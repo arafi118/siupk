@@ -1,6 +1,5 @@
 @php
     use App\Utils\Tanggal;
-    $data = ['Cover/Sampul', 'Daftar isi', 'Surat Pengajuan Pinjaman', 'Surat Rekomendasi Kredit', 'Profil Kelompok', 'Susunan Pengurus', 'Daftar Anggota Kelompok', 'Daftar Pemanfaat', 'Surat Pernyataan Tanggung Renteng', 'FC KTP Pemanfaat dan Penjamin', 'Surat Pernyataan Peminjam', 'Rencana Angsuran Kredit Ke Kelompok', 'BA Musyawarah Kelompok'];
 @endphp
 
 @extends('perguliran.dokumen.layout.base')

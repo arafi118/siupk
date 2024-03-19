@@ -1165,6 +1165,29 @@ class PinjamanKelompokController extends Controller
             'kelompok.d'
         ])->first();
 
+        $data['data'] = [
+            'Cover/ Sampul',
+            'Daftar isi',
+            'Rekomendasi Kepala Desa',
+            'Daftar Kelayakan Pemanfaat',
+            'Surat Permohonan Kredit (Mengetahui Kades)',
+            'Profil Kelompok',
+            'Susunan pengurus',
+            'Daftar Anggota Kelompok',
+            'Daftar Usulan Pinjaman Anggota',
+            'Surat Pernyataan Tanggung Renteng',
+            'FC KTP Peminjam/KK dan Suami (Ahli Waris)',
+            'FC KK (Kartu Keluarga)',
+            'Surat Pernyataan Ahli Waris/Suami',
+            'Rencana Angsuran Kredit ke Kelompok',
+            'Rencana Angsuran Kredit ke UPK',
+            'Cash Flow',
+            'Aturan Sanksi',
+            'Rencana Kegiatan Kelompok (RKK)',
+            'Rencana Usaha Anggota (RUA)',
+            'BA Musy. Kelompok & Daftar hadir'
+        ];
+
         $data['judul'] = 'Check List (' . $data['pinkel']->kelompok->nama_kelompok . ' - Loan ID. ' . $data['pinkel']->id . ')';
         $view = view('perguliran.dokumen.check', $data)->render();
 
@@ -1185,7 +1208,7 @@ class PinjamanKelompokController extends Controller
             'kelompok.d.sebutan_desa'
         ])->withCount('pinjaman_anggota')->first();
 
-        $data['judul'] = 'Surat Perngajuran Kredit (' . $data['pinkel']->kelompok->nama_kelompok . ' - Loan ID. ' . $data['pinkel']->id . ')';
+        $data['judul'] = 'Surat Permohonan Pinjaman (' . $data['pinkel']->kelompok->nama_kelompok . ' - Loan ID. ' . $data['pinkel']->id . ')';
         $view = view('perguliran.dokumen.pengajuan_kredit', $data)->render();
 
         if ($data['type'] == 'pdf') {

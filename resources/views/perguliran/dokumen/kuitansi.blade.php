@@ -34,37 +34,35 @@
                 <td width="90">Telah Diterima Dari</td>
                 <td width="10" align="center">:</td>
                 <td class="b">
-                    <b>{{ $kec->sebutan_level_3 }} {{ $kec->nama_lembaga_sort }}</b>
+                    {{ $kec->sebutan_level_3 }} {{ $kec->nama_lembaga_sort }}
                 </td>
             </tr>
             <tr>
                 <td>Uang Sebanyak</td>
                 <td align="center">:</td>
                 <td class="b">
-                    <b>{{ $keuangan->terbilang($pinkel->alokasi) }} Rupiah</b>
+                    {{ $keuangan->terbilang($pinkel->alokasi) }} Rupiah
                 </td>
             </tr>
             <tr>
                 <td>Untuk Pembayaran</td>
                 <td align="center">:</td>
                 <td class="b">
-                    <b>Pencairan Pinjaman Kel. {{ $pinkel->kelompok->nama_kelompok }}</b>
+                    Pencairan Pinjaman Kel. {{ $pinkel->kelompok->nama_kelompok }}
                 </td>
             </tr>
             <tr>
                 <td colspan="2">&nbsp;</td>
                 <td class="b">
-                    <b>
-                        Beralamat Di {{ $pinkel->kelompok->alamat_kelompok }}
-                        {{ $pinkel->kelompok->d->sebutan_desa->sebutan_desa }}
-                        {{ $pinkel->kelompok->d->nama_desa }}
-                    </b>
+                    Beralamat Di {{ $pinkel->kelompok->alamat_kelompok }}
+                    {{ $pinkel->kelompok->d->sebutan_desa->sebutan_desa }}
+                    {{ $pinkel->kelompok->d->nama_desa }}
                 </td>
             </tr>
             <tr>
                 <td colspan="2">&nbsp;</td>
                 <td class="b">
-                    <b>Loan ID. {{ $pinkel->id }} &mdash; SPK No. {{ $pinkel->spk_no }}</b>
+                    Loan ID. {{ $pinkel->id }} &mdash; SPK No. {{ $pinkel->spk_no }}
                 </td>
             </tr>
             <tr>

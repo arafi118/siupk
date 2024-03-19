@@ -32,7 +32,7 @@
         </tr>
     </table>
 
-    <div style="text-align: justify;">
+    <p style="text-align: justify;">
         Pada hari ini {{ Tanggal::namaHari($pinkel->tgl_cair) }} tanggal
         {{ $keuangan->terbilang(Tanggal::hari($pinkel->tgl_cair)) }} bulan {{ Tanggal::namaBulan($pinkel->tgl_cair) }} tahun
         {{ $keuangan->terbilang(Tanggal::tahun($pinkel->tgl_cair)) }}, telah diadakan pencairan dana perguliran
@@ -44,7 +44,7 @@
         {{ number_format($pinkel->alokasi) }} ({{ $keuangan->terbilang($pinkel->alokasi) }} Rupiah), sesuai dengan
         Register Pinjaman pada Data Base Pinjaman Nomor nomor : {{ $pinkel->kelompok->kd_kelompok }} dan Surat Perjanjian
         Kredit (SPK) nomor: {{ $pinkel->spk_no }}.
-    </div>
+    </p>
 
     <div style="text-align: justify;">
         Adapun rincian pinjaman dan data kelompok (Profil Kelompok) adalah sebagai berikut :
@@ -170,9 +170,12 @@
                 </td>
             </tr>
         </table>
-        Untuk bertindak mewakili Kelompok dalam perjanjian kredit dengan {{ $kec->nama_lembaga_sort }}
-        {{ $kec->nama_kec }} sesuai
-        dengan registrasi pinjaman nomor {{ $pinkel->kelompok->kd_kelompok }} dan data pinjaman sebagai berikut :
+
+        <p>
+            Untuk bertindak mewakili Kelompok dalam perjanjian kredit dengan {{ $kec->nama_lembaga_sort }}
+            {{ $kec->nama_kec }} sesuai
+            dengan registrasi pinjaman nomor {{ $pinkel->kelompok->kd_kelompok }} dan data pinjaman sebagai berikut :
+        </p>
 
         <table border="1" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px; table-layout: fixed;">
             <tr style="background: rgb(232, 232, 232)">
@@ -195,12 +198,7 @@
                 </tr>
             @endforeach
         </table>
-
-        <div>
-            Catatan Pencairan :
-        </div>
-
-        <p style="margin-top: 24px;">
+        <p>
             Demikian, berita acara ini dibuat sekaligus sebagai bukti pencairan dana pinjaman di atas.
         </p>
     </div>
