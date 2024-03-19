@@ -52,7 +52,7 @@
             <th width="130" align="center">Nama Lengkap</th>
             <th width="70" align="center">Unsur / Jabatan</th>
             <th align="center">Alamat</th>
-            <th width="70" align="center">Tanda Tangan</th>
+            <th width="80" align="center">Tanda Tangan</th>
         </tr>
         @foreach ($pinkel->pinjaman_anggota as $pa)
             @php

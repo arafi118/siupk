@@ -85,9 +85,7 @@
         <td width="30">Nomor</td>
         <td width="5" align="right">:</td>
         <td width="500">
-            <b>
-                ______/{{ $pinkel->kelompok->kd_kelompok }}-{{ $pinkel->id }}/{{ $pinkel->jpp->nama_jpp }}/{{ Tanggal::tglRomawi($pinkel->tgl_proposal) }}
-            </b>
+            ______/{{ $pinkel->kelompok->kd_kelompok }}-{{ $pinkel->id }}/{{ $pinkel->jpp->nama_jpp }}/{{ Tanggal::tglRomawi($pinkel->tgl_proposal) }}
         </td>
     </tr>
     <tr>
@@ -95,7 +93,7 @@
         <td width="30">Tanggal</td>
         <td width="5" align="right">:</td>
         <td width="500">
-            <b>{{ Tanggal::tglLatin($pinkel->tgl_proposal) }}</b>
+            {{ Tanggal::tglLatin($pinkel->tgl_proposal) }}
         </td>
     </tr>
     <tr>
@@ -103,7 +101,7 @@
         <td width="30">Perihal</td>
         <td width="5" align="right">:</td>
         <td width="500">
-            <b>Permohonan Kredit {{ $pinkel->jpp->nama_jpp }}</b>
+            <b>Pengajuan Pinjaman {{ $pinkel->jpp->nama_jpp }}</b>
         </td>
     </tr>
 </table>
@@ -111,22 +109,22 @@
     <tr>
         <td width="175">&nbsp;</td>
         <td width="100">
-            <b>
-                <div>Kepada Yth.</div>
-                <div>{{ $kec->sebutan_level_1 }}</div>
-                <div>{{ $kec->nama_lembaga_sort }}</div>
-                <div>{{ $kec->sebutan_kec }} {{ $kec->nama_kec }}</div>
-                <div>Di Tempat</div>
-            </b>
+            <div>Kepada Yth.</div>
+            <div>{{ $kec->sebutan_level_1 }}</div>
+            <div>{{ $kec->nama_lembaga_sort }}</div>
+            <div>{{ $kec->sebutan_kec }} {{ $kec->nama_kec }}</div>
+            <div>Di Tempat</div>
         </td>
     </tr>
-
+    <tr>
+        <td colspan="2">&nbsp;</td>
+    </tr>
 </table>
 <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
     <tr>
         <td colspan="3" align="center">
             <div style="font-size: 20px;">
-                <b>SURAT PERMOHONAN KREDIT</b>
+                <b>SURAT PERMOHONAN PINJAMAN</b>
             </div>
         </td>
     </tr>

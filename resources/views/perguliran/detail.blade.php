@@ -25,7 +25,7 @@
             'withExcel' => false,
         ],
         [
-            'title' => 'Surat Pengajuan Pinjaman',
+            'title' => 'Surat Permohonan Pinjaman',
             'file' => 'suratPengajuanPinjaman',
             'withExcel' => false,
         ],

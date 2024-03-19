@@ -45,45 +45,43 @@
                     <td width="90">Telah Diterima Dari</td>
                     <td width="10" align="center">:</td>
                     <td class="b">
-                        <b>{{ $kec->sebutan_level_3 }} {{ $kec->nama_lembaga_sort }}</b>
+                        {{ $kec->sebutan_level_3 }} {{ $kec->nama_lembaga_sort }}
                     </td>
                 </tr>
                 <tr>
                     <td>Uang Sebanyak</td>
                     <td align="center">:</td>
                     <td class="b">
-                        <b>{{ $keuangan->terbilang($pinj->alokasi) }} Rupiah</b>
+                        {{ $keuangan->terbilang($pinj->alokasi) }} Rupiah
                     </td>
                 </tr>
                 <tr>
                     <td>Untuk Pembayaran</td>
                     <td align="center">:</td>
                     <td class="b">
-                        <b>Pencairan Pemanfaat Kelompok {{ $pinj->pinkel->kelompok->nama_kelompok }}</b>
+                        Pencairan Pemanfaat Kelompok {{ $pinj->pinkel->kelompok->nama_kelompok }}
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">&nbsp;</td>
                     <td class="b">
-                        <b>
-                            a.n. {{ $pinj->anggota->namadepan }} NIK. {{ $pinj->anggota->nik }}
-                        </b>
+
+                        a.n. {{ $pinj->anggota->namadepan }} NIK. {{ $pinj->anggota->nik }}
+
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">&nbsp;</td>
                     <td class="b">
-                        <b>
-                            Beralamat Di {{ $pinj->anggota->alamat }}
-                            {{ $pinj->anggota->d->sebutan_desa->sebutan_desa }}
-                            {{ $pinj->anggota->d->nama_desa }}
-                        </b>
+                        Beralamat Di {{ $pinj->anggota->alamat }}
+                        {{ $pinj->anggota->d->sebutan_desa->sebutan_desa }}
+                        {{ $pinj->anggota->d->nama_desa }}
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">&nbsp;</td>
                     <td class="b">
-                        <b>Loan ID. {{ $pinj->pinkel->id }} &mdash; SPK No. {{ $pinj->pinkel->spk_no }}</b>
+                        Loan ID. {{ $pinj->pinkel->id }} &mdash; SPK No. {{ $pinj->pinkel->spk_no }}
                     </td>
                 </tr>
                 <tr>
