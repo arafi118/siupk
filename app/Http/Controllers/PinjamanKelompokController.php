@@ -90,7 +90,7 @@ class PinjamanKelompokController extends Controller
 
             return DataTables::of($pinkel)
                 ->addColumn('jasa', function ($row) {
-                    $jangka = $row->jangka;
+                    $jangka = ($row->jangka > 0) ? $row->jangka : 12;
                     $pros = $row->pros_jasa;
 
                     $jasa = number_format($pros / $jangka, 2);
