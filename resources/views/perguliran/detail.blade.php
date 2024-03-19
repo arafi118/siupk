@@ -471,6 +471,12 @@
                                 </div>
                                 <small class="text-danger" id="msg_alokasi_pengajuan"></small>
                             </div>
+                            <div class="col-12 mb-3">
+                                <div class="input-group input-group-static">
+                                    <input type="text" id="jaminan" name="jaminan" class="form-control"
+                                        placeholder="Jenis jaminan" autocomplete="off">
+                                </div>
+                            </div>
                         </div>
 
                         <div class="fw-bold text-center">

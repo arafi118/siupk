@@ -98,12 +98,14 @@ class PinjamanAnggotaController extends Controller
             'id_pinkel',
             'nia_pemanfaat',
             'alokasi_pengajuan',
+            'jaminan',
             'catatan_pinjaman'
         ]);
 
         $validate = Validator::make($data, [
             'id_pinkel' => 'required',
             'nia_pemanfaat' => 'required',
+            'jaminan'        => 'required',
             'alokasi_pengajuan' => 'required'
         ]);
 
@@ -129,6 +131,7 @@ class PinjamanAnggotaController extends Controller
             'proposal' => str_replace(',', '', str_replace('.00', '', $request->alokasi_pengajuan)),
             'verifikasi' => str_replace(',', '', str_replace('.00', '', $request->alokasi_pengajuan)),
             'alokasi' => str_replace(',', '', str_replace('.00', '', $request->alokasi_pengajuan)),
+            'jaminan' => $data['jaminan'],
             'kom_pokok' => '0',
             'kom_jasa' => '0',
             'spk_no' => $pinkel->spk_no,
