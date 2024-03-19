@@ -7,7 +7,6 @@
         <th>Username</th>
         <th>Password</th>
     </tr>
-
     @foreach ($users as $u)
         <tr>
             <td>{{ $u->namadepan . ' ' . $u->namabelakang }}</td>
