@@ -141,7 +141,7 @@
             </tr>
             <tr>
                 <td style="font-weight: bold; font-size: 16px;" align="center">
-                    IMPLEMENTASI SISTEM INFORMASI DANA BERGULIR MASYARAKAT
+                    IMPLEMENTASI SISTEM INFORMASI UPK ONLINE
                 </td>
             </tr>
             <tr>
@@ -320,7 +320,7 @@
                             implementasi.
                         </li>
                         <li>
-                            Memberikan username dan password kepada seluruh operator aplikasi Pihak Kedua
+                            Memberikan username dan password kepada seluruh operator aplikasi Pihak Kedua.
                         </li>
                         <li>
                             Memberikan pelatihan (training) 1 (satu) kali pada awal kerja sama selama 2 (dua) hari
@@ -337,7 +337,7 @@
                             Memberikan layanan maintenance dan backup data secara berkala.
                         </li>
                         <li>
-                            Mengadakan ujian Certified SI UPK Online bagi para operator yang telah mengikuti training
+                            Mengadakan ujian Certified SI UPK Online bagi para operator yang telah mengikuti training.
                         </li>
                         <li>
                             Memberikan Support setiap ada kendala penggunaan melalui WA, Telpon, E-mail, Facebook.
@@ -348,7 +348,7 @@
                         <li>
                             Memberikan jaminan bebas menggunakan SI UPK Online secara legal dan sah dan bebas dari
                             tuntutan
-                            pihak manapun
+                            pihak manapun.
                         </li>
                     </ul>
                 </li>
@@ -394,7 +394,7 @@
                         <li>
                             Menerima pembayaran instalasi dan migrasi data satu kali untuk selama pemakaian aplikasi
                             oleh Pihak
-                            Kedua
+                            Kedua.
                         </li>
                         <li>
                             Menerima pembayaran perpanjangan domain dan hosting satu kali dalam setahun.
@@ -419,7 +419,7 @@
                             Mendapatkan informasi mengenai release SI UPK Online yang terbaru dari Pihak Pertama, dan
                             informasi
                             terbaru
-                            tentang SI UPK Online dan perkembangannya
+                            tentang SI UPK Online dan perkembangannya.
                         </li>
                         <li>
                             Memperoleh jaminan bebas menggunakan SI UPK Online secara legal dan sah dan bebas dari
