@@ -327,7 +327,7 @@
                     Bonus UPK 5%
                 </li>
                 <li>
-                    Pemupukan modal 50%
+                    Penambahan modal 50%
                 </li>
             </ol>
         </li>
