@@ -12,7 +12,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{ $logo }}">
     <link rel="icon" type="image/png" href="{{ $logo }}">
     <title>
-        SIDBM &mdash; Jembatan Akuntabilitas Bumdesma
+        SI UPK Online &mdash; Jembatan Akuntabilitas Bumdesma
     </title>
 
     <link rel="stylesheet" type="text/css"

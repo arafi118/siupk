@@ -120,14 +120,15 @@
         <div style="color: rgb(200,200,200); font-weight: bold;">
             MEMO OF UNDERSTANDING
             <span style="float: right; color: #000; font-size: 8px; font-weight: normal; font-style: italic;">
-                MOU Nomor : {{ str_pad($kec->id, '3', '0', STR_PAD_LEFT) }}/SI-DBM/{{ Tanggal::tglRomawi($tgl_mou) }}
+                MOU Nomor : {{ str_pad($kec->id, '3', '0', STR_PAD_LEFT) }}/SI UPK
+                Online/{{ Tanggal::tglRomawi($tgl_mou) }}
             </span>
         </div>
     </header>
 
     <footer>
         <div style="text-align: right; font-size: 8px;" id="page-number">
-            Page <span class="page"></span> - MOU SI DBM
+            Page <span class="page"></span> - MoU SI UPK Online
         </div>
     </footer>
 
@@ -240,18 +241,19 @@
             <ol style="text-align: justify;">
                 <li>
                     Pihak Pertama adalah sebuah Software Company yang telah me-release software akuntansi yang diberikan
-                    nama SI DBM.
+                    nama SI UPK Online.
                 </li>
                 <li>
-                    Pihak Kedua adalah sebuah Bumdesama Lkd yang menyelenggarakan kegiatan penyaluran dana bergulir bagi
+                    Pihak Kedua adalah sebuah Bumdesama yang menyelenggarakan kegiatan penyaluran dana bergulir bagi
                     kelompok-kelompok yang membutuhkan modal usaha dalam rangka pengentasan kemiskinan.
                 </li>
                 <li>
-                    Pihak kedua akan menggunakan Software Akuntansi "SI DBM" dalam pengelolaan keuangan maupun
+                    Pihak kedua akan menggunakan Software Akuntansi "SI UPK Online" dalam pengelolaan keuangan maupun
                     pengelolaan dana bergulir.
                 </li>
                 <li>
-                    SI DBM yang digunakan dalam perjanjian ini adalah versi 4.0 dengan sistem manajemen keuangan double
+                    SI UPK Online yang digunakan dalam perjanjian ini adalah versi 4.0 dengan sistem manajemen keuangan
+                    double
                     entry berbasis accrual berpedoman kepada Kepmendesa Nomor 136/2022.
                 </li>
             </ol>
@@ -266,7 +268,8 @@
                     Pihak Pertama berkewajiban untuk :
                     <ul style="list-style: lower-alpha;">
                         <li>
-                            Menyediakan aplikasi SI DBM Full Version yang dapat diakses secara online 24 jam dalam
+                            Menyediakan aplikasi SI UPK Online Full Version yang dapat diakses secara online 24 jam
+                            dalam
                             sehari dan 7 hari dalam seminggu oleh Pihak Kedua melalui nama domain yang telah
                             diberikan
                             sebagaimana point (b).
@@ -313,7 +316,8 @@
                             </table>
                         </li>
                         <li>
-                            Melakukan migrasi data dari laporan excel ke aplikasi SI DBM pada awal masa implementasi.
+                            Melakukan migrasi data dari laporan excel ke aplikasi SI UPK Online pada awal masa
+                            implementasi.
                         </li>
                         <li>
                             Memberikan username dan password kepada seluruh operator aplikasi Pihak Kedua
@@ -321,8 +325,9 @@
                         <li>
                             Memberikan pelatihan (training) 1 (satu) kali pada awal kerja sama selama 2 (dua) hari
                             dengan durasi 8 jam per hari, kepada maksimal 8 orang calon operator Pihak Kedua meliputi
-                            unsur PO Bumdesma, Pengelola
-                            Perguliran, Pengawas dan Verifikator yang akan menggunakan SI DBM di tempat pelatihan yang
+                            unsur PO UPK , Pengelola
+                            Perguliran, Pengawas dan Verifikator yang akan menggunakan SI UPK Online di tempat pelatihan
+                            yang
                             ditentukan
                             oleh pihak Kedua. Apabila pelatihan dilakukan di luar kota alamat Pihak Pertama, maka Pihak
                             kedua
@@ -332,7 +337,7 @@
                             Memberikan layanan maintenance dan backup data secara berkala.
                         </li>
                         <li>
-                            Mengadakan ujian Certified SI DBM bagi para operator yang telah mengikuti training
+                            Mengadakan ujian Certified SI UPK Online bagi para operator yang telah mengikuti training
                         </li>
                         <li>
                             Memberikan Support setiap ada kendala penggunaan melalui WA, Telpon, E-mail, Facebook.
@@ -341,7 +346,8 @@
                             Menginformasikan versi upgrade jika telah di-release versi yang terbaru.
                         </li>
                         <li>
-                            Memberikan jaminan bebas menggunakan SI DBM secara legal dan sah dan bebas dari tuntutan
+                            Memberikan jaminan bebas menggunakan SI UPK Online secara legal dan sah dan bebas dari
+                            tuntutan
                             pihak manapun
                         </li>
                     </ul>
@@ -350,13 +356,14 @@
                     Pihak Kedua berkewajiban untuk :
                     <ul style="list-style: lower-alpha;">
                         <li>
-                            Menggunakan SI DBM sebagai software aplikasi dalam pengelolaan keuangan dan dana bergulir
+                            Menggunakan SI UPK Online sebagai software aplikasi dalam pengelolaan keuangan dan dana
+                            bergulir
                             pihak
                             Kedua dengan sebagaimana mestinya dan dengan rasa penuh tanggung jawab.
                         </li>
                         <li>
                             Menyampaikan laporan keuangan dalam bentuk softcopy excel untuk bahan migrasi kedalam
-                            database SI DBM.
+                            database SI UPK Online.
                         </li>
                         <li>
                             Menyediakan sarana hardware yang akan digunakan untuk mengakses aplikasi seperti komputer
@@ -376,12 +383,13 @@
                     Pihak Pertama mempunyai hak :
                     <ul style="list-style: lower-alpha;">
                         <li>
-                            Menerima masukan dan saran perbaikan fitur SI DBM sesuai dengan regulasi yang mengatur
-                            Bumdesma
-                            Lkd khususnya yang berkaitan dengan pengaturan pelaporan keuangan Bumdesma Lkd.
+                            Menerima masukan dan saran perbaikan fitur SI UPK Online sesuai dengan regulasi yang
+                            mengatur
+                            UPK
+                            khususnya yang berkaitan dengan pengaturan pelaporan keuangan UPK .
                         </li>
                         <li>
-                            Memberikan sertifikat pelatihan bagi peserta yang mengikuti Ujian Sertifikasi SI DBM.
+                            Memberikan sertifikat pelatihan bagi peserta yang mengikuti Ujian Sertifikasi SI UPK Online.
                         </li>
                         <li>
                             Menerima pembayaran instalasi dan migrasi data satu kali untuk selama pemakaian aplikasi
@@ -397,9 +405,9 @@
                     Pihak Kedua mempunyai hak :
                     <ul style="list-style: lower-alpha;">
                         <li>
-                            Menggunakan SI DBM sebagai software aplikasi untuk pengelolaan keuangan dan manajemen
-                            Bumdesma
-                            Lkd sesuai regulasi yang berlaku secara nasional.
+                            Menggunakan SI UPK Online sebagai software aplikasi untuk pengelolaan keuangan dan manajemen
+                            UPK
+                            sesuai regulasi yang berlaku secara nasional.
                         </li>
                         <li>
                             Mendapatkan Domain dan Hosting sesuai spesifikasi sebagaimana pasal 2 ayat 1 point (b).
@@ -408,12 +416,14 @@
                             Mendapatkan Support setiap ada kendala penggunaan melalui WA, Telpon, E-mail, Facebook.
                         </li>
                         <li>
-                            Mendapatkan informasi mengenai release SI DBM yang terbaru dari Pihak Pertama, dan informasi
+                            Mendapatkan informasi mengenai release SI UPK Online yang terbaru dari Pihak Pertama, dan
+                            informasi
                             terbaru
-                            tentang SI DBM dan perkembangannya
+                            tentang SI UPK Online dan perkembangannya
                         </li>
                         <li>
-                            Memperoleh jaminan bebas menggunakan SI DBM secara legal dan sah dan bebas dari tuntutan
+                            Memperoleh jaminan bebas menggunakan SI UPK Online secara legal dan sah dan bebas dari
+                            tuntutan
                             pihak
                             manapun.
                         </li>
@@ -485,11 +495,12 @@
                 </li>
                 <li>
                     Apabila terjadi kehilangan kemampuan dan atau pembaharuan manajemen PT. Asta Brata Teknologi dalam
-                    menjalankan fungsi manajemen dan layanan kepada User SI DBM, maka sebagai bagian proses likuidasi
+                    menjalankan fungsi manajemen dan layanan kepada User SI UPK Online, maka sebagai bagian proses
+                    likuidasi
                     dan
                     atau pembaharuan manajemen PT. Asta Brata Teknologi berkewajiban melakukan pengalihan kewajiban
                     layanan
-                    User SI DBM kepada pihak yang berkompeten dengan persetujuan kedua belah pihak.
+                    User SI UPK Online kepada pihak yang berkompeten dengan persetujuan kedua belah pihak.
                 </li>
             </ol>
         </div>
