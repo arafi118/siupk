@@ -244,7 +244,7 @@
                     nama SI UPK Online.
                 </li>
                 <li>
-                    Pihak Kedua adalah sebuah Bumdesama yang menyelenggarakan kegiatan penyaluran dana bergulir bagi
+                    Pihak Kedua adalah sebuah lembaga yang menyelenggarakan kegiatan penyaluran dana bergulir bagi
                     kelompok-kelompok yang membutuhkan modal usaha dalam rangka pengentasan kemiskinan.
                 </li>
                 <li>
@@ -254,7 +254,7 @@
                 <li>
                     SI UPK Online yang digunakan dalam perjanjian ini adalah versi 4.0 dengan sistem manajemen keuangan
                     double
-                    entry berbasis accrual berpedoman kepada Kepmendesa Nomor 136/2022.
+                    entry.
                 </li>
             </ol>
         </div>
@@ -325,7 +325,7 @@
                         <li>
                             Memberikan pelatihan (training) 1 (satu) kali pada awal kerja sama selama 2 (dua) hari
                             dengan durasi 8 jam per hari, kepada maksimal 8 orang calon operator Pihak Kedua meliputi
-                            unsur PO UPK , Pengelola
+                            unsur BKAD atau sebutan lainya , Pengelola
                             Perguliran, Pengawas dan Verifikator yang akan menggunakan SI UPK Online di tempat pelatihan
                             yang
                             ditentukan
