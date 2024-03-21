@@ -2,12 +2,12 @@
     use App\Utils\Tanggal;
 
     $title_form = [
-        1 => 'Kegiatan sosial kemasyarakatan dan bantuan RTM',
-        2 => 'Pengembangan kapasitas kelompok SPP/UEP',
-        3 => 'Pelatihan masyarakat, dan kelompok pemanfaat umum',
-        4 => 'Penambahan Modal DBM',
-        5 => 'Penambahan Investasi Usaha',
-        6 => 'Pendirian Unit Usaha',
+        1 => 'Kelembagaan',
+        2 => 'Dana Sosial',
+        3 => 'Bonus UPK',
+        4 => 'Lain-lain',
+        5 => 'Pemupukan Modal',
+        6 => 'Cadangan Resiko',
     ];
 @endphp
 
@@ -36,21 +36,70 @@
             @endif
             <h4 class="font-weight-normal mt-3">
                 <div class="row">
-                    <span class="col-sm-6">Laba/Rugi Tahun {{ Tanggal::tahun($tgl_kondisi) }}</span>
+                    <span class="col-sm-6"> &nbsp; Surplus/Devisit Tahun {{ Tanggal::tahun($tgl_kondisi) }}</span>
                     <span class="col-sm-6 text-end">Rp. {{ number_format($surplus, 2) }}</span>
                 </div>
             </h4>
 
             <form action="/transaksi/simpan_laba" method="post" id="SimpanAlokasiLaba">
                 @csrf
-
                 <input type="hidden" name="tgl_kondisi" id="tgl_kondisi" value="{{ $tgl_kondisi }}">
                 <div class="row">
                     <input type="hidden" name="surplus" id="surplus" value="{{ $surplus }}">
                     <div class="card">
                         <div class="card-body p-3">
+                            <div class="table-responsive mb-3">
+                                <table class="table table-striped midle">
+                                    <thead class="bg-dark text-white">
+                                        <tr>
+                                            <th width="50%">
+                                                <span class="text-sm">Cadangan Resiko</span>
+                                            </th>
+                                            <th width="50%">
+                                                <div class="d-flex justify-content-between">
+                                                    <span class="text-sm">Jumlah</span>
+                                                    <span class="text-sm">
+                                                        Rp. <span data-id="total_laba_ditahan">
+                                                            {{ number_format($surplus, 4) }}
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <input type="hidden" name="laba_ditahan" id="laba_ditahan"
+                                            class="form-control form-control-sm text-end" value="{{ $surplus }}">
+                                        @foreach ($kec->saldo as $saldo)
+                                            @if (substr($saldo->id, -1) == 6)
+                                                @php
+                                                    $value = 0;
+                                                    $readonly = false;
+                                                    if (substr($saldo->id, -1) == 6) {
+                                                        $value = $surplus;
+                                                        $readonly = true;
+                                                    }
+                                                @endphp
+                                                <tr>
+                                                    <td>{{ $title_form[substr($saldo->id, -1)] }}</td>
+                                                    <td>
+                                                        <div class="input-group input-group-outline my-0">
+                                                            <input type="text"
+                                                                name="laba_ditahan[{{ substr($saldo->id, -1) }}]"
+                                                                id="{{ substr($saldo->id, -1) }}"
+                                                                class="form-control {{ $readonly ? '' : 'nominal' }} laba_ditahan form-control-sm text-end"
+                                                                value="{{ number_format($value, 2) }}"
+                                                                {{ $readonly ? 'readonly' : '' }}>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endif
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                             <h4 class="font-weight-normal">
-                                Alokasi Laba Usaha
+                                Alokasi Surplus Bersih
                             </h4>
 
                             @foreach ($rekening as $rek)
@@ -77,7 +126,7 @@
                                         <tbody>
                                             @if ($rek->kode_akun == '2.1.04.01')
                                                 @foreach ($kec->saldo as $saldo)
-                                                    @if (substr($saldo->id, -1) <= 3)
+                                                    @if (substr($saldo->id, -1) <= 4)
                                                         <tr>
                                                             <td>{{ $title_form[substr($saldo->id, -1)] }}</td>
                                                             <td>
@@ -130,6 +179,7 @@
                                                     name="total{{ str_replace(' ', '_', str_replace('utang', '', strtolower($rek->nama_akun))) }}"
                                                     id="total{{ str_replace(' ', '_', str_replace('utang', '', strtolower($rek->nama_akun))) }}">
                                             @endif
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -158,11 +208,11 @@
                                         <input type="hidden" name="laba_ditahan" id="laba_ditahan"
                                             class="form-control form-control-sm text-end" value="{{ $surplus }}">
                                         @foreach ($kec->saldo as $saldo)
-                                            @if (substr($saldo->id, -1) > 3)
+                                            @if (substr($saldo->id, -1) == 5)
                                                 @php
                                                     $value = 0;
                                                     $readonly = false;
-                                                    if (substr($saldo->id, -1) == 4) {
+                                                    if (substr($saldo->id, -1) == 5) {
                                                         $value = $surplus;
                                                         $readonly = true;
                                                     }
