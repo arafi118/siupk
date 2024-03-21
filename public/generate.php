@@ -1,6 +1,6 @@
 <?php
 ini_set('display_errors', '1');
-$koneksi = mysqli_connect('localhost', 'dbm_sidbm', 'dbm_sidbm', 'dbm_laravel');
+$koneksi = mysqli_connect('cpanel.siupk.net', 'siupk_global', 'siupk_global', 'siupk_dbm');
 
 if (isset($_GET['lokasi']) && isset($_GET['where'])) {
     $lokasi = $_GET['lokasi'];
