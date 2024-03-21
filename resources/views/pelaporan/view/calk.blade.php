@@ -145,13 +145,11 @@
                 </li>
                 <li>
                     Piutang Usaha
-                    <ol style="list-style: lower-alpha;">
-                        <li>
-                            Piutang usaha disajikan sebesar jumlah alokasi pencairan pinjaman ditambah resceduling setelah
-                            dikurangi komulatif angsuran pada setiap pinjaman dan nilai penghapusan pinjaman yang diputuskan
-                            dalam MAD.
-                        </li>
-                    </ol>
+                    <div>
+                        Piutang usaha disajikan sebesar jumlah alokasi pencairan pinjaman ditambah resceduling setelah
+                        dikurangi komulatif angsuran pada setiap pinjaman dan nilai penghapusan pinjaman yang diputuskan
+                        dalam MAD.
+                    </div>
                 </li>
                 <li>
                     Aset Tetap dan Inventaris dan Aset tak berwujud
@@ -160,9 +158,8 @@
                             Aset tetap dan Inventaris beserta Aset tak berwujud dicatat sebesar biaya perolehannya pada saat
                             aset tersebut secara hukum mulai dimiliki oleh UPK.
                         </li>
-                        Aset tetap beserta Inventaris disusutkan menggunakan metode garis lurus tanpa nilai.
                         <li>
-
+                            Aset tetap beserta Inventaris disusutkan menggunakan metode garis lurus tanpa nilai.
                         </li>
                     </ol>
                 </li>
@@ -184,14 +181,13 @@
                 </li>
                 <li>
                     Pajak Penghasilan
-                    <ol style="list-style: lower-alpha;">
-                        <li>
-                            Pajak Penghasilan mengikuti ketentuan perpajakan yang berlaku di Indonesia.
-                        </li>
-                    </ol>
+                    <div>
+                        Pajak Penghasilan mengikuti ketentuan perpajakan yang berlaku di Indonesia.
+                    </div>
                 </li>
             </ol>
         </li>
+
         <li style="margin-top: 12px;">
             <div style="text-transform: uppercase;">
                 Informasi Tambahan Laporan Keuangan
@@ -328,6 +324,9 @@
                 </li>
                 <li>
                     Penambahan modal 50%
+                </li>
+                <li>
+                    Lain-lain
                 </li>
             </ol>
         </li>
