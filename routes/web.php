@@ -15,6 +15,7 @@ use App\Http\Controllers\Kabupaten\KabupatenController;
 use App\Http\Controllers\KelompokController;
 use App\Http\Controllers\PelaporanController;
 use App\Http\Controllers\PinjamanAnggotaController;
+use App\Http\Controllers\PinjamanIndividuController;
 use App\Http\Controllers\PinjamanKelompokController;
 use App\Http\Controllers\SopController;
 use App\Http\Controllers\TransaksiController;
@@ -168,6 +169,16 @@ Route::get('/perguliran/dokumen/cetak_kartu_angsuran_anggota/{id}/{idtp}/{nia?}'
 Route::post('/perguliran/dokumen', [PinjamanKelompokController::class, 'dokumen'])->middleware('auth');
 
 Route::post('/perguliran/kembali_proposal/{id}', [PinjamanKelompokController::class, 'kembaliProposal'])->middleware('auth');
+
+
+
+Route::get('/register_proposal_i', [PinjamanIndividuController::class, 'create'])->middleware('auth');
+Route::get('/register_proposal_i/{nia}', [PinjamanIndividuController::class, 'register'])->middleware('auth');
+Route::get('/daftar_individu', [PinjamanIndividuController::class, 'DaftarKelompok'])->middleware('auth');
+
+
+
+
 
 Route::get('/pinjaman_anggota/register/{id_pinkel}', [PinjamanAnggotaController::class, 'create'])->middleware('auth');
 Route::get('/pinjaman_anggota/cari_pemanfaat', [PinjamanAnggotaController::class, 'cariPemanfaat'])->middleware('auth');
