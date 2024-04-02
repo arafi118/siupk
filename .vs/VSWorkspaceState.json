@@ -3,8 +3,9 @@
     "",
     "\\app",
     "\\app\\Http",
-    "\\app\\Http\\Controllers"
+    "\\app\\Http\\Controllers",
+    "\\app\\Models"
   ],
-  "SelectedNode": "\\app\\Http\\Controllers\\AuthController.php",
+  "SelectedNode": "\\app\\Models\\RealAngsuran_i.php",
   "PreviewInSolutionExplorer": false
 }

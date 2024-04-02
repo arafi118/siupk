@@ -1,17 +1,17 @@
 @php
-    use App\Models\PinjamanKelompok;
+    use App\Models\PinjamanIndividu;
 
     $selected = false;
 @endphp
 
 <div class="row">
     <div class="col-md-9 col-7">
-        <select class="form-control mb-0" name="kelompok" id="kelompok">
-            @foreach ($kelompok as $kel)
+        <select class="form-control mb-0" name="individu" id="individu">
+            @foreach ($individu as $ind)
                 @php
                     $pinjaman = 'N';
-                    if ($kel->pinjaman_count > 0) {
-                        $status = $kel->pinjaman->status;
+                    if ($ind->pinjaman_count > 0) {
+                        $status = $ind->pinjaman->status;
                         $pinjaman = $status;
                     }
 
@@ -21,20 +21,20 @@
                         $selected = true;
                     }
 
-                    if ($id_kel > 0) {
+                    if ($id_ind > 0) {
                         $select = false;
                     }
 
-                    if ($kel->id == $id_kel) {
+                    if ($ind->id == $id_ind) {
                         $select = true;
                     }
                 @endphp
-                <option {{ $select ? 'selected' : '' }} value="{{ $kel->id }}">
-                    @if (isset($kel->d))
-                        [{{ $pinjaman }}] {{ $kel->nama_kelompok }} [{{ $kel->d->nama_desa }}]
-                        [{{ $kel->ketua }}]
+                <option {{ $select ? 'selected' : '' }} value="{{ $ind->id }}">
+                    @if (isset($ind->d))
+                        [{{ $pinjaman }}] {{ $ind->nama_depan }} [{{ $ind->d->nama_desa }}]
+                        [{{ $ind->ketua }}]
                     @else
-                        [{{ $pinjaman }}] {{ $kel->nama_kelompok }} [] [{{ $kel->ketua }}]
+                        [{{ $pinjaman }}] {{ $ind->nama_depan }} []
                     @endif
                 </option>
             @endforeach
@@ -42,13 +42,13 @@
     </div>
     <div class="col-md-3 col-5 d-flex align-items-end">
         <div class="d-grid w-100 mb-2">
-            <a href="/database/kelompok/register_kelompok" class="btn btn-info btn-sm mb-0">Register Kelompok</a>
+            <a href="/database/individu/register_individu" class="btn btn-info btn-sm mb-0">Register Individu</a>
         </div>
     </div>
 </div>
 
 <script>
-    new Choices($('#kelompok')[0], {
+    new Choices($('#individu')[0], {
         shouldSort: false,
         fuseOptions: {
             threshold: 0.1,

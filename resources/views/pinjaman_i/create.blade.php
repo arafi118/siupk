@@ -10,18 +10,18 @@
 
 @section('script')
     <script>
-        $.get('/daftar_kelompok?id_kel={{ $id_kel }}', async (result) => {
+        $.get('/daftar_individu?nia={{ $nia }}', async (result) => {
             await $('#SelectKelompok').html(result)
 
-            var id_kel = $('#kelompok').val()
-            formRegister(id_kel)
+            var nia = $('#individu').val()
+            formRegister(nia)
         })
 
-        $(document).on('change', '#kelompok', function(e) {
+        $(document).on('change', '#individu', function(e) {
             e.preventDefault()
 
-            var id_kel = $(this).val()
-            formRegister(id_kel)
+            var nia = $(this).val()
+            formRegister(nia)
         })
 
         $(document).on('click', '#SimpanProposal', function(e) {
@@ -51,8 +51,8 @@
             })
         })
 
-        function formRegister(id_kel) {
-            $.get('/register_proposal/' + id_kel, async (result) => {
+        function formRegister(nia) {
+            $.get('/register_proposal/' + nia, async (result) => {
                 await $('#RegisterProposal').html(result)
             })
         }
