@@ -71,11 +71,8 @@ class PinjamanIndividuController extends Controller
                 ->editColumn('proposal', function ($row) {
                     return number_format($row->proposal);
                 })
-                ->editColumn('anggota.alamat_anggota', function ($row) {
-                    return $row->anggota->alamat_anggota . ' ' . $row->anggota->d->nama_desa;
-                })
-                ->addColumn('pinjaman_anggota_count', function ($row) {
-                    return count($row->pinjaman_anggota);
+                ->editColumn('anggota.alamat', function ($row) {
+                    return $row->anggota->alamat . ' ' . $row->anggota->d->nama_desa;
                 })
                 ->rawColumns(['namadepan'])
                 ->make(true);
@@ -110,8 +107,8 @@ class PinjamanIndividuController extends Controller
                 ->editColumn('verifikasi', function ($row) {
                     return number_format($row->verifikasi);
                 })
-                ->editColumn('anggota.alamat_anggota', function ($row) {
-                    return $row->anggota->alamat_anggota . ' ' . $row->anggota->d->nama_desa;
+                ->editColumn('anggota.alamat', function ($row) {
+                    return $row->anggota->alamat . ' ' . $row->anggota->d->nama_desa;
                 })
                 ->addColumn('pinjaman_anggota_count', function ($row) {
                     return count($row->pinjaman_anggota);
@@ -149,8 +146,8 @@ class PinjamanIndividuController extends Controller
                 ->editColumn('alokasi', function ($row) {
                     return number_format($row->alokasi);
                 })
-                ->editColumn('anggota.alamat_anggota', function ($row) {
-                    return $row->anggota->alamat_anggota . ' ' . $row->anggota->d->nama_desa;
+                ->editColumn('anggota.alamat', function ($row) {
+                    return $row->anggota->alamat . ' ' . $row->anggota->d->nama_desa;
                 })
                 ->addColumn('pinjaman_anggota_count', function ($row) {
                     return count($row->pinjaman_anggota);
@@ -188,8 +185,8 @@ class PinjamanIndividuController extends Controller
                 ->editColumn('alokasi', function ($row) {
                     return number_format($row->alokasi);
                 })
-                ->editColumn('anggota.alamat_anggota', function ($row) {
-                    return $row->anggota->alamat_anggota . ' ' . $row->anggota->d->nama_desa;
+                ->editColumn('anggota.alamat', function ($row) {
+                    return $row->anggota->alamat . ' ' . $row->anggota->d->nama_desa;
                 })
                 ->addColumn('pinjaman_anggota_count', function ($row) {
                     return count($row->pinjaman_anggota);

@@ -1,4 +1,4 @@
-<form action="/perguliran/{{ $perguliran->id }}" method="post" id="FormInput">
+<form action="/perguliran_i/{{ $perguliran_i->id }}" method="post" id="FormInput">
     @csrf
     @method('PUT')
 
@@ -14,19 +14,19 @@
                             <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                                 Tgl Pengajuan
                                 <span class="badge badge-info badge-pill">
-                                    {{ Tanggal::tglIndo($perguliran->tgl_proposal) }}
+                                    {{ Tanggal::tglIndo($perguliran_i->tgl_proposal) }}
                                 </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                                 Pengajuan
                                 <span class="badge badge-info badge-pill">
-                                    {{ number_format($perguliran->proposal) }}
+                                    {{ number_format($perguliran_i->proposal) }}
                                 </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                                 Jenis Jasa
                                 <span class="badge badge-info badge-pill">
-                                    {{ $perguliran->jasa->nama_jj }}
+                                    {{ $perguliran_i->jasa->nama_jj }}
                                 </span>
                             </li>
                         </ul>
@@ -41,19 +41,19 @@
                             <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                                 Jasa
                                 <span class="badge badge-info badge-pill">
-                                    {{ $perguliran->pros_jasa . '% / ' . $perguliran->jangka . ' bulan' }}
+                                    {{ $perguliran_i->pros_jasa . '% / ' . $perguliran_i->jangka . ' bulan' }}
                                 </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                                 Angs. Pokok
                                 <span class="badge badge-info badge-pill">
-                                    {{ $perguliran->sis_pokok->nama_sistem }}
+                                    {{ $perguliran_i->sis_pokok->nama_sistem }}
                                 </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                                 Angs. Jasa
                                 <span class="badge badge-info badge-pill">
-                                    {{ $perguliran->sis_jasa->nama_sistem }}
+                                    {{ $perguliran_i->sis_jasa->nama_sistem }}
                                 </span>
                             </li>
                         </ul>
@@ -86,7 +86,7 @@
                         @php
                             $proposal = 0;
                         @endphp
-                        @foreach ($perguliran->pinjaman_anggota as $pinjaman_anggota)
+                        @foreach ($perguliran_i->pinjaman_anggota as $pinjaman_anggota)
                             @php
                                 $proposal += $pinjaman_anggota->proposal;
                             @endphp
@@ -163,14 +163,14 @@
             </h6>
         </div>
         <div class="card-body p-3">
-            <input type="hidden" name="_id" id="_id" value="{{ $perguliran->id }}">
+            <input type="hidden" name="_id" id="_id" value="{{ $perguliran_i->id }}">
             <input type="hidden" name="status" id="status" value="V">
             <div class="row">
                 <div class="col-md-3">
                     <div class="input-group input-group-static my-3">
                         <label for="tgl_verifikasi">Tgl Verifikasi</label>
                         <input autocomplete="off" type="text" name="tgl_verifikasi" id="tgl_verifikasi"
-                            class="form-control date" value="{{ Tanggal::tglIndo($perguliran->tgl_proposal) }}">
+                            class="form-control date" value="{{ Tanggal::tglIndo($perguliran_i->tgl_proposal) }}">
                         <small class="text-danger" id="msg_tgl_verifikasi"></small>
                     </div>
                 </div>
@@ -178,7 +178,7 @@
                     <div class="input-group input-group-static my-3">
                         <label for="verifikasi">Verifikasi Rp.</label>
                         <input autocomplete="off" type="text" name="verifikasi" id="verifikasi"
-                            class="form-control money" value="{{ number_format($perguliran->proposal, 2) }}">
+                            class="form-control money" value="{{ number_format($perguliran_i->proposal, 2) }}">
                         <small class="text-danger" id="msg_verifikasi"></small>
                     </div>
                 </div>
@@ -186,7 +186,7 @@
                     <div class="input-group input-group-static my-3">
                         <label for="jangka">Jangka</label>
                         <input autocomplete="off" type="number" name="jangka" id="jangka" class="form-control"
-                            value="{{ $perguliran->jangka }}">
+                            value="{{ $perguliran_i->jangka }}">
                         <small class="text-danger" id="msg_jangka"></small>
                     </div>
                 </div>
@@ -194,7 +194,7 @@
                     <div class="input-group input-group-static my-3">
                         <label for="pros_jasa">Prosentase Jasa (%)</label>
                         <input autocomplete="off" type="number" name="pros_jasa" id="pros_jasa"
-                            class="form-control" value="{{ $perguliran->pros_jasa }}">
+                            class="form-control" value="{{ $perguliran_i->pros_jasa }}">
                         <small class="text-danger" id="msg_pros_jasa"></small>
                     </div>
                 </div>
@@ -206,7 +206,7 @@
                         <label class="form-label" for="jenis_jasa">Jenis Jasa</label>
                         <select class="form-control" name="jenis_jasa" id="jenis_jasa">
                             @foreach ($jenis_jasa as $jj)
-                                <option {{ $jj->id == $perguliran->jenis_jasa ? 'selected' : '' }}
+                                <option {{ $jj->id == $perguliran_i->jenis_jasa ? 'selected' : '' }}
                                     value="{{ $jj->id }}">
                                     {{ $jj->nama_jj }}
                                 </option>
@@ -220,7 +220,7 @@
                         <label class="form-label" for="sistem_angsuran_pokok">Sistem Angs. Pokok</label>
                         <select class="form-control" name="sistem_angsuran_pokok" id="sistem_angsuran_pokok">
                             @foreach ($sistem_angsuran as $sa)
-                                <option {{ $sa->id == $perguliran->sistem_angsuran ? 'selected' : '' }}
+                                <option {{ $sa->id == $perguliran_i->sistem_angsuran ? 'selected' : '' }}
                                     value="{{ $sa->id }}">
                                     {{ $sa->nama_sistem }} ({{ $sa->deskripsi_sistem }})
                                 </option>
@@ -234,7 +234,7 @@
                         <label class="form-label" for="sistem_angsuran_jasa">Sistem Angs. Jasa</label>
                         <select class="form-control" name="sistem_angsuran_jasa" id="sistem_angsuran_jasa">
                             @foreach ($sistem_angsuran as $sa)
-                                <option {{ $sa->id == $perguliran->sa_jasa ? 'selected' : '' }}
+                                <option {{ $sa->id == $perguliran_i->sa_jasa ? 'selected' : '' }}
                                     value="{{ $sa->id }}">
                                     {{ $sa->nama_sistem }} ({{ $sa->deskripsi_sistem }})
                                 </option>
@@ -249,7 +249,7 @@
                     <div class="input-group input-group-static my-3">
                         <label for="catatan_verifikasi">Catatan Verifikasi</label>
                         <textarea class="form-control" name="catatan_verifikasi" id="catatan_verifikasi" rows="3"
-                            placeholder="Catatan" spellcheck="false">{{ $perguliran->catatan_verifikasi }}</textarea>
+                            placeholder="Catatan" spellcheck="false">{{ $perguliran_i->catatan_verifikasi }}</textarea>
                         <small class="text-danger" id="msg_catatan_verifikasi"></small>
                     </div>
                 </div>

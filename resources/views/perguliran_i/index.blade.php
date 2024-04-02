@@ -59,14 +59,11 @@
                             <table class="table table-flush table-hover table-click" width="100%" id="TbProposal">
                                 <thead>
                                     <tr>
-                                        <th>Kelompok</th>
+                                        <th>Nama Anggota</th>
                                         <th>Alamat</th>
                                         <th>Tgl Pengajuan</th>
                                         <th>Pengajuan</th>
                                         <th>Jasa/Jangka</th>
-                                        <th>
-                                            <i class="material-icons opacity-10">people</i>
-                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -83,14 +80,11 @@
                             <table class="table table-flush table-hover table-click" width="100%" id="TbVerified">
                                 <thead>
                                     <tr>
-                                        <th>Kelompok</th>
+                                        <th>Nama Anggota</th>
                                         <th>Alamat</th>
                                         <th>Tgl Verified</th>
                                         <th>Verifikasi</th>
                                         <th>Jasa/Jangka</th>
-                                        <th>
-                                            <i class="material-icons opacity-10">people</i>
-                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -107,14 +101,11 @@
                             <table class="table table-flush table-hover table-click" width="100%" id="TbWaiting">
                                 <thead>
                                     <tr>
-                                        <th>Kelompok</th>
+                                        <th>Nama Anggota</th>
                                         <th>Alamat</th>
                                         <th>Tgl Waiting</th>
                                         <th>Alokasi</th>
                                         <th>Jasa/Jangka</th>
-                                        <th>
-                                            <i class="material-icons opacity-10">people</i>
-                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -131,14 +122,11 @@
                             <table class="table table-flush table-hover table-click" width="100%" id="TbAktif">
                                 <thead>
                                     <tr>
-                                        <th>Kelompok</th>
+                                        <th>Nama Anggota</th>
                                         <th>Alamat</th>
                                         <th>Tgl Cair</th>
                                         <th>Alokasi</th>
                                         <th>Jasa/Jangka</th>
-                                        <th>
-                                            <i class="material-icons opacity-10">people</i>
-                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -155,14 +143,11 @@
                             <table class="table table-flush table-hover table-click" width="100%" id="TbLunas">
                                 <thead>
                                     <tr>
-                                        <th>Kelompok</th>
+                                        <th>Nama Anggota</th>
                                         <th>Alamat</th>
                                         <th>Tgl Cair</th>
                                         <th>Verifikasi</th>
                                         <th>Jasa/Jangka</th>
-                                        <th>
-                                            <i class="material-icons opacity-10">people</i>
-                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -177,12 +162,12 @@
 
 @section('script')
     <script>
-        var tbProposal = CreateTable('#TbProposal', '/perguliran/proposal', [{
-            data: 'nama_kelompok',
-            name: 'nama_kelompok'
+        var tbProposal = CreateTable('#TbProposal', '/perguliran_i/proposal', [{
+            data: 'nama_depan',
+            name: 'nama_depan'
         }, {
-            data: 'kelompok.alamat_kelompok',
-            name: 'kelompok.alamat_kelompok'
+            data: 'anggota.alamat',
+            name: 'anggota.alamat'
         }, {
             data: 'tgl_proposal',
             name: 'tgl_proposal'
@@ -194,17 +179,14 @@
             name: 'jasa',
             orderable: false,
             searchable: false
-        }, {
-            data: 'pinjaman_anggota_count',
-            name: 'pinjaman_anggota_count'
         }])
 
-        var tbVerified = CreateTable('#TbVerified', '/perguliran/verified', [{
-            data: 'nama_kelompok',
-            name: 'nama_kelompok'
+        var tbVerified = CreateTable('#TbVerified', '/perguliran_i/verified', [{
+            data: 'nama_depan',
+            name: 'nama_depan'
         }, {
-            data: 'kelompok.alamat_kelompok',
-            name: 'kelompok.alamat_kelompok'
+            data: 'anggota.alamat',
+            name: 'anggota.alamat'
         }, {
             data: 'tgl_verifikasi',
             name: 'tgl_verifikasi'
@@ -216,17 +198,14 @@
             name: 'jasa',
             orderable: false,
             searchable: false
-        }, {
-            data: 'pinjaman_anggota_count',
-            name: 'pinjaman_anggota_count'
         }])
 
-        var tbWaiting = CreateTable('#TbWaiting', '/perguliran/waiting', [{
-            data: 'nama_kelompok',
-            name: 'nama_kelompok'
+        var tbWaiting = CreateTable('#TbWaiting', '/perguliran_i/waiting', [{
+            data: 'nama_depan',
+            name: 'nama_depan'
         }, {
-            data: 'kelompok.alamat_kelompok',
-            name: 'kelompok.alamat_kelompok'
+            data: 'anggota.alamat',
+            name: 'anggota.alamat'
         }, {
             data: 'tgl_tunggu',
             name: 'tgl_tunggu'
@@ -238,17 +217,14 @@
             name: 'jasa',
             orderable: false,
             searchable: false
-        }, {
-            data: 'pinjaman_anggota_count',
-            name: 'pinjaman_anggota_count'
         }])
 
-        var tbAktif = CreateTable('#TbAktif', '/perguliran/aktif', [{
-            data: 'nama_kelompok',
-            name: 'nama_kelompok'
+        var tbAktif = CreateTable('#TbAktif', '/perguliran_i/aktif', [{
+            data: 'nama_depan',
+            name: 'nama_depan'
         }, {
-            data: 'kelompok.alamat_kelompok',
-            name: 'kelompok.alamat_kelompok'
+            data: 'anggota.alamat',
+            name: 'anggota.alamat'
         }, {
             data: 'tgl_cair',
             name: 'tgl_cair'
@@ -260,17 +236,14 @@
             name: 'jasa',
             orderable: false,
             searchable: false
-        }, {
-            data: 'pinjaman_anggota_count',
-            name: 'pinjaman_anggota_count'
         }])
 
-        var tbLunas = CreateTable('#TbLunas', '/perguliran/lunas', [{
-            data: 'nama_kelompok',
-            name: 'nama_kelompok'
+        var tbLunas = CreateTable('#TbLunas', '/perguliran_i/lunas', [{
+            data: 'nama_depan',
+            name: 'nama_depan'
         }, {
-            data: 'kelompok.alamat_kelompok',
-            name: 'kelompok.alamat_kelompok'
+            data: 'anggota.alamat',
+            name: 'anggota.alamat'
         }, {
             data: 'tgl_cair',
             name: 'tgl_cair'
@@ -282,9 +255,6 @@
             name: 'jasa',
             orderable: false,
             searchable: false
-        }, {
-            data: 'pinjaman_anggota_count',
-            name: 'pinjaman_anggota_count'
         }])
 
         function CreateTable(tabel, url, column) {
