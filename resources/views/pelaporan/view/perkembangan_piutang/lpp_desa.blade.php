@@ -63,7 +63,7 @@
                 <th class="t l b" colspan="2" width="12%">Real s.d. Bulan Lalu</th>
                 <th class="t l b" colspan="2" width="12%">Real Bulan Ini</th>
                 <th class="t l b" colspan="2" width="12%">Real s.d. Bulan Ini</th>
-                <th class="t l b" colspan="2" width="12%">Saldo</th>
+                <th class="t l b" rowspan="2">Saldo</th>
                 <th class="t l b" rowspan="2" width="2%">%</th>
                 <th class="t l b r" colspan="2" width="12%">Tunggakan</th>
             </tr>
@@ -76,8 +76,8 @@
                 <th class="t l b" width="6%">Jasa</th>
                 <th class="t l b" width="6%">Pokok</th>
                 <th class="t l b" width="6%">Jasa</th>
-                <th class="t l b" width="6%">Pokok</th>
-                <th class="t l b" width="6%">Jasa</th>
+                <!-- <th class="t l b" width="6%">Pokok</th>
+                <th class="t l b" width="6%">Jasa</th> -->
                 <th class="t l b" width="6%">Pokok</th>
                 <th class="t l b r" width="6%">Jasa</th>
             </tr>
@@ -125,7 +125,7 @@
                             <td class="t l b" align="right">{{ number_format($j_real_bi_pokok) }}</td>
                             <td class="t l b" align="right">{{ number_format($j_real_bi_jasa) }}</td>
                             <td class="t l b" align="right">{{ number_format($j_saldo_pokok) }}</td>
-                            <td class="t l b" align="right">{{ number_format($j_saldo_jasa) }}</td>
+                            <!-- <td class="t l b" align="right">{{ number_format($j_saldo_jasa) }}</td> -->
                             <td class="t l b" align="center">{{ number_format(floor($j_pross * 100)) }}</td>
                             <td class="t l b" align="right">{{ number_format($j_tunggakan_pokok) }}</td>
                             <td class="t l b r" align="right">{{ number_format($j_tunggakan_jasa) }}</td>
@@ -268,7 +268,7 @@
                     <td class="t l b" align="right">{{ number_format($j_real_bi_pokok) }}</td>
                     <td class="t l b" align="right">{{ number_format($j_real_bi_jasa) }}</td>
                     <td class="t l b" align="right">{{ number_format($j_saldo_pokok) }}</td>
-                    <td class="t l b" align="right">{{ number_format($j_saldo_jasa) }}</td>
+                    <!-- <td class="t l b" align="right">{{ number_format($j_saldo_jasa) }}</td> -->
                     <td class="t l b" align="center">{{ number_format(floor($j_pross * 100)) }}</td>
                     <td class="t l b" align="right">{{ number_format($j_tunggakan_pokok) }}</td>
                     <td class="t l b r" align="right">{{ number_format($j_tunggakan_jasa) }}</td>
@@ -362,14 +362,14 @@
                     <td class="t l b" align="right">{{ number_format($tl_real_bi_pokok) }}</td>
                     <td class="t l b" align="right">{{ number_format($tl_real_bi_jasa) }}</td>
                     <td class="t l b" align="right">{{ number_format($tl_saldo_pokok) }}</td>
-                    <td class="t l b" align="right">{{ number_format($tl_saldo_jasa) }}</td>
+                    <!-- <td class="t l b" align="right">{{ number_format($tl_saldo_jasa) }}</td> -->
                     <td class="t l b" align="center">{{ number_format($tl_pross) }}</td>
                     <td class="t l b" align="right">{{ number_format($tl_tunggakan_pokok) }}</td>
                     <td class="t l b r" align="right">{{ number_format($tl_tunggakan_jasa) }}</td>
                 </tr>
 
                 <tr>
-                    <td colspan="16" style="padding: 0px !important;">
+                    <td colspan="15" style="padding: 0px !important;">
                         <table class="p" border="0" width="100%" cellspacing="0" cellpadding="0"
                             style="font-size: 8px; table-layout: fixed;">
                             <tr style="background: rgb(230, 230, 230); font-weight: bold;">
@@ -392,9 +392,9 @@
                                 </td>
                                 <td class="t l b" width="6%" align="right">{{ number_format($t_real_bi_jasa) }}
                                 </td>
-                                <td class="t l b" width="6%" align="right">{{ number_format($t_saldo_pokok) }}
+                                <td class="t l b" width="12%" align="right">{{ number_format($t_saldo_pokok) }}
                                 </td>
-                                <td class="t l b" width="6%" align="right">{{ number_format($t_saldo_jasa) }}</td>
+                                <!-- <td class="t l b" width="6%" align="right">{{ number_format($t_saldo_jasa) }}</td> -->
                                 <td class="t l b" width="2%" align="center">
                                     {{ number_format(floor($t_pross * 100)) }}</td>
                                 <td class="t l b" width="6%" align="right">{{ number_format($t_tunggakan_pokok) }}
@@ -404,7 +404,7 @@
                             </tr>
 
                             <tr>
-                                <td colspan="16">
+                                <td colspan="15">
                                     <div style="margin-top: 16px;"></div>
                                     {!! json_decode(str_replace('{tanggal}', $tanggal_kondisi, $kec->ttd->tanda_tangan_pelaporan), true) !!}
                                 </td>

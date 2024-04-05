@@ -25,7 +25,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{ Session::get('icon') }}">
     <link rel="icon" type="image/png" href="{{ Session::get('icon') }}">
     <title>
-        {{ $title }} &mdash; Aplikasi Dana Bergulir Masyarakat SI DBM
+        {{ $title }} &mdash; Aplikasi Dana Bergulir Masyarakat SI UPK
     </title>
 
     <link rel="canonical" href="https://www.creative-tim.com/product/material-dashboard-pro" />

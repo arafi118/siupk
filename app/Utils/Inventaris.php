@@ -12,10 +12,7 @@ class Inventaris
     public static function nilaiBuku($tgl, $inv)
     {
         $tgl_beli = $inv->tgl_beli;
-
-        if (Session::get('lokasi') == '273') {
-            $tgl_beli = date('Y-m-d', strtotime('+1 month', strtotime($tgl_beli)));
-        }
+        $tgl_beli = date('Y-m-d', strtotime('+1 month', strtotime($tgl_beli)));
 
         $unit = $inv->unit;
         $harga_satuan = $inv->harsat * $unit;
@@ -35,9 +32,7 @@ class Inventaris
 
     public static function bulan($start, $end, $periode = 'bulan')
     {
-        if (Session::get('lokasi') == '273') {
-            $start = date('Y-m-d', strtotime('+1 month', strtotime($start)));
-        }
+        $start = date('Y-m-d', strtotime('+1 month', strtotime($start)));
 
         $batasan = date('t');
         $thn_awal    = substr($start, 0, 4);
