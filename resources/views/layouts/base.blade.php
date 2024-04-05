@@ -25,7 +25,11 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{ Session::get('icon') }}">
     <link rel="icon" type="image/png" href="{{ Session::get('icon') }}">
     <title>
+<<<<<<< HEAD
         {{ $title }} &mdash; Aplikasi Dana Bergulir Masyarakat SI UPK
+=======
+        {{ $title }} &mdash; Aplikasi SI UPK Online
+>>>>>>> 97f4947d92595050116f51055ca1a518d4c5df4c
     </title>
 
     <link rel="canonical" href="https://www.creative-tim.com/product/material-dashboard-pro" />
@@ -513,28 +517,6 @@
         }
     </script>
 
-    <script>
-        if (localStorage.getItem('devops') !== 'true') {
-            $(document).bind("contextmenu", function(e) {
-                return false;
-            });
-
-            $(document).keydown(function(event) {
-                if (event.keyCode == 123) { // Prevent F12
-                    return false;
-                }
-                if (event.ctrlKey && event.shiftKey && event.keyCode == 73) { // Prevent Ctrl+Shift+I        
-                    return false;
-                }
-                if (event.ctrlKey && event.shiftKey && event.keyCode == 67) { // Prevent Ctrl+Shift+C  
-                    return false;
-                }
-                if (event.ctrlKey && event.shiftKey && event.keyCode == 74) { // Prevent Ctrl+Shift+J
-                    return false;
-                }
-            });
-        }
-    </script>
 
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script async src="/assets/js/material-dashboard.min.js?v={{ time() }}"></script>

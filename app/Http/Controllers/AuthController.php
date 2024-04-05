@@ -17,31 +17,43 @@ use Session;
 
 class AuthController extends Controller
 {
-    public function index()
-    {
-        $keuangan = new Keuangan;
+public function index()
+{
+    $keuangan = new Keuangan;
 
-        if ($keuangan->startWith(request()->getHost(), 'master.sidbm')) {
-            return redirect('/master');
-        }
-
-        $kec = Kecamatan::where('web_kec', explode('//', request()->url(''))[1])->orwhere('web_alternatif', explode('//', request()->url(''))[1])->first();
-        if (!$kec) {
-            $kab = Kabupaten::where('web_kab', explode('//', request()->url(''))[1])->orwhere('web_kab_alternatif', explode('//', request()->url(''))[1])->first();
-            if (!$kab) {
-                abort(404);
-            }
-
-            return redirect('/kab');
-        }
-
-        $logo = '/assets/img/icon/favicon.png';
-        if ($kec->logo) {
-            $logo = '/storage/logo/' . $kec->logo;
-        }
-
-        return view('auth.login')->with(compact('kec', 'logo'));
+    if ($keuangan->startWith(request()->getHost(), 'master.sidbm')) {
+        return redirect('/master');
     }
+
+    // Handle URL lokal
+ if (request()->server('SERVER_NAME') === '127.0.0.1' || request()->server('SERVER_NAME') === 'localhost') {
+        $kec = Kecamatan::where('id', '68')
+                           ->with('kabupaten')
+                           ->first();
+    } else {
+        $kec = Kecamatan::where('web_kec', explode('//', request()->url(''))[1])
+            ->orWhere('web_alternatif', explode('//', request()->url(''))[1])
+            ->first();
+    }
+
+    if (!$kec) {
+        $kab = Kabupaten::where('web_kab', explode('//', request()->url(''))[1])
+            ->orWhere('web_kab_alternatif', explode('//', request()->url(''))[1])
+            ->first();
+        if (!$kab) {
+            abort(404);
+        }
+
+        return redirect('/kab');
+    }
+
+    $logo = '/assets/img/icon/favicon.png';
+    if ($kec->logo) {
+        $logo = '/storage/logo/' . $kec->logo;
+    }
+
+    return view('auth.login')->with(compact('kec', 'logo'));
+}
 
     public function login(Request $request)
     {
@@ -59,7 +71,17 @@ class AuthController extends Controller
             ]);
         }
 
-        $kec = Kecamatan::where('web_kec', $url)->orwhere('web_alternatif', $url)->with('kabupaten')->first();
+ if (request()->server('SERVER_NAME') === '127.0.0.1' || request()->server('SERVER_NAME') === 'localhost') {
+    $kec = Kecamatan::where('id', '68')
+                   ->with('kabupaten')
+                   ->first();
+} else {
+    $kec = Kecamatan::where('web_kec', $url)
+                   ->orWhere('web_alternatif', $url)
+                   ->with('kabupaten')
+                   ->first();
+}
+
         $lokasi = $kec->id;
 
         $icon = '/assets/img/icon/favicon.png';
@@ -131,7 +153,15 @@ class AuthController extends Controller
         $username = $uname;
         $password = $uname;
 
-        $kec = Kecamatan::where('web_kec', $url)->orwhere('web_alternatif', $url)->first();
+        if (request()->server('SERVER_NAME') === '127.0.0.1' || request()->server('SERVER_NAME') === 'localhost') {
+            $kec = Kecamatan::where('id', '68')
+                           ->first();
+        } else {
+            $kec = Kecamatan::where('web_kec', $url)
+                           ->orWhere('web_alternatif', $url)
+                           ->first();
+        }
+
         $lokasi = $kec->id;
 
         $icon = '/assets/img/icon/favicon.png';

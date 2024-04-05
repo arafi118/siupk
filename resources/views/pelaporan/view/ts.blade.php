@@ -76,13 +76,14 @@
     <ul style="font-size: 12px;">
         <li style="text-align: justify;">
             Jika terdapat kendala teknis, silahkan menghubungi Technical Support kami melalui WhatsApps ke nomor diatas.
-            Dimohon menggunakan bahasa yang mudah dipahami dan tidak menyulitkan
+            Dimohon menggunakan bahasa yang singkat padat dan jelas
         </li>
         <li style="text-align: justify;">
             <div>
                 Regristasikan terlebih dahulu Nomor Bapak/Ibu dengan cara ketik :
             </div>
-            <div style="text-align: center; font-weight: bold;">DBM {{ $kec->id }} Nama Lengkap {{ $kec->nama_kec }}
+            <div style="text-align: center; font-weight: bold;">UPK {{ $kec->id }} Nama Lengkap
+                {{ $kec->nama_kec }}
             </div>
         </li>
         <li style="text-align: justify;">

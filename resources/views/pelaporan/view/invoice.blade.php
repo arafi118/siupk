@@ -1,7 +1,12 @@
 @php
     use App\Utils\Tanggal;
 
-    $dari = Tanggal::tahun($inv->tgl_invoice) . '-' . Tanggal::bulan($inv->kec->tgl_pakai) . '-' . Tanggal::hari($inv->kec->tgl_pakai);
+    $dari =
+        Tanggal::tahun($inv->tgl_invoice) .
+        '-' .
+        Tanggal::bulan($inv->kec->tgl_pakai) .
+        '-' .
+        Tanggal::hari($inv->kec->tgl_pakai);
     $sampai = date('Y-m-d', strtotime('+1 years', strtotime($dari)));
 
     if ($inv->status == 'UNPAID') {
@@ -20,7 +25,10 @@
     $total = 0;
 
     $kecamatan = $inv->kec->sebutan_kec . ' ' . $inv->kec->nama_kec;
-    if (Keuangan::startWith($inv->kec->kabupaten->nama_kab, 'KOTA') || Keuangan::startWith($inv->kec->kabupaten->nama_kab, 'KAB')) {
+    if (
+        Keuangan::startWith($inv->kec->kabupaten->nama_kab, 'KOTA') ||
+        Keuangan::startWith($inv->kec->kabupaten->nama_kab, 'KAB')
+    ) {
         $kecamatan .= ' ' . ucwords(strtolower($inv->kec->kabupaten->nama_kab));
     } else {
         $kecamatan .= ' Kabupaten ' . ucwords(strtolower($inv->kec->kabupaten->nama_kab));
@@ -174,7 +182,7 @@
             <tr style="background: rgb(232, 232, 232)">
                 <td height="70" align="center" style="font-size: 11px;">
                     <div>
-                        {{ $inv->jp->nama_jp }} SI DBM {{ $inv->kec->sebutan_kec }} {{ $inv->kec->nama_kec }}
+                        {{ $inv->jp->nama_jp }} SI UPK Online {{ $inv->kec->sebutan_kec }} {{ $inv->kec->nama_kec }}
                     </div>
                     <div>{{ $keterangan }}</div>
                 </td>
@@ -233,7 +241,7 @@
                         }
                     @endphp
                     <tr>
-                        <td align="center">{{ $trx->idt }}/SI-DBM</td>
+                        <td align="center">{{ $trx->idt }}/SI UPK Online</td>
                         <td align="center">{{ Tanggal::tglIndo($trx->tgl_transaksi) }}</td>
                         <td align="center">{{ $trx->keterangan_transaksi }} {{ $keterangan }}</td>
                         <td align="right">{{ number_format($trx->jumlah, 2) }}</td>
@@ -307,8 +315,6 @@
     </main>
 
     <footer>
-        <div>www.sidbm.net</div>
-        <div>&copy; {{ date('Y') }}</div>
     </footer>
 </body>
 

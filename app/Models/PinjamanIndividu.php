@@ -1,0 +1,116 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Session;
+
+class PinjamanIndividu extends Model
+{
+    use HasFactory;
+    protected $table;
+    public $timestamps = false;
+
+    protected $guarded = ['id'];
+
+    public function __construct()
+    {
+        $this->table = 'pinjaman_anggota_' . Session::get('lokasi');
+    }
+
+    public function jpp()
+    {
+        return $this->belongsTo(JenisProdukPinjaman::class, 'jenis_pp');
+    }
+
+    public function jasa()
+    {
+        return $this->belongsTo(JenisJasa::class, 'jenis_jasa');
+    }
+
+    public function angsuran_pokok()
+    {
+        return $this->belongsTo(SistemAngsuran::class, 'sistem_angsuran');
+    }
+
+    public function angsuran_jasa()
+    {
+        return $this->belongsTo(SistemAngsuran::class, 'sa_jasa');
+    }
+
+    public function anggota()
+    {
+        return $this->belongsTo(anggota::class, 'nia', 'id');
+    }
+
+    public function sts()
+    {
+        return $this->belongsTo(StatusPinjaman::class, 'status', 'kd_status');
+    }
+
+    public function ra_i()
+    {
+        return $this->hasMany(RencanaAngsuran_i::class, 'loan_id')->orderBy('angsuran_ke', 'ASC');
+    }
+
+    public function real_i()
+    {
+        return $this->hasMany(RealAngsuran_i::class, 'loan_id')->orderBy('tgl_transaksi', 'ASC')->orderBy('id', 'ASC');
+    }
+
+    public function sis_pokok()
+    {
+        return $this->belongsTo(SistemAngsuran::class, 'sistem_angsuran');
+    }
+
+    public function sis_jasa()
+    {
+        return $this->belongsTo(SistemAngsuran::class, 'sa_jasa');
+    }
+
+    public function saldo()
+    {
+        return $this->hasOne(RealAngsuran_i::class, 'loan_id')->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC');
+    }
+
+    public function saldo2()
+    {
+        return $this->hasOne(RealAngsuran_i::class, 'loan_id')->orderBy('tgl_transaksi', 'ASC')->orderBy('id', 'ASC');
+    }
+
+    public function target()
+    {
+        return $this->hasOne(RencanaAngsuran_i::class, 'loan_id')->orderBy('jatuh_tempo', 'DESC');
+    }
+
+    public function rencana()
+    {
+        return $this->hasMany(RencanaAngsuran_i::class, 'loan_id')->orderBy('jatuh_tempo', 'ASC');
+    }
+
+    public function rencana1()
+    {
+        return $this->hasOne(RencanaAngsuran_i::class, 'loan_id')->orderBy('jatuh_tempo', 'ASC');
+    }
+
+    public function trx()
+    {
+        return $this->hasMany(Transaksi::class, 'id_pinj_i', 'id')->orderBy('tgl_transaksi', 'ASC')->orderBy('idtp', 'ASC');
+    }
+
+    public function saldo_pinjaman()
+    {
+        return $this->hasOne(Penghapusan::class, 'id_pinj_i', 'id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function pinj_i()
+    {
+        return $this->hasOne(PinjamanAnggota::class, 'nia', 'nia')->orderBy('tgl_cair', 'DESC');
+    }
+}
