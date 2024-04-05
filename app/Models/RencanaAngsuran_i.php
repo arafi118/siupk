@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Session;
 
-class RencanaAngsuranIndividu extends Model
+class RencanaAngsuran_i extends Model
 {
     use HasFactory;
 

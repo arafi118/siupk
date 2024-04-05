@@ -280,25 +280,25 @@
         $('#TbProposal').on('click', 'tbody tr', function(e) {
             var data = tbProposal.row(this).data();
 
-            window.location.href = '/detail/' + data.id
+            window.location.href = '/detail_i/' + data.id
         })
 
         $('#TbVerified').on('click', 'tbody tr', function(e) {
             var data = tbVerified.row(this).data();
 
-            window.location.href = '/detail/' + data.id
+            window.location.href = '/detail_i/' + data.id
         })
 
         $('#TbWaiting').on('click', 'tbody tr', function(e) {
             var data = tbWaiting.row(this).data();
 
-            window.location.href = '/detail/' + data.id
+            window.location.href = '/detail_i/' + data.id
         })
 
         $('#TbAktif').on('click', 'tbody tr', function(e) {
             var data = tbAktif.row(this).data();
 
-            window.location.href = '/detail/' + data.id
+            window.location.href = '/detail_i/' + data.id
         })
 
         $('#TbLunas').on('click', 'tbody tr', function(e) {

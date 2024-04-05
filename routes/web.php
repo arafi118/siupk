@@ -182,7 +182,7 @@ Route::get('/register_proposal_i/{nia}', [PinjamanIndividuController::class, 're
 Route::get('/daftar_individu', [PinjamanIndividuController::class, 'DaftarAnggota'])->middleware('auth');
 
 
-Route::get('/detail/{perguliran_i}', [PinjamanIndividuController::class, 'detail'])->middleware('auth');
+Route::get('/detail_i/{perguliran_i}', [PinjamanIndividuController::class, 'detail'])->middleware('auth');
 Route::get('/perguliran_i/proposal', [PinjamanIndividuController::class, 'proposal'])->middleware('auth');
 Route::get('/perguliran_i/verified', [PinjamanIndividuController::class, 'verified'])->middleware('auth');
 Route::get('/perguliran_i/waiting', [PinjamanIndividuController::class, 'waiting'])->middleware('auth');

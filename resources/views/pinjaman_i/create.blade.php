@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card mb-3">
-        <div class="card-body p-3" id="SelectKelompok"></div>
+        <div class="card-body p-3" id="SelectIndividu"></div>
     </div>
 
     <div class="mt-4 pt-1" id="RegisterProposal"></div>
@@ -10,18 +10,18 @@
 
 @section('script')
     <script>
-        $.get('/daftar_individu?nia={{ $nia }}', async (result) => {
-            await $('#SelectKelompok').html(result)
+        $.get('/daftar_individu?id_angg={{ $id_angg }}', async (result) => {
+            await $('#SelectIndividu').html(result)
 
-            var nia = $('#individu').val()
-            formRegister(nia)
+            var id_angg = $('#individu').val()
+            formRegister(id_angg)
         })
 
         $(document).on('change', '#individu', function(e) {
             e.preventDefault()
 
-            var nia = $(this).val()
-            formRegister(nia)
+            var id_angg = $(this).val()
+            formRegister(id_angg)
         })
 
         $(document).on('click', '#SimpanProposal', function(e) {

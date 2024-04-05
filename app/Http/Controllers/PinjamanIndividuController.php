@@ -48,7 +48,7 @@ class PinjamanIndividuController extends Controller
         if (request()->ajax()) {
             $pinj_i = PinjamanIndividu::where('status', 'P')
                 ->where('jenis_pinjaman', 'I')
-                ->with('anggota', 'anggota.d', 'jpp', 'sts', 'pinjaman_anggota')->get();
+                ->with('anggota', 'anggota.d', 'jpp', 'sts')->get();
 
             return DataTables::of($pinj_i)
                 ->addColumn('jasa', function ($row) {
@@ -227,14 +227,14 @@ class PinjamanIndividuController extends Controller
      */
     public function create()
     {
-        $id_kel = request()->get('id_kel');
-        $title = 'Registrasi Pinjaman';
-        return view('pinjaman.create')->with(compact('title', 'id_kel'));
+        $id_angg = request()->get('id_angg');
+        $title = 'Registrasi Pinjaman Individu';
+        return view('pinjaman_i.create')->with(compact('title', 'id_angg'));
     }
 
-    public function Daftaranggota()
+    public function DaftarAnggota()
     {
-        $id_kel = request()->get('id_kel') ?: 0;
+        $id_angg = request()->get('id_angg') ?: 0;
         $anggota = anggota::with([
             'd',
             'pinjaman' => function ($query) {
@@ -242,12 +242,12 @@ class PinjamanIndividuController extends Controller
             }
         ])->withCount('pinjaman')->orderBy('namadepan', 'ASC')->get();
 
-        return view('pinjaman.partials.anggota')->with(compact('anggota', 'id_kel'));
+        return view('pinjaman.partials.anggota')->with(compact('anggota', 'nia'));
     }
 
-    public function register($id_kel)
+    public function register($id_angg)
     {
-        $anggota = anggota::where('id', $id_kel)->with([
+        $anggota = anggota::where('id', $id_angg)->with([
             'pinjaman' => function ($query) {
                 $query->orderBy('tgl_proposal', 'DESC');
             },
@@ -275,7 +275,7 @@ class PinjamanIndividuController extends Controller
      */
     public function store(Request $request)
     {
-        $kel = anggota::where('id', $request->id_kel)->first();
+        $kel = anggota::where('id', $request->id_angg)->first();
         $data = $request->only([
             'tgl_proposal',
             'pengajuan',
@@ -303,7 +303,7 @@ class PinjamanIndividuController extends Controller
         }
 
         $insert = [
-            'id_kel' => $request->id_kel,
+            'id_angg' => $request->id_angg,
             'jenis_pp' => $request->jenis_produk_pinjaman,
             'tgl_proposal' => Tanggal::tglNasional($request->tgl_proposal),
             'tgl_verifikasi' => Tanggal::tglNasional($request->tgl_proposal),
@@ -348,23 +348,8 @@ class PinjamanIndividuController extends Controller
             'sis_jasa',
             'jpp',
             'jasa',
-            'pinjaman_anggota',
-            'pinjaman_anggota.anggota',
-            'pinjaman_anggota.anggota.pemanfaat' => function ($query) {
-                $query->where([
-                    ['status', 'A'],
-                    ['lokasi', '!=', Session::get('lokasi')]
-                ]);
-            },
-            'pinjaman_anggota.anggota.pemanfaat.kec',
-            'pinjaman_anggota.pinjaman' => function ($query) {
-                $query->where('status', 'A');
-            },
-            'pinjaman_anggota.pinjaman.pinkel',
-            'pinjaman_anggota.pinjaman.anggota',
-            'pinjaman_anggota.pinjaman.anggota',
-            'real',
-            'real.transaksi'
+            'real_i',
+            'real_i.transaksi'
         ])->where('id', $perguliran_i->id)->first();
         $jenis_jasa = JenisJasa::all();
         $sistem_angsuran = SistemAngsuran::all();
@@ -396,7 +381,7 @@ class PinjamanIndividuController extends Controller
         $pinj_a = [];
         if ($perguliran_i->status == 'W') {
             $pinj_i_aktif = PinjamanIndividu::where([
-                ['id_kel', $perguliran_i->id_kel],
+                ['id_angg', $perguliran_i->id_angg],
                 ['status', 'A'],
                 ['jenis_pinjaman', 'I']
             ]);
@@ -421,7 +406,7 @@ class PinjamanIndividuController extends Controller
                 }
             }
 
-            $pinjaman_anggota = PinjamanIndividu::where('id_kel', $perguliran_i->id_kel)->where('status', 'A')->with('anggota')->get();
+            $pinjaman_anggota = PinjamanIndividu::where('id_angg', $perguliran_i->id_angg)->where('status', 'A')->with('anggota')->get();
             foreach ($pinjaman_anggota as $pinj_i) {
                 $pinj_a['jumlah_anggota'] += 1;
                 $pinj_a['anggota'][] = $pinj_i;
@@ -433,7 +418,7 @@ class PinjamanIndividuController extends Controller
 
     public function detail(PinjamanIndividu $perguliran_i)
     {
-        $title = 'Detal Pinjaman anggota ' . $perguliran_i->anggota->namadepan;
+        $title = 'Detail Pinjaman anggota ' . $perguliran_i->anggota->namadepan;
         $real = RealAngsuran_i::where('loan_id', $perguliran_i->id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
         $sistem_angsuran = SistemAngsuran::all();
         return view('perguliran_i.detail')->with(compact('title', 'perguliran_i', 'real', 'sistem_angsuran'));
@@ -873,7 +858,7 @@ class PinjamanIndividuController extends Controller
         ]);
 
         $pinjaman = PinjamanIndividu::create([
-            'id_kel' => $pinj_i->id_kel,
+            'id_angg' => $pinj_i->id_angg,
             'jenis_pp' => $pinj_i->jenis_pp,
             'tgl_proposal' => Tanggal::tglNasional($tgl_resceduling),
             'tgl_verifikasi' => Tanggal::tglNasional($tgl_resceduling),
@@ -915,7 +900,7 @@ class PinjamanIndividuController extends Controller
         foreach ($pinj_i->pinjaman_anggota as $pa) {
             $pinjaman_anggota = [
                 'jenis_pinjaman' => $pa->jenis_pinjaman,
-                'id_kel' => $pa->id_kel,
+                'id_angg' => $pa->id_angg,
                 'id_pinkel' => $pinjaman->id,
                 'jenis_pp' => $pa->jenis_pp,
                 'nia' => $pa->nia,
@@ -1059,7 +1044,7 @@ class PinjamanIndividuController extends Controller
         $param = request()->get('query');
         if (strlen($param) >= '0') {
             $anggota = anggota::leftJoin('desa', 'desa.kd_desa', '=', 'anggota_' . Session::get('lokasi') . '.desa')
-                ->leftJoin('pinjaman_anggota_' . Session::get('lokasi') . ' as pk', 'pk.id_kel', '=', 'anggota_' . Session::get('lokasi') . '.id')
+                ->leftJoin('pinjaman_anggota_' . Session::get('lokasi') . ' as pk', 'pk.id_angg', '=', 'anggota_' . Session::get('lokasi') . '.id')
                 ->where(function ($query) use ($param) {
                     $query->where('anggota_' . Session::get('lokasi') . '.namadepan', 'like', '%' . $param . '%')
                         ->orwhere('anggota_' . Session::get('lokasi') . '.kd_anggota', 'like', '%' . $param . '%')
