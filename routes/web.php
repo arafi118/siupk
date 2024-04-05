@@ -134,6 +134,9 @@ Route::get('/database/penduduk/cari_nik', [AnggotaController::class, 'cariNik'])
 Route::post('/database/penduduk/{nik}/blokir', [AnggotaController::class, 'blokir'])->middleware('auth');
 
 Route::get('/database/kelompok/detail_kelompok/{id}', [KelompokController::class, 'detailKelompok'])->middleware('auth');
+Route::get('/database/anggota/detail_anggota/{id}', [AnggotaController::class, 'detailAnggota'])->middleware('auth');
+
+
 Route::resource('/database/desa', DesaController::class)->middleware('auth');
 Route::resource('/database/kelompok', KelompokController::class)->middleware('auth');
 Route::resource('/database/penduduk', AnggotaController::class)->middleware('auth');
@@ -153,15 +156,22 @@ Route::get('/lunas/{perguliran}', [PinjamanKelompokController::class, 'pelunasan
 Route::get('/cetak_keterangan_lunas/{perguliran}', [PinjamanKelompokController::class, 'keterangan'])->middleware('auth');
 
 Route::get('/perguliran/cari_kelompok', [PinjamanKelompokController::class, 'cariKelompok'])->middleware('auth');
+Route::get('/perguliran/cari_anggota', [PinjamanAnggotaController::class, 'cariAnggota'])->middleware('auth');
+
 Route::post('/perguliran/simpan_data/{id}', [PinjamanKelompokController::class, 'simpan'])->middleware('auth');
 Route::post('/perguliran/rescedule', [PinjamanKelompokController::class, 'rescedule'])->middleware('auth');
 Route::post('/perguliran/hapus', [PinjamanKelompokController::class, 'hapus'])->middleware('auth');
 Route::resource('/perguliran', PinjamanKelompokController::class)->middleware('auth');
 
 Route::get('/perguliran/dokumen/kartu_angsuran/{id}', [PinjamanKelompokController::class, 'kartuAngsuran'])->middleware('auth');
+Route::get('/perguliran/dokumen/kartu_angsuran_i/{id}', [PinjamanAnggotaController::class, 'kartuAngsuranIndividu'])->middleware('auth');
+
+
 Route::get('/perguliran/dokumen/kartu_angsuran/{id}/{idtp}', [PinjamanKelompokController::class, 'cetakPadaKartu'])->middleware('auth');
 
 Route::get('/perguliran/dokumen/kartu_angsuran_anggota/{id}/{nia?}', [PinjamanKelompokController::class, 'kartuAngsuranAnggota'])->middleware('auth');
+Route::get('/perguliran/dokumen/kartu_angsuran_anggota_i/{id}/{nia?}', [PinjamanAnggotaController::class, 'kartuAngsuranAnggotaIndividu'])->middleware('auth');
+
 
 Route::get('/perguliran/dokumen/cetak_kartu_angsuran_anggota/{id}/{idtp}/{nia?}', [PinjamanKelompokController::class, 'cetakKartuAngsuranAnggota'])->middleware('auth');
 
@@ -182,13 +192,18 @@ Route::post('/hapus_pemanfaat/{pinjaman}', [PinjamanAnggotaController::class, 'p
 
 Route::get('/transaksi/jurnal_umum', [TransaksiController::class, 'jurnalUmum'])->middleware('auth');
 Route::get('/transaksi/jurnal_angsuran', [TransaksiController::class, 'jurnalAngsuran'])->middleware('auth');
+Route::get('/transaksi/jurnal_angsuran_individu', [TransaksiController::class, 'jurnalAngsuranIndividu'])->middleware('auth');
 Route::get('/transaksi/tutup_buku', [TransaksiController::class, 'jurnalTutupBuku'])->middleware('auth');
 Route::get('/trasaksi/saldo/{kode_akun}', [TransaksiController::class, 'saldo'])->middleware('auth');
 
 Route::get('/transaksi/ambil_rekening/{id}', [TransaksiController::class, 'rekening'])->middleware('auth');
 Route::get('/transaksi/form_nominal/', [TransaksiController::class, 'form'])->middleware('auth');
 Route::get('/transaksi/form_angsuran/{id_pinkel}', [TransaksiController::class, 'formAngsuran'])->middleware('auth');
+Route::get('/transaksi/form_angsuran_individu/{id_pinkel}', [TransaksiController::class, 'formAngsuranIndividu'])->middleware('auth');
+
 Route::get('/transaksi/angsuran/target/{id_pinkel}', [TransaksiController::class, 'targetAngsuran'])->middleware('auth');
+Route::get('/transaksi/angsuran_individu/target/{id_pinkel}', [TransaksiController::class, 'targetAngsuranIndividu'])->middleware('auth');
+Route::post('/transaksi/angsuran_individu', [TransaksiController::class, 'angsuranIndividu']);
 
 Route::get('/transaksi/data/{idt}', [TransaksiController::class, 'data'])->middleware('auth');
 Route::get('/transaksi/tutup_buku/saldo_awal/{tahun}', [TransaksiController::class, 'saldoAwal'])->middleware('auth');
@@ -199,7 +214,12 @@ Route::post('/transaksi/reversal', [TransaksiController::class, 'reversal'])->mi
 Route::post('/transaksi/hapus', [TransaksiController::class, 'hapus'])->middleware('auth');
 
 Route::get('/transaksi/angsuran/lpp/{id}', [TransaksiController::class, 'lpp'])->middleware('auth');
+Route::get('/transaksi/angsuran_i/lpp/{id}', [TransaksiController::class, 'lppIndividu'])->middleware('auth');
+
 Route::get('/transaksi/angsuran/detail_angsuran/{id}', [TransaksiController::class, 'detailAngsuran'])->middleware('auth');
+Route::get('/transaksi/angsuran/detail_angsuran_i/{id}', [TransaksiController::class, 'detailAngsuranIndividu'])->middleware('auth');
+
+
 Route::get('/transaksi/detail_transaksi/', [TransaksiController::class, 'detailTransaksi'])->middleware('auth');
 
 Route::post('/transaksi/angsuran', [TransaksiController::class, 'angsuran'])->middleware('auth');
@@ -209,7 +229,11 @@ Route::get('/transaksi/generate_real/{id_pinkel}', [TransaksiController::class, 
 Route::get('/transaksi/regenerate_real/{id_pinkel}', [TransaksiController::class, 'realisasi'])->middleware('auth');
 
 Route::get('/transaksi/angsuran/form_anggota/{id_pinkel}', [TransaksiController::class, 'formAnggota'])->middleware('auth');
+Route::get('/transaksi/angsuran/form_anggota_i/{id_pinkel}', [TransaksiController::class, 'formAnggotaIndividu'])->middleware('auth');
+
 Route::get('/angsuran/notifikasi/{idtp}', [TransaksiController::class, 'notifikasi'])->middleware('auth');
+Route::get('/angsuran/notifikasi_i/{idtp}', [TransaksiController::class, 'notifikasiIndividu'])->middleware('auth');
+
 
 Route::get('/transaksi/dokumen/kuitansi/{id}', [TransaksiController::class, 'kuitansi'])->middleware('auth');
 Route::get('/transaksi/dokumen/kuitansi_thermal/{id}', [TransaksiController::class, 'kuitansi_thermal'])->middleware('auth');

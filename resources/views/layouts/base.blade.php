@@ -308,6 +308,52 @@
             }
         });
 
+
+        $('#cariAnggota').typeahead({
+            source: function(query, process) {
+                var states = [];
+                return $.get('/perguliran/cari_anggota', {
+                    query: query
+                }, function(result) {
+                    var resultList = result.map(function(item) {
+                        states.push({
+                            "id": item.id,
+                            "name": item.namadepan +
+                                ' [' + item.nik + ']',
+                            "value": item.id
+                        });
+                    });
+
+                    return process(states);
+                })
+            },
+            afterSelect: function(item) {
+                var path = '{{ Request::path() }}'
+                if (path == 'transaksi/jurnal_angsuran_individu') {
+                    $.get('/transaksi/form_angsuran_individu/' + item.id, function(result) {
+                        var ch_pokok = document.getElementById('chartP').getContext("2d");
+                        var ch_jasa = document.getElementById('chartJ').getContext("2d");
+
+                        angsuran(true, result)
+
+                        makeChart('pokok', ch_pokok, result.sisa_pokok, result.sum_pokok)
+                        makeChart('jasa', ch_jasa, result.sisa_jasa, result.sum_jasa)
+
+                        $('#loan-id').html(item.id)
+
+                        var id = $('#id').val()
+                        $.get('/transaksi/angsuran/form_anggota_i/' + id, function(result) {
+                            if (result.success) {
+                                $('#LayoutAngsuranAnggota').html(result.view)
+                                $('#AngsuranAnggotaLabel').text(result.title)
+                            }
+                        })
+                    })
+                } else {
+                    window.location.href = '/transaksi/jurnal_angsuran_individu?pinkel=' + item.id
+                }
+            }
+        });    
         function makeChart(id, target, sisa_saldo, sum_saldo) {
             window[id] = new Chart(target, {
                 type: 'doughnut',

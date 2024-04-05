@@ -404,6 +404,27 @@ class PinjamanAnggotaController extends Controller
         ]);
     }
 
+    public function cariAnggota()
+    {
+        $param = request()->get('query');
+        if (strlen($param) >= '0') {
+            $anggota = Anggota::leftJoin('desa', 'desa.kd_desa', '=', 'anggota_' . Session::get('lokasi') . '.desa')
+                ->leftJoin('pinjaman_anggota_' . Session::get('lokasi') . ' as pk', 'pk.nia', '=', 'anggota_' . Session::get('lokasi') . '.id')
+                ->where(function ($query) use ($param) {
+                    $query->where('anggota_' . Session::get('lokasi') . '.namadepan', 'like', '%' . $param . '%')
+                        ->orwhere('anggota_' . Session::get('lokasi') . '.nik', 'like', '%' . $param . '%');
+                })
+                ->where([
+                    ['pk.status', 'A'],
+                    ['pk.jenis_pinjaman','!=','K']
+                ])
+                ->get();
+
+            return response()->json($anggota);
+        }
+
+        return response()->json($param);
+    }
     public function lunaskan(Request $request, PinjamanAnggota $pinjaman)
     {
         $data = $request->only(['id_pinkel']);
