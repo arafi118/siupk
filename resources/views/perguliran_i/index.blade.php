@@ -59,7 +59,7 @@
                             <table class="table table-flush table-hover table-click" width="100%" id="TbProposal">
                                 <thead>
                                     <tr>
-                                        <th>Nama Anggota</th>
+                                        <th>Nama Anggota P</th>
                                         <th>Alamat</th>
                                         <th>Tgl Pengajuan</th>
                                         <th>Pengajuan</th>
