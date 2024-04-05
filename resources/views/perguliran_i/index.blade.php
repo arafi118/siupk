@@ -163,8 +163,8 @@
 @section('script')
     <script>
         var tbProposal = CreateTable('#TbProposal', '/perguliran_i/proposal', [{
-            data: 'nama_depan',
-            name: 'nama_depan'
+            data: 'anggota.namadepan',
+            name: 'anggota.namadepan'
         }, {
             data: 'anggota.alamat',
             name: 'anggota.alamat'
@@ -182,8 +182,8 @@
         }])
 
         var tbVerified = CreateTable('#TbVerified', '/perguliran_i/verified', [{
-            data: 'nama_depan',
-            name: 'nama_depan'
+            data: 'anggota.namadepan',
+            name: 'anggota.namadepan'
         }, {
             data: 'anggota.alamat',
             name: 'anggota.alamat'
@@ -201,8 +201,8 @@
         }])
 
         var tbWaiting = CreateTable('#TbWaiting', '/perguliran_i/waiting', [{
-            data: 'nama_depan',
-            name: 'nama_depan'
+            data: 'anggota.namadepan',
+            name: 'anggota.namadepan'
         }, {
             data: 'anggota.alamat',
             name: 'anggota.alamat'
@@ -220,8 +220,8 @@
         }])
 
         var tbAktif = CreateTable('#TbAktif', '/perguliran_i/aktif', [{
-            data: 'nama_depan',
-            name: 'nama_depan'
+            data: 'anggota.namadepan',
+            name: 'anggota.namadepan'
         }, {
             data: 'anggota.alamat',
             name: 'anggota.alamat'
@@ -239,8 +239,8 @@
         }])
 
         var tbLunas = CreateTable('#TbLunas', '/perguliran_i/lunas', [{
-            data: 'nama_depan',
-            name: 'nama_depan'
+            data: 'anggota.namadepan',
+            name: 'anggota.namadepan'
         }, {
             data: 'anggota.alamat',
             name: 'anggota.alamat'

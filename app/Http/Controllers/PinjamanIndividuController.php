@@ -48,7 +48,7 @@ class PinjamanIndividuController extends Controller
         if (request()->ajax()) {
             $pinj_i = PinjamanIndividu::where('status', 'P')
                 ->where('jenis_pinjaman', 'I')
-                ->with('anggota', 'anggota.d', 'jpp', 'sts', 'pinjaman_anggota')->get();
+                ->with('anggota', 'anggota.d', 'jpp', 'sts')->get();
 
             return DataTables::of($pinj_i)
                 ->addColumn('jasa', function ($row) {
@@ -84,7 +84,7 @@ class PinjamanIndividuController extends Controller
         if (request()->ajax()) {
             $pinj_i = PinjamanIndividu::where('status', 'V')
                 ->where('jenis_pinjaman', 'I')
-                ->with('anggota', 'anggota.d', 'jpp', 'sts', 'pinjaman_anggota')->get();
+                ->with('anggota', 'anggota.d', 'jpp', 'sts')->get();
 
             return DataTables::of($pinj_i)
                 ->addColumn('jasa', function ($row) {
@@ -110,9 +110,6 @@ class PinjamanIndividuController extends Controller
                 ->editColumn('anggota.alamat', function ($row) {
                     return $row->anggota->alamat . ' ' . $row->anggota->d->nama_desa;
                 })
-                ->addColumn('pinjaman_anggota_count', function ($row) {
-                    return count($row->pinjaman_anggota);
-                })
                 ->rawColumns(['namadepan'])
                 ->make(true);
         }
@@ -123,7 +120,7 @@ class PinjamanIndividuController extends Controller
         if (request()->ajax()) {
             $pinj_i = PinjamanIndividu::where('status', 'W')
                 ->where('jenis_pinjaman', 'I')
-                ->with('anggota', 'anggota.d', 'jpp', 'sts', 'pinjaman_anggota')->get();
+                ->with('anggota', 'anggota.d', 'jpp', 'sts')->get();
 
             return DataTables::of($pinj_i)
                 ->addColumn('jasa', function ($row) {
@@ -149,9 +146,6 @@ class PinjamanIndividuController extends Controller
                 ->editColumn('anggota.alamat', function ($row) {
                     return $row->anggota->alamat . ' ' . $row->anggota->d->nama_desa;
                 })
-                ->addColumn('pinjaman_anggota_count', function ($row) {
-                    return count($row->pinjaman_anggota);
-                })
                 ->rawColumns(['namadepan'])
                 ->make(true);
         }
@@ -162,7 +156,7 @@ class PinjamanIndividuController extends Controller
         if (request()->ajax()) {
             $pinj_i = PinjamanIndividu::where('status', 'A')
                 ->where('jenis_pinjaman', 'I')
-                ->with('anggota', 'anggota.d', 'jpp', 'sts', 'pinjaman_anggota')->get();
+                ->with('anggota', 'anggota.d', 'jpp', 'sts')->get();
 
             return DataTables::of($pinj_i)
                 ->addColumn('jasa', function ($row) {
@@ -188,9 +182,6 @@ class PinjamanIndividuController extends Controller
                 ->editColumn('anggota.alamat', function ($row) {
                     return $row->anggota->alamat . ' ' . $row->anggota->d->nama_desa;
                 })
-                ->addColumn('pinjaman_anggota_count', function ($row) {
-                    return count($row->pinjaman_anggota);
-                })
                 ->rawColumns(['namadepan'])
                 ->make(true);
         }
@@ -202,8 +193,8 @@ class PinjamanIndividuController extends Controller
             $tb_pinkel = 'pinjaman_anggota_' . Session::get('lokasi');
             $pinj_i = PinjamanIndividu::where('status', 'A')
                 ->where('jenis_pinjaman', 'I')
-                ->whereRaw($tb_pinkel . '.alokasi<=(SELECT SUM(realisasi_pokok) FROM real_angsuran_i' . Session::get('lokasi') . ' WHERE loan_id=' . $tb_pinkel . '.id)')
-                ->with('anggota', 'jpp', 'sts')->withCount('pinjaman_anggota')->get();
+                ->whereRaw($tb_pinkel . '.alokasi<=(SELECT SUM(realisasi_pokok) FROM real_angsuran_i_' . Session::get('lokasi') . ' WHERE loan_id=' . $tb_pinkel . '.id)')
+                ->with('anggota', 'jpp', 'sts')->get();
 
             return DataTables::of($pinj_i)
                 ->addColumn('jasa', function ($row) {
@@ -405,10 +396,10 @@ class PinjamanIndividuController extends Controller
         $pinj_a = [];
         if ($perguliran_i->status == 'W') {
             $pinj_i_aktif = PinjamanIndividu::where([
-                    ['id_kel', $perguliran_i->id_kel],
-                    ['status', 'A'],
-                    ['jenis_pinjaman', 'I']
-                ]);
+                ['id_kel', $perguliran_i->id_kel],
+                ['status', 'A'],
+                ['jenis_pinjaman', 'I']
+            ]);
 
             $pinjaman_anggota = $perguliran_i->pinjaman_anggota;
             $pinj_a['jumlah_pinjaman'] = 0;
