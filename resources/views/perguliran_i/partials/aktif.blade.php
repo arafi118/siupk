@@ -215,7 +215,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($perguliran_i->real as $real)
+                    @foreach ($perguliran_i->real_i as $real)
                         <tr>
                             <td align="center">{{ $loop->iteration }}</td>
                             <td align="center">{{ Tanggal::tglIndo($real->tgl_transaksi) }}</td>
