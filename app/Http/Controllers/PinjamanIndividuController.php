@@ -25,7 +25,6 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 use DNS1D;
-use Illuminate\Support\Facades\Http;
 use Session;
 
 class PinjamanIndividuController extends Controller
@@ -385,32 +384,6 @@ class PinjamanIndividuController extends Controller
                 ['status', 'A'],
                 ['jenis_pinjaman', 'I']
             ]);
-
-            $pinjaman_anggota = $perguliran_i->pinjaman_anggota;
-            $pinj_a['jumlah_pinjaman'] = 0;
-            $pinj_a['jumlah_pemanfaat'] = 0;
-            $pinj_a['jumlah_anggota'] = 0;
-
-            foreach ($pinjaman_anggota as $pa) {
-                $pinj_aktif = $pa->pinjaman;
-
-                if ($pinj_aktif) {
-                    $pinj_a['jumlah_pinjaman'] += 1;
-                    $pinj_a['pinjaman'][] = $pinj_aktif;
-                }
-
-                $pemanfaat_aktif = $pa->anggota->pemanfaat;
-                if ($pemanfaat_aktif) {
-                    $pinj_a['jumlah_pemanfaat'] += 1;
-                    $pinj_a['pemanfaat'][$pa->anggota->nik] = $pemanfaat_aktif;
-                }
-            }
-
-            $pinjaman_anggota = PinjamanIndividu::where('id_angg', $perguliran_i->id_angg)->where('status', 'A')->with('anggota')->get();
-            foreach ($pinjaman_anggota as $pinj_i) {
-                $pinj_a['jumlah_anggota'] += 1;
-                $pinj_a['anggota'][] = $pinj_i;
-            }
         }
 
         return view('perguliran_i.partials/' . $view)->with(compact('perguliran_i', 'jenis_jasa', 'sistem_angsuran', 'sumber_bayar', 'debet', 'pinj_a'));
@@ -421,7 +394,7 @@ class PinjamanIndividuController extends Controller
         $title = 'Detail Pinjaman anggota ' . $perguliran_i->anggota->namadepan;
         $real = RealAngsuran_i::where('loan_id', $perguliran_i->id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
         $sistem_angsuran = SistemAngsuran::all();
-        return view('perguliran_i.detail')->with(compact('title', 'perguliran_i', 'real', 'sistem_angsuran'));
+        return view('perguliran_i.detail')->with(compact('title', 'perguliran_i', 'real_i', 'sistem_angsuran'));
     }
 
     public function pelunasan(PinjamanIndividu $perguliran_i)
@@ -429,7 +402,7 @@ class PinjamanIndividuController extends Controller
         $title = 'Detal Pinjaman anggota ' . $perguliran_i->anggota->namadepan;
         $real = RealAngsuran_i::where('loan_id', $perguliran_i->id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
         $ra = RencanaAngsuran_i::where('loan_id', $perguliran_i->id)->orderBy('jatuh_tempo', 'DESC')->first();
-        return view('perguliran_i.partials.lunas')->with(compact('title', 'perguliran_i', 'real', 'ra'));
+        return view('perguliran_i.partials.lunas')->with(compact('title', 'perguliran_i', 'real_i', 'ra'));
     }
 
     public function keterangan(PinjamanIndividu $perguliran_i)
@@ -444,7 +417,7 @@ class PinjamanIndividuController extends Controller
             ['jabatan', '1']
         ])->first();
 
-        return view('perguliran_i.partials.cetak_keterangan')->with(compact('title', 'perguliran_i', 'real', 'ra', 'kec', 'dir'));
+        return view('perguliran_i.partials.cetak_keterangan')->with(compact('title', 'perguliran_i', 'real_i', 'ra', 'kec', 'dir'));
     }
 
     /**
@@ -953,7 +926,7 @@ class PinjamanIndividuController extends Controller
             'saldo',
             'target',
             'anggota'
-        ])->withCount('real')->firstOrFail();
+        ])->withCount('real_i')->firstOrFail();
 
         $tunggakan_pokok = 0;
         $tunggakan_jasa = 0;
@@ -1787,7 +1760,7 @@ class PinjamanIndividuController extends Controller
             'anggota',
             'jpp',
             'sis_pokok',
-            'real',
+            'real_i',
             'rencana' => function ($query) {
                 $query->where('angsuran_ke', '!=', '0');
             },
@@ -1798,7 +1771,7 @@ class PinjamanIndividuController extends Controller
             'rencana' => function ($query) {
                 $query->where('angsuran_ke', '!=', '0');
             }
-        ])->withCount('real')->first();
+        ])->withCount('real_i')->first();
         $data['barcode'] = DNS1D::getBarcodePNG($id, 'C128');
 
         $data['dir'] = User::where([
@@ -1820,10 +1793,10 @@ class PinjamanIndividuController extends Controller
             'anggota',
             'jpp',
             'sis_pokok',
-            'real',
+            'real_i',
             'pinjaman_anggota',
             'pinjaman_anggota.anggota',
-        ])->withCount('real')->first();
+        ])->withCount('real_i')->first();
 
         $rencana = [];
         foreach ($data['pinkel']->pinjaman_anggota as $pinj) {
@@ -1863,10 +1836,10 @@ class PinjamanIndividuController extends Controller
             'anggota',
             'jpp',
             'sis_pokok',
-            'real',
+            'real_i',
             'pinjaman_anggota',
             'pinjaman_anggota.anggota',
-        ])->withCount('real')->first();
+        ])->withCount('real_i')->first();
 
         $rencana = [];
         foreach ($data['pinkel']->pinjaman_anggota as $pinj) {
@@ -2069,7 +2042,7 @@ class PinjamanIndividuController extends Controller
             'sis_pokok'
         ])->first();
 
-        $data['real'] = RealAngsuran_i::where('loan_id', $id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
+        $data['real_i'] = RealAngsuran_i::where('loan_id', $id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
         $data['ra'] = RencanaAngsuran_i::where([
             ['loan_id', $id],
             ['jatuh_tempo', '<=', date('Y-m-d')]
@@ -2124,7 +2097,7 @@ class PinjamanIndividuController extends Controller
             'anggota',
             'jpp',
             'sis_pokok',
-            'real',
+            'real_i',
             'rencana' => function ($query) {
                 $query->where('angsuran_ke', '!=', '0');
             },

@@ -57,7 +57,10 @@
                     $active = 'active';
                 }
 
-                if ((in_array('detail', $arr_path) || in_array('lunas', $arr_path)) && $menu->link == '/perguliran') {
+                if (
+                    (in_array('detail', $arr_path) || in_array('lunas', $arr_path)) &&
+                    ($menu->link == '/perguliran' || $menu->link == '/perguliran_i')
+                ) {
                     $active = 'active';
                 }
             @endphp

@@ -25,11 +25,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{ Session::get('icon') }}">
     <link rel="icon" type="image/png" href="{{ Session::get('icon') }}">
     <title>
-<<<<<<< HEAD
-        {{ $title }} &mdash; Aplikasi Dana Bergulir Masyarakat SI UPK
-=======
         {{ $title }} &mdash; Aplikasi SI UPK Online
->>>>>>> 97f4947d92595050116f51055ca1a518d4c5df4c
     </title>
 
     <link rel="canonical" href="https://www.creative-tim.com/product/material-dashboard-pro" />
@@ -357,7 +353,8 @@
                     window.location.href = '/transaksi/jurnal_angsuran_individu?pinkel=' + item.id
                 }
             }
-        });    
+        });
+
         function makeChart(id, target, sisa_saldo, sum_saldo) {
             window[id] = new Chart(target, {
                 type: 'doughnut',

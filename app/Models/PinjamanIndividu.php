@@ -41,7 +41,7 @@ class PinjamanIndividu extends Model
 
     public function anggota()
     {
-        return $this->belongsTo(anggota::class, 'nia', 'id');
+        return $this->belongsTo(Anggota::class, 'nia', 'id');
     }
 
     public function sts()
