@@ -2,20 +2,6 @@
     @csrf
     @method('PUT')
 
-    @if ($pinj_a['jumlah_kelompok'] > 0)
-        @foreach ($pinj_a['kelompok'] as $kel)
-            <div class="alert alert-danger text-white" role="alert">
-                <span class="text-sm">
-                    <b>Kelompok {{ ucwords(strtolower($kel->kelompok->nama_kelompok)) }}</b> masih memiliki kewajiban
-                    angsuran pinjaman dengan
-                    <a href="/detail/{{ $kel->id }}" target="_blank" class="alert-link text-white">
-                        Loan ID. {{ $kel->id }}
-                    </a>.
-                </span>
-            </div>
-        @endforeach
-    @endif
-
     <div class="card mb-3">
         <div class="card-body">
             <div class="row mt-0">
@@ -223,9 +209,7 @@
                 <button type="button" id="kembaliProposal" class="btn btn-warning btn-sm">
                     Kembalikan Ke Proposal
                 </button>
-                <button type="button"
-                    {{ $pinj_a['jumlah_pinjaman'] > '0' || $pinj_a['jumlah_pemanfaat'] > '0' || $pinj_a['jumlah_kelompok'] > '0' ? 'disabled' : '' }}
-                    id="Simpan" class="btn btn-github ms-1 btn-sm">
+                <button type="button" id="Simpan" class="btn btn-github ms-1 btn-sm">
                     Cairkan Sekarang
                 </button>
 
