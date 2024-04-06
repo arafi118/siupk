@@ -148,79 +148,18 @@
         @endif
 
         <hr class="horizontal dark">
-
-        <div class="table-responsive">
-            <table class="table table-striped table-hover align-items-center mb-0" width="100%">
-                <thead class="bg-dark text-white">
-                    <tr>
-                        <th>#</th>
-                        <th>Nama</th>
-                        <th>Pengajuan</th>
-                        <th>Verifikasi</th>
-                        <th>Alokasi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php
-                        $proposal = 0;
-                        $verifikasi = 0;
-                        $alokasi = 0;
-                    @endphp
-                    @foreach ($perguliran_i->pinjaman_anggota as $pinjaman_anggota)
-                        @php
-                            $proposal += $pinjaman_anggota->proposal;
-                            $verifikasi += $pinjaman_anggota->verifikasi;
-                            $alokasi += $pinjaman_anggota->alokasi;
-
-                            $warna = $perguliran_i->status == 'A' ? '' : 'class="text-danger fw-bold"';
-                        @endphp
-                        <tr class="{{ $perguliran_i->status == 'A' ? 'pointer btn-click' : '' }}"
-                            data-id="{{ $pinjaman_anggota->id }}">
-                            <td {!! $warna !!} align="center">{{ $loop->iteration }}</td>
-                            <td {!! $warna !!}>
-                                {{ ucwords($pinjaman_anggota->anggota->namadepan) }}
-                                ({{ $pinjaman_anggota->nia }})
-                            </td>
-                            <td {!! $warna !!}>
-                                {{ number_format($pinjaman_anggota->proposal, 2) }}
-                            </td>
-                            <td {!! $warna !!}>
-                                {{ number_format($pinjaman_anggota->verifikasi, 2) }}
-                            </td>
-                            <td {!! $warna !!}>
-                                {{ number_format($pinjaman_anggota->alokasi, 2) }}
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th colspan="2">Jumlah</th>
-                        <th>
-                            {{ number_format($proposal, 2) }}
-                        </th>
-                        <th id="jumlah">
-                            {{ number_format($verifikasi, 2) }}
-                        </th>
-                        <th>
-                            {{ number_format($alokasi, 2) }}
-                        </th>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
     </div>
 </div>
 
 <div class="card card-body p-2 pb-0 mb-3">
-    <form action="/perguliran_i/dokumen?status=A" target="_blank" method="post">
+    <form action="/perguliran/dokumen?status=A" target="_blank" method="post">
         @csrf
 
         <input type="hidden" name="id" value="{{ $perguliran_i->id }}">
         <div class="row">
             <div class="col-12 col-sm-6 col-md-6 col-lg-4">
                 <div class="d-grid">
-                    <a href="/perguliran_i/dokumen/kartu_angsuran/{{ $perguliran_i->id }}" target="_blank"
+                    <a href="/perguliran/dokumen/kartu_angsuran/{{ $perguliran_i->id }}" target="_blank"
                         class="btn btn-outline-info btn-sm mb-2">Kartu Angsuran</a>
                 </div>
             </div>
@@ -276,7 +215,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($perguliran_i->real as $real)
+                    @foreach ($perguliran_i->real_i as $real)
                         <tr>
                             <td align="center">{{ $loop->iteration }}</td>
                             <td align="center">{{ Tanggal::tglIndo($real->tgl_transaksi) }}</td>
@@ -316,13 +255,13 @@
                                     <ul class="dropdown-menu px-2 py-3" aria-labelledby="dropdownMenuButton">
                                         <li>
                                             <a class="dropdown-item border-radius-md" target="_blank"
-                                                href="/perguliran_i/dokumen/kartu_angsuran/{{ $real->loan_id }}/{{ $real->id }}">
+                                                href="/perguliran/dokumen/kartu_angsuran/{{ $real->loan_id }}/{{ $real->id }}">
                                                 Kelompok
                                             </a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item border-radius-md" target="_blank"
-                                                href="/perguliran_i/dokumen/cetak_kartu_angsuran_anggota/{{ $real->loan_id }}/{{ $real->id }}">
+                                                href="/perguliran/dokumen/cetak_kartu_angsuran_anggota/{{ $real->loan_id }}/{{ $real->id }}">
                                                 Anggota
                                             </a>
                                         </li>
