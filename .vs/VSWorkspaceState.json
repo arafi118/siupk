@@ -4,11 +4,14 @@
     "\\app",
     "\\app\\Http",
     "\\app\\Http\\Controllers",
-    "\\app\\Models",
+    "\\resources",
+    "\\resources\\views",
+    "\\resources\\views\\layouts",
     "\\resources\\views\\perguliran_i",
-    "\\resources\\views\\pinjaman_i\\partials",
-    "\\routes"
+    "\\resources\\views\\perguliran_i\\partials",
+    "\\resources\\views\\pinjaman",
+    "\\resources\\views\\pinjaman_i"
   ],
-  "SelectedNode": "\\app\\Models\\PinjamanIndividu.php",
+  "SelectedNode": "\\app\\Http\\Controllers\\TransaksiController.php",
   "PreviewInSolutionExplorer": false
 }

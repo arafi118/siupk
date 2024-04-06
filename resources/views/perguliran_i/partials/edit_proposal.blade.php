@@ -1,15 +1,15 @@
-<form action="/perguliran/{{ $perguliran->id }}" method="post" id="FormEditProposal">
+<form action="/perguliran_i/{{ $perguliran_i->id }}" method="post" id="FormEditProposal">
     @csrf
     @method('PUT')
 
-    <input type="hidden" name="_id" id="_id" value="{{ $perguliran->id }}">
+    <input type="hidden" name="_id" id="_id" value="{{ $perguliran_i->id }}">
     <input type="hidden" name="status" id="status" value="P">
     <div class="row">
         <div class="col-md-3">
             <div class="input-group input-group-static my-3">
                 <label for="tgl_verifikasi">Tgl Proposal</label>
                 <input autocomplete="off" type="text" name="tgl_proposal" id="tgl_proposal" class="form-control date"
-                    value="{{ Tanggal::tglIndo($perguliran->tgl_proposal) }}">
+                    value="{{ Tanggal::tglIndo($perguliran_i->tgl_proposal) }}">
                 <small class="text-danger" id="msg_tgl_proposal"></small>
             </div>
         </div>
@@ -17,7 +17,7 @@
             <div class="input-group input-group-static my-3">
                 <label for="proposal">Pengajuan Rp.</label>
                 <input autocomplete="off" type="text" name="proposal" id="proposal" class="form-control money"
-                    value="{{ number_format($perguliran->proposal, 2) }}">
+                    value="{{ number_format($perguliran_i->proposal, 2) }}">
                 <small class="text-danger" id="msg_proposal"></small>
             </div>
         </div>
@@ -25,7 +25,7 @@
             <div class="input-group input-group-static my-3">
                 <label for="jangka_proposal">Jangka</label>
                 <input autocomplete="off" type="number" name="jangka_proposal" id="jangka_proposal"
-                    class="form-control" value="{{ $perguliran->jangka }}">
+                    class="form-control" value="{{ $perguliran_i->jangka }}">
                 <small class="text-danger" id="msg_jangka_proposal"></small>
             </div>
         </div>
@@ -33,7 +33,7 @@
             <div class="input-group input-group-static my-3">
                 <label for="pros_jasa_proposal">Prosentase Jasa (%)</label>
                 <input autocomplete="off" type="number" name="pros_jasa_proposal" id="pros_jasa_proposal"
-                    class="form-control" value="{{ $perguliran->pros_jasa }}">
+                    class="form-control" value="{{ $perguliran_i->pros_jasa }}">
                 <small class="text-danger" id="msg_pros_jasa_proposal"></small>
             </div>
         </div>
@@ -45,7 +45,7 @@
                 <label class="form-label" for="jenis_jasa_proposal">Jenis Jasa</label>
                 <select class="form-control" name="jenis_jasa_proposal" id="jenis_jasa_proposal">
                     @foreach ($jenis_jasa as $jj)
-                        <option {{ $jj->id == $perguliran->jenis_jasa ? 'selected' : '' }} value="{{ $jj->id }}">
+                        <option {{ $jj->id == $perguliran_i->jenis_jasa ? 'selected' : '' }} value="{{ $jj->id }}">
                             {{ $jj->nama_jj }}
                         </option>
                     @endforeach
@@ -74,7 +74,7 @@
                 <label class="form-label" for="sistem_angsuran_pokok_proposal">Sistem Angs. Pokok</label>
                 <select class="form-control" name="sistem_angsuran_pokok_proposal" id="sistem_angsuran_pokok_proposal">
                     @foreach ($sistem_angsuran as $sa)
-                        <option {{ $sa->id == $perguliran->sistem_angsuran ? 'selected' : '' }}
+                        <option {{ $sa->id == $perguliran_i->sistem_angsuran ? 'selected' : '' }}
                             value="{{ $sa->id }}">
                             {{ $sa->nama_sistem }} ({{ $sa->deskripsi_sistem }})
                         </option>
@@ -88,7 +88,7 @@
                 <label class="form-label" for="sistem_angsuran_jasa_proposal">Sistem Angs. Jasa</label>
                 <select class="form-control" name="sistem_angsuran_jasa_proposal" id="sistem_angsuran_jasa_proposal">
                     @foreach ($sistem_angsuran as $sa)
-                        <option {{ $sa->id == $perguliran->sa_jasa ? 'selected' : '' }} value="{{ $sa->id }}">
+                        <option {{ $sa->id == $perguliran_i->sa_jasa ? 'selected' : '' }} value="{{ $sa->id }}">
                             {{ $sa->nama_sistem }} ({{ $sa->deskripsi_sistem }})
                         </option>
                     @endforeach

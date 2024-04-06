@@ -25,17 +25,17 @@
     } @endphp <div class="card mb-3">
         <div class="card-body p-3">
             <h5 class="mb-1">
-                Kelompok {{ $perguliran->kelompok->nama_kelompok }} Loan ID. {{ $perguliran->id }}
-                ({{ $perguliran->jpp->nama_jpp }})
+                Kelompok {{ $perguliran_i->kelompok->nama_kelompok }} Loan ID. {{ $perguliran_i->id }}
+                ({{ $perguliran_i->jpp->nama_jpp }})
             </h5>
             <p class="mb-0">
                 <span
-                    class="badge badge-{{ $perguliran->sts->warna_status }}">{{ $perguliran->kelompok->kd_kelompok }}</span>
+                    class="badge badge-{{ $perguliran_i->sts->warna_status }}">{{ $perguliran_i->kelompok->kd_kelompok }}</span>
                 <span
-                    class="badge badge-{{ $perguliran->sts->warna_status }}">{{ $perguliran->kelompok->alamat_kelompok }}</span>
-                <span class="badge badge-{{ $perguliran->sts->warna_status }}">
-                    {{ $perguliran->kelompok->d->sebutan_desa->sebutan_desa }}
-                    {{ $perguliran->kelompok->d->nama_desa }}
+                    class="badge badge-{{ $perguliran_i->sts->warna_status }}">{{ $perguliran_i->kelompok->alamat_kelompok }}</span>
+                <span class="badge badge-{{ $perguliran_i->sts->warna_status }}">
+                    {{ $perguliran_i->kelompok->d->sebutan_desa->sebutan_desa }}
+                    {{ $perguliran_i->kelompok->d->nama_desa }}
                 </span>
             </p>
         </div>
@@ -48,21 +48,21 @@
             <table class="table p-0 mb-3">
                 <tr>
                     <td>Nama Kelompok</td>
-                    <td>: {{ $perguliran->kelompok->nama_kelompok }}</td>
+                    <td>: {{ $perguliran_i->kelompok->nama_kelompok }}</td>
                     <td>Alokasi</td>
-                    <td>{{ number_format($perguliran->alokasi) }}</td>
+                    <td>{{ number_format($perguliran_i->alokasi) }}</td>
                 </tr>
                 <tr>
                     <td>Desa</td>
-                    <td>: {{ $perguliran->kelompok->d->nama_desa }}</td>
+                    <td>: {{ $perguliran_i->kelompok->d->nama_desa }}</td>
                     <td>Jasa</td>
-                    <td>{{ $perguliran->pros_jasa }}%</td>
+                    <td>{{ $perguliran_i->pros_jasa }}%</td>
                 </tr>
                 <tr>
                     <td>Jenis Pinjaman</td>
-                    <td>: {{ $perguliran->jpp->nama_jpp }}</td>
+                    <td>: {{ $perguliran_i->jpp->nama_jpp }}</td>
                     <td>Sistem</td>
-                    <td>{{ $perguliran->jangka }} bulan / {{ $perguliran->sis_pokok->nama_sistem }}</td>
+                    <td>{{ $perguliran_i->jangka }} bulan / {{ $perguliran_i->sis_pokok->nama_sistem }}</td>
                 </tr>
             </table>
 
@@ -103,8 +103,8 @@
                     <div class="checkbox">
                         <input id="checkboxLunaskan" type="checkbox" class="d-none">
                         <label for="checkboxLunaskan">Pinjaman tersebut diatas telah kami nyatakan
-                            LUNAS dan Surat Perjanjian Kredit (SPK) nomor {{ $perguliran->spk_no }} tanggal
-                            {{ Tanggal::tglLatin($perguliran->tgl_cair) }}
+                            LUNAS dan Surat Perjanjian Kredit (SPK) nomor {{ $perguliran_i->spk_no }} tanggal
+                            {{ Tanggal::tglLatin($perguliran_i->tgl_cair) }}
                             dinyatakan selesai
                             beserta
                             seluruh hak dan kewajibannya.</label>
@@ -112,7 +112,7 @@
 
                     <div class="d-flex justify-content-end" style="gap: .5em;">
                         <button class="btn btn-warning btn-sm"
-                            onclick="window.open('/cetak_keterangan_lunas/{{ $perguliran->id }}')" type="button">
+                            onclick="window.open('/cetak_keterangan_lunas/{{ $perguliran_i->id }}')" type="button">
                             <i class="fa fa-print"></i> Cetak Keterangan Pelunasan
                         </button>
 
@@ -128,7 +128,7 @@
         </div>
     </div>
 
-    <form action="/perguliran/{{ $perguliran->id }}" method="post" id="FormPelunasan">
+    <form action="/perguliran_i/{{ $perguliran_i->id }}" method="post" id="FormPelunasan">
         @csrf
         @method('PUT')
 
@@ -137,7 +137,7 @@
 
     <div class="card mt-3">
         <div class="card-body p-2">
-            <a href="/perguliran?status=L" class="btn btn-info float-end btn-sm mb-0">Kembali</a>
+            <a href="/perguliran_i?status=L" class="btn btn-info float-end btn-sm mb-0">Kembali</a>
         </div>
     </div>
 @endsection
@@ -159,7 +159,7 @@
 
             Swal.fire({
                 title: 'Peringatan',
-                text: 'Anda akan melakukan validasi pelunasan untuk kelompok {{ $perguliran->kelompok->nama_kelompok }} dengan Loan ID. {{ $perguliran->id }}. Setelah klik tombol Lunaskan data tidak dapat diubah kembali',
+                text: 'Anda akan melakukan validasi pelunasan untuk kelompok {{ $perguliran_i->kelompok->nama_kelompok }} dengan Loan ID. {{ $perguliran_i->id }}. Setelah klik tombol Lunaskan data tidak dapat diubah kembali',
                 showCancelButton: true,
                 confirmButtonText: 'Lunaskan',
                 cancelButtonText: 'Batal',
@@ -174,7 +174,7 @@
                         data: form.serialize(),
                         success: function(result) {
                             Swal.fire('Berhasil', result.msg, 'success').then(() => {
-                                window.location.href = '/perguliran'
+                                window.location.href = '/perguliran_i'
                             })
                         }
                     })
