@@ -48,21 +48,21 @@ if ($saldo_pokok <= 0) { $saldo_pokok=0; $keterangan1='Lunas' ; } if ($saldo_jas
                 <table class="table p-0 mb-3">
                     <tr class="p-1">
                         <td>Nama Kelompok</td>
-                        <td>: {{ $perguliran->kelompok->nama_kelompok }}</td>
+                        <td>: {{ $perguliran_i->kelompok->nama_kelompok }}</td>
                         <td>Alokasi</td>
-                        <td>{{ number_format($perguliran->alokasi) }}</td>
+                        <td>{{ number_format($perguliran_i->alokasi) }}</td>
                     </tr>
                     <tr>
                         <td>Desa</td>
-                        <td>: {{ $perguliran->kelompok->d->nama_desa }}</td>
+                        <td>: {{ $perguliran_i->kelompok->d->nama_desa }}</td>
                         <td>Jasa</td>
-                        <td>{{ $perguliran->pros_jasa }}%</td>
+                        <td>{{ $perguliran_i->pros_jasa }}%</td>
                     </tr>
                     <tr>
                         <td>Jenis Pinjaman</td>
-                        <td>: {{ $perguliran->jpp->nama_jpp }}</td>
+                        <td>: {{ $perguliran_i->jpp->nama_jpp }}</td>
                         <td>Sistem</td>
-                        <td>{{ $perguliran->jangka }} bulan / {{ $perguliran->sis_pokok->nama_sistem }}</td>
+                        <td>{{ $perguliran_i->jangka }} bulan / {{ $perguliran_i->sis_pokok->nama_sistem }}</td>
                     </tr>
                 </table>
 
@@ -101,8 +101,8 @@ if ($saldo_pokok <= 0) { $saldo_pokok=0; $keterangan1='Lunas' ; } if ($saldo_jas
                     </div>
                     <div class="col-6 d-flex align-items-center">
                         <div class="f-12 font-primary">Pinjaman tersebut diatas telah kami nyatakan LUNAS dan Surat
-                            Perjanjian Kredit (SPK) nomor {{ $perguliran->spk_no }} tanggal
-                            {{ Tanggal::tglLatin($perguliran->tgl_cair) }} dinyatakan
+                            Perjanjian Kredit (SPK) nomor {{ $perguliran_i->spk_no }} tanggal
+                            {{ Tanggal::tglLatin($perguliran_i->tgl_cair) }} dinyatakan
                             selesai beserta seluruh hak
                             dan kewajibannya.</div>
                     </div>

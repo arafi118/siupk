@@ -394,7 +394,7 @@ class PinjamanIndividuController extends Controller
         $title = 'Detail Pinjaman anggota ' . $perguliran_i->anggota->namadepan;
         $real = RealAngsuran_i::where('loan_id', $perguliran_i->id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
         $sistem_angsuran = SistemAngsuran::all();
-        return view('perguliran_i.detail')->with(compact('title', 'perguliran_i', 'real', 'sistem_angsuran'));
+        return view('perguliran_i.detail')->with(compact('title', 'perguliran_i', 'real_i', 'sistem_angsuran'));
     }
 
     public function pelunasan(PinjamanIndividu $perguliran_i)
@@ -402,7 +402,7 @@ class PinjamanIndividuController extends Controller
         $title = 'Detal Pinjaman anggota ' . $perguliran_i->anggota->namadepan;
         $real = RealAngsuran_i::where('loan_id', $perguliran_i->id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
         $ra = RencanaAngsuran_i::where('loan_id', $perguliran_i->id)->orderBy('jatuh_tempo', 'DESC')->first();
-        return view('perguliran_i.partials.lunas')->with(compact('title', 'perguliran_i', 'real', 'ra'));
+        return view('perguliran_i.partials.lunas')->with(compact('title', 'perguliran_i', 'real_i', 'ra'));
     }
 
     public function keterangan(PinjamanIndividu $perguliran_i)
@@ -417,7 +417,7 @@ class PinjamanIndividuController extends Controller
             ['jabatan', '1']
         ])->first();
 
-        return view('perguliran_i.partials.cetak_keterangan')->with(compact('title', 'perguliran_i', 'real', 'ra', 'kec', 'dir'));
+        return view('perguliran_i.partials.cetak_keterangan')->with(compact('title', 'perguliran_i', 'real_i', 'ra', 'kec', 'dir'));
     }
 
     /**
@@ -926,7 +926,7 @@ class PinjamanIndividuController extends Controller
             'saldo',
             'target',
             'anggota'
-        ])->withCount('real')->firstOrFail();
+        ])->withCount('real_i')->firstOrFail();
 
         $tunggakan_pokok = 0;
         $tunggakan_jasa = 0;
@@ -1085,9 +1085,6 @@ class PinjamanIndividuController extends Controller
         $data['report'] = $file;
         $data['type'] = $report[1];
 
-        if ($file == 'kartuAngsuranAnggota') {
-            return $this->$file($request->id);
-        }
         return $this->$file($request->id, $data);
     }
 
@@ -1749,22 +1746,18 @@ class PinjamanIndividuController extends Controller
     public function kartuAngsuran($id)
     {
         $data['kec'] = Kecamatan::where('id', Session::get('lokasi'))->with('kabupaten')->first();
-        $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
+        $data['nia'] = PinjamanIndividu::where('id', $id)->with([
             'anggota',
             'jpp',
             'sis_pokok',
-            'real',
+            'real_i',
             'rencana' => function ($query) {
                 $query->where('angsuran_ke', '!=', '0');
             },
             'target' => function ($query) {
                 $query->where('angsuran_ke', '1');
             }
-        ])->withCount('pinjaman_anggota')->withCount([
-            'rencana' => function ($query) {
-                $query->where('angsuran_ke', '!=', '0');
-            }
-        ])->withCount('real')->first();
+        ])->withCount('real_i')->first();
         $data['barcode'] = DNS1D::getBarcodePNG($id, 'C128');
  
         $data['dir'] = User::where([
@@ -1773,7 +1766,7 @@ class PinjamanIndividuController extends Controller
             ['jabatan', '1']
         ])->first();
 
-        $data['laporan'] = 'Kartu Angsuran ' . $data['pinkel']->anggota->namadepan;
+        $data['laporan'] = 'Kartu Angsuran ' . $data['nia']->anggota->namadepan;
         $data['laporan'] .= ' Loan ID. ' . $id;
         return view('perguliran_i.dokumen.kartu_angsuran', $data);
     }
@@ -1786,10 +1779,10 @@ class PinjamanIndividuController extends Controller
             'anggota',
             'jpp',
             'sis_pokok',
-            'real',
+            'real_i',
             'pinjaman_anggota',
             'pinjaman_anggota.anggota',
-        ])->withCount('real')->first();
+        ])->withCount('real_i')->first();
 
         $rencana = [];
         foreach ($data['pinkel']->pinjaman_anggota as $pinj) {
@@ -1829,10 +1822,10 @@ class PinjamanIndividuController extends Controller
             'anggota',
             'jpp',
             'sis_pokok',
-            'real',
+            'real_i',
             'pinjaman_anggota',
             'pinjaman_anggota.anggota',
-        ])->withCount('real')->first();
+        ])->withCount('real_i')->first();
 
         $rencana = [];
         foreach ($data['pinkel']->pinjaman_anggota as $pinj) {
@@ -2035,7 +2028,7 @@ class PinjamanIndividuController extends Controller
             'sis_pokok'
         ])->first();
 
-        $data['real'] = RealAngsuran_i::where('loan_id', $id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
+        $data['real_i'] = RealAngsuran_i::where('loan_id', $id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
         $data['ra'] = RencanaAngsuran_i::where([
             ['loan_id', $id],
             ['jatuh_tempo', '<=', date('Y-m-d')]
@@ -2090,7 +2083,7 @@ class PinjamanIndividuController extends Controller
             'anggota',
             'jpp',
             'sis_pokok',
-            'real',
+            'real_i',
             'rencana' => function ($query) {
                 $query->where('angsuran_ke', '!=', '0');
             },

@@ -1,0 +1,101 @@
+@php
+    use App\Utils\Tanggal;
+@endphp
+
+<table class="table table-striped">
+    <tbody>
+        <tr>
+            <td>NIK</td>
+            <td>:</td>
+            <td style="font-weight: bold !important;">{{ $nia->anggota->nik }}</td>
+
+            <td>&nbsp;</td>
+
+            <td>Loan Id.</td>
+            <td>:</td>
+            <td style="font-weight: bold !important;">{{ $nia->jpp->nama_jpp }}-{{ $nia->id }}</td>
+        </tr>
+        <tr>
+            <td>Nama Anggota</td>
+            <td>:</td>
+            <td style="font-weight: bold !important;">{{ $nia->anggota->namadepan }}</td>
+
+            <td>&nbsp;</td>
+
+            <td>No. SPK</td>
+            <td>:</td>
+            <td style="font-weight: bold !important;">{{ $nia->spk_no }}</td>
+        </tr>
+        <tr>
+            <td>Alamat</td>
+            <td>:</td>
+            <td style="font-weight: bold !important;">{{ $nia->anggota->alamat }}</td>
+
+            <td>&nbsp;</td>
+
+            <td>Tgl Cair</td>
+            <td>:</td>
+            <td style="font-weight: bold !important;">{{ Tanggal::tglIndo($nia->tgl_cair) }}</td>
+        </tr>
+        <tr>
+            <td>Desa</td>
+            <td>:</td>
+            <td style="font-weight: bold !important;">{{ $nia->anggota->d->nama_desa }}</td>
+
+            <td>&nbsp;</td>
+
+            <td>Alokasi</td>
+            <td>:</td>
+            <td style="font-weight: bold !important;">{{ number_format($nia->alokasi) }}</td>
+        </tr>
+        <tr>
+            <td>Telpon/SMS</td>
+            <td>:</td>
+            <td style="font-weight: bold !important;">{{ $nia->anggota->hp }}</td>
+
+            <td>&nbsp;</td>
+
+            <td>Jasa</td>
+            <td>:</td>
+            <td style="font-weight: bold !important;">{{ $nia->pros_jasa / $nia->jangka }}%</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+
+            <td>&nbsp;</td>
+
+            <td>Sistem Angsuran</td>
+            <td>:</td>
+            <td style="font-weight: bold !important;">{{ $nia->jangka }} bulan @
+                {{ $nia->sis_pokok->nama_sistem }}</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+
+            <td>&nbsp;</td>
+
+            <td>Angsuran Pokok</td>
+            <td>:</td>
+            <td style="font-weight: bold !important;">{{ number_format($nia->target->wajib_pokok) }} x
+                {{ $nia->jangka }}
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+
+            <td>&nbsp;</td>
+
+            <td>Angsuran Jasa</td>
+            <td>:</td>
+            <td style="font-weight: bold !important;">{{ number_format($nia->target->wajib_jasa) }} x
+                {{ $nia->jangka }}
+            </td>
+        </tr>
+    </tbody>
+</table>

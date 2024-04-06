@@ -15,7 +15,7 @@
     }
 @endphp
 
-@extends('perguliran.dokumen.layout.base')
+@extends('perguliran_i.dokumen.layout.base')
 
 @section('content')
     <div style="text-align: center; font-size: 18px; margin-bottom: 12px; text-transform: uppercase;">

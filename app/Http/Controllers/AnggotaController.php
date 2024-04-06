@@ -7,6 +7,7 @@ use App\Models\Desa;
 use App\Models\Kecamatan;
 use App\Models\Keluarga;
 use App\Models\PinjamanAnggota;
+use App\Models\PinjamanIndividu;
 use App\Models\StatusPinjaman;
 use App\Models\Usaha;
 use App\Utils\Tanggal;
@@ -351,4 +352,23 @@ class AnggotaController extends Controller
             'msg' => $msg
         ]);
     }
+    
+    public function detailAnggota($id)
+    {
+        $nia = PinjamanIndividu::where('id', $id)->with([
+            'anggota',
+            'anggota.d',
+            'jpp',
+            'sis_pokok',
+            'target' => function ($query) {
+                $query->where('angsuran_ke', '1');
+            }
+        ])->firstOrFail();
+
+        return [
+            'label' => 'Detail Anggota ' . $nia->anggota->namadepan,
+            'view' => view('penduduk.detail_individu')->with(compact('nia'))->render()
+        ];
+    }
+
 }

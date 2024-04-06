@@ -13,7 +13,7 @@
     }
 @endphp
 
-@extends('perguliran.dokumen.layout.base')
+@extends('perguliran_i.dokumen.layout.base')
 
 @section('content')
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
@@ -35,7 +35,7 @@
     <p style="text-align: justify;">
         Pada hari ini {{ Tanggal::namaHari($pinkel->tgl_cair) }} tanggal
         {{ $keuangan->terbilang(Tanggal::hari($pinkel->tgl_cair)) }} bulan {{ Tanggal::namaBulan($pinkel->tgl_cair) }} tahun
-        {{ $keuangan->terbilang(Tanggal::tahun($pinkel->tgl_cair)) }}, telah diadakan pencairan dana perguliran
+        {{ $keuangan->terbilang(Tanggal::tahun($pinkel->tgl_cair)) }}, telah diadakan pencairan dana perguliran_i
         {{ $kec->nama_lembaga_sort }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }} kepada Kelompok
         {{ $pinkel->anggota->namadepan }} {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }}
         {{ $pinkel->anggota->d->nama_desa }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }} bertempat di

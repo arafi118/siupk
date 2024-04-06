@@ -61,11 +61,8 @@
                     </form>
 
                     <div class="d-flex justify-content-end">
-                        <button type="button" id="btnDetailKelompok" class="btn btn-info btn-sm me-3">
-                            Detail Kelompok <span class="badge badge-info" id="loan-id"></span>
-                        </button>
-                        <button type="button" id="btnAngsuranAnggota" class="btn btn-warning btn-sm me-3">
-                            Angsuran Anggota
+                        <button type="button" id="btnDetailIndividu" class="btn btn-info btn-sm me-3">
+                            Detail Individu <span class="badge badge-info" id="loan-id"></span>
                         </button>
                         <button type="button" id="SimpanAngsuran" class="btn btn-github btn-sm">Posting</button>
                     </div>
@@ -133,18 +130,18 @@
         </div>
     </div>
 
-    <div class="modal fade" id="DetailKelompok" tabindex="-1" aria-labelledby="DetailKelompokLabel"
+    <div class="modal fade" id="DetailIndividu" tabindex="-1" aria-labelledby="DetailIndividuLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="DetailKelompokLabel">
+                    <h1 class="modal-title fs-5" id="DetailIndividuLabel">
 
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div id="LayoutDetailKelompok"></div>
+                    <div id="LayoutDetailIndividu"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Tutup</button>
@@ -397,20 +394,7 @@
             e.preventDefault()
             var id_pinj = $('#id').val()
 
-            Swal.fire({
-                title: "Cetak Kartu Angsuran",
-                showDenyButton: true,
-                confirmButtonText: "Angsuran Kelompok",
-                denyButtonText: "Angsuran Anggota",
-                confirmButtonColor: "#3085d6",
-                denyButtonColor: "#3085d6",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    open_window('/perguliran/dokumen/kartu_angsuran_i/' + id_pinj)
-                } else if (result.isDenied) {
-                    open_window('/perguliran/dokumen/kartu_angsuran_anggota_i/' + id_pinj)
-                }
-            });
+            open_window('/perguliran_i/dokumen/kartu_angsuran/' + id_pinj)
         })
 
         $(document).on('click', '#cetakLPP', function(e) {
@@ -420,14 +404,14 @@
             open_window('/transaksi/angsuran_i/lpp/' + id_pinj)
         })
 
-        $(document).on('click', '#btnDetailKelompok', function(e) {
+        $(document).on('click', '#btnDetailIndividu', function(e) {
             var id = $('#id').val()
 
             $.get('/database/anggota/detail_anggota/' + id, function(result) {
-                $('#DetailKelompok').modal('show')
+                $('#DetailIndividu').modal('show')
 
-                $('#DetailKelompokLabel').html(result.label)
-                $('#LayoutDetailKelompok').html(result.view)
+                $('#DetailIndividuLabel').html(result.label)
+                $('#LayoutDetailIndividu').html(result.view)
             })
         })
 
