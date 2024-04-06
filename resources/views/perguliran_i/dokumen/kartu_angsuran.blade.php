@@ -3,8 +3,8 @@
     use App\Models\RencanaAngsuran;
 
     $rowspan = 19;
-    if ($pinkel->real_count > 16) {
-        $rowspan = $pinkel->real_count + 3;
+    if ($nia->real_count > 16) {
+        $rowspan = $nia->real_count + 3;
     }
 @endphp
 
@@ -91,50 +91,50 @@
                     </div>
                     <div style="margin-top: 8px;">
                         <img width="150" src="data:image/png;base64,{{ $barcode }}"
-                            alt="{{ $pinkel->kelompok->kd_kelompok }}">
+                            alt="{{ $nia->anggota->nik}}">
                     </div>
-                    <div style="font-size: 14px;">{{ $pinkel->kelompok->kd_kelompok }}</div>
+                    <div style="font-size: 14px;">{{ $nia->anggota->nik}}</div>
                 </td>
                 <td width="150">Jenis Pinjaman</td>
                 <td width="5" align="center">:</td>
-                <td width="200">{{ $pinkel->jpp->nama_jpp }}</td>
+                <td width="200">{{ $nia->jpp->nama_jpp }}</td>
                 <td width="150">Loan Id.</td>
                 <td width="5" align="center">:</td>
-                <td width="200">{{ $pinkel->id }}</td>
+                <td width="200">{{ $nia->id }}</td>
             </tr>
             <tr>
-                <td>Nama Kelompok</td>
+                <td>Nama</td>
                 <td align="center">:</td>
-                <td style="font-weight: bold;" colspan="4">{{ $pinkel->kelompok->nama_kelompok }}</td>
+                <td style="font-weight: bold;" colspan="4">{{ $nia->anggota->namadepan}}</td>
             </tr>
             <tr>
                 <td>Alamat</td>
                 <td align="center">:</td>
-                <td colspan="4">{{ $pinkel->kelompok->alamat_kelompok }}</td>
+                <td colspan="4">{{ $nia->anggota->alamat }}</td>
             </tr>
             <tr>
                 <td>Telpon/SMS</td>
                 <td align="center">:</td>
-                <td>{{ $pinkel->kelompok->telpon }}</td>
-                <td>Anggota</td>
-                <td align="center">:</td>
-                <td>{{ $pinkel->pinjaman_anggota_count }}</td>
+                <td>{{ $nia->anggota->hp}}</td>
+                <td>&nbsp;</td>
+                <td align="center">&nbsp;</td>
+                <td>&nbsp;</td>
             </tr>
             <tr>
                 <td>Tgl Cair</td>
                 <td align="center">:</td>
-                <td>{{ Tanggal::tglLatin($pinkel->tgl_cair) }}</td>
+                <td>{{ Tanggal::tglLatin($nia->tgl_cair) }}</td>
                 <td>Jangka</td>
                 <td align="center">:</td>
-                <td>{{ $pinkel->jangka }} {{ $pinkel->sis_pokok->id == '12' ? 'Minggu' : 'Bulan' }}</td>
+                <td>{{ $nia->jangka }} {{ $nia->sis_pokok->id == '12' ? 'Minggu' : 'Bulan' }}</td>
             </tr>
             <tr>
                 <td>Alokasi</td>
                 <td align="center">:</td>
-                <td>{{ number_format($pinkel->alokasi) }}</td>
+                <td>{{ number_format($nia->alokasi) }}</td>
                 <td>Jasa</td>
                 <td align="center">:</td>
-                <td>{{ $pinkel->pros_jasa / $pinkel->jangka . '%' }}</td>
+                <td>{{ $nia->pros_jasa / $nia->jangka . '%' }}</td>
             </tr>
             <tr>
                 <td>Angsuran</td>
@@ -142,7 +142,7 @@
 
                 @php
                     $jumlah_angsuran = 0;
-                    foreach ($pinkel->rencana as $renc) {
+                    foreach ($nia->rencana as $renc) {
                         if ($jumlah_angsuran == 0) {
                             if ($renc->wajib_pokok + $renc->wajib_jasa > $jumlah_angsuran) {
                                 $jumlah_angsuran = $renc->wajib_pokok + $renc->wajib_jasa;
@@ -152,9 +152,9 @@
                 @endphp
 
                 <td>{{ number_format($jumlah_angsuran) }} /
-                    {{ $pinkel->sis_pokok->nama_sistem }}</td>
+                    {{ $nia->sis_pokok->nama_sistem }}</td>
                 <td colspan="3">
-                    Angsuran pada tanggal {{ explode('-', $pinkel->target->jatuh_tempo)[2] }}
+                    Angsuran pada tanggal {{ explode('-', $nia->target->jatuh_tempo)[2] }}
                 </td>
             </tr>
             <tr>
@@ -165,7 +165,7 @@
         </table>
 
         @php
-            $baris_angsuran = ceil($pinkel->rencana_count / 2);
+            $baris_angsuran = ceil($nia->rencana_count / 2);
         @endphp
 
         <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
@@ -196,32 +196,32 @@
                 @endphp
                 <tr>
                     <td class="l {{ $j == $baris_angsuran ? 'b' : '' }}" align="center">
-                        {{ $pinkel->rencana[$i]->angsuran_ke }}
+                        {{ $nia->rencana[$i]->angsuran_ke }}
                     </td>
                     <td class="l {{ $j == $baris_angsuran ? 'b' : '' }}" align="center">
-                        {{ Tanggal::tglIndo($pinkel->rencana[$i]->jatuh_tempo) }}
+                        {{ Tanggal::tglIndo($nia->rencana[$i]->jatuh_tempo) }}
                     </td>
                     <td class="l {{ $j == $baris_angsuran ? 'b' : '' }}" align="right">
-                        {{ number_format($pinkel->rencana[$i]->wajib_pokok) }}
+                        {{ number_format($nia->rencana[$i]->wajib_pokok) }}
                     </td>
                     <td class="l {{ $j == $baris_angsuran ? 'b' : '' }} r" align="right">
-                        {{ number_format($pinkel->rencana[$i]->wajib_jasa) }}
+                        {{ number_format($nia->rencana[$i]->wajib_jasa) }}
                     </td>
 
                     <td>&nbsp;</td>
 
-                    @if (isset($pinkel->rencana[$i + $baris_angsuran]))
+                    @if (isset($nia->rencana[$i + $baris_angsuran]))
                         <td class="l {{ $j == $baris_angsuran ? 'b' : '' }}" align="center">
-                            {{ $pinkel->rencana[$i + $baris_angsuran]->angsuran_ke }}
+                            {{ $nia->rencana[$i + $baris_angsuran]->angsuran_ke }}
                         </td>
                         <td class="l {{ $j == $baris_angsuran ? 'b' : '' }}" align="center">
-                            {{ Tanggal::tglIndo($pinkel->rencana[$i + $baris_angsuran]->jatuh_tempo) }}
+                            {{ Tanggal::tglIndo($nia->rencana[$i + $baris_angsuran]->jatuh_tempo) }}
                         </td>
                         <td class="l {{ $j == $baris_angsuran ? 'b' : '' }}" align="right">
-                            {{ number_format($pinkel->rencana[$i + $baris_angsuran]->wajib_pokok) }}
+                            {{ number_format($nia->rencana[$i + $baris_angsuran]->wajib_pokok) }}
                         </td>
                         <td class="l {{ $j == $baris_angsuran ? 'b' : '' }} r" align="right">
-                            {{ number_format($pinkel->rencana[$i + $baris_angsuran]->wajib_jasa) }}
+                            {{ number_format($nia->rencana[$i + $baris_angsuran]->wajib_jasa) }}
                         </td>
                     @else
                         <td class="l {{ $j == $baris_angsuran ? 'b' : '' }}" align="center">
@@ -268,7 +268,7 @@
             @php
                 $jumlah = 0;
             @endphp
-            @foreach ($pinkel->real as $real)
+            @foreach ($nia->real_i as $real)
                 @php
                     $jumlah++;
                     $nomor = $loop->iteration;
@@ -319,13 +319,13 @@
             </tr>
             <tr>
                 <td width="350" rowspan="3">
-                    <div>Lembar 1 : Untuk Kelompok</div>
+                    <div>Lembar 1 : Untuk Pemanfaat</div>
                     <div>Lembar 2 : Arsip Lembaga</div>
                 </td>
                 <td style="font-weight: bold; font-size: 12px;" width="350" align="center">
                     <div>{{ $kec->sebutan_level_1 }} {{ $kec->nama_lembaga_sort }}</div>
                 </td>
-                <td style="font-weight: bold; font-size: 12px;" width="350" align="center">Ketua Kelompok</td>
+                <td style="font-weight: bold; font-size: 12px;" width="350" align="center">Pemanfaat</td>
             </tr>
             <tr>
                 <td colspan="2" height="50"></td>
@@ -335,7 +335,7 @@
                     <div>{{ $dir->namadepan }} {{ $dir->namabelakang }}</div>
                 </td>
                 <td width="350" align="center">
-                    {{ $pinkel->kelompok->ketua }}
+                    {{ $nia->anggota->namadepan}}
                 </td>
             </tr>
             <tr>

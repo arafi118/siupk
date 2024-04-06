@@ -1,17 +1,15 @@
 {
   "ExpandedNodes": [
     "",
-    "\\app",
-    "\\app\\Http",
-    "\\app\\Http\\Controllers",
     "\\resources",
     "\\resources\\views",
+    "\\resources\\views\\perguliran_i",
+    "\\resources\\views\\perguliran_i\\dokumen",
     "\\resources\\views\\transaksi",
     "\\resources\\views\\transaksi\\jurnal_angsuran",
     "\\resources\\views\\transaksi\\jurnal_angsuran\\dokumen",
     "\\resources\\views\\transaksi\\jurnal_angsuran\\individu",
     "\\resources\\views\\transaksi\\jurnal_angsuran\\partials"
   ],
-  "SelectedNode": "\\resources\\views\\transaksi\\jurnal_angsuran\\dokumen\\lpp_i.blade.php",
   "PreviewInSolutionExplorer": false
 }
