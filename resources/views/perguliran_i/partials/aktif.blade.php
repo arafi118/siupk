@@ -10,37 +10,37 @@
                         <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                             Tgl Pengajuan
                             <span class="badge badge-info badge-pill">
-                                {{ Tanggal::tglIndo($perguliran->tgl_proposal) }}
+                                {{ Tanggal::tglIndo($perguliran_i->tgl_proposal) }}
                             </span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                             Pengajuan
                             <span class="badge badge-info badge-pill">
-                                {{ number_format($perguliran->proposal) }}
+                                {{ number_format($perguliran_i->proposal) }}
                             </span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                             Jenis Jasa
                             <span class="badge badge-info badge-pill">
-                                {{ $perguliran->jasa->nama_jj }}
+                                {{ $perguliran_i->jasa->nama_jj }}
                             </span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                             Jasa
                             <span class="badge badge-info badge-pill">
-                                {{ $perguliran->pros_jasa . '% / ' . $perguliran->jangka . ' bulan' }}
+                                {{ $perguliran_i->pros_jasa . '% / ' . $perguliran_i->jangka . ' bulan' }}
                             </span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                             Angs. Pokok
                             <span class="badge badge-info badge-pill">
-                                {{ $perguliran->sis_pokok->nama_sistem }}
+                                {{ $perguliran_i->sis_pokok->nama_sistem }}
                             </span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                             Angs. Jasa
                             <span class="badge badge-info badge-pill">
-                                {{ $perguliran->sis_jasa->nama_sistem }}
+                                {{ $perguliran_i->sis_jasa->nama_sistem }}
                             </span>
                         </li>
                     </ul>
@@ -55,37 +55,37 @@
                         <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                             Tgl Verifikasi
                             <span class="badge badge-danger badge-pill">
-                                {{ Tanggal::tglIndo($perguliran->tgl_verifikasi) }}
+                                {{ Tanggal::tglIndo($perguliran_i->tgl_verifikasi) }}
                             </span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                             Verifikasi
                             <span class="badge badge-danger badge-pill">
-                                {{ number_format($perguliran->verifikasi) }}
+                                {{ number_format($perguliran_i->verifikasi) }}
                             </span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                             Jenis Jasa
                             <span class="badge badge-danger badge-pill">
-                                {{ $perguliran->jasa->nama_jj }}
+                                {{ $perguliran_i->jasa->nama_jj }}
                             </span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                             Jasa
                             <span class="badge badge-danger badge-pill">
-                                {{ $perguliran->pros_jasa . '% / ' . $perguliran->jangka . ' bulan' }}
+                                {{ $perguliran_i->pros_jasa . '% / ' . $perguliran_i->jangka . ' bulan' }}
                             </span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                             Angs. Pokok
                             <span class="badge badge-danger badge-pill">
-                                {{ $perguliran->sis_pokok->nama_sistem }}
+                                {{ $perguliran_i->sis_pokok->nama_sistem }}
                             </span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                             Angs. Jasa
                             <span class="badge badge-danger badge-pill">
-                                {{ $perguliran->sis_jasa->nama_sistem }}
+                                {{ $perguliran_i->sis_jasa->nama_sistem }}
                             </span>
                         </li>
                     </ul>
@@ -100,37 +100,37 @@
                         <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                             Tgl Tunggu
                             <span class="badge badge-warning badge-pill">
-                                {{ Tanggal::tglIndo($perguliran->tgl_tunggu) }}
+                                {{ Tanggal::tglIndo($perguliran_i->tgl_tunggu) }}
                             </span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                             Pendanaan
                             <span class="badge badge-warning badge-pill">
-                                {{ number_format($perguliran->alokasi) }}
+                                {{ number_format($perguliran_i->alokasi) }}
                             </span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                             Jenis Jasa
                             <span class="badge badge-warning badge-pill">
-                                {{ $perguliran->jasa->nama_jj }}
+                                {{ $perguliran_i->jasa->nama_jj }}
                             </span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                             Jasa
                             <span class="badge badge-warning badge-pill">
-                                {{ $perguliran->pros_jasa . '% / ' . $perguliran->jangka . ' bulan' }}
+                                {{ $perguliran_i->pros_jasa . '% / ' . $perguliran_i->jangka . ' bulan' }}
                             </span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                             Angs. Pokok
                             <span class="badge badge-warning badge-pill">
-                                {{ $perguliran->sis_pokok->nama_sistem }}
+                                {{ $perguliran_i->sis_pokok->nama_sistem }}
                             </span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                             Angs. Jasa
                             <span class="badge badge-warning badge-pill">
-                                {{ $perguliran->sis_jasa->nama_sistem }}
+                                {{ $perguliran_i->sis_jasa->nama_sistem }}
                             </span>
                         </li>
                     </ul>
@@ -138,7 +138,7 @@
             </div>
         </div>
 
-        @if ($perguliran->status == 'A')
+        @if ($perguliran_i->status == 'A')
             <div class="d-grid">
                 <button type="button" id="BtnTambahPemanfaat" data-bs-toggle="modal" data-bs-target="#TambahPemanfaat"
                     class="btn btn-success btn-sm mb-1">
@@ -148,67 +148,6 @@
         @endif
 
         <hr class="horizontal dark">
-
-        <div class="table-responsive">
-            <table class="table table-striped table-hover align-items-center mb-0" width="100%">
-                <thead class="bg-dark text-white">
-                    <tr>
-                        <th>#</th>
-                        <th>Nama</th>
-                        <th>Pengajuan</th>
-                        <th>Verifikasi</th>
-                        <th>Alokasi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php
-                        $proposal = 0;
-                        $verifikasi = 0;
-                        $alokasi = 0;
-                    @endphp
-                    @foreach ($perguliran->pinjaman_anggota as $pinjaman_anggota)
-                        @php
-                            $proposal += $pinjaman_anggota->proposal;
-                            $verifikasi += $pinjaman_anggota->verifikasi;
-                            $alokasi += $pinjaman_anggota->alokasi;
-
-                            $warna = $perguliran->status == 'A' ? '' : 'class="text-danger fw-bold"';
-                        @endphp
-                        <tr class="{{ $perguliran->status == 'A' ? 'pointer btn-click' : '' }}"
-                            data-id="{{ $pinjaman_anggota->id }}">
-                            <td {!! $warna !!} align="center">{{ $loop->iteration }}</td>
-                            <td {!! $warna !!}>
-                                {{ ucwords($pinjaman_anggota->anggota->namadepan) }}
-                                ({{ $pinjaman_anggota->nia }})
-                            </td>
-                            <td {!! $warna !!}>
-                                {{ number_format($pinjaman_anggota->proposal, 2) }}
-                            </td>
-                            <td {!! $warna !!}>
-                                {{ number_format($pinjaman_anggota->verifikasi, 2) }}
-                            </td>
-                            <td {!! $warna !!}>
-                                {{ number_format($pinjaman_anggota->alokasi, 2) }}
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th colspan="2">Jumlah</th>
-                        <th>
-                            {{ number_format($proposal, 2) }}
-                        </th>
-                        <th id="jumlah">
-                            {{ number_format($verifikasi, 2) }}
-                        </th>
-                        <th>
-                            {{ number_format($alokasi, 2) }}
-                        </th>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
     </div>
 </div>
 
@@ -216,11 +155,11 @@
     <form action="/perguliran/dokumen?status=A" target="_blank" method="post">
         @csrf
 
-        <input type="hidden" name="id" value="{{ $perguliran->id }}">
+        <input type="hidden" name="id" value="{{ $perguliran_i->id }}">
         <div class="row">
             <div class="col-12 col-sm-6 col-md-6 col-lg-4">
                 <div class="d-grid">
-                    <a href="/perguliran/dokumen/kartu_angsuran/{{ $perguliran->id }}" target="_blank"
+                    <a href="/perguliran/dokumen/kartu_angsuran/{{ $perguliran_i->id }}" target="_blank"
                         class="btn btn-outline-info btn-sm mb-2">Kartu Angsuran</a>
                 </div>
             </div>
@@ -276,7 +215,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($perguliran->real as $real)
+                    @foreach ($perguliran_i->real as $real)
                         <tr>
                             <td align="center">{{ $loop->iteration }}</td>
                             <td align="center">{{ Tanggal::tglIndo($real->tgl_transaksi) }}</td>
@@ -343,7 +282,7 @@
             </table>
         </div>
 
-        @if ($perguliran->status == 'A')
+        @if ($perguliran_i->status == 'A')
             <div class="d-flex justify-content-end mt-3">
                 <button type="button" data-bs-toggle="modal" data-bs-target="#Rescedule"
                     class="btn btn-warning btn-sm">Resceduling Pinjaman</button>

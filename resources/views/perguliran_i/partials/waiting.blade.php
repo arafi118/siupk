@@ -1,4 +1,4 @@
-<form action="/perguliran/{{ $perguliran->id }}" method="post" id="FormInput">
+<form action="/perguliran/{{ $perguliran_i->id }}" method="post" id="FormInput">
     @csrf
     @method('PUT')
 
@@ -28,37 +28,37 @@
                             <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                                 Tgl Pengajuan
                                 <span class="badge badge-info badge-pill">
-                                    {{ Tanggal::tglIndo($perguliran->tgl_proposal) }}
+                                    {{ Tanggal::tglIndo($perguliran_i->tgl_proposal) }}
                                 </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                                 Pengajuan
                                 <span class="badge badge-info badge-pill">
-                                    {{ number_format($perguliran->proposal) }}
+                                    {{ number_format($perguliran_i->proposal) }}
                                 </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                                 Jenis Jasa
                                 <span class="badge badge-info badge-pill">
-                                    {{ $perguliran->jasa->nama_jj }}
+                                    {{ $perguliran_i->jasa->nama_jj }}
                                 </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                                 Jasa
                                 <span class="badge badge-info badge-pill">
-                                    {{ $perguliran->pros_jasa . '% / ' . $perguliran->jangka . ' bulan' }}
+                                    {{ $perguliran_i->pros_jasa . '% / ' . $perguliran_i->jangka . ' bulan' }}
                                 </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                                 Angs. Pokok
                                 <span class="badge badge-info badge-pill">
-                                    {{ $perguliran->sis_pokok->nama_sistem }}
+                                    {{ $perguliran_i->sis_pokok->nama_sistem }}
                                 </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                                 Angs. Jasa
                                 <span class="badge badge-info badge-pill">
-                                    {{ $perguliran->sis_jasa->nama_sistem }}
+                                    {{ $perguliran_i->sis_jasa->nama_sistem }}
                                 </span>
                             </li>
                         </ul>
@@ -73,37 +73,37 @@
                             <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                                 Tgl Verifikasi
                                 <span class="badge badge-danger badge-pill">
-                                    {{ Tanggal::tglIndo($perguliran->tgl_verifikasi) }}
+                                    {{ Tanggal::tglIndo($perguliran_i->tgl_verifikasi) }}
                                 </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                                 Verifikasi
                                 <span class="badge badge-danger badge-pill">
-                                    {{ number_format($perguliran->verifikasi) }}
+                                    {{ number_format($perguliran_i->verifikasi) }}
                                 </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                                 Jenis Jasa
                                 <span class="badge badge-danger badge-pill">
-                                    {{ $perguliran->jasa->nama_jj }}
+                                    {{ $perguliran_i->jasa->nama_jj }}
                                 </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                                 Jasa
                                 <span class="badge badge-danger badge-pill">
-                                    {{ $perguliran->pros_jasa . '% / ' . $perguliran->jangka . ' bulan' }}
+                                    {{ $perguliran_i->pros_jasa . '% / ' . $perguliran_i->jangka . ' bulan' }}
                                 </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                                 Angs. Pokok
                                 <span class="badge badge-danger badge-pill">
-                                    {{ $perguliran->sis_pokok->nama_sistem }}
+                                    {{ $perguliran_i->sis_pokok->nama_sistem }}
                                 </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                                 Angs. Jasa
                                 <span class="badge badge-danger badge-pill">
-                                    {{ $perguliran->sis_jasa->nama_sistem }}
+                                    {{ $perguliran_i->sis_jasa->nama_sistem }}
                                 </span>
                             </li>
                         </ul>
@@ -118,37 +118,37 @@
                             <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                                 Tgl Tunggu
                                 <span class="badge badge-warning badge-pill">
-                                    {{ Tanggal::tglIndo($perguliran->tgl_tunggu) }}
+                                    {{ Tanggal::tglIndo($perguliran_i->tgl_tunggu) }}
                                 </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                                 Pendanaan
                                 <span class="badge badge-warning badge-pill">
-                                    {{ number_format($perguliran->alokasi) }}
+                                    {{ number_format($perguliran_i->alokasi) }}
                                 </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                                 Jenis Jasa
                                 <span class="badge badge-warning badge-pill">
-                                    {{ $perguliran->jasa->nama_jj }}
+                                    {{ $perguliran_i->jasa->nama_jj }}
                                 </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                                 Jasa
                                 <span class="badge badge-warning badge-pill">
-                                    {{ $perguliran->pros_jasa . '% / ' . $perguliran->jangka . ' bulan' }}
+                                    {{ $perguliran_i->pros_jasa . '% / ' . $perguliran_i->jangka . ' bulan' }}
                                 </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                                 Angs. Pokok
                                 <span class="badge badge-warning badge-pill">
-                                    {{ $perguliran->sis_pokok->nama_sistem }}
+                                    {{ $perguliran_i->sis_pokok->nama_sistem }}
                                 </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
                                 Angs. Jasa
                                 <span class="badge badge-warning badge-pill">
-                                    {{ $perguliran->sis_jasa->nama_sistem }}
+                                    {{ $perguliran_i->sis_jasa->nama_sistem }}
                                 </span>
                             </li>
                         </ul>
@@ -184,7 +184,7 @@
             </h6>
         </div>
         <div class="card-body p-3">
-            <input type="hidden" name="_id" id="_id" value="{{ $perguliran->id }}">
+            <input type="hidden" name="_id" id="_id" value="{{ $perguliran_i->id }}">
             <input type="hidden" name="status" id="status" value="A">
             <input type="hidden" name="debet" id="debet" value="{{ $debet->kode_akun }}">
             <div class="row">
@@ -192,7 +192,7 @@
                     <div class="input-group input-group-static my-3">
                         <label for="tgl_cair">Tgl Cair</label>
                         <input autocomplete="off" type="text" name="tgl_cair" id="tgl_cair"
-                            class="form-control date" value="{{ Tanggal::tglIndo($perguliran->tgl_cair) }}">
+                            class="form-control date" value="{{ Tanggal::tglIndo($perguliran_i->tgl_cair) }}">
                         <small class="text-danger" id="msg_tgl_cair"></small>
                     </div>
                 </div>
@@ -200,7 +200,7 @@
                     <div class="input-group input-group-static my-3">
                         <label for="alokasi">Alokasi Rp.</label>
                         <input autocomplete="off" readonly type="text" name="alokasi" id="alokasi"
-                            class="form-control money" value="{{ number_format($perguliran->alokasi, 2) }}">
+                            class="form-control money" value="{{ number_format($perguliran_i->alokasi, 2) }}">
                         <small class="text-danger" id="msg_alokasi"></small>
                     </div>
                 </div>
@@ -234,7 +234,7 @@
     </div>
 </form>
 
-<form action="/perguliran/kembali_proposal/{{ $perguliran->id }}" method="post" id="formKembaliProposal">
+<form action="/perguliran/kembali_proposal/{{ $perguliran_i->id }}" method="post" id="formKembaliProposal">
     @csrf
 </form>
 
