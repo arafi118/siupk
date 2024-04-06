@@ -25,7 +25,6 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 use DNS1D;
-use Illuminate\Support\Facades\Http;
 use Session;
 
 class PinjamanIndividuController extends Controller
