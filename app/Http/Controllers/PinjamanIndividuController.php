@@ -384,32 +384,6 @@ class PinjamanIndividuController extends Controller
                 ['status', 'A'],
                 ['jenis_pinjaman', 'I']
             ]);
-
-            $pinjaman_anggota = $perguliran_i->pinjaman_anggota;
-            $pinj_a['jumlah_pinjaman'] = 0;
-            $pinj_a['jumlah_pemanfaat'] = 0;
-            $pinj_a['jumlah_anggota'] = 0;
-
-            foreach ($pinjaman_anggota as $pa) {
-                $pinj_aktif = $pa->pinjaman;
-
-                if ($pinj_aktif) {
-                    $pinj_a['jumlah_pinjaman'] += 1;
-                    $pinj_a['pinjaman'][] = $pinj_aktif;
-                }
-
-                $pemanfaat_aktif = $pa->anggota->pemanfaat;
-                if ($pemanfaat_aktif) {
-                    $pinj_a['jumlah_pemanfaat'] += 1;
-                    $pinj_a['pemanfaat'][$pa->anggota->nik] = $pemanfaat_aktif;
-                }
-            }
-
-            $pinjaman_anggota = PinjamanIndividu::where('id_angg', $perguliran_i->id_angg)->where('status', 'A')->with('anggota')->get();
-            foreach ($pinjaman_anggota as $pinj_i) {
-                $pinj_a['jumlah_anggota'] += 1;
-                $pinj_a['anggota'][] = $pinj_i;
-            }
         }
 
         return view('perguliran_i.partials/' . $view)->with(compact('perguliran_i', 'jenis_jasa', 'sistem_angsuran', 'sumber_bayar', 'debet', 'pinj_a'));
