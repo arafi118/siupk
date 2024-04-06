@@ -63,14 +63,14 @@
             <td align="left" width="140">
                 <div>KEPADA YTH.</div>
                 <div style="font-weight: bold;">
-                    {{ $pinkel->kelompok->ketua }}
+                    {{ $pinkel->anggota->ketua }}
                 </div>
                 <div style="font-weight: bold;">
-                    a.n. Ketua Kelompok {{ $pinkel->kelompok->nama_kelompok }}
+                    a.n. Ketua Kelompok {{ $pinkel->anggota->namadepan }}
                 </div>
                 <div style="font-weight: bold;">Di</div>
                 <div style="font-weight: bold; text-align: center;">
-                    {{ strtoupper($pinkel->kelompok->d->nama_desa) }}
+                    {{ strtoupper($pinkel->anggota->d->nama_desa) }}
                 </div>
             </td>
         </tr>
@@ -83,7 +83,7 @@
                 <div>Dengan hormat,</div>
                 <div style="text-align: justify;">
                     Mendasar kepada Surat Perjanjian Kredit ({{ $pinkel->jpp->nama_jpp }}) antara
-                    {{ $pinkel->kelompok->nama_kelompok }} {{ $pinkel->kelompok->d->nama_desa }} dengan
+                    {{ $pinkel->anggota->namadepan }} {{ $pinkel->anggota->d->nama_desa }} dengan
                     {{ $kec->nama_lembaga_sort }} Tanggal {{ Tanggal::tglLatin($pinkel->tgl_cair) }} dengan rincian pinjaman
                     sebagai berikut ;
                 </div>
@@ -131,7 +131,7 @@
                 </table>
 
                 <div style="text-align: justify;">
-                    dan mendasar pada catatan pembukuan kami {{ $pinkel->kelompok->nama_kelompok }} sampai dengan
+                    dan mendasar pada catatan pembukuan kami {{ $pinkel->anggota->namadepan }} sampai dengan
                     diterbitkannya Surat Tagihan ini masih tercatat memiliki tunggakan sebagai berikut ;
                 </div>
 

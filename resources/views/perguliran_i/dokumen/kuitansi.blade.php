@@ -48,15 +48,15 @@
                 <td>Untuk Pembayaran</td>
                 <td align="center">:</td>
                 <td class="b">
-                    Pencairan Pinjaman Kel. {{ $pinkel->kelompok->nama_kelompok }}
+                    Pencairan Pinjaman Individu {{ $pinkel->anggota->namadepan }}
                 </td>
             </tr>
             <tr>
                 <td colspan="2">&nbsp;</td>
                 <td class="b">
-                    Beralamat Di {{ $pinkel->kelompok->alamat_kelompok }}
-                    {{ $pinkel->kelompok->d->sebutan_desa->sebutan_desa }}
-                    {{ $pinkel->kelompok->d->nama_desa }}
+                    Beralamat Di {{ $pinkel->anggota->alamat }}
+                    {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }}
+                    {{ $pinkel->anggota->d->nama_desa }}
                 </td>
             </tr>
             <tr>
@@ -113,7 +113,6 @@
                     {{ $kec->sebutan_level_3 }}
                 </td>
                 <td align="center" colspan="3">
-                    Ketua Kelompok
                 </td>
             </tr>
             <tr>
@@ -127,7 +126,7 @@
                     <b>{{ $bend->namadepan }} {{ $bend->namabelakang }}</b>
                 </td>
                 <td align="center" colspan="3">
-                    <b>{{ $pinkel->kelompok->ketua }}</b>
+                    <b>{{ $pinkel->anggota->namadepan }}</b>
                 </td>
             </tr>
         </table>

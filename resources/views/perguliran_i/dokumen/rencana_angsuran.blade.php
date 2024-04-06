@@ -45,9 +45,9 @@
                 </div>
                 <div style="font-size: 16px;">
                     <b>
-                        KELOMPOK {{ strtoupper($pinkel->kelompok->nama_kelompok) }}
-                        {{ strtoupper($pinkel->kelompok->d->sebutan_desa->sebutan_desa) }}
-                        {{ strtoupper($pinkel->kelompok->d->nama_desa) }}
+                        KELOMPOK {{ strtoupper($pinkel->anggota->namadepan) }}
+                        {{ strtoupper($pinkel->anggota->d->sebutan_desa->sebutan_desa) }}
+                        {{ strtoupper($pinkel->anggota->d->nama_desa) }}
                     </b>
                 </div>
             </td>
@@ -61,7 +61,7 @@
             <td width="90">Loan ID.</td>
             <td width="5" align="center">:</td>
             <td>
-                <b>{{ $pinkel->kelompok->nama_kelompok }} &mdash; {{ $pinkel->id }}</b>
+                <b>{{ $pinkel->anggota->namadepan }} &mdash; {{ $pinkel->id }}</b>
             </td>
             <td width="90">Jangka waktu</td>
             <td width="5" align="center">:</td>
@@ -178,7 +178,7 @@
                             {{ $kec->sebutan_level_1 }} {{ $kec->nama_lembaga_sort }}
                         </td>
                         <td align="center" colspan="3">
-                            Ketua Kelompok {{ $pinkel->kelompok->nama_kelompok }}
+                            Ketua Kelompok {{ $pinkel->anggota->namadepan }}
                         </td>
                     </tr>
                     <tr>
@@ -189,7 +189,7 @@
                             <b>{{ $dir->namadepan }} {{ $dir->namabelakang }}</b>
                         </td>
                         <td align="center" colspan="3">
-                            <b>{{ $pinkel->kelompok->ketua }}</b>
+                            <b>{{ $pinkel->anggota->ketua }}</b>
                         </td>
                     </tr>
                 </table>

@@ -326,7 +326,7 @@
                     Penambahan modal 50%
                 </li>
                 <li>
-                    Lain-lain
+                    Lain-lain.
                 </li>
             </ol>
         </li>

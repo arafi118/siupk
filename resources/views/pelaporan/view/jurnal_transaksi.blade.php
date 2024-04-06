@@ -24,7 +24,6 @@
             </td>
         </tr>
     </table>
-
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
         <tr>
             <td colspan="7" height="5"></td>
@@ -40,11 +39,16 @@
             <td align="center" width="5%">Ins</td>
         </tr>
 
+
         @foreach ($transaksi as $trx)
             @php
                 $data_idtp[] = $trx->idtp;
 
-                if ($trx->idtp != '0' && array_count_values($data_idtp)[$trx->idtp] > 1 && $trx->tgl_transaksi == $tgl_trx[$trx->idtp]) {
+                if (
+                    $trx->idtp != '0' &&
+                    array_count_values($data_idtp)[$trx->idtp] > 1 &&
+                    $trx->tgl_transaksi == $tgl_trx[$trx->idtp]
+                ) {
                     continue;
                 }
                 $tgl_trx[$trx->idtp] = $trx->tgl_transaksi;
