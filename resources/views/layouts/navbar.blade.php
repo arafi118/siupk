@@ -17,6 +17,12 @@
 
     $path = explode('/', Request::path());
     $show = ((in_array('perguliran', $path) ? true : in_array('detail', $path)) ? true : in_array('kelompok', $path)) ? true : false;
+    $id_search = 'cariKelompok';
+    $label = 'Kelompok';
+    if ((in_array('jurnal_angsuran_individu', $path))) {
+        $id_search = 'cariAnggota';
+        $label = 'Individu (NIK/Nama Peminjam)';
+    }
 @endphp
 
 <nav class="navbar navbar-main navbar-expand-lg position-sticky mt-4 top-1 px-0 mx-4 shadow-none border-radius-xl z-index-sticky"
@@ -34,13 +40,13 @@
         <div class="ms-md-3 pe-md-3 d-flex align-items-center w-100">
             @if (Session::get('angsuran') == true && !$show)
                 <div class="input-group input-group-outline">
-                    <label class="form-label">Angsuran Kelompok</label>
+                    <label class="form-label">Angsurann {{ $label }}</label>
                     @if (Request::get('pinkel'))
-                        <input type="text" id="cariKelompok" name="cariKelompok" class="form-control"
+                        <input type="text" id="{{ $id_search }}" name="{{ $id_search }}" class="form-control"
                             autocomplete="off"
                             value="{{ $pinkel->kelompok->nama_kelompok . ' [' . $pinkel->kelompok->d->nama_desa . '] [' . $pinkel->kelompok->ketua . ']' }}">
                     @else
-                        <input type="text" id="cariKelompok" name="cariKelompok" class="form-control"
+                        <input type="text" id="{{ $id_search }}" name="{{ $id_search }}" class="form-control"
                             autocomplete="off">
                     @endif
                 </div>

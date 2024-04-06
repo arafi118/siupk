@@ -1,1 +1,1 @@
-
+php artisan sto

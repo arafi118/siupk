@@ -28,7 +28,10 @@ class PinjamanAnggota extends Model
     {
         return $this->belongsTo(PinjamanKelompok::class, 'id_pinkel');
     }
-
+    public function target()
+    {
+        return $this->hasOne(RencanaAngsuranI::class, 'loan_id')->orderBy('jatuh_tempo', 'DESC');
+    }
     public function kelompok()
     {
         return $this->belongsTo(Kelompok::class, 'id_kel');
@@ -53,4 +56,10 @@ class PinjamanAnggota extends Model
     {
         return $this->hasOne(PinjamanAnggota::class, 'nia', 'nia')->orderBy('tgl_cair', 'DESC');
     }
+
+    public function rencana()
+    {
+        return $this->hasMany(RencanaAngsuranI::class, 'loan_id')->orderBy('jatuh_tempo', 'ASC');
+    }
+
 }

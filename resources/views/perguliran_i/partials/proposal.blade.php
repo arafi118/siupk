@@ -61,91 +61,9 @@
                 </div>
             </div>
 
-            <div class="d-grid">
-                <button type="button" id="BtnTambahPemanfaat" data-bs-toggle="modal" data-bs-target="#TambahPemanfaat"
-                    class="btn btn-success btn-sm mb-1">
-                    Tambah Pemanfaat
-                </button>
-            </div>
 
             <hr class="horizontal dark">
 
-            <div class="table-responsive">
-                <table class="table table-striped align-items-center mb-0" width="100%">
-                    <thead class="bg-dark text-white">
-                        <tr>
-                            <th>#</th>
-                            <th>Nama</th>
-                            <th>Pengajuan</th>
-                            <th>Verifikasi</th>
-                            <th>Catatan</th>
-                            <th>&nbsp;</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                            $proposal = 0;
-                        @endphp
-                        @foreach ($perguliran_i->pinjaman_anggota as $pinjaman_anggota)
-                            @php
-                                $proposal += $pinjaman_anggota->proposal;
-                            @endphp
-                            <tr>
-                                <td align="center">{{ $loop->iteration }}</td>
-                                <td>
-                                    {{ ucwords($pinjaman_anggota->anggota->namadepan) }}
-                                    ({{ $pinjaman_anggota->nia }})
-                                </td>
-                                <td>
-                                    <div class="input-group input-group-static">
-                                        <input type="text" id="{{ $pinjaman_anggota->id }}"
-                                            name="idpa_proposal[{{ $pinjaman_anggota->id }}]"
-                                            class="form-control money idpa_proposal"
-                                            value="{{ number_format($pinjaman_anggota->proposal, 2) }}">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group input-group-static">
-                                        <input type="text" name="idpa[{{ $pinjaman_anggota->id }}]"
-                                            class="form-control money idpa idpa-{{ $pinjaman_anggota->id }}"
-                                            value="{{ number_format($pinjaman_anggota->proposal, 2) }}">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group input-group-static">
-                                        <input type="text" class="form-control"
-                                            name="catatan[{{ $pinjaman_anggota->id }}]"
-                                            value="{{ $pinjaman_anggota->catatan_verifikasi }}">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="btn-group">
-                                        <button type="button" id="{{ $pinjaman_anggota->id }}"
-                                            class="btn btn-icon btn-sm btn-danger HapusPinjamanAnggota">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colspan="2">Jumlah</th>
-                            <th id="jumlah">
-                                {{ number_format($proposal, 2) }}
-                            </th>
-                            <th>
-                                <span id="_verifikasi">{{ number_format($proposal, 2) }}</span>
-                                <input type="hidden" name="__verifikasi" id="__verifikasi"
-                                    value="{{ $proposal }}">
-                            </th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
         </div>
     </div>
 

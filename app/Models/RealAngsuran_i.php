@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Session;
 
-class RealAngsuran extends Model
+class RealAngsuran_i extends Model
 {
     use HasFactory;
 

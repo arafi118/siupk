@@ -23,6 +23,9 @@
             $t_kolek1 = 0;
             $t_kolek2 = 0;
             $t_kolek3 = 0;
+            $t_kolek4 = 0;
+            $t_kolek5 = 0;
+
         @endphp
         @if ($jpp->nama_jpp != 'SPP')
             <div class="break"></div>
@@ -61,6 +64,8 @@
                         $t_kolek1 += $j_kolek1;
                         $t_kolek2 += $j_kolek2;
                         $t_kolek3 += $j_kolek3;
+                        $t_kolek4 += $j_kolek4;
+                        $t_kolek5 += $j_kolek5;
                     @endphp
                 @endif
 
@@ -72,6 +77,8 @@
                     $j_kolek1 = 0;
                     $j_kolek2 = 0;
                     $j_kolek3 = 0;
+                    $j_kolek4 = 0;
+                    $j_kolek5 = 0;
                     $section = $pinkel->kd_desa;
                     $nama_desa = $pinkel->sebutan_desa . ' ' . $pinkel->nama_desa;
                 @endphp
@@ -142,21 +149,40 @@
 
                 $_kolek = 0;
                 if ($wajib_pokok != '0') {
-                    $_kolek = $tunggakan_pokok / $wajib_pokok;
-                }
-                $kolek = round($_kolek + ($selisih - $angsuran_ke));
-                if ($kolek <= 3) {
+                        $_kolek = $tunggakan_pokok / $wajib_pokok;
+                    }
+                    $kolek = ceil($_kolek + ($selisih - $angsuran_ke));
+                    
+                    if ($kolek <= 0) {
                     $kolek1 = $saldo_pokok;
                     $kolek2 = 0;
                     $kolek3 = 0;
-                } elseif ($kolek <= 5) {
+                    $kolek4 = 0;
+                    $kolek5 = 0;
+                } elseif ($kolek > 0 && $kolek <= 2) {
                     $kolek1 = 0;
                     $kolek2 = $saldo_pokok;
                     $kolek3 = 0;
-                } else {
+                    $kolek4 = 0;
+                    $kolek5 = 0;
+                } elseif ($kolek > 2 && $kolek <= 4) {
                     $kolek1 = 0;
                     $kolek2 = 0;
                     $kolek3 = $saldo_pokok;
+                    $kolek4 = 0;
+                    $kolek5 = 0;
+                } elseif ($kolek > 4 && $kolek <= 6) {
+                    $kolek1 = 0;
+                    $kolek2 = 0;
+                    $kolek3 = 0;
+                    $kolek4 = $saldo_pokok;
+                    $kolek5 = 0;
+                } elseif ($kolek > 6) {
+                    $kolek1 = 0;
+                    $kolek2 = 0;
+                    $kolek3 = 0;
+                    $kolek4 = 0;
+                    $kolek5 = $saldo_pokok;
                 }
 
                 $j_alokasi += $pinkel->alokasi;
@@ -166,6 +192,8 @@
                 $j_kolek1 += $kolek1;
                 $j_kolek2 += $kolek2;
                 $j_kolek3 += $kolek3;
+                $j_kolek4 += $kolek4;
+                $j_kolek5 += $kolek5;
             @endphp
         @endforeach
 
@@ -179,6 +207,8 @@
                 $t_kolek1 += $j_kolek1;
                 $t_kolek2 += $j_kolek2;
                 $t_kolek3 += $j_kolek3;
+                $t_kolek4 += $j_kolek4;
+                $t_kolek5 += $j_kolek5;
 
                 $t_pros = 0;
                 if ($t_saldo) {
@@ -205,32 +235,46 @@
                 </tr>
                 <tr>
                     <td align="center">1</td>
-                    <td>Lancar</td>
-                    <td align="center">0%</td>
+                    <td>Kolek I</td>
+                    <td align="center">1%</td>
                     <td align="right">{{ number_format($t_kolek1) }}</td>
-                    <td align="right">{{ number_format(($t_kolek1 * 0) / 100) }}</td>
-                    <td align="center" rowspan="4">
-                        {{ round($t_kolek1 + $t_kolek2 + $t_kolek3 > 0 ? (($t_kolek2 + $t_kolek3) / ($t_kolek1 + $t_kolek2 + $t_kolek3)) * 100 : 0, 2) }}%
+                    <td align="right">{{ number_format(($t_kolek1 * 1) / 100) }}</td>
+                    <td align="center" rowspan="7">
+                        {{ round($t_kolek1 + $t_kolek2 + $t_kolek3 + $t_kolek4 + $t_kolek5> 0 ? (($t_kolek2 + $t_kolek3) / ($t_kolek1 + $t_kolek2 + $t_kolek3 + $t_kolek4 + $t_kolek5)) * 100 : 0, 2) }}%
                     </td>
                 </tr>
                 <tr>
                     <td align="center">2</td>
-                    <td>Diragukan</td>
-                    <td align="center">50%</td>
+                    <td>Kolek II</td>
+                    <td align="center">10%</td>
                     <td align="right">{{ number_format($t_kolek2) }}</td>
-                    <td align="right">{{ number_format(($t_kolek2 * 50) / 100) }}</td>
+                    <td align="right">{{ number_format(($t_kolek2 * 10) / 100) }}</td>
                 </tr>
                 <tr>
                     <td align="center">3</td>
-                    <td>Macet</td>
-                    <td align="center">100%</td>
+                    <td>Kolek III</td>
+                    <td align="center">25%</td>
                     <td align="right">{{ number_format($t_kolek3) }}</td>
-                    <td align="right">{{ number_format(($t_kolek3 * 100) / 100) }}</td>
+                    <td align="right">{{ number_format(($t_kolek3 * 25) / 100) }}</td>
+                </tr>
+                <tr>
+                    <td align="center">4</td>
+                    <td>Kolek IV</td>
+                    <td align="center">50%</td>
+                    <td align="right">{{ number_format($t_kolek4) }}</td>
+                    <td align="right">{{ number_format(($t_kolek2 * 50) / 100) }}</td>
+                </tr>
+                <tr>
+                    <td align="center">5</td>
+                    <td>Kolek V</td>
+                    <td align="center">100%</td>
+                    <td align="right">{{ number_format($t_kolek5) }}</td>
+                    <td align="right">{{ number_format(($t_kolek5 * 100) / 100) }}</td>
                 </tr>
                 <tr>
                     <th colspan="3" height="15">Total</th>
-                    <th>{{ number_format($t_kolek1 + $t_kolek2 + $t_kolek3) }}</th>
-                    <th>{{ number_format(($t_kolek1 * 0) / 100 + ($t_kolek2 * 50) / 100 + ($t_kolek3 * 100) / 100) }}</th>
+                    <th>{{ number_format($t_kolek1 + $t_kolek2 + $t_kolek3 + $t_kolek4 + $t_kolek5) }}</th>
+                    <th>{{ number_format(($t_kolek1 * 1) / 100 + ($t_kolek2 * 10) / 100 + ($t_kolek3 * 25) / 100 + ($t_kolek4 * 50) / 100 + ($t_kolek5 * 100) / 100 ) }}</th>
                 </tr>
             </table>
 

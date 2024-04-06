@@ -8,7 +8,7 @@
         $sum_pokok = $real->sum_pokok;
     }
 
-    $saldo_pokok = $perguliran->alokasi - $sum_pokok;
+    $saldo_pokok = $perguliran_i->alokasi - $sum_pokok;
     if ($saldo_pokok < 0) {
         $saldo_pokok = 0;
     }
@@ -35,8 +35,8 @@
             'withExcel' => false,
         ],
         [
-            'title' => 'Profil Kelompok',
-            'file' => 'profilKelompok',
+            'title' => 'Profil Individu',
+            'file' => 'profilIndividu',
             'withExcel' => false,
         ],
         [
@@ -45,8 +45,8 @@
             'withExcel' => false,
         ],
         [
-            'title' => 'Daftar Anggota Kelompok',
-            'file' => 'anggotaKelompok',
+            'title' => 'Daftar Anggota Individu',
+            'file' => 'anggotaIndividu',
             'withExcel' => false,
         ],
         [
@@ -70,7 +70,7 @@
             'withExcel' => false,
         ],
         [
-            'title' => 'BA Musyawarah Kelompok',
+            'title' => 'BA Musyawarah Individu',
             'file' => 'baMusyawarahDesa',
             'withExcel' => false,
         ],
@@ -206,23 +206,23 @@
     <div class="card mb-3">
         <div class="card-body p-3">
             <h5 class="mb-1">
-                Kelompok {{ $perguliran->kelompok->nama_kelompok }} Loan ID. {{ $perguliran->id }}
-                ({{ $perguliran->jpp->nama_jpp }})
+                Anggota {{ $perguliran_i->anggota->namadepan }} Loan ID. {{ $perguliran_i->id }}
+                ({{ $perguliran_i->jpp->nama_jpp }})
             </h5>
             <p class="mb-0">
                 <span
-                    class="badge badge-{{ $perguliran->sts->warna_status }}">{{ $perguliran->kelompok->kd_kelompok }}</span>
+                    class="badge badge-{{ $perguliran_i->sts->warna_status }}">{{ $perguliran_i->anggota->nia }}</span>
                 <span
-                    class="badge badge-{{ $perguliran->sts->warna_status }}">{{ $perguliran->kelompok->alamat_kelompok }}</span>
-                <span class="badge badge-{{ $perguliran->sts->warna_status }}">
-                    {{ $perguliran->kelompok->d->sebutan_desa->sebutan_desa }}
-                    {{ $perguliran->kelompok->d->nama_desa }}
+                    class="badge badge-{{ $perguliran_i->sts->warna_status }}">{{ $perguliran_i->anggota->alamat_anggota }}</span>
+                <span class="badge badge-{{ $perguliran_i->sts->warna_status }}">
+                    {{ $perguliran_i->anggota->d->sebutan_desa->sebutan_desa }}
+                    {{ $perguliran_i->anggota->d->nama_desa }}
                 </span>
             </p>
         </div>
     </div>
 
-    @if ($perguliran->status == 'P')
+    @if ($perguliran_i->status == 'P')
         <div class="card mb-3">
             <div class="card-body p-2 pb-0">
                 <button type="button" class="btn btn-success btn-sm mb-2" id="BtnEditProposal">Edit Proposal</button>
@@ -237,17 +237,17 @@
 
     <div class="card mt-3">
         <div class="card-body p-2">
-            @if ($perguliran->status == 'L' || $perguliran->status == 'H')
-                @if ($perguliran->status != 'H')
+            @if ($perguliran_i->status == 'L' || $perguliran_i->status == 'H')
+                @if ($perguliran_i->status != 'H')
                     <button class="btn btn-warning btn-sm float-end ms-2"
-                        onclick="window.open('/cetak_keterangan_lunas/{{ $perguliran->id }}')" type="button">
+                        onclick="window.open('/cetak_keterangan_lunas/{{ $perguliran_i->id }}')" type="button">
                         <i class="fa fa-print"></i> Cetak Keterangan Pelunasan
                     </button>
                 @endif
-                <a href="/database/kelompok/{{ $perguliran->kelompok->kd_kelompok }}"
+                <a href="/database/anggota/{{ $perguliran_i->anggota->nia }}"
                     class="btn btn-info float-end btn-sm mb-0">Kembali</a>
             @else
-                <a href="/perguliran?status={{ $perguliran->status }}"
+                <a href="/perguliran_i?status={{ $perguliran_i->status }}"
                     class="btn btn-info float-end btn-sm mb-0">Kembali</a>
             @endif
         </div>
@@ -259,7 +259,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="EditProposalLabel">
-                        Edit Proposal Kelompok {{ $perguliran->kelompok->nama_kelompok }} Loan ID. {{ $perguliran->id }}
+                        Edit Proposal Individu {{ $perguliran_i->anggota->namadepan }} Loan ID. {{ $perguliran_i->id }}
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -290,7 +290,7 @@
                                 <label class="form-label" for="tglProposal">Tanggal Proposal</label>
                                 <input autocomplete="off" type="text" name="tglProposal" id="tglProposal"
                                     class="form-control" readonly
-                                    value="{{ Tanggal::tglIndo($perguliran->tgl_proposal) }}">
+                                    value="{{ Tanggal::tglIndo($perguliran_i->tgl_proposal) }}">
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -298,15 +298,15 @@
                                 <label class="form-label" for="tglVerifikasi">Tanggal Verifikasi</label>
                                 <input autocomplete="off" type="text" name="tglVerifikasi" id="tglVerifikasi"
                                     class="form-control" readonly
-                                    value="{{ Tanggal::tglIndo($perguliran->tgl_verifikasi) }}">
+                                    value="{{ Tanggal::tglIndo($perguliran_i->tgl_verifikasi) }}">
                             </div>
                         </div>
                     </div>
 
-                    <form action="/perguliran/dokumen?status=P" target="_blank" method="post">
+                    <form action="/perguliran_i/dokumen?status=P" target="_blank" method="post">
                         @csrf
 
-                        <input type="hidden" name="id" value="{{ $perguliran->id }}">
+                        <input type="hidden" name="id" value="{{ $perguliran_i->id }}">
                         <div class="row">
                             @foreach ($dokumen_proposal as $doc => $val)
                                 <div class="col-md-3 d-grid">
@@ -341,11 +341,11 @@
 
     @php
         $readonly = 'readonly';
-        if ($perguliran->status == 'W') {
+        if ($perguliran_i->status == 'W') {
             $readonly = '';
         }
 
-        $wt_cair = explode('_', $perguliran->wt_cair);
+        $wt_cair = explode('_', $perguliran_i->wt_cair);
         if (count($wt_cair) == 1) {
             $waktu = $wt_cair[0];
         }
@@ -366,7 +366,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/perguliran/simpan_data/{{ $perguliran->id }}?save=true" method="post"
+                    <form action="/perguliran_i/simpan_data/{{ $perguliran_i->id }}?save=true" method="post"
                         id="simpanData">
                         @csrf
 
@@ -375,7 +375,7 @@
                                 <div class="input-group input-group-outline my-3">
                                     <label class="form-label" for="spk_no">Nomor SPK</label>
                                     <input autocomplete="off" type="text" name="spk_no" id="spk_no"
-                                        class="form-control save" {{ $readonly }} value="{{ $perguliran->spk_no }}">
+                                        class="form-control save" {{ $readonly }} value="{{ $perguliran_i->spk_no }}">
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -390,7 +390,7 @@
                                     <label class="form-label" for="tgl_cair">Tanggal Cair</label>
                                     <input autocomplete="off" type="text" name="tgl_cair" id="tgl_cair"
                                         class="form-control date save" {{ $readonly }}
-                                        value="{{ Tanggal::tglIndo($perguliran->tgl_cair) }}">
+                                        value="{{ Tanggal::tglIndo($perguliran_i->tgl_cair) }}">
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -403,10 +403,10 @@
                         </div>
                     </form>
 
-                    <form action="/perguliran/dokumen?status={{ $perguliran->status }}" target="_blank" method="post">
+                    <form action="/perguliran_i/dokumen?status={{ $perguliran_i->status }}" target="_blank" method="post">
                         @csrf
 
-                        <input type="hidden" name="id" value="{{ $perguliran->id }}">
+                        <input type="hidden" name="id" value="{{ $perguliran_i->id }}">
                         <div class="row">
                             @foreach ($dokumen_pencairan as $doc => $val)
                                 <div class="col-md-3 d-grid">
@@ -446,7 +446,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="TambahPemanfaatLabel">
-                        Tambah Calon Pemanfaat ({{ $perguliran->id }})
+                        Tambah Calon Pemanfaat ({{ $perguliran_i->id }})
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -454,7 +454,7 @@
                     <form action="/pinjaman_anggota" method="post" id="FormTambahPemanfaat">
                         @csrf
 
-                        <input type="hidden" name="id_pinkel" id="id_pinkel" value="{{ $perguliran->id }}">
+                        <input type="hidden" name="id_pinkel" id="id_pinkel" value="{{ $perguliran_i->id }}">
                         <input type="hidden" name="nia_pemanfaat" id="nia_pemanfaat">
                         <input type="hidden" name="catatan_pinjaman" id="catatan_pinjaman">
                         <div class="row">
@@ -481,9 +481,9 @@
 
                         <div class="fw-bold text-center">
                             <div>
-                                {{ $perguliran->kelompok->nama_kelompok }} -
-                                {{ $perguliran->kelompok->d->sebutan_desa->sebutan_desa }}
-                                {{ $perguliran->kelompok->d->nama_desa }}
+                                {{ $perguliran_i->anggota->namadepan }} -
+                                {{ $perguliran_i->anggota->d->sebutan_desa->sebutan_desa }}
+                                {{ $perguliran_i->anggota->d->nama_desa }}
                             </div>
                         </div>
                     </form>
@@ -510,7 +510,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="ResceduleLabel">
-                        Resceduling <span class="badge badge-info">Loan ID. {{ $perguliran->id }}</span>
+                        Resceduling <span class="badge badge-info">Loan ID. {{ $perguliran_i->id }}</span>
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -522,10 +522,10 @@
                         <b>Rp. {{ number_format($saldo_pokok) }}</b> ;
                     </div>
 
-                    <form action="/perguliran/rescedule" method="post" id="formRescedule">
+                    <form action="/perguliran_i/rescedule" method="post" id="formRescedule">
                         @csrf
 
-                        <input type="hidden" name="id" id="id" value="{{ $perguliran->id }}">
+                        <input type="hidden" name="id" id="id" value="{{ $perguliran_i->id }}">
                         <input type="hidden" name="_pengajuan" id="_pengajuan" value="{{ $saldo_pokok }}">
                         <div class="row">
                             <div class="col-md-6">
@@ -549,7 +549,7 @@
                                     <label class="form-label" for="sistem_angsuran_pokok">Sistem Angs. Pokok</label>
                                     <select class="form-control" name="sistem_angsuran_pokok" id="sistem_angsuran_pokok">
                                         @foreach ($sistem_angsuran as $sa)
-                                            <option {{ $perguliran->sistem_angsuran == $sa->id ? 'selected' : '' }}
+                                            <option {{ $perguliran_i->sistem_angsuran == $sa->id ? 'selected' : '' }}
                                                 value="{{ $sa->id }}">
                                                 {{ $sa->nama_sistem }} ({{ $sa->deskripsi_sistem }})
                                             </option>
@@ -563,7 +563,7 @@
                                     <label class="form-label" for="sistem_angsuran_jasa">Sistem Angs. Jasa</label>
                                     <select class="form-control" name="sistem_angsuran_jasa" id="sistem_angsuran_jasa">
                                         @foreach ($sistem_angsuran as $sa)
-                                            <option {{ $perguliran->sa_jasa == $sa->id ? 'selected' : '' }}
+                                            <option {{ $perguliran_i->sa_jasa == $sa->id ? 'selected' : '' }}
                                                 value="{{ $sa->id }}">
                                                 {{ $sa->nama_sistem }} ({{ $sa->deskripsi_sistem }})
                                             </option>
@@ -576,7 +576,7 @@
                                 <div class="input-group input-group-static my-3">
                                     <label for="jangka">Jangka</label>
                                     <input autocomplete="off" type="number" name="jangka" id="jangka"
-                                        class="form-control" value="{{ $perguliran->jangka }}">
+                                        class="form-control" value="{{ $perguliran_i->jangka }}">
                                     <small class="text-danger" id="msg_jangka"></small>
                                 </div>
                             </div>
@@ -584,7 +584,7 @@
                                 <div class="input-group input-group-static my-3">
                                     <label for="pros_jasa">Prosentase Jasa (%)</label>
                                     <input autocomplete="off" type="number" name="pros_jasa" id="pros_jasa"
-                                        class="form-control" value="{{ $perguliran->pros_jasa }}">
+                                        class="form-control" value="{{ $perguliran_i->pros_jasa }}">
                                     <small class="text-danger" id="msg_pros_jasa"></small>
                                 </div>
                             </div>
@@ -607,15 +607,15 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="PenghapusanLabel">
-                        Penghapusan Piutang <span class="badge badge-info">Loan ID. {{ $perguliran->id }}</span>
+                        Penghapusan Piutang <span class="badge badge-info">Loan ID. {{ $perguliran_i->id }}</span>
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/perguliran/hapus" method="post" id="FormPenghapusanPinjaman">
+                    <form action="/perguliran_i/hapus" method="post" id="FormPenghapusanPinjaman">
                         @csrf
 
-                        <input type="hidden" name="id" id="id" value="{{ $perguliran->id }}">
+                        <input type="hidden" name="id" id="id" value="{{ $perguliran_i->id }}">
                         <input type="hidden" name="saldo" id="saldo" value="{{ $saldo_pokok }}">
                         <div class="row">
                             <div class="col-md-6">
@@ -699,7 +699,7 @@
         </div>
     </div>
 
-    <form action="/perguliran/{{ $perguliran->id }}" method="post" id="FormDeleteProposal">
+    <form action="/perguliran_i/{{ $perguliran_i->id }}" method="post" id="FormDeleteProposal">
         @csrf
         @method('DELETE')
     </form>
@@ -758,14 +758,14 @@
             maximumFractionDigits: 2,
         })
 
-        $.get('/perguliran/{{ $perguliran->id }}', function(result) {
+        $.get('/perguliran_i/{{ $perguliran_i->id }}', function(result) {
             $('#layout').html(result)
         })
 
         $('#BtnEditProposal').click(function(e) {
             e.preventDefault()
 
-            $.get('/perguliran/{{ $perguliran->id }}/edit', function(result) {
+            $.get('/perguliran_i/{{ $perguliran_i->id }}/edit', function(result) {
                 $('#LayoutEditProposal').html(result)
                 $('#EditProposal').modal('show')
             })
@@ -790,7 +790,7 @@
                         success: function(result) {
                             if (result.hapus) {
                                 Swal.fire('Berhasil!', result.msg, 'success').then(() => {
-                                    window.location.href = '/perguliran'
+                                    window.location.href = '/perguliran_i'
                                 })
                             } else {
                                 Swal.fire('Peringatan', result.msg, 'warning')
@@ -805,7 +805,7 @@
             source: function(query, process) {
                 var states = [];
                 return $.get('/pinjaman_anggota/cari_pemanfaat', {
-                    loan_id: '{{ $perguliran->id }}',
+                    loan_id: '{{ $perguliran_i->id }}',
                     query: query
                 }, function(result) {
                     var resultList = result.map(function(item) {
@@ -820,7 +820,7 @@
                             "name": item.namadepan + ' [' + item.nik + ']' + '[' + item
                                 .alamat + ']',
                             "value": item.nik,
-                            "id_pinkel": '{{ $perguliran->id }}',
+                            "id_pinkel": '{{ $perguliran_i->id }}',
                             "disable": disable
                         });
                     });
@@ -878,7 +878,7 @@
                 data: form.serialize(),
                 success: function(result) {
                     Swal.fire('Berhasil', result.msg, 'success').then(() => {
-                        $.get('/perguliran/{{ $perguliran->id }}', function(result) {
+                        $.get('/perguliran_i/{{ $perguliran_i->id }}', function(result) {
                             $('#layout').html(result)
 
                             $('#EditProposal').modal('hide')
@@ -911,7 +911,7 @@
                 data: form.serialize(),
                 success: function(result) {
                     Swal.fire('Berhasil', result.msg, 'success').then(() => {
-                        $.get('/perguliran/{{ $perguliran->id }}', function(result) {
+                        $.get('/perguliran_i/{{ $perguliran_i->id }}', function(result) {
                             $('#layout').html(result)
                         })
 
@@ -952,7 +952,7 @@
                         success: function(result) {
                             if (result.hapus) {
                                 Swal.fire('Berhasil', result.msg, 'success').then(() => {
-                                    $.get('/perguliran/{{ $perguliran->id }}',
+                                    $.get('/perguliran_i/{{ $perguliran_i->id }}',
                                         function(result) {
                                             $('#layout').html(result)
                                         })
@@ -1030,7 +1030,7 @@
                     success: function(result) {
                         if (result.success) {
                             var id = result.id
-                            $.get('/perguliran/generate/' + result.id + '?status=' + result.status +
+                            $.get('/perguliran_i/generate/' + result.id + '?status=' + result.status +
                                 '&save',
                                 function(result) {
                                     if (result.success) {
@@ -1066,7 +1066,7 @@
                         success: function(result) {
                             if (result.success) {
                                 Swal.fire('Berhasil', result.msg, 'success').then(() => {
-                                    window.location.href = '/perguliran'
+                                    window.location.href = '/perguliran_i'
                                 })
                             }
                         }
@@ -1108,7 +1108,7 @@
                         success: function(result) {
                             if (result.success) {
                                 Swal.fire('Berhasil', result.msg, 'success').then(() => {
-                                    $.get('/perguliran/{{ $perguliran->id }}',
+                                    $.get('/perguliran_i/{{ $perguliran_i->id }}',
                                         function(result) {
                                             $('#layout').html(result)
                                         })
@@ -1156,7 +1156,7 @@
                         $.get('/transaksi/regenerate_real/' + result.id_pinkel, function(res) {
                             if (res.success) {
                                 Swal.fire('Berhasil!', result.msg, 'success').then(() => {
-                                    $.get('/perguliran/{{ $perguliran->id }}',
+                                    $.get('/perguliran_i/{{ $perguliran_i->id }}',
                                         function(result) {
                                             $('#PenghapusanPinjamanAnggota').modal(
                                                 'hide')
