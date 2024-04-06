@@ -1662,7 +1662,7 @@ class TransaksiController extends Controller
                 $query->where('jatuh_tempo', '<=', date('Y-m-t'));
             }
         ])->firstOrFail();
-        $real = RealAngsuranI::where([
+        $real = RealAngsuran_i::where([
             ['loan_id', $id_pinkel],
             ['tgl_transaksi', '<=', date('Y-m-d')]
         ])->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC');
