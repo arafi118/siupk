@@ -1442,7 +1442,7 @@ class PinjamanIndividuController extends Controller
         }
     }
 
-    public function RencanaAngsuran_i($id, $data)
+    public function RencanaAngsuran($id, $data)
     {
 
         $keuangan = new Keuangan;
@@ -1673,15 +1673,10 @@ class PinjamanIndividuController extends Controller
             'jasa',
             'anggota',
             'anggota.d',
-            'anggota.usaha',
-            'anggota.kegiatan',
-            'anggota.tk',
-            'anggota.fk',
+            'anggota.u',
             'anggota.d.sebutan_desa',
-            'pinjaman_anggota',
-            'pinjaman_anggota.anggota',
             'sis_pokok'
-        ])->withCount('pinjaman_anggota')->first();
+        ])->first();
 
         $data['user'] = User::where([
             ['lokasi', Session::get('lokasi')],
@@ -1729,8 +1724,6 @@ class PinjamanIndividuController extends Controller
             'jpp',
             'sis_pokok',
             'anggota',
-            'pinjaman_anggota',
-            'pinjaman_anggota.anggota'
         ])->first();
 
         $data['dir'] = User::where([
@@ -1766,7 +1759,7 @@ class PinjamanIndividuController extends Controller
             }
         ])->withCount('real_i')->first();
         $data['barcode'] = DNS1D::getBarcodePNG($id, 'C128');
-
+ 
         $data['dir'] = User::where([
             ['lokasi', Session::get('lokasi')],
             ['level', '1'],
@@ -2390,6 +2383,8 @@ class PinjamanIndividuController extends Controller
             'rencana' => $rencana
         ], Response::HTTP_OK);
     }
+
+    
 
     public function generateRA($id_pinj)
     {

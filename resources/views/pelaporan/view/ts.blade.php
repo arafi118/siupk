@@ -76,7 +76,7 @@
     <ul style="font-size: 12px;">
         <li style="text-align: justify;">
             Jika terdapat kendala teknis, silahkan menghubungi Technical Support kami melalui WhatsApps ke nomor diatas.
-            Dimohon menggunakan bahasa yang singkat padat dan jelas
+            Dimohon menggunakan bahasa yang singkat padat dan jelas.
         </li>
         <li style="text-align: justify;">
             <div>
@@ -94,7 +94,7 @@
 
     <div style="text-align: right; margin-top: 24px; font-size: 12px;">
         <b>
-            Team Technical Support
+            Team Technical Support.
         </b>
     </div>
 </div>
