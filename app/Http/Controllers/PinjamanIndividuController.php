@@ -1119,6 +1119,18 @@ class PinjamanIndividuController extends Controller
             'anggota.d'
         ])->first();
 
+        $data['data'] = [
+            'Cover/ Sampul',
+            'Surat Permohonan Pinjaman',
+            'Surat Rekomendasi Kredit',
+            'Surat Pernyataan Peminjam ',
+            'Surat Persetujuan dan Kuasa',
+            'Form Verifikasi',
+            'Rencana Angsuran',
+            'Tanda Terima Jaminan',
+           
+        ];
+
         $data['judul'] = 'Check List (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
         $view = view('perguliran_i.dokumen.check', $data)->render();
 
@@ -1137,7 +1149,7 @@ class PinjamanIndividuController extends Controller
             'anggota',
             'anggota.d',
             'anggota.d.sebutan_desa'
-        ])->withCount('pinjaman_anggota')->first();
+        ])->first();
 
         $data['judul'] = 'Surat Perngajuran Kredit (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
         $view = view('perguliran_i.dokumen.pengajuan_kredit', $data)->render();
@@ -1158,7 +1170,7 @@ class PinjamanIndividuController extends Controller
             'anggota',
             'anggota.d',
             'anggota.d.sebutan_desa'
-        ])->withCount('pinjaman_anggota')->first();
+        ])->first();
 
         $data['keuangan'] = $keuangan;
 
@@ -1422,6 +1434,29 @@ class PinjamanIndividuController extends Controller
             return $view;
         }
     }
+
+    public function tandaTerimaJaminan($id, $data) 
+    {
+         $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
+            'anggota'
+         ])->first();
+         
+            $data['kec'] = Kecamatan::where('id', Session::get('lokasi'))->first();
+            $data['dir'] = User::where([
+                ['level', '1'],
+                ['jabatan', '1'],
+                ['lokasi', Session::get('lokasi')]
+            ])->with(['j'])->first();
+            $data['judul'] = 'Form Verifikasi Anggota (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
+            $view = view('perguliran_i.dokumen.tanda_terima_jaminan', $data)->render();
+    
+            if ($data['type'] == 'pdf') {
+                $pdf = PDF::loadHTML($view);
+                return $pdf->stream();
+            } else {
+                return $view;
+            }
+        }
 
     public function daftarHadirVerifikasi($id, $data)
     {
