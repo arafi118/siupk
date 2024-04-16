@@ -2,7 +2,7 @@
     use App\Utils\Tanggal;
 @endphp
 
-@extends('perguliran.dokumen.layout.base')
+@extends('perguliran_i.dokumen.layout.base')
 
 @section('content')
     @foreach ($pinkel->pinjaman_anggota as $pa)

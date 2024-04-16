@@ -2,7 +2,7 @@
     use App\Utils\Tanggal;
 @endphp
 
-@extends('perguliran.dokumen.layout.base')
+@extends('perguliran_i.dokumen.layout.base')
 
 @section('content')
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
@@ -24,7 +24,7 @@
         <tr>
             <td width="70">Nama Kelompok</td>
             <td width="5" align="right">:</td>
-            <td>{{ $pinkel->kelompok->nama_kelompok }} - {{ $pinkel->id }}</td>
+            <td>{{ $pinkel->anggota->namadepan }} - {{ $pinkel->id }}</td>
             <td width="70">Alokasi Pinjaman</td>
             <td width="5" align="right">:</td>
             <td>Rp. {{ number_format($pinkel->alokasi) }}</td>
@@ -32,7 +32,7 @@
         <tr>
             <td>Alamat</td>
             <td align="right">:</td>
-            <td>{{ $pinkel->kelompok->alamat_kelompok }}</td>
+            <td>{{ $pinkel->anggota->alamat_kelompok }}</td>
             <td>Sistem Angsuran</td>
             <td align="right">:</td>
             <td>{{ $pinkel->sis_pokok->nama_sistem }}</td>

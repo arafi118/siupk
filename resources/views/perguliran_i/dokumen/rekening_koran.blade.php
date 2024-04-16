@@ -9,7 +9,7 @@
     $t_denda = 0;
 @endphp
 
-@extends('perguliran.dokumen.layout.base')
+@extends('perguliran_i.dokumen.layout.base')
 
 @section('content')
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">

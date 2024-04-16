@@ -1,14 +1,15 @@
 {
   "ExpandedNodes": [
     "",
-    "\\app",
-    "\\app\\Http",
-    "\\app\\Http\\Controllers",
-    "\\app\\Models",
+    "\\resources",
+    "\\resources\\views",
     "\\resources\\views\\perguliran_i",
-    "\\resources\\views\\pinjaman_i\\partials",
-    "\\routes"
+    "\\resources\\views\\perguliran_i\\dokumen",
+    "\\resources\\views\\transaksi",
+    "\\resources\\views\\transaksi\\jurnal_angsuran",
+    "\\resources\\views\\transaksi\\jurnal_angsuran\\dokumen",
+    "\\resources\\views\\transaksi\\jurnal_angsuran\\individu",
+    "\\resources\\views\\transaksi\\jurnal_angsuran\\partials"
   ],
-  "SelectedNode": "\\app\\Models\\PinjamanIndividu.php",
   "PreviewInSolutionExplorer": false
 }

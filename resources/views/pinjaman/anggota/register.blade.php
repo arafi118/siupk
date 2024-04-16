@@ -3,7 +3,9 @@
     $tgl_lahir = new DateTime($anggota->tgl_lahir);
     $umur = $today->diff($tgl_lahir);
 @endphp
-
+@php
+$
+@endphp
 <div class="row">
     <div class="col-lg-4 mb-3">
         <div class="card">
