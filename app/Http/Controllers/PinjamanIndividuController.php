@@ -1402,7 +1402,7 @@ class PinjamanIndividuController extends Controller
             $pdf = PDF::loadHTML($view);
             return $pdf->stream();
         } else {
-            return $view;
+            return $view;67i7ii67hyhyhhyyhy
         }
     }
 
