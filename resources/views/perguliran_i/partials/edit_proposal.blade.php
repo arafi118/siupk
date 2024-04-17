@@ -1,7 +1,6 @@
 <form action="/perguliran_i/{{ $perguliran_i->id }}" method="post" id="FormEditProposal">
     @csrf
     @method('PUT')
-
     <input type="hidden" name="_id" id="_id" value="{{ $perguliran_i->id }}">
     <input type="hidden" name="status" id="status" value="P">
     <div class="row">
@@ -45,7 +44,8 @@
                 <label class="form-label" for="jenis_jasa_proposal">Jenis Jasa</label>
                 <select class="form-control" name="jenis_jasa_proposal" id="jenis_jasa_proposal">
                     @foreach ($jenis_jasa as $jj)
-                        <option {{ $jj->id == $perguliran_i->jenis_jasa ? 'selected' : '' }} value="{{ $jj->id }}">
+                        <option {{ $jj->id == $perguliran_i->jenis_jasa ? 'selected' : '' }}
+                            value="{{ $jj->id }}">
                             {{ $jj->nama_jj }}
                         </option>
                     @endforeach

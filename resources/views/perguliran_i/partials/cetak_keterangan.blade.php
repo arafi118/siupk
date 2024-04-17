@@ -32,14 +32,22 @@
 </head>
 
 @php
-$saldo_pokok = $ra->target_pokok - $real->sum_pokok;
-$saldo_jasa = $ra->target_jasa - $real->sum_jasa;
+    $saldo_pokok = $ra->target_pokok - $real->sum_pokok;
+    $saldo_jasa = $ra->target_jasa - $real->sum_jasa;
 
-$keterangan1 = 'Belum Lunas';
-$keterangan2 = 'Belum Lunas';
+    $keterangan1 = 'Belum Lunas';
+    $keterangan2 = 'Belum Lunas';
 
-if ($saldo_pokok <= 0) { $saldo_pokok=0; $keterangan1='Lunas' ; } if ($saldo_jasa <=0) { $saldo_jasa=0;
-    $keterangan2='Lunas' ; } @endphp <body class="g-sidenav-show  bg-gray-200" onload="window.print()">
+    if ($saldo_pokok <= 0) {
+        $saldo_pokok = 0;
+        $keterangan1 = 'Lunas';
+    }
+    if ($saldo_jasa <= 0) {
+        $saldo_jasa = 0;
+        $keterangan2 = 'Lunas';
+} @endphp
+
+<body class="g-sidenav-show  bg-gray-200" onload="window.print()">
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <div class="card mt-3 text-sm shadow-none border-1">
             <div class="card-body">
@@ -94,7 +102,7 @@ if ($saldo_pokok <= 0) { $saldo_pokok=0; $keterangan1='Lunas' ; } if ($saldo_jas
                         </tr>
                     </tbody>
                 </table>
-
+                \
                 <div class="row f-12">
                     <div class="col-3 relative d-flex align-items-center">
                         <img width="100%" src="/assets/img/lunas.png">
@@ -142,6 +150,6 @@ if ($saldo_pokok <= 0) { $saldo_pokok=0; $keterangan1='Lunas' ; } if ($saldo_jas
     <script src="/assets/js/plugins/world.js"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script async src="/assets/js/material-dashboard.min.js"></script>
-    </body>
+</body>
 
 </html>

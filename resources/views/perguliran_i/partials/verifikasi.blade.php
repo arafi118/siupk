@@ -1,7 +1,6 @@
 <form action="/perguliran_i/{{ $perguliran_i->id }}" method="post" id="FormInput">
     @csrf
     @method('PUT')
-
     <div class="card mb-3">
         <div class="card-body">
             <div class="row mt-0">
@@ -146,8 +145,8 @@
                 <div class="col-md-3">
                     <div class="input-group input-group-static my-3">
                         <label for="pros_jasa">Prosentase Jasa (%)</label>
-                        <input autocomplete="off" type="number" name="pros_jasa" id="pros_jasa"
-                            class="form-control" value="{{ $perguliran_i->pros_jasa }}">
+                        <input autocomplete="off" type="number" name="pros_jasa" id="pros_jasa" class="form-control"
+                            value="{{ $perguliran_i->pros_jasa }}">
                         <small class="text-danger" id="msg_pros_jasa"></small>
                     </div>
                 </div>

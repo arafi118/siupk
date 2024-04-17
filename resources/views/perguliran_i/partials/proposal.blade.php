@@ -1,7 +1,6 @@
 <form action="/perguliran_i/{{ $perguliran_i->id }}" method="post" id="FormInput">
     @csrf
     @method('PUT')
-
     <div class="card mb-3">
         <div class="card-body">
             <div class="row mt-0">

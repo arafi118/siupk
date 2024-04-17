@@ -13,7 +13,6 @@ use App\Models\RealAngsuran_i;
 use App\Models\Rekening;
 use App\Models\RencanaAngsuran_i;
 use App\Models\SistemAngsuran;
-use App\Models\StatusPinjaman;
 use App\Models\Transaksi;
 use App\Models\User;
 use App\Utils\Keuangan;

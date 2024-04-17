@@ -14,7 +14,6 @@
 
         $keterangan1 = 'Belum Lunas';
         $keterangan2 = 'Belum Lunas';
-
         if ($saldo_pokok <= 0) {
             $saldo_pokok = 0;
             $keterangan1 = 'Lunas';
