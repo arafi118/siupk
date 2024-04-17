@@ -91,9 +91,9 @@
                     </div>
                     <div style="margin-top: 8px;">
                         <img width="150" src="data:image/png;base64,{{ $barcode }}"
-                            alt="{{ $nia->anggota->nik}}">
+                            alt="{{ $nia->anggota->nik }}">
                     </div>
-                    <div style="font-size: 14px;">{{ $nia->anggota->nik}}</div>
+                    <div style="font-size: 14px;">{{ $nia->anggota->nik }}</div>
                 </td>
                 <td width="150">Jenis Pinjaman</td>
                 <td width="5" align="center">:</td>
@@ -105,7 +105,7 @@
             <tr>
                 <td>Nama</td>
                 <td align="center">:</td>
-                <td style="font-weight: bold;" colspan="4">{{ $nia->anggota->namadepan}}</td>
+                <td style="font-weight: bold;" colspan="4">{{ $nia->anggota->namadepan }}</td>
             </tr>
             <tr>
                 <td>Alamat</td>
@@ -115,7 +115,7 @@
             <tr>
                 <td>Telpon/SMS</td>
                 <td align="center">:</td>
-                <td>{{ $nia->anggota->hp}}</td>
+                <td>{{ $nia->anggota->hp }}</td>
                 <td>&nbsp;</td>
                 <td align="center">&nbsp;</td>
                 <td>&nbsp;</td>
@@ -268,7 +268,7 @@
             @php
                 $jumlah = 0;
             @endphp
-            @foreach ($nia->real_i as $real) 
+            @foreach ($nia->real_i as $real)
                 @php
                     $jumlah++;
                     $nomor = $loop->iteration;
@@ -335,7 +335,7 @@
                     <div>{{ $dir->namadepan }} {{ $dir->namabelakang }}</div>
                 </td>
                 <td width="350" align="center">
-                    {{ $nia->anggota->namadepan}}
+                    {{ $nia->anggota->namadepan }}
                 </td>
             </tr>
             <tr>
@@ -345,13 +345,13 @@
                 <td colspan="5">
                     <ol>
                         <b>Perhatian:</b>
-                        <li>Bayarlah angsuran tepat waktu sesuai dengan jadwal diatas</li>
+                        <li>Bayarlah angsuran tepat waktu sesuai dengan jadwal diatas.</li>
                         <li>Untuk memudahkan pelayanan, bawalah kartu ini dan slip pembayaran terakhir setiap melakukan
-                            angsuran</li>
+                            angsuran.</li>
                         <li>Jagalah keutuhan kartu dan tidak melipatnya, jika hilang segera lapor
-                            {{ $kec->nama_lembaga_sort }}</li>
+                            {{ $kec->nama_lembaga_sort }}.</li>
                         <li>Jika lembar ini tidak mencukupi, cetak pada lembar baliknya dengan dibubuhi stempel
-                            {{ $kec->nama_lembaga_sort }}</li>
+                            {{ $kec->nama_lembaga_sort }}. </li>
                     </ol>
                 </td>
             </tr>

@@ -27,7 +27,7 @@
         <table border="0" width="100%" class="p">
             <tr>
                 <td colspan="3" height="40" align="center" style="text-transform: uppercase; font-size: 16px;">
-                    <b>K u i t a n s i</b>
+                    <b> K u i t a n s i </b>
                 </td>
             </tr>
             <tr>

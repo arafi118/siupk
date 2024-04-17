@@ -41,7 +41,7 @@
         <tr class="b">
             <td colspan="3" align="center">
                 <div style="font-size: 18px;">
-                    <b>RENCANA ANGSURAN PINJAMAN {{ $pinkel->jpp->nama_jpp }}</b>
+                    <b>RENCANA ANGSURAN PINJAMAN {{ $pinkel->jpp->nama_jpp }} </b>
                 </div>
                 <div style="font-size: 16px;">
                     <b>
@@ -75,7 +75,7 @@
             <td>
                 <b>{{ $pinkel->spk_no }}</b>
             </td>
-            <td>Sistem Angsuran</td>
+            <td> Sistem Angsuran </td>
             <td align="center">:</td>
             <td>
                 <b>{{ $pinkel->sis_pokok->nama_sistem }} {{ round($pinkel->jangka / $pinkel->sis_pokok->sistem) }} Kali</b>
