@@ -12,7 +12,6 @@
     if ($saldo_pokok < 0) {
         $saldo_pokok = 0;
     }
-
     $dokumen_proposal = [
         [
             'title' => 'Cover',
@@ -210,8 +209,7 @@
                 ({{ $perguliran_i->jpp->nama_jpp }})
             </h5>
             <p class="mb-0">
-                <span
-                    class="badge badge-{{ $perguliran_i->sts->warna_status }}">{{ $perguliran_i->anggota->nia }}</span>
+                <span class="badge badge-{{ $perguliran_i->sts->warna_status }}">{{ $perguliran_i->anggota->nia }}</span>
                 <span
                     class="badge badge-{{ $perguliran_i->sts->warna_status }}">{{ $perguliran_i->anggota->alamat_anggota }}</span>
                 <span class="badge badge-{{ $perguliran_i->sts->warna_status }}">
@@ -375,7 +373,8 @@
                                 <div class="input-group input-group-outline my-3">
                                     <label class="form-label" for="spk_no">Nomor SPK</label>
                                     <input autocomplete="off" type="text" name="spk_no" id="spk_no"
-                                        class="form-control save" {{ $readonly }} value="{{ $perguliran_i->spk_no }}">
+                                        class="form-control save" {{ $readonly }}
+                                        value="{{ $perguliran_i->spk_no }}">
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -403,7 +402,8 @@
                         </div>
                     </form>
 
-                    <form action="/perguliran_i/dokumen?status={{ $perguliran_i->status }}" target="_blank" method="post">
+                    <form action="/perguliran_i/dokumen?status={{ $perguliran_i->status }}" target="_blank"
+                        method="post">
                         @csrf
 
                         <input type="hidden" name="id" value="{{ $perguliran_i->id }}">
@@ -1030,7 +1030,8 @@
                     success: function(result) {
                         if (result.success) {
                             var id = result.id
-                            $.get('/perguliran_i/generate/' + result.id + '?status=' + result.status +
+                            $.get('/perguliran_i/generate/' + result.id + '?status=' + result
+                                .status +
                                 '&save',
                                 function(result) {
                                     if (result.success) {
