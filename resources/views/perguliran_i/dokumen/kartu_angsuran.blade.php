@@ -268,7 +268,7 @@
             @php
                 $jumlah = 0;
             @endphp
-            @foreach ($nia->real_i as $real)
+            @foreach ($nia->real_i as $real) 
                 @php
                     $jumlah++;
                     $nomor = $loop->iteration;
