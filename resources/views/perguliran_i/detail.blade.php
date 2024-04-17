@@ -33,66 +33,30 @@
             'file' => 'suratRekomendasi',
             'withExcel' => false,
         ],
-        [
-            'title' => 'Profil Individu',
-            'file' => 'profilIndividu',
-            'withExcel' => false,
-        ],
-        [
-            'title' => 'Susunan Pengurus',
-            'file' => 'susunanPengurus',
-            'withExcel' => false,
-        ],
-        [
-            'title' => 'Daftar Anggota Individu',
-            'file' => 'anggotaIndividu',
-            'withExcel' => false,
-        ],
-        [
-            'title' => 'Daftar Pemanfaat',
-            'file' => 'daftarPemanfaat',
-            'withExcel' => false,
-        ],
-        [
-            'title' => 'Pernyataan Tanggung Renteng',
-            'file' => 'tanggungRenteng',
-            'withExcel' => false,
-        ],
-        [
-            'title' => 'FC KTP Pemanfaat & Penjamin',
-            'file' => 'fotoCopyKTP',
-            'withExcel' => false,
-        ],
+        
         [
             'title' => 'Surat Pernyataan Peminjam',
             'file' => 'pernyataanPeminjam',
             'withExcel' => false,
         ],
-        [
-            'title' => 'BA Musyawarah Individu',
-            'file' => 'baMusyawarahDesa',
-            'withExcel' => false,
-        ],
+       
         [
             'title' => 'Form Verifikasi',
             'file' => 'formVerifikasi',
             'withExcel' => false,
         ],
-        [
-            'title' => 'Daftar Hadir Verifikasi',
-            'file' => 'daftarHadirVerifikasi',
-            'withExcel' => false,
-        ],
+
         [
             'title' => 'Rencana Angsuran',
             'file' => 'rencanaAngsuran',
             'withExcel' => false,
         ],
         [
-            'title' => 'Form Verifikasi Anggota',
-            'file' => 'formVerifikasiAnggota',
+            'title' => 'Tanda Terima Jaminan',
+            'file' => 'tandaTerimaJaminan',
             'withExcel' => false,
         ],
+       
     ];
 
     $dokumen_pencairan = [
@@ -196,6 +160,8 @@
             'file' => 'formVerifikasi',
             'withExcel' => false,
         ],
+
+      
     ];
 @endphp
 

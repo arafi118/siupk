@@ -66,12 +66,12 @@
                 KELOMPOK PINJAMAN {{ $pinkel->jpp->nama_jpp }}
             </div>
             <div style="font-size: 20px;">
-                <b>{{ $pinkel->kelompok->nama_kelompok }}</b>
+                <b>{{ $pinkel->anggota->namadepan }}</b>
             </div>
             <div style="font-size: 11px;">
-                Alamat : {{ $pinkel->kelompok->alamat_kelompok }}
-                {{ $pinkel->kelompok->d->sebutan_desa->sebutan_desa }} {{ $pinkel->kelompok->d->nama_desa }}
-                {{ $kec->nama_kec }} {{ $nama_kabupaten }} Telp: {{ $pinkel->kelompok->telpon }}
+                Alamat : {{ $pinkel->anggota->alamat }}
+                {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }} {{ $pinkel->anggota->d->nama_desa }}
+                {{ $kec->nama_kec }} {{ $nama_kabupaten }} Telp: {{ $pinkel->anggota->hp }}
             </div>
         </td>
     </tr>
@@ -85,7 +85,7 @@
         <td width="30">Nomor</td>
         <td width="5" align="right">:</td>
         <td width="500">
-            ______/{{ $pinkel->kelompok->kd_kelompok }}-{{ $pinkel->id }}/{{ $pinkel->jpp->nama_jpp }}/{{ Tanggal::tglRomawi($pinkel->tgl_proposal) }}
+            ______/{{ $pinkel->anggota->nik }}-{{ $pinkel->id }}/{{ $pinkel->jpp->nama_jpp }}/{{ Tanggal::tglRomawi($pinkel->tgl_proposal) }}
         </td>
     </tr>
     <tr>
@@ -141,13 +141,13 @@
         <td width="30">&nbsp;</td>
         <td width="80">Nama Lengkap</td>
         <td width="5" align="right">:</td>
-        <td style="font-weight: bold;">{{ $pinkel->kelompok->ketua }}</td>
+        <td style="font-weight: bold;">{{ $pinkel->anggota->namadepan }}</td>
     </tr>
     <tr>
         <td width="30">&nbsp;</td>
         <td>Alamat</td>
         <td width="5" align="right">:</td>
-        <td style="font-weight: bold;">{{ $pinkel->kelompok->d->nama_desa }}</td>
+        <td style="font-weight: bold;">{{ $pinkel->anggota->d->nama_desa }}</td>
     </tr>
     <tr>
         <td width="30">&nbsp;</td>
@@ -159,13 +159,13 @@
         <td width="30">&nbsp;</td>
         <td>Nama Lengkap</td>
         <td width="5" align="right">:</td>
-        <td style="font-weight: bold;">{{ $pinkel->kelompok->sekretaris }}</td>
+        <td style="font-weight: bold;">{{ $pinkel->anggota->sekretaris }}</td>
     </tr>
     <tr>
         <td width="30">&nbsp;</td>
         <td>Alamat</td>
         <td width="5" align="right">:</td>
-        <td style="font-weight: bold;">{{ $pinkel->kelompok->d->nama_desa }}</td>
+        <td style="font-weight: bold;">{{ $pinkel->anggota->d->nama_desa }}</td>
     </tr>
     <tr>
         <td width="30">&nbsp;</td>
@@ -177,12 +177,10 @@
         <td width="30">&nbsp;</td>
         <td colspan="3">
             <div>
-                Dalam hal ini bertindak untuk dan atas nama seluruh anggota kelompok
-                {{ $pinkel->jpp->deskripsi_jpp }} ({{ $pinkel->jpp->nama_jpp }})
-                {{ $pinkel->kelompok->nama_kelompok }} (daftar anggota terlampir), dengan ini bermaksud mengajukan
+            Dalam  hal ini bertindak untuk dan atas nama diri sendiri, dengan ini bermaksud mengajukan               
                 permohonan kredit sebesar Rp. {{ number_format($pinkel->proposal) }}
                 ({{ $keuangan->terbilang($pinkel->proposal) }}) untuk memenuhi kebutuhan tambahan modal usaha bagi
-                {{ $pinkel->pinjaman_anggota_count }} anggota. Kredit atau pinjaman tersebut di atas, akan kami
+                {{ $pinkel->pinjaman_anggota_count }}Kredit atau pinjaman tersebut di atas, akan kami
                 kembalikan dalam jangka waktu {{ $pinkel->jangka }} bulan, dengan sistem angsuran
                 {{ $pinkel->sis_pokok->nama_sistem }} ({{ $pinkel->sis_pokok->deskripsi_sistem }}).
             </div>
@@ -190,12 +188,12 @@
                 Sebagai bahan pertimbangan, bersama ini kami lampirkan:
             </div>
             <ol>
-                <li>Fotokopi KTP dan KK dari {{ $pinkel->pinjaman_anggota_count }} orang anggota kelompok kami yang
-                    mengajukan kredit;</li>
+                <li>Fotokopi KTP dan KK;</li>
                 <li>Surat Rekomendasi dari Kepala Desa/Lurah;</li>
-                <li>Pernyataan kesediaan tanggung renteng dari seluruh anggota;</li>
-                <li>Fotokopi bukti tabungan kelompok di bank;</li>
-                <li>Rencana pengembalian kredit.</li>
+                <li>Bukti Angunan / Jaminan;</li>
+                <li>Surat Pernyataan Peminjam;</li>
+                <li>Rencana pengembalian kredit;</li>
+                <li>Surat Keterangan Gaji/Surat Keterangan Usaha.</li>
             </ol>
             <div>Demikian permohonan kami, atas perhatiannya kami ucapkan terima kasih.</div>
         </td>
@@ -206,19 +204,9 @@
         <td>&nbsp;</td>
         <td align="center">{{ $kec->nama_kec }}, {{ Tanggal::tglLatin($pinkel->tgl_proposal) }}</td>
     </tr>
-    <tr>
-        <td align="center" width="50%">Ketua Kelompok,</td>
-        <td align="center" width="50%">Sekretaris Kelompok,</td>
-    </tr>
+   >
     <tr>
         <td colspan="2" height="30"></td>
     </tr>
-    <tr>
-        <td align="center" width="50%" style="font-weight: bold; text-decoration: underline;">
-            {{ $pinkel->kelompok->ketua }}
-        </td>
-        <td align="center" width="50%" style="font-weight: bold; text-decoration: underline;">
-            {{ $pinkel->kelompok->sekretaris }}
-        </td>
-    </tr>
+    
 </table>

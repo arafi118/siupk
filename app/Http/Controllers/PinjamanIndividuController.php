@@ -393,7 +393,7 @@ class PinjamanIndividuController extends Controller
         $title = 'Detail Pinjaman anggota ' . $perguliran_i->anggota->namadepan;
         $real = RealAngsuran_i::where('loan_id', $perguliran_i->id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
         $sistem_angsuran = SistemAngsuran::all();
-        return view('perguliran_i.detail')->with(compact('title', 'perguliran_i', 'real_i', 'sistem_angsuran'));
+        return view('perguliran_i.detail')->with(compact('title', 'perguliran_i', 'real', 'sistem_angsuran'));
     }
 
     public function pelunasan(PinjamanIndividu $perguliran_i)
@@ -1084,9 +1084,6 @@ class PinjamanIndividuController extends Controller
         $data['report'] = $file;
         $data['type'] = $report[1];
 
-        if ($file == 'kartuAngsuranAnggota') {
-            return $this->$file($request->id);
-        }
         return $this->$file($request->id, $data);
     }
 
@@ -1118,6 +1115,18 @@ class PinjamanIndividuController extends Controller
             'anggota.d'
         ])->first();
 
+        $data['data'] = [
+            'Cover/ Sampul',
+            'Surat Permohonan Pinjaman',
+            'Surat Rekomendasi Kredit',
+            'Surat Pernyataan Peminjam ',
+            'Surat Persetujuan dan Kuasa',
+            'Form Verifikasi',
+            'Rencana Angsuran',
+            'Tanda Terima Jaminan',
+           
+        ];
+
         $data['judul'] = 'Check List (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
         $view = view('perguliran_i.dokumen.check', $data)->render();
 
@@ -1136,7 +1145,7 @@ class PinjamanIndividuController extends Controller
             'anggota',
             'anggota.d',
             'anggota.d.sebutan_desa'
-        ])->withCount('pinjaman_anggota')->first();
+        ])->first();
 
         $data['judul'] = 'Surat Perngajuran Kredit (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
         $view = view('perguliran_i.dokumen.pengajuan_kredit', $data)->render();
@@ -1157,7 +1166,7 @@ class PinjamanIndividuController extends Controller
             'anggota',
             'anggota.d',
             'anggota.d.sebutan_desa'
-        ])->withCount('pinjaman_anggota')->first();
+        ])->first();
 
         $data['keuangan'] = $keuangan;
 
@@ -1422,6 +1431,29 @@ class PinjamanIndividuController extends Controller
         }
     }
 
+    public function tandaTerimaJaminan($id, $data) 
+    {
+         $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
+            'anggota'
+         ])->first();
+         
+            $data['kec'] = Kecamatan::where('id', Session::get('lokasi'))->first();
+            $data['dir'] = User::where([
+                ['level', '1'],
+                ['jabatan', '1'],
+                ['lokasi', Session::get('lokasi')]
+            ])->with(['j'])->first();
+            $data['judul'] = 'Form Verifikasi Anggota (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
+            $view = view('perguliran_i.dokumen.tanda_terima_jaminan', $data)->render();
+    
+            if ($data['type'] == 'pdf') {
+                $pdf = PDF::loadHTML($view);
+                return $pdf->stream();
+            } else {
+                return $view;
+            }
+        }
+
     public function daftarHadirVerifikasi($id, $data)
     {
         $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
@@ -1444,7 +1476,7 @@ class PinjamanIndividuController extends Controller
         }
     }
 
-    public function RencanaAngsuran_i($id, $data)
+    public function RencanaAngsuran($id, $data)
     {
 
         $keuangan = new Keuangan;
@@ -1675,15 +1707,10 @@ class PinjamanIndividuController extends Controller
             'jasa',
             'anggota',
             'anggota.d',
-            'anggota.usaha',
-            'anggota.kegiatan',
-            'anggota.tk',
-            'anggota.fk',
+            'anggota.u',
             'anggota.d.sebutan_desa',
-            'pinjaman_anggota',
-            'pinjaman_anggota.anggota',
             'sis_pokok'
-        ])->withCount('pinjaman_anggota')->first();
+        ])->first();
 
         $data['user'] = User::where([
             ['lokasi', Session::get('lokasi')],
@@ -1731,8 +1758,6 @@ class PinjamanIndividuController extends Controller
             'jpp',
             'sis_pokok',
             'anggota',
-            'pinjaman_anggota',
-            'pinjaman_anggota.anggota'
         ])->first();
 
         $data['dir'] = User::where([
@@ -1755,7 +1780,7 @@ class PinjamanIndividuController extends Controller
     public function kartuAngsuran($id)
     {
         $data['kec'] = Kecamatan::where('id', Session::get('lokasi'))->with('kabupaten')->first();
-        $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
+        $data['nia'] = PinjamanIndividu::where('id', $id)->with([
             'anggota',
             'jpp',
             'sis_pokok',
@@ -1766,20 +1791,16 @@ class PinjamanIndividuController extends Controller
             'target' => function ($query) {
                 $query->where('angsuran_ke', '1');
             }
-        ])->withCount('pinjaman_anggota')->withCount([
-            'rencana' => function ($query) {
-                $query->where('angsuran_ke', '!=', '0');
-            }
         ])->withCount('real_i')->first();
         $data['barcode'] = DNS1D::getBarcodePNG($id, 'C128');
-
+ 
         $data['dir'] = User::where([
             ['lokasi', Session::get('lokasi')],
             ['level', '1'],
             ['jabatan', '1']
         ])->first();
 
-        $data['laporan'] = 'Kartu Angsuran ' . $data['pinkel']->anggota->namadepan;
+        $data['laporan'] = 'Kartu Angsuran ' . $data['nia']->anggota->namadepan;
         $data['laporan'] .= ' Loan ID. ' . $id;
         return view('perguliran_i.dokumen.kartu_angsuran', $data);
     }
@@ -2396,6 +2417,8 @@ class PinjamanIndividuController extends Controller
             'rencana' => $rencana
         ], Response::HTTP_OK);
     }
+
+    
 
     public function generateRA($id_pinj)
     {

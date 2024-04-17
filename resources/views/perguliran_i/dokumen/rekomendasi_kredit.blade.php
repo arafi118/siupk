@@ -90,8 +90,8 @@
                     </div>
                     <div style="font-size: 18px;">
                         <b>
-                            {{ strtoupper($pinkel->kelompok->d->sebutan_desa->sebutan_desa) }}
-                            {{ strtoupper($pinkel->kelompok->d->nama_desa) }}
+                            {{ strtoupper($pinkel->anggota->d->sebutan_desa->sebutan_desa) }}
+                            {{ strtoupper($pinkel->anggota->d->nama_desa) }}
                         </b>
                     </div>
                 </td>
@@ -118,57 +118,54 @@
         <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 12px;">
             <tr>
                 <td colspan="3" align="justify">
-                    Yang bertanda tangan di bawah ini {{ $pinkel->kelompok->d->sebutan_desa->sebutan_kades }}
-                    {{ $pinkel->kelompok->d->nama_desa }} menerangkan bahwa Kelompok dan Pengurus tersebut namanya di
-                    bawah ini :
+                    Yang bertanda tangan di bawah ini {{ $pinkel->anggota->d->sebutan_desa->sebutan_kades }}
+                    {{ $pinkel->anggota->d->desa }} menerangkan dengan sebenarnya bahwa:
                 </td>
             </tr>
 
             <tr>
-                <td width="120" rowspan="3" style="vertical-align: top;">Nama Lengkap / Jabatan</td>
+                <td width="120" style="vertical-align: top;">Nama Lengkap  </td>
                 <td width="5" align="center">:</td>
-                <td>{{ $pinkel->kelompok->ketua }} / Ketua Kelompok</td>
+                <td>{{ $pinkel->anggota->namadepan }}  </td>
             </tr>
             <tr>
+                <td width="120" style="vertical-align: top;">Jenis Kelamin  </td>
                 <td align="center">:</td>
-                <td>{{ $pinkel->kelompok->sekretaris }} / Sekretaris Kelompok</td>
+                <td>{{ $pinkel->anggota->jk }}  </td>
             </tr>
             <tr>
+                <td width="120" style="vertical-align: top;">N I K</td>
                 <td align="center">:</td>
-                <td>{{ $pinkel->kelompok->bendahara }} / Bendahara Kelompok</td>
+                <td>{{ $pinkel->anggota->nik }}  </td>
             </tr>
             <tr>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Nama Kelompok</td>
+                <td width="120" style="vertical-align: top;">Kelahiran  </td>
                 <td align="center">:</td>
-                <td>{{ $pinkel->kelompok->nama_kelompok }}</td>
+                <td>{{ $pinkel->anggota->tempat_lahir}} 
+                {{ $pinkel->anggota->tgl_lahir}}  </td>
             </tr>
             <tr>
-                <td>Alamat</td>
+                <td width="120" style="vertical-align: top;">Alamat </td>
                 <td align="center">:</td>
-                <td>
-                    {{ $pinkel->kelompok->alamat_kelompok }} {{ $pinkel->kelompok->d->sebutan_desa->sebutan_desa }}
-                    {{ $pinkel->kelompok->d->nama_desa }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }}
-                    {{ $nama_kabupaten }}
-                </td>
+                <td>{{ $pinkel->anggota->alamat}} {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }}
+                    {{ $pinkel->anggota->d->desa }} {{$kec->sebutan_kec }} {{ $kec->nama_kec }}
+                    {{ $nama_kabupaten }} </td>
             </tr>
             <tr>
-                <td>Jumlah anggota</td>
+                <td width="120" style="vertical-align: top;">Telpon  </td>
                 <td align="center">:</td>
-                <td>{{ $pinkel->pinjaman_anggota_count }}
-                    ({{ $keuangan->terbilang($pinkel->pinjaman_anggota_count) }}) Orang</td>
+                <td>{{ $pinkel->anggota->hp }}  </td>
             </tr>
             <tr>
-                <td>Jumlah Pengajuan</td>
+                <td width="120" style="vertical-align: top;">Jenis Usaha  </td>
                 <td align="center">:</td>
-                <td>{{ number_format($pinkel->proposal) }} ({{ $keuangan->terbilang($pinkel->proposal) }})</td>
+                <td>{{ $pinkel->anggota->usaha }}  </td>
             </tr>
+            
             <tr>
                 <td align="justify" colspan="3">
-                    Benar keberadaannya dan Layak direkomendasikan untuk mendapatkan
-                    Kredit Modal {{ $pinkel->jpp->deskripsi_jpp }} ({{ $pinkel->jpp->nama_jpp }}) pada
+                Benar-benar warga Desa{{ $pinkel->anggota->sebutan_desa}} {{ $pinkel->anggota->desa}}
+                dengan berkepribadian baik dan Layak direkomendasikan untuk mendapatkan kredit Modal {{ $pinkel->jpp->deskripsi_jpp }} ({{ $pinkel->jpp->nama_jpp }}) pada
                     {{ $kec->nama_lembaga_sort }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }}
                     {{ $nama_kabupaten }}.
                 </td>
@@ -193,7 +190,7 @@
             <tr>
                 <td colspan="2">&nbsp;</td>
                 <td align="center">
-                    {{ $pinkel->kelompok->d->sebutan_desa->sebutan_kades }} {{ $pinkel->kelompok->d->nama_desa }}
+                    {{ $pinkel->anggota->d->sebutan_desa->sebutan_kades }} {{ $pinkel->anggota->d->desa }}
                 </td>
             </tr>
             <tr>
@@ -203,10 +200,10 @@
                 <td colspan="2">&nbsp;</td>
                 <td align="center">
                     <u>
-                        <b>{{ $pinkel->kelompok->d->kades }}</b>
+                        <b>{{ $pinkel->anggota->d->kades }}</b>
                     </u>
-                    @if ($pinkel->kelompok->d->nip)
-                        <div><small>NIP. {{ $pinkel->kelompok->d->nip }}</small></div>
+                    @if ($pinkel->anggota->d->nip)
+                        <div><small>NIP. {{ $pinkel->anggota->d->nip }}</small></div>
                     @endif
                 </td>
             </tr>

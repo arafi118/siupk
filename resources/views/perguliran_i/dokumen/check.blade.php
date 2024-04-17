@@ -26,7 +26,7 @@
         <tr>
             <td width="100">Kode Kelompok</td>
             <td width="5">:</td>
-            <td style="font-weight: bold;">{{ $pinkel->kelompok->kd_kelompok }}</td>
+            <td style="font-weight: bold;">{{ $pinkel->anggota->nik }}</td>
 
             <td width="80">&nbsp;</td>
 
@@ -38,25 +38,25 @@
         <tr>
             <td>Nama Kelompok</td>
             <td width="5">:</td>
-            <td style="font-weight: bold;">{{ $pinkel->kelompok->nama_kelompok }}</td>
+            <td style="font-weight: bold;">{{ $pinkel->anggota->namadepan }}</td>
 
             <td>&nbsp;</td>
 
             <td>Ketua</td>
             <td width="5">:</td>
-            <td style="font-weight: bold;">{{ $pinkel->kelompok->ketua }}</td>
+            <td style="font-weight: bold;">{{ $pinkel->anggota->namadepan }}</td>
         </tr>
 
         <tr>
             <td>Desa/Kelurahan</td>
             <td width="5">:</td>
-            <td style="font-weight: bold;">{{ $pinkel->kelompok->d->nama_desa }}</td>
+            <td style="font-weight: bold;">{{ $pinkel->anggota->d->desa }}</td>
 
             <td>&nbsp;</td>
 
             <td>Telpon</td>
             <td width="5">:</td>
-            <td style="font-weight: bold;">{{ $pinkel->kelompok->telpon }}</td>
+            <td style="font-weight: bold;">{{ $pinkel->anggota->hp }}</td>
         </tr>
     </table>
 

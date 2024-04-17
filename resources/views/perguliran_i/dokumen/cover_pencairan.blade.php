@@ -1,14 +1,17 @@
 @php
     use App\Utils\Keuangan;
     use App\Utils\Tanggal;
-    if (Keuangan::startWith($kec->kabupaten->nama_kab, 'KOTA') || Keuangan::startWith($kec->kabupaten->nama_kab, 'KAB')) {
+    if (
+        Keuangan::startWith($kec->kabupaten->nama_kab, 'KOTA') ||
+        Keuangan::startWith($kec->kabupaten->nama_kab, 'KAB')
+    ) {
         $nama_kab = ucwords(strtolower($kec->kabupaten->nama_kab));
     } else {
         $nama_kab = ' Kabupaten ' . ucwords(strtolower($kec->kabupaten->nama_kab));
     }
 @endphp
 
-<title>COVER PENCAIRAN ({{ $pinkel->kelompok->nama_kelompok . ' - Loan ID. ' . $pinkel->id }})</title>
+<title>COVER PENCAIRAN ({{ $pinkel->anggota->namadepan . ' - Loan ID. ' . $pinkel->id }})</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <style>
@@ -72,10 +75,10 @@
         <div class="center">
             <img src="../storage/app/public/logo/{{ $logo }}" width="290" alt="{{ $logo }}">
             <div style="margin-top: 10px; font-size: 24px;">
-                Kelompok {{ $pinkel->kelompok->nama_kelompok }}
+                Kelompok {{ $pinkel->anggota->namadepan }}
             </div>
             <div style="font-size: 20px;">
-                {{ $pinkel->kelompok->d->sebutan_desa->sebutan_desa }} {{ $pinkel->kelompok->d->nama_desa }}
+                {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }} {{ $pinkel->anggota->d->nama_desa }}
             </div>
         </div>
 
