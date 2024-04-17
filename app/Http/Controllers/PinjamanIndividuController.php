@@ -394,7 +394,7 @@ class PinjamanIndividuController extends Controller
         $title = 'Detail Pinjaman anggota ' . $perguliran_i->anggota->namadepan;
         $real = RealAngsuran_i::where('loan_id', $perguliran_i->id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
         $sistem_angsuran = SistemAngsuran::all();
-        return view('perguliran_i.detail')->with(compact('title', 'perguliran_i', 'real_i', 'sistem_angsuran'));
+        return view('perguliran_i.detail')->with(compact('title', 'perguliran_i', 'real', 'sistem_angsuran'));
     }
 
     public function pelunasan(PinjamanIndividu $perguliran_i)
@@ -1402,7 +1402,7 @@ class PinjamanIndividuController extends Controller
             $pdf = PDF::loadHTML($view);
             return $pdf->stream();
         } else {
-            return $view;67i7ii67hyhyhhyyhy
+            return $view;
         }
     }
 
