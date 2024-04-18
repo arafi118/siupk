@@ -62,7 +62,7 @@
 
                     <div class="d-flex justify-content-end">
                         <button type="button" id="btnDetailIndividu" class="btn btn-info btn-sm me-3">
-                            Detail Individu <span class="badge badge-info" id="loan-id"></span>
+                            Detail Pemanfaat <span class="badge badge-info" id="loan-id"></span>
                         </button>
                         <button type="button" id="SimpanAngsuran" class="btn btn-github btn-sm">Posting</button>
                     </div>
