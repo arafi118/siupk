@@ -36,41 +36,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/master', [AdminAuthController::class, 'index'])->middleware('guest');
-Route::post('/master/login', [AdminAuthController::class, 'login'])->middleware('guest');
-
-Route::group(['prefix' => 'master', 'as' => 'master.', 'middleware' => 'master'], function () {
-    Route::get('/dashboard', [AdminController::class, 'index']);
-    Route::get('/simpan_saldo', [DashboardController::class, 'simpanSaldo']);
-
-    Route::get('/kecamatan/{kd_prov}/{kd_kab}/{kd_kec}', [AdminController::class, 'kecamatan']);
-
-    Route::resource('/users', AdminUserController::class);
-
-    Route::get('/laporan', [AdminController::class, 'laporan']);
-
-    Route::get('/buat_invoice', [InvoiceController::class, 'index']);
-    Route::get('/nomor_invoice', [InvoiceController::class, 'InvoiceNo']);
-    Route::get('/jumlah_tagihan', [InvoiceController::class, 'Tagihan']);
-
-    Route::get('/unpaid', [InvoiceController::class, 'Unpaid']);
-    Route::get('/{invoice}/unpaid', [InvoiceController::class, 'DetailUnpaid']);
-
-    Route::get('/paid', [InvoiceController::class, 'Paid']);
-    Route::get('/{invoice}/paid', [InvoiceController::class, 'DetailPaid']);
-
-    Route::post('/buat_invoice', [InvoiceController::class, 'store']);
-    Route::put('/{invoice}/simpan', [InvoiceController::class, 'simpan']);
-
-    Route::resource('/menu', MenuController::class);
-
-    Route::get('/migrasi_upk/server/{server}', [UpkController::class, 'Server']);
-
-    Route::resource('/migrasi_upk', UpkController::class);
-
-    Route::post('/logout', [AdminAuthController::class, 'logout']);
-});
-
 Route::get('/kab', [KabupatenAuthController::class, 'index'])->middleware('guest');
 Route::post('/kab/login', [KabupatenAuthController::class, 'login'])->middleware('guest');
 
