@@ -175,11 +175,13 @@ class DashboardController extends Controller
         $table = '';
 
         $no = 1;
-        $pinjaman = PinjamanAnggota::where('status', $status)->with([
+        $pinjaman = PinjamanAnggota::where([
+            ['status', $status],
+            ['jenis_pinjaman', 'I']
+        ])->with([
             'anggota',
             'anggota.d',
-            'anggota.d.sebutan_desa',
-            'kelompok'
+            'anggota.d.sebutan_desa'
         ])->orderBy('tgl_cair', 'ASC')->get();
         foreach ($pinjaman as $pinkel) {
             $nama_desa = '';
@@ -189,7 +191,6 @@ class DashboardController extends Controller
             $table .= '<tr>';
 
             $table .= '<td align="center">' . $no . '</td>';
-            $table .= '<td>' . $pinkel->kelompok->nama_kelompok . ' - Loan ID. ' . $pinkel->id_pinkel . '</td>';
             $table .= '<td align="center">' . $pinkel->anggota->nik . '</td>';
             $table .= '<td>' . $pinkel->anggota->namadepan . '</td>';
             $table .= '<td>' . $nama_desa . ' ' . $pinkel->anggota->alamat . '</td>';
