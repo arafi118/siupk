@@ -12,20 +12,20 @@
             </td>
         </tr>
         <tr>
-            <td>NIK</td>
-            <td>:</td>
-            <td style="font-weight: bold !important;">{{ $nia->anggota->nik }}</td>
+            <td width="20%">NIK</td>
+            <td width="1%">:</td>
+            <td width="27" style="font-weight: bold !important;">{{ $nia->anggota->nik }}</td>
 
-            <td>&nbsp;</td>
+            <td width="4%">&nbsp;</td>
 
-            <td>Nama Anggota</td>
-            <td>:</td>
-            <td style="font-weight: bold !important;">{{ $nia->anggota->namadepan }}</td>
+            <td width="20%">Nama Anggota</td>
+            <td width="1%">:</td>
+            <td width="27" style="font-weight: bold !important;">{{ $nia->anggota->namadepan }}</td>
         </tr>
         <tr>
-            <td>No. SPK</td>
+            <td>Telpon/SMS</td>
             <td>:</td>
-            <td style="font-weight: bold !important;">{{ $nia->spk_no }}</td>
+            <td style="font-weight: bold !important;">{{ $nia->anggota->hp }}</td>
 
             <td>&nbsp;</td>
 
@@ -45,6 +45,18 @@
             <td style="font-weight: bold !important;">{{ $nia->anggota->d->nama_desa }}</td>
         </tr>
         <tr>
+            <td>No. SPK</td>
+            <td>:</td>
+            <td style="font-weight: bold !important;">{{ $nia->spk_no }}</td>
+
+            <td>&nbsp;</td>
+
+            <td>Sistem Angsuran</td>
+            <td>:</td>
+            <td style="font-weight: bold !important;">{{ $nia->jangka }} bulan @
+                {{ $nia->sis_pokok->nama_sistem }}</td>
+        </tr>
+        <tr>
             <td>Alokasi</td>
             <td>:</td>
             <td style="font-weight: bold !important;">{{ number_format($nia->alokasi) }}</td>
@@ -54,18 +66,6 @@
             <td>Jasa</td>
             <td>:</td>
             <td style="font-weight: bold !important;">{{ $nia->pros_jasa / $nia->jangka }}%</td>
-        </tr>
-        <tr>
-            <td>Telpon/SMS</td>
-            <td>:</td>
-            <td style="font-weight: bold !important;">{{ $nia->anggota->hp }}</td>
-
-            <td>&nbsp;</td>
-
-            <td>Sistem Angsuran</td>
-            <td>:</td>
-            <td style="font-weight: bold !important;">{{ $nia->jangka }} bulan @
-                {{ $nia->sis_pokok->nama_sistem }}</td>
         </tr>
         <tr>
             <td>Angsuran Pokok</td>
