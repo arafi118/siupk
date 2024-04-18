@@ -2116,8 +2116,9 @@ class PinjamanIndividuController extends Controller
 
     public function cetakPadaKartu($id, $idtp)
     {
+        $data['idtp'] = $idtp;
         $data['kec'] = Kecamatan::where('id', Session::get('lokasi'))->with('kabupaten')->first();
-        $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
+        $data['nia'] = PinjamanIndividu::where('id', $id)->with([
             'anggota',
             'jpp',
             'sis_pokok',
@@ -2128,17 +2129,21 @@ class PinjamanIndividuController extends Controller
             'target' => function ($query) {
                 $query->where('angsuran_ke', '1');
             }
-        ])->withCount('pinjaman_anggota')->withCount('rencana')->first();
-        $data['barcode'] = DNS1D::getBarcodePNG($data['pinkel']->anggota->kd_anggota, 'C128');
+        ])->withCount('real_i')->withCount([
+            'rencana' => function ($query) {
+                $query->where('angsuran_ke', '!=', '0');
+            }
+        ])->first();
+        $data['barcode'] = DNS1D::getBarcodePNG($id, 'C128');
 
-        $data['idtp'] = $idtp;
         $data['dir'] = User::where([
             ['lokasi', Session::get('lokasi')],
             ['level', '1'],
             ['jabatan', '1']
         ])->first();
 
-        $data['laporan'] = 'Kartu Angsuran ' . $data['pinkel']->anggota->namadepan;
+        $data['laporan'] = 'Kartu Angsuran ' . $data['nia']->anggota->namadepan;
+        $data['laporan'] .= ' Loan ID. ' . $id;
         return view('perguliran_i.dokumen.cetak_kartu_angsuran', $data);
     }
 

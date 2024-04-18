@@ -219,11 +219,6 @@ Route::post('/perguliran_i/dokumen', [PinjamanIndividuController::class, 'dokume
 
 Route::post('/perguliran_i/kembali_proposal/{id}', [PinjamanIndividuController::class, 'kembaliProposal'])->middleware('auth');
 
-
-
-
-
-
 Route::get('/pinjaman_anggota/register/{id_pinkel}', [PinjamanAnggotaController::class, 'create'])->middleware('auth');
 Route::get('/pinjaman_anggota/cari_pemanfaat', [PinjamanAnggotaController::class, 'cariPemanfaat'])->middleware('auth');
 Route::get('/hapus_pemanfaat/{id}', [PinjamanAnggotaController::class, 'hapus'])->middleware('auth');
@@ -288,7 +283,6 @@ Route::get('/transaksi/dokumen/bm/{id}', [TransaksiController::class, 'bm'])->mi
 Route::get('/transaksi/dokumen/struk_individu/{id}', [TransaksiController::class, 'strukIndividu'])->middleware('auth');
 Route::get('/transaksi/dokumen/struk_matrix_individu/{id}', [TransaksiController::class, 'strukMatrixIndividu'])->middleware('auth');
 Route::get('/transaksi/dokumen/struk_thermal_individu/{id}', [TransaksiController::class, 'strukThermalIndividu'])->middleware('auth');
-Route::get('/transaksi/dokumen/bkm_angsuran_individu/{id}', [TransaksiController::class, 'bkmAngsuranIndividu'])->middleware('auth');
 Route::post('/transaksi/dokumen/cetak', [TransaksiController::class, 'cetak'])->middleware('auth');
 
 Route::get('/transaksi/dokumen/struk/{id}', [TransaksiController::class, 'struk'])->middleware('auth');

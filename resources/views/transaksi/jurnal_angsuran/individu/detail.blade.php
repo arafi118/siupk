@@ -68,24 +68,19 @@
                         <ul class="dropdown-menu px-2 py-3" aria-labelledby="dropdownMenuButton">
                             <li>
                                 <a class="dropdown-item border-radius-md" target="_blank"
-                                    href="/transaksi/dokumen/struk/{{ $real_i->id }}">
+                                    href="/transaksi/dokumen/struk_individu/{{ $real_i->id }}">
                                     Kuitansi
                                 </a>
                             </li>
                             <li>
                                 <a class="dropdown-item border-radius-md" target="_blank"
-                                    href="/transaksi/dokumen/struk_matrix/{{ $real_i->id }}">
+                                    href="/transaksi/dokumen/struk_matrix_individu/{{ $real_i->id }}">
                                     Kuitansi Dot Matrix
                                 </a>
                             </li>
-                            <li>
-                                <a class="dropdown-item border-radius-md" target="_blank"
-                                    href="/transaksi/dokumen/struk_thermal/{{ $real_i->id }}">
-                                    Kuitansi Thermal
-                                </a>
-                            </li>
                         </ul>
-                        <button type="button" data-action="/transaksi/dokumen/kartu_angsuran_individu/{{ $idt }}"
+                        <button type="button"
+                            data-action="/perguliran_i/dokumen/kartu_angsuran/{{ $real_i->loan_id }}/{{ $real_i->id }}"
                             class="btn btn-github btn-icon-only btn-tooltip btn-link" data-bs-toggle="tooltip"
                             data-bs-placement="top" title="kartu angsuran" data-container="body" data-animation="true">
                             <span class="btn-inner--icon"><i class="fas fa-file-invoice"></i></span>

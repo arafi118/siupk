@@ -19,7 +19,7 @@
             </button>
         </div>
         <div class="col-md-3 d-grid">
-            <button type="button" data-action="/transaksi/dokumen/bkm_angsuran_individu/{{ $idt }}"
+            <button type="button" data-action="/transaksi/dokumen/bkm_angsuran/{{ $idt }}"
                 class="btn btn-instagram btn-tooltip btn-sm btn-link mb-2" data-bs-toggle="tooltip"
                 data-bs-placement="top" title="BKM" data-container="body" data-animation="true">
                 <span class="btn-inner--icon">
@@ -29,7 +29,7 @@
         </div>
         <div class="col-md-3 d-grid">
             <button type="button"
-                data-action="/perguliran/dokumen/kartu_angsuran_individu/{{ $id_pinkel }}/{{ $idtp }}"
+                data-action="/perguliran_i/dokumen/kartu_angsuran/{{ $id_pinkel }}/{{ $idtp }}"
                 class="btn btn-tumblr btn-tooltip btn-sm btn-link mb-2" data-bs-toggle="tooltip" data-bs-placement="top"
                 title="Cetak Pada Kartu Angsuran" data-container="body" data-animation="true">
                 <span class="btn-inner--icon">
