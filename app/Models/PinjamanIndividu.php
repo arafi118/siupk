@@ -51,12 +51,12 @@ class PinjamanIndividu extends Model
 
     public function ra_i()
     {
-        return $this->hasMany(RencanaAngsuran_i::class, 'loan_id')->orderBy('angsuran_ke', 'ASC');
+        return $this->hasMany(RencanaAngsuranI::class, 'loan_id')->orderBy('angsuran_ke', 'ASC');
     }
 
     public function real_i()
     {
-        return $this->hasMany(RealAngsuran_i::class, 'loan_id')->orderBy('tgl_transaksi', 'ASC')->orderBy('id', 'ASC');
+        return $this->hasMany(RealAngsuranI::class, 'loan_id')->orderBy('tgl_transaksi', 'ASC')->orderBy('id', 'ASC');
     }
 
     public function sis_pokok()
@@ -71,27 +71,27 @@ class PinjamanIndividu extends Model
 
     public function saldo()
     {
-        return $this->hasOne(RealAngsuran_i::class, 'loan_id')->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC');
+        return $this->hasOne(RealAngsuranI::class, 'loan_id')->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC');
     }
 
     public function saldo2()
     {
-        return $this->hasOne(RealAngsuran_i::class, 'loan_id')->orderBy('tgl_transaksi', 'ASC')->orderBy('id', 'ASC');
+        return $this->hasOne(RealAngsuranI::class, 'loan_id')->orderBy('tgl_transaksi', 'ASC')->orderBy('id', 'ASC');
     }
 
     public function target()
     {
-        return $this->hasOne(RencanaAngsuran_i::class, 'loan_id')->orderBy('jatuh_tempo', 'DESC');
+        return $this->hasOne(RencanaAngsuranI::class, 'loan_id')->orderBy('jatuh_tempo', 'DESC');
     }
 
     public function rencana()
     {
-        return $this->hasMany(RencanaAngsuran_i::class, 'loan_id')->orderBy('jatuh_tempo', 'ASC');
+        return $this->hasMany(RencanaAngsuranI::class, 'loan_id')->orderBy('jatuh_tempo', 'ASC');
     }
 
     public function rencana1()
     {
-        return $this->hasOne(RencanaAngsuran_i::class, 'loan_id')->orderBy('jatuh_tempo', 'ASC');
+        return $this->hasOne(RencanaAngsuranI::class, 'loan_id')->orderBy('jatuh_tempo', 'ASC');
     }
 
     public function trx()
