@@ -30,7 +30,7 @@
                 <th width="70">Tanda Tangan</th>
             </tr>
 
-            @foreach ($pinkel->pinjaman_anggota as $pa)
+            {{-- @foreach ($pinkel->pinjaman_anggota as $pa)
                 <tr>
                     <td align="center">{{ $loop->iteration }}.</td>
                     <td align="center">{{ $pa->anggota->nik }}</td>
@@ -42,13 +42,13 @@
                     </td>
                     <td>&nbsp;</td>
                 </tr>
-            @endforeach
+            @endforeach --}}
         </table>
     </div>
     <div style="text-align: justify;">
-        Selaku anggota pemanfaat dari Nama Kelompok {{ $pinkel->kelompok->nama_kelompok }} yang beralamatkan di
-        {{ $pinkel->kelompok->alamat_kelompok }} {{ $pinkel->kelompok->d->sebutan_desa->sebutan_desa }}
-        {{ $pinkel->kelompok->d->nama_desa }}.
+        Selaku anggota pemanfaat dari Nama Kelompok {{ $pinkel->anggota->nama_kelompok }} yang beralamatkan di
+        {{ $pinkel->anggota->alamat_kelompok }} {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }}
+        {{ $pinkel->anggota->d->nama_desa }}.
     </div>
     <div style="text-align: justify;">
         Dengan ini menyatakan, apabila terjadi tunggakan angsuran pinjaman {{ $pinkel->jpp->nama_jpp }}
@@ -74,8 +74,8 @@
             </li>
             <li>
                 Sanggup menerima sanksi dari {{ $kec->nama_lembaga_sort }} yang disepakati dalam forum Musyawarah Antar
-                {{ $pinkel->kelompok->d->sebutan_desa->sebutan_desa }}
-                (MA{{ strtoupper(substr($pinkel->kelompok->d->sebutan_desa->sebutan_desa, 0, 1)) }}) dan/atau penyelesaian
+                {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }}
+                (MA{{ strtoupper(substr($pinkel->anggota->d->sebutan_desa->sebutan_desa, 0, 1)) }}) dan/atau penyelesaian
                 secara hukum
                 yang berlaku, apabila kami ingkar terhadap pernyataan ini.
             </li>
@@ -100,23 +100,23 @@
         </tr>
         <tr>
             <td align="center">
-                {{ $pinkel->kelompok->d->sebutan_desa->sebutan_kades }} {{ $pinkel->kelompok->d->nama_desa }}
+                {{ $pinkel->anggota->d->sebutan_desa->sebutan_kades }} {{ $pinkel->anggota->d->nama_desa }}
             </td>
-            <td align="center">Ketua Kelompok {{ $pinkel->kelompok->nama_kelompok }}</td>
+            <td align="center">Ketua Kelompok {{ $pinkel->anggota->nama_kelompok }}</td>
         </tr>
         <tr>
             <td colspan="2" height="30"></td>
         </tr>
         <tr>
             <td align="center">
-                <b>{{ $pinkel->kelompok->d->kades }}</b>
-                @if ($pinkel->kelompok->d->nip)
-                    <div><small>NIP. {{ $pinkel->kelompok->d->nip }}</small></div>
+                <b>{{ $pinkel->anggota->d->kades }}</b>
+                @if ($pinkel->anggota->d->nip)
+                    <div><small>NIP. {{ $pinkel->anggota->d->nip }}</small></div>
                 @endif
             </td>
             <td align="center">
-                <b>{{ $pinkel->kelompok->ketua }}</b>
-                @if ($pinkel->kelompok->d->nip)
+                <b>{{ $pinkel->anggota->ketua }}</b>
+                @if ($pinkel->anggota->d->nip)
                     <div>&nbsp;</div>
                 @endif
             </td>

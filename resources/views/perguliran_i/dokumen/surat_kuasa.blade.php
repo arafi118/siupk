@@ -25,9 +25,9 @@
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
         <tr>
             <td colspan="4" align="justify">
-                Yang bertanda tangan di bawah ini, kami para anggota Kelompok {{ $pinkel->kelompok->nama_kelompok }} alamat
-                {{ $pinkel->kelompok->alamat_kelompok }} {{ $pinkel->kelompok->d->sebutan_desa->sebutan_desa }}
-                {{ $pinkel->kelompok->d->nama_desa }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }} {{ $nama_kabupaten }} :
+                Yang bertanda tangan di bawah ini, kami para anggota Kelompok {{ $pinkel->anggota->nama_kelompok }} alamat
+                {{ $pinkel->anggota->alamat_kelompok }} {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }}
+                {{ $pinkel->anggota->d->nama_desa }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }} {{ $nama_kabupaten }} :
             </td>
         </tr>
         <tr style="background: rgb(232, 232, 232)">
@@ -36,7 +36,7 @@
             <th class="b l t" width="80">Nik</th>
             <th class="b l t r">Alamat</th>
         </tr>
-
+        {{-- 
         @foreach ($pinkel->pinjaman_anggota as $pa)
             <tr>
                 <td height="15" class="l b" align="center">{{ $loop->iteration }}</td>
@@ -47,7 +47,7 @@
                     {{ $pa->anggota->d->nama_desa }}
                 </td>
             </tr>
-        @endforeach
+        @endforeach --}}
         <tr>
             <td colspan="4">
                 Memberikan kuasa sepenuhnya kepada pengurus kelompok :
@@ -61,26 +61,26 @@
         </tr>
         <tr>
             <td height="15" class="l b" align="center">1</td>
-            <td class="l b">{{ $pinkel->kelompok->ketua }}</td>
+            <td class="l b">{{ $pinkel->anggota->ketua }}</td>
             <td class="l b">Ketua</td>
             <td class="l b r">
-                {{ $pinkel->kelompok->alamat_kelompok }}
+                {{ $pinkel->anggota->alamat_kelompok }}
             </td>
         </tr>
         <tr>
             <td height="15" class="l b" align="center">2</td>
-            <td class="l b">{{ $pinkel->kelompok->sekretaris }}</td>
+            <td class="l b">{{ $pinkel->anggota->sekretaris }}</td>
             <td class="l b">Sekretaris</td>
             <td class="l b r">
-                {{ $pinkel->kelompok->alamat_kelompok }}
+                {{ $pinkel->anggota->alamat_kelompok }}
             </td>
         </tr>
         <tr>
             <td height="15" class="l b" align="center">3</td>
-            <td class="l b">{{ $pinkel->kelompok->bendahara }}</td>
+            <td class="l b">{{ $pinkel->anggota->bendahara }}</td>
             <td class="l b">Bendahara</td>
             <td class="l b r">
-                {{ $pinkel->kelompok->alamat_kelompok }}
+                {{ $pinkel->anggota->alamat_kelompok }}
             </td>
         </tr>
         <tr>
@@ -144,13 +144,13 @@
                     </tr>
                     <tr>
                         <td align="center" width="33%">
-                            {{ $pinkel->kelompok->ketua }}
+                            {{ $pinkel->anggota->ketua }}
                         </td>
                         <td align="center" width="33%">
-                            {{ $pinkel->kelompok->sekretaris }}
+                            {{ $pinkel->anggota->sekretaris }}
                         </td>
                         <td align="center" width="33%">
-                            {{ $pinkel->kelompok->bendahara }}
+                            {{ $pinkel->anggota->bendahara }}
                         </td>
                     </tr>
                     <tr>

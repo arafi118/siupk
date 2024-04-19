@@ -77,7 +77,7 @@
             <td>Nama</td>
             <td>:</td>
             <td>
-                <b>{{ $pinkel->kelompok->ketua }}</b>
+                <b>{{ $pinkel->anggota->ketua }}</b>
             </td>
         </tr>
         <tr>
@@ -92,8 +92,8 @@
             <td>:</td>
             <td>
                 <b>
-                    {{ $pinkel->kelompok->alamat_kelompok }} {{ $pinkel->kelompok->d->sebutan_desa->sebutan_desa }}
-                    {{ $pinkel->kelompok->d->nama_desa }}
+                    {{ $pinkel->anggota->alamat_anggota }} {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }}
+                    {{ $pinkel->anggota->d->nama_desa }}
                 </b>
             </td>
         </tr>
@@ -101,7 +101,7 @@
             <td colspan="3">
                 <p style="text-align: justify;">
                     Dalam hal ini bertindak untuk dan atas nama diri sendiri dan anggota-anggota kelompok peminjam
-                    {{ $pinkel->kelompok->nama_kelompok }} yang telah memberikan kuasa secara tertulis sebagaimana Surat
+                    {{ $pinkel->anggota->nama_kelompok }} yang telah memberikan kuasa secara tertulis sebagaimana Surat
                     Kuasa terlampir yang menjadi bagian tidak terpisahkan dari dokumen perjanjian iuran tanggung renteng
                     kematian ini, selanjutnya disebut Pihak Kedua
                 </p>
@@ -147,7 +147,7 @@
                 <b>{{ $dir->namadepan }} {{ $dir->namabelakang }}</b>
             </td>
             <td align="center">
-                <b>{{ $pinkel->kelompok->ketua }}</b>
+                <b>{{ $pinkel->anggota->ketua }}</b>
             </td>
         </tr>
     </table>

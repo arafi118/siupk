@@ -74,7 +74,7 @@ class Pinjaman
 
             $pinkel = $data['pinkel'];
             $kel = $pinkel->kelompok;
-            $desa = $pinkel->kelompok->d;
+            $desa = $pinkel->anggota->d;
 
             $ttd = strtr(json_decode($text, true), [
                 '{kepala_lembaga}' => $kec->sebutan_level_1,
@@ -82,9 +82,9 @@ class Pinjaman
                 '{kabag_keuangan}' => $kec->sebutan_level_3,
                 '{verifikator}' => $kec->nama_tv_long,
                 '{pengawas}' => $kec->nama_bp_long,
-                '{ketua}' => $kel->ketua,
-                '{sekretaris}' => $kel->sekretaris,
-                '{bendahara}' => $kel->bendahara,
+                '{ketua}' => $kec->ketua,
+                '{sekretaris}' => $kec->sekretaris,
+                '{bendahara}' => $kec->bendahara,
                 '{kades}' => $desa->kades,
                 '{nip}' => $desa->nip,
                 '{sekdes}' => $desa->sekdes,

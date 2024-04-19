@@ -82,7 +82,7 @@
         <tr>
             <td width="90">Nama Lengkap</td>
             <td width="10" align="center">:</td>
-            <td>{{ $pinkel->kelompok->ketua }}</td>
+            <td>{{ $pinkel->anggota->ketua }}</td>
         </tr>
         <tr>
             <td>Jabatan</td>
@@ -92,7 +92,7 @@
         <tr>
             <td>Nama Lengkap</td>
             <td align="center">:</td>
-            <td>{{ $pinkel->kelompok->sekretaris }}</td>
+            <td>{{ $pinkel->anggota->sekretaris }}</td>
         </tr>
         <tr>
             <td>Jabatan</td>
@@ -102,7 +102,7 @@
         <tr>
             <td>Nama Lengkap</td>
             <td align="center">:</td>
-            <td>{{ $pinkel->kelompok->bendahara }}</td>
+            <td>{{ $pinkel->anggota->bendahara }}</td>
         </tr>
         <tr>
             <td>Jabatan</td>
@@ -112,9 +112,9 @@
     </table>
 
     <div style="text-align: justify;">
-        Bertindak untuk dan atas nama kelompok {{ $pinkel->jpp->nama_jpp }} {{ $pinkel->kelompok->nama_kelompok }} yang
-        berkedudukan di {{ $pinkel->kelompok->alamat_kelompok }} {{ $pinkel->kelompok->d->sebutan_desa->sebutan_desa }}
-        {{ $pinkel->kelompok->d->nama_desa }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }}, dan beserta anggota yang
+        Bertindak untuk dan atas nama kelompok {{ $pinkel->jpp->nama_jpp }} {{ $pinkel->anggota->nama_kelompok }} yang
+        berkedudukan di {{ $pinkel->anggota->alamat_kelompok }} {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }}
+        {{ $pinkel->anggota->d->nama_desa }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }}, dan beserta anggota yang
         memberikan kuasa secara tertulis sebagaimana Surat Kuasa terlampir sebagai bagian yang tidak terpisahkan dari
         dokumen perjanjian kredit ini, selanjutnya disebut PIHAK KEDUA.
     </div>
@@ -157,11 +157,11 @@
                     Dana Pinjaman dari {{ $kec->nama_lembaga_sort }} akan dipergunakan untuk kegiatan usaha
                     dan/atau pembiayaan hal-hal yang bermanfaat untuk meningkatkan pendapatan dan mutu kehidupan
                     keluarga guna memberikan manfaat sebesar-besarnya bagi pertumbuhan ekonomi dan kesejahteraan
-                    keluarga pengurus dan anggota kelompok {{ $pinkel->kelompok->nama_kelompok }}.
+                    keluarga pengurus dan anggota kelompok {{ $pinkel->anggota->nama_kelompok }}.
                 </li>
                 <li>
                     Menjunjung tinggi dan ikut menyepakati hasil Musyawarah antara Desa yang telah menetapkan pinjaman
-                    kelompok sebagaimana kelompok {{ $pinkel->kelompok->nama_kelompok }} adalah termasuk dalam kategori
+                    kelompok sebagaimana kelompok {{ $pinkel->anggota->nama_kelompok }} adalah termasuk dalam kategori
                     kelompok yang sepakat memberikan dukungan operasional dan pengembangan kepada
                     {{ $kec->nama_lembaga_sort }} secara progresif proporsional berupa jasa pinjaman sebesar
                     {{ $pinkel->pros_jasa / $pinkel->jangka }}% {{ $pinkel->jasa->nama_jj }} per-bulan dikalikan pokok

@@ -50,14 +50,14 @@
             <td align="left" width="140">
                 <div>KEPADA YTH.</div>
                 <div style="font-weight: bold;">
-                    {{ $pinkel->kelompok->d->sebutan_desa->sebutan_kades }} {{ $pinkel->kelompok->d->nama_desa }}
+                    {{ $pinkel->anggota->d->sebutan_desa->sebutan_kades }} {{ $pinkel->anggota->d->nama_desa }}
                 </div>
                 <div style="font-weight: bold;">
                     {{ $kec->sebutan_kec }} {{ $kec->nama_kec }}
                 </div>
                 <div style="font-weight: bold;">Di</div>
                 <div style="font-weight: bold; text-align: center;">
-                    {{ strtoupper($pinkel->kelompok->d->nama_desa) }} {{ strtoupper($kec->nama_kec) }}
+                    {{ strtoupper($pinkel->anggota->d->nama_desa) }} {{ strtoupper($kec->nama_kec) }}
                 </div>
             </td>
         </tr>
@@ -78,15 +78,15 @@
                         <td width="10">1.</td>
                         <td width="120">Nama Kelompok</td>
                         <td width="5">:</td>
-                        <td>{{ $pinkel->kelompok->nama_kelompok }}</td>
+                        <td>{{ $pinkel->anggota->nama_kelompok }}</td>
                     </tr>
                     <tr>
                         <td>2.</td>
                         <td>Alamat</td>
                         <td>:</td>
                         <td>
-                            {{ $pinkel->kelompok->alamat_kelompok }}
-                            {{ $pinkel->kelompok->d->sebutan_desa->sebutan_kades }} {{ $pinkel->kelompok->d->nama_desa }}
+                            {{ $pinkel->anggota->alamat_kelompok }}
+                            {{ $pinkel->anggota->d->sebutan_desa->sebutan_kades }} {{ $pinkel->anggota->d->nama_desa }}
                         </td>
                     </tr>
                     <tr>

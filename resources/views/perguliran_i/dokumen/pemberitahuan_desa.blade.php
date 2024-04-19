@@ -44,14 +44,14 @@
             <td align="left" width="140">
                 <div>KEPADA YTH.</div>
                 <div style="font-weight: bold;">
-                    {{ $pinkel->kelompok->d->sebutan_desa->sebutan_kades }} {{ $pinkel->kelompok->d->nama_desa }}
+                    {{ $pinkel->anggota->d->sebutan_desa->sebutan_kades }} {{ $pinkel->anggota->d->nama_desa }}
                 </div>
                 <div style="font-weight: bold;">
                     {{ $kec->sebutan_kec }} {{ $kec->nama_kec }}
                 </div>
                 <div style="font-weight: bold;">Di</div>
                 <div style="font-weight: bold; text-align: center;">
-                    {{ strtoupper($pinkel->kelompok->d->nama_desa) }}
+                    {{ strtoupper($pinkel->anggota->d->nama_desa) }}
                 </div>
             </td>
         </tr>
@@ -72,16 +72,16 @@
                         <td width="10">1.</td>
                         <td width="120">Nama Kelompok</td>
                         <td width="5">:</td>
-                        <td>{{ $pinkel->kelompok->nama_kelompok }}</td>
+                        <td>{{ $pinkel->anggota->nama_kelompok }}</td>
                     </tr>
                     <tr>
                         <td>2.</td>
                         <td>Alamat</td>
                         <td>:</td>
                         <td>
-                            {{ ucwords(strtolower($pinkel->kelompok->alamat_kelompok)) }}
-                            {{ ucwords(strtolower($pinkel->kelompok->d->sebutan_desa->sebutan_desa)) }}
-                            {{ ucwords(strtolower($pinkel->kelompok->d->nama_desa)) }}
+                            {{ ucwords(strtolower($pinkel->anggota->alamat_kelompok)) }}
+                            {{ ucwords(strtolower($pinkel->anggota->d->sebutan_desa->sebutan_desa)) }}
+                            {{ ucwords(strtolower($pinkel->anggota->d->nama_desa)) }}
                         </td>
                     </tr>
                     <tr>
@@ -113,14 +113,14 @@
                         <th class="t l b r" width="80">Alokasi (Rp)</th>
                     </tr>
 
-                    @foreach ($pinkel->pinjaman_anggota as $pa)
+                    {{-- @foreach ($pinkel->pinjaman_anggota as $pa)
                         <tr>
                             <td class="t l b" align="center">{{ $loop->iteration }}</td>
                             <td class="t l b">{{ $pa->anggota->namadepan }}</td>
                             <td class="t l b">{{ $pa->anggota->alamat }}</td>
                             <td class="t l b r" align="right">{{ number_format($pa->alokasi) }}</td>
                         </tr>
-                    @endforeach
+                    @endforeach --}}
                 </table>
             </td>
         </tr>

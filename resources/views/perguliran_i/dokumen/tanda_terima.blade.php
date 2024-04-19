@@ -68,7 +68,7 @@
         @php
             $alokasi = 0;
         @endphp
-        @foreach ($pinkel->pinjaman_anggota as $pa)
+        {{-- @foreach ($pinkel->pinjaman_anggota as $pa)
             @php
                 $no = $loop->iteration;
             @endphp
@@ -84,7 +84,7 @@
             @php
                 $alokasi += $pa->alokasi;
             @endphp
-        @endforeach
+        @endforeach --}}
 
         <tr>
             <td colspan="7" style="padding: 0px !important;">
@@ -130,7 +130,7 @@
                     </tr>
                     <tr style="font-weight: bold;">
                         <td align="center">{{ $dir->namadepan }} {{ $dir->namabelakang }}</td>
-                        <td align="center">{{ $pinkel->kelompok->ketua }}</td>
+                        <td align="center">{{ $pinkel->anggota->ketua }}</td>
                     </tr>
                 </table>
             </td>

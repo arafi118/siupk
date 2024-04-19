@@ -1654,7 +1654,7 @@ class PinjamanIndividuController extends Controller
             'anggota',
             'anggota.d',
             'anggota.d.sebutan_desa'
-        ])->withCount('pinjaman_anggota')->first();
+        ])->first();
 
         $data['dir'] = User::where([
             ['level', '1'],
@@ -1682,11 +1682,7 @@ class PinjamanIndividuController extends Controller
             'anggota',
             'anggota.d',
             'anggota.d.sebutan_desa',
-            'pinjaman_anggota',
-            'pinjaman_anggota.anggota',
-            'pinjaman_anggota.anggota.d',
-            'pinjaman_anggota.anggota.d.sebutan_desa',
-        ])->withCount('pinjaman_anggota')->first();
+        ])->first();
 
         $data['judul'] = 'Surat Kuasa (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
         $view = view('perguliran_i.dokumen.surat_kuasa', $data)->render();
@@ -1736,9 +1732,7 @@ class PinjamanIndividuController extends Controller
             'jpp',
             'anggota',
             'anggota.d',
-            'anggota.d.sebutan_desa',
-            'pinjaman_anggota',
-            'pinjaman_anggota.anggota'
+            'anggota.d.sebutan_desa'
         ])->first();
 
         $data['judul'] = 'Daftar Hadir Pencairan (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
@@ -1895,9 +1889,7 @@ class PinjamanIndividuController extends Controller
         $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
             'anggota',
             'anggota.d',
-            'anggota.d.sebutan_desa',
-            'pinjaman_anggota',
-            'pinjaman_anggota.anggota'
+            'anggota.d.sebutan_desa'
         ])->first();
 
         $data['dir'] = User::where([
@@ -1952,10 +1944,10 @@ class PinjamanIndividuController extends Controller
             'anggota',
             'anggota.d',
             'anggota.d.sebutan_desa',
-            'pinjaman_anggota',
-            'pinjaman_anggota.anggota',
-            'pinjaman_anggota.anggota.d',
-            'pinjaman_anggota.anggota.d.sebutan_desa',
+            // 'pinjaman_anggota',
+            // 'pinjaman_anggota.anggota',
+            // 'pinjaman_anggota.anggota.d',
+            // 'pinjaman_anggota.anggota.d.sebutan_desa',
         ])->first();
 
         $data['judul'] = 'Pernyataan Tanggung Renteng (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
@@ -2097,7 +2089,7 @@ class PinjamanIndividuController extends Controller
             'pinjaman_anggota.anggota.keluarga',
             'pinjaman_anggota.anggota.d',
             'pinjaman_anggota.anggota.d.sebutan_desa',
-        ])->withCount('pinjaman_anggota')->first();
+        ])->first();
 
         $data['judul'] = 'Surat Ahli Waris (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
         $view = view('perguliran_i.dokumen.surat_ahli_waris', $data)->render();

@@ -34,7 +34,7 @@
         <tr>
             <td width="70">Nomor Proposal</td>
             <td align="center" width="5">:</td>
-            <td width="150"><b>{{ $pinkel->kelompok->kd_kelompok }} - {{ $pinkel->id }}</b></td>
+            <td width="150"><b>{{ $pinkel->anggota->kd_kelompok }} - {{ $pinkel->id }}</b></td>
             <td width="70">Tanggal</td>
             <td align="center" width="5">:</td>
             <td width="150">
@@ -44,7 +44,7 @@
         <tr>
             <td>Kelompok</td>
             <td align="center">:</td>
-            <td><b>{{ $pinkel->kelompok->nama_kelompok }}</b></td>
+            <td><b>{{ $pinkel->anggota->nama_kelompok }}</b></td>
             <td>Waktu</td>
             <td align="center">:</td>
             <td>
@@ -52,9 +52,9 @@
             </td>
         </tr>
         <tr>
-            <td>{{ $pinkel->kelompok->d->sebutan_desa->sebutan_desa }}/Kecamatan</td>
+            <td>{{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }}/Kecamatan</td>
             <td align="center">:</td>
-            <td><b>{{ $pinkel->kelompok->d->nama_desa }} / {{ $kec->nama_kec }}</b></td>
+            <td><b>{{ $pinkel->anggota->d->nama_desa }} / {{ $kec->nama_kec }}</b></td>
             <td>Tempat</td>
             <td align="center">:</td>
             <td>
@@ -73,7 +73,7 @@
             <th align="center">Alamat</th>
             <th width="80" align="center">Tanda Tangan</th>
         </tr>
-        @foreach ($pinkel->pinjaman_anggota as $pa)
+        {{-- @foreach ($pinkel->pinjaman_anggota as $pa)
             @php
                 $no = $loop->iteration;
             @endphp
@@ -84,7 +84,7 @@
                 <td>{{ $pa->anggota->alamat }}</td>
                 <td>{{ $no }}.</td>
             </tr>
-        @endforeach
+        @endforeach --}}
 
         @for ($i = $no + 1; $i <= 25; $i++)
             <tr>
@@ -106,7 +106,7 @@
         </tr>
         <tr>
             <td>&nbsp;</td>
-            <td align="center">Ketua Kelompok {{ $pinkel->kelompok->nama_kelompok }}</td>
+            <td align="center">Ketua Kelompok {{ $pinkel->anggota->nama_kelompok }}</td>
         </tr>
         <tr>
             <td colspan="2" height="40">&nbsp;</td>
@@ -115,7 +115,7 @@
             <td>&nbsp;</td>
             <td align="center">
                 <u>
-                    <b>{{ $pinkel->kelompok->ketua }}</b>
+                    <b>{{ $pinkel->anggota->ketua }}</b>
                 </u>
             </td>
         </tr>
