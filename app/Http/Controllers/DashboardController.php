@@ -7,6 +7,7 @@ use App\Models\AkunLevel1;
 use App\Models\Desa;
 use App\Models\Kecamatan;
 use App\Models\PinjamanAnggota;
+use App\Models\PinjamanIndividu;
 use App\Models\PinjamanKelompok;
 use App\Models\RealAngsuran;
 use App\Models\Rekening;
@@ -95,7 +96,7 @@ class DashboardController extends Controller
         $data['saldo'] = $this->_saldo($tgl);
         $data['jumlah_saldo'] = Saldo::where('kode_akun', 'NOT LIKE', $kec->kd_kec . '%')->count();
 
-        $data['api'] = env('APP_API', 'https://api-whatsapp.sidbm.net');
+        $data['api'] = env('APP_API', 'https://api-whatsapp.siupk.net');
         $data['title'] = "Dashboard";
         return view('dashboard.index')->with($data);
     }
@@ -502,9 +503,19 @@ class DashboardController extends Controller
 
     public function tagihan(Request $request)
     {
+        $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
+        $pesan_wa = json_decode($kec->whatsapp, true);
+
         $tanggal = Tanggal::tglNasional($request->tgl_tagihan);
         $tgl_bayar = Tanggal::tglNasional($request->tgl_pembayaran);
-        $pesan = $request->pesan_whatsapp;
+        $pesan = $pesan_wa['tagihan'];
+
+        $pesan = strtr($pesan, [
+            '{Tanggal Jatuh Tempo}' => $request->tgl_tagihan,
+            '{Tanggal Bayar}' => $request->tgl_pembayaran,
+            '{User Login}' => auth()->user()->namadepan . ' ' . auth()->user()->namabelakang,
+            '{Telpon}' => auth()->user()->hp
+        ]);
 
         $pinjaman = PinjamanKelompok::where('status', 'A')->whereDay('tgl_cair', date('d', strtotime($tanggal)))->with([
             'target' => function ($query) use ($tanggal) {
