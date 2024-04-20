@@ -50,14 +50,12 @@
                             <span class="text-sm">Logo</span>
                         </a>
                     </li>
-                    @if (auth()->user()->level == '1' && auth()->user()->jabatan == '1')
-                        <li class="nav-item pt-2">
-                            <a class="nav-link text-dark d-flex" id="ScanWA" data-scroll="" href="#">
-                                <i class="material-icons text-lg me-2">priority_high</i>
-                                <span class="text-sm">Whatsapp</span>
-                            </a>
-                        </li>
-                    @endif
+                    <li class="nav-item pt-2">
+                        <a class="nav-link text-dark d-flex" data-scroll="" href="#whatsapp">
+                            <i class="material-icons text-lg me-2">priority_high</i>
+                            <span class="text-sm">Whatsapp</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -109,6 +107,14 @@
                 </div>
                 <div class="card-body pt-0">
                     @include('sop.partials._logo')
+                </div>
+            </div>
+            <div class="card mt-4" id="whatsapp">
+                <div class="card-header">
+                    <h5 class="mb-0">Pengaturan Whatsapp</h5>
+                </div>
+                <div class="card-body pt-0">
+                    @include('sop.partials._whatsapp')
                 </div>
             </div>
         </div>
@@ -174,7 +180,7 @@
 
             Swal.fire({
                 title: 'Peringatan',
-                text: 'Kami selaku tim pengembang aplikasi SI UPK Online tidak bertanggung jawab jika terjadi sesuatu pada nomor anda ke depannya.',
+                text: 'Kami selaku tim pengembang aplikasi SIDBM tidak bertanggung jawab jika terjadi sesuatu pada nomor anda ke depannya.',
                 showCancelButton: true,
                 confirmButtonText: 'Lanjutkan',
                 cancelButtonText: 'Batal',

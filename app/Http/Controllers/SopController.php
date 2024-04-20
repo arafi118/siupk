@@ -21,10 +21,10 @@ class SopController extends Controller
 {
     public function index()
     {
-        $api = env('APP_API', 'https://api-whatsapp.sidbm.net');
+        $api = env('APP_API', 'https://api-whatsapp.siupk.net');
 
         $kec = Kecamatan::where('id', Session::get('lokasi'))->with('ttd')->first();
-        $token = str_replace('.', '', $kec->kd_kec) . str_replace('-', '', $kec->tgl_pakai);
+        $token = "SIUPK-" . str_replace('.', '', $kec->kd_kec) . '-' . str_pad($kec->id, 4, '0', STR_PAD_LEFT);
 
         $title = "Personalisasi SOP";
         return view('sop.index')->with(compact('title', 'kec', 'api', 'token'));
@@ -444,6 +444,41 @@ class SopController extends Controller
         return response()->json([
             'success' => true,
             'msg' => 'Pengaturan CALK Berhasil Diperbarui.',
+        ]);
+    }
+
+    public function pesanWhatsapp(Request $request, Kecamatan $kec)
+    {
+        if ($kec->id != Session::get('lokasi')) {
+            abort(404);
+        }
+
+        $data = $request->only([
+            'tagihan',
+            'angsuran'
+        ]);
+
+        $validate = Validator::make($data, [
+            'tagihan' => 'required',
+            'angsuran' => 'required',
+        ]);
+
+        if ($validate->fails()) {
+            return response()->json($validate->errors(), Response::HTTP_MOVED_PERMANENTLY);
+        }
+
+        $wa = [
+            'tagihan' => $data['tagihan'],
+            'angsuran' => $data['angsuran']
+        ];
+
+        Kecamatan::where('id', $kec->id)->update([
+            'whatsapp' => $wa
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'msg' => 'Pengaturan Pesan Whatsapp Berhasil Diperbarui.',
         ]);
     }
 
