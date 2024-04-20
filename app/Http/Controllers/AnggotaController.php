@@ -352,7 +352,7 @@ class AnggotaController extends Controller
             'msg' => $msg
         ]);
     }
-    
+
     public function detailAnggota($id)
     {
         $nia = PinjamanIndividu::where('id', $id)->with([
@@ -366,9 +366,8 @@ class AnggotaController extends Controller
         ])->firstOrFail();
 
         return [
-            'label' => 'Detail Anggota ' . $nia->anggota->namadepan,
+            'label' => 'Detail Pemanfaat Atas Nama ' . $nia->anggota->namadepan,
             'view' => view('penduduk.detail_individu')->with(compact('nia'))->render()
         ];
     }
-
 }

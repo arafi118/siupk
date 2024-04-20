@@ -340,14 +340,6 @@
                         makeChart('jasa', ch_jasa, result.sisa_jasa, result.sum_jasa)
 
                         $('#loan-id').html(item.id)
-
-                        var id = $('#id').val()
-                        $.get('/transaksi/angsuran/form_anggota_i/' + id, function(result) {
-                            if (result.success) {
-                                $('#LayoutAngsuranAnggota').html(result.view)
-                                $('#AngsuranAnggotaLabel').text(result.title)
-                            }
-                        })
                     })
                 } else {
                     window.location.href = '/transaksi/jurnal_angsuran_individu?pinkel=' + item.id

@@ -3,8 +3,8 @@
     use App\Models\RencanaAngsuran;
 
     $rowspan = 19;
-    if ($nia->real_count > 16) {
-        $rowspan = $nia->real_count + 3;
+    if ($nia->real_i_count > 16) {
+        $rowspan = $nia->real_i_count + 3;
     }
 @endphp
 

@@ -12,10 +12,10 @@ use App\Models\PinjamanAnggota;
 use App\Models\PinjamanKelompok;
 use App\Models\PinjamanIndividu;
 use App\Models\RealAngsuran;
-use App\Models\RealAngsuran_i;
+use App\Models\RealAngsuranI;
 use App\Models\Rekening;
 use App\Models\RencanaAngsuran;
-use App\Models\RencanaAngsuran_i;
+use App\Models\RencanaAngsuranI;
 use App\Models\Saldo;
 use App\Models\Transaksi;
 use App\Models\User;
@@ -65,7 +65,7 @@ class TransaksiController extends Controller
         $api = env('APP_API', 'https://api-whatsapp.sidbm.net');
         return view('transaksi.jurnal_angsuran.index')->with(compact('title', 'pinkel', 'kec', 'api'));
     }
-    
+
     public function jurnalAngsuranIndividu()
     {
         $title = 'Jurnal Angsuran';
@@ -1200,8 +1200,8 @@ class TransaksiController extends Controller
                     'rekening_debit' => (string) $kas_umum,
                     'rekening_kredit' => (string) $jasa_kredit,
                     'idtp' => $idtp,
-                    'id_pinj' => $pinj_a->id,
-                    'id_pinj_i' => '0',
+                    'id_pinj' => '0',
+                    'id_pinj_i' => $pinj_a->id,
                     'keterangan_transaksi' => (string) 'Angs. individu (J) ' . $pinj_a->anggota->namadepan . ' (' . $pinj_a->id . ')' . ' [' . $pinj_a->anggota->d->nama_desa . ']',
                     'relasi' => (string) $pinj_a->anggota->namadepan,
                     'jumlah' => str_replace(',', '', str_replace('.00', '', $request->jasa)),
@@ -1216,8 +1216,8 @@ class TransaksiController extends Controller
                     'rekening_debit' => (string) $kas_umum,
                     'rekening_kredit' => (string) $dend_kredit,
                     'idtp' => $idtp,
-                    'id_pinj' => $pinj_a->id,
-                    'id_pinj_i' => '0',
+                    'id_pinj' => '0',
+                    'id_pinj_i' => $pinj_a->id,
                     'keterangan_transaksi' => (string) 'Denda. Individu ' . $pinj_a->anggota->namadepan . ' (' . $pinj_a->id . ')' . ' [' . $pinj_a->anggota->d->nama_desa . ']',
                     'relasi' => (string) $pinj_a->anggota->namadepan,
                     'jumlah' => str_replace(',', '', str_replace('.00', '', $request->denda)),
@@ -1277,14 +1277,16 @@ class TransaksiController extends Controller
                 }
             }
 
-            RealAngsuran_i::insert($real_angsuran);
+            RealAngsuranI::insert($real_angsuran);
             DB::commit();
 
             $whatsapp = false;
             $pesan = '';
-            if (strlen($pinj_a->anggota->hp) >= 11 && strlen(auth()->user()->hp) >= 11 &&
-            (Keuangan::startWith($pinj_a->anggota->hp, '08') ||
-            Keuangan::startWith($pinj_a->anggota->hp, '628'))) {
+            if (
+                strlen($pinj_a->anggota->hp) >= 11 && strlen(auth()->user()->hp) >= 11 &&
+                (Keuangan::startWith($pinj_a->anggota->hp, '08') ||
+                    Keuangan::startWith($pinj_a->anggota->hp, '628'))
+            ) {
 
                 $nama_kelompok = $pinj_a->anggota->namadepan;
                 $desa = $pinj_a->anggota->d->sebutan_desa->sebutan_desa . ' ' . $pinj_a->anggota->d->nama_desa;
@@ -1302,7 +1304,7 @@ class TransaksiController extends Controller
 
             return response()->json([
                 'success' => true,
-                'msg' => 'Angsuran ' . $pinj_a->anggota->namadepan. ' [' . $pinj_a->anggota->d->nama_desa . '] berhasil diposting',
+                'msg' => 'Angsuran ' . $pinj_a->anggota->namadepan . ' [' . $pinj_a->anggota->d->nama_desa . '] berhasil diposting',
                 'id_pinj_i' => $pinj_a->id,
                 'idtp' => $idtp,
                 'tgl_transaksi' => $tgl_transaksi,
@@ -1331,13 +1333,13 @@ class TransaksiController extends Controller
             'view' => $view
         ]);
     }
-    
+
     public function notifikasiIndividu($idtp)
     {
         $trx = Transaksi::where('idtp', $idtp)->first();
-        $view = view('transaksi.jurnal_angsuran.partials.notif', [
+        $view = view('transaksi.jurnal_angsuran.partials.notif_individu', [
             'idtp' => $idtp,
-            'id_pinj_i' => $trx->id_pinj_i,
+            'id_pinkel' => $trx->id_pinj_i,
             'idt' => $trx->idt
         ])->render();
 
@@ -1662,14 +1664,14 @@ class TransaksiController extends Controller
                 $query->where('jatuh_tempo', '<=', date('Y-m-t'));
             }
         ])->firstOrFail();
-        $real = RealAngsuran_i::where([
+        $real = RealAngsuranI::where([
             ['loan_id', $id_pinkel],
             ['tgl_transaksi', '<=', date('Y-m-d')]
         ])->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC');
 
         $alokasi_jasa = $pinkel->alokasi * ($pinkel->pros_jasa / 100);
 
-       
+
         $alokasi_jasa = $pinkel->alokasi * ($pinkel->pros_jasa / 100);
 
         if ($real->count() > 0) {
@@ -2060,6 +2062,30 @@ class TransaksiController extends Controller
         return view('transaksi.jurnal_angsuran.dokumen.struk', $data);
     }
 
+    public function strukIndividu($id)
+    {
+        $data['real'] = RealAngsuranI::where('id', $id)->with('trx', 'trx.user')->firstOrFail();
+        $data['ra'] = RencanaAngsuranI::where([
+            ['loan_id', $data['real']->loan_id]
+        ])->orderBy('jatuh_tempo', 'DESC')->first();
+        $data['ra_bulan_ini'] = RencanaAngsuranI::where([
+            ['loan_id', $data['real']->loan_id],
+            ['jatuh_tempo', '<=', date('Y-m-t', strtotime($data['real']->tgl_transaksi))],
+        ])->orderBy('jatuh_tempo', 'DESC')->first();
+        $data['pinkel'] = PinjamanIndividu::where('id', $data['real']->loan_id)->with([
+            'anggota',
+            'anggota.d',
+            'anggota.d.sebutan_desa',
+            'jpp',
+            'sis_pokok'
+        ])->first();
+        $data['user'] = User::where('id', $data['real']->id_user)->first();
+        $data['kec'] = Kecamatan::where('id', Session::get('lokasi'))->with('kabupaten')->first();
+        $data['keuangan'] = new Keuangan;
+
+        return view('transaksi.jurnal_angsuran.individu.dokumen.struk', $data);
+    }
+
     public function strukMatrix($id)
     {
         $data['real'] = RealAngsuran::where('id', $id)->with('trx', 'trx.user')->firstOrFail();
@@ -2086,6 +2112,30 @@ class TransaksiController extends Controller
         $data['keuangan'] = new Keuangan;
 
         return view('transaksi.jurnal_angsuran.dokumen.struk_matrix', $data);
+    }
+
+    public function strukMatrixIndividu($id)
+    {
+        $data['real'] = RealAngsuranI::where('id', $id)->with('trx', 'trx.user')->firstOrFail();
+        $data['ra'] = RencanaAngsuranI::where([
+            ['loan_id', $data['real']->loan_id]
+        ])->orderBy('jatuh_tempo', 'DESC')->first();
+        $data['ra_bulan_ini'] = RencanaAngsuranI::where([
+            ['loan_id', $data['real']->loan_id],
+            ['jatuh_tempo', '<=', date('Y-m-t', strtotime($data['real']->tgl_transaksi))],
+        ])->orderBy('jatuh_tempo', 'DESC')->first();
+        $data['pinkel'] = PinjamanIndividu::where('id', $data['real']->loan_id)->with([
+            'anggota',
+            'anggota.d',
+            'anggota.d.sebutan_desa',
+            'jpp',
+            'sis_pokok'
+        ])->first();
+        $data['user'] = User::where('id', $data['real']->id_user)->first();
+        $data['kec'] = Kecamatan::where('id', Session::get('lokasi'))->with('kabupaten')->first();
+        $data['keuangan'] = new Keuangan;
+
+        return view('transaksi.jurnal_angsuran.individu.dokumen.struk_matrix', $data);
     }
 
     public function strukThermal($id)
@@ -2446,7 +2496,7 @@ class TransaksiController extends Controller
         $data['laporan'] = 'LPP Kelompok ' . $data['pinkel']->kelompok->nama_kelompok;
         return view('transaksi.jurnal_angsuran.dokumen.lpp', $data);
     }
-    
+
     public function lppIndividu($id)
     {
         $data['bulan'] = date('Y-m-t');
@@ -2464,7 +2514,7 @@ class TransaksiController extends Controller
 
         $tb_ra = 'rencana_angsuran_i_' . $data['kec']->id;
         $tb_real = 'real_angsuran_i_' . $data['kec']->id;
-        $data['rencana'] = RencanaAngsuran_i::select(
+        $data['rencana'] = RencanaAngsuranI::select(
             '*',
             DB::raw('(SELECT sum(realisasi_pokok) as rp FROM ' . $tb_real . ' WHERE ' . $tb_real . '.loan_id=' . $id . ' AND ' . $tb_real . '.tgl_transaksi<=' . $tb_ra . '.jatuh_tempo) as sum_pokok'),
             DB::raw('(SELECT sum(realisasi_jasa) as rj FROM ' . $tb_real . ' WHERE ' . $tb_real . '.loan_id=' . $id . ' AND ' . $tb_real . '.tgl_transaksi<=' . $tb_ra . '.jatuh_tempo) as sum_jasa')

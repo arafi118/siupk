@@ -36,41 +36,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/master', [AdminAuthController::class, 'index'])->middleware('guest');
-Route::post('/master/login', [AdminAuthController::class, 'login'])->middleware('guest');
-
-Route::group(['prefix' => 'master', 'as' => 'master.', 'middleware' => 'master'], function () {
-    Route::get('/dashboard', [AdminController::class, 'index']);
-    Route::get('/simpan_saldo', [DashboardController::class, 'simpanSaldo']);
-
-    Route::get('/kecamatan/{kd_prov}/{kd_kab}/{kd_kec}', [AdminController::class, 'kecamatan']);
-
-    Route::resource('/users', AdminUserController::class);
-
-    Route::get('/laporan', [AdminController::class, 'laporan']);
-
-    Route::get('/buat_invoice', [InvoiceController::class, 'index']);
-    Route::get('/nomor_invoice', [InvoiceController::class, 'InvoiceNo']);
-    Route::get('/jumlah_tagihan', [InvoiceController::class, 'Tagihan']);
-
-    Route::get('/unpaid', [InvoiceController::class, 'Unpaid']);
-    Route::get('/{invoice}/unpaid', [InvoiceController::class, 'DetailUnpaid']);
-
-    Route::get('/paid', [InvoiceController::class, 'Paid']);
-    Route::get('/{invoice}/paid', [InvoiceController::class, 'DetailPaid']);
-
-    Route::post('/buat_invoice', [InvoiceController::class, 'store']);
-    Route::put('/{invoice}/simpan', [InvoiceController::class, 'simpan']);
-
-    Route::resource('/menu', MenuController::class);
-
-    Route::get('/migrasi_upk/server/{server}', [UpkController::class, 'Server']);
-
-    Route::resource('/migrasi_upk', UpkController::class);
-
-    Route::post('/logout', [AdminAuthController::class, 'logout']);
-});
-
 Route::get('/kab', [KabupatenAuthController::class, 'index'])->middleware('guest');
 Route::post('/kab/login', [KabupatenAuthController::class, 'login'])->middleware('guest');
 
@@ -219,11 +184,6 @@ Route::post('/perguliran_i/dokumen', [PinjamanIndividuController::class, 'dokume
 
 Route::post('/perguliran_i/kembali_proposal/{id}', [PinjamanIndividuController::class, 'kembaliProposal'])->middleware('auth');
 
-
-
-
-
-
 Route::get('/pinjaman_anggota/register/{id_pinkel}', [PinjamanAnggotaController::class, 'create'])->middleware('auth');
 Route::get('/pinjaman_anggota/cari_pemanfaat', [PinjamanAnggotaController::class, 'cariPemanfaat'])->middleware('auth');
 Route::get('/hapus_pemanfaat/{id}', [PinjamanAnggotaController::class, 'hapus'])->middleware('auth');
@@ -279,12 +239,16 @@ Route::get('/transaksi/angsuran/form_anggota_i/{id_pinkel}', [TransaksiControlle
 Route::get('/angsuran/notifikasi/{idtp}', [TransaksiController::class, 'notifikasi'])->middleware('auth');
 Route::get('/angsuran/notifikasi_i/{idtp}', [TransaksiController::class, 'notifikasiIndividu'])->middleware('auth');
 
-
 Route::get('/transaksi/dokumen/kuitansi/{id}', [TransaksiController::class, 'kuitansi'])->middleware('auth');
 Route::get('/transaksi/dokumen/kuitansi_thermal/{id}', [TransaksiController::class, 'kuitansi_thermal'])->middleware('auth');
 Route::get('/transaksi/dokumen/bkk/{id}', [TransaksiController::class, 'bkk'])->middleware('auth');
 Route::get('/transaksi/dokumen/bkm/{id}', [TransaksiController::class, 'bkm'])->middleware('auth');
 Route::get('/transaksi/dokumen/bm/{id}', [TransaksiController::class, 'bm'])->middleware('auth');
+
+Route::get('/transaksi/dokumen/struk_individu/{id}', [TransaksiController::class, 'strukIndividu'])->middleware('auth');
+Route::get('/transaksi/dokumen/struk_matrix_individu/{id}', [TransaksiController::class, 'strukMatrixIndividu'])->middleware('auth');
+Route::get('/transaksi/dokumen/struk_thermal_individu/{id}', [TransaksiController::class, 'strukThermalIndividu'])->middleware('auth');
+Route::post('/transaksi/dokumen/cetak', [TransaksiController::class, 'cetak'])->middleware('auth');
 
 Route::get('/transaksi/dokumen/struk/{id}', [TransaksiController::class, 'struk'])->middleware('auth');
 Route::get('/transaksi/dokumen/struk_matrix/{id}', [TransaksiController::class, 'strukMatrix'])->middleware('auth');

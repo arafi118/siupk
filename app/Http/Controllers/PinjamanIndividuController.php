@@ -9,9 +9,9 @@ use App\Models\JenisProdukPinjaman;
 use App\Models\Kecamatan;
 use App\Models\PinjamanAnggota;
 use App\Models\PinjamanIndividu;
-use App\Models\RealAngsuran_i;
+use App\Models\RealAngsuranI;
 use App\Models\Rekening;
-use App\Models\RencanaAngsuran_i;
+use App\Models\RencanaAngsuranI;
 use App\Models\SistemAngsuran;
 use App\Models\Transaksi;
 use App\Models\User;
@@ -391,7 +391,7 @@ class PinjamanIndividuController extends Controller
     public function detail(PinjamanIndividu $perguliran_i)
     {
         $title = 'Detail Pinjaman anggota ' . $perguliran_i->anggota->namadepan;
-        $real = RealAngsuran_i::where('loan_id', $perguliran_i->id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
+        $real = RealAngsuranI::where('loan_id', $perguliran_i->id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
         $sistem_angsuran = SistemAngsuran::all();
         return view('perguliran_i.detail')->with(compact('title', 'perguliran_i', 'real', 'sistem_angsuran'));
     }
@@ -399,16 +399,16 @@ class PinjamanIndividuController extends Controller
     public function pelunasan(PinjamanIndividu $perguliran_i)
     {
         $title = 'Detal Pinjaman anggota ' . $perguliran_i->anggota->namadepan;
-        $real = RealAngsuran_i::where('loan_id', $perguliran_i->id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
-        $ra = RencanaAngsuran_i::where('loan_id', $perguliran_i->id)->orderBy('jatuh_tempo', 'DESC')->first();
+        $real = RealAngsuranI::where('loan_id', $perguliran_i->id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
+        $ra = RencanaAngsuranI::where('loan_id', $perguliran_i->id)->orderBy('jatuh_tempo', 'DESC')->first();
         return view('perguliran_i.partials.lunas')->with(compact('title', 'perguliran_i', 'real_i', 'ra'));
     }
 
     public function keterangan(PinjamanIndividu $perguliran_i)
     {
         $title = 'Cetak Keterangan Pelunasan ' . $perguliran_i->anggota->namadepan;
-        $real = RealAngsuran_i::where('loan_id', $perguliran_i->id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
-        $ra = RencanaAngsuran_i::where('loan_id', $perguliran_i->id)->orderBy('jatuh_tempo', 'DESC')->first();
+        $real = RealAngsuranI::where('loan_id', $perguliran_i->id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
+        $ra = RencanaAngsuranI::where('loan_id', $perguliran_i->id)->orderBy('jatuh_tempo', 'DESC')->first();
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $dir = User::where([
             ['lokasi', Session::get('lokasi')],
@@ -1124,7 +1124,7 @@ class PinjamanIndividuController extends Controller
             'Form Verifikasi',
             'Rencana Angsuran',
             'Tanda Terima Jaminan',
-           
+
         ];
 
         $data['judul'] = 'Check List (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
@@ -1431,28 +1431,28 @@ class PinjamanIndividuController extends Controller
         }
     }
 
-    public function tandaTerimaJaminan($id, $data) 
+    public function tandaTerimaJaminan($id, $data)
     {
-         $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
+        $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
             'anggota'
-         ])->first();
-         
-            $data['kec'] = Kecamatan::where('id', Session::get('lokasi'))->first();
-            $data['dir'] = User::where([
-                ['level', '1'],
-                ['jabatan', '1'],
-                ['lokasi', Session::get('lokasi')]
-            ])->with(['j'])->first();
-            $data['judul'] = 'Form Verifikasi Anggota (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
-            $view = view('perguliran_i.dokumen.tanda_terima_jaminan', $data)->render();
-    
-            if ($data['type'] == 'pdf') {
-                $pdf = PDF::loadHTML($view);
-                return $pdf->stream();
-            } else {
-                return $view;
-            }
+        ])->first();
+
+        $data['kec'] = Kecamatan::where('id', Session::get('lokasi'))->first();
+        $data['dir'] = User::where([
+            ['level', '1'],
+            ['jabatan', '1'],
+            ['lokasi', Session::get('lokasi')]
+        ])->with(['j'])->first();
+        $data['judul'] = 'Form Verifikasi Anggota (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
+        $view = view('perguliran_i.dokumen.tanda_terima_jaminan', $data)->render();
+
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view);
+            return $pdf->stream();
+        } else {
+            return $view;
         }
+    }
 
     public function daftarHadirVerifikasi($id, $data)
     {
@@ -1482,7 +1482,7 @@ class PinjamanIndividuController extends Controller
         $keuangan = new Keuangan;
 
         if (request()->get('status') == 'A') {
-            $data['rencana'] = RencanaAngsuran_i::where([
+            $data['rencana'] = RencanaAngsuranI::where([
                 ['loan_id', $id],
                 ['angsuran_ke', '!=', '0']
             ])->orderBy('jatuh_tempo', 'ASC')->get();
@@ -1785,9 +1785,13 @@ class PinjamanIndividuController extends Controller
             'target' => function ($query) {
                 $query->where('angsuran_ke', '1');
             }
-        ])->withCount('real_i')->first();
+        ])->withCount('real_i')->withCount([
+            'rencana' => function ($query) {
+                $query->where('angsuran_ke', '!=', '0');
+            }
+        ])->first();
         $data['barcode'] = DNS1D::getBarcodePNG($id, 'C128');
- 
+
         $data['dir'] = User::where([
             ['lokasi', Session::get('lokasi')],
             ['level', '1'],
@@ -2054,8 +2058,8 @@ class PinjamanIndividuController extends Controller
             'sis_pokok'
         ])->first();
 
-        $data['real_i'] = RealAngsuran_i::where('loan_id', $id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
-        $data['ra'] = RencanaAngsuran_i::where([
+        $data['real_i'] = RealAngsuranI::where('loan_id', $id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
+        $data['ra'] = RencanaAngsuranI::where([
             ['loan_id', $id],
             ['jatuh_tempo', '<=', date('Y-m-d')]
         ])->orderBy('jatuh_tempo', 'DESC')->first();
@@ -2104,8 +2108,9 @@ class PinjamanIndividuController extends Controller
 
     public function cetakPadaKartu($id, $idtp)
     {
+        $data['idtp'] = $idtp;
         $data['kec'] = Kecamatan::where('id', Session::get('lokasi'))->with('kabupaten')->first();
-        $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
+        $data['nia'] = PinjamanIndividu::where('id', $id)->with([
             'anggota',
             'jpp',
             'sis_pokok',
@@ -2116,17 +2121,21 @@ class PinjamanIndividuController extends Controller
             'target' => function ($query) {
                 $query->where('angsuran_ke', '1');
             }
-        ])->withCount('pinjaman_anggota')->withCount('rencana')->first();
-        $data['barcode'] = DNS1D::getBarcodePNG($data['pinkel']->anggota->kd_anggota, 'C128');
+        ])->withCount('real_i')->withCount([
+            'rencana' => function ($query) {
+                $query->where('angsuran_ke', '!=', '0');
+            }
+        ])->first();
+        $data['barcode'] = DNS1D::getBarcodePNG($id, 'C128');
 
-        $data['idtp'] = $idtp;
         $data['dir'] = User::where([
             ['lokasi', Session::get('lokasi')],
             ['level', '1'],
             ['jabatan', '1']
         ])->first();
 
-        $data['laporan'] = 'Kartu Angsuran ' . $data['pinkel']->anggota->namadepan;
+        $data['laporan'] = 'Kartu Angsuran ' . $data['nia']->anggota->namadepan;
+        $data['laporan'] .= ' Loan ID. ' . $id;
         return view('perguliran_i.dokumen.cetak_kartu_angsuran', $data);
     }
 
@@ -2305,8 +2314,8 @@ class PinjamanIndividuController extends Controller
         if (request()->get('save')) {
             $insert_ra = [];
 
-            RencanaAngsuran_i::where('loan_id', $id_pinj)->delete();
-            RencanaAngsuran_i::create([
+            RencanaAngsuranI::where('loan_id', $id_pinj)->delete();
+            RencanaAngsuranI::create([
                 'loan_id' => $id_pinj,
                 'angsuran_ke' => '0',
                 'jatuh_tempo' => $tgl,
@@ -2359,7 +2368,7 @@ class PinjamanIndividuController extends Controller
                 ];
             }
 
-            RencanaAngsuran_i::insert($insert_ra);
+            RencanaAngsuranI::insert($insert_ra);
         } else {
             $target_pokok = 0;
             $target_jasa = 0;
@@ -2410,7 +2419,7 @@ class PinjamanIndividuController extends Controller
         ], Response::HTTP_OK);
     }
 
-    
+
 
     public function generateRA($id_pinj)
     {
@@ -2518,9 +2527,9 @@ class PinjamanIndividuController extends Controller
         }
         $ra['alokasi'] = $alokasi;
 
-        RencanaAngsuran_i::where('loan_id', $id_pinj)->delete();
+        RencanaAngsuranI::where('loan_id', $id_pinj)->delete();
 
-        RencanaAngsuran_i::create([
+        RencanaAngsuranI::create([
             'loan_id' => $id_pinj,
             'angsuran_ke' => '0',
             'jatuh_tempo' => $tgl,
@@ -2560,7 +2569,7 @@ class PinjamanIndividuController extends Controller
                 $target_jasa += $jasa;
             }
 
-            RencanaAngsuran_i::create([
+            RencanaAngsuranI::create([
                 'loan_id' => $id_pinj,
                 'angsuran_ke' => $x,
                 'jatuh_tempo' => $jatuh_tempo,

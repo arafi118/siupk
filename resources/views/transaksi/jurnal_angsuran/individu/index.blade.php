@@ -62,7 +62,7 @@
 
                     <div class="d-flex justify-content-end">
                         <button type="button" id="btnDetailIndividu" class="btn btn-info btn-sm me-3">
-                            Detail Individu <span class="badge badge-info" id="loan-id"></span>
+                            Detail Pemanfaat <span class="badge badge-info" id="loan-id"></span>
                         </button>
                         <button type="button" id="SimpanAngsuran" class="btn btn-github btn-sm">Posting</button>
                     </div>
@@ -246,7 +246,7 @@
             dateFormat: "d/m/Y"
         })
 
-        var id_pinkel = '{{ Request::get('pinkel') ?: 0 }}'
+        var id_pinkel = "{{ Request::get('pinkel') ?: 0 }}"
 
         if (id_pinkel > 0) {
             var ch_pokok = document.getElementById('chartP').getContext("2d");
@@ -346,7 +346,7 @@
 
                             Swal.fire('Berhasil!', result.msg, 'success').then(() => {
                                 $.get('/transaksi/form_angsuran_individu/' + result
-                                    .id_pinkel,
+                                    .id_pinj_i,
                                     function(result) {
                                         angsuran(true, result)
 
@@ -356,27 +356,13 @@
                                         makeChart('jasa', ch_jasa, result
                                             .sisa_jasa,
                                             result.sum_jasa)
-
-                                        var id = $('#id').val()
-                                        $.get('/transaksi/angsuran/form_anggota_i/' +
-                                            id,
-                                            function(result) {
-                                                if (result.success) {
-                                                    $('#LayoutAngsuranAnggota')
-                                                        .html(result
-                                                            .view)
-                                                    $('#AngsuranAnggotaLabel')
-                                                        .text(result
-                                                            .title)
-                                                }
-                                            })
                                     })
                             })
 
-                            if (result.whatsapp) {
-                                sendMsg(result.number, result.nama_kelompok, result
-                                    .pesan)
-                            }
+                            // if (result.whatsapp) {
+                            //     sendMsg(result.number, result.nama_kelompok, result
+                            //         .pesan)
+                            // }
                         } else {
                             loading.close()
                             Swal.fire('Error', result.msg, 'warning')

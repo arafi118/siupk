@@ -1,3 +1,10 @@
+@php
+    $type = '';
+    if ($trx->id_pinj > 0) {
+        $type = 'Kelompok';
+    }
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -159,7 +166,7 @@
                     <tr>
                         <td width="30%">Terima Dari</td>
                         <td width="2%">:</td>
-                        <td colspan="3" class="keterangan">Kelompok {{ ucwords($trx->relasi) }}</td>
+                        <td colspan="3" class="keterangan">{{ $type }} {{ ucwords($trx->relasi) }}</td>
                     </tr>
                     <tr>
                         <td width="30%">Keterangan</td>

@@ -5,48 +5,22 @@
 <table class="table table-striped">
     <tbody>
         <tr>
-            <td>NIK</td>
-            <td>:</td>
-            <td style="font-weight: bold !important;">{{ $nia->anggota->nik }}</td>
-
-            <td>&nbsp;</td>
-
             <td>Loan Id.</td>
             <td>:</td>
-            <td style="font-weight: bold !important;">{{ $nia->jpp->nama_jpp }}-{{ $nia->id }}</td>
+            <td style="font-weight: bold !important;" colspan="5">
+                {{ $nia->jpp->nama_jpp }}-{{ $nia->id }}
+            </td>
         </tr>
         <tr>
-            <td>Nama Anggota</td>
-            <td>:</td>
-            <td style="font-weight: bold !important;">{{ $nia->anggota->namadepan }}</td>
+            <td width="20%">NIK</td>
+            <td width="1%">:</td>
+            <td width="27" style="font-weight: bold !important;">{{ $nia->anggota->nik }}</td>
 
-            <td>&nbsp;</td>
+            <td width="4%">&nbsp;</td>
 
-            <td>No. SPK</td>
-            <td>:</td>
-            <td style="font-weight: bold !important;">{{ $nia->spk_no }}</td>
-        </tr>
-        <tr>
-            <td>Alamat</td>
-            <td>:</td>
-            <td style="font-weight: bold !important;">{{ $nia->anggota->alamat }}</td>
-
-            <td>&nbsp;</td>
-
-            <td>Tgl Cair</td>
-            <td>:</td>
-            <td style="font-weight: bold !important;">{{ Tanggal::tglIndo($nia->tgl_cair) }}</td>
-        </tr>
-        <tr>
-            <td>Desa</td>
-            <td>:</td>
-            <td style="font-weight: bold !important;">{{ $nia->anggota->d->nama_desa }}</td>
-
-            <td>&nbsp;</td>
-
-            <td>Alokasi</td>
-            <td>:</td>
-            <td style="font-weight: bold !important;">{{ number_format($nia->alokasi) }}</td>
+            <td width="20%">Nama Anggota</td>
+            <td width="1%">:</td>
+            <td width="27" style="font-weight: bold !important;">{{ $nia->anggota->namadepan }}</td>
         </tr>
         <tr>
             <td>Telpon/SMS</td>
@@ -55,14 +29,25 @@
 
             <td>&nbsp;</td>
 
-            <td>Jasa</td>
+            <td>Tgl Cair</td>
             <td>:</td>
-            <td style="font-weight: bold !important;">{{ $nia->pros_jasa / $nia->jangka }}%</td>
+            <td style="font-weight: bold !important;">{{ Tanggal::tglIndo($nia->tgl_cair) }}</td>
         </tr>
         <tr>
+            <td>Alamat</td>
+            <td>:</td>
+            <td style="font-weight: bold !important;">{{ $nia->anggota->alamat }}</td>
+
             <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
+
+            <td>Desa</td>
+            <td>:</td>
+            <td style="font-weight: bold !important;">{{ $nia->anggota->d->nama_desa }}</td>
+        </tr>
+        <tr>
+            <td>No. SPK</td>
+            <td>:</td>
+            <td style="font-weight: bold !important;">{{ $nia->spk_no }}</td>
 
             <td>&nbsp;</td>
 
@@ -72,22 +57,22 @@
                 {{ $nia->sis_pokok->nama_sistem }}</td>
         </tr>
         <tr>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
+            <td>Alokasi</td>
+            <td>:</td>
+            <td style="font-weight: bold !important;">{{ number_format($nia->alokasi) }}</td>
 
             <td>&nbsp;</td>
 
+            <td>Jasa</td>
+            <td>:</td>
+            <td style="font-weight: bold !important;">{{ $nia->pros_jasa / $nia->jangka }}%</td>
+        </tr>
+        <tr>
             <td>Angsuran Pokok</td>
             <td>:</td>
             <td style="font-weight: bold !important;">{{ number_format($nia->target->wajib_pokok) }} x
                 {{ $nia->jangka }}
             </td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
 
             <td>&nbsp;</td>
 

@@ -63,46 +63,6 @@ return [
             ]) : [],
         ],
 
-        'master' => [
-            'driver' => 'mysql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_MASTER_HOST', '127.0.0.1'),
-            'port' => env('DB_MASTER_PORT', '3306'),
-            'database' => env('DB_MASTER_DATABASE', 'forge'),
-            'username' => env('DB_MASTER_USERNAME', 'forge'),
-            'password' => env('DB_MASTER_PASSWORD', ''),
-            'unix_socket' => env('DB_MASTER_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'strict' => true,
-            'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
-        ],
-
-        'upk' => [
-            'driver' => 'mysql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_UPK_HOST', '127.0.0.1'),
-            'port' => env('DB_UPK_PORT', '3306'),
-            'database' => env('DB_UPK_DATABASE', 'forge'),
-            'username' => env('DB_UPK_USERNAME', 'forge'),
-            'password' => env('DB_UPK_PASSWORD', ''),
-            'unix_socket' => env('DB_UPK_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'strict' => true,
-            'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
-        ],
-
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),

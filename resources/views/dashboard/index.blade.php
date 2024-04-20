@@ -23,13 +23,13 @@
                 <div class="card-body p-3 position-relative pointer" id="btnAktif">
                     <div class="row">
                         <div class="col-7 text-start">
-                            <p class="text-sm mb-1 text-capitalize font-weight-bold">Pemanfaat</p>
+                            <p class="text-sm mb-1 text-capitalize font-weight-bold">Pinjaman Aktif</p>
                             <h5 class="font-weight-bolder mb-0">
                                 {{ $pinjaman_kelompok }} Kelompok
                             </h5>
                             <span class="text-sm text-end text-success font-weight-bolder mt-auto mb-0">
                                 {{ $pinjaman_anggota }}
-                                <span class="font-weight-normal text-secondary">pemanfaat Aktif</span>
+                                <span class="font-weight-normal text-secondary">Pemanfaat</span>
                             </span>
                         </div>
                         <div class="col-5">
@@ -534,7 +534,6 @@ Terima kasih atas perhatiannya!
                                                 <thead>
                                                     <tr>
                                                         <td align="center">No</td>
-                                                        <td align="center">Nama Kelompok</td>
                                                         <td align="center">Nik</td>
                                                         <td align="center">Nama Anggota</td>
                                                         <td align="center">Alamat</td>
