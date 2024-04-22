@@ -52,7 +52,7 @@
         })
 
         function formRegister(nia) {
-            $.get('/register_proposal/' + nia, async (result) => {
+            $.get('/register_proposal_i/' + nia, async (result) => {
                 await $('#RegisterProposal').html(result)
             })
         }

@@ -230,22 +230,22 @@ class PinjamanIndividuController extends Controller
         return view('pinjaman_i.create')->with(compact('title', 'id_angg'));
     }
 
-    public function DaftarAnggota()
+    public function DaftarAnggota($nia = null)
     {
         $id_angg = request()->get('id_angg') ?: 0;
-        $anggota = anggota::with([
+        $anggota = Anggota::with([
             'd',
             'pinjaman' => function ($query) {
                 $query->orderBy('tgl_proposal', 'DESC');
             }
-        ])->withCount('pinjaman')->orderBy('namadepan', 'ASC')->get();
+        ])->orderBy('namadepan', 'ASC')->get();
 
-        return view('pinjaman.partials.anggota')->with(compact('anggota', 'nia'));
+        return view('pinjaman_i.partials.anggota')->with(compact('anggota', 'nia'));
     }
 
     public function register($id_angg)
     {
-        $anggota = anggota::where('id', $id_angg)->with([
+        $anggota = Anggota::where('id', $id_angg)->with([
             'pinjaman' => function ($query) {
                 $query->orderBy('tgl_proposal', 'DESC');
             },
@@ -261,11 +261,38 @@ class PinjamanIndividuController extends Controller
         if ($anggota->pinjaman) {
             $status = $anggota->pinjaman->status;
             if ($status == 'P' || $status == 'V' || $status == 'W') {
-                return view('pinjaman.partials.pinjaman')->with(compact('anggota', 'kec', 'jenis_jasa', 'sistem_angsuran', 'jenis_pp', 'jenis_pp_dipilih'));
+                return view('pinjaman_i.partials.pinjaman')->with(compact('anggota', 'kec', 'jenis_jasa', 'sistem_angsuran', 'jenis_pp', 'jenis_pp_dipilih'));
             }
         }
 
-        return view('pinjaman.partials.register')->with(compact('anggota', 'kec', 'jenis_jasa', 'sistem_angsuran', 'jenis_pp', 'jenis_pp_dipilih'));
+        $jaminan = [
+            [
+                'id' => '1',
+                'nama' => 'Surat Tanah',
+            ],
+            [
+                'id' => '2',
+                'nama' => 'BPKB',
+            ],
+            [
+                'id' => '3',
+                'nama' => 'SK. Pegawai',
+            ],
+            [
+                'id' => '4',
+                'nama' => 'Lain Lain',
+            ],
+        ];
+
+        return view('pinjaman_i.partials.register')->with(compact('anggota', 'kec', 'jenis_jasa', 'sistem_angsuran', 'jenis_pp', 'jenis_pp_dipilih', 'jaminan'));
+    }
+
+    public function Jaminan($id)
+    {
+        return response()->json([
+            'success' => true,
+            'view' => view('pinjaman_i.partials.jaminan')->with(compact('id'))->render()
+        ]);
     }
 
     /**
@@ -273,7 +300,7 @@ class PinjamanIndividuController extends Controller
      */
     public function store(Request $request)
     {
-        $kel = anggota::where('id', $request->id_angg)->first();
+        $kel = Anggota::where('id', $request->nia)->first();
         $data = $request->only([
             'tgl_proposal',
             'pengajuan',
@@ -301,8 +328,11 @@ class PinjamanIndividuController extends Controller
         }
 
         $insert = [
-            'id_angg' => $request->id_angg,
+            'jenis_pinjaman' => 'I',
+            'id_kel' => '0',
+            'id_pinkel' => '0',
             'jenis_pp' => $request->jenis_produk_pinjaman,
+            'nia' => $request->nia,
             'tgl_proposal' => Tanggal::tglNasional($request->tgl_proposal),
             'tgl_verifikasi' => Tanggal::tglNasional($request->tgl_proposal),
             'tgl_dana' => Tanggal::tglNasional($request->tgl_proposal),
@@ -312,6 +342,8 @@ class PinjamanIndividuController extends Controller
             'proposal' => str_replace(',', '', str_replace('.00', '', $request->pengajuan)),
             'verifikasi' => str_replace(',', '', str_replace('.00', '', $request->pengajuan)),
             'alokasi' => str_replace(',', '', str_replace('.00', '', $request->pengajuan)),
+            'kom_pokok' => '0',
+            'kom_jasa' => '0',
             'spk_no' => '0',
             'sumber' => '1',
             'pros_jasa' => $request->pros_jasa,
@@ -320,8 +352,8 @@ class PinjamanIndividuController extends Controller
             'sistem_angsuran' => $request->sistem_angsuran_pokok,
             'sa_jasa' => $request->sistem_angsuran_jasa,
             'status' => 'P',
+            'jaminan' => '',
             'catatan_verifikasi' => '0',
-            'wt_cair' => '0',
             'lu' => date('Y-m-d H:i:s'),
             'user_id' => auth()->user()->id
         ];
