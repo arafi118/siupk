@@ -300,7 +300,7 @@ class PinjamanIndividuController extends Controller
      */
     public function store(Request $request)
     {
-        $kel = Anggota::where('id', $request->nia)->first();
+        $ang = Anggota::where('id', $request->nia)->first();
         $data = $request->only([
             'tgl_proposal',
             'pengajuan',
@@ -369,11 +369,18 @@ class PinjamanIndividuController extends Controller
         ];
 
         $pinjaman_anggota = PinjamanIndividu::create($insert);
+        $data_pemanfaat = DataPemanfaat::create([
+            'lokasi' => Session::get('lokasi'),
+            'nik' => $ang->nik,
+            'id_pinkel' => 0,
+            'idpa' => $pinjaman_anggota->id,
+            'status' => $insert['status']
+        ]);
 
         return response()->json([
-            'msg' => 'Proposal Pinjaman anggota ' . $kel->namadepan . ' berhasil dibuat',
-            'kode_anggota' => $kel->kd_anggota + 1,
-            'desa' => $kel->desa,
+            'msg' => 'Proposal Pinjaman anggota ' . $ang->namadepan . ' berhasil dibuat',
+            'kode_anggota' => $ang->kd_anggota + 1,
+            'desa' => $ang->desa,
             'id' => $pinjaman_anggota->id
         ], Response::HTTP_ACCEPTED);
     }
@@ -1037,13 +1044,16 @@ class PinjamanIndividuController extends Controller
     public function destroy(PinjamanIndividu $perguliran_i)
     {
         if ($perguliran_i->status == 'P') {
-            PinjamanAnggota::where('id_pinkel', $perguliran_i->id)->delete();
-
             PinjamanIndividu::destroy($perguliran_i->id);
+            DataPemanfaat::where([
+                'lokasi' => Session::get('lokasi'),
+                'nik' => $perguliran_i->anggota->nik,
+                'idpa' => $perguliran_i->id
+            ])->delete();
 
             return response()->json([
                 'hapus' => true,
-                'msg' => 'Proposal pinjaman anggota ' . $perguliran_i->anggota->namadepan . ' berhasil dihapus'
+                'msg' => 'Proposal pinjaman atas nama ' . $perguliran_i->anggota->namadepan . ' berhasil dihapus'
             ]);
         }
 

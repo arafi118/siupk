@@ -59,13 +59,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="d-grid">
-                <button type="button" id="BtnTambahPemanfaat" data-bs-toggle="modal" data-bs-target="#TambahPemanfaat"
-                    class="btn btn-success btn-sm mb-1">
-                    Tambah Pemanfaat
-                </button>
-            </div>
         </div>
     </div>
 
@@ -113,8 +106,8 @@
                 <div class="col-md-3">
                     <div class="input-group input-group-static my-3">
                         <label for="pros_jasa">Prosentase Jasa (%)</label>
-                        <input autocomplete="off" type="number" name="pros_jasa" id="pros_jasa"
-                            class="form-control" value="{{ $perguliran_i->pros_jasa }}">
+                        <input autocomplete="off" type="number" name="pros_jasa" id="pros_jasa" class="form-control"
+                            value="{{ $perguliran_i->pros_jasa }}">
                         <small class="text-danger" id="msg_pros_jasa"></small>
                     </div>
                 </div>

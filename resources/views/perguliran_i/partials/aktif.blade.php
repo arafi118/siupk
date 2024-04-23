@@ -139,15 +139,6 @@
             </div>
         </div>
 
-        @if ($perguliran_i->status == 'A')
-            <div class="d-grid">
-                <button type="button" id="BtnTambahPemanfaat" data-bs-toggle="modal" data-bs-target="#TambahPemanfaat"
-                    class="btn btn-success btn-sm mb-1">
-                    Tambah Pemanfaat
-                </button>
-            </div>
-        @endif
-
         <hr class="horizontal dark">
     </div>
 </div>
