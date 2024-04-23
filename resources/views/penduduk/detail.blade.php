@@ -201,7 +201,9 @@
                             @foreach ($penduduk->pinjaman_anggota as $pinj)
                                 @php
                                     $pinkel = $pinj;
+                                    $detail = 'detail_i';
                                     if ($pinj->pinkel) {
+                                        $detail = 'detail';
                                         $pinkel = $pinj->pinkel;
                                     }
                                 @endphp
@@ -221,7 +223,7 @@
                                             $jumlah = $pinj->alokasi;
                                         }
                                     @endphp
-                                    <blockquote data-link="/detail/{{ $pinkel->id }}"
+                                    <blockquote data-link="/{{ $detail }}/{{ $pinkel->id }}"
                                         class="blockquote text-white mb-1 pointer">
                                         <p class="text-dark ms-3">
                                             <span class="badge badge-{{ $pinkel->sts->warna_status }}">

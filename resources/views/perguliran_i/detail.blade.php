@@ -33,13 +33,13 @@
             'file' => 'suratRekomendasi',
             'withExcel' => false,
         ],
-        
+
         [
             'title' => 'Surat Pernyataan Peminjam',
             'file' => 'pernyataanPeminjam',
             'withExcel' => false,
         ],
-       
+
         [
             'title' => 'Form Verifikasi',
             'file' => 'formVerifikasi',
@@ -56,7 +56,6 @@
             'file' => 'tandaTerimaJaminan',
             'withExcel' => false,
         ],
-       
     ];
 
     $dokumen_pencairan = [
@@ -160,8 +159,6 @@
             'file' => 'formVerifikasi',
             'withExcel' => false,
         ],
-
-      
     ];
 @endphp
 
@@ -400,71 +397,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Tutup</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- Modal Tambah Pemanfaat --}}
-    <div class="modal fade" id="TambahPemanfaat" tabindex="-1" aria-labelledby="TambahPemanfaatLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="TambahPemanfaatLabel">
-                        Tambah Calon Pemanfaat ({{ $perguliran_i->id }})
-                    </h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="/pinjaman_anggota" method="post" id="FormTambahPemanfaat">
-                        @csrf
-
-                        <input type="hidden" name="id_pinkel" id="id_pinkel" value="{{ $perguliran_i->id }}">
-                        <input type="hidden" name="nia_pemanfaat" id="nia_pemanfaat">
-                        <input type="hidden" name="catatan_pinjaman" id="catatan_pinjaman">
-                        <div class="row">
-                            <div class="col-6 mb-3">
-                                <div class="input-group input-group-static">
-                                    <input type="text" id="cariNik" name="cariNik" class="form-control"
-                                        placeholder="Ketikkan NIK atau Nama" autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="col-6 mb-3">
-                                <div class="input-group input-group-static">
-                                    <input type="text" id="alokasi_pengajuan" disabled name="alokasi_pengajuan"
-                                        class="form-control money" placeholder="Alokasi Pengajuan">
-                                </div>
-                                <small class="text-danger" id="msg_alokasi_pengajuan"></small>
-                            </div>
-                            <div class="col-12 mb-3">
-                                <div class="input-group input-group-static">
-                                    <input type="text" id="jaminan" name="jaminan" class="form-control"
-                                        placeholder="Jenis jaminan" autocomplete="off">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="fw-bold text-center">
-                            <div>
-                                {{ $perguliran_i->anggota->namadepan }} -
-                                {{ $perguliran_i->anggota->d->sebutan_desa->sebutan_desa }}
-                                {{ $perguliran_i->anggota->d->nama_desa }}
-                            </div>
-                        </div>
-                    </form>
-
-                    <div class="card border">
-                        <div class="card-body pt-3 pb-0 ps-3 pe-3">
-                            <div id="LayoutTambahPemanfaat">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" id="SimpanPemanfaat" disabled class="btn btn-github btn-sm">Tambahkan</button>
                 </div>
             </div>
         </div>
