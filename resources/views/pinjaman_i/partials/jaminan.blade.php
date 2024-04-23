@@ -103,7 +103,7 @@
     </div>
     <div class="col-md-4">
         <div class="input-group input-group-static my-3">
-            <label for="nama_kuitansi_penerbit">Nama Kuitansi Penerbit</label>
+            <label for="nama_kuitansi_penerbit">Nama Instansi Penerbit</label>
             <input autocomplete="off" type="text" name="data_jaminan[nama_kuitansi_penerbit]"
                 id="nama_kuitansi_penerbit" class="form-control">
             <small class="text-danger" id="msg_nama_kuitansi_penerbit"></small>
