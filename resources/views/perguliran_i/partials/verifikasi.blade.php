@@ -1,112 +1,122 @@
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="row mt-0">
+            <div class="col-md-6 mb-3">
+                <div class="border border-light border-2 border-radius-md p-3">
+                    <h6 class="text-info text-gradient mb-0">
+                        Proposal
+                    </h6>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
+                            Tgl Pengajuan
+                            <span class="badge badge-info badge-pill">
+                                {{ Tanggal::tglIndo($perguliran_i->tgl_proposal) }}
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
+                            Pengajuan
+                            <span class="badge badge-info badge-pill">
+                                {{ number_format($perguliran_i->proposal) }}
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
+                            Jenis Jasa
+                            <span class="badge badge-info badge-pill">
+                                {{ $perguliran_i->jasa->nama_jj }}
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
+                            Jasa
+                            <span class="badge badge-info badge-pill">
+                                {{ $perguliran_i->pros_jasa . '% / ' . $perguliran_i->jangka . ' bulan' }}
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
+                            Angs. Pokok
+                            <span class="badge badge-info badge-pill">
+                                {{ $perguliran_i->sis_pokok->nama_sistem }}
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
+                            Angs. Jasa
+                            <span class="badge badge-info badge-pill">
+                                {{ $perguliran_i->sis_jasa->nama_sistem }}
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="border border-light border-2 border-radius-md p-3">
+                    <h6 class="text-danger text-gradient mb-0">
+                        Verified
+                    </h6>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
+                            Tgl Verifikasi
+                            <span class="badge badge-danger badge-pill">
+                                {{ Tanggal::tglIndo($perguliran_i->tgl_verifikasi) }}
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
+                            Verifikasi
+                            <span class="badge badge-danger badge-pill">
+                                {{ number_format($perguliran_i->verifikasi) }}
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
+                            Jenis Jasa
+                            <span class="badge badge-danger badge-pill">
+                                {{ $perguliran_i->jasa->nama_jj }}
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
+                            Jasa
+                            <span class="badge badge-danger badge-pill">
+                                {{ $perguliran_i->pros_jasa . '% / ' . $perguliran_i->jangka . ' bulan' }}
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
+                            Angs. Pokok
+                            <span class="badge badge-danger badge-pill">
+                                {{ $perguliran_i->sis_pokok->nama_sistem }}
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
+                            Angs. Jasa
+                            <span class="badge badge-danger badge-pill">
+                                {{ $perguliran_i->sis_jasa->nama_sistem }}
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <hr class="horizontal dark">
+
+    </div>
+</div>
+
+<div class="card card-body p-2 pb-0 mb-3">
+    <form action="/perguliran_i/dokumen?status=P" target="_blank" method="post">
+        @csrf
+
+        <input type="hidden" name="id" value="{{ $perguliran_i->id }}">
+        <div class="d-grid">
+            <button type="submit" name="report" value="RekomendasiVerifikator#pdf" class="btn btn-info btn-sm mb-2">Cetak Rekomendasi Verifikator/Analis</button>
+        </div>
+ <div class="d-grid">
+    <button type="button" data-bs-toggle="modal" data-bs-target="#CetakDokumenProposal"
+     class="btn btn-success btn-sm mb-2" style="background-color: green;">Cetak Dokumen Proposal</button>
+</div>
+
+    </form>
+</div>
+
 <form action="/perguliran_i/{{ $perguliran_i->id }}" method="post" id="FormInput">
     @csrf
     @method('PUT')
-    <div class="card mb-3">
-        <div class="card-body">
-            <div class="row mt-0">
-                <div class="col-md-6 mb-3">
-                    <div class="border border-light border-2 border-radius-md p-3">
-                        <h6 class="text-info text-gradient mb-0">
-                            Proposal
-                        </h6>
-                        <ul class="list-group">
-                            <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
-                                Tgl Pengajuan
-                                <span class="badge badge-info badge-pill">
-                                    {{ Tanggal::tglIndo($perguliran_i->tgl_proposal) }}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
-                                Pengajuan
-                                <span class="badge badge-info badge-pill">
-                                    {{ number_format($perguliran_i->proposal) }}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
-                                Jenis Jasa
-                                <span class="badge badge-info badge-pill">
-                                    {{ $perguliran_i->jasa->nama_jj }}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
-                                Jasa
-                                <span class="badge badge-info badge-pill">
-                                    {{ $perguliran_i->pros_jasa . '% / ' . $perguliran_i->jangka . ' bulan' }}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
-                                Angs. Pokok
-                                <span class="badge badge-info badge-pill">
-                                    {{ $perguliran_i->sis_pokok->nama_sistem }}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
-                                Angs. Jasa
-                                <span class="badge badge-info badge-pill">
-                                    {{ $perguliran_i->sis_jasa->nama_sistem }}
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <div class="border border-light border-2 border-radius-md p-3">
-                        <h6 class="text-danger text-gradient mb-0">
-                            Verified
-                        </h6>
-                        <ul class="list-group">
-                            <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
-                                Tgl Verifikasi
-                                <span class="badge badge-danger badge-pill">
-                                    {{ Tanggal::tglIndo($perguliran_i->tgl_verifikasi) }}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
-                                Verifikasi
-                                <span class="badge badge-danger badge-pill">
-                                    {{ number_format($perguliran_i->verifikasi) }}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
-                                Jenis Jasa
-                                <span class="badge badge-danger badge-pill">
-                                    {{ $perguliran_i->jasa->nama_jj }}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
-                                Jasa
-                                <span class="badge badge-danger badge-pill">
-                                    {{ $perguliran_i->pros_jasa . '% / ' . $perguliran_i->jangka . ' bulan' }}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
-                                Angs. Pokok
-                                <span class="badge badge-danger badge-pill">
-                                    {{ $perguliran_i->sis_pokok->nama_sistem }}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
-                                Angs. Jasa
-                                <span class="badge badge-danger badge-pill">
-                                    {{ $perguliran_i->sis_jasa->nama_sistem }}
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="horizontal dark">
-
-        </div>
-    </div>
-
-    <div class="card card-body p-2 pb-0 mb-3">
-        <div class="d-grid">
-            <button type="button" data-bs-toggle="modal" data-bs-target="#CetakDokumenProposal"
-                class="btn btn-info btn-sm mb-2">Cetak Dokumen Verifikasi</button>
-        </div>
-    </div>
 
     <div class="card mb-3">
         <div class="card-header pb-0 p-3">

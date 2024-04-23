@@ -19,11 +19,6 @@
             'withExcel' => false,
         ],
         [
-            'title' => 'Check List',
-            'file' => 'check',
-            'withExcel' => false,
-        ],
-        [
             'title' => 'Surat Permohonan Pinjaman',
             'file' => 'suratPengajuanPinjaman',
             'withExcel' => false,
@@ -52,11 +47,15 @@
             'withExcel' => false,
         ],
         [
+            'title' => 'Surat Kuasa Khusus',
+            'file' => 'SuratPersetujuanKuasa',
+            'withExcel' => false,
+        ],
+        [
             'title' => 'Tanda Terima Jaminan',
             'file' => 'tandaTerimaJaminan',
             'withExcel' => false,
         ],
-       
     ];
 
     $dokumen_pencairan = [

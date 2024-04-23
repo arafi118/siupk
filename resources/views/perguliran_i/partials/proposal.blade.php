@@ -282,7 +282,7 @@
         $('small').html('')
 
         var verifikasi = parseInt($('#verifikasi').val().split(',').join('').split('.00').join(''))
-        var __verifikasi = parseInt($('#__verifikasi').val())
+        var _verifikasi = parseInt($('#_verifikasi').val())
 
         var lanjut = true;
         if (verifikasi != __verifikasi) {
