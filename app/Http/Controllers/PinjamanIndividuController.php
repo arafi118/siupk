@@ -869,6 +869,8 @@ class PinjamanIndividuController extends Controller
             'id_user' => auth()->user()->id
         ]);
 
+        $this->generate($pinjaman->id);
+
         return response()->json([
             'success' => true,
             'status' => 'A',
