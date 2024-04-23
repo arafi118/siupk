@@ -869,7 +869,7 @@ class PinjamanIndividuController extends Controller
             'id_user' => auth()->user()->id
         ]);
 
-        $this->generate($pinjaman->id);
+        $this->generate($pinjaman->id, true);
 
         return response()->json([
             'success' => true,
@@ -2115,7 +2115,7 @@ class PinjamanIndividuController extends Controller
         return view('perguliran_i.dokumen.cetak_kartu_angsuran', $data);
     }
 
-    public function generate($id_pinj, $pinj_i = null, $alokasi = null, $tgl = null)
+    public function generate($id_pinj, $save = false, $alokasi = null, $tgl = null)
     {
         $rencana = [];
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
@@ -2287,7 +2287,7 @@ class PinjamanIndividuController extends Controller
 
         $ra['alokasi'] = $alokasi;
 
-        if (request()->get('save')) {
+        if (request()->get('save') || $save) {
             $insert_ra = [];
 
             RencanaAngsuranI::where('loan_id', $id_pinj)->delete();
