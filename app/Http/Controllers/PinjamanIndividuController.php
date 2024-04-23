@@ -239,7 +239,7 @@ class PinjamanIndividuController extends Controller
             }
         ])->withCount('pinjaman')->orderBy('namadepan', 'ASC')->get();
 
-        return view('pinjaman.partials.anggota')->with(compact('anggota', 'nia'));
+        return view('pinjaman_i.partials.anggota')->with(compact('anggota', 'nia'));
     }
 
     public function register($id_angg)
@@ -260,11 +260,11 @@ class PinjamanIndividuController extends Controller
         if ($anggota->pinjaman) {
             $status = $anggota->pinjaman->status;
             if ($status == 'P' || $status == 'V' || $status == 'W') {
-                return view('pinjaman.partials.pinjaman')->with(compact('anggota', 'kec', 'jenis_jasa', 'sistem_angsuran', 'jenis_pp', 'jenis_pp_dipilih'));
+                return view('pinjaman_i.partials.pinjaman')->with(compact('anggota', 'kec', 'jenis_jasa', 'sistem_angsuran', 'jenis_pp', 'jenis_pp_dipilih'));
             }
         }
 
-        return view('pinjaman.partials.register')->with(compact('anggota', 'kec', 'jenis_jasa', 'sistem_angsuran', 'jenis_pp', 'jenis_pp_dipilih'));
+        return view('pinjaman_i.partials.register')->with(compact('anggota', 'kec', 'jenis_jasa', 'sistem_angsuran', 'jenis_pp', 'jenis_pp_dipilih'));
     }
 
     /**
