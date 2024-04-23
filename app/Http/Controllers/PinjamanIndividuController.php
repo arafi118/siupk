@@ -506,11 +506,6 @@ class PinjamanIndividuController extends Controller
         }
 
         if ($request->status == 'L') {
-            PinjamanAnggota::where('id_pinkel', $perguliran_i->id)->update([
-                'status' => 'L',
-                'tgl_lunas' => date('Y-m-d')
-            ]);
-
             DataPemanfaat::where('id_pinkel', $perguliran_i->id)->where('lokasi', Session::get('lokasi'))->update([
                 'status' => 'L'
             ]);
@@ -651,14 +646,6 @@ class PinjamanIndividuController extends Controller
                 'status' => 'A'
             ];
 
-            PinjamanAnggota::where('id_pinkel', $perguliran_i->id)->update([
-                'status' => 'A'
-            ]);
-
-            DataPemanfaat::where([['id_pinkel', $perguliran_i->id], ['lokasi', Session::get('lokasi')]])->update([
-                'status' => 'A'
-            ]);
-
             $keterangan = 'Pencairan Kel. ' . $perguliran_i->anggota->namadepan;
             $keterangan .= ' (' . $perguliran_i->jpp->nama_jpp . ')';
 
@@ -676,23 +663,6 @@ class PinjamanIndividuController extends Controller
                 'id_user' => auth()->user()->id,
             ]);
         } elseif ($request->status == 'W') {
-            if ($request->idpa != null) {
-                foreach ($request->idpa as $idpa => $val) {
-
-                    $val = str_replace(',', '', str_replace('.00', '', $val));
-                    if ($val == '') $val = 0;
-                    PinjamanAnggota::where('id', $idpa)->update([
-                        $tgl => Tanggal::tglNasional($data[$tgl]),
-                        $alokasi => $val,
-                        'status' => $data['status']
-                    ]);
-
-                    DataPemanfaat::where([['idpa', $idpa], ['lokasi', Session::get('lokasi')]])->update([
-                        'status' => $data['status']
-                    ]);
-                }
-            }
-
             $update = [
                 'tgl_dana' => Tanggal::tglNasional($data[$tgl]),
                 $tgl => Tanggal::tglNasional($data[$tgl]),
@@ -707,23 +677,6 @@ class PinjamanIndividuController extends Controller
                 'status' => $data['status']
             ];
         } else {
-            if ($request->idpa != null) {
-                foreach ($request->idpa as $idpa => $val) {
-                    $val = str_replace(',', '', str_replace('.00', '', $val));
-                    if ($val == '') $val = 0;
-                    // echo $val . ', ';
-                    PinjamanAnggota::where('id', $idpa)->update([
-                        $tgl => Tanggal::tglNasional($data[$tgl]),
-                        $alokasi => $val,
-                        'status' => $data['status']
-                    ]);
-
-                    DataPemanfaat::where([['idpa', $idpa], ['lokasi', Session::get('lokasi')]])->update([
-                        'status' => $data['status']
-                    ]);
-                }
-            }
-
             $update = [
                 $tgl => Tanggal::tglNasional($data[$tgl]),
                 $alokasi => str_replace(',', '', str_replace('.00', '', $data[$alokasi])),
@@ -745,6 +698,12 @@ class PinjamanIndividuController extends Controller
         }
 
         $pinj_i = PinjamanIndividu::where('id', $perguliran_i->id)->update($update);
+        $data_pemanfaat = DataPemanfaat::where([
+            'nik' => $perguliran_i->anggota->nik,
+            'idpa' => $perguliran_i->id
+        ])->update([
+            'status' => $update['status']
+        ]);
 
         if ($request->status == 'W' || $request->status == 'A') {
             $this->generate($perguliran_i->id);
@@ -803,10 +762,6 @@ class PinjamanIndividuController extends Controller
             'status' => 'P'
         ]);
 
-        $pinjaman = PinjamanAnggota::where('id_pinkel', $id->id)->update([
-            'status' => 'P'
-        ]);
-
         $pemanfaat = DataPemanfaat::where([
             ['id_pinkel', $id->id],
             ['lokasi', Session::get('lokasi')]
@@ -816,7 +771,7 @@ class PinjamanIndividuController extends Controller
 
         return response()->json([
             'success' => true,
-            'msg' => 'Pinjaman anggota ' . $id->anggota->namadepan . ' Loan ID. ' . $id->id . ' berhasil dikembalikan menjadi status P (Pengajuan/Proposal)',
+            'msg' => 'Pinjaman atas nama ' . $id->anggota->namadepan . ' Loan ID. ' . $id->id . ' berhasil dikembalikan menjadi status P (Pengajuan/Proposal)',
             'id_pinkel' => $id->id
         ]);
     }

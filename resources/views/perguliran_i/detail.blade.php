@@ -897,7 +897,8 @@
                         success: function(result) {
                             if (result.success) {
                                 Swal.fire('Berhasil', result.msg, 'success').then(() => {
-                                    window.location.href = '/detail/' + result.id_pinkel
+                                    window.location.href = '/detail_i/' + result
+                                        .id_pinkel
                                 })
                             }
                         }

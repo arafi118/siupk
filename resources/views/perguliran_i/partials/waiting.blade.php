@@ -217,7 +217,7 @@
     </div>
 </form>
 
-<form action="/perguliran/kembali_proposal/{{ $perguliran_i->id }}" method="post" id="formKembaliProposal">
+<form action="/perguliran_i/kembali_proposal/{{ $perguliran_i->id }}" method="post" id="formKembaliProposal">
     @csrf
 </form>
 
@@ -275,7 +275,7 @@
                 success: function(result) {
                     if (result.success) {
                         Swal.fire('Berhasil', result.msg, 'success').then(() => {
-                            window.location.href = '/detail/' + result.id
+                            window.location.href = '/detail_i/' + result.id
                         })
                     } else {
                         Swal.fire('Error', result.msg, 'error')
