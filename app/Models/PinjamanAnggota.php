@@ -57,9 +57,18 @@ class PinjamanAnggota extends Model
         return $this->hasOne(PinjamanAnggota::class, 'nia', 'nia')->orderBy('tgl_cair', 'DESC');
     }
 
+    public function angsuran_pokok()
+    {
+        return $this->belongsTo(SistemAngsuran::class, 'sistem_angsuran');
+    }
+
+    public function angsuran_jasa()
+    {
+        return $this->belongsTo(SistemAngsuran::class, 'sa_jasa');
+    }
+
     public function rencana()
     {
         return $this->hasMany(RencanaAngsuranI::class, 'loan_id')->orderBy('jatuh_tempo', 'ASC');
     }
-
 }

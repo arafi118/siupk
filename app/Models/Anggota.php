@@ -21,7 +21,7 @@ class Anggota extends Model
 
     public function pinjaman_anggota()
     {
-        return $this->hasMany(PinjamanIndividu::class, 'nia');
+        return $this->hasMany(PinjamanAnggota::class, 'nia');
     }
 
     public function pinjaman()

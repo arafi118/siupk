@@ -312,7 +312,8 @@ class PinjamanIndividuController extends Controller
             'jenis_produk_pinjaman'
         ]);
 
-        $validate = Validator::make($data, [
+
+        $validate = Validator::make($request->all(), [
             'tgl_proposal' => 'required',
             'pengajuan' => 'required',
             'jangka' => 'required',
@@ -320,11 +321,20 @@ class PinjamanIndividuController extends Controller
             'jenis_jasa' => 'required',
             'sistem_angsuran_pokok' => 'required',
             'sistem_angsuran_jasa' => 'required',
-            'jenis_produk_pinjaman' => 'required'
+            'jenis_produk_pinjaman' => 'required',
+            'data_jaminan' => 'required|array',
+            'data_jaminan.*' => 'required',
         ]);
 
         if ($validate->fails()) {
             return response()->json($validate->errors(), Response::HTTP_MOVED_PERMANENTLY);
+        }
+
+        $jaminan = [];
+        foreach ($request->data_jaminan as $key => $val) {
+            $val = (Keuangan::startWith($key, 'nilai')) ? str_replace(',', '', str_replace('.00', '', $val)) : $val;
+
+            $jaminan[$key] = $val;
         }
 
         $insert = [
@@ -352,7 +362,7 @@ class PinjamanIndividuController extends Controller
             'sistem_angsuran' => $request->sistem_angsuran_pokok,
             'sa_jasa' => $request->sistem_angsuran_jasa,
             'status' => 'P',
-            'jaminan' => '',
+            'jaminan' => json_encode($jaminan),
             'catatan_verifikasi' => '0',
             'lu' => date('Y-m-d H:i:s'),
             'user_id' => auth()->user()->id
