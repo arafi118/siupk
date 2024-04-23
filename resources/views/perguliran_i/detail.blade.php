@@ -759,7 +759,7 @@
                                     if (result.success) {
                                         Swal.fire('Berhasil', result.msg, 'success').then(
                                             () => {
-                                                window.location.href = '/detail/' + id
+                                                window.location.href = '/detail_i/' + id
                                             })
                                     }
                                 })
