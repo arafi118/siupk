@@ -40,7 +40,7 @@ class PinjamanKelompokController extends Controller
 
         $status = strtolower($status);
 
-        $title = 'Tahapan Perguliran';
+        $title = 'Tahapan Perguliran Kelompok';
         return view('perguliran.index')->with(compact('title', 'status'));
     }
 

@@ -37,7 +37,7 @@ class PinjamanIndividuController extends Controller
 
         $status = strtolower($status);
 
-        $title = 'Tahapan perguliran_i';
+        $title = 'Tahapan Perguliran Individu';
         return view('perguliran_i.index')->with(compact('title', 'status'));
     }
 
@@ -792,7 +792,7 @@ class PinjamanIndividuController extends Controller
             'sis_pokok',
             'sis_jasa',
             'pinjaman_anggota'
-        ])->withCount('pinjaman_anggota')->first();
+        ])->first();
 
         if ($pinj_i->jenis_pp == '1') {
             $rekening_1 = '1.1.01.01';
