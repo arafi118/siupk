@@ -272,11 +272,7 @@ class PinjamanIndividuController extends Controller
      */
     public function store(Request $request)
     {
-<<<<<<< HEAD
-        $kel = anggota::where('id', $request->id_angg)->first();
-=======
         $ang = Anggota::where('id', $request->nia)->first();
->>>>>>> 61c927c9150240ec9018ced06d630b0b691c85ff
         $data = $request->only([
             'tgl_proposal',
             'pengajuan',
@@ -333,10 +329,7 @@ class PinjamanIndividuController extends Controller
             'sistem_angsuran' => $request->sistem_angsuran_pokok,
             'sa_jasa' => $request->sistem_angsuran_jasa,
             'status' => 'P',
-<<<<<<< HEAD
-=======
             'jaminan' => json_encode($jaminan),
->>>>>>> 61c927c9150240ec9018ced06d630b0b691c85ff
             'catatan_verifikasi' => '0',
             'wt_cair' => '0',
             'lu' => date('Y-m-d H:i:s'),
@@ -765,12 +758,7 @@ class PinjamanIndividuController extends Controller
         $pinj_i = PinjamanAnggota::where('id', $id)->with([
             'anggota',
             'sis_pokok',
-<<<<<<< HEAD
-            'sis_jasa',
-            'pinjaman_anggota'
-=======
             'sis_jasa'
->>>>>>> 61c927c9150240ec9018ced06d630b0b691c85ff
         ])->first();
 
         if ($pinj_i->jenis_pp == '1') {
@@ -1073,7 +1061,7 @@ class PinjamanIndividuController extends Controller
             'Form Verifikasi',
             'Rencana Angsuran',
             'Tanda Terima Jaminan',
-           
+
         ];
 
         $data['judul'] = 'Check List (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
@@ -1361,51 +1349,51 @@ class PinjamanIndividuController extends Controller
         }
     }
 
-    public function tandaTerimaJaminan($id, $data) 
+    public function tandaTerimaJaminan($id, $data)
     {
-         $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
+        $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
             'anggota'
-         ])->first();
-         
-            $data['kec'] = Kecamatan::where('id', Session::get('lokasi'))->first();
-            $data['dir'] = User::where([
-                ['level', '1'],
-                ['jabatan', '1'],
-                ['lokasi', Session::get('lokasi')]
-            ])->with(['j'])->first();
-            $data['judul'] = 'Tanda Terima Jaminan (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
-            $view = view('perguliran_i.dokumen.tanda_terima_jaminan', $data)->render();
-    
-            if ($data['type'] == 'pdf') {
-                $pdf = PDF::loadHTML($view);
-                return $pdf->stream();
-            } else {
-                return $view;
-            }
-        }
+        ])->first();
 
-        public function SuratPersetujuanKuasa($id, $data) 
-        {
-             $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
-                'anggota'
-             ])->first();
-             
-                $data['kec'] = Kecamatan::where('id', Session::get('lokasi'))->first();
-                $data['dir'] = User::where([
-                    ['level', '1'],
-                    ['jabatan', '1'],
-                    ['lokasi', Session::get('lokasi')]
-                ])->with(['j'])->first();
-                $data['judul'] = 'Surat Persetujuan dan Kuasa (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
-                $view = view('perguliran_i.dokumen.surat_persetujuan_kuasa', $data)->render();
-        
-                if ($data['type'] == 'pdf') {
-                    $pdf = PDF::loadHTML($view);
-                    return $pdf->stream();
-                } else {
-                    return $view;
-                }
-            }
+        $data['kec'] = Kecamatan::where('id', Session::get('lokasi'))->first();
+        $data['dir'] = User::where([
+            ['level', '1'],
+            ['jabatan', '1'],
+            ['lokasi', Session::get('lokasi')]
+        ])->with(['j'])->first();
+        $data['judul'] = 'Tanda Terima Jaminan (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
+        $view = view('perguliran_i.dokumen.tanda_terima_jaminan', $data)->render();
+
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view);
+            return $pdf->stream();
+        } else {
+            return $view;
+        }
+    }
+
+    public function SuratPersetujuanKuasa($id, $data)
+    {
+        $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
+            'anggota'
+        ])->first();
+
+        $data['kec'] = Kecamatan::where('id', Session::get('lokasi'))->first();
+        $data['dir'] = User::where([
+            ['level', '1'],
+            ['jabatan', '1'],
+            ['lokasi', Session::get('lokasi')]
+        ])->with(['j'])->first();
+        $data['judul'] = 'Surat Persetujuan dan Kuasa (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
+        $view = view('perguliran_i.dokumen.surat_persetujuan_kuasa', $data)->render();
+
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view);
+            return $pdf->stream();
+        } else {
+            return $view;
+        }
+    }
     public function daftarHadirVerifikasi($id, $data)
     {
         $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
@@ -2566,7 +2554,7 @@ class PinjamanIndividuController extends Controller
                     $target_jasa += $jasa;
                 }
 
-              
+
                 $rencana[] = [
                     'loan_id' => $id_pinj,
                     'angsuran_ke' => $x,
@@ -2588,12 +2576,12 @@ class PinjamanIndividuController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function RekomendasiVerifikator($id, $data) 
+    public function RekomendasiVerifikator($id, $data)
     {
         $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
-           'anggota'
+            'anggota'
         ])->first();
-             
+
         $data['kec'] = Kecamatan::where('id', Session::get('lokasi'))->first();
         $data['user'] = User::where([
             ['lokasi', Session::get('lokasi')],
