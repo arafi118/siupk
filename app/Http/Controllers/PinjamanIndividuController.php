@@ -229,22 +229,22 @@ class PinjamanIndividuController extends Controller
         return view('pinjaman_i.create')->with(compact('title', 'id_angg'));
     }
 
-    public function DaftarAnggota()
+    public function DaftarAnggota($nia = null)
     {
-        $nia = request()->get('id_angg') ?: 0;
-        $anggota = anggota::with([
+        $id_angg = request()->get('id_angg') ?: 0;
+        $anggota = Anggota::with([
             'd',
             'pinjaman' => function ($query) {
                 $query->orderBy('tgl_proposal', 'DESC');
             }
-        ])->withCount('pinjaman')->orderBy('namadepan', 'ASC')->get();
+        ])->orderBy('namadepan', 'ASC')->get();
 
         return view('pinjaman_i.partials.anggota')->with(compact('anggota', 'nia'));
     }
 
     public function register($id_angg)
     {
-        $anggota = anggota::where('id', $id_angg)->with([
+        $anggota = Anggota::where('id', $id_angg)->with([
             'pinjaman' => function ($query) {
                 $query->orderBy('tgl_proposal', 'DESC');
             },
@@ -264,7 +264,34 @@ class PinjamanIndividuController extends Controller
             }
         }
 
-        return view('pinjaman_i.partials.register')->with(compact('anggota', 'kec', 'jenis_jasa', 'sistem_angsuran', 'jenis_pp', 'jenis_pp_dipilih'));
+        $jaminan = [
+            [
+                'id' => '1',
+                'nama' => 'Surat Tanah',
+            ],
+            [
+                'id' => '2',
+                'nama' => 'BPKB',
+            ],
+            [
+                'id' => '3',
+                'nama' => 'SK. Pegawai',
+            ],
+            [
+                'id' => '4',
+                'nama' => 'Lain Lain',
+            ],
+        ];
+
+        return view('pinjaman_i.partials.register')->with(compact('anggota', 'kec', 'jenis_jasa', 'sistem_angsuran', 'jenis_pp', 'jenis_pp_dipilih', 'jaminan'));
+    }
+
+    public function Jaminan($id)
+    {
+        return response()->json([
+            'success' => true,
+            'view' => view('pinjaman_i.partials.jaminan')->with(compact('id'))->render()
+        ]);
     }
 
     /**
