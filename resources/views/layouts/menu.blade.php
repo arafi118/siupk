@@ -9,7 +9,6 @@
                 $link[] = $menu_link;
             });
 
-            dd($path, $link);
             $active = '';
             if (in_array($path, $link)) {
                 $active = 'active';
