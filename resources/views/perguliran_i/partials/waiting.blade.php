@@ -1,4 +1,4 @@
-<form action="/perguliran/{{ $perguliran_i->id }}" method="post" id="FormInput">
+<form action="/perguliran_i/{{ $perguliran_i->id }}" method="post" id="FormInput">
     @csrf
     @method('PUT')
     <div class="card mb-3">

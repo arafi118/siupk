@@ -209,7 +209,7 @@
                     <div class="input-group input-group-static my-3">
                         <label for="nomor_spk">Nomor SPK</label>
                         <input autocomplete="off" type="text" name="nomor_spk" id="nomor_spk"
-                            class="form-control" value="{{ $perguliran_i->nomor_spk }}">
+                            class="form-control" value="{{ $perguliran_i->spk_no }}">
                         <small class="text-danger" id="msg_nomor_spk"></small>
                     </div>
                 </div>
