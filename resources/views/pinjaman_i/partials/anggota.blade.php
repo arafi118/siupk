@@ -41,7 +41,7 @@
     </div>
     <div class="col-md-3 col-5 d-flex align-items-end">
         <div class="d-grid w-100 mb-2">
-            <a href="/database/individu/register_individu" class="btn btn-info btn-sm mb-0">Register Individu</a>
+            <a href="/database/penduduk/register_penduduk" class="btn btn-info btn-sm mb-0">Register Individu</a>
         </div>
     </div>
 </div>

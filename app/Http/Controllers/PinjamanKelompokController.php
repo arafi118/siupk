@@ -40,7 +40,7 @@ class PinjamanKelompokController extends Controller
 
         $status = strtolower($status);
 
-        $title = 'Tahapan Perguliran';
+        $title = 'Tahapan Perguliran Kelompok';
         return view('perguliran.index')->with(compact('title', 'status'));
     }
 
@@ -1045,6 +1045,10 @@ class PinjamanKelompokController extends Controller
             PinjamanAnggota::where('id_pinkel', $perguliran->id)->delete();
 
             PinjamanKelompok::destroy($perguliran->id);
+            DataPemanfaat::where([
+                'lokasi' => Session::get('lokasi'),
+                'id_pinkel' => $perguliran->id
+            ])->delete();
 
             return response()->json([
                 'hapus' => true,

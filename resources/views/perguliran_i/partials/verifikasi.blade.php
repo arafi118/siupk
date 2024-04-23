@@ -219,7 +219,7 @@
                     <div class="input-group input-group-static my-3">
                         <label for="nomor_spk">Nomor SPK</label>
                         <input autocomplete="off" type="text" name="nomor_spk" id="nomor_spk"
-                            class="form-control" value="{{ $perguliran_i->nomor_spk }}">
+                            class="form-control" value="{{ $perguliran_i->spk_no }}">
                         <small class="text-danger" id="msg_nomor_spk"></small>
                     </div>
                 </div>
@@ -275,114 +275,31 @@
         dateFormat: "d/m/Y"
     })
 
-    $('.idpa_proposal').change(function(e) {
-
-        var idpa = $(this).attr('id')
-        var value = $(this).val()
-
-        $.ajax({
-            url: '/pinjaman_anggota/' + idpa,
-            type: 'post',
-            data: {
-                '_method': 'PUT',
-                'idpa': idpa,
-                'verifikasi': value,
-                'status': 'V',
-                '_token': $('[name=_token]').val()
-            },
-            success: function(result) {
-                var total = 0;
-                $('.idpa_proposal').map(function() {
-                    var idpa = $(this).attr('id')
-                    var value = $(this).val()
-
-                    $('.idpa-' + idpa).val(value)
-
-                    value = value.split(',').join('')
-                    value = value.split('.00').join('')
-                    value = parseFloat(value)
-
-                    total += value
-
-                })
-
-                $('#jumlah').html(result.jumlah)
-                $('#alokasi').val(result.jumlah)
-                $('#_alokasi').html(result.jumlah)
-                $('#__alokasi').val(result.jumlah)
-            }
-        })
-    })
-
-    $(document).on('change', '.idpa', function(e) {
-        var total = 0;
-        $('.idpa').map(function() {
-            var value = $(this).val()
-            if (value == '') {
-                value = 0
-            } else {
-                value = value.split(',').join('')
-                value = value.split('.00').join('')
-            }
-
-            value = parseFloat(value)
-
-            total += value
-        })
-
-        $('#__alokasi').val(total)
-        $('#_alokasi').html(formatter.format(total))
-        $('#alokasi').val(formatter.format(total))
-    })
-
     $(document).on('click', '#Simpan', async function(e) {
         e.preventDefault()
         $('small').html('')
 
-        var alokasi = parseInt($('#alokasi').val().split(',').join('').split('.00').join(''))
-        var __alokasi = parseInt($('#__alokasi').val())
+        var form = $('#FormInput')
+        $.ajax({
+            type: 'POST',
+            url: form.attr('action') + '?save=true',
+            data: form.serialize(),
+            success: function(result) {
+                Swal.fire('Berhasil', result.msg, 'success').then(() => {
+                    window.location.href = '/detail_i/' + result.id
+                })
+            },
+            error: function(result) {
+                const respons = result.responseJSON;
 
-        var lanjut = true;
-        if (alokasi != __alokasi) {
-            lanjut = await Swal.fire({
-                title: 'Peringatan',
-                text: 'Jumlah alokasi Anggota dan Kelompok Berbeda. Tetap lanjutkan?',
-                showCancelButton: true,
-                confirmButtonText: 'Lanjutkan',
-                cancelButtonText: 'Batal',
-                icon: 'warning'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    return true;
-                }
-
-                return false
-            })
-        }
-
-        if (lanjut) {
-            var form = $('#FormInput')
-            $.ajax({
-                type: 'POST',
-                url: form.attr('action') + '?save=true',
-                data: form.serialize(),
-                success: function(result) {
-                    Swal.fire('Berhasil', result.msg, 'success').then(() => {
-                        window.location.href = '/detail/' + result.id
-                    })
-                },
-                error: function(result) {
-                    const respons = result.responseJSON;
-
-                    Swal.fire('Error', 'Cek kembali input yang anda masukkan', 'error')
-                    $.map(respons, function(res, key) {
-                        $('#' + key).parent('.input-group.input-group-static')
-                            .addClass(
-                                'is-invalid')
-                        $('#msg_' + key).html(res)
-                    })
-                }
-            })
-        }
+                Swal.fire('Error', 'Cek kembali input yang anda masukkan', 'error')
+                $.map(respons, function(res, key) {
+                    $('#' + key).parent('.input-group.input-group-static')
+                        .addClass(
+                            'is-invalid')
+                    $('#msg_' + key).html(res)
+                })
+            }
+        })
     })
 </script>

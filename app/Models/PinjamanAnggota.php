@@ -24,14 +24,26 @@ class PinjamanAnggota extends Model
         return $this->belongsTo(StatusPinjaman::class, 'status', 'kd_status');
     }
 
+    public function sis_pokok()
+    {
+        return $this->belongsTo(SistemAngsuran::class, 'sistem_angsuran');
+    }
+
+    public function sis_jasa()
+    {
+        return $this->belongsTo(SistemAngsuran::class, 'sa_jasa');
+    }
+
     public function pinkel()
     {
         return $this->belongsTo(PinjamanKelompok::class, 'id_pinkel');
     }
+
     public function target()
     {
         return $this->hasOne(RencanaAngsuranI::class, 'loan_id')->orderBy('jatuh_tempo', 'DESC');
     }
+
     public function kelompok()
     {
         return $this->belongsTo(Kelompok::class, 'id_kel');
@@ -57,9 +69,18 @@ class PinjamanAnggota extends Model
         return $this->hasOne(PinjamanAnggota::class, 'nia', 'nia')->orderBy('tgl_cair', 'DESC');
     }
 
+    public function angsuran_pokok()
+    {
+        return $this->belongsTo(SistemAngsuran::class, 'sistem_angsuran');
+    }
+
+    public function angsuran_jasa()
+    {
+        return $this->belongsTo(SistemAngsuran::class, 'sa_jasa');
+    }
+
     public function rencana()
     {
         return $this->hasMany(RencanaAngsuranI::class, 'loan_id')->orderBy('jatuh_tempo', 'ASC');
     }
-
 }

@@ -200,7 +200,12 @@
                         <ul class="list-group list-group-flush mt-2">
                             @foreach ($penduduk->pinjaman_anggota as $pinj)
                                 @php
-                                    $pinkel = $pinj->pinkel;
+                                    $pinkel = $pinj;
+                                    $detail = 'detail_i';
+                                    if ($pinj->pinkel) {
+                                        $detail = 'detail';
+                                        $pinkel = $pinj->pinkel;
+                                    }
                                 @endphp
                                 <li class="list-group-item">
                                     @php
@@ -218,11 +223,12 @@
                                             $jumlah = $pinj->alokasi;
                                         }
                                     @endphp
-                                    <blockquote data-link="/detail/{{ $pinkel->id }}"
+                                    <blockquote data-link="/{{ $detail }}/{{ $pinkel->id }}"
                                         class="blockquote text-white mb-1 pointer">
                                         <p class="text-dark ms-3">
                                             <span class="badge badge-{{ $pinkel->sts->warna_status }}">
-                                                Loan ID. {{ $pinkel->id }} {{ $pinj->kelompok->nama_kelompok }}
+                                                Loan ID. {{ $pinkel->id }}
+                                                {{ $pinj->pinkel ? $pinj->kelompok->nama_kelompok : $penduduk->namadepan }}
                                             </span>
                                             |
                                             <span>
