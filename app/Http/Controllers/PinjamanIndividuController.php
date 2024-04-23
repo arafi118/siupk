@@ -337,8 +337,11 @@ class PinjamanIndividuController extends Controller
         }
 
         $insert = [
-            'id_angg' => $request->id_angg,
+            'jenis_pinjaman' => 'I',
+            'id_kel' => '0',
+            'id_pinkel' => '0',
             'jenis_pp' => $request->jenis_produk_pinjaman,
+            'nia' => $request->nia,
             'tgl_proposal' => Tanggal::tglNasional($request->tgl_proposal),
             'tgl_verifikasi' => Tanggal::tglNasional($request->tgl_proposal),
             'tgl_dana' => Tanggal::tglNasional($request->tgl_proposal),
@@ -348,6 +351,8 @@ class PinjamanIndividuController extends Controller
             'proposal' => str_replace(',', '', str_replace('.00', '', $request->pengajuan)),
             'verifikasi' => str_replace(',', '', str_replace('.00', '', $request->pengajuan)),
             'alokasi' => str_replace(',', '', str_replace('.00', '', $request->pengajuan)),
+            'kom_pokok' => '0',
+            'kom_jasa' => '0',
             'spk_no' => '0',
             'sumber' => '1',
             'pros_jasa' => $request->pros_jasa,
@@ -358,7 +363,6 @@ class PinjamanIndividuController extends Controller
             'status' => 'P',
             'jaminan' => json_encode($jaminan),
             'catatan_verifikasi' => '0',
-            'wt_cair' => '0',
             'lu' => date('Y-m-d H:i:s'),
             'user_id' => auth()->user()->id
         ];
