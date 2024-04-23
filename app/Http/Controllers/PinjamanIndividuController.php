@@ -231,7 +231,7 @@ class PinjamanIndividuController extends Controller
 
     public function DaftarAnggota()
     {
-        $id_angg = request()->get('id_angg') ?: 0;
+        $nia = request()->get('id_angg') ?: 0;
         $anggota = anggota::with([
             'd',
             'pinjaman' => function ($query) {
