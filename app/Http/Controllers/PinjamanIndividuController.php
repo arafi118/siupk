@@ -1489,6 +1489,8 @@ class PinjamanIndividuController extends Controller
         $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
             'jpp',
             'anggota',
+            'anggota.d',
+            'anggota.d.sebutan_desa',
             'sis_pokok',
             'jasa'
         ])->first();
@@ -1499,7 +1501,7 @@ class PinjamanIndividuController extends Controller
             ['lokasi', Session::get('lokasi')]
         ])->first();
 
-        $data['transaksi'] = Transaksi::where('id_pinj', $id)->orderBy('tgl_transaksi', 'ASC')->with('user')->orderBy('idtp', 'ASC')->get();
+        $data['transaksi'] = Transaksi::where('id_pinj_i', $id)->orderBy('tgl_transaksi', 'ASC')->with('user')->orderBy('idtp', 'ASC')->get();
 
         $data['judul'] = 'Rekening Koran (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
         $view = view('perguliran_i.dokumen.rekening_koran', $data)->render();
