@@ -24,17 +24,15 @@
     } @endphp <div class="card mb-3">
         <div class="card-body p-3">
             <h5 class="mb-1">
-                Kelompok {{ $perguliran_i->kelompok->nama_kelompok }} Loan ID. {{ $perguliran_i->id }}
+                Atas Nama {{ $perguliran_i->anggota->namadepan }} Loan ID. {{ $perguliran_i->id }}
                 ({{ $perguliran_i->jpp->nama_jpp }})
             </h5>
             <p class="mb-0">
-                <span
-                    class="badge badge-{{ $perguliran_i->sts->warna_status }}">{{ $perguliran_i->kelompok->kd_kelompok }}</span>
-                <span
-                    class="badge badge-{{ $perguliran_i->sts->warna_status }}">{{ $perguliran_i->kelompok->alamat_kelompok }}</span>
+                <span class="badge badge-{{ $perguliran_i->sts->warna_status }}">{{ $perguliran_i->anggota->nik }}</span>
+                <span class="badge badge-{{ $perguliran_i->sts->warna_status }}">{{ $perguliran_i->anggota->alamat }}</span>
                 <span class="badge badge-{{ $perguliran_i->sts->warna_status }}">
-                    {{ $perguliran_i->kelompok->d->sebutan_desa->sebutan_desa }}
-                    {{ $perguliran_i->kelompok->d->nama_desa }}
+                    {{ $perguliran_i->anggota->d->sebutan_desa->sebutan_desa }}
+                    {{ $perguliran_i->anggota->d->nama_desa }}
                 </span>
             </p>
         </div>
@@ -47,13 +45,13 @@
             <table class="table p-0 mb-3">
                 <tr>
                     <td>Nama Kelompok</td>
-                    <td>: {{ $perguliran_i->kelompok->nama_kelompok }}</td>
+                    <td>: {{ $perguliran_i->anggota->nama_kelompok }}</td>
                     <td>Alokasi</td>
                     <td>{{ number_format($perguliran_i->alokasi) }}</td>
                 </tr>
                 <tr>
                     <td>Desa</td>
-                    <td>: {{ $perguliran_i->kelompok->d->nama_desa }}</td>
+                    <td>: {{ $perguliran_i->anggota->d->nama_desa }}</td>
                     <td>Jasa</td>
                     <td>{{ $perguliran_i->pros_jasa }}%</td>
                 </tr>
@@ -158,7 +156,7 @@
 
             Swal.fire({
                 title: 'Peringatan',
-                text: 'Anda akan melakukan validasi pelunasan untuk kelompok {{ $perguliran_i->kelompok->nama_kelompok }} dengan Loan ID. {{ $perguliran_i->id }}. Setelah klik tombol Lunaskan data tidak dapat diubah kembali',
+                text: 'Anda akan melakukan validasi pelunasan untuk kelompok {{ $perguliran_i->anggota->nama_kelompok }} dengan Loan ID. {{ $perguliran_i->id }}. Setelah klik tombol Lunaskan data tidak dapat diubah kembali',
                 showCancelButton: true,
                 confirmButtonText: 'Lunaskan',
                 cancelButtonText: 'Batal',

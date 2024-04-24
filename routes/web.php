@@ -158,7 +158,7 @@ Route::get('/perguliran_i/waiting', [PinjamanIndividuController::class, 'waiting
 Route::get('/perguliran_i/aktif', [PinjamanIndividuController::class, 'aktif'])->middleware('auth');
 Route::get('/perguliran_i/lunas', [PinjamanIndividuController::class, 'lunas'])->middleware('auth');
 Route::get('/perguliran_i/generate/{id_pinj}', [PinjamanIndividuController::class, 'generate'])->middleware('auth');
-Route::get('/lunas/{perguliran_i}', [PinjamanIndividuController::class, 'pelunasan'])->middleware('auth');
+Route::get('/lunas_i/{perguliran_i}', [PinjamanIndividuController::class, 'pelunasan'])->middleware('auth');
 Route::get('/cetak_keterangan_lunas/{perguliran_i}', [PinjamanIndividuController::class, 'keterangan'])->middleware('auth');
 
 Route::get('/perguliran_i/cari_kelompok', [PinjamanIndividuController::class, 'cariKelompok'])->middleware('auth');

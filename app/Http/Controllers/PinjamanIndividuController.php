@@ -430,7 +430,7 @@ class PinjamanIndividuController extends Controller
         $title = 'Detal Pinjaman anggota ' . $perguliran_i->anggota->namadepan;
         $real = RealAngsuranI::where('loan_id', $perguliran_i->id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
         $ra = RencanaAngsuranI::where('loan_id', $perguliran_i->id)->orderBy('jatuh_tempo', 'DESC')->first();
-        return view('perguliran_i.partials.lunas')->with(compact('title', 'perguliran_i', 'real_i', 'ra'));
+        return view('perguliran_i.partials.lunas')->with(compact('title', 'perguliran_i', 'real', 'ra'));
     }
 
     public function keterangan(PinjamanIndividu $perguliran_i)
