@@ -21,4 +21,9 @@ class JenisProdukPinjaman extends Model
     {
         return $this->hasMany(PinjamanAnggota::class, 'jenis_pp');
     }
+
+    public function pinjaman_individu()
+    {
+        return $this->hasMany(PinjamanIndividu::class, 'jenis_pp');
+    }
 }
