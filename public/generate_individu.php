@@ -315,15 +315,11 @@ if (isset($_GET['lokasi']) && isset($_GET['where'])) {
             // Cek apakah data yang akan di input kedalam tabel real_angsuran_i_$lokasi sudah ada
             if (mysqli_num_rows($realisasi) <= 0) {
                 $sqlinput2 = false;
-                // Cek rekening_kredit apakah termasuk kedalam angsuran
-                if ($tr['rekening_kredit'] == $poko_kredit || $tr['rekening_kredit'] == $jasa_kredit) {
-
-                    // Input data kedalam tabel real_angsurann_$lokasi
-                    $sqlinput2 = mysqli_query($koneksi, "INSERT INTO `real_angsuran_i_$lokasi` (`id`, `loan_id`, `tgl_transaksi`, `realisasi_pokok`, `realisasi_jasa`, 
+                // Input data kedalam tabel real_angsurann_$lokasi
+                $sqlinput2 = mysqli_query($koneksi, "INSERT INTO `real_angsuran_i_$lokasi` (`id`, `loan_id`, `tgl_transaksi`, `realisasi_pokok`, `realisasi_jasa`, 
                     `sum_pokok`, `sum_jasa`, `saldo_pokok`, `saldo_jasa`, `tunggakan_pokok`, `tunggakan_jasa`, `lu`, `id_user`) VALUES ('$tr[idtp]','$pk[id]',
                     '$tgl_transaksi','$realisasi_pokok','$realisasi_jasa','$sum_pokok','$sum_jasa','$saldo_pokok','$saldo_jasa','$tunggakan_pokok','$tunggakan_jasa',
                     '$datetime','1')");
-                }
                 if (!$sqlinput2) {
                     var_dump($koneksi->error);
                     echo "<br>";
