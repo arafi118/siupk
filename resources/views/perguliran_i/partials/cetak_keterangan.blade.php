@@ -51,18 +51,19 @@
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <div class="card mt-3 text-sm shadow-none border-1">
             <div class="card-body">
-                Dengan mempertimbangkan Standar Operasional Prosedur (SOP) yang berlaku, dengan ini Saya selaku manajer,
+                Dengan mempertimbangkan Standar Operasional Prosedur (SOP) yang berlaku, dengan ini Saya selaku
+                {{ $kec->sebutan_level_1 }},
                 menyatakan dengan sebenar-benarnya bahwa :
                 <table class="table p-0 mb-3">
                     <tr class="p-1">
-                        <td>Nama Kelompok</td>
-                        <td>: {{ $perguliran_i->kelompok->nama_kelompok }}</td>
+                        <td>Nama</td>
+                        <td>: {{ $perguliran_i->anggota->namadepan }}</td>
                         <td>Alokasi</td>
                         <td>{{ number_format($perguliran_i->alokasi) }}</td>
                     </tr>
                     <tr>
                         <td>Desa</td>
-                        <td>: {{ $perguliran_i->kelompok->d->nama_desa }}</td>
+                        <td>: {{ $perguliran_i->anggota->d->nama_desa }}</td>
                         <td>Jasa</td>
                         <td>{{ $perguliran_i->pros_jasa }}%</td>
                     </tr>
