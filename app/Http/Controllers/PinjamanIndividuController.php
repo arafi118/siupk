@@ -929,20 +929,14 @@ class PinjamanIndividuController extends Controller
             'status' => 'H'
         ]);
 
-        $pinj_anggota = PinjamanAnggota::where('id_pinkel', $pinj_i->id)->update([
-            'tgl_lunas' => Tanggal::tglNasional($data['tgl_penghapusan']),
-            'catatan_verifikasi' => $data['alasan_penghapusan'],
-            'status' => 'H'
-        ]);
-
         $trx = Transaksi::create([
             'tgl_transaksi' => (string) Tanggal::tglNasional($data['tgl_penghapusan']),
             'rekening_debit' => (string) $rekening_debit,
             'rekening_kredit' => (string) $rekening_kredit,
             'idtp' => $last_idtp + 1,
-            'id_pinj' => $pinj_i->id,
-            'id_pinj_i' => '0',
-            'keterangan_transaksi' => (string) 'Penghapusan Pinjaman anggota ' . $pinj_i->anggota->namadepan . ' (' . $pinj_i->id . ')',
+            'id_pinj' => 0,
+            'id_pinj_i' => $pinj_i->id,
+            'keterangan_transaksi' => (string) 'Penghapusan Pinjaman ' . $pinj_i->anggota->namadepan . ' (' . $pinj_i->id . ')',
             'relasi' => (string) $pinj_i->anggota->namadepan,
             'jumlah' => $data['saldo'],
             'urutan' => '0',
@@ -951,7 +945,7 @@ class PinjamanIndividuController extends Controller
 
         return response()->json([
             'success' => true,
-            'msg' => 'Penghapusan Pinjaman anggota ' . $pinj_i->anggota->namadepan . ' (' . $pinj_i->id . ') berhasil',
+            'msg' => 'Penghapusan Pinjaman atas nama ' . $pinj_i->anggota->namadepan . ' (' . $pinj_i->id . ') berhasil',
             'id' => $pinj_i->id
         ]);
     }
