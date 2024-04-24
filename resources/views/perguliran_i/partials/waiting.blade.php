@@ -1,6 +1,19 @@
 <form action="/perguliran_i/{{ $perguliran_i->id }}" method="post" id="FormInput">
     @csrf
     @method('PUT')
+
+    @if ($pinj_aktif)
+        <div class="alert alert-danger text-white" role="alert">
+            <span class="text-sm">
+                <b>{{ ucwords(strtolower($pinj_aktif->anggota->namadepan)) }}</b> masih memiliki kewajiban
+                angsuran pinjaman dengan
+                <a href="/detail_i/{{ $pinj_aktif->id }}" target="_blank" class="alert-link text-white">
+                    Loan ID. {{ $pinj_aktif->id }}
+                </a>
+            </span>
+        </div>
+    @endif
+
     <div class="card mb-3">
         <div class="card-body">
             <div class="row mt-0">
@@ -208,7 +221,8 @@
                 <button type="button" id="kembaliProposal" class="btn btn-warning btn-sm">
                     Kembalikan Ke Proposal
                 </button>
-                <button type="button" id="Simpan" class="btn btn-github ms-1 btn-sm">
+                <button type="button" id="Simpan" {{ $pinj_aktif ? 'disabled' : '' }}
+                    class="btn btn-github ms-1 btn-sm">
                     Cairkan Sekarang
                 </button>
 

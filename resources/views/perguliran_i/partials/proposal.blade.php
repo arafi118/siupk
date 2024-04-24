@@ -213,10 +213,6 @@
         e.preventDefault()
         $('small').html('')
 
-<<<<<<< HEAD
-        var verifikasi = parseInt($('#verifikasi').val().split(',').join('').split('.00').join(''))
-        var _verifikasi = parseInt($('#_verifikasi').val())
-=======
         var form = $('#FormInput')
         $.ajax({
             type: 'POST',
@@ -229,7 +225,6 @@
             },
             error: function(result) {
                 const respons = result.responseJSON;
->>>>>>> 61c927c9150240ec9018ced06d630b0b691c85ff
 
                 Swal.fire('Error', 'Cek kembali input yang anda masukkan', 'error')
                 $.map(respons, function(res, key) {

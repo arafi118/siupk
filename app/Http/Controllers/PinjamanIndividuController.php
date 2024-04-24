@@ -424,16 +424,18 @@ class PinjamanIndividuController extends Controller
             $view = 'edit_proposal';
         }
 
-        $pinj_a = [];
+        $pinj_aktif = '';
         if ($perguliran_i->status == 'W') {
             $pinj_i_aktif = PinjamanIndividu::where([
-                ['id_angg', $perguliran_i->id_angg],
+                ['nia', $perguliran_i->nia],
                 ['status', 'A'],
                 ['jenis_pinjaman', 'I']
-            ]);
+            ])->with('anggota')->orderBy('tgl_cair', 'DESC')->first();
+
+            $pinj_aktif = $pinj_i_aktif;
         }
 
-        return view('perguliran_i.partials/' . $view)->with(compact('perguliran_i', 'jenis_jasa', 'sistem_angsuran', 'sumber_bayar', 'debet', 'pinj_a'));
+        return view('perguliran_i.partials/' . $view)->with(compact('perguliran_i', 'jenis_jasa', 'sistem_angsuran', 'sumber_bayar', 'debet', 'pinj_aktif'));
     }
 
     public function detail(PinjamanIndividu $perguliran_i)
