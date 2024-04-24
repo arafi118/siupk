@@ -389,6 +389,7 @@ class PinjamanIndividuController extends Controller
      */
     public function show(PinjamanIndividu $perguliran_i)
     {
+        $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $perguliran_i = $perguliran_i->with([
             'sis_pokok',
             'sis_jasa',
@@ -433,7 +434,7 @@ class PinjamanIndividuController extends Controller
             ]);
         }
 
-        return view('perguliran_i.partials/' . $view)->with(compact('perguliran_i', 'jenis_jasa', 'sistem_angsuran', 'sumber_bayar', 'debet', 'pinj_a'));
+        return view('perguliran_i.partials/' . $view)->with(compact('perguliran_i', 'jenis_jasa', 'sistem_angsuran', 'sumber_bayar', 'debet', 'pinj_a', 'kec'));
     }
 
     public function detail(PinjamanIndividu $perguliran_i)
