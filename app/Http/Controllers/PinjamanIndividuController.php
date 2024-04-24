@@ -389,7 +389,6 @@ class PinjamanIndividuController extends Controller
      */
     public function show(PinjamanIndividu $perguliran_i)
     {
-        $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $perguliran_i = $perguliran_i->with([
             'sis_pokok',
             'sis_jasa',
@@ -434,7 +433,7 @@ class PinjamanIndividuController extends Controller
             ]);
         }
 
-        return view('perguliran_i.partials/' . $view)->with(compact('perguliran_i', 'jenis_jasa', 'sistem_angsuran', 'sumber_bayar', 'debet', 'pinj_a', 'kec'));
+        return view('perguliran_i.partials/' . $view)->with(compact('perguliran_i', 'jenis_jasa', 'sistem_angsuran', 'sumber_bayar', 'debet', 'pinj_a'));
     }
 
     public function detail(PinjamanIndividu $perguliran_i)
@@ -447,10 +446,11 @@ class PinjamanIndividuController extends Controller
 
     public function pelunasan(PinjamanIndividu $perguliran_i)
     {
+        $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $title = 'Detal Pinjaman anggota ' . $perguliran_i->anggota->namadepan;
         $real = RealAngsuranI::where('loan_id', $perguliran_i->id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
         $ra = RencanaAngsuranI::where('loan_id', $perguliran_i->id)->orderBy('jatuh_tempo', 'DESC')->first();
-        return view('perguliran_i.partials.lunas')->with(compact('title', 'perguliran_i', 'real', 'ra'));
+        return view('perguliran_i.partials.lunas')->with(compact('title', 'perguliran_i', 'real', 'ra', 'kec'));
     }
 
     public function keterangan(PinjamanIndividu $perguliran_i)
