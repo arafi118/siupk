@@ -283,7 +283,7 @@ class PinjamanIndividuController extends Controller
             ],
         ];
 
-        return view('pinjaman_i.partials.register')->with(compact('anggota', 'kec', 'jenis_jasa', 'sistem_angsuran', 'jenis_pp', 'jenis_pp_dipilih'));
+        return view('pinjaman_i.partials.register')->with(compact('anggota', 'kec', 'jenis_jasa', 'sistem_angsuran', 'jenis_pp', 'jenis_pp_dipilih', 'jaminan'));
     }
 
     public function Jaminan($id)
