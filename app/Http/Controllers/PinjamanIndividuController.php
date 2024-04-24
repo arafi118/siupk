@@ -239,7 +239,7 @@ class PinjamanIndividuController extends Controller
             }
         ])->orderBy('namadepan', 'ASC')->get();
 
-        return view('pinjaman_i.partials.individu')->with(compact('anggota', 'nia'));
+        return view('pinjaman_i.partials.anggota')->with(compact('anggota', 'nia'));
     }
 
     public function register($id_angg)
