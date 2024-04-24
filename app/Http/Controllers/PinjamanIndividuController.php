@@ -465,7 +465,7 @@ class PinjamanIndividuController extends Controller
             ['jabatan', '1']
         ])->first();
 
-        return view('perguliran_i.partials.cetak_keterangan')->with(compact('title', 'perguliran_i', 'real_i', 'ra', 'kec', 'dir'));
+        return view('perguliran_i.partials.cetak_keterangan')->with(compact('title', 'perguliran_i', 'real', 'ra', 'kec', 'dir'));
     }
 
     /**
