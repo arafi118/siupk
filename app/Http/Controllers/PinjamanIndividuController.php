@@ -264,6 +264,25 @@ class PinjamanIndividuController extends Controller
             }
         }
 
+        $jaminan = [
+            [
+                'id' => '1',
+                'nama' => 'Surat Tanah',
+            ],
+            [
+                'id' => '2',
+                'nama' => 'BPKB',
+            ],
+            [
+                'id' => '3',
+                'nama' => 'SK. Pegawai',
+            ],
+            [
+                'id' => '4',
+                'nama' => 'Lain Lain',
+            ],
+        ];
+
         return view('pinjaman_i.partials.register')->with(compact('anggota', 'kec', 'jenis_jasa', 'sistem_angsuran', 'jenis_pp', 'jenis_pp_dipilih'));
     }
 
