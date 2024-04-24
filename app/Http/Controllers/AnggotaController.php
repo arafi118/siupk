@@ -229,6 +229,7 @@ class AnggotaController extends Controller
             'pinjaman_anggota.pinkel.sts',
             'pinjaman_anggota.pinkel.angsuran_pokok',
         ])->where('id', $penduduk->id)->first();
+
         $desa_dipilih = $penduduk->desa;
         $jenis_usaha_dipilih = $penduduk->usaha;
         $hubungan_dipilih = $penduduk->hubungan;

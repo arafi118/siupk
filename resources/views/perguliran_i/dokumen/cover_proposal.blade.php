@@ -61,7 +61,7 @@
     <header>
         <h1 style="margin: 0px;">{{ strtoupper($judul) }}</h1>
         <div style="margin: 0px; font-size: 24px;">
-            {{ strtoupper('Pinjaman Kelompok ' . $pinkel->jpp->nama_jpp) }}
+            {{ strtoupper('Pinjaman Anggota ' . $pinkel->jpp->nama_jpp) }}
         </div>
     </header>
 
@@ -69,7 +69,7 @@
         <div class="center">
             <img src="../storage/app/public/logo/{{ $logo }}" width="290" alt="{{ $logo }}">
             <div style="margin-top: 10px; font-size: 24px;">
-                Kelompok {{ $pinkel->anggota->namadepan }}
+                Anggota {{ $pinkel->anggota->namadepan }}
             </div>
             <div style="font-size: 20px;">
                 {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }} {{ $pinkel->anggota->d->nama_desa }}

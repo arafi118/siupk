@@ -7,11 +7,11 @@
 <div class="row">
     <div class="col-md-9 col-7">
         <select class="form-control mb-0" name="individu" id="individu">
-            @foreach ($individu as $ind)
+            @foreach ($anggota as $ang)
                 @php
                     $pinjaman = 'N';
-                    if ($ind->pinjaman_count > 0) {
-                        $status = $ind->pinjaman->status;
+                    if ($ang->pinjaman) {
+                        $status = $ang->pinjaman->status;
                         $pinjaman = $status;
                     }
 
@@ -21,20 +21,19 @@
                         $selected = true;
                     }
 
-                    if ($id_ind > 0) {
+                    if ($nia > 0) {
                         $select = false;
                     }
 
-                    if ($ind->id == $id_ind) {
+                    if ($ang->id == $nia) {
                         $select = true;
                     }
                 @endphp
-                <option {{ $select ? 'selected' : '' }} value="{{ $ind->id }}">
-                    @if (isset($ind->d))
-                        [{{ $pinjaman }}] {{ $ind->nama_depan }} [{{ $ind->d->nama_desa }}]
-                        [{{ $ind->ketua }}]
+                <option {{ $select ? 'selected' : '' }} value="{{ $ang->id }}">
+                    @if (isset($ang->d))
+                        [{{ $pinjaman }}] {{ $ang->namadepan }} [{{ $ang->d->nama_desa }}]
                     @else
-                        [{{ $pinjaman }}] {{ $ind->nama_depan }} []
+                        [{{ $pinjaman }}] {{ $ang->namadepan }} []
                     @endif
                 </option>
             @endforeach
@@ -42,7 +41,7 @@
     </div>
     <div class="col-md-3 col-5 d-flex align-items-end">
         <div class="d-grid w-100 mb-2">
-            <a href="/database/individu/register_individu" class="btn btn-info btn-sm mb-0">Register Individu</a>
+            <a href="/database/penduduk/register_penduduk" class="btn btn-info btn-sm mb-0">Register Individu</a>
         </div>
     </div>
 </div>

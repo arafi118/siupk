@@ -146,17 +146,10 @@ Route::post('/perguliran/dokumen', [PinjamanKelompokController::class, 'dokumen'
 
 Route::post('/perguliran/kembali_proposal/{id}', [PinjamanKelompokController::class, 'kembaliProposal'])->middleware('auth');
 
-
-
-
-
-
-
-
 Route::get('/register_proposal_i', [PinjamanIndividuController::class, 'create'])->middleware('auth');
 Route::get('/register_proposal_i/{nia}', [PinjamanIndividuController::class, 'register'])->middleware('auth');
+Route::get('/register_proposal_i/jaminan/{id}', [PinjamanIndividuController::class, 'Jaminan'])->middleware('auth');
 Route::get('/daftar_individu', [PinjamanIndividuController::class, 'DaftarAnggota'])->middleware('auth');
-
 
 Route::get('/detail_i/{perguliran_i}', [PinjamanIndividuController::class, 'detail'])->middleware('auth');
 Route::get('/perguliran_i/proposal', [PinjamanIndividuController::class, 'proposal'])->middleware('auth');

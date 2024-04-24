@@ -83,16 +83,15 @@
                 </td>
                 <td align="center">
                     <div style="font-size: 18px;">
-                        PEMERINTAH DAERAH {{ strtoupper($nama_kabupaten) }}
+                    {{ $kec->nama_lembaga_sort }} {{ strtoupper($nama_kabupaten) }}
                     </div>
                     <div style="font-size: 18px;">
                         {{ strtoupper($kec->sebutan_kec) }} {{ strtoupper($kec->nama_kec) }}
                     </div>
-                    <div style="font-size: 18px;">
-                        <b>
-                            {{ strtoupper($pinkel->anggota->d->sebutan_desa->sebutan_desa) }}
-                            {{ strtoupper($pinkel->anggota->d->nama_desa) }}
-                        </b>
+                    <div align="center"style="font-size: 12px;">
+                 Alamat:...........................................................................
+
+                      
                     </div>
                 </td>
             </tr>
@@ -102,12 +101,12 @@
             <tr>
                 <td align="center">
                     <div style="font-size: 18px;">
-                        <b>REKOMENDASI KREDIT {{ $pinkel->jpp->nama_jpp }}</b>
+                        <b>REKOMENDASI HASIL VERIVIKASI/ANALISA KREDIT</b>
                     </div>
                     <div style="font-size: 12px;">
-                        Nomor: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   Nomor:..................................... &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                       
                     </div>
                 </td>
             </tr>
@@ -120,65 +119,91 @@
         </table>
         <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 12px;">
             <tr>
-                <td colspan="3" align="justify">
-                    Yang bertanda tangan di bawah ini {{ $pinkel->anggota->d->sebutan_desa->sebutan_kades }}
-                    {{ $pinkel->anggota->d->nama_desa }} menerangkan dengan sebenarnya bahwa:
+                <td colspan=5" align="justify">
+                Setelah dilakukan pengkajian dokumen permohonan kredit dan Analisa lapangan atas permohonan kredit / permohonan pinjaman  sebagai  berikut :
                 </td>
             </tr>
 
             <tr>
-                <td width="120" style="vertical-align: top;">Nama Lengkap  </td>
+                <td width="30">&nbsp;</td>
+                <td width="120" style="vertical-align: top;">Nama Pemohon Kredit  </td>
                 <td width="5" align="center">:</td>
                 <td>{{ $pinkel->anggota->namadepan }}  </td>
             </tr>
             <tr>
-                <td width="120" style="vertical-align: top;">Jenis Kelamin  </td>
-                <td align="center">:</td>
-                <td>{{ $pinkel->anggota->jk }}  </td>
-            </tr>
-            <tr>
+              <td width="30">&nbsp;</td>
                 <td width="120" style="vertical-align: top;">N I K</td>
                 <td align="center">:</td>
                 <td>{{ $pinkel->anggota->nik }}  </td>
             </tr>
             <tr>
-                <td width="120" style="vertical-align: top;">Tempat/Tanggal lahir  </td>
+              <td width="30">&nbsp;</td>
+                <td width="120" style="vertical-align: top;">Alamat</td>
                 <td align="center">:</td>
-                <td>{{ $pinkel->anggota->tempat_lahir}} 
-                {{ Tanggal::tglLatin($pinkel->anggota->tgl_lahir) }}  </td>
+                <td>
+                {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }}    
+                {{ $pinkel->anggota->d->nama_desa }}</td>
             </tr>
             <tr>
-                <td width="120" style="vertical-align: top;">Alamat </td>
+            <td width="30">&nbsp;</td>
+                <td width="120" style="vertical-align: top;">Tanggal dan Nomor Permohonan Kredit</td>
                 <td align="center">:</td>
-                <td>{{ $pinkel->anggota->alamat}} {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }}
-                    {{ $pinkel->anggota->d->desa }} {{$kec->sebutan_kec }} {{ $kec->nama_kec }}
-                    {{ $nama_kabupaten }} </td>
+                <td>____________/____________</td>
             </tr>
             <tr>
-                <td width="120" style="vertical-align: top;">Telpon  </td>
+            <td width="30">&nbsp;</td>
+                <td width="120" style="vertical-align: top;">Nilai Permohonan </td>
                 <td align="center">:</td>
-                <td>{{ $pinkel->anggota->hp }}  </td>
+                <td>{{$pinkel->proposal}}</td>
             </tr>
+          <tr>
+            <td>&nbsp;</td>
+          </tr>
             <tr>
-                <td width="120" style="vertical-align: top;">Jenis Usaha  </td>
-                <td align="center">:</td>
-                <td>{{ $pinkel->anggota->u->nama_usaha }} </td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            
-            <tr>
-                <td align="justify" colspan="3">
-                Benar-benar warga Desa {{ $pinkel->anggota->d->nama_desa}} 
-                dengan berkepribadian baik dan kami rekomendasi untuk mengajukan kredit Modal {{ $pinkel->jpp->deskripsi_jpp }} ({{ $pinkel->jpp->nama_jpp }}) pada
-                    {{ $kec->nama_lembaga_sort }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }}
-                    {{ $nama_kabupaten }}.
+                <td align="justify" colspan="5">
+                Dengan ini selaku Tim Verifikasi/Analis Kredit menyatakan bahwa Permohonan Kredit sebagaimana dimaksud diatas dinyatakan LAYAK dengan rincian rekomendasi kredit sebagai berikut :
                 </td>
             </tr>
             <tr>
-                <td align="justify" colspan="3">
-                    Demikian Surat Rekomendasi ini diberikan kepada yang bersangkutan untuk dipergunakan sebagaimana mestinya.
+                <td width="30">&nbsp;</td>
+                <td width="120" style="vertical-align: top;">Nilai Rekomendasi  </td>
+                <td width="5" align="center">:</td>
+                <td>{{$pinkel->verifikasi}}</td>
+            </tr>
+            <tr>
+              <td width="30">&nbsp;</td>
+                <td width="120" style="vertical-align: top;">Jangka Waktu Pinjaman</td>
+                <td align="center">:</td>
+                <td>{{$pinkel->jangka}}  bulan</td>
+            </tr>
+            <tr>
+              <td width="30">&nbsp;</td>
+                <td width="120" style="vertical-align: top;">Jenis dan besaran Jasa</td>
+                <td align="center">:</td>
+                <td>{{ $pinkel->jasa->nama_jj }}
+                {{ round($pinkel->pros_jasa / $pinkel->jangka, 2) }}% per bulan
+                </td>
+            </tr>
+            <tr>
+            <td width="30">&nbsp;</td>
+                <td width="120" style="vertical-align: top;">Sistem Angsuran Pokok</td>
+                <td align="center">:</td>
+                <td> {{ $pinkel->sis_pokok->nama_sistem }}</td>
+            </tr>
+            <tr>
+            <td width="30">&nbsp;</td>
+                <td width="120" style="vertical-align: top;">Sistem Angsuran Jasa </td>
+                <td align="center">:</td>
+                <td>{{ $pinkel->sis_jasa->nama_sistem }}</td>
+            </tr>
+            <tr>
+            <td>&nbsp;</td>
+                </tr>
+            <tr>
+                <td align="justify" colspan="5">
+
+                Demikian rekomendasi ini kami terbitkan untuk dapat ditindaklanjuti sebagaimana mestinya oleh Tim Pemutus Pinjaman Bersama Bagian Kredit {{ $kec->nama_lembaga_sort }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }}.
+
                 </td>
             </tr>
         </table>
@@ -190,23 +215,24 @@
                 <td width="33%">&nbsp;</td>
             </tr>
             <tr>
-                <td width="200"align="center"colspan="1">&nbsp;</td>
-                <td align="center">{{ $nama_kab }}, {{ Tanggal::tglLatin($pinkel->tgl_proposal) }}</td>
+            <td width="200"align="center"colspan="1">&nbsp;</td>
+                <td align="center">{{ $kec->nama_kec }},{{ Tanggal::tglLatin($pinkel->tgl_verifikasi) }}</td>
             </tr>
             <tr>
-                <td width="200"align="center"colspan="1">&nbsp;</td>
+            <td width="200"align="center"colspan="1">&nbsp;</td>
                 <td align="center">
-                    {{ $pinkel->anggota->d->sebutan_desa->sebutan_kades }} {{ $pinkel->anggota->d->desa }}
-                </td>
+                Verifikatis/Analis Kredit                </td>
             </tr>
             <tr>
                 <td colspan="3" height="40">&nbsp;</td>
             </tr>
             <tr>
-                <td width="200"align="center"colspan="1">&nbsp;</td>
+            <td width="200"align="center"colspan="1">&nbsp;</td>
                 <td align="center">
                     <u>
-                        <b>{{ $pinkel->anggota->d->kades }}</b>
+                        <p>({{$dir->namadepan }} {{$dir->namabelakang }})<br>
+                    Ketua Tim
+                   </p>
                     </u>
                     @if ($pinkel->anggota->d->nip)
                         <div><small>NIP. {{ $pinkel->anggota->d->nip }}</small></div>
