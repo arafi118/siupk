@@ -118,4 +118,9 @@ class PinjamanKelompok extends Model
     {
         return $this->hasOne(PinjamanKelompok::class, 'id_kel', 'id_kel')->orderBy('tgl_cair', 'DESC');
     }
+
+    public function getTableStructure()
+    {
+        return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
+    }
 }

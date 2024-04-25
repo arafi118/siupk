@@ -83,4 +83,9 @@ class PinjamanAnggota extends Model
     {
         return $this->hasMany(RencanaAngsuranI::class, 'loan_id')->orderBy('jatuh_tempo', 'ASC');
     }
+
+    public function getTableStructure()
+    {
+        return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
+    }
 }

@@ -10,6 +10,7 @@ use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DesaController;
+use App\Http\Controllers\GenerateController;
 use App\Http\Controllers\Kabupaten\AuthController as KabupatenAuthController;
 use App\Http\Controllers\Kabupaten\KabupatenController;
 use App\Http\Controllers\KelompokController;
@@ -279,5 +280,10 @@ Route::get('/download/{file}', function ($file) {
 
 Route::get('/unpaid', [DashboardController::class, 'unpaid'])->middleware('auth');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
+
+Route::get('/generate', [GenerateController::class, 'index']);
+Route::get('/generate/individu', [GenerateController::class, 'individu']);
+Route::get('/generate/kelompok', [GenerateController::class, 'kelompok']);
+Route::post('/generate/save/{offset?}', [GenerateController::class, 'generate']);
 
 Route::get('/{invoice}', [PelaporanController::class, 'invoice']);

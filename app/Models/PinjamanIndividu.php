@@ -113,4 +113,9 @@ class PinjamanIndividu extends Model
     {
         return $this->hasOne(PinjamanAnggota::class, 'nia', 'nia')->orderBy('tgl_cair', 'DESC');
     }
+
+    public function getTableStructure()
+    {
+        return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
+    }
 }
