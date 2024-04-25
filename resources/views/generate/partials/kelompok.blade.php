@@ -2,6 +2,8 @@
     $operator = [
         '=',
         '!=',
+        '>',
+        '<',
         'LIKE',
         'NOT LIKE',
         [
