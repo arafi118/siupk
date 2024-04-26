@@ -52,11 +52,11 @@
         <div class="card mt-3 text-sm shadow-none border-1">
             <div class="card-body">
                 Dengan mempertimbangkan Standar Operasional Prosedur (SOP) yang berlaku, dengan ini Saya selaku
-                {{ $kec->sebutan_level_1 }},
+                {{ $kec->sebutan_level_1 }},{{$kec->nama_lembaga_sort}}
                 menyatakan dengan sebenar-benarnya bahwa :
                 <table class="table p-0 mb-3">
                     <tr class="p-1">
-                        <td>Nama</td>
+                        <td>Nama Pemanfaat</td>
                         <td>: {{ $perguliran_i->anggota->namadepan }}</td>
                         <td>Alokasi</td>
                         <td>{{ number_format($perguliran_i->alokasi) }}</td>
