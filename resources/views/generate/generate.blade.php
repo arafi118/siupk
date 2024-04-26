@@ -30,7 +30,7 @@
         @endforeach
 
         <div class="text-center">
-            Generate <b>{{ $offset - $limit }}</b> data.
+            Generate <b>{{ $offset }}</b> data.
         </div>
         <button type="submit" class="btn btn-info" id="generate">Generate</button>
     </form>
