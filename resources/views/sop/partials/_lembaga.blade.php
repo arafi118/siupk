@@ -26,7 +26,7 @@
         </div>
         <div class="col-md-8">
             <div class="input-group input-group-static my-3">
-                <label for="nama_bumdesma">Nama Bumdesma</label>
+                <label for="nama_bumdesma">Nama Lembaga</label>
                 <input autocomplete="off" type="text" name="nama_bumdesma" id="nama_bumdesma" class="form-control"
                     value="{{ $kec->nama_lembaga_sort }}">
                 <small class="text-danger" id="msg_nama_bumdesma"></small>

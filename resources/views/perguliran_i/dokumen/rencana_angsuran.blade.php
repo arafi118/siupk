@@ -45,9 +45,8 @@
                 </div>
                 <div style="font-size: 16px;">
                     <b>
-                        KELOMPOK {{ strtoupper($pinkel->anggota->namadepan) }}
-                        {{ strtoupper($pinkel->anggota->d->sebutan_desa->sebutan_desa) }}
-                        {{ strtoupper($pinkel->anggota->d->nama_desa) }}
+                        {{ strtoupper($pinkel->anggota->namadepan) }}
+                        ( NIK {{ strtoupper($pinkel->anggota->nik) }} )
                     </b>
                 </div>
             </td>
@@ -178,18 +177,16 @@
                             {{ $kec->sebutan_level_1 }} {{ $kec->nama_lembaga_sort }}
                         </td>
                         <td align="center" colspan="3">
-                            Ketua Kelompok {{ $pinkel->anggota->namadepan }}
+                            Pemanfaat
                         </td>
                     </tr>
                     <tr>
                         <td align="center" colspan="8" height="40">&nbsp;</td>
                     </tr>
                     <tr>
-                        <td align="center" colspan="5">
-                            <b>{{ $dir->namadepan }} {{ $dir->namabelakang }}</b>
-                        </td>
+
                         <td align="center" colspan="3">
-                            <b>{{ $pinkel->anggota->ketua }}</b>
+                            <b>{{ $pinkel->anggota->namadepan }}</b>
                         </td>
                     </tr>
                 </table>

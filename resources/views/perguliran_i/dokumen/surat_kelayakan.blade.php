@@ -21,21 +21,19 @@
             <td width="50">Nomor</td>
             <td width="10" align="center">:</td>
             <td colspan="2">
-                <b>______/DBM/{{ Tanggal::tglRomawi($pinkel->tgl_dana) }}</b>
-            </td>
+                ______ /DBM/{{ Tanggal::tglRomawi($pinkel->tgl_dana) }} </td>
         </tr>
         <tr>
             <td>Tanggal</td>
             <td align="center">:</td>
             <td colspan="2">
-                <b>{{ Tanggal::tglLatin($pinkel->tgl_dana) }}</b>
-            </td>
+                {{ Tanggal::tglLatin($pinkel->tgl_dana) }} </td>
         </tr>
         <tr>
             <td>Sifat</td>
             <td align="center">:</td>
             <td colspan="2">
-                <b>Penting dan Rahasia</b>
+                Penting dan Rahasia
             </td>
         </tr>
         <tr>
@@ -48,21 +46,23 @@
         <tr>
             <td colspan="3">&nbsp;</td>
             <td align="left" width="140">
-                <div>KEPADA YTH.</div>
+                <div>Kepada Yth.</div>
                 <div style="font-weight: bold;">
                     {{ $pinkel->anggota->d->sebutan_desa->sebutan_kades }} {{ $pinkel->anggota->d->nama_desa }}
                 </div>
-                <div style="font-weight: bold;">
+                <div>
                     {{ $kec->sebutan_kec }} {{ $kec->nama_kec }}
                 </div>
-                <div style="font-weight: bold;">Di</div>
-                <div style="font-weight: bold; text-align: center;">
-                    {{ strtoupper($pinkel->anggota->d->nama_desa) }} {{ strtoupper($kec->nama_kec) }}
+                <div>Di</div>
+                <div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tempat
                 </div>
             </td>
         </tr>
         <tr>
-            <td colspan="4">&nbsp;</td>
+            <td colspan="4">
+                &nbsp;
+            </td>
         </tr>
         <tr>
             <td>&nbsp;</td>
@@ -76,16 +76,16 @@
                 <table>
                     <tr>
                         <td width="10">1.</td>
-                        <td width="120">Nama Kelompok</td>
+                        <td width="120">Nama Pemanfaat</td>
                         <td width="5">:</td>
-                        <td>{{ $pinkel->anggota->nama_kelompok }}</td>
+                        <td>{{ $pinkel->anggota->namadepan }}</td>
                     </tr>
                     <tr>
                         <td>2.</td>
                         <td>Alamat</td>
                         <td>:</td>
                         <td>
-                            {{ $pinkel->anggota->alamat_kelompok }}
+                            {{ $pinkel->anggota->alamat_Anggota }}
                             {{ $pinkel->anggota->d->sebutan_desa->sebutan_kades }} {{ $pinkel->anggota->d->nama_desa }}
                         </td>
                     </tr>
@@ -100,12 +100,6 @@
                         <td>Jumlah Permohonan</td>
                         <td>:</td>
                         <td>Rp {{ number_format($pinkel->proposal) }}</td>
-                    </tr>
-                    <tr>
-                        <td>5.</td>
-                        <td>Jumlah Pemanfaat</td>
-                        <td>:</td>
-                        <td>{{ $pinkel->pinjaman_anggota_count }} orang</td>
                     </tr>
                 </table>
 

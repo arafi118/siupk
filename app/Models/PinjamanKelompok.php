@@ -21,7 +21,7 @@ class PinjamanKelompok extends Model
 
     public function jpp()
     {
-        return $this->belongsTo(JenisProdukPinjaman::class, 'jenis_pp');
+        return $this->belongsTo(JenisProdukPinjaman::class, 'jenis_pp', 'id');
     }
 
     public function jasa()
@@ -61,7 +61,7 @@ class PinjamanKelompok extends Model
 
     public function pinjaman_anggota()
     {
-        return $this->hasMany(PinjamanAnggota::class, 'id_pinkel')->orderBy('id', 'asc');
+        return $this->hasMany(PinjamanAnggota::class, 'id_pinkel', 'id')->orderBy('id', 'asc');
     }
 
     public function sis_pokok()

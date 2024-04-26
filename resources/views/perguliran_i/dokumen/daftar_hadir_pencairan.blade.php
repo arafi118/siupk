@@ -32,9 +32,9 @@
     </table>
     <table border="0" width="100%" align="center"cellspacing="0" cellpadding="0" style="font-size: 11px;">
         <tr>
-            <td width="70">Nomor Proposal</td>
+            <td width="70">Tempat</td>
             <td align="center" width="5">:</td>
-            <td width="150"><b>{{ $pinkel->anggota->kd_kelompok }} - {{ $pinkel->id }}</b></td>
+            <td width="150">{{ $tempat }}</td>
             <td width="70">Tanggal</td>
             <td align="center" width="5">:</td>
             <td width="150">
@@ -42,23 +42,13 @@
             </td>
         </tr>
         <tr>
-            <td>Kelompok</td>
+            <td>{{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }}/Kecamatan</td>
             <td align="center">:</td>
-            <td><b>{{ $pinkel->anggota->nama_kelompok }}</b></td>
+            <td>{{ $pinkel->anggota->d->nama_desa }} / {{ $kec->nama_kec }}</td>
             <td>Waktu</td>
             <td align="center">:</td>
             <td>
                 <b>{{ $waktu }}</b>
-            </td>
-        </tr>
-        <tr>
-            <td>{{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }}/Kecamatan</td>
-            <td align="center">:</td>
-            <td><b>{{ $pinkel->anggota->d->nama_desa }} / {{ $kec->nama_kec }}</b></td>
-            <td>Tempat</td>
-            <td align="center">:</td>
-            <td>
-                <b>{{ $tempat }}</b>
             </td>
         </tr>
         <tr>

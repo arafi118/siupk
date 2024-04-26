@@ -42,19 +42,19 @@
             <td width="90">ID Kelompok</td>
             <td width="5" align="center">:</td>
             <td width="130">
-                <b>{{ $pinkel->kelompok->kd_kelompok }}</b>
+                <b>{{ $pinkel->anggota->kd_kelompok }}</b>
             </td>
             <td width="90">Tanggal Berdiri</td>
             <td width="5" align="center">:</td>
             <td width="130">
-                <b>{{ Tanggal::tglLatin($pinkel->kelompok->tgl_berdiri) }}</b>
+                {{-- <b>{{ Tanggal::tglLatin($pinkel->anggota->tgl_berdiri) }}</b> --}}
             </td>
         </tr>
         <tr>
             <td>Nama Kelompok </td>
             <td>:</td>
             <td>
-                <b>{{ $pinkel->kelompok->nama_kelompok }}</b>
+                <b>{{ $pinkel->anggota->nama_kelompok }}</b>
             </td>
             <td>Jenis Produk Pinjaman</td>
             <td>:</td>
@@ -66,26 +66,26 @@
             <td>Alamat Kelompok</td>
             <td>:</td>
             <td>
-                <b>{{ $pinkel->kelompok->alamat_kelompok }}</b>
+                <b>{{ $pinkel->anggota->alamat_kelompok }}</b>
             </td>
             <td>Jenis Usaha </td>
             <td>:</td>
             <td>
-                <b>{{ $pinkel->kelompok->usaha->nama_usaha }}</b>
+                {{-- <b>{{ $pinkel->anggota->usaha->nama_usaha }}</b> --}}
             </td>
         </tr>
         <tr>
             <td>
-                {{ $pinkel->kelompok->d->sebutan_desa->sebutan_desa }}
+                {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }}
             </td>
             <td>:</td>
             <td>
-                <b>{{ $pinkel->kelompok->d->nama_desa }}</b>
+                <b>{{ $pinkel->anggota->d->nama_desa }}</b>
             </td>
             <td>Jenis Kegiatan</td>
             <td>:</td>
             <td>
-                <b>{{ $pinkel->kelompok->kegiatan->nama_jk }}</b>
+                {{-- <b>{{ $pinkel->anggota->kegiatan->nama_jk }}</b> --}}
             </td>
         </tr>
         <tr>
@@ -97,26 +97,26 @@
             <td>Tingkat Kelompok </td>
             <td>:</td>
             <td>
-                <b>{{ $pinkel->kelompok->tk->nama_tk }}</b>
+                {{-- <b>{{ $pinkel->anggota->tk->nama_tk }}</b> --}}
             </td>
         </tr>
         <tr>
             <td>Telpon</td>
             <td>:</td>
             <td>
-                <b>{{ $pinkel->kelompok->telpon }}</b>
+                <b>{{ $pinkel->anggota->telpon }}</b>
             </td>
             <td>Fungsi Kelompok </td>
             <td>:</td>
             <td>
-                <b>{{ $pinkel->kelompok->fk->nama_fk }}</b>
+                {{-- <b>{{ $pinkel->anggota->fk->nama_fk }}</b> --}}
             </td>
         </tr>
         <tr>
             <td>Nama Ketua</td>
             <td>:</td>
             <td>
-                <b>{{ $pinkel->kelompok->ketua }}</b>
+                <b>{{ $pinkel->anggota->ketua }}</b>
             </td>
             <td>Last Update</td>
             <td>:</td>
@@ -128,7 +128,7 @@
             <td>Nama Sekretaris</td>
             <td>:</td>
             <td>
-                <b>{{ $pinkel->kelompok->sekretaris }}</b>
+                <b>{{ $pinkel->anggota->sekretaris }}</b>
             </td>
             <td>Petugas/PJ</td>
             <td>:</td>
@@ -199,7 +199,7 @@
             $alokasi = 0;
             $no = 0;
         @endphp
-        @foreach ($pinkel->pinjaman_anggota as $pa)
+        {{-- @foreach ($pinkel->pinjaman_anggota as $pa)
             @php
                 $proposal += $pa->proposal;
                 $verifikasi += $pa->verifikasi;
@@ -230,7 +230,7 @@
                     {!! $statusDokumen != 'P' || $pinkel->status == 'V' ? $pa->catatan_verifikasi : '&nbsp;' !!}
                 </td>
             </tr>
-        @endforeach
+        @endforeach --}}
 
         @foreach ($data_nia as $nia => $val)
             @php

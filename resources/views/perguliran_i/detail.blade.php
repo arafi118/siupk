@@ -33,13 +33,13 @@
             'file' => 'suratRekomendasi',
             'withExcel' => false,
         ],
-        
+
         [
             'title' => 'Surat Pernyataan Peminjam',
             'file' => 'pernyataanPeminjam',
             'withExcel' => false,
         ],
-       
+
         [
             'title' => 'Form Verifikasi',
             'file' => 'formVerifikasi',
@@ -56,7 +56,6 @@
             'file' => 'tandaTerimaJaminan',
             'withExcel' => false,
         ],
-       
     ];
 
     $dokumen_pencairan = [
@@ -71,13 +70,8 @@
             'withExcel' => false,
         ],
         [
-            'title' => 'Surat Kelayakan',
-            'file' => 'suratKelayakan',
-            'withExcel' => false,
-        ],
-        [
-            'title' => 'Surat Kuasa',
-            'file' => 'suratKuasa',
+            'title' => 'Rencana Angsuran',
+            'file' => 'rencanaAngsuran',
             'withExcel' => false,
         ],
         [
@@ -86,13 +80,8 @@
             'withExcel' => false,
         ],
         [
-            'title' => 'Daftar Hadir Pencairan',
-            'file' => 'daftarHadirPencairan',
-            'withExcel' => false,
-        ],
-        [
-            'title' => 'Tanda Terima',
-            'file' => 'tandaTerima',
+            'title' => 'Kuitansi',
+            'file' => 'kuitansi',
             'withExcel' => false,
         ],
         [
@@ -101,48 +90,23 @@
             'withExcel' => false,
         ],
         [
-            'title' => 'Kartu Angsuran Anggota',
-            'file' => 'kartuAngsuranAnggota',
+            'title' => 'analisis keputusan kredit',
+            'file' => 'analisiskeputusankredit',
             'withExcel' => false,
         ],
         [
-            'title' => 'Rencana Angsuran',
-            'file' => 'rencanaAngsuran',
+            'title' => 'surat pemberitahuan', 
+            'file' => 'suratpemberitahuan',
             'withExcel' => false,
         ],
         [
-            'title' => 'Pemberitahuan Ke Desa',
-            'file' => 'pemberitahuanDesa',
+            'title' => 'pengikat diri sebagai penjamin',
+            'file' => 'pengikatdirisebagaipenjamin',
             'withExcel' => false,
         ],
         [
-            'title' => 'Penerima IPTW',
-            'file' => 'iptw',
-            'withExcel' => false,
-        ],
-        // [
-        //     'title' => 'Peserta Asuransi',
-        //     'file' => 'pesertaAsuransi',
-        //     'withExcel' => false,
-        // ],
-        [
-            'title' => 'Tanggung Renteng Kematian',
-            'file' => 'tanggungRentengKematian',
-            'withExcel' => false,
-        ],
-        [
-            'title' => 'Pernyataan Tanggung Renteng',
-            'file' => 'pernyataanTanggungRenteng',
-            'withExcel' => false,
-        ],
-        [
-            'title' => 'Kuitansi',
-            'file' => 'kuitansi',
-            'withExcel' => false,
-        ],
-        [
-            'title' => 'Kuitansi Anggota',
-            'file' => 'kuitansiAnggota',
+            'title' => 'surat pernyataan suami',
+            'file' => 'suratpernyataansuami',
             'withExcel' => false,
         ],
         [
@@ -151,17 +115,77 @@
             'withExcel' => false,
         ],
         [
+            'title' => 'Surat Kelayakan',
+            'file' => 'suratKelayakan',
+            'withExcel' => false,
+        ],
+        [
+            'title' => 'Daftar Hadir Pencairan',
+            'file' => 'daftarHadirPencairan',
+            'withExcel' => false,
+        ],
+        [
+            'title' => 'Pemberitahuan Ke Desa',
+            'file' => 'pemberitahuanDesa',
+            'withExcel' => false,
+        ],
+
+        [
             'title' => 'Surat Ahli Waris',
             'file' => 'suratAhliWaris',
             'withExcel' => false,
         ],
-        [
-            'title' => 'Form Verifikasi',
-            'file' => 'formVerifikasi',
-            'withExcel' => false,
-        ],
 
-      
+        // [
+        //     'title' => 'Tanggung Renteng Kematian',
+        //     'file' => 'tanggungRentengKematian',
+        //     'withExcel' => false,
+        // ],
+        // [
+        //     'title' => 'Pernyataan Tanggung Renteng',
+        //     'file' => 'pernyataanTanggungRenteng',
+        //     'withExcel' => false,
+        // ],
+        // [
+        //     'title' => 'Penerima IPTW',
+        //     'file' => 'iptw',
+        //     'withExcel' => false,
+        // ],
+
+        // [
+        //     'title' => 'Surat Kuasa',
+        //     'file' => 'suratKuasa',
+        //     'withExcel' => false,
+        // ],
+        // [
+        //     'title' => 'Tanda Terima',
+        //     'file' => 'tandaTerima',
+        //     'withExcel' => false,
+        // ],
+
+        // [
+        //     'title' => 'Kartu Angsuran Anggota',
+        //     'file' => 'kartuAngsuranAnggota',
+        //     'withExcel' => false,
+        // ],
+
+        // [
+        //     'title' => 'Peserta Asuransi',
+        //     'file' => 'pesertaAsuransi',
+        //     'withExcel' => false,
+        // ],
+
+        // [
+        //     'title' => 'Kuitansi Anggota',
+        //     'file' => 'kuitansiAnggota',
+        //     'withExcel' => false,
+        // ],
+
+        // [
+        //     'title' => 'Form Verifikasi',
+        //     'file' => 'formVerifikasi',
+        //     'withExcel' => false,
+        // ],
     ];
 @endphp
 
