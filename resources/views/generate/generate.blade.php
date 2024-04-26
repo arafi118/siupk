@@ -1,7 +1,7 @@
 <link id="pagestyle" href="/assets/css/material-dashboard.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="/assets/css/style.css">
 
-<body class="min-vh-100 d-flex align-items-center justify-content-center">
+<body class="w-100 min-vh-100 d-flex align-items-center justify-content-center flex-column">
     <form action="/generate/save/{{ $offset }}" method="post">
         @csrf
 
@@ -29,6 +29,9 @@
             @endif
         @endforeach
 
+        <div class="text-center">
+            Generate <b>{{ $offset - $limit }}</b> data.
+        </div>
         <button type="submit" class="btn btn-info" id="generate">Generate</button>
     </form>
 

@@ -1641,7 +1641,7 @@ class TransaksiController extends Controller
     {
         $pinkel = PinjamanAnggota::where('id', $id_pinkel)->with([
             'target' => function ($query) {
-                $query->where('jatuh_tempo', '<=', date('Y-m-t'));
+                $query->where('jatuh_tempo', '<=', date('Y-m-t'))->orwhere('angsuran_ke', '0')->orderBy('jatuh_tempo', 'DESC');
             }
         ])->firstOrFail();
         $real = RealAngsuranI::where([
