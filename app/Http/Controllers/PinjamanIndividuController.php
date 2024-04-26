@@ -403,7 +403,7 @@ class PinjamanIndividuController extends Controller
             ['lev1', '1'],
             ['lev2', '1'],
             ['lev3', '1'],
-            ['lev4', '!=', '2']
+            ['lev4', $perguliran_i->jenis_pp + 1]
         ])->orderBy('kode_akun', 'asc')->get();
         $debet = Rekening::where([
             ['lev1', '1'],
@@ -795,16 +795,8 @@ class PinjamanIndividuController extends Controller
             'sis_jasa'
         ])->first();
 
-        if ($pinj_i->jenis_pp == '1') {
-            $rekening_1 = '1.1.01.01';
-            $rekening_2 = '1.1.03.01';
-        } elseif ($pinj_i->jenis_pp == '2') {
-            $rekening_1 = '1.1.01.01';
-            $rekening_2 = '1.1.03.02';
-        } else {
-            $rekening_1 = '1.1.01.01';
-            $rekening_2 = '1.1.03.03';
-        }
+        $rekening_1 = '1.1.01.' . str_pad($pinj_i->jenis_pp + 1, 2, '0', STR_PAD_LEFT);
+        $rekening_2 = '1.1.03.' . str_pad($pinj_i->jenis_pp, 2, '0', STR_PAD_LEFT);
 
         $trx_resc = Transaksi::create([
             'tgl_transaksi' => (string) Tanggal::tglNasional($tgl_resceduling),
@@ -915,16 +907,8 @@ class PinjamanIndividuController extends Controller
             $saldo_jasa = $pinj_i->target->saldo_jasa - $jasa;
         }
 
-        if ($pinj_i->jenis_pp == '1') {
-            $rekening_debit = '1.1.04.01';
-            $rekening_kredit = '1.1.03.01';
-        } elseif ($pinj_i->jenis_pp == '2') {
-            $rekening_debit = '1.1.04.02';
-            $rekening_kredit = '1.1.03.02';
-        } else {
-            $rekening_debit = '1.1.04.03';
-            $rekening_kredit = '1.1.03.03';
-        }
+        $rekening_debit = '1.1.04' . str_pad($pinj_i->jenis_pp, 2, '0', STR_PAD_LEFT);
+        $rekening_kredit = '1.1.03' . str_pad($pinj_i->jenis_pp, 2, '0', STR_PAD_LEFT);
 
         $pinj_anggota = PinjamanIndividu::where('id', $pinj_i->id)->update([
             'tgl_lunas' => Tanggal::tglNasional($data['tgl_penghapusan']),

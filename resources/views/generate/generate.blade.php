@@ -32,9 +32,10 @@
         <button type="submit" class="btn btn-info" id="generate">Generate</button>
     </form>
 
-    @if (count($data_id_pinj) >= $offset)
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    @if (count($data_id_pinj) >= $limit)
         <script>
-            $('#generate').submit()
+            $('#generate').trigger('click')
         </script>
     @else
         <script>
