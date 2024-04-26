@@ -83,6 +83,8 @@ class GenerateController extends Controller
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
 
         $where = [];
+        $whereIn = [];
+        $whereNotIn = [];
         foreach ($request->all() as $key => $val) {
             if ($key == '_token' || $key == 'pinjaman') {
                 continue;
@@ -93,11 +95,29 @@ class GenerateController extends Controller
             if (is_array($val)) {
                 $opt = $val['operator'];
                 $value = $val['value'];
-                if ($opt == 'IN' || $opt == 'NOT IN') {
-                    $value = "($val[value])";
+                if (!$value) {
+                    continue;
                 }
 
-                if (!$value) {
+                if ($opt == 'IN') {
+                    $values = explode(',', $value);
+
+                    $value = [];
+                    foreach ($values as $v) {
+                        $whereIn[$key][] = $v;
+                    }
+
+                    continue;
+                }
+
+                if ($opt == 'NOT IN') {
+                    $values = explode(',', $value);
+
+                    $value = [];
+                    foreach ($values as $v) {
+                        $whereNotIn[$key][] = $v;
+                    }
+
                     continue;
                 }
             }
@@ -116,7 +136,7 @@ class GenerateController extends Controller
                 'trx.tr_idtp',
                 'kelompok',
                 'kelompok.d'
-            ])->limit($limit)->offset($offset)->orderBy('id', 'ASC')->get();
+            ]);
         } else {
             $pinjaman = PinjamanIndividu::where($where)->with([
                 'sis_pokok',
@@ -127,8 +147,22 @@ class GenerateController extends Controller
                 'trx.tr_idtp',
                 'anggota',
                 'anggota.d'
-            ])->limit($limit)->offset($offset)->orderBy('id', 'ASC')->get();
+            ]);
         }
+
+        if (count($whereIn) > 0) {
+            foreach ($whereIn as $key => $value) {
+                $pinjaman = $pinjaman->whereIn($key, $value);
+            }
+        }
+
+        if (count($whereNotIn) > 0) {
+            foreach ($whereNotIn as $key => $value) {
+                $pinjaman = $pinjaman->whereNotIn($key, $value);
+            }
+        }
+
+        $pinjaman = $pinjaman->limit($limit)->offset($offset)->orderBy('id', 'ASC')->get();
 
         $data_id_pinj = [];
         $data_id_real = [];
@@ -180,12 +214,12 @@ class GenerateController extends Controller
             $sa_jasa = $pinkel->sa_jasa;
             $pros_jasa = $pinkel->pros_jasa;
 
-            $rek_pokok = ['1.1.03.01', '1.1.03.02', '1.1.03.03'];
-            $rek_jasa = ['4.1.01.01', '4.1.01.02', '4.1.01.03', '1.1.03.04', '1.1.03.05', '1.1.03.06'];
-            $rek_denda = ['4.1.01.04', '4.1.01.05', '4.1.01.06'];
+            $poko_kredit = '1.1.03.';
+            $jasa_kredit = '4.1.01.';
+            $dend_kredit = '4.1.02.';
 
-            $sistem_pokok = $pinkel->sis_pokok->sistem;
-            $sistem_jasa = $pinkel->sis_jasa->sistem;
+            $sistem_pokok = ($pinkel->sis_pokok) ? $pinkel->sis_pokok->sistem : '1';
+            $sistem_jasa = ($pinkel->sis_jasa) ? $pinkel->sis_jasa->sistem : '1';
 
             if ($sa_pokok == 11) {
                 $tempo_pokok        = ($jangka) - 24 / $sistem_pokok;
@@ -213,29 +247,31 @@ class GenerateController extends Controller
 
             $ra = [];
             $alokasi_pokok = $alokasi;
-            for ($j = 1; $j <= $jangka; $j++) {
-                $sisa = $j % $sistem_jasa;
-                $ke = $j / $sistem_jasa;
+            if ($jenis_jasa == '1') {
+                for ($j = 1; $j <= $jangka; $j++) {
+                    $sisa = $j % $sistem_jasa;
+                    $ke = $j / $sistem_jasa;
 
-                $alokasi_jasa = $alokasi_pokok * ($pros_jasa / 100);
-                $wajib_jasa = $alokasi_jasa / $tempo_jasa;
-                $wajib_jasa = Keuangan::pembulatan($wajib_jasa, (string) $kec->pembulatan);
-                $sum_jasa = $wajib_jasa * ($tempo_jasa - 1);
+                    $alokasi_jasa = $alokasi_pokok * ($pros_jasa / 100);
+                    $wajib_jasa = $alokasi_jasa / $tempo_jasa;
+                    $wajib_jasa = Keuangan::pembulatan($wajib_jasa, (string) $kec->pembulatan);
+                    $sum_jasa = $wajib_jasa * ($tempo_jasa - 1);
 
-                if ($sisa == 0 and $ke != $tempo_jasa) {
-                    $angsuran_jasa = $wajib_jasa;
-                } elseif ($sisa == 0 and $ke == $tempo_jasa) {
-                    $angsuran_jasa = $alokasi_jasa - $sum_jasa;
-                } else {
-                    $angsuran_jasa = 0;
+                    if ($sisa == 0 and $ke != $tempo_jasa) {
+                        $angsuran_jasa = $wajib_jasa;
+                    } elseif ($sisa == 0 and $ke == $tempo_jasa) {
+                        $angsuran_jasa = $alokasi_jasa - $sum_jasa;
+                    } else {
+                        $angsuran_jasa = 0;
+                    }
+
+                    if ($jenis_jasa == '2') {
+                        $angsuran_jasa = $wajib_jasa;
+                        $alokasi_pokok -= $ra[$j]['pokok'];
+                    }
+
+                    $ra[$j]['jasa'] = $angsuran_jasa;
                 }
-
-                if ($jenis_jasa == '2') {
-                    $angsuran_jasa = $wajib_jasa;
-                    $alokasi_pokok -= $ra[$j]['pokok'];
-                }
-
-                $ra[$j]['jasa'] = $angsuran_jasa;
             }
 
             for ($i = 1; $i <= $jangka; $i++) {
@@ -255,6 +291,34 @@ class GenerateController extends Controller
 
                 $ra[$i]['pokok'] = $angsuran_pokok;
             }
+
+            if ($jenis_jasa != '1') {
+                for ($j = 1; $j <= $jangka; $j++) {
+                    $sisa = $j % $sistem_jasa;
+                    $ke = $j / $sistem_jasa;
+
+                    $alokasi_jasa = $alokasi_pokok * ($pros_jasa / 100);
+                    $wajib_jasa = $alokasi_jasa / $tempo_jasa;
+                    $wajib_jasa = Keuangan::pembulatan($wajib_jasa, (string) $kec->pembulatan);
+                    $sum_jasa = $wajib_jasa * ($tempo_jasa - 1);
+
+                    if ($sisa == 0 and $ke != $tempo_jasa) {
+                        $angsuran_jasa = $wajib_jasa;
+                    } elseif ($sisa == 0 and $ke == $tempo_jasa) {
+                        $angsuran_jasa = $alokasi_jasa - $sum_jasa;
+                    } else {
+                        $angsuran_jasa = 0;
+                    }
+
+                    if ($jenis_jasa == '2') {
+                        $angsuran_jasa = $wajib_jasa;
+                        $alokasi_pokok -= $ra[$j]['pokok'];
+                    }
+
+                    $ra[$j]['jasa'] = $angsuran_jasa;
+                }
+            }
+
             $ra['alokasi'] = $alokasi;
 
             $target_pokok = 0;
@@ -323,20 +387,20 @@ class GenerateController extends Controller
 
             ksort($data_rencana);
             foreach ($pinkel->trx as $trx) {
-                if (in_array($trx->rekening_kredit, $rek_denda)) continue;
+                if (Keuangan::startWith($trx['rekening_kredit'], $dend_kredit)) continue;
                 if (in_array($trx->idtp, $data_idtp)) continue;
 
                 $tgl_transaksi = $trx->tgl_transaksi;
                 $realisasi_pokok = 0;
                 $realisasi_jasa = 0;
                 foreach ($trx->tr_idtp as $idtp) {
-                    if (in_array($idtp->rekening_kredit, $rek_pokok)) {
+                    if (Keuangan::startWith($trx['rekening_kredit'], $poko_kredit)) {
                         $realisasi_pokok = $idtp->jumlah;
                         $sum_pokok += $realisasi_pokok;
                         $alokasi_pokok -= $realisasi_pokok;
                     }
 
-                    if (in_array($idtp->rekening_kredit, $rek_jasa)) {
+                    if (Keuangan::startWith($trx['rekening_kredit'], $jasa_kredit)) {
                         $realisasi_jasa = $idtp->jumlah;
                         $sum_jasa += $realisasi_jasa;
                         $alokasi_jasa -= $realisasi_jasa;
@@ -407,6 +471,6 @@ class GenerateController extends Controller
 
         $data = $request->all();
         $offset = $offset + $limit;
-        return view('generate.generate')->with(compact('data_id_pinj', 'data', 'offset'));
+        return view('generate.generate')->with(compact('data_id_pinj', 'data', 'offset', 'limit'));
     }
 }
