@@ -25,7 +25,7 @@
         <div class="card-body p-3">
             <h5 class="mb-1">
                 Atas Nama {{ $perguliran_i->anggota->namadepan }} Loan ID. {{ $perguliran_i->id }}
-                ({{ $perguliran_i->jpp->nama_jpp }})
+                {{ $perguliran_i->jpp->nama_jpp }} {{$kec->nama_lembaga_sort}}
             </h5>
             <p class="mb-0">
                 <span class="badge badge-{{ $perguliran_i->sts->warna_status }}">{{ $perguliran_i->anggota->nik }}</span>
@@ -40,13 +40,12 @@
 
     <div class="card">
         <div class="card-body text-sm">
-            Dengan mempertimbangkan Standar Operasional Prosedur (SOP) yang berlaku, dengan ini Saya selaku
-            {{ $kec->sebutan_level_1 }},
+            Dengan mempertimbangkan Standar Operasional Prosedur (SOP) yang berlaku, dengan ini Saya selaku  {{ $kec->sebutan_level_1 }},{{$kec->nama_lembaga_sort}}
             menyatakan dengan sebenar-benarnya bahwa :
             <table class="table p-0 mb-3">
                 <tr>
-                    <td>Nama Kelompok</td>
-                    <td>: {{ $perguliran_i->anggota->nama_kelompok }}</td>
+                    <td>Nama Pemanfaat</td>
+                    <td>: {{$perguliran_i->anggota->namadepan}}</td>
                     <td>Alokasi</td>
                     <td>{{ number_format($perguliran_i->alokasi) }}</td>
                 </tr>
@@ -64,7 +63,7 @@
                 </tr>
             </table>
 
-            REKAPITULASI
+            REKAPITULASI ANGSURAN
             <table class="table f-12">
                 <thead class="bg-light">
                     <tr>
@@ -110,7 +109,7 @@
 
                     <div class="d-flex justify-content-end" style="gap: .5em;">
                         <button class="btn btn-warning btn-sm"
-                            onclick="window.open('/cetak_keterangan_lunas/{{ $perguliran_i->id }}')" type="button">
+                            onclick="window.open('/cetak_keterangan_lunas_i/{{ $perguliran_i->id }}')" type="button">
                             <i class="fa fa-print"></i> Cetak Keterangan Pelunasan
                         </button>
 

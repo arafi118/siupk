@@ -61,17 +61,23 @@
     <header>
         <h1 style="margin: 0px;">{{ strtoupper($judul) }}</h1>
         <div style="margin: 0px; font-size: 24px;">
-            {{ strtoupper('Pinjaman Anggota ' . $pinkel->jpp->nama_jpp) }}
+            {{ strtoupper('Pinjaman Individu ' . $pinkel->jpp->nama_jpp) }}
         </div>
     </header>
 
     <main>
         <div class="center">
             <img src="../storage/app/public/logo/{{ $logo }}" width="290" alt="{{ $logo }}">
-            <div style="margin-top: 10px; font-size: 24px;">
-                Anggota {{ $pinkel->anggota->namadepan }}
+            <div style="margin-top: 10px; font-size: 18px;">
+             Pemanfaat :
             </div>
-            <div style="font-size: 20px;">
+            <div style="margin-top: 10px; font-size: 20px;">
+                 {{ $pinkel->anggota->namadepan }} 
+            </div>
+            <div style="font-size: 17px;">
+            NIK: {{$pinkel->anggota->nik}}     
+               </div>
+             <div style="margin-top: 10px; font-size: size: 18px;">
                 {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }} {{ $pinkel->anggota->d->nama_desa }}
             </div>
         </div>
@@ -80,6 +86,10 @@
             <div style="font-weight: bold;">Pengajuan Rp. {{ number_format($pinkel->proposal) }}</div>
             <div style="font-weight: bold;">Tanggal Proposal {{ Tanggal::tglLatin($pinkel->tgl_proposal) }}</div>
             <div style="font-weight: bold;">Tenor {{ $pinkel->jangka }} Bulan</div>
+            <div style="font-weight: bold;"> </div>
+            <div style="font-weight: bold;"> </div>
+
+
         </div>
     </main>
 
@@ -87,9 +97,9 @@
         <table width="100%">
             <tr>
                 <td align="center">
-                    <div>{{ strtoupper($nama_lembaga) }}</div>
+                    <div>{{ strtoupper($nama_lembaga) }} </div>
                     <div>
-                        <b>{{ strtoupper($nama_kecamatan) }}</b>
+                        <b>{{ strtoupper($nama_kecamatan) }} </b>
                     </div>
                     <div style="font-size: 10px; color: grey;">
                         <i>{{ $nomor_usaha }}</i>
@@ -101,7 +111,7 @@
                         <i>{{ $email }}</i>
                     </div>
                     <div style="font-size: 10px; color: grey; margin-top: 10px;">
-                        <i>Tahun {{ date('Y') }}</i>
+                        <i> </i>
                     </div>
                 </td>
             </tr>
