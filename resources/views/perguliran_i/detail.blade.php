@@ -52,7 +52,7 @@
             'withExcel' => false,
         ],
         [
-            'title' => 'Tanda Terima Jaminan',
+            'title' => 'Kesanggupan Penyerahan Jaminan',
             'file' => 'tandaTerimaJaminan',
             'withExcel' => false,
         ],

@@ -106,13 +106,11 @@
                             beserta
                             seluruh hak dan kewajibannya.</label>
                     </div>
-
                     <div class="d-flex justify-content-end" style="gap: .5em;">
                         <button class="btn btn-warning btn-sm"
                             onclick="window.open('/cetak_keterangan_lunas_i/{{ $perguliran_i->id }}')" type="button">
                             <i class="fa fa-print"></i> Cetak Keterangan Pelunasan
                         </button>
-
                         @if ($is_dir)
                             <button class="btn btn-danger btn-sm" type="button" id="TombolLunaskan" disabled>
                                 <i class="fa fa-gavel"></i> Validasi Lunas

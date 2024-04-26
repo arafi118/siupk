@@ -171,14 +171,14 @@
             <tr>
                 <td align="justify" colspan="3">
                 Benar-benar warga Desa {{ $pinkel->anggota->d->nama_desa}} 
-                dengan berkepribadian baik dan kami rekomendasi untuk mengajukan kredit Modal {{ $pinkel->jpp->deskripsi_jpp }} ({{ $pinkel->jpp->nama_jpp }}) pada
+                yang berkepribadian baik dan kami memberikan rekomendasi atas pengajuan kredit Modal {{ $pinkel->jpp->deskripsi_jpp }} ({{ $pinkel->jpp->nama_jpp }}) pada
                     {{ $kec->nama_lembaga_sort }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }}
                     {{ $nama_kabupaten }}.
                 </td>
             </tr>
             <tr>
                 <td align="justify" colspan="3">
-                    Demikian Surat Rekomendasi ini diberikan kepada yang bersangkutan untuk dipergunakan sebagaimana mestinya.
+                    Demikian Surat Rekomendasi ini diberikan kepada yang bersangkutan untuk dapat dipergunakan sebagaimana mestinya.
                 </td>
             </tr>
         </table>
