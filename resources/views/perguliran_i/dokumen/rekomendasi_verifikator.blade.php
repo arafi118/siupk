@@ -154,7 +154,7 @@
             <td width="30">&nbsp;</td>
                 <td width="120" style="vertical-align: top;">Nilai Permohonan </td>
                 <td align="center">:</td>
-                <td>{{$pinkel->proposal}}</td>
+                <td> Rp. {{number_format($pinkel->proposal)}}.-</td>
             </tr>
           <tr>
             <td>&nbsp;</td>
@@ -168,7 +168,7 @@
                 <td width="30">&nbsp;</td>
                 <td width="120" style="vertical-align: top;">Nilai Rekomendasi  </td>
                 <td width="5" align="center">:</td>
-                <td>{{$pinkel->verifikasi}}</td>
+                <td> Rp. {{number_format($pinkel->verifikasi)}}.-</td>
             </tr>
             <tr>
               <td width="30">&nbsp;</td>

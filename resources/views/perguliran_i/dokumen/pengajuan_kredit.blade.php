@@ -171,9 +171,9 @@
             <ol>
                 <li>Fotokopi KTP dan KK;</li>
                 <li>Surat Rekomendasi dari Kepala Desa/Lurah;</li>
-                <li>Bukti Angunan / Jaminan;</li>
+                <li>Surat Kesanggupan Penyerahan Jaminan;</li>
                 <li>Surat Pernyataan Peminjam;</li>
-                <li>Rencana pengembalian kredit;</li>
+                <li>Tabel Rencana Angsuran;</li>
                 <!-- <li>Surat Keterangan Gaji/Surat Keterangan Usaha.</li> -->
             </ol>
             <div>Demikian permohonan kami, atas perhatiannya kami ucapkan terima kasih.</div>
@@ -199,12 +199,12 @@
 	    <td align="center" height="24" colspan="-1" class="style9">
             <p>&nbsp;</p>
         <p>&nbsp;</p>
-        <p>{{$pinkel->anggota->penjamin}}<br>NIK/KK. {{$pinkel->anggota->kk}}</th>
+        <p>{{$pinkel->anggota->penjamin}}<br></th>
     </td>
     <td>&nbsp;</td>
         <td align="center" width="32%" class="style9"><p>&nbsp;</p>
         <p>&nbsp;</p>
-        <p>{{$pinkel->anggota->namadepan}}<br>NIK. {{$pinkel->anggota->nik}}</p></td>
+        <p>{{$pinkel->anggota->namadepan}}<br> </p></td>
   </tr>
     <tr>
         <td colspan="2" height="30"></td>

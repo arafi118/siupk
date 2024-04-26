@@ -22,7 +22,7 @@
       <tr>
         <td width="4%" class="align-justify style9"><div align="right">1.</div></td>
         <td width="25%" class="align-justify style9">Nama anggota</td>
-        <td colspan="4" class="style27">:{{$pinkel->anggota->namadepan}}</td>
+        <td colspan="4" class="style27">: {{$pinkel->anggota->namadepan}}</td>
       </tr>
       <tr>
         <td class="align-justify style9"><div align="right">2.</div></td>
@@ -60,7 +60,7 @@
       <tr>
         <td class="align-justify style9"><div align="right">8.</div></td>
         <td class="align-justify style9">Jumlah Kredit yang diminta</td>
-        <td colspan="4" class="style27"><span class="style27">: {{ $pinkel->proposal }} </span></td>
+        <td colspan="4" class="style27"><span class="style27">: Rp. {{ number_format($pinkel->proposal)}}.- </span></td>
       </tr>
       <tr>
         <td class="align-justify style9"><div align="right">9.</div></td>
