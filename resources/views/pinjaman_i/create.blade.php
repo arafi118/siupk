@@ -35,7 +35,7 @@
                 data: form.serialize(),
                 success: function(result) {
                     Swal.fire('Berhasil', result.msg, 'success').then(() => {
-                        window.location.href = '/detail/' + result.id
+                        window.location.href = '/detail_i/' + result.id
                     })
                 },
                 error: function(result) {
@@ -52,7 +52,7 @@
         })
 
         function formRegister(nia) {
-            $.get('/register_proposal/' + nia, async (result) => {
+            $.get('/register_proposal_i/' + nia, async (result) => {
                 await $('#RegisterProposal').html(result)
             })
         }

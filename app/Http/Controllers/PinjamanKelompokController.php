@@ -40,7 +40,7 @@ class PinjamanKelompokController extends Controller
 
         $status = strtolower($status);
 
-        $title = 'Tahapan Perguliran';
+        $title = 'Tahapan Perguliran Kelompok';
         return view('perguliran.index')->with(compact('title', 'status'));
     }
 
@@ -380,7 +380,7 @@ class PinjamanKelompokController extends Controller
             ['lev1', '1'],
             ['lev2', '1'],
             ['lev3', '1'],
-            ['lev4', '!=', '2']
+            ['lev4', $perguliran->jenis_pp + 1]
         ])->orderBy('kode_akun', 'asc')->get();
         $debet = Rekening::where([
             ['lev1', '1'],
@@ -837,16 +837,8 @@ class PinjamanKelompokController extends Controller
             'pinjaman_anggota'
         ])->withCount('pinjaman_anggota')->first();
 
-        if ($pinkel->jenis_pp == '1') {
-            $rekening_1 = '1.1.01.01';
-            $rekening_2 = '1.1.03.01';
-        } elseif ($pinkel->jenis_pp == '2') {
-            $rekening_1 = '1.1.01.01';
-            $rekening_2 = '1.1.03.02';
-        } else {
-            $rekening_1 = '1.1.01.01';
-            $rekening_2 = '1.1.03.03';
-        }
+        $rekening_1 = '1.1.01.' . str_pad($pinkel->jenis_pp + 1, 2, '0', STR_PAD_LEFT);
+        $rekening_2 = '1.1.03.' . str_pad($pinkel->jenis_pp, 2, '0', STR_PAD_LEFT);
 
         $trx_resc = Transaksi::create([
             'tgl_transaksi' => (string) Tanggal::tglNasional($tgl_resceduling),
@@ -992,16 +984,8 @@ class PinjamanKelompokController extends Controller
             $saldo_jasa = $pinkel->target->saldo_jasa - $jasa;
         }
 
-        if ($pinkel->jenis_pp == '1') {
-            $rekening_debit = '1.1.04.01';
-            $rekening_kredit = '1.1.03.01';
-        } elseif ($pinkel->jenis_pp == '2') {
-            $rekening_debit = '1.1.04.02';
-            $rekening_kredit = '1.1.03.02';
-        } else {
-            $rekening_debit = '1.1.04.03';
-            $rekening_kredit = '1.1.03.03';
-        }
+        $rekening_debit = '1.1.04' . str_pad($pinkel->jenis_pp, 2, '0', STR_PAD_LEFT);
+        $rekening_kredit = '1.1.03' . str_pad($pinkel->jenis_pp, 2, '0', STR_PAD_LEFT);
 
         $pinj_kelompok = PinjamanKelompok::where('id', $pinkel->id)->update([
             'tgl_lunas' => Tanggal::tglNasional($data['tgl_penghapusan']),
@@ -1045,6 +1029,10 @@ class PinjamanKelompokController extends Controller
             PinjamanAnggota::where('id_pinkel', $perguliran->id)->delete();
 
             PinjamanKelompok::destroy($perguliran->id);
+            DataPemanfaat::where([
+                'lokasi' => Session::get('lokasi'),
+                'id_pinkel' => $perguliran->id
+            ])->delete();
 
             return response()->json([
                 'hapus' => true,

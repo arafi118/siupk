@@ -41,12 +41,16 @@
         <tr class="b">
             <td colspan="3" align="center">
                 <div style="font-size: 18px;">
-                    <b>RENCANA ANGSURAN PINJAMAN {{ $pinkel->jpp->nama_jpp }} </b>
+                    <b>RENCANA ANGSURAN PINJAMAN INDIVIDU {{ $pinkel->jpp->nama_jpp }} </b>
                 </div>
                 <div style="font-size: 16px;">
+<<<<<<< HEAD
                     <b>
                         {{ strtoupper($pinkel->anggota->namadepan) }}
                         ( NIK {{ strtoupper($pinkel->anggota->nik) }} )
+=======
+                    <b>&nbsp;
+>>>>>>> c8014486a1beef4ddc091f3e97a67c2bc5a0f280
                     </b>
                 </div>
             </td>
@@ -57,10 +61,10 @@
     </table>
     <table border="0" width="100%" align="center"cellspacing="0" cellpadding="0" style="font-size: 11px;">
         <tr>
-            <td width="90">Loan ID.</td>
+            <td width="90">Nama calon pemanfaat</td>
             <td width="5" align="center">:</td>
             <td>
-                <b>{{ $pinkel->anggota->namadepan }} &mdash; {{ $pinkel->id }}</b>
+                <b>{{ $pinkel->anggota->namadepan }} </b>
             </td>
             <td width="90">Jangka waktu</td>
             <td width="5" align="center">:</td>
@@ -69,12 +73,12 @@
             </td>
         </tr>
         <tr>
-            <td>No. SPK</td>
+            <td>No register</td>
             <td align="center">:</td>
             <td>
-                <b>{{ $pinkel->spk_no }}</b>
+                <b>{{ $pinkel->id }}</b>
             </td>
-            <td> Sistem Angsuran </td>
+            <td>Sistem Angsuran</td>
             <td align="center">:</td>
             <td>
                 <b>{{ $pinkel->sis_pokok->nama_sistem }} {{ round($pinkel->jangka / $pinkel->sis_pokok->sistem) }} Kali</b>
@@ -166,19 +170,26 @@
 
                 <table class="p" border="0" width="100%" cellspacing="0" cellpadding="0"
                     style="font-size: 11px;">
+                   
                     <tr>
                         <td align="center" colspan="5">&nbsp;</td>
                         <td align="center" colspan="3">
                             {{ $kec->nama_kec }}, {{ Tanggal::tglLatin($tgl) }}
                         </td>
                     </tr>
+                   
                     <tr>
                         <td align="center" colspan="5">
                             {{ $kec->sebutan_level_1 }} {{ $kec->nama_lembaga_sort }}
                         </td>
                         <td align="center" colspan="3">
+<<<<<<< HEAD
                             Pemanfaat
+=======
+                            Pemanfaat 
+>>>>>>> c8014486a1beef4ddc091f3e97a67c2bc5a0f280
                         </td>
+                        
                     </tr>
                     <tr>
                         <td align="center" colspan="8" height="40">&nbsp;</td>
@@ -186,7 +197,12 @@
                     <tr>
 
                         <td align="center" colspan="3">
+<<<<<<< HEAD
                             <b>{{ $pinkel->anggota->namadepan }}</b>
+=======
+                            <b>{{ $pinkel->anggota->ketua }}
+                                &nbsp;&nbsp;&nbsp;{{ $pinkel->anggota->namadepan }} </b>
+>>>>>>> c8014486a1beef4ddc091f3e97a67c2bc5a0f280
                         </td>
                     </tr>
                 </table>

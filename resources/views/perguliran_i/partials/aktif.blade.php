@@ -139,28 +139,19 @@
             </div>
         </div>
 
-        @if ($perguliran_i->status == 'A')
-            <div class="d-grid">
-                <button type="button" id="BtnTambahPemanfaat" data-bs-toggle="modal" data-bs-target="#TambahPemanfaat"
-                    class="btn btn-success btn-sm mb-1">
-                    Tambah Pemanfaat
-                </button>
-            </div>
-        @endif
-
         <hr class="horizontal dark">
     </div>
 </div>
 
 <div class="card card-body p-2 pb-0 mb-3">
-    <form action="/perguliran/dokumen?status=A" target="_blank" method="post">
+    <form action="/perguliran_i/dokumen?status=A" target="_blank" method="post">
         @csrf
 
         <input type="hidden" name="id" value="{{ $perguliran_i->id }}">
         <div class="row">
             <div class="col-12 col-sm-6 col-md-6 col-lg-4">
                 <div class="d-grid">
-                    <a href="/perguliran/dokumen/kartu_angsuran/{{ $perguliran_i->id }}" target="_blank"
+                    <a href="/perguliran_i/dokumen/kartu_angsuran/{{ $perguliran_i->id }}" target="_blank"
                         class="btn btn-outline-info btn-sm mb-2">Kartu Angsuran</a>
                 </div>
             </div>

@@ -10,6 +10,7 @@ use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DesaController;
+use App\Http\Controllers\GenerateController;
 use App\Http\Controllers\Kabupaten\AuthController as KabupatenAuthController;
 use App\Http\Controllers\Kabupaten\KabupatenController;
 use App\Http\Controllers\KelompokController;
@@ -146,17 +147,10 @@ Route::post('/perguliran/dokumen', [PinjamanKelompokController::class, 'dokumen'
 
 Route::post('/perguliran/kembali_proposal/{id}', [PinjamanKelompokController::class, 'kembaliProposal'])->middleware('auth');
 
-
-
-
-
-
-
-
 Route::get('/register_proposal_i', [PinjamanIndividuController::class, 'create'])->middleware('auth');
 Route::get('/register_proposal_i/{nia}', [PinjamanIndividuController::class, 'register'])->middleware('auth');
+Route::get('/register_proposal_i/jaminan/{id}', [PinjamanIndividuController::class, 'Jaminan'])->middleware('auth');
 Route::get('/daftar_individu', [PinjamanIndividuController::class, 'DaftarAnggota'])->middleware('auth');
-
 
 Route::get('/detail_i/{perguliran_i}', [PinjamanIndividuController::class, 'detail'])->middleware('auth');
 Route::get('/perguliran_i/proposal', [PinjamanIndividuController::class, 'proposal'])->middleware('auth');
@@ -165,8 +159,8 @@ Route::get('/perguliran_i/waiting', [PinjamanIndividuController::class, 'waiting
 Route::get('/perguliran_i/aktif', [PinjamanIndividuController::class, 'aktif'])->middleware('auth');
 Route::get('/perguliran_i/lunas', [PinjamanIndividuController::class, 'lunas'])->middleware('auth');
 Route::get('/perguliran_i/generate/{id_pinj}', [PinjamanIndividuController::class, 'generate'])->middleware('auth');
-Route::get('/lunas/{perguliran_i}', [PinjamanIndividuController::class, 'pelunasan'])->middleware('auth');
-Route::get('/cetak_keterangan_lunas/{perguliran_i}', [PinjamanIndividuController::class, 'keterangan'])->middleware('auth');
+Route::get('/lunas_i/{perguliran_i}', [PinjamanIndividuController::class, 'pelunasan'])->middleware('auth');
+Route::get('/cetak_keterangan_lunas_i/{perguliran_i}', [PinjamanIndividuController::class, 'keterangan'])->middleware('auth');
 
 Route::get('/perguliran_i/cari_kelompok', [PinjamanIndividuController::class, 'cariKelompok'])->middleware('auth');
 Route::post('/perguliran_i/simpan_data/{id}', [PinjamanIndividuController::class, 'simpan'])->middleware('auth');
@@ -286,5 +280,10 @@ Route::get('/download/{file}', function ($file) {
 
 Route::get('/unpaid', [DashboardController::class, 'unpaid'])->middleware('auth');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
+
+Route::get('/generate', [GenerateController::class, 'index']);
+Route::get('/generate/individu', [GenerateController::class, 'individu']);
+Route::get('/generate/kelompok', [GenerateController::class, 'kelompok']);
+Route::post('/generate/save/{offset?}', [GenerateController::class, 'generate']);
 
 Route::get('/{invoice}', [PelaporanController::class, 'invoice']);

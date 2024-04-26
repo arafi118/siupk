@@ -60,42 +60,15 @@
 
 <title>{{ $judul }}</title>
 <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
-    <tr class="b">
-        <td colspan="3" align="center">
-            <div style="font-size: 16px;">
-                KELOMPOK PINJAMAN {{ $pinkel->jpp->nama_jpp }}
-            </div>
-            <div style="font-size: 20px;">
-                <b>{{ $pinkel->anggota->namadepan }}</b>
-            </div>
-            <div style="font-size: 11px;">
-                Alamat : {{ $pinkel->anggota->alamat }}
-                {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }} {{ $pinkel->anggota->d->nama_desa }}
-                {{ $kec->nama_kec }} {{ $nama_kabupaten }} Telp: {{ $pinkel->anggota->hp }}
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="3" height="5"></td>
-    </tr>
-</table>
-<table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
     <tr>
         <td width="30">&nbsp;</td>
         <td width="30">Nomor</td>
         <td width="5" align="right">:</td>
         <td width="500">
-            ______/{{ $pinkel->anggota->nik }}-{{ $pinkel->id }}/{{ $pinkel->jpp->nama_jpp }}/{{ Tanggal::tglRomawi($pinkel->tgl_proposal) }}
+            ______/{{ $pinkel->jpp->nama_jpp }}/{{ Tanggal::tglRomawi($pinkel->tgl_proposal) }}
         </td>
     </tr>
-    <tr>
-        <td width="30">&nbsp;</td>
-        <td width="30">Tanggal</td>
-        <td width="5" align="right">:</td>
-        <td width="500">
-            {{ Tanggal::tglLatin($pinkel->tgl_proposal) }}
-        </td>
-    </tr>
+    
     <tr>
         <td width="30">&nbsp;</td>
         <td width="30">Perihal</td>
@@ -123,8 +96,8 @@
 <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
     <tr>
         <td colspan="3" align="center">
-            <div style="font-size: 20px;">
-                <b>SURAT PERMOHONAN PINJAMAN</b>
+            <div style="font-size: 50px;">
+                
             </div>
         </td>
     </tr>
@@ -145,41 +118,49 @@
     </tr>
     <tr>
         <td width="30">&nbsp;</td>
+        <td>Jenis Kelamin</td>
+        <td width="5" align="right">:</td>
+        <td style="font-weight:">{{$pinkel->anggota->jk}}</td>
+    </tr>
+    <tr>
+        <td width="30">&nbsp;</td>
+        <td>NIK</td>
+        <td width="5" align="right">:</td>
+        <td style="font-weight: ">{{$pinkel->anggota->nik}}</td>
+    </tr>
+    <tr>
+        <td width="30">&nbsp;</td>
+        <td>Tempat/Tanggal lahir</td>
+        <td width="5" align="right">:</td>
+        <td style="font-weight: ">
+        {{ $pinkel->anggota->tempat_lahir}}, 
+              {{ Tanggal::tglLatin($pinkel->anggota->tgl_lahir) }}</td>
+    </tr>
+    <tr>
+        <td width="30">&nbsp;</td>
         <td>Alamat</td>
         <td width="5" align="right">:</td>
-        <td style="font-weight: bold;">{{ $pinkel->anggota->d->nama_desa }}</td>
+        <td style="font-weight: ">{{ $pinkel->anggota->d->nama_desa }}</td>
     </tr>
     <tr>
         <td width="30">&nbsp;</td>
-        <td>Jabatan</td>
+        <td>Telpon</td>
         <td width="5" align="right">:</td>
-        <td style="font-weight: bold;">Ketua Kelompok</td>
+        <td style="font-weight: ">{{ $pinkel->anggota->hp}}</td>
     </tr>
     <tr>
         <td width="30">&nbsp;</td>
-        <td>Nama Lengkap</td>
+        <td>Jenis Usaha</td>
         <td width="5" align="right">:</td>
-        <td style="font-weight: bold;">{{ $pinkel->anggota->sekretaris }}</td>
+        <td style="font-weight:">{{ $pinkel->anggota->u->nama_usaha }}</td>
     </tr>
-    <tr>
-        <td width="30">&nbsp;</td>
-        <td>Alamat</td>
-        <td width="5" align="right">:</td>
-        <td style="font-weight: bold;">{{ $pinkel->anggota->d->nama_desa }}</td>
-    </tr>
-    <tr>
-        <td width="30">&nbsp;</td>
-        <td>Jabatan</td>
-        <td width="5" align="right">:</td>
-        <td style="font-weight: bold;">Sekretaris Kelompok</td>
-    </tr>
-    <tr>
+   
         <td width="30">&nbsp;</td>
         <td colspan="3">
             <div>
             Dalam  hal ini bertindak untuk dan atas nama diri sendiri, dengan ini bermaksud mengajukan               
                 permohonan kredit sebesar Rp. {{ number_format($pinkel->proposal) }}
-                ({{ $keuangan->terbilang($pinkel->proposal) }}) untuk memenuhi kebutuhan tambahan modal usaha bagi
+                ({{ $keuangan->terbilang($pinkel->proposal) }}) untuk memenuhi kebutuhan tambahan modal usaha. 
                 {{ $pinkel->pinjaman_anggota_count }}Kredit atau pinjaman tersebut di atas, akan kami
                 kembalikan dalam jangka waktu {{ $pinkel->jangka }} bulan, dengan sistem angsuran
                 {{ $pinkel->sis_pokok->nama_sistem }} ({{ $pinkel->sis_pokok->deskripsi_sistem }}).
@@ -193,18 +174,38 @@
                 <li>Bukti Angunan / Jaminan;</li>
                 <li>Surat Pernyataan Peminjam;</li>
                 <li>Rencana pengembalian kredit;</li>
-                <li>Surat Keterangan Gaji/Surat Keterangan Usaha.</li>
+                <!-- <li>Surat Keterangan Gaji/Surat Keterangan Usaha.</li> -->
             </ol>
             <div>Demikian permohonan kami, atas perhatiannya kami ucapkan terima kasih.</div>
         </td>
     </tr>
 </table>
 <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px; margin-top: 40px;">
+    
     <tr>
-        <td>&nbsp;</td>
-        <td align="center">{{ $kec->nama_kec }}, {{ Tanggal::tglLatin($pinkel->tgl_proposal) }}</td>
-    </tr>
-   >
+      <td width="30%" class="style9 align-justify">&nbsp;</td>
+      <td width="20%" class="style9 align-justify">&nbsp;</td>
+      <td width="30%" class="style9 align-justify"><div align="center">{{ $kec->nama_kec }}, {{ Tanggal::tglLatin($pinkel->tgl_proposal) }}<br>
+      </div></td>
+	<tr>
+        <td width="32%" height="36" colspan="1" class="style26"><div align="center" class="style9">
+          <p>Mengetahui,<br>Penjamin</p>
+        </div></td><td>&nbsp;</td>
+        <td class="style26"><div align="center" class="style9">
+          <p>Pemohon <br>&nbsp;</p>
+        </div></td>
+      </tr>	
+	<tr>
+	    <td align="center" height="24" colspan="-1" class="style9">
+            <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>{{$pinkel->anggota->penjamin}}<br>NIK/KK. {{$pinkel->anggota->kk}}</th>
+    </td>
+    <td>&nbsp;</td>
+        <td align="center" width="32%" class="style9"><p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>{{$pinkel->anggota->namadepan}}<br>NIK. {{$pinkel->anggota->nik}}</p></td>
+  </tr>
     <tr>
         <td colspan="2" height="30"></td>
     </tr>

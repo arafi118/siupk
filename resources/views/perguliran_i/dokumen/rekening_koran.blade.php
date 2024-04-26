@@ -19,7 +19,7 @@
                     <b>REKENING KORAN</b>
                 </div>
                 <div style="font-size: 16px;">
-                    <b>KELOMPOK {{ strtoupper($pinkel->kelompok->nama_kelompok) }}</b>
+                    <b>PINJAMAN {{ strtoupper($pinkel->anggota->namadepan) }}</b>
                 </div>
             </td>
         </tr>
@@ -32,7 +32,7 @@
             <td width="90">Loan ID.</td>
             <td width="5" align="center">:</td>
             <td>
-                <b>{{ $pinkel->kelompok->nama_kelompok }} &ndash; {{ $pinkel->id }}</b>
+                <b>{{ $pinkel->anggota->namadepan }} &ndash; {{ $pinkel->id }}</b>
             </td>
             <td width="90">Jangka waktu</td>
             <td width="5" align="center">:</td>
@@ -110,9 +110,17 @@
 
                 if ($kredit == '1.1.03') {
                     $pokok = intval($trx->jumlah);
-                } elseif ($trx->rekening_kredit == '4.1.01.01' or $trx->rekening_kredit == '4.1.01.02' or $trx->rekening_kredit == '4.1.01.03') {
+                } elseif (
+                    $trx->rekening_kredit == '4.1.01.01' or
+                    $trx->rekening_kredit == '4.1.01.02' or
+                    $trx->rekening_kredit == '4.1.01.03'
+                ) {
                     $jasa = intval($trx->jumlah);
-                } elseif ($trx->rekening_kredit == '4.1.01.04' or $trx->rekening_kredit == '4.1.01.05' or $trx->rekening_kredit == '4.1.01.06') {
+                } elseif (
+                    $trx->rekening_kredit == '4.1.01.04' or
+                    $trx->rekening_kredit == '4.1.01.05' or
+                    $trx->rekening_kredit == '4.1.01.06'
+                ) {
                     $denda = intval($trx->jumlah);
                 } elseif ($kredit == '1.1.01') {
                     $pencairan = intval($trx->jumlah);

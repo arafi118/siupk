@@ -102,7 +102,7 @@
             <tr>
                 <td align="center">
                     <div style="font-size: 18px;">
-                        <b>SURAT REKOMENDASI KREDIT {{ $pinkel->jpp->nama_jpp }}</b>
+                        <b>REKOMENDASI KREDIT {{ $pinkel->jpp->nama_jpp }}</b>
                     </div>
                     <div style="font-size: 12px;">
                         Nomor: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
@@ -112,6 +112,9 @@
                 </td>
             </tr>
             <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
                 <td height="5"></td>
             </tr>
         </table>
@@ -119,7 +122,7 @@
             <tr>
                 <td colspan="3" align="justify">
                     Yang bertanda tangan di bawah ini {{ $pinkel->anggota->d->sebutan_desa->sebutan_kades }}
-                    {{ $pinkel->anggota->d->desa }} menerangkan dengan sebenarnya bahwa:
+                    {{ $pinkel->anggota->d->nama_desa }} menerangkan dengan sebenarnya bahwa:
                 </td>
             </tr>
 
@@ -139,10 +142,10 @@
                 <td>{{ $pinkel->anggota->nik }}  </td>
             </tr>
             <tr>
-                <td width="120" style="vertical-align: top;">Kelahiran  </td>
+                <td width="120" style="vertical-align: top;">Tempat/Tanggal lahir  </td>
                 <td align="center">:</td>
                 <td>{{ $pinkel->anggota->tempat_lahir}} 
-                {{ $pinkel->anggota->tgl_lahir}}  </td>
+                {{ Tanggal::tglLatin($pinkel->anggota->tgl_lahir) }}  </td>
             </tr>
             <tr>
                 <td width="120" style="vertical-align: top;">Alamat </td>
@@ -159,20 +162,23 @@
             <tr>
                 <td width="120" style="vertical-align: top;">Jenis Usaha  </td>
                 <td align="center">:</td>
-                <td>{{ $pinkel->anggota->usaha }}  </td>
+                <td>{{ $pinkel->anggota->u->nama_usaha }} </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
             </tr>
             
             <tr>
                 <td align="justify" colspan="3">
-                Benar-benar warga Desa{{ $pinkel->anggota->sebutan_desa}} {{ $pinkel->anggota->desa}}
-                dengan berkepribadian baik dan Layak direkomendasikan untuk mendapatkan kredit Modal {{ $pinkel->jpp->deskripsi_jpp }} ({{ $pinkel->jpp->nama_jpp }}) pada
+                Benar-benar warga Desa {{ $pinkel->anggota->d->nama_desa}} 
+                dengan berkepribadian baik dan kami rekomendasi untuk mengajukan kredit Modal {{ $pinkel->jpp->deskripsi_jpp }} ({{ $pinkel->jpp->nama_jpp }}) pada
                     {{ $kec->nama_lembaga_sort }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }}
                     {{ $nama_kabupaten }}.
                 </td>
             </tr>
             <tr>
                 <td align="justify" colspan="3">
-                    Demikian Surat Rekomendasi ini diberikan kepada yang bersangkutan untuk dipergunakan seperlunya.
+                    Demikian Surat Rekomendasi ini diberikan kepada yang bersangkutan untuk dipergunakan sebagaimana mestinya.
                 </td>
             </tr>
         </table>
@@ -184,11 +190,11 @@
                 <td width="33%">&nbsp;</td>
             </tr>
             <tr>
-                <td colspan="2">&nbsp;</td>
+                <td width="200"align="center"colspan="1">&nbsp;</td>
                 <td align="center">{{ $nama_kab }}, {{ Tanggal::tglLatin($pinkel->tgl_proposal) }}</td>
             </tr>
             <tr>
-                <td colspan="2">&nbsp;</td>
+                <td width="200"align="center"colspan="1">&nbsp;</td>
                 <td align="center">
                     {{ $pinkel->anggota->d->sebutan_desa->sebutan_kades }} {{ $pinkel->anggota->d->desa }}
                 </td>
@@ -197,7 +203,7 @@
                 <td colspan="3" height="40">&nbsp;</td>
             </tr>
             <tr>
-                <td colspan="2">&nbsp;</td>
+                <td width="200"align="center"colspan="1">&nbsp;</td>
                 <td align="center">
                     <u>
                         <b>{{ $pinkel->anggota->d->kades }}</b>

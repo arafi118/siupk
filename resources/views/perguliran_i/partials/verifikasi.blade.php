@@ -1,112 +1,122 @@
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="row mt-0">
+            <div class="col-md-6 mb-3">
+                <div class="border border-light border-2 border-radius-md p-3">
+                    <h6 class="text-info text-gradient mb-0">
+                        Proposal
+                    </h6>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
+                            Tgl Pengajuan
+                            <span class="badge badge-info badge-pill">
+                                {{ Tanggal::tglIndo($perguliran_i->tgl_proposal) }}
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
+                            Pengajuan
+                            <span class="badge badge-info badge-pill">
+                                {{ number_format($perguliran_i->proposal) }}
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
+                            Jenis Jasa
+                            <span class="badge badge-info badge-pill">
+                                {{ $perguliran_i->jasa->nama_jj }}
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
+                            Jasa
+                            <span class="badge badge-info badge-pill">
+                                {{ $perguliran_i->pros_jasa . '% / ' . $perguliran_i->jangka . ' bulan' }}
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
+                            Angs. Pokok
+                            <span class="badge badge-info badge-pill">
+                                {{ $perguliran_i->sis_pokok->nama_sistem }}
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
+                            Angs. Jasa
+                            <span class="badge badge-info badge-pill">
+                                {{ $perguliran_i->sis_jasa->nama_sistem }}
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="border border-light border-2 border-radius-md p-3">
+                    <h6 class="text-danger text-gradient mb-0">
+                        Verified
+                    </h6>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
+                            Tgl Verifikasi
+                            <span class="badge badge-danger badge-pill">
+                                {{ Tanggal::tglIndo($perguliran_i->tgl_verifikasi) }}
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
+                            Verifikasi
+                            <span class="badge badge-danger badge-pill">
+                                {{ number_format($perguliran_i->verifikasi) }}
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
+                            Jenis Jasa
+                            <span class="badge badge-danger badge-pill">
+                                {{ $perguliran_i->jasa->nama_jj }}
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
+                            Jasa
+                            <span class="badge badge-danger badge-pill">
+                                {{ $perguliran_i->pros_jasa . '% / ' . $perguliran_i->jangka . ' bulan' }}
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
+                            Angs. Pokok
+                            <span class="badge badge-danger badge-pill">
+                                {{ $perguliran_i->sis_pokok->nama_sistem }}
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
+                            Angs. Jasa
+                            <span class="badge badge-danger badge-pill">
+                                {{ $perguliran_i->sis_jasa->nama_sistem }}
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <hr class="horizontal dark">
+
+    </div>
+</div>
+
+<div class="card card-body p-2 pb-0 mb-3">
+    <form action="/perguliran_i/dokumen?status=P" target="_blank" method="post">
+        @csrf
+
+        <input type="hidden" name="id" value="{{ $perguliran_i->id }}">
+        <div class="d-grid">
+            <button type="submit" name="report" value="RekomendasiVerifikator#pdf" class="btn btn-info btn-sm mb-2">Cetak Rekomendasi Verifikator/Analis</button>
+        </div>
+ <div class="d-grid">
+    <button type="button" data-bs-toggle="modal" data-bs-target="#CetakDokumenProposal"
+     class="btn btn-success btn-sm mb-2" style="background-color: green;">Cetak Dokumen Proposal</button>
+</div>
+
+    </form>
+</div>
+
 <form action="/perguliran_i/{{ $perguliran_i->id }}" method="post" id="FormInput">
     @csrf
     @method('PUT')
-    <div class="card mb-3">
-        <div class="card-body">
-            <div class="row mt-0">
-                <div class="col-md-6 mb-3">
-                    <div class="border border-light border-2 border-radius-md p-3">
-                        <h6 class="text-info text-gradient mb-0">
-                            Proposal
-                        </h6>
-                        <ul class="list-group">
-                            <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
-                                Tgl Pengajuan
-                                <span class="badge badge-info badge-pill">
-                                    {{ Tanggal::tglIndo($perguliran_i->tgl_proposal) }}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
-                                Pengajuan
-                                <span class="badge badge-info badge-pill">
-                                    {{ number_format($perguliran_i->proposal) }}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
-                                Jenis Jasa
-                                <span class="badge badge-info badge-pill">
-                                    {{ $perguliran_i->jasa->nama_jj }}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
-                                Jasa
-                                <span class="badge badge-info badge-pill">
-                                    {{ $perguliran_i->pros_jasa . '% / ' . $perguliran_i->jangka . ' bulan' }}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
-                                Angs. Pokok
-                                <span class="badge badge-info badge-pill">
-                                    {{ $perguliran_i->sis_pokok->nama_sistem }}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
-                                Angs. Jasa
-                                <span class="badge badge-info badge-pill">
-                                    {{ $perguliran_i->sis_jasa->nama_sistem }}
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <div class="border border-light border-2 border-radius-md p-3">
-                        <h6 class="text-danger text-gradient mb-0">
-                            Verified
-                        </h6>
-                        <ul class="list-group">
-                            <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
-                                Tgl Verifikasi
-                                <span class="badge badge-danger badge-pill">
-                                    {{ Tanggal::tglIndo($perguliran_i->tgl_verifikasi) }}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
-                                Verifikasi
-                                <span class="badge badge-danger badge-pill">
-                                    {{ number_format($perguliran_i->verifikasi) }}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
-                                Jenis Jasa
-                                <span class="badge badge-danger badge-pill">
-                                    {{ $perguliran_i->jasa->nama_jj }}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
-                                Jasa
-                                <span class="badge badge-danger badge-pill">
-                                    {{ $perguliran_i->pros_jasa . '% / ' . $perguliran_i->jangka . ' bulan' }}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
-                                Angs. Pokok
-                                <span class="badge badge-danger badge-pill">
-                                    {{ $perguliran_i->sis_pokok->nama_sistem }}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center text-sm">
-                                Angs. Jasa
-                                <span class="badge badge-danger badge-pill">
-                                    {{ $perguliran_i->sis_jasa->nama_sistem }}
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="horizontal dark">
-
-        </div>
-    </div>
-
-    <div class="card card-body p-2 pb-0 mb-3">
-        <div class="d-grid">
-            <button type="button" data-bs-toggle="modal" data-bs-target="#CetakDokumenProposal"
-                class="btn btn-info btn-sm mb-2">Cetak Dokumen Verifikasi</button>
-        </div>
-    </div>
 
     <div class="card mb-3">
         <div class="card-header pb-0 p-3">
@@ -209,7 +219,7 @@
                     <div class="input-group input-group-static my-3">
                         <label for="nomor_spk">Nomor SPK</label>
                         <input autocomplete="off" type="text" name="nomor_spk" id="nomor_spk"
-                            class="form-control" value="{{ $perguliran_i->nomor_spk }}">
+                            class="form-control" value="{{ $perguliran_i->spk_no }}">
                         <small class="text-danger" id="msg_nomor_spk"></small>
                     </div>
                 </div>
@@ -265,114 +275,31 @@
         dateFormat: "d/m/Y"
     })
 
-    $('.idpa_proposal').change(function(e) {
-
-        var idpa = $(this).attr('id')
-        var value = $(this).val()
-
-        $.ajax({
-            url: '/pinjaman_anggota/' + idpa,
-            type: 'post',
-            data: {
-                '_method': 'PUT',
-                'idpa': idpa,
-                'verifikasi': value,
-                'status': 'V',
-                '_token': $('[name=_token]').val()
-            },
-            success: function(result) {
-                var total = 0;
-                $('.idpa_proposal').map(function() {
-                    var idpa = $(this).attr('id')
-                    var value = $(this).val()
-
-                    $('.idpa-' + idpa).val(value)
-
-                    value = value.split(',').join('')
-                    value = value.split('.00').join('')
-                    value = parseFloat(value)
-
-                    total += value
-
-                })
-
-                $('#jumlah').html(result.jumlah)
-                $('#alokasi').val(result.jumlah)
-                $('#_alokasi').html(result.jumlah)
-                $('#__alokasi').val(result.jumlah)
-            }
-        })
-    })
-
-    $(document).on('change', '.idpa', function(e) {
-        var total = 0;
-        $('.idpa').map(function() {
-            var value = $(this).val()
-            if (value == '') {
-                value = 0
-            } else {
-                value = value.split(',').join('')
-                value = value.split('.00').join('')
-            }
-
-            value = parseFloat(value)
-
-            total += value
-        })
-
-        $('#__alokasi').val(total)
-        $('#_alokasi').html(formatter.format(total))
-        $('#alokasi').val(formatter.format(total))
-    })
-
     $(document).on('click', '#Simpan', async function(e) {
         e.preventDefault()
         $('small').html('')
 
-        var alokasi = parseInt($('#alokasi').val().split(',').join('').split('.00').join(''))
-        var __alokasi = parseInt($('#__alokasi').val())
+        var form = $('#FormInput')
+        $.ajax({
+            type: 'POST',
+            url: form.attr('action') + '?save=true',
+            data: form.serialize(),
+            success: function(result) {
+                Swal.fire('Berhasil', result.msg, 'success').then(() => {
+                    window.location.href = '/detail_i/' + result.id
+                })
+            },
+            error: function(result) {
+                const respons = result.responseJSON;
 
-        var lanjut = true;
-        if (alokasi != __alokasi) {
-            lanjut = await Swal.fire({
-                title: 'Peringatan',
-                text: 'Jumlah alokasi Anggota dan Kelompok Berbeda. Tetap lanjutkan?',
-                showCancelButton: true,
-                confirmButtonText: 'Lanjutkan',
-                cancelButtonText: 'Batal',
-                icon: 'warning'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    return true;
-                }
-
-                return false
-            })
-        }
-
-        if (lanjut) {
-            var form = $('#FormInput')
-            $.ajax({
-                type: 'POST',
-                url: form.attr('action') + '?save=true',
-                data: form.serialize(),
-                success: function(result) {
-                    Swal.fire('Berhasil', result.msg, 'success').then(() => {
-                        window.location.href = '/detail/' + result.id
-                    })
-                },
-                error: function(result) {
-                    const respons = result.responseJSON;
-
-                    Swal.fire('Error', 'Cek kembali input yang anda masukkan', 'error')
-                    $.map(respons, function(res, key) {
-                        $('#' + key).parent('.input-group.input-group-static')
-                            .addClass(
-                                'is-invalid')
-                        $('#msg_' + key).html(res)
-                    })
-                }
-            })
-        }
+                Swal.fire('Error', 'Cek kembali input yang anda masukkan', 'error')
+                $.map(respons, function(res, key) {
+                    $('#' + key).parent('.input-group.input-group-static')
+                        .addClass(
+                            'is-invalid')
+                    $('#msg_' + key).html(res)
+                })
+            }
+        })
     })
 </script>

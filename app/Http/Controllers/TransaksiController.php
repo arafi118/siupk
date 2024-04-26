@@ -861,20 +861,10 @@ class TransaksiController extends Controller
                 ]);
             }
 
-            $kas_umum = '1.1.01.01';
-            if ($pinkel->jenis_pp == '1') {
-                $poko_kredit = '1.1.03.01';
-                $jasa_kredit = '4.1.01.01';
-                $dend_kredit = '4.1.01.04';
-            } elseif ($pinkel->jenis_pp == '2') {
-                $poko_kredit = '1.1.03.02';
-                $jasa_kredit = '4.1.01.02';
-                $dend_kredit = '4.1.01.05';
-            } else {
-                $poko_kredit = '1.1.03.03';
-                $jasa_kredit = '4.1.01.03';
-                $dend_kredit = '4.1.01.06';
-            }
+            $kas_umum = '1.1.01.' . str_pad($pinkel->jenis_pp + 1, 2, '0', STR_PAD_LEFT);
+            $poko_kredit = '1.1.03.' . str_pad($pinkel->jenis_pp, 2, '0', STR_PAD_LEFT);
+            $jasa_kredit = '4.1.01.' . str_pad($pinkel->jenis_pp, 2, '0', STR_PAD_LEFT);
+            $dend_kredit = '4.1.02.' . str_pad($pinkel->jenis_pp, 2, '0', STR_PAD_LEFT);
 
             $_pokok = floatval($request->pokok) - floatval($request->total_pokok_anggota);
             $_jasa = floatval($request->jasa) - floatval($request->total_jasa_anggota);
@@ -992,8 +982,8 @@ class TransaksiController extends Controller
                 ]);
             }
 
-            $rek_pokok = ['1.1.03.01', '1.1.03.02', '1.1.03.03'];
-            $rek_jasa = ['1.1.03.04', '1.1.03.05', '1.1.03.06', '4.1.01.01', '4.1.01.02', '4.1.01.03'];
+            $poko_kredit = '1.1.03.';
+            $jasa_kredit = '4.1.01.';
 
             $alokasi_pokok = intval($pinkel->alokasi);
             $alokasi_jasa = intval($pinkel->pros_jasa == 0 ? 0 : $pinkel->alokasi * ($pinkel->pros_jasa / 100));
@@ -1015,7 +1005,7 @@ class TransaksiController extends Controller
             ];
 
             foreach ($transaksi as $key => $trx) {
-                if (in_array($trx['rekening_kredit'], $rek_pokok)) {
+                if (Keuangan::startWith($trx['rekening_kredit'], $poko_kredit)) {
                     $sum_pokok += $trx['jumlah'];
                     $alokasi_pokok -= $sum_pokok;
                     $tunggakan_pokok -= $trx['jumlah'];
@@ -1027,7 +1017,7 @@ class TransaksiController extends Controller
                     $real_angsuran['tunggakan_pokok'] = $tunggakan_pokok;
                 }
 
-                if (in_array($trx['rekening_kredit'], $rek_jasa)) {
+                if (Keuangan::startWith($trx['rekening_kredit'], $jasa_kredit)) {
                     $sum_jasa += $trx['jumlah'];
                     $alokasi_jasa -= $sum_jasa;
                     $tunggakan_jasa -= $trx['jumlah'];
@@ -1152,20 +1142,10 @@ class TransaksiController extends Controller
                 ]);
             }
 
-            $kas_umum = '1.1.01.01';
-            if ($pinj_a->jenis_pp == '1') {
-                $poko_kredit = '1.1.03.01';
-                $jasa_kredit = '4.1.01.01';
-                $dend_kredit = '4.1.01.04';
-            } elseif ($pinj_a->jenis_pp == '2') {
-                $poko_kredit = '1.1.03.02';
-                $jasa_kredit = '4.1.01.02';
-                $dend_kredit = '4.1.01.05';
-            } else {
-                $poko_kredit = '1.1.03.03';
-                $jasa_kredit = '4.1.01.03';
-                $dend_kredit = '4.1.01.06';
-            }
+            $kas_umum = '1.1.01.' . str_pad($pinj_a->jenis_pp + 1, 2, '0', STR_PAD_LEFT);
+            $poko_kredit = '1.1.03.' . str_pad($pinj_a->jenis_pp, 2, '0', STR_PAD_LEFT);
+            $jasa_kredit = '4.1.01.' . str_pad($pinj_a->jenis_pp, 2, '0', STR_PAD_LEFT);
+            $dend_kredit = '4.1.02.' . str_pad($pinj_a->jenis_pp, 2, '0', STR_PAD_LEFT);
 
             if (strtotime($tgl_transaksi) < strtotime($request->tgl_pakai_aplikasi)) {
                 return response()->json([
@@ -1229,8 +1209,8 @@ class TransaksiController extends Controller
 
             $jasa_pinjaman = ($pinj_a->pros_jasa / 100) * $pinj_a->alokasi;
 
-            $rek_pokok = ['1.1.03.01', '1.1.03.02', '1.1.03.03'];
-            $rek_jasa = ['1.1.03.04', '1.1.03.05', '1.1.03.06', '4.1.01.01', '4.1.01.02', '4.1.01.03'];
+            $poko_kredit = '1.1.03.';
+            $jasa_kredit = '4.1.01.';
 
             $alokasi_pokok = intval($pinj_a->alokasi);
             $alokasi_jasa = intval($pinj_a->pros_jasa == 0 ? 0 : $pinj_a->alokasi * ($pinj_a->pros_jasa / 100));
@@ -1252,7 +1232,7 @@ class TransaksiController extends Controller
             ];
 
             foreach ($transaksi as $key => $trx) {
-                if (in_array($trx['rekening_kredit'], $rek_pokok)) {
+                if (Keuangan::startWith($trx['rekening_kredit'], $poko_kredit)) {
                     $sum_pokok += $trx['jumlah'];
                     $alokasi_pokok -= $sum_pokok;
                     $tunggakan_pokok -= $trx['jumlah'];
@@ -1264,7 +1244,7 @@ class TransaksiController extends Controller
                     $real_angsuran['tunggakan_pokok'] = $tunggakan_pokok;
                 }
 
-                if (in_array($trx['rekening_kredit'], $rek_jasa)) {
+                if (Keuangan::startWith($trx['rekening_kredit'], $jasa_kredit)) {
                     $sum_jasa += $trx['jumlah'];
                     $alokasi_jasa -= $sum_jasa;
                     $tunggakan_jasa -= $trx['jumlah'];
@@ -1661,7 +1641,7 @@ class TransaksiController extends Controller
     {
         $pinkel = PinjamanAnggota::where('id', $id_pinkel)->with([
             'target' => function ($query) {
-                $query->where('jatuh_tempo', '<=', date('Y-m-t'));
+                $query->where('jatuh_tempo', '<=', date('Y-m-t'))->orwhere('angsuran_ke', '0')->orderBy('jatuh_tempo', 'DESC');
             }
         ])->firstOrFail();
         $real = RealAngsuranI::where([
@@ -2599,11 +2579,11 @@ class TransaksiController extends Controller
             'id_user' => auth()->user()->id,
         ];
 
-        $rek_pokok = ['1.1.03.01', '1.1.03.02', '1.1.03.03'];
-        $rek_jasa = ['1.1.03.04', '1.1.03.05', '1.1.03.06', '4.1.01.01', '4.1.01.02', '4.1.01.03'];
+        $poko_kredit = '1.1.03.';
+        $jasa_kredit = '4.1.01.';
 
         foreach ($transaksi as $trx) {
-            if (in_array($trx->rekening_kredit, $rek_pokok)) {
+            if (Keuangan::startWith($trx['rekening_kredit'], $poko_kredit)) {
                 $insert['realisasi_pokok'] += $trx->jumlah;
                 $insert['sum_pokok'] += $trx->jumlah;
                 $insert['saldo_pokok'] -= $trx->jumlah;
@@ -2612,7 +2592,7 @@ class TransaksiController extends Controller
                 if ($insert['tunggakan_pokok'] <= 0) $insert['tunggakan_pokok'] = 0;
             }
 
-            if (in_array($trx->rekening_kredit, $rek_jasa)) {
+            if (Keuangan::startWith($trx['rekening_kredit'], $jasa_kredit)) {
                 $insert['realisasi_jasa'] += $trx->jumlah;
                 $insert['sum_jasa'] += $trx->jumlah;
                 $insert['saldo_jasa'] -= $trx->jumlah;
@@ -2656,8 +2636,8 @@ class TransaksiController extends Controller
         $alokasi_pokok = intval($pinkel->alokasi);
         $alokasi_jasa = intval($pinkel->alokasi * ($pinkel->pros_jasa / 100));
 
-        $rek_pokok = ['1.1.03.01', '1.1.03.02', '1.1.03.03'];
-        $rek_jasa = ['1.1.03.04', '1.1.03.05', '1.1.03.06', '4.1.01.01', '4.1.01.02', '4.1.01.03'];
+        $poko_kredit = '1.1.03.';
+        $jasa_kredit = '4.1.01.';
 
         $sum_pokok = 0;
         $sum_jasa = 0;
@@ -2698,7 +2678,7 @@ class TransaksiController extends Controller
                 }
 
                 foreach ($trx->tr_idtp as $tr) {
-                    if (in_array($tr->rekening_kredit, $rek_pokok)) {
+                    if (Keuangan::startWith($trx['rekening_kredit'], $poko_kredit)) {
                         $sum_pokok += intval($tr->jumlah);
 
                         $tunggakan_pokok = $ra->target_pokok - $sum_pokok;
@@ -2710,7 +2690,7 @@ class TransaksiController extends Controller
                         $insert[$trx->idtp]['tunggakan_pokok'] = $tunggakan_pokok;
                     }
 
-                    if (in_array($tr->rekening_kredit, $rek_jasa)) {
+                    if (Keuangan::startWith($trx['rekening_kredit'], $jasa_kredit)) {
                         $sum_jasa += intval($tr->jumlah);
 
                         $tunggakan_jasa = $ra->target_jasa - $sum_jasa;
