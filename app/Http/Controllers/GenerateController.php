@@ -93,6 +93,9 @@ class GenerateController extends Controller
             if (is_array($val)) {
                 $opt = $val['operator'];
                 $value = $val['value'];
+                if ($opt == 'IN' || $opt == 'NOT IN') {
+                    $value = "($val[value])";
+                }
 
                 if (!$value) {
                     continue;
