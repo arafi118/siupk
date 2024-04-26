@@ -135,65 +135,11 @@
             'file' => 'suratAhliWaris',
             'withExcel' => false,
         ],
-<<<<<<< HEAD
-
-        // [
-        //     'title' => 'Tanggung Renteng Kematian',
-        //     'file' => 'tanggungRentengKematian',
-        //     'withExcel' => false,
-        // ],
-        // [
-        //     'title' => 'Pernyataan Tanggung Renteng',
-        //     'file' => 'pernyataanTanggungRenteng',
-        //     'withExcel' => false,
-        // ],
-        // [
-        //     'title' => 'Penerima IPTW',
-        //     'file' => 'iptw',
-        //     'withExcel' => false,
-        // ],
-
-        // [
-        //     'title' => 'Surat Kuasa',
-        //     'file' => 'suratKuasa',
-        //     'withExcel' => false,
-        // ],
-        // [
-        //     'title' => 'Tanda Terima',
-        //     'file' => 'tandaTerima',
-        //     'withExcel' => false,
-        // ],
-
-        // [
-        //     'title' => 'Kartu Angsuran Anggota',
-        //     'file' => 'kartuAngsuranAnggota',
-        //     'withExcel' => false,
-        // ],
-
-        // [
-        //     'title' => 'Peserta Asuransi',
-        //     'file' => 'pesertaAsuransi',
-        //     'withExcel' => false,
-        // ],
-
-        // [
-        //     'title' => 'Kuitansi Anggota',
-        //     'file' => 'kuitansiAnggota',
-        //     'withExcel' => false,
-        // ],
-
-        // [
-        //     'title' => 'Form Verifikasi',
-        //     'file' => 'formVerifikasi',
-        //     'withExcel' => false,
-        // ],
-=======
         [
             'title' => 'Form Verifikasi',
             'file' => 'formVerifikasi',
             'withExcel' => false,
         ],
->>>>>>> c8014486a1beef4ddc091f3e97a67c2bc5a0f280
     ];
 @endphp
 
