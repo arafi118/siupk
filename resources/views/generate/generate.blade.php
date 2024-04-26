@@ -32,6 +32,7 @@
         <button type="submit" class="btn btn-info" id="generate">Generate</button>
     </form>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     @if (count($data_id_pinj) >= $offset)
         <script>
             $('#generate').submit()
