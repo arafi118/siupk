@@ -1305,39 +1305,10 @@ class PinjamanIndividuController extends Controller
         }
     }
 
-    // public function formVerifikasi($id, $data)
-    // {
-    //     $keuangan = new Keuangan;
+    public function formVerifikasi($id, $data)
+    {
+        $keuangan = new Keuangan;
 
-<<<<<<< HEAD
-    //     $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
-    //         'jpp',
-    //         'jasa',
-    //         'anggota',
-    //         'anggota.d',
-    //         'anggota.u',
-    //         // 'anggota.kegiatan',
-    //         // 'anggota.tk',
-    //         // 'anggota.fk',
-    //         'anggota.d.sebutan_desa',
-    //         // 'pinjaman_anggota',
-    //         // 'pinjaman_anggota.anggota',
-    //         'sis_pokok',
-    //         // 'user',
-    //         // 'pinkel' => function ($query) use ($data, $id) {
-    //         //     $query->where([
-    //         //         ['id', '!=', $id]
-    //         //     ]);
-    //         // },
-    //         // 'pinkel.pinjaman_anggota',
-    //         // 'pinkel.pinjaman_anggota.anggota'
-    //     ])->first();
-
-    //     $data['user'] = User::where([
-    //         ['lokasi', Session::get('lokasi')],
-    //         ['level', '4']
-    //     ])->with('j')->orderBy('id')->get();
-=======
         $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
             'jpp',
             'jasa',
@@ -1353,21 +1324,20 @@ class PinjamanIndividuController extends Controller
             ['level', '4'],
             ['jabatan', '70']
         ])->with('j')->orderBy('id')->first();
->>>>>>> c8014486a1beef4ddc091f3e97a67c2bc5a0f280
 
-    //     $data['keuangan'] = $keuangan;
-    //     $data['statusDokumen'] = request()->get('status');
+        $data['keuangan'] = $keuangan;
+        $data['statusDokumen'] = request()->get('status');
 
-    //     $data['judul'] = 'Form Verifikasi (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
-    //     $view = view('perguliran_i.dokumen.form_verifikasi', $data)->render();
+        $data['judul'] = 'Form Verifikasi (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
+        $view = view('perguliran_i.dokumen.form_verifikasi', $data)->render();
 
-    //     if ($data['type'] == 'pdf') {
-    //         $pdf = PDF::loadHTML($view);
-    //         return $pdf->stream();
-    //     } else {
-    //         return $view;
-    //     }
-    // }
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view);
+            return $pdf->stream();
+        } else {
+            return $view;
+        }
+    }
 
     public function formVerifikasiAnggota($id, $data)
     {
@@ -1484,7 +1454,7 @@ class PinjamanIndividuController extends Controller
 
         $data['dir'] = User::where([
             ['level', '1'],
-            ['jabatan', '1'], 
+            ['jabatan', '1'],
             ['lokasi', Session::get('lokasi')]
         ])->first();
 
@@ -1700,7 +1670,7 @@ class PinjamanIndividuController extends Controller
             return $view;
         }
     }
-   
+
     public function pengikatdirisebagaipenjamin($id, $data)
     {
         $keuangan = new keuangan;
@@ -1721,9 +1691,9 @@ class PinjamanIndividuController extends Controller
         $data['keuangan'] = $keuangan;
         $data['ttd'] = Pinjaman::keyword($data['kec']->ttd->tanda_tangan_spk, $data, true);
 
-        $data['judul'] ='pengikat diri sebagai penjamin (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
+        $data['judul'] = 'pengikat diri sebagai penjamin (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
         $view = view('perguliran_i.dokumen.pengikat_diri_sebagai_penjamin', $data)->render();
-        
+
         if ($data['type'] == 'pdf') {
             $pdf = PDF::loadHTML($view);
             return $pdf->stream();
@@ -1731,7 +1701,7 @@ class PinjamanIndividuController extends Controller
             return $view;
         }
     }
-    
+
 
     public function suratKelayakan($id, $data)
     {
@@ -1787,7 +1757,7 @@ class PinjamanIndividuController extends Controller
 
         $data['judul'] = 'surat pernyataan suami (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
         $view = view('perguliran_i.dokumen.surat_pernyataan_suami', $data)->render();
-        
+
         if ($data['type'] == 'pdf') {
             $pdf = PDF::loadHTML($view);
             return $pdf->stream();
@@ -1829,7 +1799,7 @@ class PinjamanIndividuController extends Controller
             'anggota.d.sebutan_desa',
             'sis_pokok'
         ])->first();
- 
+
         $data['user'] = User::where([
             ['lokasi', Session::get('lokasi')],
             ['level', '4']
@@ -2073,13 +2043,6 @@ class PinjamanIndividuController extends Controller
             'anggota',
             'anggota.d',
             'anggota.d.sebutan_desa',
-<<<<<<< HEAD
-=======
-            'pinjaman_anggota',
-            'pinjaman_anggota.anggota',
-            'pinjaman_anggota.anggota.d',
-            'pinjaman_anggota.anggota.d.sebutan_desa',
->>>>>>> c8014486a1beef4ddc091f3e97a67c2bc5a0f280
         ])->first();
 
         $data['judul'] = 'Pernyataan Tanggung Renteng (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
@@ -2216,16 +2179,7 @@ class PinjamanIndividuController extends Controller
         $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
             'jpp',
             'anggota',
-<<<<<<< HEAD
         ])->first();
-=======
-            'pinjaman_anggota',
-            'pinjaman_anggota.anggota',
-            'pinjaman_anggota.anggota.keluarga',
-            'pinjaman_anggota.anggota.d',
-            'pinjaman_anggota.anggota.d.sebutan_desa',
-        ])->withCount('pinjaman_anggota')->first();
->>>>>>> c8014486a1beef4ddc091f3e97a67c2bc5a0f280
 
         $data['judul'] = 'Surat Ahli Waris (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
         $view = view('perguliran_i.dokumen.surat_ahli_waris', $data)->render();
