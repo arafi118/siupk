@@ -1,6 +1,7 @@
 @php
     use App\Utils\Tanggal;
 
+    $real = 0;
     $real_pokok = 0;
     $real_jasa = 0;
     $sum_pokok = 0;
@@ -8,12 +9,12 @@
     $saldo_pokok = $pinkel->alokasi;
     $saldo_jasa = $pinkel->alokasi / $pinkel->pros_jasa;
     if ($real) {
-        $real_pokok = $real->realisasi_pokok;
-        $real_jasa = $real->realisasi_jasa;
-        $sum_pokok = $real->sum_pokok;
-        $sum_jasa = $real->sum_jasa;
-        $saldo_pokok = $real->saldo_pokok;
-        $saldo_jasa = $real->saldo_jasa;
+        $real_pokok = $real->realisasi_pokok ?? null;
+        $real_jasa = $real->realisasi_jasa ?? null;
+        $sum_pokok = $real->sum_pokok ?? null;
+        $sum_jasa = $real->sum_jasa ?? null;
+        $saldo_pokok = $real->saldo_pokok ?? null;
+        $saldo_jasa = $real->saldo_jasa ?? null;
     }
 
     $target_pokok = 0;
@@ -41,14 +42,14 @@
             <td width="50">Nomor</td>
             <td width="10" align="center">:</td>
             <td colspan="2">
-                <b>______/DBM/{{ Tanggal::tglRomawi(date('Y-m-d')) }}</b>
+                ______/DBM/{{ Tanggal::tglRomawi(date('Y-m-d')) }}
             </td>
         </tr>
         <tr>
             <td>Sifat</td>
             <td align="center">:</td>
             <td colspan="2">
-                <b>Penting dan Rahasia</b>
+                Penting dan Rahasia
             </td>
         </tr>
         <tr>
@@ -61,16 +62,13 @@
         <tr>
             <td colspan="3">&nbsp;</td>
             <td align="left" width="140">
-                <div>KEPADA YTH.</div>
-                <div style="font-weight: bold;">
-                    {{ $pinkel->anggota->ketua }}
+                <div>Kepada Yth. </div>
+                <div>
+                    Bpk/Ibu <b>{{ $pinkel->anggota->namadepan }}</b>
                 </div>
-                <div style="font-weight: bold;">
-                    a.n. Ketua Kelompok {{ $pinkel->anggota->namadepan }}
-                </div>
-                <div style="font-weight: bold;">Di</div>
-                <div style="font-weight: bold; text-align: center;">
-                    {{ strtoupper($pinkel->anggota->d->nama_desa) }}
+                <div>Di</div>
+                <div>
+                    &nbsp;&nbsp;{{ $pinkel->anggota->d->nama_desa }}
                 </div>
             </td>
         </tr>
@@ -79,11 +77,21 @@
         </tr>
         <tr>
             <td>&nbsp;</td>
+            @php
+                if ($pinkel->anggota->jk == 'P') {
+                    $PL = 'Ibu.';
+                } else {
+                    $PL = 'Bpk.';
+                }
+            @endphp
+
             <td colspan="3">
                 <div>Dengan hormat,</div>
                 <div style="text-align: justify;">
-                    Mendasar kepada Surat Perjanjian Kredit ({{ $pinkel->jpp->nama_jpp }}) antara
-                    {{ $pinkel->anggota->namadepan }} {{ $pinkel->anggota->d->nama_desa }} dengan
+                    Mendasar kepada Surat Perjanjian Kredit ({{ $pinkel->jpp->nama_jpp }})
+                    antara {{ $PL }} {{ $pinkel->anggota->namadepan }}
+                    {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }} {{ $pinkel->anggota->d->nama_desa }}
+                    dengan
                     {{ $kec->nama_lembaga_sort }} Tanggal {{ Tanggal::tglLatin($pinkel->tgl_cair) }} dengan rincian pinjaman
                     sebagai berikut ;
                 </div>
@@ -131,7 +139,9 @@
                 </table>
 
                 <div style="text-align: justify;">
-                    dan mendasar pada catatan pembukuan kami {{ $pinkel->anggota->namadepan }} sampai dengan
+                    dan mendasar pada catatan pembukuan kami {{ $PL }} {{ $pinkel->anggota->namadepan }}
+                    {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }} {{ $pinkel->anggota->d->nama_desa }} sampai
+                    dengan
                     diterbitkannya Surat Tagihan ini masih tercatat memiliki tunggakan sebagai berikut ;
                 </div>
 

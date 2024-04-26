@@ -76,7 +76,7 @@
                 <td>Fungsi Kelompok</td>
                 <td align="center">:</td>
                 <td>
-                    <b>{{ $pinkel->kelompok->fk->nama_fk }}</b>
+                    <b>{{ $pinkel->kelompok->fk->nama_fgs }}</b>
                 </td>
             </tr>
             <tr>

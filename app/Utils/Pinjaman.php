@@ -4,7 +4,7 @@ namespace App\Utils;
 
 class Pinjaman
 {
-    public static function keyword($text = false, $data = [])
+    public static function keyword($text = false, $data = [], $individu = false)
     {
         if ($text === false) {
             return [
@@ -71,10 +71,14 @@ class Pinjaman
             ];
         } else {
             $kec = $data['kec'];
-
             $pinkel = $data['pinkel'];
-            $kel = $pinkel->kelompok;
-            $desa = $pinkel->anggota->d;
+            if ($individu) {
+                $kel = $pinkel->anggota;
+                $desa = $pinkel->anggota->d;
+            } else {
+                $kel = $pinkel->kelompok;
+                $desa = $pinkel->kelompok->d;
+            }
 
             $ttd = strtr(json_decode($text, true), [
                 '{kepala_lembaga}' => $kec->sebutan_level_1,
@@ -82,9 +86,9 @@ class Pinjaman
                 '{kabag_keuangan}' => $kec->sebutan_level_3,
                 '{verifikator}' => $kec->nama_tv_long,
                 '{pengawas}' => $kec->nama_bp_long,
-                '{ketua}' => $kec->ketua,
-                '{sekretaris}' => $kec->sekretaris,
-                '{bendahara}' => $kec->bendahara,
+                '{ketua}' => (!$individu) ? $pinkel->kelompok->ketua:'',
+                '{sekretaris}' =>(!$individu) ? $pinkel->kelompok->sekretaris:'',
+                '{bendahara}' => (!$individu) ? $pinkel->kelompok->bendahara:'',
                 '{kades}' => $desa->kades,
                 '{nip}' => $desa->nip,
                 '{sekdes}' => $desa->sekdes,

@@ -1,7 +1,10 @@
 @php
     use App\Utils\Keuangan;
     use App\Utils\Tanggal;
-    if (Keuangan::startWith($kec->kabupaten->nama_kab, 'KOTA') || Keuangan::startWith($kec->kabupaten->nama_kab, 'KAB')) {
+    if (
+        Keuangan::startWith($kec->kabupaten->nama_kab, 'KOTA') ||
+        Keuangan::startWith($kec->kabupaten->nama_kab, 'KAB')
+    ) {
         $nama_kab = ucwords(strtolower($kec->kabupaten->nama_kab));
     } else {
         $nama_kab = ' Kabupaten ' . ucwords(strtolower($kec->kabupaten->nama_kab));

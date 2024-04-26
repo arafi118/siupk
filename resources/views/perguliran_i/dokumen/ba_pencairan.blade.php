@@ -23,7 +23,7 @@
                     <b>BERITA ACARA PENCAIRAN</b>
                 </div>
                 <div style="font-size: 16px;">
-                    <b>PINJAMAN KELOMPOK {{ $pinkel->jpp->nama_jpp }}</b>
+                    <b>PINJAMAN INDIVIDU {{ $pinkel->jpp->nama_jpp }}</b>
                 </div>
             </td>
         </tr>
@@ -32,175 +32,151 @@
         </tr>
     </table>
 
+
     <p style="text-align: justify;">
-        Pada hari ini {{ Tanggal::namaHari($pinkel->tgl_cair) }} tanggal
-        {{ $keuangan->terbilang(Tanggal::hari($pinkel->tgl_cair)) }} bulan {{ Tanggal::namaBulan($pinkel->tgl_cair) }} tahun
-        {{ $keuangan->terbilang(Tanggal::tahun($pinkel->tgl_cair)) }}, telah diadakan pencairan dana perguliran_i
-        {{ $kec->nama_lembaga_sort }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }} kepada Kelompok
-        {{ $pinkel->anggota->namadepan }} {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }}
-        {{ $pinkel->anggota->d->nama_desa }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }} bertempat di
-        {{ $tempat }},
-        sebesar Rp.
-        {{ number_format($pinkel->alokasi) }} ({{ $keuangan->terbilang($pinkel->alokasi) }} Rupiah), sesuai dengan
-        Register Pinjaman pada Data Base Pinjaman Nomor nomor : {{ $pinkel->anggota->kd_kelompok }} dan Surat Perjanjian
-        Kredit (SPK) nomor: {{ $pinkel->spk_no }}.
+        Sesuai Surat Perjanjian Kredit (SPK) nomor : {{ $pinkel->spk_no }}. Pada hari ini
+        {{ Tanggal::namaHari($pinkel->tgl_cair) }}
+        tanggal
+        {{ $keuangan->terbilang(Tanggal::hari($pinkel->tgl_cair)) }} bulan {{ Tanggal::namaBulan($pinkel->tgl_cair) }}
+        tahun
+        {{ $keuangan->terbilang(Tanggal::tahun($pinkel->tgl_cair)) }}, telah diadakan pencairan dana
+        perguliran {{ $kec->nama_lembaga_sort }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }}
+        {{ $pinkel->anggota->kd_kelompok }} dengan detail identitas pemanfaat dan detail pinjaman sebagai
+        berikut :
+    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
+
+
+
+        <tr>
+            <td align="center">1.</td>
+            <td>Nama Pemanfaat</td>
+            <td align="center">:</td>
+            <td>
+                <b> {{ $pinkel->anggota->namadepan }}</b>
+            </td>
+
+            <td align="center">9.</td>
+            <td>KK / NIK Penjamin</td>
+            <td align="center">:</td>
+            <td>
+                <b>{{ $pinkel->anggota->kk }} {{ $pinkel->anggota->nik_penjamin }}</b>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">2.</td>
+            <td>NIK</td>
+            <td align="center">:</td>
+            <td>
+                <b>{{ $pinkel->anggota->nik }}</b>
+            </td>
+
+            <td align="center">10.</td>
+            <td>Nama Penjamin</td>
+            <td align="center">:</td>
+            <td>
+                <b>{{ $pinkel->anggota->penjamin }}</b>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">3.</td>
+            <td>Jenis Kelamin</td>
+            <td align="center">:</td>
+            <td>
+                <b>{{ $pinkel->anggota->jk }}</b>
+            </td>
+
+            <td align="center">11.</td>
+            <td>Jenis Pinjaman</td>
+            <td align="center">:</td>
+            <td>
+                <b>{{ $pinkel->jpp->nama_jpp }}</b>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">4.</td>
+            <td>Tempat & tgl lahir</td>
+            <td align="center">:</td>
+            <td>
+                <b>{{ $pinkel->anggota->tempat_lahir }}
+                    {{ \Carbon\Carbon::parse($pinkel->anggota->tgl_lahir)->format('d F Y') }}</b>
+            </td>
+
+            <td align="center">12.</td>
+            <td>Alokasi Pinjaman</td>
+            <td align="center">:</td>
+            <td>
+                <b>Rp. {{ number_format($pinkel->alokasi) }},-</b>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">5.</td>
+            <td>Alamat</td>
+            <td align="center">:</td>
+            <td>
+                <b>{{ $pinkel->anggota->alamat }} </b>
+            </td>
+
+            <td align="center">13.</td>
+            <td>Tanggal Pencairan</td>
+            <td align="center">:</td>
+            <td>
+                <b>{{ $pinkel->tgl_cair }}</b>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">6.</td>
+            <td>Desa</td>
+            <td align="center">:</td>
+            <td>
+                <b> {{ $pinkel->anggota->d->nama_desa }} </b>
+            </td>
+
+            <td align="center">14.</td>
+            <td>Tempo</td>
+            <td align="center">:</td>
+            <td>
+                <b>{{ $pinkel->jangka }} bulan</b>
+            </td>
+
+        </tr>
+        <tr>
+            <td align="center">7.</td>
+            <td>Contact Person</td>
+            <td align="center">:</td>
+            <td>
+                <b>{{ $pinkel->anggota->hp }} </b>
+            </td>
+
+            <td align="center">15.</td>
+            <td>Sistem angsuran pokok & jasa</td>
+            <td align="center">:</td>
+            <td>
+                <b>{{ $pinkel->sis_pokok->nama_sistem }} & {{ $pinkel->sis_jasa->nama_sistem }}</b>
+            </td>
+
+        </tr>
+        <tr>
+            <td align="center">8.</td>
+            <td>Jenis Usaha</td>
+            <td align="center">:</td>
+            <td>
+                <b>{{ $pinkel->anggota->u->nama_usaha }}</b>
+            </td>
+
+
+            <td align="center">16.</td>
+            <td>Prosentase Jasa</td>
+            <td align="center">:</td>
+            <td>
+                <b>{{ round($pinkel->pros_jasa / $pinkel->jangka, 2) }}% per bulan</b>
+            </td>
+
+        </tr>
+    </table>
+
+    <p>
+        Demikian, berita acara ini dibuat sekaligus sebagai bukti pencairan dana pinjaman di atas.
     </p>
-
-    <div style="text-align: justify;">
-        Adapun rincian pinjaman dan data kelompok (Profil Kelompok) adalah sebagai berikut :
-        <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
-            <tr>
-                <td width="10" align="center">1.</td>
-                <td width="100">{{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }}</td>
-                <td width="10" align="center">:</td>
-                <td>
-                    <b>{{ $pinkel->anggota->d->nama_desa }}</b>
-                </td>
-
-                <td width="10" align="center">9.</td>
-                <td width="100">Tingkat Kelompok</td>
-                <td width="10" align="center">:</td>
-                {{-- <td>
-                    <b>{{ $pinkel->anggota->tk->nama_tk }}</b>
-                </td> --}}
-            </tr>
-            <tr>
-                <td align="center">2.</td>
-                <td>Nama Kelompok</td>
-                <td align="center">:</td>
-                <td>
-                    <b>{{ $pinkel->anggota->namadepan }}</b>
-                </td>
-
-                <td align="center">10.</td>
-                <td>Fungsi Kelompok</td>
-                <td align="center">:</td>
-                {{-- <td>
-                    <b>{{ $pinkel->kelompok->fk->nama_fk }}</b>
-                </td> --}}
-            </tr>
-            <tr>
-                <td align="center">3.</td>
-                <td>Alamat Kelompok</td>
-                <td align="center">:</td>
-                <td>
-                    <b>{{ $pinkel->anggota->alamat }}</b>
-                </td>
-
-                <td align="center">11.</td>
-                <td>Nama Ketua</td>
-                <td align="center">:</td>
-                <td>
-                    <b>{{ $pinkel->anggota->namadepan }}</b>
-                </td>
-            </tr>
-            <tr>
-                <td align="center">4.</td>
-                <td>Tanggal Berdiri</td>
-                <td align="center">:</td>
-                {{-- <td>
-                    <b>{{ Tanggal::tglLatin($pinkel->anggota->tgl_berdiri) }}</b>
-                </td> --}}
-
-                <td align="center">12.</td>
-                <td>Nomor Kontak</td>
-                <td align="center">:</td>
-                <td>
-                    <b>{{ $pinkel->anggota->telpon }}</b>
-                </td>
-            </tr>
-            <tr>
-                <td align="center">5.</td>
-                <td>Jumlah Pemanfaat</td>
-                <td align="center">:</td>
-                <td>
-                    <b>{{ $pinkel->pinjaman_anggota_count }} Orang</b>
-                </td>
-
-                <td align="center">13.</td>
-                <td>Tanggal Pencairan</td>
-                <td align="center">:</td>
-                <td>
-                    <b>{{ Tanggal::tglLatin($pinkel->tgl_cair) }}</b>
-                </td>
-            </tr>
-            <tr>
-                <td align="center">6.</td>
-                <td>Jenis Pinjaman</td>
-                <td align="center">:</td>
-                <td>
-                    <b>{{ $pinkel->jpp->nama_jpp }} Orang</b>
-                </td>
-
-                <td align="center">14.</td>
-                <td>Alokasi Pinjaman</td>
-                <td align="center">:</td>
-                <td>
-                    <b>{{ number_format($pinkel->alokasi) }}</b>
-                </td>
-            </tr>
-            <tr>
-                <td align="center">7.</td>
-                <td>Jenis Usaha</td>
-                <td align="center">:</td>
-                {{-- <td>
-                    <b>{{ $pinkel->anggota->usaha->nama_ju }}</b>
-                </td> --}}
-
-                <td align="center">15.</td>
-                <td>Jangka Sistem</td>
-                <td align="center">:</td>
-                <td>
-                    <b>{{ $pinkel->jangka }} / {{ $pinkel->sis_pokok->nama_sistem }}</b>
-                </td>
-            </tr>
-            <tr>
-                <td align="center">8.</td>
-                <td>Jenis Kegiatan</td>
-                <td align="center">:</td>
-                {{-- <td>
-                    <b>{{ $pinkel->anggota->kegiatan->nama_jk }}</b>
-                </td> --}}
-
-                <td align="center">16.</td>
-                <td>Prosentase Jasa</td>
-                <td align="center">:</td>
-                <td>
-                    <b>{{ $pinkel->pros_jasa / $pinkel->jangka }}%</b>
-                </td>
-            </tr>
-        </table>
-
-        <p>
-            Untuk bertindak mewakili Kelompok dalam perjanjian kredit dengan {{ $kec->nama_lembaga_sort }}
-            {{ $kec->nama_kec }} sesuai
-            dengan registrasi pinjaman nomor {{ $pinkel->anggota->kd_kelompok }} dan data pinjaman sebagai berikut :
-        </p>
-
-        <table border="1" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px; table-layout: fixed;">
-            <tr style="background: rgb(232, 232, 232)">
-                <th width="3%" height="20">No</th>
-                <th width="17%">Nik</th>
-                <th width="20%">Nama Anggota</th>
-                <th width="15%">Nomor HP</th>
-                <th width="30%">Alamat</th>
-                <th width="15%">Alokasi</th>
-            </tr>
-
-            {{-- @foreach ($pinkel->pinjaman_anggota as $pa)
-                <tr>
-                    <td align="center">{{ $loop->iteration }}</td>
-                    <td align="center">{{ $pa->anggota->nik }}</td>
-                    <td>{{ $pa->anggota->namadepan }}</td>
-                    <td align="center">{{ $pa->anggota->hp }}</td>
-                    <td>{{ $pa->anggota->alamat }}</td>
-                    <td align="right">{{ number_format($pa->alokasi) }}</td>
-                </tr>
-            @endforeach --}}
-        </table>
-        <p>
-            Demikian, berita acara ini dibuat sekaligus sebagai bukti pencairan dana pinjaman di atas.
-        </p>
     </div>
 
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
@@ -219,7 +195,7 @@
             <td align="center">
                 {{ $kec->sebutan_level_1 }} {{ $kec->nama_lembaga_sort }}
             </td>
-            <td colspan="2" align="center">Ketua Kelompok</td>
+            <td colspan="2" align="center">Peminjam</td>
         </tr>
         <tr>
             <td colspan="3" height="40">&nbsp;</td>

@@ -71,7 +71,7 @@
             </div>
             <div class="card mt-4" id="pengelola">
                 <div class="card-header">
-                    <h5 class="mb-0">Sebutan Pengelola Bumdesma</h5>
+                    <h5 class="mb-0">Sebutan Pengelola Lembaga</h5>
                 </div>
                 <div class="card-body pt-0">
                     @include('sop.partials._pengelola')

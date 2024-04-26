@@ -71,7 +71,7 @@
             <td>Jenis Usaha </td>
             <td>:</td>
             <td>
-                <b>{{ $pinkel->kelompok->usaha->nama_usaha }}</b>
+                <b>{{ $pinkel->kelompok->usaha->nama_ju }}</b>
             </td>
         </tr>
         <tr>
@@ -109,7 +109,7 @@
             <td>Fungsi Kelompok </td>
             <td>:</td>
             <td>
-                <b>{{ $pinkel->kelompok->fk->nama_fk }}</b>
+                <b>{{ $pinkel->kelompok->fk->nama_fgs }}</b>
             </td>
         </tr>
         <tr>
@@ -133,7 +133,7 @@
             <td>Petugas/PJ</td>
             <td>:</td>
             <td>
-                <b>{{ $pinkel->user->namadepan }} {{ $pinkel->user->namabelakang }}</b>
+                <b> {{ $pinkel->user->namadepan }} {{ $pinkel->user->namabelakang }}</b>
             </td>
         </tr>
         <tr>

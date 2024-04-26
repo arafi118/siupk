@@ -64,7 +64,7 @@
     <header>
         <h1 style="margin: 0px;">{{ strtoupper($judul) }}</h1>
         <div style="margin: 0px; font-size: 24px;">
-            {{ strtoupper('Pinjaman Kelompok ' . $pinkel->jpp->nama_jpp) }}
+            {{ strtoupper('Pinjaman Individu ' . $pinkel->jpp->nama_jpp) }}
         </div>
         <div style="margin: 0px;">
             Nomor SPK : {{ $pinkel->spk_no }}
@@ -75,8 +75,12 @@
         <div class="center">
             <img src="../storage/app/public/logo/{{ $logo }}" width="290" alt="{{ $logo }}">
             <div style="margin-top: 10px; font-size: 24px;">
-                Kelompok {{ $pinkel->anggota->namadepan }}
+                {{ $pinkel->anggota->namadepan }}
             </div>
+            <div style="margin-top: 10px; font-size: 24px;">
+                NIK : {{ $pinkel->anggota->nik }}
+            </div>
+
             <div style="font-size: 20px;">
                 {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }} {{ $pinkel->anggota->d->nama_desa }}
             </div>
@@ -106,9 +110,7 @@
                     <div style="font-size: 10px; color: grey;">
                         <i>{{ $email }}</i>
                     </div>
-                    <div style="font-size: 10px; color: grey; margin-top: 10px;">
-                        <i>Tahun {{ date('Y') }}</i>
-                    </div>
+
                 </td>
             </tr>
         </table>

@@ -21,21 +21,20 @@
             <td width="50">Nomor</td>
             <td width="10" align="center">:</td>
             <td colspan="2">
-                <b>______/DBM/{{ Tanggal::tglRomawi($pinkel->tgl_dana) }}</b>
+                ______/DBM/{{ Tanggal::tglRomawi($pinkel->tgl_dana) }}
             </td>
         </tr>
         <tr>
             <td>Tanggal</td>
             <td align="center">:</td>
             <td colspan="2">
-                <b>{{ Tanggal::tglLatin($pinkel->tgl_dana) }}</b>
-            </td>
+                {{ Tanggal::tglLatin($pinkel->tgl_dana) }} </td>
         </tr>
         <tr>
             <td>Sifat</td>
             <td align="center">:</td>
             <td colspan="2">
-                <b>Penting dan Rahasia</b>
+                Penting dan Rahasia
             </td>
         </tr>
         <tr>
@@ -48,16 +47,16 @@
         <tr>
             <td colspan="3">&nbsp;</td>
             <td align="left" width="140">
-                <div>KEPADA YTH.</div>
+                <div>Kepada Yth.</div>
                 <div style="font-weight: bold;">
                     {{ $pinkel->kelompok->d->sebutan_desa->sebutan_kades }} {{ $pinkel->kelompok->d->nama_desa }}
                 </div>
-                <div style="font-weight: bold;">
+                <div>
                     {{ $kec->sebutan_kec }} {{ $kec->nama_kec }}
                 </div>
-                <div style="font-weight: bold;">Di</div>
-                <div style="font-weight: bold; text-align: center;">
-                    {{ strtoupper($pinkel->kelompok->d->nama_desa) }} {{ strtoupper($kec->nama_kec) }}
+                <div>Di</div>
+                <div text-align: center;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tempat
                 </div>
             </td>
         </tr>
@@ -99,7 +98,7 @@
                         <td>4.</td>
                         <td>Jumlah Permohonan</td>
                         <td>:</td>
-                        <td>Rp {{ number_format($pinkel->proposal) }}</td>
+                        <td>Rp {{ number_format($pinkel->proposal) }},-</td>
                     </tr>
                     <tr>
                         <td>5.</td>
@@ -135,7 +134,7 @@
         </tr>
         <tr>
             <td>&nbsp;</td>
-            <td align="center">{{ $kec->sebutan_level_1 }} DBM</td>
+            <td align="center">{{ $kec->sebutan_level_1 }}</td>
         </tr>
         <tr>
             <td colspan="2" height="40">&nbsp;</td>

@@ -125,7 +125,7 @@ class GenerateController extends Controller
             $where[] = [$key, $opt, $value];
         }
 
-        $limit = 15;
+        $limit = 30;
         if ($is_pinkel) {
             $pinjaman = PinjamanKelompok::where($where)->with([
                 'sis_pokok',

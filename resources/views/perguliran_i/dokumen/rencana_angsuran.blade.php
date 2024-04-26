@@ -44,7 +44,13 @@
                     <b>RENCANA ANGSURAN PINJAMAN INDIVIDU {{ $pinkel->jpp->nama_jpp }} </b>
                 </div>
                 <div style="font-size: 16px;">
+<<<<<<< HEAD
+                    <b>
+                        {{ strtoupper($pinkel->anggota->namadepan) }}
+                        ( NIK {{ strtoupper($pinkel->anggota->nik) }} )
+=======
                     <b>&nbsp;
+>>>>>>> c8014486a1beef4ddc091f3e97a67c2bc5a0f280
                     </b>
                 </div>
             </td>
@@ -177,7 +183,11 @@
                             {{ $kec->sebutan_level_1 }} {{ $kec->nama_lembaga_sort }}
                         </td>
                         <td align="center" colspan="3">
+<<<<<<< HEAD
+                            Pemanfaat
+=======
                             Pemanfaat 
+>>>>>>> c8014486a1beef4ddc091f3e97a67c2bc5a0f280
                         </td>
                         
                     </tr>
@@ -185,12 +195,14 @@
                         <td align="center" colspan="8" height="40">&nbsp;</td>
                     </tr>
                     <tr>
-                        <td align="center" colspan="5">
-                            <b>{{ $dir->namadepan }} {{ $dir->namabelakang }}</b>
-                        </td>
+
                         <td align="center" colspan="3">
+<<<<<<< HEAD
+                            <b>{{ $pinkel->anggota->namadepan }}</b>
+=======
                             <b>{{ $pinkel->anggota->ketua }}
                                 &nbsp;&nbsp;&nbsp;{{ $pinkel->anggota->namadepan }} </b>
+>>>>>>> c8014486a1beef4ddc091f3e97a67c2bc5a0f280
                         </td>
                     </tr>
                 </table>

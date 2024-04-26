@@ -19,7 +19,7 @@ class Desa extends Model
 
     public function sebutan_desa()
     {
-        return $this->belongsTo(SebutanDesa::class, 'sebutan');
+        return $this->belongsTo(SebutanDesa::class, 'sebutan', 'id');
     }
 
     public function kelompok()

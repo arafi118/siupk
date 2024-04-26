@@ -32,7 +32,7 @@
         <tr>
             <td>Alamat</td>
             <td align="right">:</td>
-            <td>{{ $pinkel->anggota->alamat_kelompok }}</td>
+            <td>{{ $pinkel->anggota->alamat }}</td>
             <td>Sistem Angsuran</td>
             <td align="right">:</td>
             <td>{{ $pinkel->sis_pokok->nama_sistem }}</td>
@@ -68,23 +68,21 @@
         @php
             $alokasi = 0;
         @endphp
-        {{-- @foreach ($pinkel->pinjaman_anggota as $pa)
-            @php
-                $no = $loop->iteration;
-            @endphp
-            <tr>
-                <td class="t l b" height="15" align="center">{{ $no }}</td>
-                <td class="t l b">{{ $pa->anggota->nik }}</td>
-                <td class="t l b">{{ $pa->anggota->namadepan }}</td>
-                <td class="t l b" align="center">{{ $pa->anggota->jk }}</td>
-                <td class="t l b">{{ $pa->anggota->alamat }}</td>
-                <td class="t l b" align="right">{{ number_format($pa->alokasi) }}</td>
-                <td class="t l b r">{{ $no }}.</td>
-            </tr>
-            @php
-                $alokasi += $pa->alokasi;
-            @endphp
-        @endforeach --}}
+        @php
+            $no = $pinkel->iteration;
+        @endphp
+        <tr>
+            <td class="t l b" height="15" align="center">{{ $no }}</td>
+            <td class="t l b">{{ $pinkel->anggota->nik }}</td>
+            <td class="t l b">{{ $pinkel->anggota->namadepan }}</td>
+            <td class="t l b" align="center">{{ $pinkel->anggota->jk }}</td>
+            <td class="t l b">{{ $pinkel->anggota->alamat }}</td>
+            <td class="t l b" align="right">{{ number_format($pinkel->alokasi) }}</td>
+            <td class="t l b r">{{ $no }}.</td>
+        </tr>
+        @php
+            $alokasi += $pinkel->alokasi;
+        @endphp
 
         <tr>
             <td colspan="7" style="padding: 0px !important;">

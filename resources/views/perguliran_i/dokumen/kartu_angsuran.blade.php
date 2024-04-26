@@ -103,7 +103,7 @@
                 <td width="200">{{ $nia->id }}</td>
             </tr>
             <tr>
-                <td>Nama</td>
+                <td>Nama Peminjam</td>
                 <td align="center">:</td>
                 <td style="font-weight: bold;" colspan="4">{{ $nia->anggota->namadepan }}</td>
             </tr>
@@ -116,9 +116,22 @@
                 <td>Telpon/SMS</td>
                 <td align="center">:</td>
                 <td>{{ $nia->anggota->hp }}</td>
-                <td>&nbsp;</td>
-                <td align="center">&nbsp;</td>
-                <td>&nbsp;</td>
+                <td>Jumlah Angsuran</td>
+                <td align="center">:</td>
+
+                @php
+                    $jumlah_angsuran = 0;
+                    foreach ($nia->rencana as $renc) {
+                        if ($jumlah_angsuran == 0) {
+                            if ($renc->wajib_pokok + $renc->wajib_jasa > $jumlah_angsuran) {
+                                $jumlah_angsuran = $renc->wajib_pokok + $renc->wajib_jasa;
+                            }
+                        }
+                    }
+                @endphp
+
+                <td>{{ number_format($jumlah_angsuran) }} /
+                    {{ $nia->sis_pokok->nama_sistem }}</td>
             </tr>
             <tr>
                 <td>Tgl Cair</td>
@@ -137,25 +150,12 @@
                 <td>{{ $nia->pros_jasa / $nia->jangka . '%' }}</td>
             </tr>
             <tr>
-                <td>Angsuran</td>
-                <td align="center">:</td>
-
-                @php
-                    $jumlah_angsuran = 0;
-                    foreach ($nia->rencana as $renc) {
-                        if ($jumlah_angsuran == 0) {
-                            if ($renc->wajib_pokok + $renc->wajib_jasa > $jumlah_angsuran) {
-                                $jumlah_angsuran = $renc->wajib_pokok + $renc->wajib_jasa;
-                            }
-                        }
-                    }
-                @endphp
-
-                <td>{{ number_format($jumlah_angsuran) }} /
-                    {{ $nia->sis_pokok->nama_sistem }}</td>
-                <td colspan="3">
-                    Angsuran pada tanggal {{ explode('-', $nia->target->jatuh_tempo)[2] }}
-                </td>
+                <td>&nbsp</td>
+                <td align="center">&nbsp</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+                <td align="center">&nbsp</td>
+                <td>&nbsp</td>
             </tr>
             <tr>
                 <td colspan="7" class="b t" style="font-weight: bold; font-size: 24px;" align="center">
@@ -163,7 +163,6 @@
                 </td>
             </tr>
         </table>
-
         @php
             $baris_angsuran = ceil($nia->rencana_count / 2);
         @endphp
@@ -319,13 +318,13 @@
             </tr>
             <tr>
                 <td width="350" rowspan="3">
-                    <div>Lembar 1 : Untuk Pemanfaat</div>
+                    <div>Lembar 1 : Untuk Peminjam</div>
                     <div>Lembar 2 : Arsip Lembaga</div>
                 </td>
                 <td style="font-weight: bold; font-size: 12px;" width="350" align="center">
                     <div>{{ $kec->sebutan_level_1 }} {{ $kec->nama_lembaga_sort }}</div>
                 </td>
-                <td style="font-weight: bold; font-size: 12px;" width="350" align="center">Pemanfaat</td>
+                <td style="font-weight: bold; font-size: 12px;" width="350" align="center">Peminjam</td>
             </tr>
             <tr>
                 <td colspan="2" height="50"></td>

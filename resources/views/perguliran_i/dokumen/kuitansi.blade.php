@@ -2,7 +2,7 @@
     use App\Utils\Tanggal;
 
     $waktu = date('H:i');
-    $tempat = 'Kantor DBM';
+    $tempat = 'Kantor UPK';
 
     $wt_cair = explode('_', $pinkel->wt_cair);
     if (count($wt_cair) == 1) {
@@ -16,14 +16,8 @@
 @endphp
 
 @extends('perguliran_i.dokumen.layout.base')
-
-@section('content')
-    <div style="text-align: center; font-size: 18px; margin-bottom: 12px; text-transform: uppercase;">
-        <div>Bukti Transaksi</div>
-        <div>Pinjaman Kelompok</div>
-    </div>
-
-    <div style="padding: 60px; padding-top: 0px; border: 1px solid #000; height: 82%;">
+<br><br>
+< @section('content') < <div style="padding: 60px; padding-top: 0px; border: 1px solid #000; height: 82%;">
         <table border="0" width="100%" class="p">
             <tr>
                 <td colspan="3" height="40" align="center" style="text-transform: uppercase; font-size: 16px;">
@@ -48,7 +42,7 @@
                 <td>Untuk Pembayaran</td>
                 <td align="center">:</td>
                 <td class="b">
-                    Pencairan Pinjaman Individu {{ $pinkel->anggota->namadepan }}
+                    Pencairan Pinjaman Individu Atas Nama {{ $pinkel->anggota->namadepan }}
                 </td>
             </tr>
             <tr>
@@ -130,5 +124,5 @@
                 </td>
             </tr>
         </table>
-    </div>
-@endsection
+        </div>
+    @endsection

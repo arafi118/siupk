@@ -1,8 +1,7 @@
 @php
     use App\Utils\Tanggal;
-
     $waktu = date('H:i');
-    $tempat = 'Kantor DBM';
+    // $tempat = {{ $pinkel->kelompok->wt_cair }};
 
     $wt_cair = explode('_', $pinkel->wt_cair);
     if (count($wt_cair) == 1) {
@@ -16,6 +15,7 @@
 
     $redaksi_spk = str_replace('<ol>', '', str_replace('</ol>', '', $kec->redaksi_spk));
     $redaksi_spk = str_replace('<ul>', '', str_replace('</ul>', '', $redaksi_spk));
+
 @endphp
 
 @extends('perguliran.dokumen.layout.base')
