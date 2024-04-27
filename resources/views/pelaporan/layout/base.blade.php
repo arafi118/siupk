@@ -1,7 +1,13 @@
 @php
     if ($type == 'excel') {
         header('Content-type: application/vnd-ms-excel');
-        header('Content-Disposition: attachment; filename=' . ucwords(str_replace('_', ' ', $laporan)) . ' (' . ucwords($tgl) . ').xls');
+        header(
+            'Content-Disposition: attachment; filename=' .
+                ucwords(str_replace('_', ' ', $laporan)) .
+                ' (' .
+                ucwords($tgl) .
+                ').xls',
+        );
     }
 @endphp
 
@@ -9,9 +15,16 @@
 <html lang="en" translate="no">
 
 <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Sistem Informasi Unit Pengelola Kegiatan Berbasis Web">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords" content="upk, online, siupk, upk online, siupk online, asta brata teknologi, abt">
+    <meta name="author" content="Enfii">
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <title>{{ ucwords(str_replace('_', ' ', $laporan)) }} ({{ ucwords($tgl) }})</title>
     <style>
         * {

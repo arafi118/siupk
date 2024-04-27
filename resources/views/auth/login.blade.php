@@ -3,10 +3,9 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="description" content="Sistem Informasi Unit Pengelola Kegiatan Online">
+    <meta name="description" content="Sistem Informasi Unit Pengelola Kegiatan Berbasis Web">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="keywords"
-        content="dbm, sidbm, sidbm.net, demo.sidbm.net, app.sidbm.net, asta brata teknologi, abt, dbm, kepmendesa 136, kepmendesa nomor 136 tahun 2022">
+    <meta name="keywords" content="upk, online, siupk, upk online, siupk online, asta brata teknologi, abt">
     <meta name="author" content="Enfii">
 
     <link rel="apple-touch-icon" sizes="76x76" href="{{ $logo }}">
