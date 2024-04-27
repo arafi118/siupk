@@ -16,10 +16,15 @@
     }
 
     $path = explode('/', Request::path());
-    $show = ((in_array('perguliran', $path) ? true : in_array('detail', $path)) ? true : in_array('kelompok', $path)) ? true : false;
+
+    $show = true;
+    if (in_array('jurnal_angsuran', $path) || in_array('jurnal_angsuran_individu', $path)) {
+        $show = false;
+    }
+
     $id_search = 'cariKelompok';
     $label = 'Kelompok';
-    if ((in_array('jurnal_angsuran_individu', $path))) {
+    if (in_array('jurnal_angsuran_individu', $path)) {
         $id_search = 'cariAnggota';
         $label = 'Individu (NIK/Nama Peminjam)';
     }
