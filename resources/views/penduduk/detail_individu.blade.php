@@ -18,7 +18,7 @@
 
             <td width="4%">&nbsp;</td>
 
-            <td width="20%">Nama Anggota</td>
+            <td width="20%">Nama Peminjam</td>
             <td width="1%">:</td>
             <td width="27" style="font-weight: bold !important;">{{ $nia->anggota->namadepan }}</td>
         </tr>

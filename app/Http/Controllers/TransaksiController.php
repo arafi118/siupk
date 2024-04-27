@@ -2481,7 +2481,7 @@ class TransaksiController extends Controller
     {
         $data['bulan'] = date('Y-m-t');
         $data['kec'] = Kecamatan::where('id', Session::get('lokasi'))->with('kabupaten')->first();
-        $data['id_pinj_i'] = PinjamanIndividu::where('id', $id)->with([
+        $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
             'anggota',
             'anggota.d',
             'anggota.d.sebutan_desa',
@@ -2494,16 +2494,16 @@ class TransaksiController extends Controller
 
         $tb_ra = 'rencana_angsuran_i_' . $data['kec']->id;
         $tb_real = 'real_angsuran_i_' . $data['kec']->id;
-        $data['rencana'] = RencanaAngsuranI::select(
-            '*',
-            DB::raw('(SELECT sum(realisasi_pokok) as rp FROM ' . $tb_real . ' WHERE ' . $tb_real . '.loan_id=' . $id . ' AND ' . $tb_real . '.tgl_transaksi<=' . $tb_ra . '.jatuh_tempo) as sum_pokok'),
-            DB::raw('(SELECT sum(realisasi_jasa) as rj FROM ' . $tb_real . ' WHERE ' . $tb_real . '.loan_id=' . $id . ' AND ' . $tb_real . '.tgl_transaksi<=' . $tb_ra . '.jatuh_tempo) as sum_jasa')
-        )->where([
+        $data['rencana'] = RencanaAngsuranI::where([
             ['loan_id', $id],
             ['angsuran_ke', '!=', '0']
+        ])->with([
+            'real' => function ($query) {
+                $query->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC');
+            }
         ])->get();
 
-        $data['laporan'] = 'LPP Individu ' . $data['id_pinj_i']->anggota->namadepan;
+        $data['laporan'] = 'LPP Individu ' . $data['pinkel']->anggota->namadepan;
         return view('transaksi.jurnal_angsuran.dokumen.lpp_i', $data);
     }
 
