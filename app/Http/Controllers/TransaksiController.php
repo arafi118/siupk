@@ -2464,7 +2464,7 @@ class TransaksiController extends Controller
 
         $tb_ra = 'rencana_angsuran_' . $data['kec']->id;
         $tb_real = 'real_angsuran_' . $data['kec']->id;
-        $data['rencana'] = RencanaAngsuranI::where([
+        $data['rencana'] = RencanaAngsuran::where([
             ['loan_id', $id],
             ['angsuran_ke', '!=', '0']
         ])->with([
