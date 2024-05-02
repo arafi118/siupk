@@ -24,7 +24,7 @@ class SopController extends Controller
         $api = env('APP_API', 'https://api-whatsapp.siupk.net');
 
         $kec = Kecamatan::where('id', Session::get('lokasi'))->with('ttd')->first();
-        $token = "SIUPK-" . str_replace('.', '', $kec->kd_kec) . '-' . str_pad($kec->id, 4, '0', STR_PAD_LEFT);
+        $token = "UPK-" . str_pad($kec->id, 4, '0', STR_PAD_LEFT);
 
         $title = "Personalisasi SOP";
         return view('sop.index')->with(compact('title', 'kec', 'api', 'token'));
