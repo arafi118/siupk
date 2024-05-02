@@ -45,7 +45,7 @@
         <div class="ms-md-3 pe-md-3 d-flex align-items-center w-100">
             @if (Session::get('angsuran') == true && !$show)
                 <div class="input-group input-group-outline">
-                    <label class="form-label">Angsurann {{ $label }}</label>
+                    <label class="form-label">Angsuran {{ $label }}</label>
                     @if (Request::get('pinkel'))
                         <input type="text" id="{{ $id_search }}" name="{{ $id_search }}" class="form-control"
                             autocomplete="off"
