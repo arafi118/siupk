@@ -755,7 +755,7 @@ class PelaporanController extends Controller
             return $view;
         }
     }
-    
+
     private function individu_aktif(array $data)
     {
         $thn = $data['tahun'];
@@ -1107,7 +1107,7 @@ class PelaporanController extends Controller
             return $view;
         }
     }
-    
+
     private function pinjaman_individu(array $data)
     {
         $thn = $data['tahun'];
@@ -2146,6 +2146,12 @@ class PelaporanController extends Controller
                 $query->where('keterangan_transaksi', 'Like', '%tahun ' . $data['tahun'] - 1);
             },
         ])->orderBy('kode_akun', 'ASC')->get();
+
+        $data['dir'] = User::where([
+            ['level', '1'],
+            ['jabatan', '1'],
+            ['lokasi', Session::get('lokasi')],
+        ])->first();
 
         $data['sekr'] = User::where([
             ['level', '1'],
