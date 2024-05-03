@@ -38,13 +38,23 @@
     $keterangan1 = 'Belum Lunas';
     $keterangan2 = 'Belum Lunas';
 
-    if ($saldo_pokok <= 0) {
+    if ($saldo_pokok = 0) {
         $saldo_pokok = 0;
         $keterangan1 = 'Lunas';
     }
-    if ($saldo_jasa <= 0) {
+    
+    if ($saldo_pokok < 0) {
+        $saldo_pokok = 0;
+        $keterangan1 = 'Lunas sebelum jatuh tempo';
+    }
+    if ($saldo_jasa = 0) {
         $saldo_jasa = 0;
         $keterangan2 = 'Lunas';
+    }
+     if ($saldo_jasa < 0) {
+        $saldo_jasa = 0;
+        $keterangan2 = 'Lunas (Pembayaran lebih dari target)';
+        
 } @endphp
 
 <body class="g-sidenav-show  bg-gray-200" onload="window.print()">
@@ -75,7 +85,7 @@
                     </tr>
                 </table>
 
-                REKAPITULASI
+                REKAPITULASI PEMBAYARAN ANGSURAN
                 <table class="table f-12">
                     <thead class="bg-light">
                         <tr>

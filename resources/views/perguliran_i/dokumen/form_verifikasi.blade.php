@@ -247,21 +247,10 @@
                     <tr>
                         <td>&nbsp;</td>
                     </tr>
-                    <tr>
-                        <td width='60%' class='style27'> <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class='style9'> </span>
-                        </td>
-                        <td width='30%' class='bottom'></td>
-                    </tr>
-                    <tr>
-                        <td width='60%' class='style27'>{{ $user->namadepan }}
-                            {{ $user->namabelakang }}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class='style9'>{{ $user->j->nama_jabatan }}</span>
-                        </td>
-                        <td width='30%' class='bottom'></td>
-                    </tr>
+                    <p> {{ $user->namadepan }} {{ $user->namabelakang }}<br><br><br><br>
+                      &nbsp;&nbsp;&nbsp;{{ $user->j->nama_jabatan }}</p>
                 </table>
-
+             
             </td>
         </tr>
     </table>

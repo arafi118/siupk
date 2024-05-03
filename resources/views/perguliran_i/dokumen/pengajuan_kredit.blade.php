@@ -154,6 +154,9 @@
         <td width="5" align="right">:</td>
         <td style="font-weight:">{{ $pinkel->anggota->u->nama_usaha }}</td>
     </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
    
         <td width="30">&nbsp;</td>
         <td colspan="3">
@@ -184,28 +187,28 @@
     
     <tr>
       <td width="30%" class="style9 align-justify">&nbsp;</td>
-      <td width="20%" class="style9 align-justify">&nbsp;</td>
+      <td width="20%" align="center" class="style9 align-justify">Mengetahui,</td>
       <td width="30%" class="style9 align-justify"><div align="center">{{ $kec->nama_kec }}, {{ Tanggal::tglLatin($pinkel->tgl_proposal) }}<br>
       </div></td>
-	<tr>
-        <td width="32%" height="36" colspan="1" class="style26"><div align="center" class="style9">
-          <p>Mengetahui,<br>Penjamin</p>
-        </div></td><td>&nbsp;</td>
-        <td class="style26"><div align="center" class="style9">
-          <p>Pemohon <br>&nbsp;</p>
-        </div></td>
-      </tr>	
-	<tr>
-	    <td align="center" height="24" colspan="-1" class="style9">
-            <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p>{{$pinkel->anggota->penjamin}}<br></th>
-    </td>
-    <td>&nbsp;</td>
-        <td align="center" width="32%" class="style9"><p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p>{{$pinkel->anggota->namadepan}}<br> </p></td>
-  </tr>
+      <tr>
+            <td align="center">Penjamin</td>
+            <td align="center"></td>
+            <td align="center">Pemohon</td>
+        </tr>
+        <tr>
+            <td colspan="3" height="30">&nbsp;</td>
+        </tr>
+        <tr>
+            <td align="center">
+                <b>{{$pinkel->anggota->penjamin}}</b>
+            </td>
+            <td align="center">
+                <b> </b>
+            </td>
+            <td align="center">
+                <b>{{$pinkel->anggota->namadepan}}</b>
+            </td>
+        </tr>
     <tr>
         <td colspan="2" height="30"></td>
     </tr>

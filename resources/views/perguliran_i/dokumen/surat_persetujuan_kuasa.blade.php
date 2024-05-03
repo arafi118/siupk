@@ -54,7 +54,7 @@
       </tr>
 	  <tr>
         <td height="10" class="style9">Nomor HP</td>
-        <td class="style27">:{{ $pinkel->anggota->hp }}</td>
+        <td class="style27">: {{ $pinkel->anggota->hp }}</td>
         <td height="10" class="style9">&nbsp;</td>
       </tr>
       
@@ -100,30 +100,19 @@
 <table width="97%" border="0" align="center" cellpadding="3" cellspacing="0">
    
   <tr>
-        <td width="10%" height="36" colspan="1" class="style26"><div align="center" class="style9">
+        <td width="10%" height="30" colspan="1" class="style26"><div align="center" class="style9">
           <p></p>
         </div></td>
 		 <td class="style26"><div align="center" class="style9">
-          <p>Penerima Kuasa </p>
+          <p>Penerima Kuasa <br><br><br><br>
+{{$pinkel->anggota->namadepan}}        </p>
         </div></td>
         <td class="style26"><div align="center" class="style9">
-          <p>Pemberi Kuasa</p>
+          <p>Pemberi Kuasa <br><br><br><br>
+          {{ $dir->namadepan }} {{$dir->namabelakang}}
+         </p>
         </div></td>
       </tr>	
-	<tr>
-	    <td align="center"height="24" class="style9">&nbsp;</p>
-        <p >&nbsp;</p>
-        <p>
-        </p></td>
-		
-        <td align="center" class="style9"><p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p>{{ $dir->namadepan }} {{$dir->namabelakang}}<br></p></td>
-		
-		<td align="center" class="style9"><p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p>{{$pinkel->anggota->namadepan}}<br></p></td>
-		
-  </tr>
+	
 </table>
 @endsection

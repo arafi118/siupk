@@ -160,37 +160,36 @@
                         <td class="l t b" width="13%" align="right">{{ number_format($saldo_pokok) }}</td>
                         <td class="l t b r" width="13%" align="right">{{ number_format($saldo_jasa) }}</td>
                     </tr>
-                </table>
+                </table><br>
 
                 <table class="p" border="0" width="100%" cellspacing="0" cellpadding="0"
                     style="font-size: 11px;">
 
                     <tr>
-                        <td align="center" colspan="5">&nbsp;</td>
-                        <td align="center" colspan="3">
+                        <td align="center" colspan="4">&nbsp;</td>
+                        <td align="center" colspan="4">
                             {{ $kec->nama_kec }}, {{ Tanggal::tglLatin($tgl) }}
                         </td>
                     </tr>
-
                     <tr>
-                        <td align="center" colspan="5">
-                            {{ $kec->sebutan_level_1 }} {{ $kec->nama_lembaga_sort }}
+                        <td align="center" colspan="4">
+                            {{ $kec->sebutan_level_1 }} {{ $kec->nama_lembaga_sort }} <br><br><br><br>
                         </td>
-                        <td align="center" colspan="3">
-                            Pemanfaat
+                        <td align="center" colspan="4">
+                            Pemanfaat <br><br><br><br>
                         </td>
 
                     </tr>
                     <tr>
-                        <td align="center" colspan="8" height="40">&nbsp;</td>
-                    </tr>
-                    <tr>
-
-                        <td align="center" colspan="3">
-                            <b>{{ $pinkel->anggota->ketua }}
-                                &nbsp;&nbsp;&nbsp;{{ $pinkel->anggota->namadepan }} </b>
+                        <td align="center" colspan="4">
+                    <b> {{ $dir->namadepan }} {{ $dir->namabelakang }}</b>
                         </td>
+                        <td align="center" colspan="4">
+                       <b> {{ $pinkel->anggota->namadepan }}</b>
+                        </td>
+
                     </tr>
+                   
                 </table>
             </td>
         </tr>

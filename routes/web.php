@@ -161,6 +161,7 @@ Route::get('/perguliran_i/lunas', [PinjamanIndividuController::class, 'lunas'])-
 Route::get('/perguliran_i/generate/{id_pinj}', [PinjamanIndividuController::class, 'generate'])->middleware('auth');
 Route::get('/lunas_i/{perguliran_i}', [PinjamanIndividuController::class, 'pelunasan'])->middleware('auth');
 Route::get('/cetak_keterangan_lunas_i/{perguliran_i}', [PinjamanIndividuController::class, 'keterangan'])->middleware('auth');
+Route::get('/pengembalian_jaminan/{perguliran_i}', [PinjamanIndividuController::class, 'pengembalian'])->middleware('auth');
 
 Route::get('/perguliran_i/cari_kelompok', [PinjamanIndividuController::class, 'cariKelompok'])->middleware('auth');
 Route::post('/perguliran_i/simpan_data/{id}', [PinjamanIndividuController::class, 'simpan'])->middleware('auth');
