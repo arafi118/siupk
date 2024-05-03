@@ -214,10 +214,6 @@ class GenerateController extends Controller
             $sa_jasa = $pinkel->sa_jasa;
             $pros_jasa = $pinkel->pros_jasa;
 
-            $poko_kredit = '1.1.03.';
-            $jasa_kredit = '4.1.01.';
-            $dend_kredit = '4.1.02.';
-
             $sistem_pokok = ($pinkel->sis_pokok) ? $pinkel->sis_pokok->sistem : '1';
             $sistem_jasa = ($pinkel->sis_jasa) ? $pinkel->sis_jasa->sistem : '1';
 
@@ -387,20 +383,25 @@ class GenerateController extends Controller
 
             ksort($data_rencana);
             foreach ($pinkel->trx as $trx) {
-                if (Keuangan::startWith($trx['rekening_kredit'], $dend_kredit)) continue;
+                $poko_kredit = '1.1.03';
+                $jasa_kredit = '4.1.01';
+                $dend_kredit = '4.1.02';
+
+                if (Keuangan::startWith($trx->rekening_kredit, $dend_kredit)) continue;
                 if (in_array($trx->idtp, $data_idtp)) continue;
 
                 $tgl_transaksi = $trx->tgl_transaksi;
                 $realisasi_pokok = 0;
                 $realisasi_jasa = 0;
+
                 foreach ($trx->tr_idtp as $idtp) {
-                    if (Keuangan::startWith($trx['rekening_kredit'], $poko_kredit)) {
+                    if (Keuangan::startWith($idtp->rekening_kredit, $poko_kredit)) {
                         $realisasi_pokok = $idtp->jumlah;
                         $sum_pokok += $realisasi_pokok;
                         $alokasi_pokok -= $realisasi_pokok;
                     }
 
-                    if (Keuangan::startWith($trx['rekening_kredit'], $jasa_kredit)) {
+                    if (Keuangan::startWith($idtp->rekening_kredit, $jasa_kredit)) {
                         $realisasi_jasa = $idtp->jumlah;
                         $sum_jasa += $realisasi_jasa;
                         $alokasi_jasa -= $realisasi_jasa;
