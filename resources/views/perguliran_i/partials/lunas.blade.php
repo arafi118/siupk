@@ -9,13 +9,26 @@ $is_dir = true;
 
 @section('content')
 @php
-$saldo_pokok = $ra->target_pokok - $real->sum_pokok;
-$saldo_jasa = $ra->target_jasa - $real->sum_jasa;
+    $saldo_pokok = $ra->target_pokok - $real->sum_pokok;
+    $saldo_jasa = $ra->target_jasa - $real->sum_jasa;
 
-$keterangan1 = 'Belum Lunas';
-$keterangan2 = 'Belum Lunas';
-
-if ($saldo_pokok <= 0) { $keterangan1='Lunas' ; } if ($saldo_jasa <=0) { $keterangan2='Lunas' ; } @endphp <div
+    $keterangan1 = 'Belum Lunas';
+    $keterangan2 = 'Belum Lunas';
+    
+    if ($saldo_pokok == 0) {
+        $keterangan1 = 'Lunas';
+    }
+    
+    if ($saldo_pokok < 0) {
+        $keterangan1 = 'Lunas sebelum jatuh tempo';
+    }
+    if ($saldo_jasa == 0) {
+        $keterangan2 = 'Lunas';
+    }
+    if ($saldo_jasa < 0) {
+        $keterangan2 = 'Lunas (Pembayaran lebih dari target)';
+    }
+ @endphp <div
     class="card mb-3">
     <div class="card-body p-3">
         <h5 class="mb-1">
