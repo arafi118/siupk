@@ -47,15 +47,15 @@
       
       <tr>
         <td height="20" colspan="3" class="style9">Menyatakan sanggup menyerahkan barang jaminan berupa {{$pinkel->jaminan}} guna
-          memenuhi persyaratan permohonan pinjaman dengan Nomor Registrasi {{$pinkel->id}} di {{$kec->nama_lembaga_sort}}.<br>
+          memenuhi persyaratan permohonan pinjaman dengan Nomor Registrasi {{$pinkel->id}} di {{$kec->nama_lembaga_sort}},<br>
           Demikian surat pernyataan kesanggupan ini kami buat dengan penuh kesadaran dan untuk menjadikan
           periksa bagi yang berkepentingan.
         </td>
       </tr>
-	   
+       
       <tr>
-        <td height="10" colspan="2" class="style9">&nbsp;</td>
-        <td height="10" class="style9"><div align="right"><span class="style9"><br></span></div></td>
+        <td height="20" colspan="2" class="style9"></td>
+        <td height="20" class="style9"><div><span class="style9"><br>{{$pinkel->anggota->d->nama_desa}}, {{ Tanggal::tglLatin(date('Y-m-d')) }}</span></div></td>
       </tr>
 </table>
 <table width="97%" border="0" align="center" cellpadding="3" cellspacing="0">
@@ -67,27 +67,10 @@
         </td>
         <td class="style26">
             <div align="center" class="style9">
-                <p>Yang menerima</p>
+            <p>Yang menerima <br><br><br><br>
+           {{$pinkel->anggota->namadepan }}
+</p>
             </div>
-        </td>
-    </tr>
-    <tr>
-        
-        <td width="7"align="center" colspan="-1" class="style9">
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p> <br></p>
-        </td>
-        <td width="7"align="center" class="style9">
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>
-            {{$pinkel->anggota->namadepan }}
-                
-                <br>
-                
-              
-            </p>
         </td>
     </tr>
 </table>	  
