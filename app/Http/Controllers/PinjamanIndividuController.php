@@ -1122,7 +1122,7 @@ class PinjamanIndividuController extends Controller
             'anggota.d.sebutan_desa'
         ])->first();
 
-        $data['judul'] = 'Surat Perngajuran Kredit (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
+        $data['judul'] = 'Surat Pengajuan Kredit (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
         $view = view('perguliran_i.dokumen.pengajuan_kredit', $data)->render();
 
         if ($data['type'] == 'pdf') {

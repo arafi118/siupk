@@ -445,10 +445,11 @@ class PinjamanKelompokController extends Controller
 
     public function pelunasan(PinjamanKelompok $perguliran)
     {
+        $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $title = 'Detal Pinjaman Kelompok ' . $perguliran->kelompok->nama_kelompok;
         $real = RealAngsuran::where('loan_id', $perguliran->id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
         $ra = RencanaAngsuran::where('loan_id', $perguliran->id)->orderBy('jatuh_tempo', 'DESC')->first();
-        return view('perguliran.partials.lunas')->with(compact('title', 'perguliran', 'real', 'ra'));
+        return view('perguliran.partials.lunas')->with(compact('title', 'perguliran', 'real', 'ra','kec'));
     }
 
     public function keterangan(PinjamanKelompok $perguliran)

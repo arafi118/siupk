@@ -101,7 +101,7 @@
             <tr>
                 <td align="center">
                     <div style="font-size: 18px;">
-                        <b>REKOMENDASI HASIL VERIVIKASI/ANALISA KREDIT</b>
+                        <b>REKOMENDASI HASIL VERIFIKASI/ANALISA KREDIT</b>
                     </div>
                     <div style="font-size: 12px;">
                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   Nomor:..................................... &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
