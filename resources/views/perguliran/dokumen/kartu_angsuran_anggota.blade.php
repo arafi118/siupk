@@ -150,7 +150,7 @@
                     <td>{{ number_format($pinj->alokasi) }}</td>
                     <td>Jasa</td>
                     <td align="center">:</td>
-                    <td>{{ $pinkel->pros_jasa / $pinkel->jangka . '%' }}</td>
+                    <td>{{ $pinj->pros_jasa / $pinj->jangka . '%' }}</td>
                 </tr>
                 <tr>
                     <td>Angsuran</td>
