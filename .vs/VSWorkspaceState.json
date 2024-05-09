@@ -1,15 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\resources",
-    "\\resources\\views",
-    "\\resources\\views\\perguliran_i",
-    "\\resources\\views\\perguliran_i\\dokumen",
-    "\\resources\\views\\transaksi",
-    "\\resources\\views\\transaksi\\jurnal_angsuran",
-    "\\resources\\views\\transaksi\\jurnal_angsuran\\dokumen",
-    "\\resources\\views\\transaksi\\jurnal_angsuran\\individu",
-    "\\resources\\views\\transaksi\\jurnal_angsuran\\partials"
+    ""
   ],
+  "SelectedNode": "\\C:\\laragon\\www\\siupk",
   "PreviewInSolutionExplorer": false
 }
