@@ -1036,7 +1036,12 @@ class PelaporanController extends Controller
 
         $data['tgl_lalu'] = $data['tahun'] . '-' . $data['bulan'] . '-01';
 
-        $data['jenis_pp'] = JenisProdukPinjaman::where('lokasi', '0')->with([
+        $data['jenis_pp'] = JenisProdukPinjaman::where('lokasi', '0')
+            ->where(function ($query) use ($data) {
+                $query->where('kecuali', 'NOT LIKE', "%-$data[kec]-%")
+                      ->orWhere('lokasi', 'LIKE', "%-$data[kec]-%");
+            })
+            ->with([
             'pinjaman_kelompok' => function ($query) use ($data) {
                 $tb_pinkel = 'pinjaman_kelompok_' . $data['kec']->id;
                 $tb_kel = 'kelompok_' . $data['kec']->id;
