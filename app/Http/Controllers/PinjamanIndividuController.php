@@ -1757,8 +1757,9 @@ class PinjamanIndividuController extends Controller
         }
     }
 
+
     public function suratpernyataansuami($id, $data)
-    {
+    { 
         $keuangan = new Keuangan;
         $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
             'jpp',

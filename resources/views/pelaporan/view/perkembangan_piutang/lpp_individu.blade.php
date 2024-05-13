@@ -15,7 +15,7 @@
     @foreach ($jenis_pp as $jpp)
         @php
             if ($jpp->pinjaman_individu->isEmpty()) {
-                break;
+                continue;
             }
         @endphp
         @php
