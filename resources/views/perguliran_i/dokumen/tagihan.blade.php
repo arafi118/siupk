@@ -23,8 +23,6 @@
         $target_jasa = $ra->target_jasa;
     }
 
-    dd($real);
-
     $tunggakan_pokok = $target_pokok - $sum_pokok;
     if ($tunggakan_pokok < 0) {
         $tunggakan_pokok = 0;
