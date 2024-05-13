@@ -482,7 +482,7 @@ class PinjamanIndividuController extends Controller
             ['jabatan', '1'],
             ['lokasi', Session::get('lokasi')]
         ])->with(['j'])->first();
-        
+
         $data['judul'] = 'Bukti Pengembalian Jaminan (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
         $view = view('perguliran_i.partials.bukti_pengembalian_jaminan', $data)->render();
 
@@ -1759,7 +1759,7 @@ class PinjamanIndividuController extends Controller
 
 
     public function suratpernyataansuami($id, $data)
-    { 
+    {
         $keuangan = new Keuangan;
         $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
             'jpp',
@@ -1806,8 +1806,8 @@ class PinjamanIndividuController extends Controller
             ['jabatan', '1'],
             ['lokasi', Session::get('lokasi')]
         ])->with(['j'])->first();
-        
-       
+
+
         $data['judul'] = 'Surat Kuasa (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
         $view = view('perguliran_i.dokumen.surat_kuasa', $data)->render();
 
@@ -2181,7 +2181,7 @@ class PinjamanIndividuController extends Controller
             'sis_pokok'
         ])->first();
 
-        $data['real_i'] = RealAngsuranI::where('loan_id', $id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
+        $data['real'] = RealAngsuranI::where('loan_id', $id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
         $data['ra'] = RencanaAngsuranI::where([
             ['loan_id', $id],
             ['jatuh_tempo', '<=', date('Y-m-d')]
