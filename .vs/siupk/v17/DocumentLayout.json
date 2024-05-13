@@ -3,28 +3,108 @@
   "WorkspaceRootPath": "C:\\laragon\\www\\siupk\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\TransaksiController.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\Http\\Controllers\\TransaksiController.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\app\\Models\\JenisProdukPinjaman.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\Models\\JenisProdukPinjaman.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\app\\Models\\PinjamanKelompok.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\Models\\PinjamanKelompok.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\app\\Models\\Kelompok.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\Models\\Kelompok.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PinjamanKelompokController.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\Http\\Controllers\\PinjamanKelompokController.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\app\\Models\\JenisLaporanPinjaman.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\Models\\JenisLaporanPinjaman.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PelaporanController.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\Http\\Controllers\\PelaporanController.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\lpp_kelompok.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\pelaporan\\view\\perkembangan_piutang\\lpp_kelompok.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PinjamanIndividuController.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\Http\\Controllers\\PinjamanIndividuController.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\routes\\web.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:routes\\web.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\dokumen\\kartu_angsuran.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\perguliran_i\\dokumen\\kartu_angsuran.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\_rencana_realisasi.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\pelaporan\\view\\perkembangan_piutang\\_rencana_realisasi.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\TransaksiController.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\Http\\Controllers\\TransaksiController.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\waiting.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\pelaporan\\view\\perkembangan_piutang\\waiting.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\verifikasi.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\pelaporan\\view\\perkembangan_piutang\\verifikasi.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\tunggakan.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\pelaporan\\view\\perkembangan_piutang\\tunggakan.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\rencana_realisasi.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\pelaporan\\view\\perkembangan_piutang\\rencana_realisasi.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\proposal.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\pelaporan\\view\\perkembangan_piutang\\proposal.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\pemanfaat_aktif.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\pelaporan\\view\\perkembangan_piutang\\pemanfaat_aktif.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\pelunasan.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\pelaporan\\view\\perkembangan_piutang\\pelunasan.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\lpp_individu.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\pelaporan\\view\\perkembangan_piutang\\lpp_individu.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\lpp_desa.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\pelaporan\\view\\perkembangan_piutang\\lpp_desa.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\kolek_kelompok.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\pelaporan\\view\\perkembangan_piutang\\kolek_kelompok.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\cadangan_penghapusan.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\pelaporan\\view\\perkembangan_piutang\\cadangan_penghapusan.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\kolek_desa.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\pelaporan\\view\\perkembangan_piutang\\kolek_desa.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\kelompok_aktif.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\pelaporan\\view\\perkembangan_piutang\\kelompok_aktif.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\jatuh_tempo.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\pelaporan\\view\\perkembangan_piutang\\jatuh_tempo.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\individu_aktif.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\pelaporan\\view\\perkembangan_piutang\\individu_aktif.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PinjamanIndividuController.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\Http\\Controllers\\PinjamanIndividuController.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\dokumen\\kartu_angsuran.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\perguliran_i\\dokumen\\kartu_angsuran.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\resources\\views\\transaksi\\jurnal_angsuran\\individu\\index.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
@@ -103,16 +183,8 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\Models\\RealAngsuran_i.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\app\\Models\\Kelompok.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\Models\\Kelompok.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\app\\Models\\Anggota.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\Models\\Anggota.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PinjamanKelompokController.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\Http\\Controllers\\PinjamanKelompokController.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\app\\Models\\RencanaAngsuran_i.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
@@ -133,10 +205,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\app\\Models\\SistemAngsuran.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\Models\\SistemAngsuran.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\app\\Models\\PinjamanKelompok.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\Models\\PinjamanKelompok.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\app\\Models\\Master\\RealAngsuran_i.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
@@ -163,10 +231,6 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\Models\\Kabupaten.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\app\\Models\\JenisLaporanPinjaman.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\Models\\JenisLaporanPinjaman.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\app\\Models\\Calk.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\Models\\Calk.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
@@ -190,38 +254,25 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "TransaksiController.php",
               "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\TransaksiController.php",
               "RelativeDocumentMoniker": "app\\Http\\Controllers\\TransaksiController.php",
               "ToolTip": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\TransaksiController.php",
               "RelativeToolTip": "app\\Http\\Controllers\\TransaksiController.php",
-              "ViewState": "AQIAAD0CAAAAAAAAAAAgwFgCAABvAAAA",
+              "ViewState": "AQIAAE4DAAAAAAAAAAAAAF8DAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
               "WhenOpened": "2024-04-05T09:22:13.271Z",
-              "IsPinned": true
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PelaporanController.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PelaporanController.php",
-              "RelativeDocumentMoniker": "app\\Http\\Controllers\\PelaporanController.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PelaporanController.php",
-              "RelativeToolTip": "app\\Http\\Controllers\\PelaporanController.php",
-              "ViewState": "AQIAAKwCAAAAAAAAAAAAAMACAAARAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-05-10T07:30:36.366Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "web.php",
               "DocumentMoniker": "C:\\laragon\\www\\siupk\\routes\\web.php",
               "RelativeDocumentMoniker": "routes\\web.php",
@@ -250,451 +301,55 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PinjamanIndividuController.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PinjamanIndividuController.php",
-              "RelativeDocumentMoniker": "app\\Http\\Controllers\\PinjamanIndividuController.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PinjamanIndividuController.php",
-              "RelativeToolTip": "app\\Http\\Controllers\\PinjamanIndividuController.php",
-              "ViewState": "AQIAAM4GAAAAAAAAAADwv+MGAABEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-03-20T04:05:57.155Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "lpp_kelompok.blade.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\lpp_kelompok.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\lpp_kelompok.blade.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\lpp_kelompok.blade.php",
-              "RelativeToolTip": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\lpp_kelompok.blade.php",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAEAAAA",
+              "Title": "JenisProdukPinjaman.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\JenisProdukPinjaman.php",
+              "RelativeDocumentMoniker": "app\\Models\\JenisProdukPinjaman.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\JenisProdukPinjaman.php",
+              "RelativeToolTip": "app\\Models\\JenisProdukPinjaman.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-05-10T02:04:37.936Z"
+              "WhenOpened": "2024-05-11T02:25:37.727Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "kartu_angsuran.blade.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\dokumen\\kartu_angsuran.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\perguliran_i\\dokumen\\kartu_angsuran.blade.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\dokumen\\kartu_angsuran.blade.php",
-              "RelativeToolTip": "resources\\views\\perguliran_i\\dokumen\\kartu_angsuran.blade.php",
-              "ViewState": "AQIAAIIAAAAAAAAAAAAwwAkBAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-04-06T04:52:59.505Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "index.blade.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\transaksi\\jurnal_angsuran\\individu\\index.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\transaksi\\jurnal_angsuran\\individu\\index.blade.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\transaksi\\jurnal_angsuran\\individu\\index.blade.php",
-              "RelativeToolTip": "resources\\views\\transaksi\\jurnal_angsuran\\individu\\index.blade.php",
-              "ViewState": "AQIAAH8BAAAAAAAAAAAgwIcBAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-04-06T01:40:08.438Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "aktif.blade.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\aktif.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\perguliran_i\\partials\\aktif.blade.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\aktif.blade.php",
-              "RelativeToolTip": "resources\\views\\perguliran_i\\partials\\aktif.blade.php",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAABIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-04-05T09:13:12.747Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "lpp_i.blade.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\transaksi\\jurnal_angsuran\\dokumen\\lpp_i.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\transaksi\\jurnal_angsuran\\dokumen\\lpp_i.blade.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\transaksi\\jurnal_angsuran\\dokumen\\lpp_i.blade.php",
-              "RelativeToolTip": "resources\\views\\transaksi\\jurnal_angsuran\\dokumen\\lpp_i.blade.php",
-              "ViewState": "AQIAAGYAAAAAAAAAAAAwwHUAAABRAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-04-06T03:40:11.859Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "detail.blade.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\transaksi\\jurnal_angsuran\\individu\\detail.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\transaksi\\jurnal_angsuran\\individu\\detail.blade.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\transaksi\\jurnal_angsuran\\individu\\detail.blade.php",
-              "RelativeToolTip": "resources\\views\\transaksi\\jurnal_angsuran\\individu\\detail.blade.php",
-              "ViewState": "AQIAAEAAAAAAAAAAAAAgwF0AAABSAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-04-06T03:12:13.714Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "PinjamanIndividu.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\PinjamanIndividu.php",
-              "RelativeDocumentMoniker": "app\\Models\\PinjamanIndividu.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\PinjamanIndividu.php",
-              "RelativeToolTip": "app\\Models\\PinjamanIndividu.php",
-              "ViewState": "AQIAAB0AAAAAAAAAAAAgwDgAAAAXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-03-30T02:38:13.808Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "register_i.blade.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pinjaman_i\\partials\\register_i.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\pinjaman_i\\partials\\register_i.blade.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pinjaman_i\\partials\\register_i.blade.php",
-              "RelativeToolTip": "resources\\views\\pinjaman_i\\partials\\register_i.blade.php",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAABcAAABSAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-04-06T02:27:43.487Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "create.blade.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pinjaman_i\\create.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\pinjaman_i\\create.blade.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pinjaman_i\\create.blade.php",
-              "RelativeToolTip": "resources\\views\\pinjaman_i\\create.blade.php",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-04-05T05:27:13.624Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "AnggotaController.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\AnggotaController.php",
-              "RelativeDocumentMoniker": "app\\Http\\Controllers\\AnggotaController.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\AnggotaController.php",
-              "RelativeToolTip": "app\\Http\\Controllers\\AnggotaController.php",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-03-20T03:37:45.7Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "detail_individu.blade.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\penduduk\\detail_individu.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\penduduk\\detail_individu.blade.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\penduduk\\detail_individu.blade.php",
-              "RelativeToolTip": "resources\\views\\penduduk\\detail_individu.blade.php",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAABLAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-04-06T01:51:53.515Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "PinjamanAnggotaController.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PinjamanAnggotaController.php",
-              "RelativeDocumentMoniker": "app\\Http\\Controllers\\PinjamanAnggotaController.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PinjamanAnggotaController.php",
-              "RelativeToolTip": "app\\Http\\Controllers\\PinjamanAnggotaController.php",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAADEAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-03-20T03:37:49.466Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "KelompokController.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\KelompokController.php",
-              "RelativeDocumentMoniker": "app\\Http\\Controllers\\KelompokController.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\KelompokController.php",
-              "RelativeToolTip": "app\\Http\\Controllers\\KelompokController.php",
-              "ViewState": "AQIAACIBAAAAAAAAAAAkwE0BAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-03-20T04:05:22.461Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "detail.blade.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\detail.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\perguliran_i\\detail.blade.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\detail.blade.php",
-              "RelativeToolTip": "resources\\views\\perguliran_i\\detail.blade.php",
-              "ViewState": "AQIAAN4CAAAAAAAAAAAAAPgCAAAcAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-04-02T02:03:52.917Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "Transaksi.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\Transaksi.php",
-              "RelativeDocumentMoniker": "app\\Models\\Transaksi.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\Transaksi.php",
-              "RelativeToolTip": "app\\Models\\Transaksi.php",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-04-05T09:21:57.263Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "verifikasi.blade.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\verifikasi.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\perguliran_i\\partials\\verifikasi.blade.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\verifikasi.blade.php",
-              "RelativeToolTip": "resources\\views\\perguliran_i\\partials\\verifikasi.blade.php",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAABCAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-04-05T08:57:54.468Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "proposal.blade.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\proposal.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\perguliran_i\\partials\\proposal.blade.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\proposal.blade.php",
-              "RelativeToolTip": "resources\\views\\perguliran_i\\partials\\proposal.blade.php",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-04-02T01:58:58.153Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "base.blade.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\layouts\\base.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\layouts\\base.blade.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\layouts\\base.blade.php",
-              "RelativeToolTip": "resources\\views\\layouts\\base.blade.php",
-              "ViewState": "AQIAAO8BAAAAAAAAAAAAAAYCAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-04-05T08:49:03.736Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "cetak_keterangan.blade.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\cetak_keterangan.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\perguliran_i\\partials\\cetak_keterangan.blade.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\cetak_keterangan.blade.php",
-              "RelativeToolTip": "resources\\views\\perguliran_i\\partials\\cetak_keterangan.blade.php",
-              "ViewState": "AQIAACEAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-04-05T08:26:24.223Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "index.blade.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\index.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\perguliran_i\\index.blade.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\index.blade.php",
-              "RelativeToolTip": "resources\\views\\perguliran_i\\index.blade.php",
-              "ViewState": "AQIAAFcAAAAAAAAAAAApwMoAAABAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-04-02T02:40:39.826Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "RealAngsuran_i.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\RealAngsuran_i.php",
-              "RelativeDocumentMoniker": "app\\Models\\RealAngsuran_i.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\RealAngsuran_i.php",
-              "RelativeToolTip": "app\\Models\\RealAngsuran_i.php",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAAqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-03-26T22:38:57.827Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "Kelompok.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\Kelompok.php",
-              "RelativeDocumentMoniker": "app\\Models\\Kelompok.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\Kelompok.php",
-              "RelativeToolTip": "app\\Models\\Kelompok.php",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAIwDQAAAAcAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-04-04T06:35:16.155Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "Anggota.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\Anggota.php",
-              "RelativeDocumentMoniker": "app\\Models\\Anggota.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\Anggota.php",
-              "RelativeToolTip": "app\\Models\\Anggota.php",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABgAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-04-04T07:20:53.983Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "PinjamanKelompokController.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PinjamanKelompokController.php",
-              "RelativeDocumentMoniker": "app\\Http\\Controllers\\PinjamanKelompokController.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PinjamanKelompokController.php",
-              "RelativeToolTip": "app\\Http\\Controllers\\PinjamanKelompokController.php",
-              "ViewState": "AQIAANoAAAAAAAAAAAApwPQAAAAwAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-03-20T04:05:24.821Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "RencanaAngsuran_i.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\RencanaAngsuran_i.php",
-              "RelativeDocumentMoniker": "app\\Models\\RencanaAngsuran_i.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\RencanaAngsuran_i.php",
-              "RelativeToolTip": "app\\Models\\RencanaAngsuran_i.php",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAABGAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-03-26T02:39:56.115Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "User.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\User.php",
-              "RelativeDocumentMoniker": "app\\Models\\User.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\User.php",
-              "RelativeToolTip": "app\\Models\\User.php",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-04-04T06:38:26.019Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "Desa.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\Desa.php",
-              "RelativeDocumentMoniker": "app\\Models\\Desa.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\Desa.php",
-              "RelativeToolTip": "app\\Models\\Desa.php",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-04-04T06:35:37.208Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "Usaha.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\Usaha.php",
-              "RelativeDocumentMoniker": "app\\Models\\Usaha.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\Usaha.php",
-              "RelativeToolTip": "app\\Models\\Usaha.php",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-04-04T06:38:27.161Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 32,
-              "Title": "SistemAngsuran.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\SistemAngsuran.php",
-              "RelativeDocumentMoniker": "app\\Models\\SistemAngsuran.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\SistemAngsuran.php",
-              "RelativeToolTip": "app\\Models\\SistemAngsuran.php",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-04-04T06:38:07.491Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 2,
               "Title": "PinjamanKelompok.php",
               "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\PinjamanKelompok.php",
               "RelativeDocumentMoniker": "app\\Models\\PinjamanKelompok.php",
               "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\PinjamanKelompok.php",
               "RelativeToolTip": "app\\Models\\PinjamanKelompok.php",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAGcAAAAzAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
               "WhenOpened": "2024-04-04T06:36:47.737Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
-              "Title": "RealAngsuran_i.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\Master\\RealAngsuran_i.php",
-              "RelativeDocumentMoniker": "app\\Models\\Master\\RealAngsuran_i.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\Master\\RealAngsuran_i.php",
-              "RelativeToolTip": "app\\Models\\Master\\RealAngsuran_i.php",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAnAAAA",
+              "DocumentIndex": 3,
+              "Title": "Kelompok.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\Kelompok.php",
+              "RelativeDocumentMoniker": "app\\Models\\Kelompok.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\Kelompok.php",
+              "RelativeToolTip": "app\\Models\\Kelompok.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-03-26T22:40:03.178Z"
+              "WhenOpened": "2024-04-04T06:35:16.155Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
-              "Title": "individu.blade.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pinjaman_i\\partials\\individu.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\pinjaman_i\\partials\\individu.blade.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pinjaman_i\\partials\\individu.blade.php",
-              "RelativeToolTip": "resources\\views\\pinjaman_i\\partials\\individu.blade.php",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAAAEAAAAjAAAA",
+              "DocumentIndex": 4,
+              "Title": "PinjamanKelompokController.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PinjamanKelompokController.php",
+              "RelativeDocumentMoniker": "app\\Http\\Controllers\\PinjamanKelompokController.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PinjamanKelompokController.php",
+              "RelativeToolTip": "app\\Http\\Controllers\\PinjamanKelompokController.php",
+              "ViewState": "AQIAAO0AAAAAAAAAAAAiwBEBAACCAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-03-30T02:19:01.917Z"
+              "WhenOpened": "2024-03-20T04:05:24.821Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
-              "Title": "pinjaman_i.blade.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pinjaman_i\\partials\\pinjaman_i.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\pinjaman_i\\partials\\pinjaman_i.blade.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pinjaman_i\\partials\\pinjaman_i.blade.php",
-              "RelativeToolTip": "resources\\views\\pinjaman_i\\partials\\pinjaman_i.blade.php",
-              "ViewState": "AQIAAFEAAAAAAAAAAAAAAFoAAAAqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-03-30T02:18:38.783Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 37,
-              "Title": "RencanaAngsuran_i.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\Master\\RencanaAngsuran_i.php",
-              "RelativeDocumentMoniker": "app\\Models\\Master\\RencanaAngsuran_i.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\Master\\RencanaAngsuran_i.php",
-              "RelativeToolTip": "app\\Models\\Master\\RencanaAngsuran_i.php",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-03-26T22:40:13.841Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 38,
-              "Title": "Kecamatan.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\Kecamatan.php",
-              "RelativeDocumentMoniker": "app\\Models\\Kecamatan.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\Kecamatan.php",
-              "RelativeToolTip": "app\\Models\\Kecamatan.php",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAAZAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-03-20T02:37:08.18Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 39,
-              "Title": "Kabupaten.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\Kabupaten.php",
-              "RelativeDocumentMoniker": "app\\Models\\Kabupaten.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\Kabupaten.php",
-              "RelativeToolTip": "app\\Models\\Kabupaten.php",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-03-20T02:37:05.811Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 5,
               "Title": "JenisLaporanPinjaman.php",
               "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\JenisLaporanPinjaman.php",
               "RelativeDocumentMoniker": "app\\Models\\JenisLaporanPinjaman.php",
@@ -706,7 +361,607 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PelaporanController.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PelaporanController.php",
+              "RelativeDocumentMoniker": "app\\Http\\Controllers\\PelaporanController.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PelaporanController.php",
+              "RelativeToolTip": "app\\Http\\Controllers\\PelaporanController.php",
+              "ViewState": "AQIAAM0DAAAAAAAAAADwvzEEAABPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-05-10T07:30:36.366Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "_rencana_realisasi.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\_rencana_realisasi.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\_rencana_realisasi.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\_rencana_realisasi.blade.php",
+              "RelativeToolTip": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\_rencana_realisasi.blade.php",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAAB4AAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-05-11T02:09:21.814Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "waiting.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\waiting.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\waiting.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\waiting.blade.php",
+              "RelativeToolTip": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\waiting.blade.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-05-11T02:09:18.831Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "verifikasi.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\verifikasi.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\verifikasi.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\verifikasi.blade.php",
+              "RelativeToolTip": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\verifikasi.blade.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-05-11T02:09:16.076Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "tunggakan.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\tunggakan.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\tunggakan.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\tunggakan.blade.php",
+              "RelativeToolTip": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\tunggakan.blade.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-05-11T02:09:10.168Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "rencana_realisasi.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\rencana_realisasi.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\rencana_realisasi.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\rencana_realisasi.blade.php",
+              "RelativeToolTip": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\rencana_realisasi.blade.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-05-11T02:09:07.507Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "proposal.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\proposal.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\proposal.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\proposal.blade.php",
+              "RelativeToolTip": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\proposal.blade.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-05-11T02:09:04.892Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "pemanfaat_aktif.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\pemanfaat_aktif.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\pemanfaat_aktif.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\pemanfaat_aktif.blade.php",
+              "RelativeToolTip": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\pemanfaat_aktif.blade.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-05-11T02:09:01.861Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "pelunasan.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\pelunasan.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\pelunasan.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\pelunasan.blade.php",
+              "RelativeToolTip": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\pelunasan.blade.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-05-11T02:08:57.031Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "lpp_individu.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\lpp_individu.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\lpp_individu.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\lpp_individu.blade.php",
+              "RelativeToolTip": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\lpp_individu.blade.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-05-11T02:08:50.822Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "lpp_desa.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\lpp_desa.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\lpp_desa.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\lpp_desa.blade.php",
+              "RelativeToolTip": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\lpp_desa.blade.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-05-11T02:08:46.185Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "kolek_kelompok.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\kolek_kelompok.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\kolek_kelompok.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\kolek_kelompok.blade.php",
+              "RelativeToolTip": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\kolek_kelompok.blade.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-05-11T02:08:41.316Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "cadangan_penghapusan.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\cadangan_penghapusan.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\cadangan_penghapusan.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\cadangan_penghapusan.blade.php",
+              "RelativeToolTip": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\cadangan_penghapusan.blade.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-05-11T02:07:00.462Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "kolek_desa.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\kolek_desa.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\kolek_desa.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\kolek_desa.blade.php",
+              "RelativeToolTip": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\kolek_desa.blade.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-05-11T02:08:30.761Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "kelompok_aktif.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\kelompok_aktif.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\kelompok_aktif.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\kelompok_aktif.blade.php",
+              "RelativeToolTip": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\kelompok_aktif.blade.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-05-11T02:08:26.443Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "jatuh_tempo.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\jatuh_tempo.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\jatuh_tempo.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\jatuh_tempo.blade.php",
+              "RelativeToolTip": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\jatuh_tempo.blade.php",
+              "ViewState": "AQIAADkAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-05-11T02:08:09.066Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "individu_aktif.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\individu_aktif.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\individu_aktif.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\individu_aktif.blade.php",
+              "RelativeToolTip": "resources\\views\\pelaporan\\view\\perkembangan_piutang\\individu_aktif.blade.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-05-11T02:07:57.564Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "PinjamanIndividuController.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PinjamanIndividuController.php",
+              "RelativeDocumentMoniker": "app\\Http\\Controllers\\PinjamanIndividuController.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PinjamanIndividuController.php",
+              "RelativeToolTip": "app\\Http\\Controllers\\PinjamanIndividuController.php",
+              "ViewState": "AQIAAM4GAAAAAAAAAADwv+MGAABEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-03-20T04:05:57.155Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "kartu_angsuran.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\dokumen\\kartu_angsuran.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\perguliran_i\\dokumen\\kartu_angsuran.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\dokumen\\kartu_angsuran.blade.php",
+              "RelativeToolTip": "resources\\views\\perguliran_i\\dokumen\\kartu_angsuran.blade.php",
+              "ViewState": "AQIAAIIAAAAAAAAAAAAwwAkBAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-04-06T04:52:59.505Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "index.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\transaksi\\jurnal_angsuran\\individu\\index.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\transaksi\\jurnal_angsuran\\individu\\index.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\transaksi\\jurnal_angsuran\\individu\\index.blade.php",
+              "RelativeToolTip": "resources\\views\\transaksi\\jurnal_angsuran\\individu\\index.blade.php",
+              "ViewState": "AQIAAH8BAAAAAAAAAAAgwIcBAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-04-06T01:40:08.438Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "aktif.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\aktif.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\perguliran_i\\partials\\aktif.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\aktif.blade.php",
+              "RelativeToolTip": "resources\\views\\perguliran_i\\partials\\aktif.blade.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAABIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-04-05T09:13:12.747Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "lpp_i.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\transaksi\\jurnal_angsuran\\dokumen\\lpp_i.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\transaksi\\jurnal_angsuran\\dokumen\\lpp_i.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\transaksi\\jurnal_angsuran\\dokumen\\lpp_i.blade.php",
+              "RelativeToolTip": "resources\\views\\transaksi\\jurnal_angsuran\\dokumen\\lpp_i.blade.php",
+              "ViewState": "AQIAAGYAAAAAAAAAAAAwwHUAAABRAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-04-06T03:40:11.859Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "detail.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\transaksi\\jurnal_angsuran\\individu\\detail.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\transaksi\\jurnal_angsuran\\individu\\detail.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\transaksi\\jurnal_angsuran\\individu\\detail.blade.php",
+              "RelativeToolTip": "resources\\views\\transaksi\\jurnal_angsuran\\individu\\detail.blade.php",
+              "ViewState": "AQIAAEAAAAAAAAAAAAAgwF0AAABSAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-04-06T03:12:13.714Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "PinjamanIndividu.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\PinjamanIndividu.php",
+              "RelativeDocumentMoniker": "app\\Models\\PinjamanIndividu.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\PinjamanIndividu.php",
+              "RelativeToolTip": "app\\Models\\PinjamanIndividu.php",
+              "ViewState": "AQIAAB0AAAAAAAAAAAAgwDgAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-03-30T02:38:13.808Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "register_i.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pinjaman_i\\partials\\register_i.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\pinjaman_i\\partials\\register_i.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pinjaman_i\\partials\\register_i.blade.php",
+              "RelativeToolTip": "resources\\views\\pinjaman_i\\partials\\register_i.blade.php",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABcAAABSAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-04-06T02:27:43.487Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "create.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pinjaman_i\\create.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\pinjaman_i\\create.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pinjaman_i\\create.blade.php",
+              "RelativeToolTip": "resources\\views\\pinjaman_i\\create.blade.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-04-05T05:27:13.624Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "AnggotaController.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\AnggotaController.php",
+              "RelativeDocumentMoniker": "app\\Http\\Controllers\\AnggotaController.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\AnggotaController.php",
+              "RelativeToolTip": "app\\Http\\Controllers\\AnggotaController.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-03-20T03:37:45.7Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "detail_individu.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\penduduk\\detail_individu.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\penduduk\\detail_individu.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\penduduk\\detail_individu.blade.php",
+              "RelativeToolTip": "resources\\views\\penduduk\\detail_individu.blade.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAABLAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-04-06T01:51:53.515Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "PinjamanAnggotaController.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PinjamanAnggotaController.php",
+              "RelativeDocumentMoniker": "app\\Http\\Controllers\\PinjamanAnggotaController.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PinjamanAnggotaController.php",
+              "RelativeToolTip": "app\\Http\\Controllers\\PinjamanAnggotaController.php",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAADEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-03-20T03:37:49.466Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "KelompokController.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\KelompokController.php",
+              "RelativeDocumentMoniker": "app\\Http\\Controllers\\KelompokController.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\KelompokController.php",
+              "RelativeToolTip": "app\\Http\\Controllers\\KelompokController.php",
+              "ViewState": "AQIAACIBAAAAAAAAAAAkwE0BAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-03-20T04:05:22.461Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "detail.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\detail.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\perguliran_i\\detail.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\detail.blade.php",
+              "RelativeToolTip": "resources\\views\\perguliran_i\\detail.blade.php",
+              "ViewState": "AQIAAN4CAAAAAAAAAAAAAPgCAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-04-02T02:03:52.917Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "Transaksi.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\Transaksi.php",
+              "RelativeDocumentMoniker": "app\\Models\\Transaksi.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\Transaksi.php",
+              "RelativeToolTip": "app\\Models\\Transaksi.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-04-05T09:21:57.263Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "verifikasi.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\verifikasi.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\perguliran_i\\partials\\verifikasi.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\verifikasi.blade.php",
+              "RelativeToolTip": "resources\\views\\perguliran_i\\partials\\verifikasi.blade.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAABCAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-04-05T08:57:54.468Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "proposal.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\proposal.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\perguliran_i\\partials\\proposal.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\proposal.blade.php",
+              "RelativeToolTip": "resources\\views\\perguliran_i\\partials\\proposal.blade.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-04-02T01:58:58.153Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 41,
+              "Title": "base.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\layouts\\base.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\layouts\\base.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\layouts\\base.blade.php",
+              "RelativeToolTip": "resources\\views\\layouts\\base.blade.php",
+              "ViewState": "AQIAAO8BAAAAAAAAAAAAAAYCAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-04-05T08:49:03.736Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "cetak_keterangan.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\cetak_keterangan.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\perguliran_i\\partials\\cetak_keterangan.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\cetak_keterangan.blade.php",
+              "RelativeToolTip": "resources\\views\\perguliran_i\\partials\\cetak_keterangan.blade.php",
+              "ViewState": "AQIAACEAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-04-05T08:26:24.223Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "index.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\index.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\perguliran_i\\index.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\index.blade.php",
+              "RelativeToolTip": "resources\\views\\perguliran_i\\index.blade.php",
+              "ViewState": "AQIAAFcAAAAAAAAAAAApwMoAAABAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-04-02T02:40:39.826Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "RealAngsuran_i.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\RealAngsuran_i.php",
+              "RelativeDocumentMoniker": "app\\Models\\RealAngsuran_i.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\RealAngsuran_i.php",
+              "RelativeToolTip": "app\\Models\\RealAngsuran_i.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-03-26T22:38:57.827Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "Anggota.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\Anggota.php",
+              "RelativeDocumentMoniker": "app\\Models\\Anggota.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\Anggota.php",
+              "RelativeToolTip": "app\\Models\\Anggota.php",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABgAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-04-04T07:20:53.983Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "RencanaAngsuran_i.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\RencanaAngsuran_i.php",
+              "RelativeDocumentMoniker": "app\\Models\\RencanaAngsuran_i.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\RencanaAngsuran_i.php",
+              "RelativeToolTip": "app\\Models\\RencanaAngsuran_i.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAABGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-03-26T02:39:56.115Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "User.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\User.php",
+              "RelativeDocumentMoniker": "app\\Models\\User.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\User.php",
+              "RelativeToolTip": "app\\Models\\User.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-04-04T06:38:26.019Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "Desa.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\Desa.php",
+              "RelativeDocumentMoniker": "app\\Models\\Desa.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\Desa.php",
+              "RelativeToolTip": "app\\Models\\Desa.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-04-04T06:35:37.208Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "Usaha.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\Usaha.php",
+              "RelativeDocumentMoniker": "app\\Models\\Usaha.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\Usaha.php",
+              "RelativeToolTip": "app\\Models\\Usaha.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-04-04T06:38:27.161Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "SistemAngsuran.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\SistemAngsuran.php",
+              "RelativeDocumentMoniker": "app\\Models\\SistemAngsuran.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\SistemAngsuran.php",
+              "RelativeToolTip": "app\\Models\\SistemAngsuran.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-04-04T06:38:07.491Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "RealAngsuran_i.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\Master\\RealAngsuran_i.php",
+              "RelativeDocumentMoniker": "app\\Models\\Master\\RealAngsuran_i.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\Master\\RealAngsuran_i.php",
+              "RelativeToolTip": "app\\Models\\Master\\RealAngsuran_i.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-03-26T22:40:03.178Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "individu.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pinjaman_i\\partials\\individu.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\pinjaman_i\\partials\\individu.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pinjaman_i\\partials\\individu.blade.php",
+              "RelativeToolTip": "resources\\views\\pinjaman_i\\partials\\individu.blade.php",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAAAEAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-03-30T02:19:01.917Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "pinjaman_i.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pinjaman_i\\partials\\pinjaman_i.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\pinjaman_i\\partials\\pinjaman_i.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pinjaman_i\\partials\\pinjaman_i.blade.php",
+              "RelativeToolTip": "resources\\views\\pinjaman_i\\partials\\pinjaman_i.blade.php",
+              "ViewState": "AQIAAFEAAAAAAAAAAAAAAFoAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-03-30T02:18:38.783Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "RencanaAngsuran_i.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\Master\\RencanaAngsuran_i.php",
+              "RelativeDocumentMoniker": "app\\Models\\Master\\RencanaAngsuran_i.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\Master\\RencanaAngsuran_i.php",
+              "RelativeToolTip": "app\\Models\\Master\\RencanaAngsuran_i.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-03-26T22:40:13.841Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "Kecamatan.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\Kecamatan.php",
+              "RelativeDocumentMoniker": "app\\Models\\Kecamatan.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\Kecamatan.php",
+              "RelativeToolTip": "app\\Models\\Kecamatan.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-03-20T02:37:08.18Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "Kabupaten.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\Kabupaten.php",
+              "RelativeDocumentMoniker": "app\\Models\\Kabupaten.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\Kabupaten.php",
+              "RelativeToolTip": "app\\Models\\Kabupaten.php",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-03-20T02:37:05.811Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
               "Title": "Calk.php",
               "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\Calk.php",
               "RelativeDocumentMoniker": "app\\Models\\Calk.php",
@@ -718,7 +973,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 58,
               "Title": "FungsiKelompok.php",
               "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\FungsiKelompok.php",
               "RelativeDocumentMoniker": "app\\Models\\FungsiKelompok.php",
@@ -730,7 +985,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 59,
               "Title": "AdminUser.php",
               "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\AdminUser.php",
               "RelativeDocumentMoniker": "app\\Models\\AdminUser.php",
@@ -742,7 +997,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 60,
               "Title": ".env",
               "DocumentMoniker": "C:\\laragon\\www\\siupk\\.env",
               "RelativeDocumentMoniker": ".env",
