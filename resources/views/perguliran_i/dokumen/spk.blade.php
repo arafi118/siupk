@@ -281,16 +281,16 @@
                             <td colspan="2" height="24">&nbsp;</td>
                         </tr>
                         <tr>
-                            <td width="50%">Pihak Pertama</td>
+                            <td width="50%" align="center">Pihak Pertama</td>
                             <td width="50%" align="center">Pihak Kedua</td>
                         </tr>
                         <tr>
                             <td colspan="2" height="40">&nbsp;</td>
                         </tr>
                         <tr>
-                            <td>{{ $dir->namadepan . ' ' . $dir->namabelakang }}</td>
+                            <td align="center">{{ $dir->namadepan . ' ' . $dir->namabelakang }}</td>
                             <td align="center">
-                                {{ $pinkel->namadepan }}
+                                {{ $pinkel->anggota->namadepan }}
                             </td>
                         </tr>
                     </table>
