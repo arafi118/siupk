@@ -1439,7 +1439,6 @@ class PinjamanIndividuController extends Controller
             'anggota',
             'anggota.d',
             'anggota.d.sebutan_desa',
-            'pinjaman_anggota.anggota'
         ])->first();
 
         $data['judul'] = 'Daftar Hadir Verifikasi (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
@@ -1798,7 +1797,6 @@ class PinjamanIndividuController extends Controller
             'anggota',
             'anggota.d',
             'anggota.d.sebutan_desa',
-            'pinjaman_anggota.anggota.d.sebutan_desa',
         ])->first();
         $data['kec'] = Kecamatan::where('id', Session::get('lokasi'))->first();
         $data['dir'] = User::where([
@@ -1857,7 +1855,6 @@ class PinjamanIndividuController extends Controller
             'anggota',
             'anggota.d',
             'anggota.d.sebutan_desa',
-            'pinjaman_anggota.anggota'
         ])->first();
 
         $data['judul'] = 'Daftar Hadir Pencairan (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
@@ -1980,8 +1977,6 @@ class PinjamanIndividuController extends Controller
             'jpp',
             'sis_pokok',
             'real_i',
-            'pinjaman_anggota',
-            'pinjaman_anggota.anggota',
         ])->withCount('real_i')->first();
 
         $rencana = [];
@@ -2019,8 +2014,6 @@ class PinjamanIndividuController extends Controller
             'anggota',
             'anggota.d',
             'anggota.d.sebutan_desa',
-            'pinjaman_anggota',
-            'pinjaman_anggota.anggota'
         ])->first();
 
         $data['dir'] = User::where([
