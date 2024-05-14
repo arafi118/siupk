@@ -29,7 +29,7 @@
                             </h5>
                             <span class="text-sm text-end text-success font-weight-bolder mt-auto mb-0">
                                 {{ $pinjaman_anggota }}
-                                <span class="font-weight-normal text-secondary">Pemanfaat</span>
+                                <span class="font-weight-normal text-secondary">Individu</span>
                             </span>
                         </div>
                         <div class="col-5">
@@ -459,10 +459,9 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mb-0 px-0 py-1 text-danger" data-bs-toggle="tab"
-                                    href="#pemanfaat_aktif" role="tab" aria-controls="pemanfaat_aktif"
-                                    aria-selected="false">
-                                    Pemanfaat
+                                <a class="nav-link mb-0 px-0 py-1 text-danger" data-bs-toggle="tab" href="#anggota"
+                                    role="tab" aria-controls="anggota" aria-selected="false">
+                                    Anggota
                                 </a>
                             </li>
                         </ul>
@@ -490,8 +489,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="pemanfaat_aktif" role="tabpanel"
-                                aria-labelledby="pemanfaat_aktif">
+                            <div class="tab-pane fade" id="anggota" role="tabpanel" aria-labelledby="anggota">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="table-responsive">
@@ -506,7 +504,7 @@
                                                         <td align="center">Alokasi</td>
                                                     </tr>
                                                 </thead>
-                                                <tbody id="tbPemanfaat"></tbody>
+                                                <tbody id="tbAnggota"></tbody>
                                             </table>
                                         </div>
                                     </div>
@@ -673,7 +671,7 @@
 
         $.get('/dashboard/pemanfaat?status=A', function(result) {
             if (result.success) {
-                $('#tbPemanfaat').html(result.table)
+                $('#d').html(result.table)
             }
         })
 
