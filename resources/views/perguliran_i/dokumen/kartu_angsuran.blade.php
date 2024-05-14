@@ -81,7 +81,7 @@
             <tr>
                 <td rowspan="7" align="center" width="400">
                     <div style="font-size: 14px; font-weight: bold;">
-                        {{ $kec->nama_lembaga_sort }} {{ $kec->nama_kec }}
+                        {{ $kec->nama_lembaga_sort }}
                     </div>
                     <div>
                         {{ $kec->alamat_kec }}
