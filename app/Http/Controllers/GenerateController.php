@@ -208,6 +208,13 @@ class GenerateController extends Controller
                 }
             }
 
+            if ($kec->batas_angsuran > 0) {
+                $batas_tgl_angsuran = $kec->batas_angsuran;
+                if ($tanggal_cair >= $batas_tgl_angsuran) {
+                    $tgl_cair = date('Y-m-d', strtotime('+1 month', strtotime($tgl_cair)));
+                }
+            }
+
             $jenis_jasa = $pinkel->jenis_jasa;
             $jangka = $pinkel->jangka;
             $sa_pokok = $pinkel->sistem_angsuran;
@@ -458,13 +465,13 @@ class GenerateController extends Controller
 
         if ($is_pinkel) {
             RencanaAngsuran::whereIn('loan_id', $data_id_pinj)->delete();
-            RealAngsuran::whereIn('id', $data_id_real)->delete();
+            RealAngsuran::whereIn('id', $data_id_pinj)->delete();
 
             RencanaAngsuran::insert($rencana);
             RealAngsuran::insert($real);
         } else {
             RencanaAngsuranI::whereIn('loan_id', $data_id_pinj)->delete();
-            RealAngsuranI::whereIn('id', $data_id_real)->delete();
+            RealAngsuranI::whereIn('id', $data_id_pinj)->delete();
 
             RencanaAngsuranI::insert($rencana);
             RealAngsuranI::insert($real);
