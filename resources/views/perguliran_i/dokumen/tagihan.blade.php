@@ -41,7 +41,7 @@
             <td width="50">Nomor</td>
             <td width="10" align="center">:</td>
             <td colspan="2">
-                ______/DBM/{{ Tanggal::tglRomawi(date('Y-m-d')) }}
+                __________/{{ Tanggal::tglRomawi(date('Y-m-d')) }}
             </td>
         </tr>
         <tr>
