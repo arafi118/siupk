@@ -73,7 +73,8 @@
     <div style="text-align: justify;">
         Dalam hal ini bertindak untuk dan atas nama Pengurus {{ $kec->nama_lembaga_sort }} {{ $kec->sebutan_kec }}
         {{ $kec->nama_kec }} selaku pengelola pelayanan
-        kredit untuk Individu Umum (IU) dan Mandiri Pemberdayaan Masyarakat di {{ $kec->sebutan_kec }}
+        kredit untuk {{ $pinkel->jpp->deskripsi_jpp }}
+        ({{ $pinkel->jpp->nama_jpp }}) di {{ $kec->sebutan_kec }}
         {{ $kec->nama_kec }}, Selanjutnya disebut
         <b>Pihak Pertama</b>, dan
     </div>
