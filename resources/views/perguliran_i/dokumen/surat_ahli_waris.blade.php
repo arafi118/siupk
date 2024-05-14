@@ -66,7 +66,7 @@
                 <p>
                     Adalah benar-benar ahli waris dari <b>{{ $pinkel->anggota->namadepan }}</b> Dengan ini menyatakan
                     bersedia menanggung beban pinjaman {{ $pinkel->jpp->nama_jpp }} sampai lunas. Apabila terjadi
-                    hal-hal yang tidak diinginkan yang menyebabkan peminjaman tidak bisa melunasi kewajibannya seperti :
+                    hal-hal yang tidak diinginkan yang menyebabkan peminjam tidak bisa melunasi kewajibannya seperti :
                     Meninggal Dunia, Melarikan Diri, Berpindah domisili di luar desa, gangguan kejiwaan, sakit parah,
                     dll.
                 </p>
@@ -83,14 +83,14 @@
             <td align="center" width="50%">{{ $kec->nama_kec }}, {{ Tanggal::tglLatin($pinkel->tgl_cair) }}</td>
         </tr>
         <tr>
-            <td align="center">Mengetahui Kepala {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }}</td>
+            <td align="center">&nbsp;</td>
             <td align="center">Nama Penjamin</td>
         </tr>
         <tr>
             <td align="center" colspan="2" height="30">&nbsp;</td>
         </tr>
         <tr style="font-weight: bold;">
-            <td align="center">{{ $pinkel->anggota->d->kades }}</td>
+            <td align="center">&nbsp;</td>
             <td align="center">{{ $pinkel->anggota->penjamin }}</td>
         </tr>
     </table>

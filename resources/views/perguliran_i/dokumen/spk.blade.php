@@ -73,7 +73,8 @@
     <div style="text-align: justify;">
         Dalam hal ini bertindak untuk dan atas nama Pengurus {{ $kec->nama_lembaga_sort }} {{ $kec->sebutan_kec }}
         {{ $kec->nama_kec }} selaku pengelola pelayanan
-        kredit untuk Individu Umum (IU) dan Mandiri Pemberdayaan Masyarakat di {{ $kec->sebutan_kec }}
+        kredit untuk {{ $pinkel->jpp->deskripsi_jpp }}
+        ({{ $pinkel->jpp->nama_jpp }}) di {{ $kec->sebutan_kec }}
         {{ $kec->nama_kec }}, Selanjutnya disebut
         <b>Pihak Pertama</b>, dan
     </div>
@@ -275,11 +276,21 @@
                         </tr>
                     </table>
 
-                    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;"
-                        class="p">
+                    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 12px;">
                         <tr>
-                            <td>
-                                {!! $ttd !!}
+                            <td colspan="2" height="24">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td width="50%" align="center">Pihak Pertama</td>
+                            <td width="50%" align="center">Pihak Kedua</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" height="40">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td align="center">{{ $dir->namadepan . ' ' . $dir->namabelakang }}</td>
+                            <td align="center">
+                                {{ $pinkel->anggota->namadepan }}
                             </td>
                         </tr>
                     </table>

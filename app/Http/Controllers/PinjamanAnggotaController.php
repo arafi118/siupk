@@ -115,7 +115,7 @@ class PinjamanAnggotaController extends Controller
         $anggota = Anggota::where('id', $request->nia_pemanfaat)->first();
 
         $pros_jasa = $pinkel->pros_jasa;
-        if ($pinkel->pros_jasa / $pinkel->jangka == '1.5') {
+        if ($pinkel->pros_jasa / $pinkel->jangka == '1.5' && Session::get('lokasi') == '68') {
             $pros_jasa = 1.8 * $pinkel->jangka;
         }
 

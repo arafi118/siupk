@@ -1,7 +1,6 @@
 @php
     use App\Utils\Tanggal;
 
-    $real = 0;
     $real_pokok = 0;
     $real_jasa = 0;
     $sum_pokok = 0;
@@ -9,12 +8,12 @@
     $saldo_pokok = $pinkel->alokasi;
     $saldo_jasa = $pinkel->alokasi / $pinkel->pros_jasa;
     if ($real) {
-        $real_pokok = $real->realisasi_pokok ?? null;
-        $real_jasa = $real->realisasi_jasa ?? null;
-        $sum_pokok = $real->sum_pokok ?? null;
-        $sum_jasa = $real->sum_jasa ?? null;
-        $saldo_pokok = $real->saldo_pokok ?? null;
-        $saldo_jasa = $real->saldo_jasa ?? null;
+        $real_pokok = $real->realisasi_pokok ?: null;
+        $real_jasa = $real->realisasi_jasa ?: null;
+        $sum_pokok = $real->sum_pokok ?: null;
+        $sum_jasa = $real->sum_jasa ?: null;
+        $saldo_pokok = $real->saldo_pokok ?: null;
+        $saldo_jasa = $real->saldo_jasa ?: null;
     }
 
     $target_pokok = 0;
@@ -42,7 +41,7 @@
             <td width="50">Nomor</td>
             <td width="10" align="center">:</td>
             <td colspan="2">
-                ______/DBM/{{ Tanggal::tglRomawi(date('Y-m-d')) }}
+                __________/{{ Tanggal::tglRomawi(date('Y-m-d')) }}
             </td>
         </tr>
         <tr>

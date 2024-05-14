@@ -85,8 +85,8 @@ class SopController extends Controller
         ];
 
         $kecamatan = Kecamatan::where('id', $kec->id)->update([
-            'nama_lembaga_sort' => ucwords(strtolower($data['nama_bumdesma'])),
-            'nama_lembaga_long' => ucwords(strtolower($data['nama_bumdesma'])),
+            'nama_lembaga_sort' => $data['nama_bumdesma'],
+            'nama_lembaga_long' => $data['nama_bumdesma'],
             'nomor_bh' => $data['nomor_badan_hukum'],
             'telpon_kec' => $data['telpon'],
             'email_kec' => $data['email'],
@@ -94,7 +94,7 @@ class SopController extends Controller
             'calk' => json_encode($calk),
         ]);
 
-        Session::put('nama_lembaga', ucwords(strtolower($data['nama_bumdesma'])));
+        Session::put('nama_lembaga', $data['nama_bumdesma']);
 
         return response()->json([
             'success' => true,
