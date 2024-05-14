@@ -276,11 +276,21 @@
                         </tr>
                     </table>
 
-                    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;"
-                        class="p">
+                    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 12px;">
                         <tr>
-                            <td>
-                                {!! $ttd !!}
+                            <td colspan="2" height="24">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Pihak Pertama</td>
+                            <td width="50%" align="center">Pihak Kedua</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" height="40">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>{{ $dir->namadepan . ' ' . $dir->namabelakang }}</td>
+                            <td align="center">
+                                {{ $pinkel->namadepan }}
                             </td>
                         </tr>
                     </table>
