@@ -128,6 +128,9 @@
                         <div style="font-size: 12px;">
                             <b>{{ strtoupper($nama_kecamatan) }}</b>
                         </div>
+                        <div style="font-size: 8px;">
+                            <i>{{ $info }}</i>
+                        </div>
                     </td>
                 </tr>
             </table>
@@ -136,11 +139,6 @@
                     <td>
                         <span style="font-size: 8px; color: grey;">
                             <i>{{ $nomor_usaha }}</i>
-                        </span>
-                    </td>
-                    <td align="right">
-                        <span style="font-size: 8px; color: grey;">
-                            <i>{{ $info }}</i>
                         </span>
                     </td>
                 </tr>
