@@ -71,7 +71,6 @@
             <div style="font-size: 11px;">
                 Alamat : {{ $pinkel->kelompok->alamat_kelompok }}
                 {{ $pinkel->kelompok->d->sebutan_desa->sebutan_desa }} {{ $pinkel->kelompok->d->nama_desa }}
-                {{ $kec->nama_kec }} {{ $nama_kabupaten }} Telp: {{ $pinkel->kelompok->telpon }}
             </div>
         </td>
     </tr>
