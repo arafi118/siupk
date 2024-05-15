@@ -128,7 +128,7 @@
                         <div style="font-size: 12px;">
                             <b>{{ strtoupper($nama_kecamatan) }}</b>
                         </div>
-                        <div style="font-size: 8px; color: grey;">
+                        <div style="font-size: 8px;">
                             <i>{{ $nomor_usaha }}</i>
                         </div>
                         <div style="font-size: 8px;">
