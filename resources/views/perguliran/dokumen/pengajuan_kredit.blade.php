@@ -85,7 +85,7 @@
         <td width="30">Nomor</td>
         <td width="5" align="right">:</td>
         <td width="500">
-            ______/{{ $pinkel->kelompok->kd_kelompok }}-{{ $pinkel->id }}/{{ $pinkel->jpp->nama_jpp }}/{{ Tanggal::tglRomawi($pinkel->tgl_proposal) }}
+            ______/{{ $pinkel->jpp->nama_jpp }}/{{ Tanggal::tglRomawi($pinkel->tgl_proposal) }}
         </td>
     </tr>
     <tr>
