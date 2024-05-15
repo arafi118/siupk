@@ -90,14 +90,6 @@
     </tr>
     <tr>
         <td width="30">&nbsp;</td>
-        <td width="30">Tanggal</td>
-        <td width="5" align="right">:</td>
-        <td width="500">
-            {{ Tanggal::tglLatin($pinkel->tgl_proposal) }}
-        </td>
-    </tr>
-    <tr>
-        <td width="30">&nbsp;</td>
         <td width="30">Perihal</td>
         <td width="5" align="right">:</td>
         <td width="500">
