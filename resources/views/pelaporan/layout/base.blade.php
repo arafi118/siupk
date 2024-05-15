@@ -129,7 +129,7 @@
                             <b>{{ strtoupper($nama_kecamatan) }}</b>
                         </div>
                         <div style="font-size: 8px;">
-                            <i>{{ $nomor_usaha }}</i>
+                            {{ $nomor_usaha }}
                         </div>
                         <div style="font-size: 8px;">
                             <i>{{ $info }}</i>
