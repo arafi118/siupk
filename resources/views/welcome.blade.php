@@ -1,4 +1,5 @@
 <div>Kecamatan {{ $kec->nama_kec }} [{{ $kec->id }}], {{ $kec->kabupaten->nama_kab }}</div>
+
 <table border="1" cellspacing="0" cellpadding="0" width="100%">
     <tr>
         <th>Nama</th>
