@@ -17,6 +17,7 @@
         </tr>
     @endforeach
 </table>
+
 <div style="text-align: right;">
     <a href="/" target="_blank">{{ $kec->web_kec }}</a>
 </div>
