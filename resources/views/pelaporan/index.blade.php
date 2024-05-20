@@ -1,0 +1,285 @@
+@php
+    $thn_awal = explode('-', $kec->tgl_pakai)[0];
+@endphp
+
+@extends('layouts.base')
+
+@section('content')
+    <div class="app-main__inner">
+
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <form action="/pelaporan/preview"class="needs-validation" novalidate method="post" id="FormPelaporan"
+                    target="_blank">
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustom01" class="form-label">Tahunan</label>
+                            <select class="form-control" name="tahun" id="tahun">
+                                <option value="">---</option>
+                                @for ($i = $thn_awal; $i <= date('Y'); $i++)
+                                    <option {{ $i == date('Y') ? 'selected' : '' }} value="{{ $i }}">
+                                        {{ $i }}
+                                    </option>
+                                @endfor
+                            </select>
+                            <small class="text-danger" id="msg_tahun"></small>
+                            <div class="valid-feedback">
+                                success!!
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustom02" class="form-label">Bulanan</label>
+                            <select class="form-control" name="bulan" id="bulan">
+                                <option value="">---</option>
+                                <option {{ date('m') == '01' ? 'selected' : '' }} value="01">01. JANUARI</option>
+                                <option {{ date('m') == '02' ? 'selected' : '' }} value="02">02. FEBRUARI</option>
+                                <option {{ date('m') == '03' ? 'selected' : '' }} value="03">03. MARET</option>
+                                <option {{ date('m') == '04' ? 'selected' : '' }} value="04">04. APRIL</option>
+                                <option {{ date('m') == '05' ? 'selected' : '' }} value="05">05. MEI</option>
+                                <option {{ date('m') == '06' ? 'selected' : '' }} value="06">06. JUNI</option>
+                                <option {{ date('m') == '07' ? 'selected' : '' }} value="07">07. JULI</option>
+                                <option {{ date('m') == '08' ? 'selected' : '' }} value="08">08. AGUSTUS</option>
+                                <option {{ date('m') == '09' ? 'selected' : '' }} value="09">09. SEPTEMBER</option>
+                                <option {{ date('m') == '10' ? 'selected' : '' }} value="10">10. OKTOBER</option>
+                                <option {{ date('m') == '11' ? 'selected' : '' }} value="11">11. NOVEMBER</option>
+                                <option {{ date('m') == '12' ? 'selected' : '' }} value="12">12. DESEMBER</option>
+                            </select>
+                            <small class="text-danger" id="msg_bulan"></small>
+                            <div class="valid-feedback">
+                                success!!
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="hari" class="form-label">Harian</label>
+                            <select class="form-control" name="hari" id="hari">
+                                <option value="">---</option>
+                                @for ($j = 1; $j <= 31; $j++)
+                                    @if ($j < 10)
+                                        <option value="0{{ $j }}">0{{ $j }}</option>
+                                    @else
+                                        <option value="{{ $j }}">{{ $j }}</option>
+                                    @endif
+                                @endfor
+                            </select>
+                            <small class="text-danger" id="msg_hari"></small>
+                            <div class="valid-feedback">
+                                success!!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom03" class="form-label">Nama Laporan</label>
+                            <input type="text" class="form-control" id="validationCustom03" placeholder="Nama Laporan"
+                                required>
+                            <div class="valid-feedback">
+                                success!!
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom03" class="form-label">Nama Sub Laporan</label>
+                            <select class="form-control" name="sub_laporan" id="sub_laporan">
+                                <option value="">---</option>
+                            </select>
+                            <small class="text-danger" id="msg_sub_laporan"></small>
+                            <div class="valid-feedback">
+                                success!!
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="type" id="type" value="pdf">
+
+                    <br>
+                    <button class="btn btn-danger" type="submit">SIMPAN SALDO</button>
+                    <button class="btn btn-success" type="submit">EXCEL</button>
+                    <button class="btn btn-secondary" type="submit">PREVIEW</button>
+
+                    <br><br>
+                </form>
+
+                <script>
+                    // Example starter JavaScript for disabling form submissions if there are invalid fields
+                    (function() {
+                        'use strict';
+                        window.addEventListener('load', function() {
+                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                            var forms = document.getElementsByClassName('needs-validation');
+                            // Loop over them and prevent submission
+                            var validation = Array.prototype.filter.call(forms, function(form) {
+                                form.addEventListener('submit', function(event) {
+                                    if (form.checkValidity() === false) {
+                                        event.preventDefault();
+                                        event.stopPropagation();
+                                    }
+                                    form.classList.add('was-validated');
+                                }, false);
+                            });
+                        }, false);
+                    })();
+                </script>
+            </div>
+        </div>
+
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <br><br><br>
+                <script>
+                    // Example starter JavaScript for disabling form submissions if there are invalid fields
+                    (function() {
+                        'use strict';
+                        window.addEventListener('load', function() {
+                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                            var forms = document.getElementsByClassName('needs-validation');
+                            // Loop over them and prevent submission
+                            var validation = Array.prototype.filter.call(forms, function(form) {
+                                form.addEventListener('submit', function(event) {
+                                    if (form.checkValidity() === false) {
+                                        event.preventDefault();
+                                        event.stopPropagation();
+                                    }
+                                    form.classList.add('was-validated');
+                                }, false);
+                            });
+                        }, false);
+                    })();
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body p-2" id="LayoutPreview">
+            <div class="p-5"></div>
+        </div>
+    </div>
+@endsection
+
+@section('script')
+    <script>
+        new Choices($('select#tahun')[0], {
+            shouldSort: false,
+            fuseOptions: {
+                threshold: 0.1,
+                distance: 1000
+            }
+        })
+        new Choices($('select#bulan')[0], {
+            shouldSort: false,
+            fuseOptions: {
+                threshold: 0.1,
+                distance: 1000
+            }
+        })
+        new Choices($('select#hari')[0], {
+            shouldSort: false,
+            fuseOptions: {
+                threshold: 0.1,
+                distance: 1000
+            }
+        })
+        new Choices($('select#laporan')[0], {
+            shouldSort: false,
+            fuseOptions: {
+                threshold: 0.1,
+                distance: 1000
+            }
+        })
+        new Choices($('select#sub_laporan')[0], {
+            shouldSort: false,
+            fuseOptions: {
+                threshold: 0.1,
+                distance: 1000
+            }
+        })
+
+        $(document).on('change', '#tahun, #bulan', function(e) {
+            e.preventDefault()
+
+            var file = $('select#laporan').val()
+            subLaporan(file)
+        })
+
+        $(document).on('change', '#laporan', function(e) {
+            e.preventDefault()
+
+            var file = $(this).val()
+            subLaporan(file)
+        })
+
+        function subLaporan(file) {
+            var tahun = $('select#tahun').val()
+            var bulan = $('select#bulan').val()
+
+            if (file == 'calk') {
+                $('#namaLaporan').removeClass('col-md-6')
+                $('#namaLaporan').addClass('col-md-12')
+                $('#subLaporan').removeClass('col-md-6')
+                $('#subLaporan').addClass('col-md-12')
+            }
+
+            $.get('/pelaporan/sub_laporan/' + file + '?tahun=' + tahun + '&bulan=' + bulan, function(result) {
+                $('#subLaporan').html(result)
+            })
+        }
+
+        var quill = new Quill('#editor', {
+            theme: 'snow'
+        });
+
+        $(document).on('click', '#Preview', async function(e) {
+            e.preventDefault()
+
+            $(this).parent('div').parent('div').find('form').find('#type').val('pdf')
+            var file = $('select#laporan').val()
+            if (file == 'calk') {
+                await $('textarea#sub_laporan').val(quill.container.firstChild.innerHTML)
+            }
+
+            var form = $('#FormPelaporan')
+            if (file != '') {
+                form.submit()
+            }
+        })
+
+        $(document).on('click', '#Excel', async function(e) {
+            e.preventDefault()
+
+            $(this).parent('div').parent('div').find('form').find('#type').val('excel')
+            var file = $('select#laporan').val()
+            if (file == 'calk') {
+                await $('textarea#sub_laporan').val(quill.container.firstChild.innerHTML)
+            }
+
+            var form = $('#FormPelaporan')
+            console.log(form.serialize())
+            if (file != '') {
+                form.submit()
+            }
+        })
+
+        let childWindow, loading;
+        $(document).on('click', '#SimpanSaldo', function(e) {
+            e.preventDefault()
+
+            var tahun = $('select#tahun').val()
+            loading = Swal.fire({
+                title: "Mohon Menunggu..",
+                html: "Menyimpan Saldo Januari sampai Desember Th. " + tahun,
+                timerProgressBar: true,
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            })
+
+            childWindow = window.open('/simpan_saldo?bulan=00&tahun=' + tahun, '_blank');
+        })
+
+        window.addEventListener('message', function(event) {
+            if (event.data === 'closed') {
+                loading.close()
+                window.location.reload()
+            }
+        })
+    </script>
+@endsection
