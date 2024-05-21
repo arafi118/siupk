@@ -3,12 +3,8 @@
     "",
     "\\app",
     "\\app\\Http",
-    "\\app\\Http\\Controllers",
-    "\\resources",
-    "\\resources\\views",
-    "\\resources\\views\\pinjaman_i",
-    "\\resources\\views\\pinjaman_i\\partials"
+    "\\app\\Http\\Controllers"
   ],
-  "SelectedNode": "\\resources\\views\\pinjaman_i\\create.blade.php",
+  "SelectedNode": "\\app\\Http\\Controllers\\DashboardController.php",
   "PreviewInSolutionExplorer": false
 }
