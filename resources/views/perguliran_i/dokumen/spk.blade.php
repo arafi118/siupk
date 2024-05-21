@@ -1,6 +1,7 @@
 @php
     use App\Utils\Tanggal;
     use Carbon\Carbon;
+    Carbon::setLocale('id');
 
     $waktu = date('H:i');
     $tempat = 'Kantor DBM';
@@ -169,7 +170,7 @@
             <b>{{ number_format($pinkel->alokasi) }} ({{ $keuangan->terbilang($pinkel->alokasi) }} Rupiah)</b> ditambah
             jasa <b> {{ $pinkel->pros_jasa / $pinkel->jangka }} % Flat</b> sebesar <b>Rp.75,000,- (Tujuh Puluh Lima Ribu Rupiah)</b> setiap bulan, selama 6 bulan,
             yang dimulai pada {{ Tanggal::namaHari($pinkel->tgl_cair) }},
-            {{ \Carbon\Carbon::parse($pinkel->anggota->tgl_cair)->format('d F Y') }} dan
+            {{ \Carbon\Carbon::parse($pinkel->anggota->tgl_cair)->translatedFormat('d F Y') }} dan
             sampai target pelunasan, sebagaimana jadwal angsuran terlampir.
         </div>
     </div>
