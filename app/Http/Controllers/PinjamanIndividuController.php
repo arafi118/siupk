@@ -253,12 +253,12 @@ class PinjamanIndividuController extends Controller
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $jenis_jasa = JenisJasa::all();
         $sistem_angsuran = SistemAngsuran::all();
-        $jenis_pp = JenisProdukPinjaman::where(function($query) use ($kec) {
+        $jenis_pp = JenisProdukPinjaman::where(function ($query) use ($kec) {
             $query->where('lokasi', '0')
-                  ->orWhere(function($query) use ($kec) {
-                      $query->where('kecuali', 'NOT LIKE', "%-{$kec['id']}-%")
-                            ->where('lokasi', 'LIKE', "%-{$kec['id']}-%");
-                  });
+                ->orWhere(function ($query) use ($kec) {
+                    $query->where('kecuali', 'NOT LIKE', "%-{$kec['id']}-%")
+                        ->where('lokasi', 'LIKE', "%-{$kec['id']}-%");
+                });
         })->get();
 
         $jenis_pp_dipilih = $anggota->jenis_produk_pinjaman;
@@ -505,14 +505,15 @@ class PinjamanIndividuController extends Controller
      */
     public function edit(PinjamanIndividu $perguliran_i)
     {
+        $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $jenis_jasa = JenisJasa::all();
         $sistem_angsuran = SistemAngsuran::all();
-        $jenis_pp = JenisProdukPinjaman::where(function($query) use ($kec) {
+        $jenis_pp = JenisProdukPinjaman::where(function ($query) use ($kec) {
             $query->where('lokasi', '0')
-                  ->orWhere(function($query) use ($kec) {
-                      $query->where('kecuali', 'NOT LIKE', "%-{$kec['id']}-%")
-                            ->where('lokasi', 'LIKE', "%-{$kec['id']}-%");
-                  });
+                ->orWhere(function ($query) use ($kec) {
+                    $query->where('kecuali', 'NOT LIKE', "%-{" . $kec->id . "}-%")
+                        ->where('lokasi', 'LIKE', "%-{" . $kec->id . "}-%");
+                });
         })->get();
 
         $jenis_jasa_dipilih = $perguliran_i->jenis_jasa;
