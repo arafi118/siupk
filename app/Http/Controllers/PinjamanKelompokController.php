@@ -484,8 +484,8 @@ class PinjamanKelompokController extends Controller
         $jenis_pp = JenisProdukPinjaman::where(function ($query) use ($kec) {
             $query->where('lokasi', '0')
                 ->orWhere(function ($query) use ($kec) {
-                    $query->where('kecuali', 'NOT LIKE', "%-{$kec['id']}-%")
-                        ->where('lokasi', 'LIKE', "%-{$kec['id']}-%");
+                    $query->where('kecuali', 'NOT LIKE', "%-{" . $kec->id . "}-%")
+                        ->where('lokasi', 'LIKE', "%-{" . $kec->id . "}-%");
                 });
         })->get();
 
