@@ -1,7 +1,10 @@
 @php
     use App\Utils\Tanggal;
+    use Carbon\Carbon;
+    Carbon::setLocale('id');
+
     $waktu = date('H:i');
-    // $tempat = {{ $pinkel->kelompok->wt_cair }};
+    $tempat = 'Kantor UPK';
 
     $wt_cair = explode('_', $pinkel->wt_cair);
     if (count($wt_cair) == 1) {
@@ -10,7 +13,7 @@
 
     if (count($wt_cair) == 2) {
         $waktu = $wt_cair[0];
-        $tempat = $wt_cair[1];
+        $tempat = $wt_cair[1] ?? ' . . . . . . . ';
     }
 
     $redaksi_spk = str_replace('<ol>', '', str_replace('</ol>', '', $kec->redaksi_spk));
