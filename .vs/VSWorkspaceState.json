@@ -1,17 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\app",
-    "\\app\\Http",
-    "\\app\\Http\\Controllers",
     "\\resources",
     "\\resources\\views",
     "\\resources\\views\\pelaporan",
     "\\resources\\views\\pelaporan\\view",
     "\\resources\\views\\pelaporan\\view\\perkembangan_piutang",
+    "\\resources\\views\\perguliran",
+    "\\resources\\views\\perguliran\\dokumen",
     "\\resources\\views\\perguliran_i",
     "\\resources\\views\\perguliran_i\\dokumen"
   ],
-  "SelectedNode": "\\resources\\views\\perguliran_i\\dokumen\\spk.blade.php",
+  "SelectedNode": "\\resources\\views\\perguliran_i\\dokumen",
   "PreviewInSolutionExplorer": false
 }
