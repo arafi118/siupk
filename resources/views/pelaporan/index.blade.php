@@ -11,6 +11,8 @@
             <div class="card-body">
                 <form action="/pelaporan/preview"class="needs-validation" novalidate method="post" id="FormPelaporan"
                     target="_blank">
+                    @csrf
+
                     <br>
                     <div class="row">
                         <div class="col-md-4 mb-3">
@@ -69,31 +71,37 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="validationCustom03" class="form-label">Nama Laporan</label>
-                            <input type="text" class="form-control" id="validationCustom03" placeholder="Nama Laporan"
-                                required>
-                            <div class="valid-feedback">
-                                success!!
-                            </div>
+                    <div id="namaLaporan" class="col-md-6">
+                        <div class="my-2">
+                            <label class="form-label" for="laporan">Nama Laporan</label>
+                            <select class="form-control" name="laporan" id="laporan">
+                                <option value="">---</option>
+                                @foreach ($laporan as $lap)
+                                    <option value="{{ $lap->file }}">
+                                        {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}.
+                                        {{ $lap->nama_laporan }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <small class="text-danger" id="msg_laporan"></small>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="validationCustom03" class="form-label">Nama Sub Laporan</label>
+                    </div>
+                    <div class="col-md-6" id="subLaporan">
+                        <div class="my-2">
+                            <label class="form-label" for="sub_laporan">Nama Sub Laporan</label>
                             <select class="form-control" name="sub_laporan" id="sub_laporan">
                                 <option value="">---</option>
                             </select>
                             <small class="text-danger" id="msg_sub_laporan"></small>
-                            <div class="valid-feedback">
-                                success!!
-                            </div>
                         </div>
                     </div>
+                </div>
                     <input type="hidden" name="type" id="type" value="pdf">
 
                     <br>
-                    <button class="btn btn-danger" type="submit">SIMPAN SALDO</button>
-                    <button class="btn btn-success" type="submit">EXCEL</button>
-                    <button class="btn btn-secondary" type="submit">PREVIEW</button>
+                    <button type="button" id="SimpanSaldo" class="btn btn-sm btn-danger me-2">Simpan Saldo</button>
+                <button type="button" id="Excel" class="btn btn-sm btn-success me-2">Excel</button>
+                <button type="button" id="Preview" class="btn btn-sm btn-github">Preview</button>
 
                     <br><br>
                 </form>
@@ -147,51 +155,16 @@
             </div>
         </div>
     </div>
-    <div class="card">
+    <!-- <div class="card">
         <div class="card-body p-2" id="LayoutPreview">
             <div class="p-5"></div>
         </div>
-    </div>
+    </div> -->
 @endsection
 
 @section('script')
     <script>
-        new Choices($('select#tahun')[0], {
-            shouldSort: false,
-            fuseOptions: {
-                threshold: 0.1,
-                distance: 1000
-            }
-        })
-        new Choices($('select#bulan')[0], {
-            shouldSort: false,
-            fuseOptions: {
-                threshold: 0.1,
-                distance: 1000
-            }
-        })
-        new Choices($('select#hari')[0], {
-            shouldSort: false,
-            fuseOptions: {
-                threshold: 0.1,
-                distance: 1000
-            }
-        })
-        new Choices($('select#laporan')[0], {
-            shouldSort: false,
-            fuseOptions: {
-                threshold: 0.1,
-                distance: 1000
-            }
-        })
-        new Choices($('select#sub_laporan')[0], {
-            shouldSort: false,
-            fuseOptions: {
-                threshold: 0.1,
-                distance: 1000
-            }
-        })
-
+        
         $(document).on('change', '#tahun, #bulan', function(e) {
             e.preventDefault()
 
@@ -221,11 +194,7 @@
                 $('#subLaporan').html(result)
             })
         }
-
-        var quill = new Quill('#editor', {
-            theme: 'snow'
-        });
-
+        
         $(document).on('click', '#Preview', async function(e) {
             e.preventDefault()
 
