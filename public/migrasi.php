@@ -1,13 +1,13 @@
 <?php
 ini_set('display_errors', '1');
 session_start();
-$koneksi = mysqli_connect('45.149.187.98', 'siupk', 'Indonesia78!', 'information_schema');
-$trigger = mysqli_connect('45.149.187.98', 'siupk_global', 'siupk_global', 'siupk_dbm');
+$koneksi = mysqli_connect('cpanel.siupk.net', 'siupk_global', 'siupk_global', 'siupk_dbm');
+$trigger = mysqli_connect('cpanel.siupk.net', 'siupk_global', 'siupk_global', 'siupk_perantara');
 
 if (isset($_POST['copy'])) {
     $lokasi = htmlspecialchars($_POST['lokasi']);
 
-    $kec = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM dbm_sidbm.kecamatan WHERE id='$lokasi'"));
+    $kec = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM siupk_perantara.kecamatan WHERE id='$lokasi'"));
 
     mysqli_query($koneksi, "DROP TABLE IF EXISTS siupk_dbm.anggota_" . $lokasi);
     mysqli_query($koneksi, "DROP TABLE IF EXISTS siupk_dbm.inventaris_" . $lokasi);
@@ -27,36 +27,36 @@ if (isset($_POST['copy'])) {
     mysqli_query($koneksi, "DELETE FROM siupk_dbm.kecamatan WHERE id='$lokasi'");
     mysqli_query($koneksi, "DELETE FROM siupk_dbm.desa WHERE kd_kec='$kec[kd_kec]'");
 
-    mysqli_query($koneksi, "CREATE TABLE siupk_dbm.anggota_$lokasi LIKE dbm_sidbm.anggota_$lokasi");
-    mysqli_query($koneksi, "CREATE TABLE siupk_dbm.inventaris_$lokasi LIKE dbm_sidbm.inventaris_$lokasi");
-    mysqli_query($koneksi, "CREATE TABLE siupk_dbm.kelompok_$lokasi LIKE dbm_sidbm.kelompok_$lokasi");
-    mysqli_query($koneksi, "CREATE TABLE siupk_dbm.pinjaman_anggota_$lokasi LIKE dbm_sidbm.pinjaman_anggota_$lokasi");
-    mysqli_query($koneksi, "CREATE TABLE siupk_dbm.pinjaman_kelompok_$lokasi LIKE dbm_sidbm.pinjaman_kelompok_$lokasi");
-    mysqli_query($koneksi, "CREATE TABLE siupk_dbm.real_angsuran_$lokasi LIKE dbm_sidbm.real_angsuran_$lokasi");
-    mysqli_query($koneksi, "CREATE TABLE siupk_dbm.real_angsuran_i_$lokasi LIKE dbm_sidbm.real_angsuran_i_$lokasi");
-    mysqli_query($koneksi, "CREATE TABLE siupk_dbm.rekening_$lokasi LIKE dbm_sidbm.rekening_$lokasi");
-    mysqli_query($koneksi, "CREATE TABLE siupk_dbm.rencana_angsuran_$lokasi LIKE dbm_sidbm.rencana_angsuran_$lokasi");
-    mysqli_query($koneksi, "CREATE TABLE siupk_dbm.rencana_angsuran_i_$lokasi LIKE dbm_sidbm.rencana_angsuran_i_$lokasi");
-    mysqli_query($koneksi, "CREATE TABLE siupk_dbm.transaksi_$lokasi LIKE dbm_sidbm.transaksi_$lokasi");
+    mysqli_query($koneksi, "CREATE TABLE siupk_dbm.anggota_$lokasi LIKE siupk_perantara.anggota_$lokasi");
+    mysqli_query($koneksi, "CREATE TABLE siupk_dbm.inventaris_$lokasi LIKE siupk_perantara.inventaris_$lokasi");
+    mysqli_query($koneksi, "CREATE TABLE siupk_dbm.kelompok_$lokasi LIKE siupk_perantara.kelompok_$lokasi");
+    mysqli_query($koneksi, "CREATE TABLE siupk_dbm.pinjaman_anggota_$lokasi LIKE siupk_perantara.pinjaman_anggota_$lokasi");
+    mysqli_query($koneksi, "CREATE TABLE siupk_dbm.pinjaman_kelompok_$lokasi LIKE siupk_perantara.pinjaman_kelompok_$lokasi");
+    mysqli_query($koneksi, "CREATE TABLE siupk_dbm.real_angsuran_$lokasi LIKE siupk_perantara.real_angsuran_$lokasi");
+    mysqli_query($koneksi, "CREATE TABLE siupk_dbm.real_angsuran_i_$lokasi LIKE siupk_perantara.real_angsuran_i_$lokasi");
+    mysqli_query($koneksi, "CREATE TABLE siupk_dbm.rekening_$lokasi LIKE siupk_perantara.rekening_$lokasi");
+    mysqli_query($koneksi, "CREATE TABLE siupk_dbm.rencana_angsuran_$lokasi LIKE siupk_perantara.rencana_angsuran_$lokasi");
+    mysqli_query($koneksi, "CREATE TABLE siupk_dbm.rencana_angsuran_i_$lokasi LIKE siupk_perantara.rencana_angsuran_i_$lokasi");
+    mysqli_query($koneksi, "CREATE TABLE siupk_dbm.transaksi_$lokasi LIKE siupk_perantara.transaksi_$lokasi");
 
     mysqli_query($koneksi, "CREATE TABLE IF NOT EXISTS siupk_dbm.saldo_$lokasi LIKE siupk_dbm.saldo");
     mysqli_query($koneksi, "CREATE TABLE IF NOT EXISTS siupk_dbm.ebudgeting_$lokasi LIKE siupk_dbm.ebudgeting");
 
-    mysqli_query($koneksi, "INSERT siupk_dbm.anggota_$lokasi SELECT * FROM dbm_sidbm.anggota_$lokasi");
-    mysqli_query($koneksi, "INSERT siupk_dbm.inventaris_$lokasi SELECT * FROM dbm_sidbm.inventaris_$lokasi");
-    mysqli_query($koneksi, "INSERT siupk_dbm.kelompok_$lokasi SELECT * FROM dbm_sidbm.kelompok_$lokasi");
-    mysqli_query($koneksi, "INSERT siupk_dbm.pinjaman_anggota_$lokasi SELECT * FROM dbm_sidbm.pinjaman_anggota_$lokasi");
-    mysqli_query($koneksi, "INSERT siupk_dbm.pinjaman_kelompok_$lokasi SELECT * FROM dbm_sidbm.pinjaman_kelompok_$lokasi");
-    mysqli_query($koneksi, "INSERT siupk_dbm.real_angsuran_$lokasi SELECT * FROM dbm_sidbm.real_angsuran_$lokasi");
-    mysqli_query($koneksi, "INSERT siupk_dbm.real_angsuran_i_$lokasi SELECT * FROM dbm_sidbm.real_angsuran_$lokasi");
-    mysqli_query($koneksi, "INSERT siupk_dbm.rekening_$lokasi SELECT * FROM dbm_sidbm.rekening_$lokasi");
-    mysqli_query($koneksi, "INSERT siupk_dbm.rencana_angsuran_$lokasi SELECT * FROM dbm_sidbm.rencana_angsuran_$lokasi");
-    mysqli_query($koneksi, "INSERT siupk_dbm.rencana_angsuran_i_$lokasi SELECT * FROM dbm_sidbm.rencana_angsuran_$lokasi");
-    mysqli_query($koneksi, "INSERT siupk_dbm.transaksi_$lokasi SELECT * FROM dbm_sidbm.transaksi_$lokasi");
+    mysqli_query($koneksi, "INSERT siupk_dbm.anggota_$lokasi SELECT * FROM siupk_perantara.anggota_$lokasi");
+    mysqli_query($koneksi, "INSERT siupk_dbm.inventaris_$lokasi SELECT * FROM siupk_perantara.inventaris_$lokasi");
+    mysqli_query($koneksi, "INSERT siupk_dbm.kelompok_$lokasi SELECT * FROM siupk_perantara.kelompok_$lokasi");
+    mysqli_query($koneksi, "INSERT siupk_dbm.pinjaman_anggota_$lokasi SELECT * FROM siupk_perantara.pinjaman_anggota_$lokasi");
+    mysqli_query($koneksi, "INSERT siupk_dbm.pinjaman_kelompok_$lokasi SELECT * FROM siupk_perantara.pinjaman_kelompok_$lokasi");
+    mysqli_query($koneksi, "INSERT siupk_dbm.real_angsuran_$lokasi SELECT * FROM siupk_perantara.real_angsuran_$lokasi");
+    mysqli_query($koneksi, "INSERT siupk_dbm.real_angsuran_i_$lokasi SELECT * FROM siupk_perantara.real_angsuran_$lokasi");
+    mysqli_query($koneksi, "INSERT siupk_dbm.rekening_$lokasi SELECT * FROM siupk_perantara.rekening_$lokasi");
+    mysqli_query($koneksi, "INSERT siupk_dbm.rencana_angsuran_$lokasi SELECT * FROM siupk_perantara.rencana_angsuran_$lokasi");
+    mysqli_query($koneksi, "INSERT siupk_dbm.rencana_angsuran_i_$lokasi SELECT * FROM siupk_perantara.rencana_angsuran_$lokasi");
+    mysqli_query($koneksi, "INSERT siupk_dbm.transaksi_$lokasi SELECT * FROM siupk_perantara.transaksi_$lokasi");
 
-    mysqli_query($koneksi, "INSERT INTO siupk_dbm.users SELECT * FROM dbm_sidbm.users WHERE lokasi='$lokasi'");
-    mysqli_query($koneksi, "INSERT INTO siupk_dbm.kecamatan SELECT * FROM dbm_sidbm.kecamatan WHERE id='$lokasi'");
-    mysqli_query($koneksi, "INSERT INTO siupk_dbm.desa SELECT * FROM dbm_sidbm.desa WHERE kd_kec='$kec[kd_kec]'");
+    mysqli_query($koneksi, "INSERT INTO siupk_dbm.users SELECT * FROM siupk_perantara.users WHERE lokasi='$lokasi'");
+    mysqli_query($koneksi, "INSERT INTO siupk_dbm.kecamatan SELECT * FROM siupk_perantara.kecamatan WHERE id='$lokasi'");
+    mysqli_query($koneksi, "INSERT INTO siupk_dbm.desa SELECT * FROM siupk_perantara.desa WHERE kd_kec='$kec[kd_kec]'");
 
     mysqli_query($koneksi, "ALTER TABLE siupk_dbm.anggota_$lokasi CHANGE `usaha` `usaha` VARCHAR(50) NULL DEFAULT '0'");
     mysqli_query($koneksi, "ALTER TABLE siupk_dbm.rekening_$lokasi ADD `parent_id` VARCHAR(50) NULL FIRST");
