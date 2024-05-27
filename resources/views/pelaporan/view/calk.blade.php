@@ -4,7 +4,6 @@
 
     $calk = json_decode($kec->calk, true);
     $peraturan_desa = $calk['peraturan_desa'];
-
     $calk = [
         '0' => [
             'th_lalu' => 0,

@@ -243,13 +243,21 @@
                     Oleh : Tim Verifikasi {{ $kec->sebutan_kec }} {{ $kec->nama_kec }} <br>
                 </p>
 
-                <table width='100%'>
-                    <tr>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <p> {{ $user->namadepan }} {{ $user->namabelakang }}<br><br><br><br>
-                      &nbsp;&nbsp;&nbsp;{{ $user->j->nama_jabatan }}</p>
-                </table>
+                <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
+                        @foreach ($user as $r)
+                            <tr>
+                                <td width="70" height="20">
+                                    <div>{{ $r->namadepan }} {{ $r->namabelakang }}</div>
+                                    <div>
+                                        <b>{{ $r->j->nama_jabatan }}</b>
+                                    </div>
+                                </td>
+                                <td align="right" style="vertical-align: bottom;">
+                                    _____________________________________
+                                </td>
+                            </tr>
+                        @endforeach
+                    </table>
              
             </td>
         </tr>
