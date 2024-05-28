@@ -48,6 +48,46 @@
             </li>
             <li>
                 <a href="#">
+                    <i class="metismenu-icon pe-7s-note"></i>
+                    Basis Data
+                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                </a>
+                <ul>
+                    <li>
+                        <a href="/database/desa">
+                            <i class="metismenu-icon">
+                                <i class="metismenu-icon pe-7s-note"></i>
+                            </i>D. Data Desa
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/database/kelompok/register_kelompok">
+                            <i class="metismenu-icon">
+                            </i>Rk. Register Kelompok
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/transaksi/jurnal_angsuran">
+                            <i class="metismenu-icon">
+                            </i>Dk. Data Kelompok
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/transaksi/jurnal_angsuran_individu">
+                            <i class="metismenu-icon">
+                            </i>Ra. Register Anggota
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/transaksi/jurnal_angsuran">
+                            <i class="metismenu-icon">
+                            </i>Da. Data Anggota
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
                     <i class="metismenu-icon pe-7s-display2"></i>
                     Jurnal Angsuran
                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
@@ -65,7 +105,6 @@
                             </i>Ang.Individu
                         </a>
                     </li>
-                    <li>
                 </ul>
             </li>
 

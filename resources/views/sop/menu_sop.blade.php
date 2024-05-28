@@ -18,7 +18,7 @@
         <div class="mb-12 card">
             <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">&nbsp;
                 <li class="nav-item">
-                    <a href="/pengaturan/lembaga/{kec}" class="btn btn-outline-primary">
+                    <a href="/sop/partials/_lembaga" class="btn btn-outline-primary" active>
                         <i class="fa-solid fa-tree-city"></i>
                         <span>Identitas Lembaga</span>
                     </a>
@@ -36,7 +36,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/pengaturan/asuransi/{kec}" class="btn btn-outline-primary active">
+                    <a href="/pengaturan/asuransi/{kec}" class="btn btn-outline-primary">
                         <i class="fa-solid fa-money-bill-transfer"></i>
                         <span>Pengaturan Asuransi</span>
                     </a>

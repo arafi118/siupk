@@ -14,60 +14,130 @@
             .btn {
                 width: 100%;
             }
+
+            .sticky-navbar {
+                position: -webkit-sticky;
+                /* For Safari */
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+                /* Ensure it stays above other content */
+                background-color: white;
+                /* Optional: to match the card's background */
+            }
+
         }
     </style>
     <div class="app-main__inner">
         <div class="tab-content">
             <br>
-            @include('sop.menu_sop')
-
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mb-12 card position-sticky top-10">
+                        <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">&nbsp;&nbsp;&nbsp;
+                            <li class="nav-item">
+                                <a href="#lembaga" class="btn btn-outline-primary" active>
+                                    <i class="fa-solid fa-tree-city"></i>
+                                    <span>Identitas Lembaga</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#pengelola" class="btn btn-outline-primary">
+                                    <i class="fa-solid fa-person-chalkboard"></i>
+                                    <span>Sebutan Pengelola</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#pinjaman" class="btn btn-outline-primary">
+                                    <i class="fa-solid fa-chart-simple"></i>
+                                    <span>Sistem Pinjaman</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#asuransi" class="btn btn-outline-primary">
+                                    <i class="fa-solid fa-money-bill-transfer"></i>
+                                    <span>Pengaturan Asuransi</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#redaksi_spk" class="btn btn-outline-primary">
+                                    <i class="fa-solid fa-laptop-file"></i>
+                                    <span>Redaksi Dk.SPK</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#logo" class="btn btn-outline-primary">
+                                    <i class="fa-solid fa-panorama"></i>
+                                    <span>Logo</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#whatsapp" class="btn btn-outline-primary">
+                                    <i class="fa-solid fa-camera-rotate"></i>
+                                    <span>Whatsapp</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <br>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="main-card mb-3 card">
+                    <div class="main-card mb-3 card" id="lembaga">
+                        <div class="card-body">
+                            <h5 class="card-title">Identitas Lembaga</h5>
+                        </div>
+                        <div class="card-body pt-0">
+                            @include('sop.partials._lembaga')
+                        </div>
+                    </div>
+                    <div class="main-card mb-3 card" id="pengelola">
+                        <div class="card-body">
+                            <h5 class="card-title">Sebutan Pengelola Lembaga</h5>
+                        </div>
+                        <div class="card-body pt-0">
+                            @include('sop.partials._pengelola')
+                        </div>
+                    </div>
+                    <div class="main-card mb-3 card" id="pinjaman">
+                        <div class="card-body">
+                            <h5 class="card-title">Sistem Pinjaman</h5>
+                        </div>
+                        <div class="card-body pt-0">
+                            @include('sop.partials._pinjaman')
+                        </div>
+                    </div>
+                    <div class="main-card mb-3 card" id="asuransi">
+                        <div class="card-body">
+                            <h5 class="card-title">Pengaturan Asuransi</h5>
+                        </div>
+                        <div class="card-body pt-0">
+                            @include('sop.partials._asuransi')
+                        </div>
+                    </div>
+                    <div class="main-card mb-3 card" id="redaksi_spk">
+                        <div class="card-body">
+                            <h5 class="card-title">Redaksi Dokumen SPK</h5>
+                        </div>
+                        <div class="card-body pt-0">
+                            @include('sop.partials._spk')
+                        </div>
+                    </div>
+                    <div class="main-card mb-3 card" id="logo">
+                        <div class="card-body">
+                            <h5 class="card-title">Upload Logo</h5>
+                        </div>
+                        <div class="card-body pt-0">
+                            @include('sop.partials._logo')
+                        </div>
+                    </div>
+                    <div class="main-card mb-3 card" id="whatsapp">
                         <div class="card-body">
                             <h5 class="card-title">Controls Types</h5>
-                            <form class="">
-                                <div class="position-relative mb-3"><label for="exampleEmail"
-                                        class="form-label">Email</label><input name="email" id="exampleEmail"
-                                        placeholder="with a placeholder" type="email" class="form-control"></div>
-                                <div class="position-relative mb-3"><label for="examplePassword"
-                                        class="form-label">Password</label><input name="password" id="examplePassword"
-                                        placeholder="password placeholder" type="password" class="form-control"></div>
-                                <div class="position-relative mb-3">
-                                    <label for="exampleSelect" class="form-label">Select</label>
-                                    <select name="select" id="exampleSelect" class="form-select">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
-                                </div>
-                                <div class="position-relative mb-3">
-                                    <label for="exampleSelectMulti" class="form-label">Select Multiple</label>
-                                    <select multiple="" name="selectMulti" id="exampleSelectMulti" class="form-select">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
-                                </div>
-                                <div class="position-relative mb-3">
-                                    <label for="exampleText" class="form-label">Text Area</label>
-                                    <textarea name="text" id="exampleText" class="form-control"></textarea>
-                                </div>
-                                <div class="position-relative mb-3">
-                                    <label for="exampleFile" class="form-label">File</label>
-                                    <input name="file" id="exampleFile" type="file" class="form-control">
-                                    <small class="form-text text-muted">
-                                        This is some placeholder block-level help text for the above input.
-                                        It's a bit lighter and easily wraps to a new line.
-                                    </small>
-                                </div>
-                                <button class="mt-1 btn btn-primary">Submit</button>
-                            </form>
+                        </div>
+                        <div class="card-body pt-0">
+                            @include('sop.partials._whatsapp')
                         </div>
                     </div>
                 </div>

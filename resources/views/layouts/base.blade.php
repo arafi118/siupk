@@ -25,6 +25,10 @@
     <script defer src="/assets/scripts/fullcalendar.js"></script>
     <script defer src="/assets/scripts/maps.js"></script>
     <script defer src="/assets/scripts/chart_js.js"></script>
+
+    <link rel="stylesheet" href="/assets/css/pace.css?v=1716515606">
+
+
 </head>
 
 <body>
@@ -463,5 +467,377 @@
         </div>
     </div>
 </body>
+
+<form action="/logout" method="post" id="formLogout">
+    <input type="hidden" name="_token" value="yZaBRXeawdWlSwzP4com4AIEfVtTtwcAPgf6mA40">
+</form>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
+<script src="/assets/js/core/popper.min.js"></script>
+<script src="/assets/js/core/bootstrap.min.js"></script>
+<script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
+<script src="/assets/js/plugins/choices.min.js"></script>
+<script src="/assets/js/plugins/sweetalert.min.js"></script>
+<script src="/assets/js/plugins/flatpickr.min.js"></script>
+<script src="/assets/js/plugins/chartjs.min.js"></script>
+<script src="/assets/js/html5-qrcode.js?v=1716515606"></script>
+<script src="http://siupk.test/vendor/tinymce/tinymce.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"
+    integrity="sha512-Rdk63VC+1UYzGSgd3u2iadi0joUrcwX0IWp2rTh6KXFoAmgOjRS99Vynz1lJPT8dLjvo6JZOqpAHJyfCEZ5KoA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
+    integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="//cdn.quilljs.com/1.3.7/quill.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+
+<script>
+    var table = $('.table-borderless').DataTable({
+        language: {
+            paginate: {
+                previous: "&laquo;",
+                next: "&raquo;"
+            }
+        },
+        processing: true,
+        serverSide: true,
+        ajax: "/database/desa",
+        columns: [{
+                data: 'kd_desa',
+                name: 'kd_desa'
+            },
+            {
+                data: 'nama_desa',
+                name: 'nama_desa'
+            },
+            {
+                data: 'alamat_desa',
+                name: 'alamat_desa'
+            },
+            {
+                data: 'telp_desa',
+                name: 'telp_desa'
+            },
+            {
+                data: 'kades',
+                name: 'kades'
+            }
+        ]
+    });
+
+    $('.table').on('click', 'tbody tr', function(e) {
+        var data = table.row(this).data();
+
+        $.get('/database/desa/' + data.kd_desa + "/edit", function(result) {
+            $('#EditDesa .modal-dialog').html(result)
+        })
+
+        $('#EditDesa').modal('show')
+    })
+
+    $(document).on('click', '#simpanDesa', function(e) {
+        e.preventDefault()
+
+        var form = $('#FormEditDesa')
+        $.ajax({
+            type: "POST",
+            url: form.attr('action'),
+            data: form.serialize(),
+            success: function(result) {
+                Swal.fire('Berhasil', result.msg, 'success').then(async (result) => {
+                    await $('#EditDesa').modal('toggle')
+                    table.ajax.reload();
+                })
+            },
+            error: function(result) {
+                const respons = result.responseJSON;
+
+                Swal.fire('Error', 'Cek kembali input yang anda masukkan', 'error')
+                $.map(respons, function(res, key) {
+                    $('#' + key).parent('.input-group').addClass('is-invalid')
+                    $('#msg_' + key).html(res)
+                })
+            }
+        })
+
+    })
+</script>
+
+<script>
+    var formatter = new Intl.NumberFormat('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    })
+
+    window.paceOptions = {
+        ajax: true,
+        document: false,
+        eventLag: false,
+        elements: {
+            selectors: ['.g-sidenav-show']
+        }
+    }
+
+    $('#cariKelompok').typeahead({
+        source: function(query, process) {
+            var states = [];
+            return $.get('/perguliran/cari_kelompok', {
+                query: query
+            }, function(result) {
+                var resultList = result.map(function(item) {
+                    states.push({
+                        "id": item.id,
+                        "name": item.nama_kelompok +
+                            ' [' + item.nama_desa + ']' +
+                            ' [' + item.ketua + ']' +
+                            ' [' + item.kd_kelompok + ']',
+                        "value": item.id
+                    });
+                });
+
+                return process(states);
+            })
+        },
+        afterSelect: function(item) {
+            var path = 'database/desa'
+            if (path == 'transaksi/jurnal_angsuran') {
+                $.get('/transaksi/form_angsuran/' + item.id, function(result) {
+                    var ch_pokok = document.getElementById('chartP').getContext("2d");
+                    var ch_jasa = document.getElementById('chartJ').getContext("2d");
+
+                    angsuran(true, result)
+
+                    makeChart('pokok', ch_pokok, result.sisa_pokok, result.sum_pokok)
+                    makeChart('jasa', ch_jasa, result.sisa_jasa, result.sum_jasa)
+
+                    $('#loan-id').html(item.id)
+
+                    var id = $('#id').val()
+                    $.get('/transaksi/angsuran/form_anggota/' + id, function(result) {
+                        if (result.success) {
+                            $('#LayoutAngsuranAnggota').html(result.view)
+                            $('#AngsuranAnggotaLabel').text(result.title)
+                        }
+                    })
+                })
+            } else {
+                window.location.href = '/transaksi/jurnal_angsuran?pinkel=' + item.id
+            }
+        }
+    });
+
+
+    $('#cariAnggota').typeahead({
+        source: function(query, process) {
+            var states = [];
+            return $.get('/perguliran/cari_anggota', {
+                query: query
+            }, function(result) {
+                var resultList = result.map(function(item) {
+                    states.push({
+                        "id": item.id,
+                        "name": item.namadepan +
+                            ' [' + item.nik + ']',
+                        "value": item.id
+                    });
+                });
+
+                return process(states);
+            })
+        },
+        afterSelect: function(item) {
+            var path = 'database/desa'
+            if (path == 'transaksi/jurnal_angsuran_individu') {
+                $.get('/transaksi/form_angsuran_individu/' + item.id, function(result) {
+                    var ch_pokok = document.getElementById('chartP').getContext("2d");
+                    var ch_jasa = document.getElementById('chartJ').getContext("2d");
+
+                    angsuran(true, result)
+
+                    makeChart('pokok', ch_pokok, result.sisa_pokok, result.sum_pokok)
+                    makeChart('jasa', ch_jasa, result.sisa_jasa, result.sum_jasa)
+
+                    $('#loan-id').html(item.id)
+                })
+            } else {
+                window.location.href = '/transaksi/jurnal_angsuran_individu?pinkel=' + item.id
+            }
+        }
+    });
+
+    function makeChart(id, target, sisa_saldo, sum_saldo) {
+        window[id] = new Chart(target, {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    'Sisa Saldo',
+                    'Total Pengembalian'
+                ],
+                datasets: [{
+                    label: 'My First Dataset',
+                    data: [sisa_saldo, sum_saldo],
+                    backgroundColor: [
+                        '#e3316e',
+                        '#3A416F'
+                    ],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        })
+    }
+
+    function angsuran(destroy = false, result) {
+        $('#pokok').val(formatter.format(result.saldo_pokok))
+        $('#jasa').val(formatter.format(result.saldo_jasa))
+        $('#id').val(result.pinkel.id)
+
+        $('#_pokok').val(result.sisa_pokok)
+        $('#_jasa').val(result.sisa_jasa)
+
+        var ch_pokok = document.getElementById('chartP').getContext("2d");
+        var ch_jasa = document.getElementById('chartJ').getContext("2d");
+
+        if (destroy) {
+            if (pokok) {
+                pokok.destroy()
+            }
+
+            if (jasa) {
+                jasa.destroy()
+            }
+        }
+
+        $('#alokasi_pokok').html("Rp. " + formatter.format(result.alokasi_pokok))
+        $('#alokasi_jasa').html("Rp. " + formatter.format(result.alokasi_jasa))
+
+        $('#pokok,#jasa,#denda').trigger('change')
+    }
+
+    function open_window(link) {
+        return window.open(link)
+    }
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+
+    $(document).on('click', '#logout', function(e) {
+        e.preventDefault()
+
+        Swal.fire({
+            title: 'Logout',
+            text: 'Dengan klik tombol logout maka anda tidak bisa membuka halaman ini lagi sebelum melakukan login ulang, Logout?',
+            showCancelButton: true,
+            confirmButtonText: 'Logout',
+            cancelButtonText: 'Batal',
+            icon: 'info'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('#formLogout').submit()
+            }
+        })
+    })
+
+    $(document).on('click', '#btnLaporanPelunasan', function(e) {
+        e.preventDefault()
+
+        $('input#laporan').val('pelunasan')
+        $('#FormLaporanSisipan').submit()
+    })
+</script>
+
+<script>
+    tinymce.init({
+        selector: '.tiny-mce-editor',
+        plugins: 'table visualblocks fullscreen',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | align | table fullscreen | removeformat',
+        font_family_formats: 'Arial=arial,helvetica,sans-serif; Courier New=courier new,courier,monospace;',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'ARAFII'
+    });
+
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+        var options = {
+            damping: '0.5'
+        }
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+
+    function Toastr(icon, text) {
+        font = "1.2rem Nimrod MT";
+
+        canvas = document.createElement("canvas");
+        context = canvas.getContext("2d");
+        context.font = font;
+        width = context.measureText(text).width;
+        formattedWidth = Math.ceil(width) + 100;
+
+        Toast.fire({
+            icon: icon,
+            title: text,
+            width: formattedWidth
+        })
+    }
+
+    function MultiToast(icon, text) {
+        font = "1.2rem Nimrod MT";
+
+        canvas = document.createElement("canvas");
+        context = canvas.getContext("2d");
+        context.font = font;
+        width = context.measureText(text).width;
+        formattedWidth = Math.ceil(width) + 100;
+
+        let MultiToast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        MultiToast.fire({
+            icon: icon,
+            title: text,
+            width: formattedWidth
+        })
+    }
+</script>
+
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script async src="/assets/js/material-dashboard.min.js?v=1716515606"></script>
+
+</body>
+
+</html>
 
 </html>

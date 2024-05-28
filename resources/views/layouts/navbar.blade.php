@@ -32,9 +32,9 @@
 @endphp
 <div class="app-header header-shadow">
     <div class="app-header__logo">
-        <span class="logo" id="nama_lembaga_sort" style="color: blue;">
+        <a href="/dashboard" class="logo" id="nama_lembaga_sort" style="color: rgb(0, 0, 0);">
             <b> {{ Session::get('nama_lembaga') }} </b>
-        </span>
+        </a>
         <div class="header__pane ms-auto">
             <div>
                 <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
@@ -134,10 +134,9 @@
                             </div>
                         </div>
                         <div class="widget-content-left  ms-3 header-user-info">
-                            <div class="widget-heading">
-                                <span class="nav-link-text ms-2 ps-1 nama_user"
-                                    style="color: blue;">{{ Session::get('nama') }}</span>
-                            </div>
+                            <a href="/profil" class="nav-link text-black">
+                                <span class="nav-link-text ms-2 ps-1 nama_user">{{ Session::get('nama') }}</span>
+                            </a>
                         </div>&nbsp;&nbsp;
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">

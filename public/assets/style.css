@@ -242,6 +242,7 @@
   }
 }
 
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -12977,6 +12978,14 @@ button,
   padding: 1.5rem 1.5rem 0;
   flex: 1;
 }
+.sticky-navbar {
+  position: -webkit-sticky; /* For Safari */
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Ensure it stays above other content */
+  background-color: white; /* Optional: to match the card's background */
+}
+
 
 .app-theme-white.app-container {
   background: #f1f4f6;
@@ -18694,7 +18703,15 @@ A VERTICAL event
   .slick-slider-sm .slick-slider .slick-next {
     right: 0.75rem;
   }
+  .sticky {
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Make sure it stays on top of other content */
+    background-color: white; /* Background color to avoid transparency issues */
+  }
 }
+
 @media only screen and (min-width: 1200px) and (max-width: 1500px) {
   .profile-responsive .dropdown-menu-header .menu-header-content.btn-pane-right {
     display: block;
@@ -18880,5 +18897,6 @@ A VERTICAL event
 .after-img {
   max-width: 100%;
 }
+
 
 /*# sourceMappingURL=style.css.map */

@@ -525,11 +525,11 @@
                         <table class="align-middle mb-0 table table-borderless table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th class="text-center">#</th>
-                                    <th>Name</th>
-                                    <th class="text-center">City</th>
-                                    <th class="text-center">Status</th>
-                                    <th class="text-center">Actions</th>
+                                    <th class="text-center">kode desa</th>
+                                    <th>Name desa</th>
+                                    <th class="text-center">alamat desa</th>
+                                    <th class="text-center">telepon desa</th>
+                                    <th class="text-center">kades</th>
                                 </tr>
                             </thead>
                             <tbody>
