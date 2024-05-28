@@ -4,13 +4,8 @@
     "\\resources",
     "\\resources\\views",
     "\\resources\\views\\pelaporan",
-    "\\resources\\views\\pelaporan\\view",
-    "\\resources\\views\\pelaporan\\view\\perkembangan_piutang",
-    "\\resources\\views\\perguliran",
-    "\\resources\\views\\perguliran\\dokumen",
-    "\\resources\\views\\perguliran_i",
-    "\\resources\\views\\perguliran_i\\dokumen"
+    "\\resources\\views\\pelaporan\\view"
   ],
-  "SelectedNode": "\\resources\\views\\perguliran_i\\dokumen",
+  "SelectedNode": "\\resources\\views\\pelaporan\\view\\calk.blade.php",
   "PreviewInSolutionExplorer": false
 }
