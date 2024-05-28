@@ -200,11 +200,13 @@ class GenerateController extends Controller
             $tgl_angsur = $tgl_cair;
             $tanggal_cair = date('d', strtotime($tgl_cair));
 
-            if ($desa->jadwal_angsuran_desa > 0) {
-                $angsuran_desa = $desa->jadwal_angsuran_desa;
-                if ($angsuran_desa > 0) {
-                    $tgl_pinjaman = date('Y-m', strtotime($tgl_cair));
-                    $tgl_cair = $tgl_pinjaman . '-' . $angsuran_desa;
+            if ($desa) {
+                if ($desa->jadwal_angsuran_desa > 0) {
+                    $angsuran_desa = $desa->jadwal_angsuran_desa;
+                    if ($angsuran_desa > 0) {
+                        $tgl_pinjaman = date('Y-m', strtotime($tgl_cair));
+                        $tgl_cair = $tgl_pinjaman . '-' . $angsuran_desa;
+                    }
                 }
             }
 
