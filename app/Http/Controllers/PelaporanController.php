@@ -1781,6 +1781,81 @@ class PelaporanController extends Controller
             return $view;
         }
     }
+    
+ private function rencana_realisasi_i(array $data)
+{
+    $keuangan = new Keuangan;
+    $thn = $data['tahun'];
+    $bln = $data['bulan'];
+    $hari = $data['hari'];
+
+    $tgl = $thn . '-' . $bln . '-' . $hari;
+    $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
+    $data['tgl'] = Tanggal::tahun($tgl);
+    $data['tgl_cair'] = $thn . '-';
+    if ($data['bulanan']) {
+        $data['sub_judul'] = 'Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+        $data['tgl'] = Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+        $data['tgl_cair'] = $thn . '-' . $bln . '-';
+    }
+
+    $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
+    $data['jenis_pp'] = JenisProdukPinjaman::where(function ($query) use ($kec, $data) {
+        $query->where('lokasi', '0')
+            ->orWhere(function ($query) use ($kec) {
+                $query->where('kecuali', 'NOT LIKE', "%-{$kec['id']}-%")
+                    ->where('lokasi', 'LIKE', "%-{$kec['id']}-%");
+            });
+    })->with([
+        'pinjaman_individu' => function ($query) use ($data) {
+            $tb_pinj_i = 'pinjaman_anggota_' . $data['kec']->id;
+            $tb_angg = 'anggota_' . $data['kec']->id;
+            $data['tb_pinj_i'] = $tb_pinj_i;
+
+            $query->select(
+                $tb_pinj_i . '.*',
+                $tb_angg . '.namadepan',
+                'desa.nama_desa',
+                'desa.kd_desa',
+                'desa.kode_desa',
+                'sebutan_desa.sebutan_desa'
+            )
+                ->join($tb_angg, $tb_angg . '.id', '=', $tb_pinj_i . '.nia')
+                ->join('desa', $tb_angg . '.desa', '=', 'desa.kd_desa')
+                ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
+                ->where($tb_pinj_i . '.sistem_angsuran', '!=', '12')
+                ->where(function ($query) use ($data) {
+                    $query->where($data['tb_pinj_i'] . '.tgl_cair', 'LIKE', $data['tgl_cair'] . '%')
+                        ->where(function ($query) use ($data) {
+                            $query->where([
+                                [$data['tb_pinj_i'] . '.status', 'A'],
+                                [$data['tb_pinj_i'] . '.jenis_pinjaman', 'I']
+                            ])->orwhere([
+                                [$data['tb_pinj_i'] . '.status', 'L'],
+                                [$data['tb_pinj_i'] . '.jenis_pinjaman', 'I']
+                            ])->orwhere([
+                                [$data['tb_pinj_i'] . '.status', 'R'],
+                                [$data['tb_pinj_i'] . '.jenis_pinjaman', 'I']
+                            ])->orwhere([
+                                [$data['tb_pinj_i'] . '.status', 'H'],
+                                [$data['tb_pinj_i'] . '.jenis_pinjaman', 'I']
+                            ]);
+                        });
+                });
+        },
+        'pinjaman_kelompok.sis_pokok'
+    ])->get();
+
+    $data['keuangan'] = $keuangan;
+    $view = view('pelaporan.view.perkembangan_piutang.rencana_realisasi_i', $data)->render();
+
+    if ($data['type'] == 'pdf') {
+        $pdf = PDF::loadHTML($view)->setPaper('A4', 'landscape');
+        return $pdf->stream();
+    } else {
+        return $view;
+    }
+}
 
     private function tagihan_hari_ini(array $data)
     {
