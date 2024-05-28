@@ -5,7 +5,7 @@ $koneksi = mysqli_connect('cpanel.siupk.net', 'siupk_global', 'siupk_global', 's
 $trigger = mysqli_connect('cpanel.siupk.net', 'siupk_global', 'siupk_global', 'siupk_perantara');
 
 $MigrasiLokasi = '';
-if ($_GET['lokasi']) {
+if (isset($_GET['lokasi'])) {
     $MigrasiLokasi = $_GET['lokasi'];
 }
 if (isset($_POST['copy'])) {
