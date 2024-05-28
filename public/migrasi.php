@@ -4,6 +4,10 @@ session_start();
 $koneksi = mysqli_connect('cpanel.siupk.net', 'siupk_global', 'siupk_global', 'siupk_dbm');
 $trigger = mysqli_connect('cpanel.siupk.net', 'siupk_global', 'siupk_global', 'siupk_perantara');
 
+$MigrasiLokasi = '';
+if ($_GET['lokasi']) {
+    $MigrasiLokasi = $_GET['lokasi'];
+}
 if (isset($_POST['copy'])) {
     $lokasi = htmlspecialchars($_POST['lokasi']);
 
@@ -147,7 +151,7 @@ if (isset($_POST['copy'])) {
     ?>
 
     <form action="" method="post">
-        <input type="text" name="lokasi" id="lokasi">
+        <input type="text" name="lokasi" id="lokasi" value="<?= $MigrasiLokasi; ?>">
         <button type="submit" name="copy" id="copy">Copy Tabel</button>
     </form>
 
