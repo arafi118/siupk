@@ -119,7 +119,7 @@
         berkedudukan di {{ $pinkel->kelompok->alamat_kelompok }} {{ $pinkel->kelompok->d->sebutan_desa->sebutan_desa }}
         {{ $pinkel->kelompok->d->nama_desa }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }}, sekaligus mewakili anggota yang 
         memberikan kuasa secara tertulis sebagaimana Surat Kuasa terlampir sebagai bagian yang tidak terpisahkan dari
-        dokumen perjanjian kredit ini, selanjutnya disebut PIHAK KEDUA.
+        dokumen perjanjian kredit ini, yang selanjutnya disebut PIHAK KEDUA.
     </div>
 
     <p style="text-align: justify;">
