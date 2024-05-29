@@ -157,11 +157,11 @@
             'file' => 'iptw',
             'withExcel' => false,
         ],
-        // [
-        //     'title' => 'Peserta Asuransi',
-        //     'file' => 'pesertaAsuransi',
-        //     'withExcel' => false,
-        // ],
+         [
+             'title' => 'Peserta Asuransi',
+             'file' => 'Asuransi',
+             'withExcel' => false,
+         ],
         [
             'title' => 'Tanggung Renteng Kematian',
             'file' => 'tanggungRentengKematian',

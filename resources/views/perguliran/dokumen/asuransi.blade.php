@@ -5,14 +5,22 @@
 @extends('perguliran.dokumen.layout.base')
 
 @section('content')
+@if(empty($kec->nama_asuransi_p))
+    <b>tidak ada asuransi</b>
+@else
+
+@php
+    $besar_premi = $kec->besar_premi ?? 1;
+@endphp
+
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
         <tr>
             <td colspan="3" align="center">
                 <div style="font-size: 18px;">
-                    <b>DAFTAR PESERTA ASURANSI</b>
+                    <b>DAFTAR PESERTA ASURANSI {{ $kec->nama_asuransi_p }}</b>
                 </div>
                 <div style="font-size: 16px;">
-                    <b>PINJAMAN KELOMPOK {{ $pinkel->jpp->nama_jpp }}</b>
+                    <b>PLAN ASURANSI CICILAN BULANAN</b>
                 </div>
             </td>
         </tr>
@@ -56,44 +64,89 @@
     </table>
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px; table-layout: fixed;">
         <tr style="background: rgb(232, 232, 232)">
-            <th class="t l b" width="3%" height="15">No</th>
-            <th class="t l b" width="18%">Nik</th>
-            <th class="t l b" width="22%">Nama Anggota</th>
-            <th class="t l b" width="3%">JK</th>
-            <th class="t l b" width="26%">Alamat</th>
-            <th class="t l b" width="14%">Pengajuan</th>
-            <th class="t l b r" width="14%">Ttd</th>
+            <th class="t l b" width="3%" rowspan="2" height="15">No</th>
+            <th class="t l b" width="10%" rowspan="2">          Nama Anggota</th>
+            <th class="t l b" width="11%" rowspan="2">          TTL</th>
+            <th class="t l b" width="10%" rowspan="2">          Nama Penjamin</th>
+            <th class="t l b" width="6%" rowspan="2">           Masa Pinj.</th>
+            <th class="t l b" colspan="2">                      Pinjaman</th>
+            <th class="t l b" width="10%" rowspan="2">          Jumlah</th>
+            <th class="t l b" width="10%" rowspan="2">          Premi <br> ({{ $besar_premi }} %)</th>
+            <th class="t l b" width="10%" rowspan="2">          Keterangan</th>
+            <th class="t l b r" width="10%" rowspan="2">        TTD</th>
+        </tr>
+        <tr style="background: rgb(232, 232, 232)">
+            <th class="l b" width="10%">          Pokok</th>
+            <th class="l b" width="10%">          Jasa</th>
         </tr>
 
         @php
             $alokasi = 0;
+            $jasa = 0;
+            $jumlah = 0;
+            $premi = 0;
         @endphp
         @foreach ($pinkel->pinjaman_anggota as $pa)
             @php
                 $no = $loop->iteration;
+                $alo =  $pa->alokasi ;
+                $js = $pa->alokasi*($pa->pros_jasa/$pa->jangka)/100;
+                $juml =  $alo+$js ;
+                $prm =  $juml*$besar_premi/100 ;
+
+                $usia = \Carbon\Carbon::parse($pa->anggota->tgl_lahir)->age;
+                        
+                    if ($usia > $kec->usia_mak) {
+                        $row_keterangan = "Tidak dapat";
+                    } else {
+                        $row_keterangan = "Dapat";
+                    }
             @endphp
             <tr>
                 <td class="t l b" height="15" align="center">{{ $no }}</td>
-                <td class="t l b">{{ $pa->anggota->nik }}</td>
                 <td class="t l b">{{ $pa->anggota->namadepan }}</td>
-                <td class="t l b" align="center">{{ $pa->anggota->jk }}</td>
-                <td class="t l b">{{ $pa->anggota->alamat }}</td>
-                <td class="t l b" align="right">{{ number_format($pa->alokasi) }}</td>
+                <td class="t l b" align="center">{{ $pa->anggota->tempat_lahir }} <br> {{ $pa->anggota->tgl_lahir }}</td>
+                <td class="t l b">{{ $pa->anggota->penjamin }}</td>
+                <td class="t l b" align="center">{{ $pa->jangka }}</td>
+                <td class="t l b" align="right">{{ number_format($alo) }}</td>
+                <td class="t l b" align="right">{{ number_format($js) }}</td>
+                <td class="t l b" align="right">{{ number_format($juml) }}</td>
+                <td class="t l b" align="right">{{ number_format($prm) }}</td>
+                <td class="t l b">{{ $row_keterangan }}</td>
                 <td class="t l b r">{{ $no }}.</td>
             </tr>
             @php
-                $alokasi += $pa->alokasi;
+                $alokasi += $alo;
+                $jasa += $js;
+                $jumlah += $juml;
+                $premi += $prm;
             @endphp
         @endforeach
+            <tr>
+                <td class="t l b" height="15" align="center"></td>
+                <td class="t l b"></td>
+                <td class="t l b"></td>
+                <td class="t l b"></td>
+                <td class="t l b"></td>
+                <td class="t l b"></td>
+                <td class="t l b"></td>
+                <td class="t l b"></td>
+                <td class="t l b"></td>
+                <td class="t l b"></td>
+                <td class="t l b r"></td>
+            </tr>
 
         <tr>
-            <td colspan="7" style="padding: 0px !important;">
+            <td colspan="11" style="padding: 0px !important;">
                 <table class="p" border="0" width="100%" cellspacing="0" cellpadding="0"
                     style="font-size: 11px; table-layout: fixed;">
                     <tr style="font-weight: bold;">
-                        <td class="t l b" height="15" width="72%" align="center">JUMLAH</td>
-                        <td class="t l b" align="right" width="14%">{{ number_format($alokasi) }}</td>
-                        <td class="t l b r" width="14%">&nbsp;</td>
+                        <td class=" l b" height="15" width="40%" align="center">JUMLAH</td>
+                        <td class=" l b" align="right" width="10%">{{ number_format($alokasi) }}</td>
+                        <td class=" l b" align="right" width="10%">{{ number_format($jasa) }}</td>
+                        <td class=" l b" align="right" width="10%">{{ number_format($jumlah) }}</td>
+                        <td class=" l b" align="right" width="10%">{{ number_format($premi) }}</td>
+                        <td class=" l b r" width="20%">&nbsp;</td>
                     </tr>
                 </table>
 
@@ -136,4 +189,5 @@
             </td>
         </tr>
     </table>
+@endif
 @endsection
