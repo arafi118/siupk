@@ -2019,10 +2019,6 @@ class TransaksiController extends Controller
     public function struk($id)
     {
         $data['real'] = RealAngsuran::where('id', $id)->with('trx', 'trx.user')->firstOrFail();
-        // $data['ra'] = RencanaAngsuran::where([
-        //     ['loan_id', $data['real']->loan_id],
-        //     ['target_pokok', '>=', $data['real']->sum_pokok]
-        // ])->orderBy('jatuh_tempo', 'ASC')->first();
         $data['ra'] = RencanaAngsuran::where([
             ['loan_id', $data['real']->loan_id]
         ])->orderBy('jatuh_tempo', 'DESC')->first();
@@ -2037,6 +2033,7 @@ class TransaksiController extends Controller
             'jpp',
             'sis_pokok'
         ])->first();
+
         $data['user'] = User::where('id', $data['real']->id_user)->first();
         $data['kec'] = Kecamatan::where('id', Session::get('lokasi'))->with('kabupaten')->first();
         $data['keuangan'] = new Keuangan;
@@ -2071,10 +2068,6 @@ class TransaksiController extends Controller
     public function strukMatrix($id)
     {
         $data['real'] = RealAngsuran::where('id', $id)->with('trx', 'trx.user')->firstOrFail();
-        // $data['ra'] = RencanaAngsuran::where([
-        //     ['loan_id', $data['real']->loan_id],
-        //     ['target_pokok', '>=', $data['real']->sum_pokok]
-        // ])->orderBy('jatuh_tempo', 'ASC')->first();
         $data['ra'] = RencanaAngsuran::where([
             ['loan_id', $data['real']->loan_id]
         ])->orderBy('jatuh_tempo', 'DESC')->first();
