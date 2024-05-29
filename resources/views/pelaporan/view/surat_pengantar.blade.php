@@ -3,23 +3,9 @@
 @section('content')
     <table border="0">
         <tr>
-            <td width="5%">Nomor</td>
-            <td width="50%">: ______________________</td>
-            <td width="45%" align="right">{{ $kec->nama_kec }}, {{ $tgl }}</td>
-        </tr>
-        <tr>
-            <td>Lampiran</td>
-            <td>: 1 Bendel</td>
-        </tr>
-        <tr>
-            <td>Perihal</td>
-            <td>: Laporan Keuangan</td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td style="padding-left: 8px;">
-                &nbsp; <u>Sampai Dengan {{ $sub_judul }}</u>
-            </td>
+            <td width="5%">Nomor<br>Lampiran<br> Perihal</td>
+            <td width="20%">: &nbsp; <br> : 1 Bendel <br> : Laporan Keuangan</td>
+            <td width="45%" align="right">{{ $kec->nama_kec }}, {{ $tgl }} <br> &nbsp;<br> &nbsp;</td>
         </tr>
         <tr>
             <td colspan="3" height="15"></td>
@@ -27,10 +13,13 @@
         <tr>
             <td>&nbsp;</td>
             <td colspan="2" align="left" style="padding-left: 8px;">
-                <div><b>Kepada Yth.</b></div>
+                <div>Kepada Yth.</div>
                 <div><b>Kepala Dinas PMD {{ $nama_kabupaten }}</b></div>
-                <div><b>Di {{ $kab->alamat_kab }}.</b></div>
+                <div>Di {{ $kab->alamat_kab }}.</div>
             </td>
+        </tr>
+        <tr>
+            <td colspan="3" height="15"></td>
         </tr>
         <tr>
             <td colspan="3" height="15"></td>
@@ -59,9 +48,10 @@
             <td colspan="3" height="15"></td>
         </tr>
         <tr>
-            <td colspan="2"></td>
-            <td align="center">
-                <div>{{ $nama_lembaga }} {{ $kec->nama_kec }}</div>
+            <td width="5%">&nbsp; </td>
+            <td width="20%"> &nbsp;</td>
+            <td width="50%" align="center">
+                <div>{{ $nama_lembaga }} </div>
                 <div>{{ $kec->ttd_mengetahui_lap == '2' ? 'Direktur' : $kec->sebutan_level_1 }},</div>
                 <br>
                 <br>
