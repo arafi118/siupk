@@ -41,7 +41,9 @@
 
         $no_kuitansi .= $trx->idt . '/';
 
-        $nama_user = $trx->user->namadepan . ' ' . $trx->user->namabelakang;
+        if ($trx->user) {
+            $nama_user = $trx->user->namadepan . ' ' . $trx->user->namabelakang;
+        }
     @endphp
 @endforeach
 
