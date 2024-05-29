@@ -1915,6 +1915,7 @@ class TransaksiController extends Controller
 
         if ($angsuran) {
             $this->regenerateReal($pinkel);
+            $this->regenerateReali($pinkel);
         }
 
         return response()->json([
@@ -1960,6 +1961,7 @@ class TransaksiController extends Controller
             }
 
             $this->regenerateReal($pinkel);
+            $this->regenerateReali($pinkel);
         } else {
             if ($id_pinj != '0') {
                 $pinkel = PinjamanKelompok::where('id', $id_pinj)->update([
@@ -2720,4 +2722,117 @@ class TransaksiController extends Controller
             'success' => true
         ]);
     }
+
+    
+    public function regenerateReali($pinj_i)
+    {
+        $keuangan = new Keuangan;
+        if (!$pinj_i) {
+            return response()->json([
+                'success' => false,
+                'msg' => 'Error'
+            ]);
+        }
+
+        $id_pinkel = $pinj_i->id;
+        $transaksi = Transaksi::select(
+            'idtp',
+            'tgl_transaksi'
+        )->where([
+            ['id_pinj_i', $pinj_i->id],
+            ['idtp', '!=', '0']
+        ])->with([
+            'tr_idtp'
+        ])->groupBy('idtp', 'tgl_transaksi')->orderBy('tgl_transaksi', 'ASC')->orderBy('idtp', 'ASC')->get();
+
+        $alokasi_pokok = intval($pinj_i->alokasi);
+        $alokasi_jasa = intval($pinj_i->alokasi * ($pinj_i->pros_jasa / 100));
+
+        $poko_kredit = '1.1.03.';
+        $jasa_kredit = '4.1.01.';
+
+        $sum_pokok = 0;
+        $sum_jasa = 0;
+
+        // dd($transaksi);
+        RealAngsuranI::where('loan_id', $pinj_i->id)->delete();
+        foreach ($transaksi as $trx) {
+            $tgl_transaksi = $trx->tgl_transaksi;
+
+            $insert[$trx->idtp] = [
+                'id' => $trx->idtp,
+                'loan_id' => $pinj_i->id,
+                'tgl_transaksi' => $tgl_transaksi,
+                'realisasi_pokok' => 0,
+                'realisasi_jasa' => 0,
+                'sum_pokok' => $sum_pokok,
+                'sum_jasa' => $sum_jasa,
+                'saldo_pokok' => $alokasi_pokok - $sum_pokok,
+                'saldo_jasa' => $alokasi_jasa - $sum_jasa,
+                'tunggakan_pokok' => 0,
+                'tunggakan_jasa' => 0,
+                'lu' => date('Y-m-d H:i:s'),
+                'id_user' => auth()->user()->id,
+            ];
+
+            if (count($trx->tr_idtp) > 0) {
+                $ra = RencanaAngsuranI::where([
+                    ['loan_id', $id_pinkel],
+                    ['jatuh_tempo', '<=', $tgl_transaksi],
+                    ['angsuran_ke', '!=', '0']
+                ])->orderBy('jatuh_tempo', 'DESC');
+
+                if ($ra->count() > 0) {
+                    $ra = $ra->first();
+                } else {
+                    $ra->target_pokok = 0;
+                    $ra->target_jasa = 0;
+                }
+
+                foreach ($trx->tr_idtp as $tr) {
+                    if (Keuangan::startWith($trx['rekening_kredit'], $poko_kredit)) {
+                        $sum_pokok += intval($tr->jumlah);
+
+                        $tunggakan_pokok = $ra->target_pokok - $sum_pokok;
+                        if ($tunggakan_pokok <= 0) $tunggakan_pokok = 0;
+
+                        $insert[$trx->idtp]['realisasi_pokok'] = $tr->jumlah;
+                        $insert[$trx->idtp]['sum_pokok'] = $sum_pokok;
+                        $insert[$trx->idtp]['saldo_pokok'] = $alokasi_pokok - $sum_pokok;
+                        $insert[$trx->idtp]['tunggakan_pokok'] = $tunggakan_pokok;
+                    }
+
+                    if (Keuangan::startWith($trx['rekening_kredit'], $jasa_kredit)) {
+                        $sum_jasa += intval($tr->jumlah);
+
+                        $tunggakan_jasa = $ra->target_jasa - $sum_jasa;
+                        if ($tunggakan_jasa <= 0) $tunggakan_jasa = 0;
+
+                        $insert[$trx->idtp]['realisasi_jasa'] = $tr->jumlah;
+                        $insert[$trx->idtp]['sum_jasa'] = $sum_jasa;
+                        $insert[$trx->idtp]['saldo_jasa'] = $alokasi_jasa - $sum_jasa;
+                        $insert[$trx->idtp]['tunggakan_jasa'] = $tunggakan_jasa;
+                    }
+                }
+            }
+        }
+        RealAngsuranI::insert($insert);
+
+        return response()->json([
+            'success' => true
+        ]);
+    }
+
+    public function realisasii($id_pinj_i)
+    {
+        $pinj_i = PinjamanIndividu::where('id', $id_pinj_i)->first();
+        $this->regenerateReali($pinj_i);
+
+        return response()->json([
+            'success' => true
+        ]);
+    }
+
+
+
 }

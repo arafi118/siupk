@@ -27,7 +27,7 @@ public function index()
 
     // Handle URL lokal
  if (request()->server('SERVER_NAME') === '127.0.0.1' || request()->server('SERVER_NAME') === 'localhost') {
-        $kec = Kecamatan::where('id', '68')
+        $kec = Kecamatan::where('id', '1')
                            ->with('kabupaten')
                            ->first();
     } else {
@@ -72,7 +72,7 @@ public function index()
         }
 
  if (request()->server('SERVER_NAME') === '127.0.0.1' || request()->server('SERVER_NAME') === 'localhost') {
-    $kec = Kecamatan::where('id', '68')
+    $kec = Kecamatan::where('id', '1')
                    ->with('kabupaten')
                    ->first();
 } else {
@@ -154,7 +154,7 @@ public function index()
         $password = $uname;
 
         if (request()->server('SERVER_NAME') === '127.0.0.1' || request()->server('SERVER_NAME') === 'localhost') {
-            $kec = Kecamatan::where('id', '68')
+            $kec = Kecamatan::where('id', '1')
                            ->first();
         } else {
             $kec = Kecamatan::where('web_kec', $url)
