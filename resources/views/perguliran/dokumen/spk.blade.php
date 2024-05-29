@@ -1,7 +1,10 @@
 @php
     use App\Utils\Tanggal;
+    use Carbon\Carbon;
+    Carbon::setLocale('id');
+
     $waktu = date('H:i');
-    // $tempat = {{ $pinkel->kelompok->wt_cair }};
+    $tempat = 'Kantor UPK';
 
     $wt_cair = explode('_', $pinkel->wt_cair);
     if (count($wt_cair) == 1) {
@@ -10,7 +13,7 @@
 
     if (count($wt_cair) == 2) {
         $waktu = $wt_cair[0];
-        $tempat = $wt_cair[1];
+        $tempat = $wt_cair[1] ?? ' . . . . . . . ';
     }
 
     $redaksi_spk = str_replace('<ol>', '', str_replace('</ol>', '', $kec->redaksi_spk));
@@ -114,9 +117,9 @@
     <div style="text-align: justify;">
         Bertindak untuk dan atas nama kelompok {{ $pinkel->jpp->nama_jpp }} {{ $pinkel->kelompok->nama_kelompok }} yang
         berkedudukan di {{ $pinkel->kelompok->alamat_kelompok }} {{ $pinkel->kelompok->d->sebutan_desa->sebutan_desa }}
-        {{ $pinkel->kelompok->d->nama_desa }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }}, dan beserta anggota yang
+        {{ $pinkel->kelompok->d->nama_desa }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }}, sekaligus mewakili anggota yang 
         memberikan kuasa secara tertulis sebagaimana Surat Kuasa terlampir sebagai bagian yang tidak terpisahkan dari
-        dokumen perjanjian kredit ini, selanjutnya disebut PIHAK KEDUA.
+        dokumen perjanjian kredit ini, yang selanjutnya disebut PIHAK KEDUA.
     </div>
 
     <p style="text-align: justify;">

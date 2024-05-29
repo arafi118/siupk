@@ -4,7 +4,7 @@
     Carbon::setLocale('id');
 
     $waktu = date('H:i');
-    $tempat = 'Kantor DBM';
+    $tempat = 'Kantor UPK';
 
     $wt_cair = explode('_', $pinkel->wt_cair);
     if (count($wt_cair) == 1) {
@@ -13,7 +13,7 @@
 
     if (count($wt_cair) == 2) {
         $waktu = $wt_cair[0];
-        $tempat = $wt_cair[1];
+        $tempat = $wt_cair[1] ?? ' . . . . . . . ';
     }
 
     $redaksi_spk = str_replace('<ol>', '', str_replace('</ol>', '', $kec->redaksi_spk));
@@ -168,7 +168,7 @@
             <b>Pihak Kedua</b> wajib membayar hutang tersebut kepada <b>Pihak Pertama</b> dengan cara pembayaran angsuran
             sebesar
             <b>{{ number_format($pinkel->alokasi) }} ({{ $keuangan->terbilang($pinkel->alokasi) }} Rupiah)</b> ditambah
-            jasa <b> {{ $pinkel->pros_jasa / $pinkel->jangka }} % Flat</b> sebesar <b>Rp.75,000,- (Tujuh Puluh Lima Ribu Rupiah)</b> setiap bulan, selama 6 bulan,
+            jasa <b> {{ $pinkel->pros_jasa / $pinkel->jangka }} % Flat</b> sebesar <b>{{ number_format($pinkel->alokasi*( $pinkel->pros_jasa / $pinkel->jangka/100 )) }} ({{ $keuangan->terbilang($pinkel->alokasi*( $pinkel->pros_jasa / $pinkel->jangka/100 )) }} Rupiah)</b> setiap bulan, selama 6 bulan,
             yang dimulai pada {{ Tanggal::namaHari($pinkel->tgl_cair) }},
             {{ \Carbon\Carbon::parse($pinkel->anggota->tgl_cair)->translatedFormat('d F Y') }} dan
             sampai target pelunasan, sebagaimana jadwal angsuran terlampir.

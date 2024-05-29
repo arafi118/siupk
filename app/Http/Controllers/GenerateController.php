@@ -200,11 +200,13 @@ class GenerateController extends Controller
             $tgl_angsur = $tgl_cair;
             $tanggal_cair = date('d', strtotime($tgl_cair));
 
-            if ($desa->jadwal_angsuran_desa > 0) {
-                $angsuran_desa = $desa->jadwal_angsuran_desa;
-                if ($angsuran_desa > 0) {
-                    $tgl_pinjaman = date('Y-m', strtotime($tgl_cair));
-                    $tgl_cair = $tgl_pinjaman . '-' . $angsuran_desa;
+            if ($desa) {
+                if ($desa->jadwal_angsuran_desa > 0) {
+                    $angsuran_desa = $desa->jadwal_angsuran_desa;
+                    if ($angsuran_desa > 0) {
+                        $tgl_pinjaman = date('Y-m', strtotime($tgl_cair));
+                        $tgl_cair = $tgl_pinjaman . '-' . $angsuran_desa;
+                    }
                 }
             }
 
@@ -403,13 +405,13 @@ class GenerateController extends Controller
 
                 foreach ($trx->tr_idtp as $idtp) {
                     if (Keuangan::startWith($idtp->rekening_kredit, $poko_kredit)) {
-                        $realisasi_pokok = $idtp->jumlah;
+                        $realisasi_pokok = intval($idtp->jumlah);
                         $sum_pokok += $realisasi_pokok;
                         $alokasi_pokok -= $realisasi_pokok;
                     }
 
                     if (Keuangan::startWith($idtp->rekening_kredit, $jasa_kredit)) {
-                        $realisasi_jasa = $idtp->jumlah;
+                        $realisasi_jasa = intval($idtp->jumlah);
                         $sum_jasa += $realisasi_jasa;
                         $alokasi_jasa -= $realisasi_jasa;
                     }
