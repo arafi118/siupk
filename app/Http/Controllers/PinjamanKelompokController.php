@@ -1685,6 +1685,54 @@ class PinjamanKelompokController extends Controller
             return $view;
         }
     }
+    
+
+    public function spk_anggota($id, $data)
+    {
+        $keuangan = new Keuangan;
+        $data['pinkel'] = PinjamanAnggota::where('id_pinkel', $id)->with([
+            'jpp',
+            'jasa',
+            'sis_pokok',
+            'sis_jasa',
+            'kelompok',
+            'pinkel',
+            'anggota',
+            'anggota.d',
+            'anggota.d.sebutan_desa',
+        ])->get();
+
+        $data['dir'] = User::where([
+            ['level', '1'],
+            ['jabatan', '1'],
+            ['lokasi', Session::get('lokasi')]
+        ])->first();
+
+        $data['bend'] = User::where([
+            ['level', '1'],
+            ['jabatan', '3'],
+            ['lokasi', Session::get('lokasi')]
+        ])->first();
+
+        $data['bp'] = User::where([
+            ['level', '3'],
+            ['jabatan', '1'],
+            ['lokasi', Session::get('lokasi')]
+        ])->first();
+
+        $data['keuangan'] = $keuangan;
+        $data['ttd'] = Pinjaman::keyword($data['kec']->ttd->tanda_tangan_spk, $data);
+
+        $data['judul'] = 'Surat Perjanjian Kredit Loan ID. ' . $id;
+        $view = view('perguliran.dokumen.spk_anggota', $data)->render();
+
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view);
+            return $pdf->stream();
+        } else {
+            return $view;
+        }
+    }
 
     public function suratKelayakan($id, $data)
     {
@@ -2087,6 +2135,7 @@ class PinjamanKelompokController extends Controller
             return $view;
         }
     }
+
 
     public function kuitansiAnggota($id, $data)
     {

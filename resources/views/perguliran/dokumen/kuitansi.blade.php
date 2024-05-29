@@ -2,7 +2,7 @@
     use App\Utils\Tanggal;
 
     $waktu = date('H:i');
-    $tempat = 'Kantor DBM';
+    $tempat = 'Kantor UPK';
 
     $wt_cair = explode('_', $pinkel->wt_cair);
     if (count($wt_cair) == 1) {

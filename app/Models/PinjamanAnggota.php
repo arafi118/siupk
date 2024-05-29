@@ -24,6 +24,17 @@ class PinjamanAnggota extends Model
         return $this->belongsTo(StatusPinjaman::class, 'status', 'kd_status');
     }
 
+    public function jpp()
+    {
+        return $this->belongsTo(JenisProdukPinjaman::class, 'jenis_pp', 'id');
+    }
+
+    public function jasa()
+    {
+        return $this->belongsTo(JenisJasa::class, 'jenis_jasa');
+    }
+
+
     public function sis_pokok()
     {
         return $this->belongsTo(SistemAngsuran::class, 'sistem_angsuran');
