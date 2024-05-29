@@ -15,7 +15,10 @@ class PBController extends Controller
 {
     public function index()
     {
-        $kec = Kecamatan::where('id', 1)->first();
+        $kec = Kecamatan::where('web_kec', explode('//', URL::to('/'))[1])
+            ->orWhere('web_alternatif', explode('//', URL::to('/'))[1])
+            ->first();
+
         Session::put('lokasi', $kec->id);
 
         $logo = '/assets/img/icon/favicon.png';
@@ -35,34 +38,41 @@ class PBController extends Controller
         $fromPinjaman = $request->input('from_pinjaman');
         $toPinjaman = $request->input('to_pinjaman');
 
-        Transaksi::where('rekening_debit', from_kas)->update([
-            'rekening_debit' => to_kas
+        Transaksi::where('rekening_debit', $fromKas)->update([
+            'rekening_debit' => $toKas
             ]);
-        Transaksi::where('rekening_kredit', from_kas)->update([
-            'rekening_debit' => to_kas
+        Transaksi::where('rekening_kredit', $fromKas)->update([
+            'rekening_kredit' => $toKas
             ]);
+
         Transaksi::where('rekening_debit', $fromPinjaman)->update([
             'rekening_debit' => $toPinjaman
             ]);
         Transaksi::where('rekening_kredit', $fromPinjaman)->update([
-            'rekening_debit' => $toPinjaman
+            'rekening_kredit' => $toPinjaman
             ]);
-            
-        $lev4 = substr($toPinjaman, -2);
-        $lev4 = (int) $lev4;
-        Rekening::where('kode_akun', $toKas)->delete();
-        Rekening::where('kode_akun', $fromPinjaman)->update([
-            'rekening_debit' => $toPinjaman,
-            'lev4' => $lev4
-            ]);
+
+        if ($fromKas !== $toKas) {
+            Rekening::where('kode_akun', $toKas)->delete();
+            $lev4 = substr($toKas, -2);
+            $lev4 = (int) $lev4;
+            Rekening::where('kode_akun', $fromKas)->update([
+                'kode_akun' => $toKas,
+                'lev4' => $lev4
+                ]);
+            }
+
+        if ($fromPinjaman !== $toPinjaman) {
+            Rekening::where('kode_akun', $toPinjaman)->delete();
+            $lev4 = substr($toPinjaman, -2);
+            $lev4 = (int) $lev4;
+            Rekening::where('kode_akun', $fromPinjaman)->update([
+                'kode_akun' => $toPinjaman,
+                'lev4' => $lev4
+                ]);
+            }
+
                 
-        $lev4 = substr($toKas, -2);
-        $lev4 = (int) $lev4;
-        Rekening::where('kode_akun', $toPinjaman)->delete();
-        Rekening::where('kode_akun', $fromPinjaman)->update([
-            'rekening_debit' => $toKas,
-            'lev4' => $lev4
-            ]);
 
         return redirect()->route('pindah_buku.index')->with('success', 'Sukses memindahkan buku.');
     }
