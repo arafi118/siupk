@@ -6,7 +6,7 @@
 
 @section('content')
 @if(empty($kec->nama_asuransi_p))
-    <b>tidak ada asuransi</b>
+    <b>Anda tidak mempunyai layanan asuransi, untuk mengatur layanan asurasi, silakan menuju pengaturan > Personalisasi SOP > pengaturan asuransi</b>
 @else
 
 @php
