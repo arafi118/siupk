@@ -30,8 +30,8 @@
             <div class="break">&nbsp;</div>
         @endif
         <div style="text-align: center; font-size: 18px; margin-bottom: 12px; text-transform: uppercase;">
-            <div>Bukti Transaksi</div>
-            <div>Pinjaman Angota</div>
+            <div>Bukti Transaksi </div>
+            <div>Pinjaman Angota </div>
         </div>
 
         <div style="padding: 60px; padding-top: 0px; border: 1px solid #000; height: 82%;">
