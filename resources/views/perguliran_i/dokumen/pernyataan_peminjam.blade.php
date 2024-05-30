@@ -36,7 +36,7 @@
             <td>Tempat, Tangal lahir</td>
             <td align="right">:</td>
             <td>{{ $pinkel->anggota->tempat_lahir }}
-                {{ Tanggal::tglLatin($pinkel->anggota->tgl_lahir) }}
+            {{ Tanggal::tglLatin($pinkel->anggota->tgl_lahir) }} 
             </td>
         </tr>
         <tr>
@@ -47,12 +47,12 @@
         <tr>
             <td>Alamat</td>
             <td align="right">:</td>
-            <td>{{ $pinkel->anggota->d->nama_desa }}</td>
+            <td>{{ $pinkel->anggota->d->nama_desa}}</td>
         </tr>
         <tr>
             <td>Jenis Usaha</td>
             <td align="right">:</td>
-            <td>{{ $pinkel->anggota->u->nama_usaha }}</td>
+            <td>{{$pinkel->anggota->u->nama_usaha}}</td>
         </tr>
         <tr>
             <td width="100" colspan="3">
@@ -62,9 +62,8 @@
 
                 <ol>
                     <li>
-                        Saya selaku Pemanfaat pinjaman individu pada Kecamatan {{ $kec->nama_kec }}
-                        melalui {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }} {{ $pinkel->anggota->d->nama_desa }},
-                        Kecamatan {{ $kec->nama_kec }}
+                    Saya selaku Pemanfaat pinjaman individu pada Kecamatan {{ $kec->nama_kec }}
+                        melalui  {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }} {{ $pinkel->anggota->d->nama_desa }}, Kecamatan {{ $kec->nama_kec }}
                         {{ $nama_kabupaten }}, benar-benar telah meminjam uang sebesar Rp. _____________________,
                         dengan jaminan berupa barang sebagai berikut :
                         <ul style="list-style: disc;">
@@ -121,8 +120,7 @@
                 </ol>
 
                 <div>
-                    Demikian surat pernyataan ini saya buat dengan sebenarnya dan dengan penuh kesadaran serta rasa tanggung
-                    jawab.
+                Demikian surat pernyataan ini saya buat dengan sebenarnya dan dengan penuh kesadaran serta rasa tanggung jawab.
 
 
                 </div>
@@ -148,7 +146,7 @@
         </tr>
         <tr>
             <td align="center">
-                <b>____________________</b>
+                 <b>____________________</b>
             </td>
             <td align="center">
                 <b>____________________</b>

@@ -11,6 +11,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DesaController;
 use App\Http\Controllers\GenerateController;
+use App\Http\Controllers\PBController;
 use App\Http\Controllers\Kabupaten\AuthController as KabupatenAuthController;
 use App\Http\Controllers\Kabupaten\KabupatenController;
 use App\Http\Controllers\KelompokController;
@@ -281,6 +282,9 @@ Route::get('/download/{file}', function ($file) {
 
 Route::get('/unpaid', [DashboardController::class, 'unpaid'])->middleware('auth');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
+
+Route::get('/pindah-buku', [PBController::class, 'index'])->name('pindah_buku.index');
+Route::post('/pindah-buku', [PBController::class, 'pindahBuku'])->name('pindah_buku.pindahBuku');
 
 Route::get('/generate', [GenerateController::class, 'index']);
 Route::get('/generate/individu', [GenerateController::class, 'individu']);
