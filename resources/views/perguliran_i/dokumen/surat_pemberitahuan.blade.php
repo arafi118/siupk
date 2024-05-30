@@ -194,6 +194,7 @@
                 {{ $kec->nama_kec }}, {{ Tanggal::tglLatin($pinkel->tgl_cair) }}
             </td>
         </tr>
+
         <tr>
             <td align="center">
                 Direktur

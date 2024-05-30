@@ -140,7 +140,7 @@
             <td colspan="2" height="40">&nbsp;</td>
         </tr>
         <tr>
-            <td>&nbsp;</td>
+            <td>&nbsp; </td>
             <td align="center">{{ $dir->namadepan }} {{ $dir->namabelakang }}</td>
         </tr>
     </table>
