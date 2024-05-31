@@ -2008,7 +2008,7 @@ class TransaksiController extends Controller
             'real_i',
             'real_i.trx' => function ($query) use ($id) {
                 $query->where('id_pinj_i', $id);
-            },,
+            },
             'anggota'
         ])->first();
 
