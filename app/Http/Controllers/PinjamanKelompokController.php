@@ -1690,7 +1690,7 @@ class PinjamanKelompokController extends Controller
     public function spk_anggota($id, $data)
     {
         $keuangan = new Keuangan;
-        $data['pinkel'] = PinjamanAnggota::where('id_pinkel', $id)->with([
+        $data['pinjaman'] = PinjamanAnggota::where('id_pinkel', $id)->with([
             'jpp',
             'jasa',
             'sis_pokok',
@@ -1721,7 +1721,6 @@ class PinjamanKelompokController extends Controller
         ])->first();
 
         $data['keuangan'] = $keuangan;
-        $data['ttd'] = Pinjaman::keyword($data['kec']->ttd->tanda_tangan_spk, $data);
 
         $data['judul'] = 'Surat Perjanjian Kredit Loan ID. ' . $id;
         $view = view('perguliran.dokumen.spk_anggota', $data)->render();
