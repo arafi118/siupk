@@ -108,11 +108,6 @@
             'withExcel' => false,
         ],
         [
-            'title' => 'SPK Anggota',
-            'file' => 'spk_anggota',
-            'withExcel' => false,
-        ],
-        [
             'title' => 'Surat Kelayakan',
             'file' => 'suratKelayakan',
             'withExcel' => false,
