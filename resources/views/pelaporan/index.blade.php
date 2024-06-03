@@ -71,67 +71,49 @@
                         </div>
                     </div>
                     <div class="row">
-                    <div id="namaLaporan" class="col-md-6">
-                        <div class="my-2">
-                            <label class="form-label" for="laporan">Nama Laporan</label>
-                            <select class="form-control" name="laporan" id="laporan">
-                                <option value="">---</option>
-                                @foreach ($laporan as $lap)
-                                    <option value="{{ $lap->file }}">
-                                        {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}.
-                                        {{ $lap->nama_laporan }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <small class="text-danger" id="msg_laporan"></small>
+                        <div id="namaLaporan" class="col-md-6">
+                            <div class="my-2">
+                                <label class="form-label" for="laporan">Nama Laporan</label>
+                                <select class="form-control" name="laporan" id="laporan">
+                                    <option value="">---</option>
+                                    @foreach ($laporan as $lap)
+                                        <option value="{{ $lap->file }}">
+                                            {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}.
+                                            {{ $lap->nama_laporan }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <small class="text-danger" id="msg_laporan"></small>
+                            </div>
+                        </div>
+                        <div id="subLaporan" class="col-md-6">
+                            <div class="my-2">
+                                <label class="form-label" for="sub_laporan">Nama Sub Laporan</label>
+                                <select class="form-control" name="sub_laporan" id="sub_laporan">
+                                    <option value="">---</option>
+                                </select>
+                                <small class="text-danger" id="msg_sub_laporan"></small>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6" id="subLaporan">
-                        <div class="my-2">
-                            <label class="form-label" for="sub_laporan">Nama Sub Laporan</label>
-                            <select class="form-control" name="sub_laporan" id="sub_laporan">
-                                <option value="">---</option>
-                            </select>
-                            <small class="text-danger" id="msg_sub_laporan"></small>
-                        </div>
-                    </div>
-                </div>
                     <input type="hidden" name="type" id="type" value="pdf">
 
                     <br>
                     <button type="button" id="SimpanSaldo" class="btn btn-sm btn-danger me-2">Simpan Saldo</button>
-                <button type="button" id="Excel" class="btn btn-sm btn-success me-2">Excel</button>
-                <button type="button" id="Preview" class="btn btn-sm btn-github">Preview</button>
+                    <button type="button" id="Excel" class="btn btn-sm btn-success me-2">Excel</button>
+                    <button type="button" id="Preview" class="btn btn-sm btn-dark">Preview</button>
 
                     <br><br>
                 </form>
-
-                <script>
-                    // Example starter JavaScript for disabling form submissions if there are invalid fields
-                    (function() {
-                        'use strict';
-                        window.addEventListener('load', function() {
-                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                            var forms = document.getElementsByClassName('needs-validation');
-                            // Loop over them and prevent submission
-                            var validation = Array.prototype.filter.call(forms, function(form) {
-                                form.addEventListener('submit', function(event) {
-                                    if (form.checkValidity() === false) {
-                                        event.preventDefault();
-                                        event.stopPropagation();
-                                    }
-                                    form.classList.add('was-validated');
-                                }, false);
-                            });
-                        }, false);
-                    })();
-                </script>
             </div>
         </div>
 
         <div class="main-card mb-3 card">
             <div class="card-body">
-                <br><br><br>
+                <br>
+                <div class="card-body p-2" id="LayoutPreview">
+                    <div class="p-2"></div>
+                </div>
                 <script>
                     // Example starter JavaScript for disabling form submissions if there are invalid fields
                     (function() {
@@ -155,16 +137,10 @@
             </div>
         </div>
     </div>
-    <!-- <div class="card">
-        <div class="card-body p-2" id="LayoutPreview">
-            <div class="p-5"></div>
-        </div>
-    </div> -->
 @endsection
 
 @section('script')
     <script>
-        
         $(document).on('change', '#tahun, #bulan', function(e) {
             e.preventDefault()
 
@@ -194,7 +170,7 @@
                 $('#subLaporan').html(result)
             })
         }
-        
+
         $(document).on('click', '#Preview', async function(e) {
             e.preventDefault()
 

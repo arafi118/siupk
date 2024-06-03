@@ -73,7 +73,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/transaksi/jurnal_angsuran_individu">
+                        <a href="/database/penduduk/register_penduduk">
                             <i class="metismenu-icon">
                             </i>Ra. Register Anggota
                         </a>
