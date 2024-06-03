@@ -1988,7 +1988,9 @@ class TransaksiController extends Controller
     {
         $pinkel = PinjamanKelompok::where('id', $id)->with([
             'real',
-            'real.trx',
+            'real.trx' => function ($query) use ($id) {
+                $query->where('id_pinj', $id);
+            },
             'kelompok'
         ])->first();
 
@@ -2004,7 +2006,9 @@ class TransaksiController extends Controller
     {
         $nia = PinjamanIndividu::where('id', $id)->with([
             'real_i',
-            'real_i.trx',
+            'real_i.trx' => function ($query) use ($id) {
+                $query->where('id_pinj_i', $id);
+            },
             'anggota'
         ])->first();
 
@@ -2716,7 +2720,7 @@ class TransaksiController extends Controller
         ]);
     }
 
-    
+
     public function regenerateReali($pinj_i)
     {
         $keuangan = new Keuangan;
@@ -2825,7 +2829,4 @@ class TransaksiController extends Controller
             'success' => true
         ]);
     }
-
-
-
 }
