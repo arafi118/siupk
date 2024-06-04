@@ -528,7 +528,7 @@
                     style="font-size: 11px;">
                     <tr style="font-weight: bold;" class="break">
                         <td class="t l b" width="50%">
-                            Komulatif skor dalam parameter Bumdesma dengan usaha utama DBM
+                            Komulatif skor dalam parameter Bumdesma dengan usaha utama UPK
                         </td>
                         <td class="t l b" align="center" width="10%">{{ '> 87.5 - 100' }}</td>
                         <td class="t l b" align="center" width="10%">{{ '> 62.5 - 87.5' }}</td>

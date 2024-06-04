@@ -126,7 +126,7 @@
             <div class="card-header pb-0 pt-3">
                 <div class="float-start">
                     <h5 class="mt-3 mb-0">
-                        Tampilan SIDBM
+                        Tampilan SIUPK
                     </h5>
                     <p>Sesuaikan tampilan aplikasi anda.</p>
                 </div>
@@ -200,7 +200,7 @@
                 <div class="w-100 text-center">
                     <span></span>
                     <h6 class="mt-3">Have a nice day</h6>
-                    <a href="https://app.sidbm.net" class="btn btn-dark mb-0 me-2" target="_blank">
+                    <a href="https://app.siupk.net" class="btn btn-dark mb-0 me-2" target="_blank">
                         <i class="fas fa-cube me-1" aria-hidden="true"></i> Demo App
                     </a>
                     <a href="https://www.facebook.com/astabratagroup" class="btn btn-dark mb-0 me-2" target="_blank">
