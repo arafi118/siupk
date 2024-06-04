@@ -409,13 +409,13 @@ class PinjamanIndividuController extends Controller
             ['lev1', '1'],
             ['lev2', '1'],
             ['lev3', '1'],
-            ['lev4', $perguliran_i->jenis_pp + 1]
+            ['lev4', $perguliran_i->jpp->kode + 1]
         ])->orderBy('kode_akun', 'asc')->get();
         $debet = Rekening::where([
             ['lev1', '1'],
             ['lev2', '1'],
             ['lev3', '3'],
-            ['lev4', $perguliran_i->jenis_pp]
+            ['lev4', $perguliran_i->jpp->kode]
         ])->first();
 
         if ($perguliran_i->status == 'A' || $perguliran_i->status == 'L' || $perguliran_i->status == 'R' || $perguliran_i->status == 'H') {
@@ -511,8 +511,8 @@ class PinjamanIndividuController extends Controller
         $jenis_pp = JenisProdukPinjaman::where(function ($query) use ($kec) {
             $query->where('lokasi', '0')
                 ->orWhere(function ($query) use ($kec) {
-                    $query->where('kecuali', 'NOT LIKE', "%-{" . $kec->id . "}-%")
-                        ->where('lokasi', 'LIKE', "%-{" . $kec->id . "}-%");
+                    $query->where('kecuali', 'NOT LIKE', "%-{$kec['id']}-%")
+                        ->where('lokasi', 'LIKE', "%-{$kec['id']}-%");
                 });
         })->get();
 
@@ -832,8 +832,8 @@ class PinjamanIndividuController extends Controller
             'sis_jasa'
         ])->first();
 
-        $rekening_1 = '1.1.01.' . str_pad($pinj_i->jenis_pp + 1, 2, '0', STR_PAD_LEFT);
-        $rekening_2 = '1.1.03.' . str_pad($pinj_i->jenis_pp, 2, '0', STR_PAD_LEFT);
+        $rekening_1 = '1.1.01.' . str_pad($pinj_i->jpp->kode + 1, 2, '0', STR_PAD_LEFT);
+        $rekening_2 = '1.1.03.' . str_pad($pinj_i->jpp->kode, 2, '0', STR_PAD_LEFT);
 
         $trx_resc = Transaksi::create([
             'tgl_transaksi' => (string) Tanggal::tglNasional($tgl_resceduling),
@@ -944,8 +944,8 @@ class PinjamanIndividuController extends Controller
             $saldo_jasa = $pinj_i->target->saldo_jasa - $jasa;
         }
 
-        $rekening_debit = '1.1.04' . str_pad($pinj_i->jenis_pp, 2, '0', STR_PAD_LEFT);
-        $rekening_kredit = '1.1.03' . str_pad($pinj_i->jenis_pp, 2, '0', STR_PAD_LEFT);
+        $rekening_debit = '1.1.04' . str_pad($pinj_i->jpp->kode, 2, '0', STR_PAD_LEFT);
+        $rekening_kredit = '1.1.03' . str_pad($pinj_i->jpp->kode, 2, '0', STR_PAD_LEFT);
 
         $pinj_anggota = PinjamanIndividu::where('id', $pinj_i->id)->update([
             'tgl_lunas' => Tanggal::tglNasional($data['tgl_penghapusan']),

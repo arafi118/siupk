@@ -404,6 +404,12 @@ class GenerateController extends Controller
                 $realisasi_jasa = 0;
 
                 foreach ($trx->tr_idtp as $idtp) {
+                    if ($is_pinkel) {
+                        if ($idtp->id_pinj != $pinkel->id) continue;
+                    } else {
+                        if ($idtp->id_pinj_i != $pinkel->id) continue;
+                    }
+
                     if (Keuangan::startWith($idtp->rekening_kredit, $poko_kredit)) {
                         $realisasi_pokok = intval($idtp->jumlah);
                         $sum_pokok += $realisasi_pokok;

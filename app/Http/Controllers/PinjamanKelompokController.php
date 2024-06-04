@@ -386,13 +386,13 @@ class PinjamanKelompokController extends Controller
             ['lev1', '1'],
             ['lev2', '1'],
             ['lev3', '1'],
-            ['lev4', $perguliran->jenis_pp + 1]
+            ['lev4', $perguliran->jpp->kode + 1]
         ])->orderBy('kode_akun', 'asc')->get();
         $debet = Rekening::where([
             ['lev1', '1'],
             ['lev2', '1'],
             ['lev3', '3'],
-            ['lev4', $perguliran->jenis_pp]
+            ['lev4', $perguliran->jpp->kode]
         ])->first();
 
         if ($perguliran->status == 'A' || $perguliran->status == 'L' || $perguliran->status == 'R' || $perguliran->status == 'H') {
@@ -851,8 +851,8 @@ class PinjamanKelompokController extends Controller
             'pinjaman_anggota'
         ])->withCount('pinjaman_anggota')->first();
 
-        $rekening_1 = '1.1.01.' . str_pad($pinkel->jenis_pp + 1, 2, '0', STR_PAD_LEFT);
-        $rekening_2 = '1.1.03.' . str_pad($pinkel->jenis_pp, 2, '0', STR_PAD_LEFT);
+        $rekening_1 = '1.1.01.' . str_pad($pinkel->jpp->kode + 1, 2, '0', STR_PAD_LEFT);
+        $rekening_2 = '1.1.03.' . str_pad($pinkel->jpp->kode, 2, '0', STR_PAD_LEFT);
 
         $trx_resc = Transaksi::create([
             'tgl_transaksi' => (string) Tanggal::tglNasional($tgl_resceduling),
@@ -998,8 +998,8 @@ class PinjamanKelompokController extends Controller
             $saldo_jasa = $pinkel->target->saldo_jasa - $jasa;
         }
 
-        $rekening_debit = '1.1.04' . str_pad($pinkel->jenis_pp, 2, '0', STR_PAD_LEFT);
-        $rekening_kredit = '1.1.03' . str_pad($pinkel->jenis_pp, 2, '0', STR_PAD_LEFT);
+        $rekening_debit = '1.1.04' . str_pad($pinkel->jpp->kode, 2, '0', STR_PAD_LEFT);
+        $rekening_kredit = '1.1.03' . str_pad($pinkel->jpp->kode, 2, '0', STR_PAD_LEFT);
 
         $pinj_kelompok = PinjamanKelompok::where('id', $pinkel->id)->update([
             'tgl_lunas' => Tanggal::tglNasional($data['tgl_penghapusan']),
@@ -1690,7 +1690,7 @@ class PinjamanKelompokController extends Controller
     public function spk_anggota($id, $data)
     {
         $keuangan = new Keuangan;
-        $data['pinkel'] = PinjamanAnggota::where('id_pinkel', $id)->with([
+        $data['pinjaman'] = PinjamanAnggota::where('id_pinkel', $id)->with([
             'jpp',
             'jasa',
             'sis_pokok',
@@ -1721,7 +1721,6 @@ class PinjamanKelompokController extends Controller
         ])->first();
 
         $data['keuangan'] = $keuangan;
-        $data['ttd'] = Pinjaman::keyword($data['kec']->ttd->tanda_tangan_spk, $data);
 
         $data['judul'] = 'Surat Perjanjian Kredit Loan ID. ' . $id;
         $view = view('perguliran.dokumen.spk_anggota', $data)->render();

@@ -283,8 +283,8 @@ Route::get('/download/{file}', function ($file) {
 Route::get('/unpaid', [DashboardController::class, 'unpaid'])->middleware('auth');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
 
-Route::get('/pindah-buku', [PBController::class, 'index'])->name('pindah_buku.index');
-Route::post('/pindah-buku', [PBController::class, 'pindahBuku'])->name('pindah_buku.pindahBuku');
+Route::get('/pindah-buku', [PBController::class, 'index'])->name('pindah_buku.index')->middleware('auth');
+Route::post('/pindah-buku', [PBController::class, 'pindahBuku'])->name('pindah_buku.pindahBuku')->middleware('auth');
 
 Route::get('/generate', [GenerateController::class, 'index']);
 Route::get('/generate/individu', [GenerateController::class, 'individu']);
