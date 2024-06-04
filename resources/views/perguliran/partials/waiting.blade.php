@@ -14,7 +14,7 @@
                 <tr class="bg-danger">
                     <th align="center" width="10">No</th>
                     <th align="center">Nama</th>
-                    <th>Loan ID.</th>
+                    <th>detail</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,7 +25,7 @@
                         <td>
                             <a href="/detail/{{ $pa->id_pinkel }}" target="_blank"
                                 class="text-danger text-gradient font-weight-bold">
-                                detail kelompok
+                                detail pinjaman sebelumnya
                             </a>.
                         </td>
                     </tr>
