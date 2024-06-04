@@ -61,15 +61,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/database/kelompok/register_kelompok">
+                        <a href="#">
                             <i class="metismenu-icon">
-                            </i>Rk. Register Kelompok
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/transaksi/jurnal_angsuran">
-                            <i class="metismenu-icon">
-                            </i>Dk. Data Kelompok
+                            </i>DS. Data Supplier
                         </a>
                     </li>
                     <li>
@@ -87,25 +81,25 @@
                 </ul>
             </li>
             <li>
-                <a href="/transaksi/jurnal_angsuran_individu">
+                <a href="">
                     <i class="metismenu-icon pe-7s-display2"></i>
-                    Jurnal Angsuran
-                    {{-- <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i> --}}
+                    Tahapan Perguliran
+                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                 </a>
-                {{-- <ul>
+                <ul>
                     <li>
-                        <a href="/transaksi/jurnal_angsuran">
+                        <a href="/register_proposal_i">
                             <i class="metismenu-icon">
-                            </i>Ang. Kelompok
+                            </i>Register Proposal
                         </a>
                     </li>
                     <li>
-                        <a href="/transaksi/jurnal_angsuran_individu">
+                        <a href="/detail_i/{perguliran_i">
                             <i class="metismenu-icon">
-                            </i>Ang.Individu
+                            </i>Status Proposal
                         </a>
                     </li>
-                </ul> --}}
+                </ul>
             </li>
 
             <li>
@@ -119,6 +113,12 @@
                         <a href="/transaksi/jurnal_umum">
                             <i class="metismenu-icon">
                             </i>Jurnal Umum
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/transaksi/jurnal_angsuran_individu">
+                            <i class="metismenu-icon">
+                            </i>Jurnal Angsuran
                         </a>
                     </li>
                     <li>

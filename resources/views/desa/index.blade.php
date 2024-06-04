@@ -1,29 +1,44 @@
 @extends('layouts.base')
 
 @section('content')
-    <div class="card">
+    <div class="app-main__inner">
         <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-flush table-hover table-click" width="100%">
-                    <thead>
-                        <tr>
-                            <th>Kode</th>
-                            <th>Nama Desa</th>
-                            <th>Alamat</th>
-                            <th>Telpon</th>
-                            <th>Kades</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Simple table</h5>
+                            <table class="mb-0 table" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Kode</th>
+                                        <th>Nama Desa</th>
+                                        <th>Alamat</th>
+                                        <th>Telpon</th>
+                                        <th>Kades</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 
-    <div class="modal fade" id="EditDesa" tabindex="-1" aria-labelledby="EditDesaLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal fade" id="EditDesa" tabindex="-1" aria-labelledby="EditDesaLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable">
 
 
+                </div>
+            </div>
         </div>
     </div>
 @endsection
