@@ -318,6 +318,7 @@
                         states.push({
                             "id": item.id,
                             "name": item.namadepan +
+                                ' [' + item.nama_desa + ']' +
                                 ' [' + item.nik + ']',
                             "value": item.id
                         });

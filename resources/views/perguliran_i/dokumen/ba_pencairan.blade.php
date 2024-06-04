@@ -160,7 +160,7 @@
             <td>Jenis Usaha</td>
             <td align="center">:</td>
             <td>
-                <b>{{ $pinkel->anggota->u->nama_usaha }}</b>
+                <b>{{ $pinkel->anggota->usaha }}</b>
             </td>
 
 
