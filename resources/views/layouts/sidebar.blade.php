@@ -87,12 +87,12 @@
                 </ul>
             </li>
             <li>
-                <a href="#">
+                <a href="/transaksi/jurnal_angsuran_individu">
                     <i class="metismenu-icon pe-7s-display2"></i>
                     Jurnal Angsuran
-                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                    {{-- <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i> --}}
                 </a>
-                <ul>
+                {{-- <ul>
                     <li>
                         <a href="/transaksi/jurnal_angsuran">
                             <i class="metismenu-icon">
@@ -105,7 +105,7 @@
                             </i>Ang.Individu
                         </a>
                     </li>
-                </ul>
+                </ul> --}}
             </li>
 
             <li>
