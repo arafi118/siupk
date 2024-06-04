@@ -27,8 +27,3 @@
     </div>
 </div>
 
-
-<script>
-    var sumber = new Choices($('#sumber_dana')[0])
-    var simpan = new Choices($('#disimpan_ke')[0])
-</script>

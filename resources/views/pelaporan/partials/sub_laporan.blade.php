@@ -71,6 +71,3 @@
 @endif
 
 
-<script>
-    new Choices($('select#sub_laporan')[0])
-</script>
