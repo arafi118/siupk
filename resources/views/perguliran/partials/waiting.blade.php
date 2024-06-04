@@ -14,7 +14,7 @@
                 <tr class="bg-danger">
                     <th align="center" width="10">No</th>
                     <th align="center">Nama</th>
-                    <th>detail</th>
+                    <th>Loan ID.</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,10 +23,19 @@
                         <td align="center">{{ $loop->iteration }}</td>
                         <td align="left">{{ ucwords(strtolower($pa->anggota->namadepan)) }} ({{ $pa->nia }})</td>
                         <td>
+                            @if ($pa->jenis_pinjaman == "K")
                             <a href="/detail/{{ $pa->id_pinkel }}" target="_blank"
                                 class="text-danger text-gradient font-weight-bold">
-                                detail pinjaman sebelumnya
+
+                                {{ $pa->kelompok->nama_kelompok }} Loan ID. {{ $pa->id_pinkel }}
                             </a>.
+                            @else
+                            <a href="/detail_i/{{ $pa->id }}" target="_blank"
+                                class="text-danger text-gradient font-weight-bold">
+
+                                {{ $pa->anggota->namadepan}} Loan ID. {{ $pa->id }}
+                            </a>.
+                            @endif
                         </td>
                     </tr>
                 @endforeach
