@@ -73,7 +73,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/transaksi/jurnal_angsuran">
+                        <a href="/database/penduduk">
                             <i class="metismenu-icon">
                             </i>Da. Data Anggota
                         </a>
