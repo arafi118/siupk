@@ -216,7 +216,7 @@
                 $no = $loop->iteration;
             @endphp
             <tr>
-                <td align="center">{{ $no }}</td>
+                <td align="center">{{ $pa['id'] }}</td>
                 <td>{{ $pa->anggota->namadepan }}</td>
                 <td align="right">{{ number_format($pinjaman_lalu) }}</td>
                 <td align="right">{{ number_format($pa->proposal) }}</td>
