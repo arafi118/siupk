@@ -9,48 +9,68 @@
                 <div class="col-md-9">
                     <div class="main-card mb-3 card">
                         <div class="card-body">
-                            <form class="">
+                        <form action="/transaksi" method="post" id="FormTransaksi">
+                        @csrf
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="position-relative mb-3"><label for="exampleState">Tanggal
-                                                Transaksi</label><input name="" id="exampleState"
-                                                placeholder="with a placeholder" type="date" class="form-control"></div>
+                                        <div class="position-relative mb-3">
+                                        <label for="tgl_transaksi">Tgl Transaksi</label>
+                                    <input autocomplete="off" type="date" name="tgl_transaksi" id="tgl_transaksi"
+                                        class="form-control date" value="{{ date('d/m/Y') }}">
+                                    <small class="text-danger" id="msg_tgl_transaksi"></small>
+                                            </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="position-relative mb-3"><label for="exampleState"
-                                                class="form-label">Jenis Transaksi</label><input name="password"
-                                                id="exampleState" placeholder="password placeholder" type="password"
-                                                class="form-control">
+                                        <div class="position-relative mb-3">
+                                        <label class="form-label" for="jenis_transaksi">Jenis Transaksi</label>
+                                    <select class="form-control" name="jenis_transaksi" id="jenis_transaksi">
+                                        <option value="">-- Pilih Jenis Transaksi --</option>
+                                        @foreach ($jenis_transaksi as $jt)
+                                            <option value="{{ $jt->id }}">
+                                                {{ $jt->nama_jt }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <small class="text-danger" id="msg_jenis_transaksi"></small>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="position-relative mb-3"><label for="exampleState"
-                                                class="form-label">Sumber Dana</label><input name="text"
-                                                id="exampleState" placeholder="with a placeholder" type="text"
-                                                class="form-control"></div>
+                                <div class="row" id="kd_rekening">         
+                                 <div class="col-md-6">
+                                        <div class="position-relative mb-3">
+                                        <label class="form-label" for="sumber_dana">Sumber Dana</label>
+                                    <select class="form-control" name="sumber_dana" id="sumber_dana">
+                                        <option value="">-- Sumber Dana --</option>
+                                    </select>
+                                    <small class="text-danger" id="msg_sumber_dana"></small>
+                                        </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="position-relative mb-3"><label for="exampleState"
-                                                class="form-label">Disimpan Ke</label><input name="password"
-                                                id="exampleState" placeholder="password placeholder" type="password"
-                                                class="form-control">
+                                        <div class="position-relative mb-3">
+                                        <label class="form-label" for="disimpan_ke">Disimpan Ke</label>
+                                    <select class="form-control" name="disimpan_ke" id="disimpan_ke">
+                                        <option value="">-- Disimpan Ke --</option>
+                                    </select>
+                                    <small class="text-danger" id="msg_disimpan_ke"></small>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row" id="form_nominal">
                                     <div class="col-md-12">
-                                        <div class="position-relative mb-3"><label for="exampleState"
-                                                class="form-label">Keterangan</label><input name="state" id="exampleState"
-                                                type="text" class="form-control"></div>
+                                        <div class="position-relative mb-3">
+                                        <label for="keterangan">Keterangan&nbsp;</label>
+                                    <input autocomplete="off" type="text" name="keterangan" id="keterangan"
+                                        class="form-control">
+                                    <small class="text-danger" id="msg_keterangan"></small>
+                                            </div>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-md-12">
-                                        <div class="position-relative mb-3"><label for="exampleState"
-                                                class="form-label">Nominal Rp.</label><input name="state"
-                                                id="exampleState" type="text" class="form-control"></div>
+                                        <div class="position-relative mb-3">
+                                        <label for="nominal">Nominal Rp.&nbsp;</label>
+                                    <input autocomplete="off" type="text" name="nominal" id="nominal"
+                                        class="form-control">
+                                    <small class="text-danger" id="msg_nominal"></small>
+                                            </div>
                                     </div>
                                 </div>
                                 <div style="text-align: right;">
@@ -61,7 +81,7 @@
 
                                         }
                                     </style>
-                                    <button class="mt-2 btn btn-focus btn--text">SIMPAN TRANSAKSI</button>
+                                    <button type="button" id="SimpanTransaksi"  class="mt-2 btn btn-focus btn--text">SIMPAN TRANSAKSI</button>
                                 </div><br>
                             </form>
                         </div>
@@ -84,71 +104,59 @@
                                 <div class="text-sm fw-bold text-center">Cetak Buku Bantu</div>
                                 <hr class="horizontal dark mb-0">
                                 <div class="row">
-                                    <div class="position-relative mb-3"><label for="tahun"
-                                            class="form-label">Tahunan</label>
-                                        <select class="form-control" name="tahun" id="tahun">
-                                            @php
-                                                $tgl_pakai = $kec->tgl_pakai;
-                                                $th_pakai = explode('-', $tgl_pakai)[0];
-                                            @endphp
-                                            @for ($i = $th_pakai; $i <= date('Y'); $i++)
-                                                <option value="{{ $i }}" {{ date('Y') == $i ? 'selected' : '' }}>
-                                                    {{ $i }}</option>
-                                            @endfor
-                                        </select>
+                                    <div class="position-relative mb-3">
+                                    <label class="form-label" for="tahun">Tahunan</label>
+                                            <select class="form-control" name="tahun" id="tahun">
+                                    @php
+                                        $tgl_pakai = $kec->tgl_pakai;
+                                        $th_pakai = explode('-', $tgl_pakai)[0];
+                                    @endphp
+                                    @for ($i = $th_pakai; $i <= date('Y'); $i++)
+                                        <option value="{{ $i }}" {{ date('Y') == $i ? 'selected' : '' }}>
+                                            {{ $i }}</option>
+                                    @endfor
+                                </select>
                                         <small class="text-danger" id="msg_tahun"></small>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="position-relative mb-3"><label for="exampleState"
-                                                class="form-label">Bulanan</label>
+                                        <div class="position-relative mb-3">
+                                        <label class="form-label" for="bulan">Bulanan</label>
                                             <select class="form-control" name="bulan" id="bulan">
-                                                <option value="">--</option>
-                                                <option {{ date('m') == '01' ? 'selected' : '' }} value="01">01.
-                                                    JANUARI</option>
-                                                <option {{ date('m') == '02' ? 'selected' : '' }} value="02">02.
-                                                    FEBRUARI</option>
-                                                <option {{ date('m') == '03' ? 'selected' : '' }} value="03">03.
-                                                    MARET</option>
-                                                <option {{ date('m') == '04' ? 'selected' : '' }} value="04">04.
-                                                    APRIL</option>
-                                                <option {{ date('m') == '05' ? 'selected' : '' }} value="05">05. MEI
-                                                </option>
-                                                <option {{ date('m') == '06' ? 'selected' : '' }} value="06">06.
-                                                    JUNI</option>
-                                                <option {{ date('m') == '07' ? 'selected' : '' }} value="07">07.
-                                                    JULI</option>
-                                                <option {{ date('m') == '08' ? 'selected' : '' }} value="08">08.
-                                                    AGUSTUS</option>
-                                                <option {{ date('m') == '09' ? 'selected' : '' }} value="09">09.
-                                                    SEPTEMBER
-                                                </option>
-                                                <option {{ date('m') == '10' ? 'selected' : '' }} value="10">10.
-                                                    OKTOBER</option>
-                                                <option {{ date('m') == '11' ? 'selected' : '' }} value="11">11.
-                                                    NOVEMBER
-                                                </option>
-                                                <option {{ date('m') == '12' ? 'selected' : '' }} value="12">12.
-                                                    DESEMBER
-                                                </option>
-                                            </select>
+                                    <option value="">--</option>
+                                    <option {{ date('m') == '01' ? 'selected' : '' }} value="01">01. JANUARI</option>
+                                    <option {{ date('m') == '02' ? 'selected' : '' }} value="02">02. FEBRUARI</option>
+                                    <option {{ date('m') == '03' ? 'selected' : '' }} value="03">03. MARET</option>
+                                    <option {{ date('m') == '04' ? 'selected' : '' }} value="04">04. APRIL</option>
+                                    <option {{ date('m') == '05' ? 'selected' : '' }} value="05">05. MEI</option>
+                                    <option {{ date('m') == '06' ? 'selected' : '' }} value="06">06. JUNI</option>
+                                    <option {{ date('m') == '07' ? 'selected' : '' }} value="07">07. JULI</option>
+                                    <option {{ date('m') == '08' ? 'selected' : '' }} value="08">08. AGUSTUS</option>
+                                    <option {{ date('m') == '09' ? 'selected' : '' }} value="09">09. SEPTEMBER
+                                    </option>
+                                    <option {{ date('m') == '10' ? 'selected' : '' }} value="10">10. OKTOBER</option>
+                                    <option {{ date('m') == '11' ? 'selected' : '' }} value="11">11. NOVEMBER
+                                    </option>
+                                    <option {{ date('m') == '12' ? 'selected' : '' }} value="12">12. DESEMBER
+                                    </option>
+                                </select>
                                             <small class="text-danger" id="msg_bulan"></small>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="position-relative mb-3"><label for="exampleState"
-                                                class="form-label">Harian</label>
-                                            <select class="form-control" name="tanggal" id="tanggal">
-                                                <option value="">--</option>
-                                                @for ($j = 1; $j <= 31; $j++)
-                                                    @php $no=str_pad($j, 2, "0" , STR_PAD_LEFT) @endphp
-                                                    <option value="{{ $no }}">{{ $no }}</option>
-                                                @endfor
-                                            </select>
-                                            <small class="text-danger" id="msg_tanggal"></small>
+                                        <div class="position-relative mb-3">
+                                        <label class="form-label" for="tanggal">Tanggal</label>
+                                <select class="form-control" name="tanggal" id="tanggal">
+                                    <option value="">--</option>
+                                    @for ($j = 1; $j <= 31; $j++)
+                                        @php $no=str_pad($j, 2, "0" , STR_PAD_LEFT) @endphp
+                                        <option value="{{ $no }}">{{ $no }}</option>
+                                    @endfor
+                                </select>
+                                <small class="text-danger" id="msg_tanggal"></small>
                                         </div>
                                     </div>
                                 </div>
@@ -160,7 +168,7 @@
 
                                         }
                                     </style>
-                                    <button class="mt-2 btn btn-success btn--text">DETAIL TRANSAKSI</button>
+                                    <button type="button" id="BtndetailTransaksi" class="mt-2 btn btn-success btn--text">DETAIL TRANSAKSI</button>
                                 </div>
 
                             </form>
@@ -171,64 +179,77 @@
             </div>
         </div>
     </div>
+    <div id="notifikasi"></div>
+
+<div class="modal fade" id="detailTransaksi" tabindex="-1" aria-labelledby="detailTransaksiLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="detailTransaksiLabel">
+
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="LayoutdetailTransaksi"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="BtnCetakBuktiTransaksi" class="btn btn-sm btn-info">
+                    Cetak Bukti Transaksi
+                </button>
+                <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="CetakBuktiTransaksi" tabindex="-1" aria-labelledby="CetakBuktiTransaksiLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="CetakBuktiTransaksiLabel">
+
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="LayoutCetakBuktiTransaksi"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="BtnCetak" class="btn btn-sm btn-info">
+                    Print
+                </button>
+                <button type="button" id="BtnCetakBuktiTransaksi" class="btn btn-danger btn-sm">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form action="/transaksi/reversal" method="post" id="formReversal">
+    @csrf
+
+    <input type="hidden" name="rev_idt" id="rev_idt">
+    <input type="hidden" name="rev_idtp" id="rev_idtp">
+    <input type="hidden" name="rev_id_pinj" id="rev_id_pinj">
+</form>
+
+<form action="/transaksi/hapus" method="post" id="formHapus">
+    @csrf
+
+    <input type="hidden" name="del_idt" id="del_idt">
+    <input type="hidden" name="del_idtp" id="del_idtp">
+    <input type="hidden" name="del_id_pinj" id="del_id_pinj">
+</form>
 @endsection
+
 @section('script')
-    <script>
+<script>
         var formatter = new Intl.NumberFormat('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
         })
-
-        var jenis_transaksi = new Choices($('#jenis_transaksi')[0], {
-            shouldSort: false,
-            fuseOptions: {
-                threshold: 0.1,
-                distance: 1000
-            }
-        })
-        var sumber = new Choices($('#sumber_dana')[0], {
-            shouldSort: false,
-            fuseOptions: {
-                threshold: 0.1,
-                distance: 1000
-            }
-        })
-        var simpan = new Choices($('#disimpan_ke')[0], {
-            shouldSort: false,
-            fuseOptions: {
-                threshold: 0.1,
-                distance: 1000
-            }
-        })
-        var selectTahun = new Choices($('select#tahun')[0], {
-            shouldSort: false,
-            fuseOptions: {
-                threshold: 0.1,
-                distance: 1000
-            }
-        })
-        var selectBulan = new Choices($('select#bulan')[0], {
-            shouldSort: false,
-            fuseOptions: {
-                threshold: 0.1,
-                distance: 1000
-            }
-        })
-        new Choices($('select#tanggal')[0], {
-            shouldSort: false,
-            fuseOptions: {
-                threshold: 0.1,
-                distance: 1000
-            }
-        })
-
-        $(".date").flatpickr({
-            dateFormat: "d/m/Y"
-        })
-
-        $("#nominal").maskMoney({
-            allowNegative: true
-        });
 
         $(document).on('change', '#jenis_transaksi', function(e) {
             e.preventDefault()
@@ -256,22 +277,10 @@
             e.preventDefault()
             var sumber_dana = $(this).val()
 
-            if (sumber_dana == '1.2.02.01') {
-                simpan.setChoiceByValue('5.1.07.08')
-            }
-
-            if (sumber_dana == '1.2.02.02') {
-                simpan.setChoiceByValue('5.1.07.09')
-            }
-
-            if (sumber_dana == '1.2.02.03') {
-                simpan.setChoiceByValue('5.1.07.10')
-            }
-
-            var tgl_transaksi = $('#tgl_transaksi').val().split('/')
-            var tahun = tgl_transaksi[2];
+            var tgl_transaksi = $('#tgl_transaksi').val().split('-')
+            var tahun = tgl_transaksi[0];
             var bulan = tgl_transaksi[1];
-            var hari = tgl_transaksi[0];
+            var hari = tgl_transaksi[2];
 
             $.get('/trasaksi/saldo/' + sumber_dana + '?tahun=' + tahun + '&bulan=' + bulan + '&hari=' + hari,
                 function(result) {
@@ -389,7 +398,7 @@
             $('#nilai_buku').val(formatter.format(nilai_buku))
             $('#harga_jual').val(formatter.format(nilai_buku))
         })
-
+        
         $(document).on('change', '#alasan', function() {
             var status = $(this).val()
             console.log(status)
