@@ -10,7 +10,7 @@
             page-break-after: always;
         }
     </style>
-    @foreach ($pinjaman as $pinj)
+    @foreach ($pinkel as $pinj)
         @php
             $waktu = date('H:i');
             $tempat = 'Kantor UPK';

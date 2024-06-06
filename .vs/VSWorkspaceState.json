@@ -4,9 +4,12 @@
     "\\app",
     "\\app\\Http",
     "\\app\\Http\\Controllers",
-    "\\public",
-    "\\routes"
+    "\\resources",
+    "\\resources\\views",
+    "\\resources\\views\\pelaporan",
+    "\\resources\\views\\pelaporan\\view",
+    "\\resources\\views\\pelaporan\\view\\perkembangan_piutang"
   ],
-  "SelectedNode": "\\app\\Http\\Controllers\\PinjamanAnggotaController.php",
+  "SelectedNode": "\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\lpp_desa.blade.php",
   "PreviewInSolutionExplorer": false
 }
