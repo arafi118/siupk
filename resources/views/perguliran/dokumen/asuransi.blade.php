@@ -78,8 +78,8 @@
             <th class="t l b r" width="10%" rowspan="2">TTD</th>
         </tr>
         <tr>
-            <td class="t l b" width="10%">Pokok</td>
-            <td class="t l b" width="10%">Jasa</td>
+            <th class="t l b" width="10%">Pokok</th>
+            <th class="t l b" width="10%">Jasa</th>
         </tr>
 
         @php
@@ -113,7 +113,7 @@
                 }
 
                 $row_jumlah = $row_jasa + $row_pokok;
-                $u_max = $pa->usia_mak;
+                $u_max = $kec->usia_mak;
 
                 $usia_sekarang = hitungUsia($pa->anggota->tgl_lahir);
                 
@@ -122,7 +122,7 @@
                     $row_premi = "0";
                 } else {
                     $row_keterangan = "Dapat";
-                    $row_premi = $row_jumlah * $pa->besar_premi / 100;
+                    $row_premi = $row_jumlah * $kec->besar_premi / 100;
                 }
             @endphp
             <tr>
@@ -130,10 +130,10 @@
                 <td class="t l b">{{ $pa->anggota->namadepan }}</td>
                 <td class="t l b">{{ $pa->anggota->tempat_lahir }} <br> {{ $pa->anggota->tgl_lahir }}</td>
                 <td class="t l b">{{ $pa->anggota->penjamin }}</td>
-                <td class="t l b" align="right">{{ $row_pokok }}</td>
-                <td class="t l b" align="right">{{ $row_jasa }}</td>
-                <td class="t l b" align="right">{{ $row_jumlah }}</td>
-                <td class="t l b" align="right">{{ $row_premi }}</td>
+                <td class="t l b" align="right">{{ number_format($row_pokok) }}</td>
+                <td class="t l b" align="right">{{ number_format($row_jasa) }}</td>
+                <td class="t l b" align="right">{{ number_format($row_jumlah) }}</td>
+                <td class="t l b" align="right">{{ number_format($row_premi) }}</td>
                 <td class="t l b">{{ $row_keterangan }}</td>
                 <td class="t l b r">{{ $no }}.</td>
             </tr>
@@ -146,10 +146,10 @@
         @endforeach
             <tr>
                 <th class="t l b" height="15" align="center" colspan=4>Jumlah</th>
-                <th class="t l b" align="right">{{ $j_pokok }}</th>
-                <th class="t l b" align="right">{{ $j_jasa }}</th>
-                <th class="t l b" align="right">{{ $j_jumlah }}</th>
-                <th class="t l b" align="right">{{ $j_premi }}</th>
+                <th class="t l b" align="right">{{ number_format($j_pokok) }}</th>
+                <th class="t l b" align="right">{{ number_format($j_jasa) }}</th>
+                <th class="t l b" align="right">{{ number_format($j_jumlah) }}</th>
+                <th class="t l b" align="right">{{ number_format($j_premi) }}</th>
                 <th class="t l b r" colspan=2>&nbsp;</th>
             </tr>
     </table>
