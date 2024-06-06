@@ -956,7 +956,7 @@ class PinjamanKelompokController extends Controller
                 'sistem_angsuran' => $sis_pokok,
                 'sa_jasa' => $sis_jasa,
                 'status' => 'A',
-                'jaminan' => $pinjaman->jaminan,
+                'jaminan' => $pinjaman->jaminan ?: '0',
                 'catatan_verifikasi' => $pinjaman->catatan_verifikasi,
                 'lu' => $pinjaman->lu,
                 'user_id' => $pinjaman->user_id,
