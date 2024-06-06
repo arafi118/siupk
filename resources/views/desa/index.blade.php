@@ -8,7 +8,7 @@
                     <div class="main-card mb-3 card">
                         <div class="card-body">
                             <h5 class="card-title">Simple table</h5>
-                            <table class="mb-0 table" width="100%">
+                            <table class="mb-0 table table-borderless" width="100%">
                                 <thead>
                                     <tr>
                                         <th>Kode</th>
@@ -19,13 +19,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <td>@mdo</td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
