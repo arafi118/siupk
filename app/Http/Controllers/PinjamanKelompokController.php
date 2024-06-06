@@ -1873,15 +1873,20 @@ class PinjamanKelompokController extends Controller
 
 
     public function asuransi($id, $data)
-    {
+{
         $data['pinkel'] = PinjamanKelompok::where('id', $id)->with([
-            'jpp',
+            'jasa',
             'sis_pokok',
             'kelompok',
-            'pinjaman_anggota',
-            'pinjaman_anggota.anggota'
-        ])->first();
-
+            'kelompok.d',
+            'kelompok.d.sebutan_desa',
+            'pinjaman_anggota' => function ($query) {
+                $query->where('status', 'A')->orWhere('status', 'W');
+            },
+        'pinjaman_anggota.anggota'
+    ])->first();
+    // Pastikan data['pinkel'] bukan null
+    if ($data['pinkel']) {
         $data['dir'] = User::where([
             ['level', '1'],
             ['jabatan', '1'],
@@ -1897,7 +1902,11 @@ class PinjamanKelompokController extends Controller
         } else {
             return $view;
         }
+    } else {
+        // Handle the case where no data is found
+        return response()->json(['error' => 'Data tidak ditemukan'], 404);
     }
+}
 
     public function kartuAngsuran($id)
     {

@@ -1,155 +1,196 @@
-@php
-    use App\Utils\Tanggal;
-@endphp
-
 @extends('perguliran.dokumen.layout.base')
 
 @section('content')
-    <style>
-        .break {
-            page-break-after: always;
-        }
-    </style>
-    @foreach ($pinkel as $pinj)
+    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
+        <tr class="b">
+            <td colspan="3" align="center">
+                <div style="font-size: 18px;">
+                    <b>DAFTAR PESERTA ASURANSI {{ strtoupper($kec->nama_asuransi_p) }}</b>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" height="5"></td>
+        </tr>
+    </table>
+
+    <table border="0" width="100%" align="center" cellspacing="0" cellpadding="0" style="font-size: 11px;">
+        <tr>
+            <td width="20%">Kelompok</td>
+            <td align="center" width="2%">:</td>
+            <td width="28%">
+                <b>{{ $pinkel->kelompok->nama_kelompok }} / {{ $pinkel->id }}</b>
+            </td>
+            <td width="20%">Tanggal Cair</td>
+            <td align="center" width="2%">:</td>
+            <td width="28%">
+                <b>{{ Tanggal::tglLatin($pinkel->tgl_cair) }}</b>
+            </td>
+        </tr>
+        <tr>
+            <td>Alamat</td>
+            <td align="center">:</td>
+            <td>
+                <b>{{ $pinkel->kelompok->alamat_kelompok }}</b>
+            </td>
+            <td>Alokasi Pinjaman</td>
+            <td align="center">:</td>
+            <td>
+                <b>Rp. {{ number_format($pinkel->alokasi) }}</b>
+            </td>
+        </tr>
+        <tr>
+            <td>{{ $pinkel->kelompok->d->sebutan_desa->sebutan_desa }}</td>
+            <td align="center">:</td>
+            <td>
+                <b>{{ $pinkel->kelompok->d->nama_desa }}</b>
+            </td>
+            <td>Alokasi Pinjaman</td>
+            <td align="center">:</td>
+            <td>
+                <b>{{ $pinkel->sis_pokok->nama_sistem }} ({{ $pinkel->jangka }} Bulan)</b>
+            </td>
+        </tr>
+        <tr>
+            <td>Ketua</td>
+            <td align="center">:</td>
+            <td>
+                <b>{{ $pinkel->kelompok->ketua }}</b>
+            </td>
+            <td>Sistem Bagi Hasil</td>
+            <td align="center">:</td>
+            <td>
+                <b>{{ $pinkel->pros_jasa / $pinkel->jangka }}%/Bulan, {{ $pinkel->jasa->nama_jj }}</b>
+            </td>
+        </tr>
+    </table>
+    
+    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
+        <tr>
+            <th class="t l b" width="3%" rowspan="2">No</th>
+            <th class="t l b" width="10%" rowspan="2">Nama Anggota</th>
+            <th class="t l b" width="10%" rowspan="2">TTL</th>
+            <th class="t l b" width="10%" rowspan="2">Nama Penjamin</th>
+            <th class="t l b" colspan="2">Pinjaman</th>
+            <th class="t l b" width="10%" rowspan="2">Jumlah</th>
+            <th class="t l b" width="10%" rowspan="2">Premi <br> ({{ $kec->besar_premi }}%)</th>
+            <th class="t l b" width="10%" rowspan="2">Keterangan</th>
+            <th class="t l b r" width="10%" rowspan="2">TTD</th>
+        </tr>
+        <tr>
+            <td class="t l b" width="10%">Pokok</td>
+            <td class="t l b" width="10%">Jasa</td>
+        </tr>
+
         @php
-            $waktu = date('H:i');
-            $tempat = 'Kantor UPK';
+            function hitungUsia($tanggal_lahir) {
+                $lahir = new DateTime($tanggal_lahir);
+                $sekarang = new DateTime('today');
+                $usia = $lahir->diff($sekarang)->y + ($lahir->diff($sekarang)->m / 12) + ($lahir->diff($sekarang)->d / 365.25);
 
-            $wt_cair = explode('_', $pinj->pinkel->wt_cair);
-            if (count($wt_cair) == 1) {
-                $waktu = $wt_cair[0];
-            }
-
-            if (count($wt_cair) == 2) {
-                $waktu = $wt_cair[0];
-                $tempat = $wt_cair[1];
+                return number_format($usia, 2);
             }
         @endphp
 
-        @if ($loop->iteration > 1)
-            <div class="break">&nbsp;</div>
-        @endif
-        <div style="text-align: center; font-size: 18px; margin-bottom: 12px; text-transform: uppercase;">
-            <div>Bukti Transaksi</div>
-            <div>Pinjaman Kelompok</div>
-        </div>
+        @php
+            $j_pokok = 0;
+            $j_jasa = 0;
+            $j_jumlah = 0;
+            $j_premi = 0;
+        @endphp
 
-        <div style="padding: 60px; padding-top: 0px; border: 1px solid #000; height: 82%;">
-            <table border="0" width="100%" class="p">
-                <tr>
-                    <td colspan="3" height="40" align="center" style="text-transform: uppercase; font-size: 16px;">
-                        <b>K u i t a n s i</b>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="90">Telah Diterima Dari</td>
-                    <td width="10" align="center">:</td>
-                    <td class="b">
-                        {{ $kec->sebutan_level_3 }} {{ $kec->nama_lembaga_sort }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>Uang Sebanyak</td>
-                    <td align="center">:</td>
-                    <td class="b">
-                        {{ $keuangan->terbilang($pinj->alokasi) }} Rupiah
-                    </td>
-                </tr>
-                <tr>
-                    <td>Untuk Pembayaran</td>
-                    <td align="center">:</td>
-                    <td class="b">
-                        Pencairan Pemanfaat Kelompok {{ $pinj->pinkel->kelompok->nama_kelompok }}
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">&nbsp;</td>
-                    <td class="b">
+        @foreach ($pinkel->pinjaman_anggota as $pa)
+            @php
+                $no = $loop->iteration;
 
-                        a.n. {{ $pinj->anggota->namadepan }} NIK. {{ $pinj->anggota->nik }}
+                $j_a = $pa->pengaturan_asuransi;
+                $row_pokok = $pa->alokasi;
+                
+                if($j_a == "2") {
+                    $row_jasa = $pa->alokasi * $pa->pros_jasa / 100 * $pa->jangka;
+                } else {
+                    $row_jasa = "0";
+                }
 
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">&nbsp;</td>
-                    <td class="b">
-                        Beralamat Di {{ $pinj->anggota->alamat }}
-                        {{ $pinj->anggota->d->sebutan_desa->sebutan_desa }}
-                        {{ $pinj->anggota->d->nama_desa }}
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">&nbsp;</td>
-                    <td class="b">
-                        Loan ID. {{ $pinj->pinkel->id }} &mdash; SPK No. {{ $pinj->pinkel->spk_no }}
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="3"></td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="t b" align="center">
-                        Rp. {{ number_format($pinj->alokasi) }}
-                    </td>
-                    <td>&nbsp;</td>
-                </tr>
-            </table>
+                $row_jumlah = $row_jasa + $row_pokok;
+                $u_max = $pa->usia_mak;
 
-            <table border="0" width="100%" style="font-size: 11px;">
-                <tr>
-                    <td width="10%">&nbsp;</td>
-                    <td width="10%">&nbsp;</td>
-                    <td width="10%">&nbsp;</td>
-                    <td width="10%">&nbsp;</td>
-                    <td width="10%">&nbsp;</td>
-                    <td width="10%">&nbsp;</td>
-                    <td width="10%">&nbsp;</td>
-                    <td width="10%">&nbsp;</td>
-                    <td width="10%">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td colspan="6">&nbsp;</td>
-                    <td colspan="3" align="center">
-                        {{ $kec->nama_kec }}, {{ Tanggal::tglLatin($pinj->tgl_cair) }}
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center" colspan="3">
-                        &nbsp;
-                    </td>
-                    <td align="center" colspan="3">
-                        &nbsp;
-                    </td>
-                    <td align="center" colspan="3">
-                        Diterima Oleh
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center" colspan="3">
-                        &nbsp;
-                    </td>
-                    <td align="center" colspan="3">
-                        &nbsp;
-                    </td>
-                    <td align="center" colspan="3">
-                        Anggota Pemanfaat
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="9" height="55">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td align="center" colspan="3">
-                        <b>&nbsp;</b>
-                    </td>
-                    <td align="center" colspan="3">
-                        <b>&nbsp;</b>
-                    </td>
-                    <td align="center" colspan="3">
-                        <b>{{ $pinj->anggota->namadepan }}</b>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    @endforeach
+                $usia_sekarang = hitungUsia($pa->anggota->tgl_lahir);
+                
+                if($usia_sekarang > $u_max) {
+                    $row_keterangan = "Tidak dapat";
+                    $row_premi = "0";
+                } else {
+                    $row_keterangan = "Dapat";
+                    $row_premi = $row_jumlah * $pa->besar_premi / 100;
+                }
+            @endphp
+            <tr>
+                <td class="t l b" height="15" align="center">{{ $no }}</td>
+                <td class="t l b">{{ $pa->anggota->namadepan }}</td>
+                <td class="t l b">{{ $pa->anggota->tempat_lahir }} <br> {{ $pa->anggota->tgl_lahir }}</td>
+                <td class="t l b">{{ $pa->anggota->penjamin }}</td>
+                <td class="t l b" align="right">{{ $row_pokok }}</td>
+                <td class="t l b" align="right">{{ $row_jasa }}</td>
+                <td class="t l b" align="right">{{ $row_jumlah }}</td>
+                <td class="t l b" align="right">{{ $row_premi }}</td>
+                <td class="t l b">{{ $row_keterangan }}</td>
+                <td class="t l b r">{{ $no }}.</td>
+            </tr>
+            @php
+                $j_pokok += $row_pokok;
+                $j_jasa += $row_jasa;
+                $j_jumlah += $row_jumlah;
+                $j_premi += $row_premi;
+            @endphp
+        @endforeach
+            <tr>
+                <th class="t l b" height="15" align="center" colspan=4>Jumlah</th>
+                <th class="t l b" align="right">{{ $j_pokok }}</th>
+                <th class="t l b" align="right">{{ $j_jasa }}</th>
+                <th class="t l b" align="right">{{ $j_jumlah }}</th>
+                <th class="t l b" align="right">{{ $j_premi }}</th>
+                <th class="t l b r" colspan=2>&nbsp;</th>
+            </tr>
+    </table>
+
+                <table class="p" border="0" width="100%" cellspacing="0" cellpadding="0"
+                    style="font-size: 11px;">
+                    <tr>
+                        <td width="60%">&nbsp;</td>
+                        <td width="60"></td>
+                        <td width="2"></td>
+                        <td>{{ substr($pinkel->wt_cair, 6) }}</td>
+                    </tr>
+                    <tr>
+                        <td width="60%">&nbsp;</td>
+                        <td width="60">Pada Tanggal</td>
+                        <td width="2">:</td>
+                        <td>{{ Tanggal::tglLatin($pinkel->tgl_cair) }}</td>
+                    </tr>
+                </table>
+                <table class="p" border="0" width="100%" cellspacing="0" cellpadding="0"
+                    style="font-size: 11px;">
+                    <tr>
+                        <td colspan="2" height="10">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td align="center" width="50%">Mengetahui,</td>
+                        <td align="center" width="50%">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td align="center">{{ $kec->sebutan_level_1 }} {{ $kec->nama_lembaga_sort }}</td>
+                        <td align="center">Ketua Kelompok</td>
+                    </tr>
+                    <tr>
+                        <td align="center" colspan="2" height="30">&nbsp;</td>
+                    </tr>
+                    <tr style="font-weight: bold;">
+                        <td align="center">{{ $dir->namadepan }} {{ $dir->namabelakang }}</td>
+                        <td align="center">{{ $pinkel->kelompok->ketua }}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
 @endsection
