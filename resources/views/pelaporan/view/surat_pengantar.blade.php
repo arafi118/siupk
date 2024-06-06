@@ -34,7 +34,7 @@
                         <li>Laporan Laba Rugi</li>
                         <li>Laporan Arus Kas</li>
                         <li>Laporan Perubahan Modal</li>
-                        <li>Catatan Atas Laporan Keuangan (CALK)</li>
+                        <li>Catatan atas Laporan Keuangan (CALK)</li>
                     </ol>
                 </div>
                 <div>
