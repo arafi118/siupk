@@ -944,8 +944,8 @@ class PinjamanIndividuController extends Controller
             $saldo_jasa = $pinj_i->target->saldo_jasa - $jasa;
         }
 
-        $rekening_debit = '1.1.04' . str_pad($pinj_i->jpp->kode, 2, '0', STR_PAD_LEFT);
-        $rekening_kredit = '1.1.03' . str_pad($pinj_i->jpp->kode, 2, '0', STR_PAD_LEFT);
+        $rekening_debit = '1.1.04.' . str_pad($pinj_i->jpp->kode, 2, '0', STR_PAD_LEFT);
+        $rekening_kredit = '1.1.03.' . str_pad($pinj_i->jpp->kode, 2, '0', STR_PAD_LEFT);
 
         $pinj_anggota = PinjamanIndividu::where('id', $pinj_i->id)->update([
             'tgl_lunas' => Tanggal::tglNasional($data['tgl_penghapusan']),
@@ -1360,7 +1360,7 @@ class PinjamanIndividuController extends Controller
             ['lokasi', Session::get('lokasi')],
             ['level', '4'],
             ['jabatan', '70']
-            ])->with('j')->orderBy('id')->get();
+        ])->with('j')->orderBy('id')->get();
 
         $data['keuangan'] = $keuangan;
         $data['statusDokumen'] = request()->get('status');
