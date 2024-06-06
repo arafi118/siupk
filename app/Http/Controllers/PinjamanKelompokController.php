@@ -876,7 +876,10 @@ class PinjamanKelompokController extends Controller
             'user_id' => auth()->user()->id
         ]);
 
-        $update_pinj_a = PinjamanAnggota::where('id_pinkel', $id)->update([
+        $update_pinj_a = PinjamanAnggota::where([
+            ['id_pinkel', $id],
+            ['status', '=', 'A']
+        ])->update([
             'tgl_lunas' => Tanggal::tglNasional($tgl_resceduling),
             'status' => 'R',
             'lu' => date('Y-m-d H:i:s'),
@@ -1874,7 +1877,7 @@ class PinjamanKelompokController extends Controller
 
 
     public function asuransi($id, $data)
-{
+    {
         $data['pinkel'] = PinjamanKelompok::where('id', $id)->with([
             'jasa',
             'sis_pokok',
@@ -1884,30 +1887,30 @@ class PinjamanKelompokController extends Controller
             'pinjaman_anggota' => function ($query) {
                 $query->where('status', 'A')->orWhere('status', 'W');
             },
-        'pinjaman_anggota.anggota'
-    ])->first();
-    // Pastikan data['pinkel'] bukan null
-    if ($data['pinkel']) {
-        $data['dir'] = User::where([
-            ['level', '1'],
-            ['jabatan', '1'],
-            ['lokasi', Session::get('lokasi')]
+            'pinjaman_anggota.anggota'
         ])->first();
+        // Pastikan data['pinkel'] bukan null
+        if ($data['pinkel']) {
+            $data['dir'] = User::where([
+                ['level', '1'],
+                ['jabatan', '1'],
+                ['lokasi', Session::get('lokasi')]
+            ])->first();
 
-        $data['judul'] = 'Peserta Asuransi (' . $data['pinkel']->kelompok->nama_kelompok . ' - Loan ID. ' . $data['pinkel']->id . ')';
-        $view = view('perguliran.dokumen.asuransi', $data)->render();
+            $data['judul'] = 'Peserta Asuransi (' . $data['pinkel']->kelompok->nama_kelompok . ' - Loan ID. ' . $data['pinkel']->id . ')';
+            $view = view('perguliran.dokumen.asuransi', $data)->render();
 
-        if ($data['type'] == 'pdf') {
-            $pdf = PDF::loadHTML($view);
-            return $pdf->stream();
+            if ($data['type'] == 'pdf') {
+                $pdf = PDF::loadHTML($view);
+                return $pdf->stream();
+            } else {
+                return $view;
+            }
         } else {
-            return $view;
+            // Handle the case where no data is found
+            return response()->json(['error' => 'Data tidak ditemukan'], 404);
         }
-    } else {
-        // Handle the case where no data is found
-        return response()->json(['error' => 'Data tidak ditemukan'], 404);
     }
-}
 
     public function kartuAngsuran($id)
     {
