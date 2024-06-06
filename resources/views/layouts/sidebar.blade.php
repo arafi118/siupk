@@ -94,7 +94,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/detail_i/{perguliran_i">
+                        <a href="/detail_i/{perguliran_i}">
                             <i class="metismenu-icon">
                             </i>Status Proposal
                         </a>
