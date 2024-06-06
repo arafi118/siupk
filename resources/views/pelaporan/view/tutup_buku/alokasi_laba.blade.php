@@ -5,7 +5,7 @@
         1 => 'Kegiatan sosial kemasyarakatan dan bantuan RTM',
         2 => 'Pengembangan kapasitas kelompok SPP/UEP',
         3 => 'Pelatihan masyarakat, dan kelompok pemanfaat umum',
-        4 => 'Penambahan Modal DBM',
+        4 => 'Penambahan Modal UPK',
         5 => 'Penambahan Investasi Usaha',
         6 => 'Pendirian Unit Usaha',
     ];

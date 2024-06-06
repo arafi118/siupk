@@ -75,7 +75,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="input-group input-group-static my-3">
-                <label for="peningkatan_modal">Peningkatan Modal DBM</label>
+                <label for="peningkatan_modal">Peningkatan Modal UPK</label>
                 <input autocomplete="off" type="text" name="peningkatan_modal" id="peningkatan_modal"
                     class="form-control money" value="{{ number_format($calk['D']['2']['a'], 2) }}">
                 <small class="text-danger" id="msg_peningkatan_modal"></small>

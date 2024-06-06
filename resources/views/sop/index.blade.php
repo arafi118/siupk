@@ -180,7 +180,7 @@
 
             Swal.fire({
                 title: 'Peringatan',
-                text: 'Kami selaku tim pengembang aplikasi SIDBM tidak bertanggung jawab jika terjadi sesuatu pada nomor anda ke depannya.',
+                text: 'Kami selaku tim pengembang aplikasi SIUPK tidak bertanggung jawab jika terjadi sesuatu pada nomor anda ke depannya.',
                 showCancelButton: true,
                 confirmButtonText: 'Lanjutkan',
                 cancelButtonText: 'Batal',
@@ -240,7 +240,7 @@
                     if (result.status) {
                         Swal.fire({
                             title: 'Selamat',
-                            text: 'Anda telah logout dari SI DBM Whatsapp Gateway.',
+                            text: 'Anda telah logout dari SI UPK Whatsapp Gateway.',
                             showCancelButton: false,
                             icon: 'success'
                         }).then(() => {
@@ -255,7 +255,7 @@
         function waActive() {
             Swal.fire({
                 title: 'Selamat',
-                text: 'SI DBM Whatsapp Gateway berhasil diaktifkan.',
+                text: 'SI UPK Whatsapp Gateway berhasil diaktifkan.',
                 showCancelButton: false,
                 icon: 'success'
             })

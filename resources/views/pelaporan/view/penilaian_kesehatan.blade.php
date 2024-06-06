@@ -13,9 +13,6 @@
                     <b>PENILAIAN KESEHATAN</b>
                 </div>
                 <div style="font-size: 16px;">
-                    <b>{{ strtoupper($kec->nama_lembaga_sort) }}</b>
-                </div>
-                <div style="font-size: 16px;">
                     <b>{{ strtoupper($sub_judul) }}</b>
                 </div>
             </td>
@@ -148,7 +145,7 @@
             $skor_b4 = 6.25;
             $status_b4 = 'Cukup Sehat';
         } elseif ($beban_operasional < 80) {
-            $skor_b4 = 5;
+            $skor_b4 = 5.75;
             $status_b4 = 'Kurang Sehat';
         } elseif ($beban_operasional < 85) {
             $skor_b4 = 3.75;
@@ -257,20 +254,20 @@
                 </table>
             </td>
             <td class="t l b" rowspan="2">
-                <div>{{ 'R < 5% skor 40' }}</div>
-                <div>{{ 'R < 10% skor 35' }}</div>
+                <div>{{ 'P < 5% skor 40' }}</div>
+                <div>{{ 'P < 10% skor 35' }}</div>
             </td>
             <td class="t l b" rowspan="2">
-                <div>{{ 'R < 12.5% skor 30' }}</div>
-                <div>{{ 'R < 15% skor 25' }}</div>
+                <div>{{ 'P < 12.5% skor 30' }}</div>
+                <div>{{ 'P < 15% skor 25' }}</div>
             </td>
             <td class="t l b" rowspan="2">
-                <div>{{ 'R < 17.5% skor 20' }}</div>
-                <div>{{ 'R < 20% skor 15' }}</div>
+                <div>{{ 'P < 17.5% skor 20' }}</div>
+                <div>{{ 'P < 20% skor 15' }}</div>
             </td>
             <td class="t l b" rowspan="2">
-                <div>{{ 'R < 25% skor 10' }}</div>
-                <div>{{ 'R >= 25% skor 0' }}</div>
+                <div>{{ 'P < 25% skor 10' }}</div>
+                <div>{{ 'P >= 25% skor 0' }}</div>
             </td>
             <td class="t l b" rowspan="2" align="center">{{ $skor_b1 }}</td>
             <td class="t l b r" rowspan="2" align="center">{{ $status_b1 }}</td>
@@ -302,19 +299,19 @@
                 </table>
             </td>
             <td class="t l b" rowspan="2">
-                <div>{{ 'R >= 100% skor 20' }}</div>
+                <div>{{ 'P >= 100% skor 20' }}</div>
             </td>
             <td class="t l b" rowspan="2">
-                <div>{{ 'R > 90% skor 15' }}</div>
-                <div>{{ 'R > 80% skor 12.5' }}</div>
+                <div>{{ 'P > 90% skor 15' }}</div>
+                <div>{{ 'P > 80% skor 12.5' }}</div>
             </td>
             <td class="t l b" rowspan="2">
-                <div>{{ 'R > 70% skor 10' }}</div>
-                <div>{{ 'R > 60% skor 7.5' }}</div>
+                <div>{{ 'P > 70% skor 10' }}</div>
+                <div>{{ 'P > 60% skor 7.5' }}</div>
             </td>
             <td class="t l b" rowspan="2">
-                <div>{{ 'R > 50% skor 5' }}</div>
-                <div>{{ 'R <= 50% skor 0' }}</div>
+                <div>{{ 'P > 50% skor 5' }}</div>
+                <div>{{ 'P <= 50% skor 0' }}</div>
             </td>
             <td class="t l b" rowspan="2" align="center">{{ $skor_b2 }}</td>
             <td class="t l b r" rowspan="2" align="center">{{ $status_b2 }}</td>
@@ -332,7 +329,7 @@
 
         <tr>
             <td class="t l b" align="center" rowspan="2">3</td>
-            <td class="t l b" rowspan="2" align="center">Rasio Laba Bersih Terhadap Kekayaan Bumdesma</td>
+            <td class="t l b" rowspan="2" align="center">Rasio Laba Bersih Terhadap Kekayaan UPK</td>
             <td class="t l b">
                 <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 10px;">
                     <tr>
@@ -354,20 +351,20 @@
                 </table>
             </td>
             <td class="t l b" rowspan="2">
-                <div>{{ 'R > 1% skor 10' }}</div>
-                <div>{{ 'R > 0.75% skor 8.75' }}</div>
+                <div>{{ 'P > 1% skor 10' }}</div>
+                <div>{{ 'P > 0.75% skor 8.75' }}</div>
             </td>
             <td class="t l b" rowspan="2">
-                <div>{{ 'R > 0.6% skor 7.5' }}</div>
-                <div>{{ 'R > 0.45% skor 6.25' }}</div>
+                <div>{{ 'P > 0.6% skor 7.5' }}</div>
+                <div>{{ 'P > 0.45% skor 6.25' }}</div>
             </td>
             <td class="t l b" rowspan="2">
-                <div>{{ 'R > 0.3% skor 5' }}</div>
-                <div>{{ 'R > 0.15% skor 3.75' }}</div>
+                <div>{{ 'P > 0.3% skor 5' }}</div>
+                <div>{{ 'P > 0.15% skor 3.75' }}</div>
             </td>
             <td class="t l b" rowspan="2">
-                <div>{{ 'R > 0% skor 2.5' }}</div>
-                <div>{{ 'R <= 0% skor 0' }}</div>
+                <div>{{ 'P > 0% skor 2.5' }}</div>
+                <div>{{ 'P <= 0% skor 0' }}</div>
             </td>
             <td class="t l b" rowspan="2" align="center">{{ $skor_b3 }}</td>
             <td class="t l b r" rowspan="2" align="center">{{ $status_b3 }}</td>
@@ -399,20 +396,20 @@
                 </table>
             </td>
             <td class="t l b" rowspan="2">
-                <div>{{ 'R < 60% skor 10' }}</div>
-                <div>{{ 'R < 65% skor 8.75' }}</div>
+                <div>{{ 'P < 40% skor 10' }}</div>
+                <div>{{ 'P < 50% skor 8.75' }}</div>
             </td>
             <td class="t l b" rowspan="2">
-                <div>{{ 'R < 70% skor 5.75' }}</div>
-                <div>{{ 'R < 75% skor 6.25' }}</div>
+                <div>{{ 'P < 60% skor 7.5' }}</div>
+                <div>{{ 'P < 70% skor 6.25' }}</div>
             </td>
             <td class="t l b" rowspan="2">
-                <div>{{ 'R < 80% skor 5' }}</div>
-                <div>{{ 'R < 85% skor 3.75' }}</div>
+                <div>{{ 'P < 80% skor 5.75' }}</div>
+                <div>{{ 'P < 90% skor 3.75' }}</div>
             </td>
             <td class="t l b" rowspan="2">
-                <div>{{ 'R < 95% skor 2.5' }}</div>
-                <div>{{ 'R >= 95% skor 0' }}</div>
+                <div>{{ 'P < 100% skor 2.5' }}</div>
+                <div>{{ 'P >= 100% skor 0' }}</div>
             </td>
             <td class="t l b" rowspan="2" align="center">{{ $skor_b4 }}</td>
             <td class="t l b r" rowspan="2" align="center">{{ $status_b4 }}</td>
@@ -430,7 +427,7 @@
 
         <tr>
             <td class="t l b" align="center" rowspan="2">5</td>
-            <td class="t l b" rowspan="2" align="center">Rasio Saldo Piutang Terhadap Kekayaan Bumdesma Non Investasi
+            <td class="t l b" rowspan="2" align="center">Rasio Saldo Piutang Terhadap Kekayaan UPK Non Investasi
             </td>
             <td class="t l b">
                 <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 10px;">
@@ -445,19 +442,19 @@
                 </table>
             </td>
             <td class="t l b" rowspan="2">
-                <div>{{ 'R >= 85% skor 10' }}</div>
+                <div>{{ 'P >= 85% skor 10' }}</div>
             </td>
             <td class="t l b" rowspan="2">
-                <div>{{ 'R > 80% skor 7.5' }}</div>
-                <div>{{ 'R > 75% skor 6.5' }}</div>
+                <div>{{ 'P > 80% skor 7.5' }}</div>
+                <div>{{ 'P > 75% skor 6.5' }}</div>
             </td>
             <td class="t l b" rowspan="2">
-                <div>{{ 'R > 70% skor 5' }}</div>
-                <div>{{ 'R > 65% skor 3.75' }}</div>
+                <div>{{ 'P > 70% skor 5' }}</div>
+                <div>{{ 'P > 65% skor 3.75' }}</div>
             </td>
             <td class="t l b" rowspan="2">
-                <div>{{ 'R > 65% skor 2.5' }}</div>
-                <div>{{ 'R <= 65% skor 0' }}</div>
+                <div>{{ 'P > 60% skor 2.5' }}</div>
+                <div>{{ 'P <= 60% skor 0' }}</div>
             </td>
             <td class="t l b" rowspan="2" align="center">{{ $skor_b5 }}</td>
             <td class="t l b r" rowspan="2" align="center">{{ $status_b5 }}</td>
@@ -475,7 +472,7 @@
 
         <tr>
             <td class="t l b" align="center" rowspan="2">6</td>
-            <td class="t l b" rowspan="2" align="center">Rasio Kekayaan Bersih Budesma</td>
+            <td class="t l b" rowspan="2" align="center">Rasio Kekayaan Bersih UPK</td>
             <td class="t l b">
                 <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 10px;">
                     <tr>
@@ -487,26 +484,26 @@
                         <td align="right">{{ number_format($tk['sum_kolek']) }}</td>
                     </tr>
                     <tr>
-                        <td>c. Modal disetor bumdesma </td>
+                        <td>c. Modal disetor UPK </td>
                         <td align="right">{{ number_format($modal_awal) }}</td>
                     </tr>
                 </table>
             </td>
             <td class="t l b" rowspan="2">
-                <div>{{ 'R > 110% skor 10' }}</div>
-                <div>{{ 'R > 107.5% skor 8.75' }}</div>
+                <div>{{ 'P > 110% skor 10' }}</div>
+                <div>{{ 'P > 107.5% skor 8.75' }}</div>
             </td>
             <td class="t l b" rowspan="2">
-                <div>{{ 'R > 105% skor 7.5' }}</div>
-                <div>{{ 'R > 102% skor 6.25' }}</div>
+                <div>{{ 'P > 105% skor 7.5' }}</div>
+                <div>{{ 'P > 102% skor 6.25' }}</div>
             </td>
             <td class="t l b" rowspan="2">
-                <div>{{ 'R > 100% skor 5' }}</div>
-                <div>{{ 'R > 97.5% skor 3.75' }}</div>
+                <div>{{ 'P > 100% skor 5' }}</div>
+                <div>{{ 'P > 97.5% skor 3.75' }}</div>
             </td>
             <td class="t l b" rowspan="2">
-                <div>{{ 'R > 95% skor 2.5' }}</div>
-                <div>{{ 'R < 95% skor 0' }}</div>
+                <div>{{ 'P > 95% skor 2.5' }}</div>
+                <div>{{ 'P < 95% skor 0' }}</div>
             </td>
             <td class="t l b" rowspan="2" align="center">{{ $skor_b6 }}</td>
             <td class="t l b r" rowspan="2" align="center">{{ $status_b6 }}</td>
@@ -528,7 +525,7 @@
                     style="font-size: 11px;">
                     <tr style="font-weight: bold;" class="break">
                         <td class="t l b" width="50%">
-                            Komulatif skor dalam parameter Bumdesma dengan usaha utama DBM
+                            Komulatif skor 
                         </td>
                         <td class="t l b" align="center" width="10%">{{ '> 87.5 - 100' }}</td>
                         <td class="t l b" align="center" width="10%">{{ '> 62.5 - 87.5' }}</td>

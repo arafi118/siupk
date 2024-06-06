@@ -284,7 +284,7 @@
                     dengan hasil survey lapangan bahwa kelompok dengan identitas tersebut di atas <b>ADA/TIDAK ADA</b>
                     keberadaannya dan dapat dipertanggungjawabkan sesuai dengan peraturan yang berlaku. Serta <b>LAYAK/TIDAK
                         LAYAK</b> untuk diberikan pinjaman sesuai dengan hasil rekomendasi Verifikasi di atas. Form ini
-                    digunakan sebagai dasar Verified pada SI DBM.
+                    digunakan sebagai dasar Verified pada SI UPK.
                 </div>
             </td>
             <td width="50%" align="justify" style="vertical-align: top;">
