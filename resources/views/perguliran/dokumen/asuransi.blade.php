@@ -78,8 +78,8 @@
             <th class="t l b r" width="10%" rowspan="2">TTD</th>
         </tr>
         <tr>
-            <td class="t l b" width="10%">Pokok</td>
-            <td class="t l b" width="10%">Jasa</td>
+            <th class="t l b" width="10%">Pokok</th>
+            <th class="t l b" width="10%">Jasa</th>
         </tr>
 
         @php
