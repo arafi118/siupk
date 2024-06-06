@@ -290,7 +290,9 @@
                 <button type="button" id="kembaliProposal" class="btn btn-warning btn-sm">
                     Kembalikan Ke Proposal
                 </button>
-                <button type="button" id="Simpan" class="btn btn-github ms-1 btn-sm">
+                <button type="button" id="Simpan"
+                    {{ $pinj_a['jumlah_pinjaman'] > '0' || $pinj_a['jumlah_pemanfaat'] > '0' || $pinj_a['jumlah_kelompok'] > '0' ? 'disabled' : '' }}
+                    class="btn btn-github ms-1 btn-sm">
                     Simpan Keputusan Pendanaan
                 </button>
             </div>

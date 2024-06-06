@@ -380,6 +380,7 @@ class PinjamanKelompokController extends Controller
             'real',
             'real.transaksi'
         ])->where('id', $perguliran->id)->first();
+
         $jenis_jasa = JenisJasa::all();
         $sistem_angsuran = SistemAngsuran::all();
         $sumber_bayar = Rekening::where([
@@ -408,7 +409,7 @@ class PinjamanKelompokController extends Controller
         }
 
         $pinj_a = [];
-        if ($perguliran->status == 'W') {
+        if ($perguliran->status == 'W' || $perguliran->status == 'V') {
             $pinkel_aktif = PinjamanKelompok::where([['id_kel', $perguliran->id_kel], ['status', 'A']]);
 
             $pinjaman_anggota = $perguliran->pinjaman_anggota;
@@ -1685,7 +1686,7 @@ class PinjamanKelompokController extends Controller
             return $view;
         }
     }
-    
+
 
     public function spk_anggota($id, $data)
     {
