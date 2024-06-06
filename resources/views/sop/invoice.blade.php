@@ -1,24 +1,43 @@
 @extends('layouts.base')
 
 @section('content')
-    <div class="card">
+    <div class="app-main__inner">
         <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-flush table-hover table-click" width="100%" id="TbInvoice">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Jenis Pembayaran</th>
-                            <th>tgl Invoice</th>
-                            <th>Tagihan</th>
-                            <th>Saldo</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Simple table</h5>
+                            <table class="table table-flush table-hover table-click" width="100%" id="TbInvoice">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Jenis Pembayaran</th>
+                                        <th>tgl Invoice</th>
+                                        <th>Tagihan</th>
+                                        <th>Saldo</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
+    </div>
+    </div>
     </div>
 @endsection
 
