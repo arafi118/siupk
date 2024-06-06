@@ -999,8 +999,8 @@ class PinjamanKelompokController extends Controller
             $saldo_jasa = $pinkel->target->saldo_jasa - $jasa;
         }
 
-        $rekening_debit = '1.1.04' . str_pad($pinkel->jpp->kode, 2, '0', STR_PAD_LEFT);
-        $rekening_kredit = '1.1.03' . str_pad($pinkel->jpp->kode, 2, '0', STR_PAD_LEFT);
+        $rekening_debit = '1.1.04.' . str_pad($pinkel->jpp->kode, 2, '0', STR_PAD_LEFT);
+        $rekening_kredit = '1.1.03.' . str_pad($pinkel->jpp->kode, 2, '0', STR_PAD_LEFT);
 
         $pinj_kelompok = PinjamanKelompok::where('id', $pinkel->id)->update([
             'tgl_lunas' => Tanggal::tglNasional($data['tgl_penghapusan']),
