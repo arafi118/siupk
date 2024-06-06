@@ -128,9 +128,9 @@ if (isset($_POST['copy'])) {
         END;
     ";
 
-    mysqli_query($trigger, $create);
-    mysqli_query($trigger, $update);
-    mysqli_query($trigger, $delete);
+    mysqli_query($koneksi, $create);
+    mysqli_query($koneksi, $update);
+    mysqli_query($koneksi, $delete);
 
     mysqli_query($koneksi, "UPDATE siupk_dbm.inventaris_$lokasi SET kategori='1', jenis='1' WHERE kategori='1' AND jenis='3'");
     mysqli_query($koneksi, "UPDATE siupk_dbm.inventaris_$lokasi SET kategori='1', jenis='3' WHERE kategori='5' AND jenis='2'");
