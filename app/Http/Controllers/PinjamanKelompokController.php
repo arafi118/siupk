@@ -878,7 +878,7 @@ class PinjamanKelompokController extends Controller
 
         $update_pinj_a = PinjamanAnggota::where([
             ['id_pinkel', $id],
-            ['status', '=', 'A']
+            ['status', 'A']
         ])->update([
             'tgl_lunas' => Tanggal::tglNasional($tgl_resceduling),
             'status' => 'R',
@@ -926,7 +926,11 @@ class PinjamanKelompokController extends Controller
             'id_user' => auth()->user()->id
         ]);
 
-        foreach ($pinkel->pinjaman_anggota as $pa) {
+        $pinjaman_anggota = PinjamanAnggota::where([
+            ['id_pinkel', $pinkel->id],
+            ['status', 'R']
+        ])->get();
+        foreach ($pinjaman_anggota as $pa) {
             $pinjaman_anggota = [
                 'jenis_pinjaman' => $pa->jenis_pinjaman,
                 'id_kel' => $pa->id_kel,
