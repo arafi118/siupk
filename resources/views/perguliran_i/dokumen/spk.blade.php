@@ -23,16 +23,24 @@
 @extends('perguliran_i.dokumen.layout.base')
 
 @section('content')
-    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
+    <style>
+        /* styles.css */
+        .centered-text {
+            font-size: 10px;
+            text-align: center;
+            text-align: justify;
+        }
+    </style>
+    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 12px;">
+
         <tr>
             <td colspan="3" align="center">
-                <div style="font-size: 18px;">
+                <div style="font-size: 14px;">
                     <b>SURAT PERJANJIAN KREDIT (SPK)</b>
                 </div>
-                <div style="font-size: 14px;">
+                <div style="font-size: 12px;">
                     Nomor: {{ $pinkel->spk_no }}
                 </div>
-
             </td>
         </tr>
         <tr>
@@ -40,38 +48,40 @@
         </tr>
     </table>
 
-    <div style="text-align: justify;">
+    <div class="centered-text">
         Dengan memohon rahmat Tuhan Yang Maha Kuasa serta kesadaran akan cita-cita luhur pemberdayaan masyarakat desa untuk
         mencapai kemajuan ekonomi dan kemakmuran bersama, pada hari ini {{ Tanggal::namaHari($pinkel->tgl_cair) }} tanggal
         {{ $keuangan->terbilang(Tanggal::hari($pinkel->tgl_cair)) }} bulan {{ Tanggal::namaBulan($pinkel->tgl_cair) }} tahun
         {{ $keuangan->terbilang(Tanggal::tahun($pinkel->tgl_cair)) }}, bertempat di {{ $tempat }} kami yang bertanda
         tangan dibawah ini;
     </div>
-
-    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 12px;">
+    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 10px;">
         <tr>
+            <td width="5">&nbsp;</td>
             <td width="90">Nama Lengkap</td>
             <td width="10" align="center">:</td>
             <td>{{ $dir->namadepan }} {{ $dir->namabelakang }}</td>
         </tr>
         <tr>
+            <td width="5">&nbsp;</td>
             <td>Jabatan</td>
             <td align="center">:</td>
             <td>{{ $kec->sebutan_level_1 }} {{ $kec->nama_lembaga_sort }}</td>
         </tr>
         <tr>
+            <td width="5">&nbsp;</td>
             <td>NIK</td>
             <td align="center">:</td>
             <td>{{ $dir->nik }}</td>
         </tr>
         <tr>
+            <td width="5">&nbsp;</td>
             <td>Alamat</td>
             <td align="center">:</td>
             <td>{{ $kec->alamat_kec }}</td>
         </tr>
     </table>
-
-    <div style="text-align: justify;">
+    <div class="centered-text">
         Dalam hal ini bertindak untuk dan atas nama Pengurus {{ $kec->nama_lembaga_sort }} {{ $kec->sebutan_kec }}
         {{ $kec->nama_kec }} selaku pengelola pelayanan
         kredit untuk {{ $pinkel->jpp->deskripsi_jpp }}
@@ -79,19 +89,21 @@
         {{ $kec->nama_kec }}, Selanjutnya disebut
         <b>Pihak Pertama</b>, dan
     </div>
-
-    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 12px;">
+    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 10px;">
         <tr>
+            <td width="5">&nbsp;</td>
             <td width="90">Nama Lengkap</td>
             <td width="10" align="center">:</td>
             <td>{{ $pinkel->anggota->namadepan }}</td>
         </tr>
         <tr>
+            <td width="5">&nbsp;</td>
             <td>Jenis kelamin</td>
             <td align="center">:</td>
             <td>{{ $pinkel->anggota->jk }}</td>
         </tr>
         <tr>
+            <td width="5">&nbsp;</td>
             <td>Tempat, tangal lahir</td>
             <td align="center">:</td>
             <td>{{ $pinkel->anggota->tempat_lahir }},
@@ -99,22 +111,24 @@
             </td>
         </tr>
         <tr>
+            <td width="5">&nbsp;</td>
             <td>NIK</td>
             <td align="center">:</td>
             <td>{{ $pinkel->anggota->nik }}</td>
         </tr>
         <tr>
+            <td width="5">&nbsp;</td>
             <td>Berkedudukan di</td>
             <td align="center">:</td>
             <td>{{ $pinkel->anggota->alamat }}</td>
         </tr>
     </table>
 
-    <div style="text-align: justify;">
+    <div class="centered-text">
         Dalam hubungan ini bertindak untuk dan atas nama diri sendiri yang menjadi bagian tidak terpisahkan dari dokumen
         perjanjian kredit ini, selanjutnya disebut PIHAK KEDUA.
     </div>
-    <p style="text-align: justify;">
+    <p class="centered-text">
         Pihak Pertama dan Pihak Kedua dalam kedudukan masing-masing seperti telah diterangkan diatas, Pada hari
         {{ \Carbon\Carbon::parse($pinkel->anggota->tgl_cair)->format('d F Y') }},
         bertempat di {{ $kec->nama_lembaga_sort }} {{ $kec->sebutan_kec }}
@@ -125,9 +139,9 @@
 
 
     <div style="text-align: center;">
-        <b style="font-size: 14px;">PASAL 1</b>
+        <b class="centered-text">PASAL 1</b>
 
-        <ol style="text-align: justify;">
+        <ol class="centered-text">
             <li> <b> Pihak Pertama</b> dengan ini setuju memberikan kredit kepada <b>Pihak Kedua</b> uang sebesar Rp.
                 {{ number_format($pinkel->alokasi) }} ({{ $keuangan->terbilang($pinkel->alokasi) }} Rupiah) Yaitu jumlah
                 yang telah diputuskan dalam Rekomendasi rapat <b>Tim Pendanaan</b> mendasar pada surat Rekomendasi dari
@@ -145,9 +159,9 @@
     </div>
 
     <div style="text-align: center;">
-        <b style="font-size: 14px;">PASAL 2</b>
-        <h3 class="fa fa-align-center" aria-hidden="true">Penyerahan Pinjaman</i></h3>
-        <div style="text-align: justify;">
+        <b class="centered-text">PASAL 2</b>
+        <h3 class="fa fa-align-center" aria-hidden="true"style="font-size: 10px;">Penyerahan Pinjaman</i></h3>
+        <div class="centered-text">
             <b> Pihak Pertama</b> telah menyerahkan uang kepada Pihak Kedua sebagai pinjaman sebesar
             <b>{{ number_format($pinkel->alokasi) }} ({{ $keuangan->terbilang($pinkel->alokasi) }} Rupiah)</b>
             tersebut secara tunai dan sekaligus kepada <b>Pihak Kedua</b> pada saat perjanjian ini dibuat dan ditanda
@@ -155,11 +169,12 @@
             sah.
         </div>
     </div>
+    <br>
     <div style="text-align: center;">
-        <b style="font-size: 14px;">PASAL 3</b>
-        <h3 class="fa fa-align-center" aria-hidden="true">Sistem Pengembalian
+        <b class="centered-text">PASAL 3</b>
+        <h3 class="fa fa-align-center" aria-hidden="true"style="font-size: 10px;">Sistem Pengembalian
             </i></h3>
-        <div style="text-align: justify;">
+        <div class="centered-text">
             <b> Pihak Pertama</b> telah menyerahkan uang kepada Pihak Kedua sebagai pinjaman sebesar
             <b>{{ number_format($pinkel->alokasi) }} ({{ $keuangan->terbilang($pinkel->alokasi) }} Rupiah)</b>
             tersebut secara tunai dan sekaligus kepada <b>Pihak Kedua</b> pada saat perjanjian ini dibuat dan ditanda
@@ -168,22 +183,26 @@
             <b>Pihak Kedua</b> wajib membayar hutang tersebut kepada <b>Pihak Pertama</b> dengan cara pembayaran angsuran
             sebesar
             <b>{{ number_format($pinkel->alokasi) }} ({{ $keuangan->terbilang($pinkel->alokasi) }} Rupiah)</b> ditambah
-            jasa <b> {{ $pinkel->pros_jasa / $pinkel->jangka }} % Flat</b> sebesar <b>{{ number_format($pinkel->alokasi*( $pinkel->pros_jasa / $pinkel->jangka/100 )) }} ({{ $keuangan->terbilang($pinkel->alokasi*( $pinkel->pros_jasa / $pinkel->jangka/100 )) }} Rupiah)</b> setiap bulan, selama 6 bulan,
+            jasa <b> {{ $pinkel->pros_jasa / $pinkel->jangka }} % Flat</b> sebesar
+            <b>{{ number_format($pinkel->alokasi * ($pinkel->pros_jasa / $pinkel->jangka / 100)) }}
+                ({{ $keuangan->terbilang($pinkel->alokasi * ($pinkel->pros_jasa / $pinkel->jangka / 100)) }} Rupiah)</b>
+            setiap bulan, selama 6 bulan,
             yang dimulai pada {{ Tanggal::namaHari($pinkel->tgl_cair) }},
             {{ \Carbon\Carbon::parse($pinkel->anggota->tgl_cair)->translatedFormat('d F Y') }} dan
             sampai target pelunasan, sebagaimana jadwal angsuran terlampir.
         </div>
     </div>
+    <br>
     <div style="text-align: center;">
-        <b style="font-size: 14px;">PASAL 4</b>
-        <h3 class="fa fa-align-center" aria-hidden="true">Agunan</i></h3>
-        <div style="text-align: justify;">
+        <b class="centered-text">PASAL 4</b>
+        <h3 class="fa fa-align-center" aria-hidden="true"style="font-size: 10px;">Agunan</i></h3>
+        <div class="centered-text">
             Untuk menjamin pembayaran kembali yang tertib dan sebagaimana mestinya atas segala sesuatu yang berdasarkan
             perjanjian ini masih terutang oleh <b>Pihak Kedua</b>kepada <b>Pihak Pertama</b>, ditambah biaya yang timbul
             akibat
             eksekusi
             Agunan, maka akan dibuat sebuah perjanjian dimana :
-            <ol style="text-align: justify;">
+            <ol class="centered-text">
                 <li>
                     <b> Pihak Kedua</b> akan menyerahkan Agunan kepada Pihak Pertama berupa.
                     berikut dengan segala hak dan kepentingan yang sekarang atau dikemudian hari akan diperoleh <b>Pihak
@@ -206,11 +225,13 @@
             </ol>
         </div>
     </div>
+    <br><br><br>
     <div style="text-align: center;">
-        <b style="font-size: 14px;">PASAL 5</b>
-        <h3 class="fa fa-align-center" aria-hidden="true">Pengalihan Kuasa Khusus atas Agunan </i></h3>
+        <b class="centered-text">PASAL 5</b>
+        <h3 class="fa fa-align-center" aria-hidden="true"style="font-size: 10px;">Pengalihan Kuasa Khusus atas Agunan </i>
+        </h3>
 
-        <ol style="text-align: justify;">
+        <ol class="centered-text">
             <li><b>Pihak Kedua</b> dengan ini memberikan kuasa kepada <b>Pihak Pertama</b> untuk mengambil dan menguasai
                 obyek yang disebutkan sebagai Barang jaminan atau agunan dimaksud dalam pasal 5 secara sah dan memiliki hak
                 sepenuhnya untuk menjual atau melakukan lelang atau memiliki sendiri atas barang jaminan/agunan tersebut
@@ -230,10 +251,10 @@
         </ol>
     </div>
     <div style="text-align: center;">
-        <b style="font-size: 14px;">PASAL 6</b>
-        <h3 class="fa fa-align-center" aria-hidden="true">Penyelesaian Perselisihan </i></h3>
+        <b class="centered-text">PASAL 6</b>
+        <h3 class="fa fa-align-center" aria-hidden="true"style="font-size: 10px;">Penyelesaian Perselisihan </i></h3>
 
-        <ol style="text-align: justify;">
+        <ol class="centered-text">
             <li>Apabila ada hal-hal yang tidak atau belum diatur dalam perjanjian ini dan juga jika
                 terjadi perbedaan penafsiran atas seluruh atau sebagian dari perjanjian ini maka
                 kedua belah pihak sepakat untuk menyelesaikannya secara musyawarah untuk mufakat.
@@ -246,28 +267,30 @@
         </ol>
     </div>
     <div style="text-align: center;">
-        <b style="font-size: 14px;">PASAL 7</b>
-        <h3 class="fa fa-align-center" aria-hidden="true">Sistem Pengembalian
+        <b class="centered-text">PASAL 7</b>
+        <h3 class="fa fa-align-center" aria-hidden="true"style="font-size: 10px;">Sistem Pengembalian
             </i></h3>
-        <div style="text-align: justify;">
+        <div class="centered-text">
             Hal-hal yang belum atau belum cukup diatur dalam perjanjian ini akan diatur lebih lanjut dalam bentuk surat
             menyurat dan atau addendum perjanjian yang ditandatangani oleh para pihak yang merupakan satu kesatuan dan
             bagian yang tidak terpisahkan dari perjanjian ini.
         </div>
     </div>
-    <div style="text-align: center;">
-        <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 12px;"class="p0">
+    <div style="text-align: center;"style="font-size: 10px;">
+        <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 10px;"class="p0">
             <tr>
                 <td style="padding: 0px !important;">
                     <table class="p0" border="0" width="100%" cellspacing="0" cellpadding="0"
-                        style="font-size: 12px;">
+                        style="font-size: 10px;">
+                        <br>
                         <tr>
                             <td style="padding: 0px !important;">
                                 <div style="text-align: center;">
-                                    <b style="font-size: 14px; text-align: center;">PASAL 8</b>
-                                    <h3 class="fa fa-align-center" aria-hidden="true">Penyelesaian Perselisihan </i></h3>
+                                    <b class="centered-text">PASAL 8</b>
+                                    <h3 class="fa fa-align-center" aria-hidden="true"style="font-size: 10px;">Penyelesaian
+                                        Perselisihan </i></h3>
                                 </div>
-                                <div style="text-align: justify;">
+                                <div class="centered-text">
                                     Perjanjian Hutang Piutang uang ini dibuat rangkap 2 (dua) di atas kertas bermaterai
                                     cukup untuk masing-masing pihak yang mempunyai kekuatan hukum yang sama dan ditanda
                                     tangani oleh kedua belah pihak dalam keadaan sehat jasmani dan rohani, serta tanpa
@@ -277,7 +300,7 @@
                         </tr>
                     </table>
 
-                    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 12px;">
+                    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 10px;">
                         <tr>
                             <td colspan="2" height="24">&nbsp;</td>
                         </tr>

@@ -4,7 +4,7 @@
     <table border="0">
         <tr>
             <td width="5%">Nomor<br>Lampiran<br> Perihal</td>
-            <td width="20%">: &nbsp; <br> : 1 Bendel  <br> : Laporan Keuangan</td>
+            <td width="20%">: &nbsp; <br> : 1 Bendel <br> : Laporan Keuangan</td>
             <td width="45%" align="right">{{ $kec->nama_kec }}, {{ $tgl }} <br> &nbsp;<br> &nbsp;</td>
         </tr>
         <tr>
@@ -26,14 +26,15 @@
             <td colspan="2" style="padding-left: 8px; text-align: justify;">
                 <div>Dengan Hormat,</div>
                 <div>
-                    Bersama ini kami sampaikan Laporan Keuangan {{ $nama_lembaga }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }} sampai dengan
+                    Bersama ini kami sampaikan Laporan Keuangan {{ $nama_lembaga }} {{ $kec->sebutan_kec }}
+                    {{ $kec->nama_kec }} sampai dengan
                     {{ $sub_judul }} sebagai berikut:
                     <ol>
                         <li>Laporan Neraca</li>
-                        <li>Laporan Rugi/Laba</li>
-                        <li>Neraca Saldo</li>
+                        <li>Laporan Laba Rugi</li>
+                        <li>Laporan Arus Kas</li>
                         <li>Laporan Perubahan Modal</li>
-                        <li>Catatan Atas Laporan Keuangan (CALK)</li>
+                        <li>Catatan atas Laporan Keuangan (CALK)</li>
                     </ol>
                 </div>
                 <div>
