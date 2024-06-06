@@ -112,7 +112,7 @@
             <td width="50">Jumlah Angsuran </td>
             <td width="100">: &nbsp;
                 <b>
-                    Rp. {{ number_format($pinkel->target->wajib_pokok) }} x
+                    Rp. {{ number_format($pinkel->target->wajib_pokok + $pinkel->target->wajib_jasa) }} x
                     {{ $pinkel->jangka / $pinkel->sis_pokok->sistem }}
                 </b>
             </td>

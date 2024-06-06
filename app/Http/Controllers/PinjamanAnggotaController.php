@@ -42,59 +42,50 @@ class PinjamanAnggotaController extends Controller
 
             $anggota = Anggota::where('id', $nia)->where('nik', request()->get('value'))->first();
 
-            if ($anggota->status != '0') {
-                $pinjaman_anggota = PinjamanAnggota::where('nia', $nia)->where(function (Builder $query) {
-                    $query->where('status', 'P')->orwhere('status', 'V')->orwhere('status', 'W');
-                });
-                $jumlah_pinjaman_anggota = $pinjaman_anggota->count();
-                $pinjaman_anggota = $pinjaman_anggota->with('sts')->orderby('tgl_proposal', 'desc')->first();
+            $pinjaman_anggota = PinjamanAnggota::where('nia', $nia)->where(function (Builder $query) {
+                $query->where('status', 'P')->orwhere('status', 'V')->orwhere('status', 'W');
+            });
+            $jumlah_pinjaman_anggota = $pinjaman_anggota->count();
+            $pinjaman_anggota = $pinjaman_anggota->with('sts')->orderby('tgl_proposal', 'desc')->first();
 
-                $pinjaman_anggota_a = PinjamanAnggota::where('nia', $nia)->where('status', 'A');
-                $jumlah_pinjaman_anggota_a = $pinjaman_anggota_a->count();
-                $pinjaman_anggota_a = $pinjaman_anggota_a->with('sts')->orderby('tgl_cair', 'desc')->first();
+            $pinjaman_anggota_a = PinjamanAnggota::where('nia', $nia)->where('status', 'A');
+            $jumlah_pinjaman_anggota_a = $pinjaman_anggota_a->count();
+            $pinjaman_anggota_a = $pinjaman_anggota_a->with('sts')->orderby('tgl_cair', 'desc')->first();
 
-                $data_pemanfaat = DataPemanfaat::where([
-                    ['nik', request()->get('value')],
-                    ['lokasi', '!=', Session::get('lokasi')]
-                ])->where(function (Builder $query) {
-                    $query->where('status', 'P')->orwhere('status', 'V')->orwhere('status', 'W');
-                });
-                $jumlah_data_pemanfaat = $data_pemanfaat->count();
-                $data_pemanfaat = $data_pemanfaat->with('sts', 'kec')->first();
+            $data_pemanfaat = DataPemanfaat::where([
+                ['nik', request()->get('value')],
+                ['lokasi', '!=', Session::get('lokasi')]
+            ])->where(function (Builder $query) {
+                $query->where('status', 'P')->orwhere('status', 'V')->orwhere('status', 'W');
+            });
+            $jumlah_data_pemanfaat = $data_pemanfaat->count();
+            $data_pemanfaat = $data_pemanfaat->with('sts', 'kec')->first();
 
-                $data_pemanfaat_a = DataPemanfaat::where([
-                    ['nik', request()->get('value')],
-                    ['lokasi', '!=', Session::get('lokasi')]
-                ])->where('status', 'A');
-                $jumlah_data_pemanfaat_a = $data_pemanfaat_a->count();
-                $data_pemanfaat_a = $data_pemanfaat_a->with('sts', 'kec')->first();
+            $data_pemanfaat_a = DataPemanfaat::where([
+                ['nik', request()->get('value')],
+                ['lokasi', '!=', Session::get('lokasi')]
+            ])->where('status', 'A');
+            $jumlah_data_pemanfaat_a = $data_pemanfaat_a->count();
+            $data_pemanfaat_a = $data_pemanfaat_a->with('sts', 'kec')->first();
 
-                $catatan = '';
-                $enable_alokasi = true;
-                if ($jumlah_pinjaman_anggota > 0 || $jumlah_data_pemanfaat > 0) $enable_alokasi = false;
+            $catatan = '';
+            $enable_alokasi = true;
+            if ($jumlah_pinjaman_anggota > 0 || $jumlah_data_pemanfaat > 0) $enable_alokasi = false;
 
-                if ($jumlah_pinjaman_anggota_a > 0) {
-                    $catatan = 'Memiliki pinjaman aktif dengan Loan ID. ' . $pinjaman_anggota_a->id_pinkel;
+            if ($jumlah_pinjaman_anggota_a > 0) {
+                $catatan = 'Memiliki pinjaman aktif dengan Loan ID. ' . $pinjaman_anggota_a->id_pinkel;
 
-                    if ($pinkel->id == $pinjaman_anggota_a->id_pinkel) $enable_alokasi = false;
-                }
-
-
-                $view = view('pinjaman.anggota.register')->with(compact('anggota', 'pinjaman_anggota', 'jumlah_pinjaman_anggota', 'pinjaman_anggota_a', 'jumlah_pinjaman_anggota_a', 'data_pemanfaat', 'jumlah_data_pemanfaat', 'data_pemanfaat_a', 'jumlah_data_pemanfaat_a'))->render();
-                return [
-                    'nia' => $nia,
-                    'enable_alokasi' => $enable_alokasi,
-                    'html' => $view,
-                    'catatan' => $catatan
-                ];
+                if ($pinkel->id == $pinjaman_anggota_a->id_pinkel) $enable_alokasi = false;
             }
 
-            $view = view('pinjaman.anggota.blokir')->with(compact('anggota'))->render();
+            if ($anggota->status == '0') $enable_alokasi = false;
+
+            $view = view('pinjaman.anggota.register')->with(compact('anggota', 'pinjaman_anggota', 'jumlah_pinjaman_anggota', 'pinjaman_anggota_a', 'jumlah_pinjaman_anggota_a', 'data_pemanfaat', 'jumlah_data_pemanfaat', 'data_pemanfaat_a', 'jumlah_data_pemanfaat_a'))->render();
             return [
                 'nia' => $nia,
-                'enable_alokasi' => false,
+                'enable_alokasi' => $enable_alokasi,
                 'html' => $view,
-                'catatan' => 'Blokir'
+                'catatan' => $catatan
             ];
         }
     }
