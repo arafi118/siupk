@@ -32,7 +32,7 @@
                     <ol>
                         <li>Laporan Neraca</li>
                         <li>Laporan Laba Rugi</li>
-                        <li>Arus Kas</li>
+                        <li>Laporan Arus Kas</li>
                         <li>Laporan Perubahan Modal</li>
                         <li>Catatan Atas Laporan Keuangan (CALK)</li>
                     </ol>
