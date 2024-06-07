@@ -7,7 +7,7 @@
                 <div class="col-lg-12">
                     <div class="main-card mb-3 card">
                         <div class="card-body">
-                            <h5 class="card-title">Simple table</h5>
+                            <h5 class="card-title"></h5>
                             <table class="mb-0 table table-borderless" width="100%">
                                 <thead>
                                     <tr>
