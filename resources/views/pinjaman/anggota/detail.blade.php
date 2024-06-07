@@ -79,7 +79,7 @@
                     </div>
                     <div class="col-6 d-grid">
                         <button type="button" id="Pelunasan" class="mb-0 btn btn-sm btn-github">
-                            Pelunasan Pinjaman
+                            Lepas Tanggung Renteng
                         </button>
                     </div>
                 </div>

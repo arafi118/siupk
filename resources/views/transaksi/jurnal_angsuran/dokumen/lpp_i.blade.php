@@ -101,7 +101,17 @@
             <td width="50">Jumlah Angsuran </td>
             <td width="100">: &nbsp;
                 <b>
-                    Rp. {{ number_format($pinkel->target->wajib_pokok) }} x
+                    @php
+                        $jumlah_angsuran = 0;
+                        foreach ($rencana as $renc) {
+                            if ($jumlah_angsuran == 0) {
+                                if ($renc->wajib_pokok + $renc->wajib_jasa > $jumlah_angsuran) {
+                                    $jumlah_angsuran = $renc->wajib_pokok + $renc->wajib_jasa;
+                                }
+                            }
+                        }
+                    @endphp
+                    Rp. {{ number_format($jumlah_angsuran) }} x
                     {{ $pinkel->jangka / $pinkel->sis_pokok->sistem }}
                 </b>
             </td>
