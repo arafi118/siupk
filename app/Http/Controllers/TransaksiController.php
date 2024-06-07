@@ -1973,7 +1973,7 @@ class TransaksiController extends Controller
                     'kom_pokok' => 0,
                     'kom_jasa' => 0
                 ]);
-            }
+            } 
 
             $trx = Transaksi::where('idt', $idt)->delete();
         }

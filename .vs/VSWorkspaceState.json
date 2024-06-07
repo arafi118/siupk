@@ -4,12 +4,13 @@
     "\\app",
     "\\app\\Http",
     "\\app\\Http\\Controllers",
+    "\\app\\Models",
     "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\pelaporan",
-    "\\resources\\views\\pelaporan\\view",
-    "\\resources\\views\\pelaporan\\view\\perkembangan_piutang"
+    "\\resources\\views\\desa",
+    "\\resources\\views\\perguliran",
+    "\\resources\\views\\perguliran\\dokumen"
   ],
-  "SelectedNode": "\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\lpp_desa.blade.php",
+  "SelectedNode": "\\app\\Models\\Desa.php",
   "PreviewInSolutionExplorer": false
 }
