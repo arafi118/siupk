@@ -19050,21 +19050,6 @@ A VERTICAL event
     text-transform: uppercase !important;
     opacity: .7 !important;
 }
-
-.form-control-sm {
-    overflow: hidden; /* Mengatasi masalah clearing float */
-    min-height: calc(1.5em + 0.5rem + calc(var(--bs-border-width) * 2));
-    padding: 0.25rem 0.5rem;
-    font-size: 0.968rem;
-    border-radius: var(--bs-border-radius-sm);
-  }
-  
-  .form-control-sm::file-selector-button {
-    float: right; /* Mengatur posisi di sebelah kanan */
-    padding: 0.25rem 0.5rem;
-    margin: -0.25rem -0.5rem;
-    margin-inline-end: 0.5rem;
-  }
 .table tbody tr td,
 .blockquote p {
     font-size: .875rem !important;
