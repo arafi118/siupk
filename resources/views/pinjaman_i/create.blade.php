@@ -1,11 +1,26 @@
 @extends('layouts.base')
 
-@section('content')
+{{-- @section('content')
     <div class="card mb-3">
         <div class="card-body p-3" id="SelectIndividu"></div>
     </div>
 
     <div class="mt-4 pt-1" id="RegisterProposal"></div>
+@endsection --}}
+
+@section('content')
+    <div class="app-main__inner">
+        <div class="tab-content">
+            <br>
+            <div class="main-card mb-3 card">
+                <div class="card-body p-3" id="SelectIndividu"></div>
+            </div>
+            <div class="main-card mb-3 card">
+                <div class="mt-4 pt-1" id="RegisterProposal"></div>
+            </div>
+
+        </div>
+    </div>
 @endsection
 
 @section('script')
