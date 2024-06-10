@@ -5,6 +5,7 @@ namespace App\Utils;
 use App\Models\AkunLevel2;
 use App\Models\Kecamatan;
 use App\Models\PinjamanKelompok;
+use App\Models\PinjamanIndividu;
 use App\Models\Rekening;
 use App\Models\Saldo;
 use App\Models\Transaksi;
@@ -470,6 +471,52 @@ class Keuangan
                     $query->where('jatuh_tempo', '<=', $data['tgl_kondisi']);
                 }
             ])->get();
+            
+        $pinjaman_individu = PinjamanIndividu::where('sistem_angsuran', '!=', '12')
+            ->where(function ($query) use ($data) {
+                $query->where([
+                    ['status', 'A'],
+                    ['jenis_pinjaman', 'I'],
+                    ['tgl_cair', '<=', $data['tgl_kondisi']]
+                ])->orwhere([
+                    ['status', 'L'],
+                    ['jenis_pinjaman', 'I'],
+                    ['tgl_cair', '<=', $data['tgl_kondisi']],
+                    ['tgl_lunas', '>=', "$data[tahun]-01-01"]
+                ])->orwhere([
+                    ['status', 'L'],
+                    ['jenis_pinjaman', 'I'],
+                    ['tgl_lunas', '<=', $data['tgl_kondisi']],
+                    ['tgl_lunas', '>=', "$data[tahun]-01-01"]
+                ])->orwhere([
+                    ['status', 'R'],
+                    ['jenis_pinjaman', 'I'],
+                    ['tgl_cair', '<=', $data['tgl_kondisi']],
+                    ['tgl_lunas', '>=', "$data[tahun]-01-01"]
+                ])->orwhere([
+                    ['status', 'R'],
+                    ['jenis_pinjaman', 'I'],
+                    ['tgl_lunas', '<=', $data['tgl_kondisi']],
+                    ['tgl_lunas', '>=', "$data[tahun]-01-01"]
+                ])->orwhere([
+                    ['status', 'H'],
+                    ['jenis_pinjaman', 'I'],
+                    ['tgl_cair', '<=', $data['tgl_kondisi']],
+                    ['tgl_lunas', '>=', "$data[tahun]-01-01"]
+                ])->orwhere([
+                    ['status', 'H'],
+                    ['jenis_pinjaman', 'I'],
+                    ['tgl_lunas', '<=', $data['tgl_kondisi']],
+                    ['tgl_lunas', '>=', "$data[tahun]-01-01"]
+                ]);
+            })->with([
+                'saldo' => function ($query) use ($data) {
+                    $query->where('tgl_transaksi', '<=', $data['tgl_kondisi']);
+                },
+                'target' => function ($query) use ($data) {
+                    $query->where('jatuh_tempo', '<=', $data['tgl_kondisi']);
+                }
+            ])->get();
 
         foreach ($pinjaman_kelompok as $pinkel) {
             $real_pokok = 0;
@@ -530,6 +577,101 @@ class Keuangan
             }
 
             $tgl_cair = explode('-', $pinkel->tgl_cair);
+            $th_cair = $tgl_cair[0];
+            $bl_cair = $tgl_cair[1];
+            $tg_cair = $tgl_cair[2];
+
+            $selisih_tahun = ($data['tahun'] - $th_cair) * 12;
+            $selisih_bulan = $data['bulan'] - $bl_cair;
+
+            $selisih = $selisih_bulan + $selisih_tahun;
+
+            $_kolek = 0;
+            if ($wajib_pokok != '0') {
+                $_kolek = ($tunggakan_pokok / $wajib_pokok);
+            }
+            $kolek = round($_kolek + ($selisih - $angsuran_ke));
+            if ($kolek <= 3) {
+                $kolek1 = $saldo_pokok;
+                $kolek2 = 0;
+                $kolek3 = 0;
+            } elseif ($kolek <= 5) {
+                $kolek1 = 0;
+                $kolek2 = $saldo_pokok;
+                $kolek3 = 0;
+            } else {
+                $kolek1 = 0;
+                $kolek2 = 0;
+                $kolek3 = $saldo_pokok;
+            }
+
+            $sum_nunggak_pokok += $tunggakan_pokok;
+            $sum_nunggak_jasa += $tunggakan_jasa;
+            $sum_saldo_pokok += $saldo_pokok;
+            $sum_saldo_jasa += $saldo_jasa;
+            $sum_kolek1 += $kolek1;
+            $sum_kolek2 += $kolek2;
+            $sum_kolek3 += $kolek3;
+        }
+        foreach ($pinjaman_individu as $pinj_i) {
+            $real_pokok = 0;
+            $real_jasa = 0;
+            $sum_pokok = 0;
+            $sum_jasa = 0;
+            $saldo_pokok = $pinj_i->alokasi;
+            $saldo_jasa = 0;
+            if ($pinj_i->pros_jasa > 0) {
+                $saldo_jasa = $pinj_i->pros_jasa == 0 ? 0 : $pinj_i->alokasi * ($pinj_i->pros_jasa / 100);
+            }
+            if ($pinj_i->saldo) {
+                $real_pokok = $pinj_i->saldo->realisasi_pokok;
+                $real_jasa = $pinj_i->saldo->realisasi_jasa;
+                $sum_pokok = $pinj_i->saldo->sum_pokok;
+                $sum_jasa = $pinj_i->saldo->sum_jasa;
+                $saldo_pokok = $pinj_i->saldo->saldo_pokok;
+                $saldo_jasa = $pinj_i->saldo->saldo_jasa;
+            }
+
+            $target_pokok = 0;
+            $target_jasa = 0;
+            $wajib_pokok = 0;
+            $wajib_jasa = 0;
+            $angsuran_ke = 0;
+            if ($pinj_i->target) {
+                $target_pokok = $pinj_i->target->target_pokok;
+                $target_jasa = $pinj_i->target->target_jasa;
+                $wajib_pokok = $pinj_i->target->wajib_pokok;
+                $wajib_jasa = $pinj_i->target->wajib_jasa;
+                $angsuran_ke = $pinj_i->target->angsuran_ke;
+            }
+
+            $tunggakan_pokok = $target_pokok - $sum_pokok;
+            if ($tunggakan_pokok < 0) {
+                $tunggakan_pokok = 0;
+            }
+            $tunggakan_jasa = $target_jasa - $sum_jasa;
+            if ($tunggakan_jasa < 0) {
+                $tunggakan_jasa = 0;
+            }
+
+            if ($pinj_i->tgl_lunas <= $data['tgl_kondisi'] && $pinj_i->status == 'L') {
+                $tunggakan_pokok = 0;
+                $tunggakan_jasa = 0;
+                $saldo_pokok = 0;
+                $saldo_jasa = 0;
+            } elseif ($pinj_i->tgl_lunas <= $data['tgl_kondisi'] && $pinj_i->status == 'R') {
+                $tunggakan_pokok = 0;
+                $tunggakan_jasa = 0;
+                $saldo_pokok = 0;
+                $saldo_jasa = 0;
+            } elseif ($pinj_i->tgl_lunas <= $data['tgl_kondisi'] && $pinj_i->status == 'H') {
+                $tunggakan_pokok = 0;
+                $tunggakan_jasa = 0;
+                $saldo_pokok = 0;
+                $saldo_jasa = 0;
+            }
+
+            $tgl_cair = explode('-', $pinj_i->tgl_cair);
             $th_cair = $tgl_cair[0];
             $bl_cair = $tgl_cair[1];
             $tg_cair = $tgl_cair[2];
