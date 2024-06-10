@@ -1934,6 +1934,12 @@ class TransaksiController extends Controller
         $id_pinj = $request->del_id_pinj;
 
         if ($idtp != '0') {
+            $trview = Transaksi::where('idt', $idt)->first();
+                if ($trview['id_pinj'] == '0' || $trview['id_pinj'] === NULL) {
+                    $trx = Transaksi::where('idtp', $idtp)->delete();
+                    $pinkel = PinjamanAnggota::where('id', $trview['id_pinj_i'])->first();
+                    $this->regenerateReali($pinkel);
+                }else{
             $trx = Transaksi::where('idtp', $idtp)->delete();
             $pinkel = PinjamanKelompok::where('id', $id_pinj)->with('pinjaman_anggota')->first();
 
@@ -1961,7 +1967,7 @@ class TransaksiController extends Controller
             }
 
             $this->regenerateReal($pinkel);
-            $this->regenerateReali($pinkel);
+                }
         } else {
             if ($id_pinj != '0') {
                 $pinkel = PinjamanKelompok::where('id', $id_pinj)->update([
@@ -1973,7 +1979,7 @@ class TransaksiController extends Controller
                     'kom_pokok' => 0,
                     'kom_jasa' => 0
                 ]);
-            }
+            } 
 
             $trx = Transaksi::where('idt', $idt)->delete();
         }
