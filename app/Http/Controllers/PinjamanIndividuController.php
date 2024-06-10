@@ -1624,6 +1624,8 @@ class PinjamanIndividuController extends Controller
         ])->first();
 
         $data['keuangan'] = $keuangan;
+        $data['ttd'] = Pinjaman::keyword($data['kec']->ttd->tanda_tangan_spk, $data, true);
+
         $data['dir'] = User::Where([
             ['lokasi', Session::get('lokasi')],
             ['level', '1'],
