@@ -409,7 +409,7 @@ class PinjamanKelompokController extends Controller
         }
 
         $pinj_a = [];
-        if ($perguliran->status == 'W' || $perguliran->status == 'V') {
+        if ($perguliran->status == 'W') {
             $pinkel_aktif = PinjamanKelompok::where([['id_kel', $perguliran->id_kel], ['status', 'A']]);
 
             $pinjaman_anggota = $perguliran->pinjaman_anggota;
