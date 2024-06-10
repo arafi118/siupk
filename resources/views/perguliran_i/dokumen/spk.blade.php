@@ -304,6 +304,7 @@
                         class="p">
                         <tr>
                             <td>
+                                {!! $ttd !!}
                             </td>
                         </tr>
                     </table>
