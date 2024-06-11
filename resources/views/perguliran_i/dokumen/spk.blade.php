@@ -10,7 +10,7 @@
     if (count($wt_cair) == 1) {
         $waktu = $wt_cair[0];
     }
-
+    
     if (count($wt_cair) == 2) {
         $waktu = $wt_cair[0];
         $tempat = $wt_cair[1] ?? ' . . . . . . . ';
@@ -299,22 +299,12 @@
                             </td>
                         </tr>
                     </table>
-
-                    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 10px;">
+                    
+                    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;"
+                        class="p">
                         <tr>
-                            <td colspan="2" height="24">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td width="50%" align="center">Pihak Pertama</td>
-                            <td width="50%" align="center">Pihak Kedua</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" height="40">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td align="center">{{ $dir->namadepan . ' ' . $dir->namabelakang }}</td>
-                            <td align="center">
-                                {{ $pinkel->anggota->namadepan }}
+                            <td>
+                                {!! $ttd !!}
                             </td>
                         </tr>
                     </table>
