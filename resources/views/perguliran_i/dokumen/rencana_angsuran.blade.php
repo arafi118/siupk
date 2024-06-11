@@ -130,6 +130,14 @@
                     $saldo_jasa = ($saldo_pokok * $pinkel->pros_jasa) / 100;
                 }
 
+                $sa_pokok = $pinkel->sistem_angsuran;
+                $sa_jasa = $pinkel->sa_jasa;
+
+                $jangka = $pinkel->jangka;
+                if ($sa_pokok == 11 || $sa_jasa == 11) {
+                    $jangka += 24;
+                }
+
                 $sum_pokok += $ra->wajib_pokok;
                 $sum_jasa += $ra->wajib_jasa;
             @endphp
@@ -182,14 +190,14 @@
                     </tr>
                     <tr>
                         <td align="center" colspan="4">
-                    <b> {{ $dir->namadepan }} {{ $dir->namabelakang }}</b>
+                            <b> {{ $dir->namadepan }} {{ $dir->namabelakang }}</b>
                         </td>
                         <td align="center" colspan="4">
-                       <b> {{ $pinkel->anggota->namadepan }}</b>
+                            <b> {{ $pinkel->anggota->namadepan }}</b>
                         </td>
 
                     </tr>
-                   
+
                 </table>
             </td>
         </tr>

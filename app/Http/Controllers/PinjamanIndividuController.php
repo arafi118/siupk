@@ -2336,6 +2336,10 @@ class PinjamanIndividuController extends Controller
             }
         }
 
+        if ($sa_pokok == 11 || $sa_jasa == 11) {
+            $jangka += 24;
+        }
+
         $sistem_pokok = $pinj_i->sis_pokok->sistem;
         $sistem_jasa = $pinj_i->sis_jasa->sistem;
 
