@@ -28,7 +28,6 @@
 
     <link rel="stylesheet" href="/assets/css/pace.css?v=1716515606">
 
-
 </head>
 
 <body>

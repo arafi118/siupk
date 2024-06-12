@@ -128,7 +128,7 @@
         <button type="submit" id="SimpanProposal" class="btn btn-github btn-sm float-end">Simpan Proposal</button>
     </div>
 </div>
-{{-- <script>
+<script>
     new Choices($('#jenis_jasa')[0], {
         shouldSort: false,
         fuseOptions: {
@@ -183,4 +183,4 @@
     }
 
     jaminan()
-</script> --}}
+</script>

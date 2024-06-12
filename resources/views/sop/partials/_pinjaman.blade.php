@@ -17,27 +17,28 @@
 <form action="/pengaturan/pinjaman/{{ $kec->id }}" method="post" id="FormPinjaman">
     @csrf
     @method('PUT')
-
     <div class="row">
         <div class="col-md-6">
-            <div class="input-group input-group-static my-3">
-                <label for="default_jasa">Default Jasa (%)</label>
+            <div class="position-relative mb-3">
+                <label for="default_jasa" class="form-label">Default Jasa (%)</label>
                 <input autocomplete="off" type="number" name="default_jasa" id="default_jasa" class="form-control"
                     value="{{ $kec->def_jasa }}">
                 <small class="text-danger" id="msg_default_jasa"></small>
             </div>
         </div>
         <div class="col-md-6">
-            <div class="input-group input-group-static my-3">
-                <label for="default_jangka">Default Jangka (%)</label>
+            <div class="position-relative mb-3">
+                <label for="default_jangka" class="form-label">Default Jangka (%)</label>
                 <input autocomplete="off" type="number" name="default_jangka" id="default_jangka" class="form-control"
                     value="{{ $kec->def_jangka }}">
                 <small class="text-danger" id="msg_default_jangka"></small>
             </div>
         </div>
+    </div>
+    <div class="row">
         <div class="col-md-6">
-            <div class="my-2">
-                <label class="form-label" for="pembulatan">Pembulatan</label>
+            <div class="position-relative mb-3">
+                <label for="pembulatan" class="form-label">Pembulatan</label>
                 <select class="form-control" name="pembulatan" id="pembulatan">
                     <option {{ $pembulatan == '500' ? 'selected' : '' }} value="500">500</option>
                     <option {{ $pembulatan == '1000' ? 'selected' : '' }} value="1000">1000</option>
@@ -46,8 +47,8 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="my-2">
-                <label class="form-label" for="sistem">Sistem Pembulatan</label>
+            <div class="position-relative mb-3">
+                <label for="sistem" class="form-label">Sistem Pembulatan </label>
                 <select class="form-control" name="sistem" id="sistem">
                     <option {{ $sistem == 'auto' ? 'selected' : '' }} value="">Auto</option>
                     <option {{ $sistem == 'keatas' ? 'selected' : '' }} value="+">Keatas</option>
@@ -60,8 +61,7 @@
 </form>
 
 <div class="d-flex justify-content-end">
-    <button type="button" id="SimpanPinjaman" data-target="#FormPinjaman"
-        class="btn btn-sm btn-github mb-0 btn-simpan">
+    <button type="button" id="SimpanPinjaman" data-target="#FormPinjaman" class="btn btn-secondary mb-0 btn-simpan">
         Simpan Perubahan
     </button>
 </div>

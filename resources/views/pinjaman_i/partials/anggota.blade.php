@@ -4,6 +4,7 @@
     $selected = false;
 @endphp
 
+
 {{-- <div class="row">
     <div class="col-md-9 col-7">
         <select class="form-control mb-0" name="individu" id="individu">
@@ -45,6 +46,7 @@
         </div>
     </div>
 </div> --}}
+
 <div class="row">
     <div class="col-md-8">
         <div class="position-relative mb-3">
@@ -81,6 +83,7 @@
                 @endforeach
             </select>
             <small class="text-danger" id="msg_individu"></small>
+
         </div>
     </div>
     <div class="col-md-4">
