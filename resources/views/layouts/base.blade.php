@@ -27,7 +27,22 @@
     <script defer src="/assets/scripts/chart_js.js"></script>
 
     <link rel="stylesheet" href="/assets/css/pace.css?v=1716515606">
+    <style>
+        .dataTables_paginate.paging_simple_numbers {
+            display: flex !important;
+            justify-content: flex-end !important;
+        }
 
+        #DataTables_Table_0_filter.dataTables_filter label {
+            display: flex;
+            align-items: center;
+            justify-content: end;
+        }
+
+        #DataTables_Table_0_filter.dataTables_filter label input {
+            width: 200px;
+        }
+    </style>
 
 </head>
 
@@ -471,6 +486,8 @@
             @yield('script')
         </div>
     </div>
+
+    @yield('modal')
 </body>
 
 <form action="/logout" method="post" id="formLogout">
