@@ -191,7 +191,7 @@
                     </td>
                     <td width="40">&nbsp;</td>
                 </tr>
-
+                    
                 <tr style="font-weight: bold;">
                     <th rowspan="{{ $baris_angsuran + 1 }}">&nbsp;</th>
                     <th height="30" class="l t b" align="center">Ke</th>
@@ -215,6 +215,7 @@
                             'jasa' => $rencana[$pinj->id][$i]->target_jasa,
                             'jatuh_tempo' => $rencana[$pinj->id][$i]->jatuh_tempo,
                         ];
+                        dd($rencana);
                     @endphp
                     <tr>
                         <td class="l {{ $j == $baris_angsuran ? 'b' : '' }}" align="center">
