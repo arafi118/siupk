@@ -2355,6 +2355,10 @@ class PinjamanKelompokController extends Controller
         $sistem_pokok = $pinkel->sis_pokok->sistem;
         $sistem_jasa = $pinkel->sis_jasa->sistem;
 
+        if ($sa_pokok == 11 || $sa_jasa == 11) {
+            $jangka += 24;
+        }
+
         if ($sa_pokok == 11) {
             $tempo_pokok        = ($jangka) - 24 / $sistem_pokok;
         } else if ($sa_pokok == 14) {
