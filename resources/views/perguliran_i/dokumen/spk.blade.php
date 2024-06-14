@@ -187,7 +187,7 @@
             jasa <b> {{ $pinkel->pros_jasa / $pinkel->jangka }} % Flat</b> sebesar
             <b>{{ number_format($pinkel->alokasi * ($pinkel->pros_jasa / $pinkel->jangka / 100)) }}
                 ({{ $keuangan->terbilang($pinkel->alokasi * ($pinkel->pros_jasa / $pinkel->jangka / 100)) }} Rupiah)</b>
-            setiap bulan, selama 6 bulan,
+            setiap bulan, selama {{ $pinkel->jangka }} bulan,
             yang dimulai pada {{ Tanggal::namaHari($pinkel->tgl_cair) }},
             {{ \Carbon\Carbon::parse($pinkel->anggota->tgl_cair)->translatedFormat('d F Y') }} dan
             sampai target pelunasan, sebagaimana jadwal angsuran terlampir.
@@ -334,6 +334,8 @@
                             <td width="50" align="center">&nbsp;</td>
                         </tr>
                     </table>
+
+
                     {{-- <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;"
                         class="p">
                         <tr>
