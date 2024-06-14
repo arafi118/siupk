@@ -309,12 +309,12 @@
                         </tr><br><br><br><br><br>
                         <tr>
                             <td width="10" align="center">&nbsp;</td>
-                            <td width="70" align="center">............<br> Kepala UPK</td>
+                            <td width="70" align="center">{{ $dir->namadepan }} {{ $dir->namabelakang }}<br> Kepala
+                                UPK</td>
                             <td width="50" align="center">&nbsp;</td>
-                            <td width="60" align="center">{{ $dir->namadepan }} {{ $dir->namabelakang }}
-                                <br>Peminjam
+                            <td width="60" align="center">{{ $pinkel->anggota->namadepan }}<br>Peminjam
                             </td>
-                            <td width="50" align="center">{{ $pinkel->anggota->namadepan }} <br> Penjamin</td>
+                            <td width="50" align="center"> <br>{{ $pinkel->anggota->penjamin }} <br> Penjamin</td>
                         </tr><br>
                         <tr>
                             <td width="10" align="center">&nbsp;</td>
