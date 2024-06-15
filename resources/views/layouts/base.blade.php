@@ -33,8 +33,6 @@
             justify-content: flex-end !important;
         }
 
-<<<<<<< HEAD
-=======
         #DataTables_Table_0_filter.dataTables_filter label {
             display: flex;
             align-items: center;
@@ -44,9 +42,13 @@
         #DataTables_Table_0_filter.dataTables_filter label input {
             width: 200px;
         }
+
+        .search-wrapper .input-holder {
+            overflow: unset !important;
+        }
+
     </style>
 
->>>>>>> 712e5189f0b45edf65e15c34ed7bab92814061b8
 </head>
 
 <body>
@@ -468,6 +470,7 @@
                                 ©
                                 <script>
                                     document.write(new Date().getFullYear())
+
                                 </script>,
                                 made with <i class="fa fa-heart"></i> by
                                 <a href="https://abt.co.id" class="font-weight-bold" target="_blank">
@@ -486,16 +489,15 @@
                 integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
                 crossorigin="anonymous" referrerpolicy="no-referrer"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            @yield('script')
+
         </div>
     </div>
 
     @yield('modal')
-</body>
 
-<form action="/logout" method="post" id="formLogout">
-    <input type="hidden" name="_token" value="yZaBRXeawdWlSwzP4com4AIEfVtTtwcAPgf6mA40">
-</form>
+    <form action="/logout" method="post" id="formLogout">
+        <input type="hidden" name="_token" value="yZaBRXeawdWlSwzP4com4AIEfVtTtwcAPgf6mA40">
+    </form>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.js"></script>
@@ -508,7 +510,6 @@
 <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
 <script src="/assets/js/plugins/choices.min.js"></script>
 <script src="/assets/js/plugins/sweetalert.min.js"></script>
-<script src="/assets/js/plugins/flatpickr.min.js"></script>
 <script src="/assets/js/plugins/chartjs.min.js"></script>
 <script src="/assets/js/html5-qrcode.js?v=1716515606"></script>
 <script src="http://siupk.test/vendor/tinymce/tinymce.min.js"></script>
@@ -524,77 +525,7 @@
 <script src="//cdn.quilljs.com/1.3.7/quill.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 
-<script>
-    var table = $('.table-borderless').DataTable({
-        language: {
-            paginate: {
-                previous: "&laquo;",
-                next: "&raquo;"
-            }
-        },
-        processing: true,
-        serverSide: true,
-        ajax: "/database/desa",
-        columns: [{
-                data: 'kd_desa',
-                name: 'kd_desa'
-            },
-            {
-                data: 'nama_desa',
-                name: 'nama_desa'
-            },
-            {
-                data: 'alamat_desa',
-                name: 'alamat_desa'
-            },
-            {
-                data: 'telp_desa',
-                name: 'telp_desa'
-            },
-            {
-                data: 'kades',
-                name: 'kades'
-            }
-        ]
-    });
-
-    $('.table').on('click', 'tbody tr', function(e) {
-        var data = table.row(this).data();
-
-        $.get('/database/desa/' + data.kd_desa + "/edit", function(result) {
-            $('#EditDesa .modal-dialog').html(result)
-        })
-
-        $('#EditDesa').modal('show')
-    })
-
-    $(document).on('click', '#simpanDesa', function(e) {
-        e.preventDefault()
-
-        var form = $('#FormEditDesa')
-        $.ajax({
-            type: "POST",
-            url: form.attr('action'),
-            data: form.serialize(),
-            success: function(result) {
-                Swal.fire('Berhasil', result.msg, 'success').then(async (result) => {
-                    await $('#EditDesa').modal('toggle')
-                    table.ajax.reload();
-                })
-            },
-            error: function(result) {
-                const respons = result.responseJSON;
-
-                Swal.fire('Error', 'Cek kembali input yang anda masukkan', 'error')
-                $.map(respons, function(res, key) {
-                    $('#' + key).parent('.input-group').addClass('is-invalid')
-                    $('#msg_' + key).html(res)
-                })
-            }
-        })
-
-    })
-</script>
+@yield('script')
 
 <script>
     var formatter = new Intl.NumberFormat('en-US', {
@@ -612,12 +543,12 @@
     }
 
     $('#cariKelompok').typeahead({
-        source: function(query, process) {
+        source: function (query, process) {
             var states = [];
             return $.get('/perguliran/cari_kelompok', {
                 query: query
-            }, function(result) {
-                var resultList = result.map(function(item) {
+            }, function (result) {
+                var resultList = result.map(function (item) {
                     states.push({
                         "id": item.id,
                         "name": item.nama_kelompok +
@@ -631,10 +562,10 @@
                 return process(states);
             })
         },
-        afterSelect: function(item) {
+        afterSelect: function (item) {
             var path = 'database/desa'
             if (path == 'transaksi/jurnal_angsuran') {
-                $.get('/transaksi/form_angsuran/' + item.id, function(result) {
+                $.get('/transaksi/form_angsuran/' + item.id, function (result) {
                     var ch_pokok = document.getElementById('chartP').getContext("2d");
                     var ch_jasa = document.getElementById('chartJ').getContext("2d");
 
@@ -646,7 +577,7 @@
                     $('#loan-id').html(item.id)
 
                     var id = $('#id').val()
-                    $.get('/transaksi/angsuran/form_anggota/' + id, function(result) {
+                    $.get('/transaksi/angsuran/form_anggota/' + id, function (result) {
                         if (result.success) {
                             $('#LayoutAngsuranAnggota').html(result.view)
                             $('#AngsuranAnggotaLabel').text(result.title)
@@ -661,12 +592,12 @@
 
 
     $('#cariAnggota').typeahead({
-        source: function(query, process) {
+        source: function (query, process) {
             var states = [];
             return $.get('/perguliran/cari_anggota', {
                 query: query
-            }, function(result) {
-                var resultList = result.map(function(item) {
+            }, function (result) {
+                var resultList = result.map(function (item) {
                     states.push({
                         "id": item.id,
                         "name": item.namadepan +
@@ -678,10 +609,10 @@
                 return process(states);
             })
         },
-        afterSelect: function(item) {
+        afterSelect: function (item) {
             var path = 'database/desa'
             if (path == 'transaksi/jurnal_angsuran_individu') {
-                $.get('/transaksi/form_angsuran_individu/' + item.id, function(result) {
+                $.get('/transaksi/form_angsuran_individu/' + item.id, function (result) {
                     var ch_pokok = document.getElementById('chartP').getContext("2d");
                     var ch_jasa = document.getElementById('chartJ').getContext("2d");
 
@@ -769,7 +700,7 @@
         }
     })
 
-    $(document).on('click', '#logout', function(e) {
+    $(document).on('click', '#logout', function (e) {
         e.preventDefault()
 
         Swal.fire({
@@ -786,12 +717,13 @@
         })
     })
 
-    $(document).on('click', '#btnLaporanPelunasan', function(e) {
+    $(document).on('click', '#btnLaporanPelunasan', function (e) {
         e.preventDefault()
 
         $('input#laporan').val('pelunasan')
         $('#FormLaporanSisipan').submit()
     })
+
 </script>
 
 <script>
@@ -855,6 +787,7 @@
             width: formattedWidth
         })
     }
+
 </script>
 
 
@@ -862,7 +795,5 @@
 <script async src="/assets/js/material-dashboard.min.js?v=1716515606"></script>
 
 </body>
-
-</html>
 
 </html>

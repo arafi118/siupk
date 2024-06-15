@@ -1753,6 +1753,59 @@ class TransaksiController extends Controller
         ]);
     }
 
+    public function targetAngsuranIndividu($id_pinkel)
+    {
+        if (request()->get('tanggal')) {
+            $tanggal = request()->get('tanggal');
+            $tahun = date('Y', strtotime(Tanggal::tglNasional($tanggal)));
+            $bulan = date('m', strtotime(Tanggal::tglNasional($tanggal)));
+            $hari = date('t', strtotime(Tanggal::tglNasional($tanggal)));
+
+            $pinkel = PinjamanIndividu::where('id', $id_pinkel)->with('anggota')->withSum([
+                'rencana' => function ($query) use ($tahun, $bulan, $hari) {
+                    $query->where('jatuh_tempo', '<=', $tahun . '-' . $bulan . '-' . $hari);
+                }
+            ], 'wajib_pokok')->withSum([
+                'rencana' => function ($query) use ($tahun, $bulan, $hari) {
+                    $query->where('jatuh_tempo', '<=', $tahun . '-' . $bulan . '-' . $hari);
+                }
+            ], 'wajib_jasa')->firstOrFail();
+        } else {
+            $pinkel = PinjamanIndividu::where('id', $id_pinkel)->with('anggota')->withSum([
+                'rencana' => function ($query) {
+                    $query->where('jatuh_tempo', '<=', date('Y-m-t'));
+                }
+            ], 'wajib_pokok')->withSum([
+                'rencana' => function ($query) {
+                    $query->where('jatuh_tempo', '<=', date('Y-m-t'));
+                }
+            ], 'wajib_jasa')->firstOrFail();
+        }
+
+        $real = RealAngsuranI::where([
+            ['loan_id', $id_pinkel],
+            ['tgl_transaksi', '<=', date('Y-m-d')]
+        ])->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC');
+
+        if ($real->count() > 0) {
+            $real = $real->first();
+        } else {
+            $real->sum_pokok = 0;
+            $real->sum_jasa = 0;
+        }
+
+        $target_pokok = $pinkel->rencana_sum_wajib_pokok;
+        $target_jasa = $pinkel->rencana_sum_wajib_jasa;
+
+        $saldo_pokok = ($target_pokok - $real->sum_pokok > 0) ? $target_pokok - $real->sum_pokok : 0;
+        $saldo_jasa = ($target_jasa - $real->sum_jasa > 0) ? $target_jasa - $real->sum_jasa : 0;
+
+        return response()->json([
+            'saldo_pokok' => $saldo_pokok,
+            'saldo_jasa' => $saldo_jasa
+        ]);
+    }
+
     public function detailTransaksi(Request $request)
     {
         $keuangan = new Keuangan;
