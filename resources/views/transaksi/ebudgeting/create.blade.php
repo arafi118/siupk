@@ -65,7 +65,7 @@
 </form>
 
 <div class="d-flex justify-content-end">
-    <button id="SimpanAnggaran" class="btn btn-sm btn-github mb-0">Simpan Rencana Anggaran</button>
+    <button id="SimpanAnggaran" class="btn btn-sm btn-github mb-0 btn btn-sm btn-dark mb-0">Simpan Rencana Anggaran</button>
 </div>
 
 <script>

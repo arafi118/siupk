@@ -45,8 +45,3 @@
     </div>
 @endsection
 
-@section('script')
-    <script>
-        $('#akun').jstree();
-    </script>
-@endsection

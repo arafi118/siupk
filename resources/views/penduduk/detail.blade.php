@@ -170,7 +170,7 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-github btn-sm float-end" id="SimpanPenduduk">
+                            <button type="submit" class="btn btn-github btn-sm float-end btn btn-sm btn-dark mb-0" id="SimpanPenduduk">
                                 Simpan Penduduk
                             </button>
                             <button type="button" class="btn btn-danger btn-sm me-3 float-end" id="BlokirPenduduk">
