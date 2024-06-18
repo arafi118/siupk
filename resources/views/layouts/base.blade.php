@@ -31,10 +31,57 @@
         .dataTables_paginate.paging_simple_numbers {
             display: flex !important;
             justify-content: flex-end !important;
+
+        }
+        .form-check-input.custom-checkbox {
+            width: 20px;
+            height: 20px;
         }
 
-<<<<<<< HEAD
-=======
+        .badge-light-blue {
+            background-color: #00c8ffc8 !important;
+            /* Warna biru muda */
+            color: rgb(0, 4, 255) !important; 
+            /* Warna teks */
+        }
+        .badge-light-reed {
+            background-color: #ff00007c !important;
+            /* Warna biru muda */
+            color: rgb(210, 0, 0) !important;
+            /* Warna teks */
+        }
+
+        .angka-warna-biru {
+            background-color: #00c8ffc5 !important;
+            /* Warna biru muda */
+            color: rgb(0, 4, 255) !important;
+            /* Warna teks */
+            float: right;
+            /* Posisikan elemen di sebelah kanan */
+            /* Tambahan gaya lainnya sesuai kebutuhan */
+        }
+
+        .angka-warna-merah {
+            background-color: rgba(255, 47, 0, 0.434) !important;
+            /* Warna biru muda */
+            color: rgb(255, 0, 0) !important;
+            /* Warna teks */
+            float: right;
+            /* Posisikan elemen di sebelah kanan */
+            /* Tambahan gaya lainnya sesuai kebutuhan */
+        }
+
+        .angka-warna-kuning {
+            background-color: rgba(255, 221, 0, 0.549) !important;
+            /* Warna biru muda */
+            color: rgb(255, 166, 0) !important;
+            /* Warna teks */
+            float: right;
+            /* Posisikan elemen di sebelah kanan */
+            /* Tambahan gaya lainnya sesuai kebutuhan */
+        }
+
+
         #DataTables_Table_0_filter.dataTables_filter label {
             display: flex;
             align-items: center;
@@ -44,9 +91,19 @@
         #DataTables_Table_0_filter.dataTables_filter label input {
             width: 200px;
         }
+
+        .dataTables_filter {
+            display: flex !important;
+            justify-content: flex-end;
+        }
+
+        .dataTables_filter label {
+            display: flex !important;
+            align-items: center;
+        }
     </style>
 
->>>>>>> 712e5189f0b45edf65e15c34ed7bab92814061b8
+
 </head>
 
 <body>
@@ -486,7 +543,6 @@
                 integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
                 crossorigin="anonymous" referrerpolicy="no-referrer"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            @yield('script')
         </div>
     </div>
 
@@ -524,77 +580,7 @@
 <script src="//cdn.quilljs.com/1.3.7/quill.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 
-<script>
-    var table = $('.table-borderless').DataTable({
-        language: {
-            paginate: {
-                previous: "&laquo;",
-                next: "&raquo;"
-            }
-        },
-        processing: true,
-        serverSide: true,
-        ajax: "/database/desa",
-        columns: [{
-                data: 'kd_desa',
-                name: 'kd_desa'
-            },
-            {
-                data: 'nama_desa',
-                name: 'nama_desa'
-            },
-            {
-                data: 'alamat_desa',
-                name: 'alamat_desa'
-            },
-            {
-                data: 'telp_desa',
-                name: 'telp_desa'
-            },
-            {
-                data: 'kades',
-                name: 'kades'
-            }
-        ]
-    });
-
-    $('.table').on('click', 'tbody tr', function(e) {
-        var data = table.row(this).data();
-
-        $.get('/database/desa/' + data.kd_desa + "/edit", function(result) {
-            $('#EditDesa .modal-dialog').html(result)
-        })
-
-        $('#EditDesa').modal('show')
-    })
-
-    $(document).on('click', '#simpanDesa', function(e) {
-        e.preventDefault()
-
-        var form = $('#FormEditDesa')
-        $.ajax({
-            type: "POST",
-            url: form.attr('action'),
-            data: form.serialize(),
-            success: function(result) {
-                Swal.fire('Berhasil', result.msg, 'success').then(async (result) => {
-                    await $('#EditDesa').modal('toggle')
-                    table.ajax.reload();
-                })
-            },
-            error: function(result) {
-                const respons = result.responseJSON;
-
-                Swal.fire('Error', 'Cek kembali input yang anda masukkan', 'error')
-                $.map(respons, function(res, key) {
-                    $('#' + key).parent('.input-group').addClass('is-invalid')
-                    $('#msg_' + key).html(res)
-                })
-            }
-        })
-
-    })
-</script>
+@yield('script')
 
 <script>
     var formatter = new Intl.NumberFormat('en-US', {

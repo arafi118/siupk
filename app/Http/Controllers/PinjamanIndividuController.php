@@ -47,6 +47,21 @@ class PinjamanIndividuController extends Controller
                 ->where('jenis_pinjaman', 'I')
                 ->with('anggota', 'anggota.d', 'jpp', 'sts')->get();
 
+            /**
+             * [
+             *  pinjaman => [
+             *      ...,
+             *      anggota => [
+             *          ...,
+             *          d => []
+             *      ],
+             *      jpp => [],
+             *      sts => []
+             *  ]
+             * ]
+             * 
+             */
+
             return DataTables::of($pinj_i)
                 ->addColumn('jasa', function ($row) {
                     $jangka = $row->jangka;

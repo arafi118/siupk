@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="app-main__inner">
-        
         {{-- <div class="main-card mb-3 card">
             <div class="card-body">
                 <h5 class="card-title"></h5>
@@ -27,34 +26,34 @@
         </div> --}}
         <div class="card-body">
             <ul class="nav nav-pills nav-fill">
-                <li class="nav-item"><a data-bs-toggle="tab" id="tab-0" href="#tab-content-0" class="active nav-link">
+                <li class="nav-item"><a data-bs-toggle="tab" id="tab-0" href="#Proposal" class="active nav-link">
                         <i class="fa-solid fa-file-circle-plus"></i> <b>&nbsp; &nbsp;Proposal (P)</b>
                     </a>
                 </li>
-                <li class="nav-item"><a data-bs-toggle="tab" id="tab-1" href="#tab-content-1" class="nav-link">
-                        <i class="fa-solid fa-tarp-droplet"></i> <b>&nbsp; &nbsp;Verified (V)</b></a>
+                <li class="nav-item"><a data-bs-toggle="tab" id="tab-1" href="#Verified" class="nav-link">
+                        <i class=" fa fa-window-restore"></i> <b>&nbsp; &nbsp;Verified (V)</b></a>
                 </li>
-                <li class="nav-item"><a data-bs-toggle="tab" id="tab-2" href="#tab-content-2" class="nav-link">
-                        <i class="fa-solid fa-diagram-next"></i> <b> &nbsp; &nbsp;Waiting (W)</b></a>
+                <li class="nav-item"><a data-bs-toggle="tab" id="tab-2" href="#Waiting" class="nav-link">
+                        <i class="fa-solid fa-history"></i> <b> &nbsp; &nbsp;Waiting (W)</b></a>
                 </li>
-                <li class="nav-item"><a data-bs-toggle="tab" id="tab-3" href="#tab-content-3" class="nav-link">
+                <li class="nav-item"><a data-bs-toggle="tab" id="tab-3" href="#Aktif" class="nav-link">
                         <i class="fa-solid fa-arrow-down-up-across-line"></i> <b>&nbsp; &nbsp;Aktif (A)</b></a>
                 </li>
-                <li class="nav-item"><a data-bs-toggle="tab" id="tab-4" href="#tab-content-4" class="nav-link">
+                <li class="nav-item"><a data-bs-toggle="tab" id="tab-4" href="#Lunas" class="nav-link">
                         <i class="fa-solid fa-person-circle-check"></i> <b>&nbsp;&nbsp;Lunas (L)</b></a>
                 </li>
             </ul>
         </div>
 
         <div class="tab-content">
-            <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
+            <div class="tab-pane tabs-animation fade {{ $status == 'p' ? 'show active' : '' }}" id="Proposal" role="tabpanel" aria-labelledby="Proposal">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="main-card mb-3 card">
 
                             <div class="card-body">
                                 <h5 class="card-title"></h5>
-                                <table class="table table-flush table-hover table-click" width="100%" id="TbProposal">
+                                <table class="table table-flush table-hover table-click " width="100%" id="TbProposal">
                                     <thead>
                                         <tr>
                                             <th>Nama Anggota P</th>
@@ -72,7 +71,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane tabs-animation fade" id="tab-content-1" role="tabpanel">
+            <div class="tab-pane tabs-animation fade{{ $status == 'v' ? 'show active' : '' }}" id="Verified" role="tabpanel" aria-labelledby="Verified">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="mb-3 card">
@@ -98,7 +97,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane tabs-animation fade" id="tab-content-2" role="tabpanel">
+            <div class="tab-pane tabs-animation fade{{ $status == 'w' ? 'show active' : '' }}" id="Waiting" role="tabpanel" aria-labelledby="Waiting">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="main-card mb-3 card">
@@ -121,7 +120,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane tabs-animation fade" id="tab-content-3" role="tabpanel">
+            <div class="tab-pane tabs-animation fade{{ $status == 'a' ? 'show active' : '' }}" id="Aktif" role="tabpanel" aria-labelledby="Aktif">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="main-card mb-3 card">
@@ -144,7 +143,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane tabs-animation fade" id="tab-content-4" role="tabpanel">
+            <div class="tab-pane tabs-animation fade{{ $status == 'l' ? 'show active' : '' }}" id="Lunas" role="tabpanel" aria-labelledby="Lunas">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="main-card mb-3 card">
@@ -167,10 +166,10 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 @endsection
+
 
 @section('script')
     <script>
