@@ -37,7 +37,6 @@
             width: 20px;
             height: 20px;
         }
-
         .badge-light-blue {
             background-color: #00c8ffc8 !important;
             /* Warna biru muda */
@@ -81,7 +80,6 @@
             /* Tambahan gaya lainnya sesuai kebutuhan */
         }
 
-
         #DataTables_Table_0_filter.dataTables_filter label {
             display: flex;
             align-items: center;
@@ -103,6 +101,11 @@
         }
     </style>
 
+        .search-wrapper .input-holder {
+            overflow: unset !important;
+        }
+
+    </style>
 
 </head>
 
@@ -525,6 +528,7 @@
                                 ©
                                 <script>
                                     document.write(new Date().getFullYear())
+
                                 </script>,
                                 made with <i class="fa fa-heart"></i> by
                                 <a href="https://abt.co.id" class="font-weight-bold" target="_blank">
@@ -543,15 +547,18 @@
                 integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
                 crossorigin="anonymous" referrerpolicy="no-referrer"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<<<<<<< HEAD
+=======
+
+>>>>>>> e8c55c08ade1bf2139aab9b641f50796b51003dc
         </div>
     </div>
 
     @yield('modal')
-</body>
 
-<form action="/logout" method="post" id="formLogout">
-    <input type="hidden" name="_token" value="yZaBRXeawdWlSwzP4com4AIEfVtTtwcAPgf6mA40">
-</form>
+    <form action="/logout" method="post" id="formLogout">
+        <input type="hidden" name="_token" value="yZaBRXeawdWlSwzP4com4AIEfVtTtwcAPgf6mA40">
+    </form>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.js"></script>
@@ -564,7 +571,6 @@
 <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
 <script src="/assets/js/plugins/choices.min.js"></script>
 <script src="/assets/js/plugins/sweetalert.min.js"></script>
-<script src="/assets/js/plugins/flatpickr.min.js"></script>
 <script src="/assets/js/plugins/chartjs.min.js"></script>
 <script src="/assets/js/html5-qrcode.js?v=1716515606"></script>
 <script src="http://siupk.test/vendor/tinymce/tinymce.min.js"></script>
@@ -598,12 +604,12 @@
     }
 
     $('#cariKelompok').typeahead({
-        source: function(query, process) {
+        source: function (query, process) {
             var states = [];
             return $.get('/perguliran/cari_kelompok', {
                 query: query
-            }, function(result) {
-                var resultList = result.map(function(item) {
+            }, function (result) {
+                var resultList = result.map(function (item) {
                     states.push({
                         "id": item.id,
                         "name": item.nama_kelompok +
@@ -617,10 +623,10 @@
                 return process(states);
             })
         },
-        afterSelect: function(item) {
+        afterSelect: function (item) {
             var path = 'database/desa'
             if (path == 'transaksi/jurnal_angsuran') {
-                $.get('/transaksi/form_angsuran/' + item.id, function(result) {
+                $.get('/transaksi/form_angsuran/' + item.id, function (result) {
                     var ch_pokok = document.getElementById('chartP').getContext("2d");
                     var ch_jasa = document.getElementById('chartJ').getContext("2d");
 
@@ -632,7 +638,7 @@
                     $('#loan-id').html(item.id)
 
                     var id = $('#id').val()
-                    $.get('/transaksi/angsuran/form_anggota/' + id, function(result) {
+                    $.get('/transaksi/angsuran/form_anggota/' + id, function (result) {
                         if (result.success) {
                             $('#LayoutAngsuranAnggota').html(result.view)
                             $('#AngsuranAnggotaLabel').text(result.title)
@@ -647,12 +653,12 @@
 
 
     $('#cariAnggota').typeahead({
-        source: function(query, process) {
+        source: function (query, process) {
             var states = [];
             return $.get('/perguliran/cari_anggota', {
                 query: query
-            }, function(result) {
-                var resultList = result.map(function(item) {
+            }, function (result) {
+                var resultList = result.map(function (item) {
                     states.push({
                         "id": item.id,
                         "name": item.namadepan +
@@ -664,10 +670,10 @@
                 return process(states);
             })
         },
-        afterSelect: function(item) {
+        afterSelect: function (item) {
             var path = 'database/desa'
             if (path == 'transaksi/jurnal_angsuran_individu') {
-                $.get('/transaksi/form_angsuran_individu/' + item.id, function(result) {
+                $.get('/transaksi/form_angsuran_individu/' + item.id, function (result) {
                     var ch_pokok = document.getElementById('chartP').getContext("2d");
                     var ch_jasa = document.getElementById('chartJ').getContext("2d");
 
@@ -755,7 +761,7 @@
         }
     })
 
-    $(document).on('click', '#logout', function(e) {
+    $(document).on('click', '#logout', function (e) {
         e.preventDefault()
 
         Swal.fire({
@@ -772,12 +778,13 @@
         })
     })
 
-    $(document).on('click', '#btnLaporanPelunasan', function(e) {
+    $(document).on('click', '#btnLaporanPelunasan', function (e) {
         e.preventDefault()
 
         $('input#laporan').val('pelunasan')
         $('#FormLaporanSisipan').submit()
     })
+
 </script>
 
 <script>
@@ -841,6 +848,7 @@
             width: formattedWidth
         })
     }
+
 </script>
 
 
@@ -848,7 +856,5 @@
 <script async src="/assets/js/material-dashboard.min.js?v=1716515606"></script>
 
 </body>
-
-</html>
 
 </html>

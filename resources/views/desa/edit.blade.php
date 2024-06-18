@@ -1,6 +1,6 @@
 <div class="modal-content">
     <div class="modal-header">
-        <h1 class="modal-title fs-5" id="NamaDesa">
+        <h1 class="modal-title fs-4" id="NamaDesa">
             Edit Desa {{ $desa->nama_desa }} [{{ $desa->kd_desa }}]
         </h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -12,24 +12,24 @@
             <input type="hidden" name="kd_desa" id="kd_desa" value="{{ $desa->kd_desa }}">
             <div class="row">
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-3">
-                        <label for="nama_desa">Nama Desa</label>
+                    <div class="input-group input-group-static my-4">
+                        <label for="nama_desa">Nama Desa &nbsp;&nbsp;&nbsp;</label>
                         <input type="text" name="nama_desa" id="nama_desa" class="form-control"
                             value="{{ $desa->nama_desa }}">
                         <small class="text-danger" id="msg_nama_desa"></small>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-3">
-                        <label for="telp_desa">Telpon</label>
+                    <div class="input-group input-group-static my-4">
+                        <label for="telp_desa">Telpon &nbsp; &nbsp;&nbsp;&nbsp;</label>
                         <input type="text" name="telp_desa" id="telp_desa" class="form-control"
                             value="{{ $desa->telp_desa }}">
                         <small class="text-danger" id="msg_telp_desa"></small>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-3">
-                        <label for="alamat_desa">Alamat Desa</label>
+                    <div class="input-group input-group-static my-4">
+                        <label for="alamat_desa">Alamat Desa &nbsp;</label>
                         <input type="text" name="alamat_desa" id="alamat_desa" class="form-control"
                             value="{{ $desa->alamat_desa }}">
                         <small class="text-danger" id="msg_alamat_desa"></small>
@@ -38,24 +38,24 @@
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-3">
-                        <label for="kades">Nama Kades/Lurah</label>
+                    <div class="input-group input-group-static my-4">
+                        <label for="kades">Nama Kades &nbsp;</label>
                         <input type="text" name="kades" id="kades" class="form-control"
                             value="{{ $desa->kades }}">
                         <small class="text-danger" id="msg_kades"></small>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-3">
-                        <label for="no_kades">Telp Kades/Lurah</label>
+                    <div class="input-group input-group-static my-4">
+                        <label for="no_kades">Telp Kades &nbsp;</label>
                         <input type="text" name="no_kades" id="no_kades" class="form-control"
                             value="{{ $desa->no_kades }}">
                         <small class="text-danger" id="msg_no_kades"></small>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-3">
-                        <label for="nip">NIP Kades/Lurah</label>
+                    <div class="input-group input-group-static my-4">
+                        <label for="nip">NIP Kades &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;</label>
                         <input type="text" name="nip" id="nip" class="form-control"
                             value="{{ $desa->nip }}">
                         <small class="text-danger" id="msg_nip"></small>
@@ -64,24 +64,24 @@
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-3">
-                        <label for="sekdes">Nama Sekdes</label>
+                    <div class="input-group input-group-static my-4">
+                        <label for="sekdes">Nama Sekdes &nbsp;</label>
                         <input type="text" name="sekdes" id="sekdes" class="form-control"
                             value="{{ $desa->sekdes }}">
                         <small class="text-danger" id="msg_sekdes"></small>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-3">
-                        <label for="no_sekdes">Telp Sekdes</label>
+                    <div class="input-group input-group-static my-4">
+                        <label for="no_sekdes">Telp Sekdes &nbsp;</label>
                         <input type="text" name="no_sekdes" id="no_sekdes" class="form-control"
                             value="{{ $desa->no_sekdes }}">
                         <small class="text-danger" id="msg_no_sekdes"></small>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-3">
-                        <label for="deskripsi_desa">Deskripsi Desa/Kelurahan</label>
+                    <div class="input-group input-group-static my-4">
+                        <label for="deskripsi_desa">Deskripsi Desa &nbsp;</label>
                         <input type="text" name="deskripsi_desa" id="deskripsi_desa" class="form-control"
                             value="{{ $desa->deskripsi_desa }}">
                     </div>
@@ -90,8 +90,8 @@
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-3">
-                        <label for="ked">Nama KED/LPMD/BPD</label>
+                    <div class="input-group input-group-static my-4">
+                        <label for="ked">Nama KED/LPMD/BPD &nbsp;</label>
                         <input type="text" name="ked" id="ked" class="form-control"
                             value="{{ $desa->ked }}">
                     </div>
@@ -99,7 +99,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="my-2">
-                        <label class="form-label" for="sebutan">Sebutan Desa</label>
+                        <label class="form-label" for="sebutan">Sebutan Desa &nbsp;</label>
                         <select class="form-control" name="sebutan" id="sebutan">
                             @foreach ($sebutan as $seb)
                                 <option value="{{ $seb->id }}"
@@ -113,10 +113,10 @@
                 </div>
                 <div class="col-md-4">
                     <div class="my-2">
-                        <label class="form-label" for="jadwal_angsuran_desa">Jadwal Angsuran Desa</label>
+                        <label class="form-label" for="jadwal_angsuran_desa">Jadwal Angsuran Desa &nbsp;</label>
                         <select class="form-control" name="jadwal_angsuran_desa" id="jadwal_angsuran_desa">
                             <option value="0">Setiap Tanggal Cair</option>
-                            @for ($i = 1; $i <= 31; $i++)
+                            @for ($i = 1; $i <= 41; $i++)
                                 @php $tgl=sprintf("%02d", $i); @endphp <option value="{{ $tgl }}"
                                     {{ $desa->jadwal_angsuran_desa == $tgl ? 'selected' : '' }}>
                                     Setiap Tanggal {{ $tgl }}</option>
@@ -134,19 +134,3 @@
     </div>
 </div>
 
-<script>
-    new Choices($('#sebutan')[0], {
-        shouldSort: false,
-        fuseOptions: {
-            threshold: 0.1,
-            distance: 1000
-        }
-    })
-    new Choices($('#jadwal_angsuran_desa')[0], {
-        shouldSort: false,
-        fuseOptions: {
-            threshold: 0.1,
-            distance: 1000
-        }
-    })
-</script>
