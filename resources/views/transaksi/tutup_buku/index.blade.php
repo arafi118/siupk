@@ -6,8 +6,8 @@
             <div class="main-card mb-3 card">
                 <div class="card-body">
                     <br>
-                    <form action="/transaksi/anggaran" method="post" id="formAnggaran">
-                        @csrf
+                    <form action="" method="post" id="FormTahunTutupBuku">
+                    @csrf
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="position-relative mb-3"><label for="exampleEmail11"
@@ -34,7 +34,7 @@
                     </form>
                     <div class="d-flex justify-content-end"style=" float: right;">
                         <button type="button" id="TutupBuku" {{ date('m') <= 10 ? 'disabled' : '' }}
-                            class="btn btn-sm btn-dark mb-0 ms-3">1. Tutup Buku</button>
+                            class="btn btn-sm btn-dark mb-0 ms-3 ">1. Tutup Buku</button>
                         <button type="button" id="PembagianLaba" class="btn btn-sm btn-success mb-0 ms-3">
                             2. Simpan Alokasi Laba
                         </button>
@@ -59,14 +59,6 @@
     <script>
         var tahun = "{{ date('Y') }}"
         var bulan = "{{ date('m') }}"
-
-        new Choices($('select#tahun')[0], {
-            shouldSort: false,
-            fuseOptions: {
-                threshold: 0.1,
-                distance: 1000
-            }
-        })
 
         $(document).on('change', 'select#tahun', function(e) {
             e.preventDefault()

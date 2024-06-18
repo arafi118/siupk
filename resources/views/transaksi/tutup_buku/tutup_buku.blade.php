@@ -168,7 +168,7 @@
                             </div>
 
                             <div class="d-flex justify-content-end">
-                                <button type="button" id="btnSimpanLaba" class="btn btn-github btn-sm">
+                                <button type="button" id="btnSimpanLaba" class="btn btn-github btn-sm btn btn-sm btn-dark mb-0">
                                     Simpan Alokasi Laba
                                 </button>
                             </div>
