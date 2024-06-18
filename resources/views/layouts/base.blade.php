@@ -37,6 +37,85 @@
             width: 20px;
             height: 20px;
         }
+
+<<<<<<< HEAD
+        .badge-light-blue {
+            background-color: #00c8ffc8 !important;
+            /* Warna biru muda */
+            color: rgb(0, 4, 255) !important; 
+            /* Warna teks */
+        }
+        .badge-light-reed {
+            background-color: #ff00007c !important;
+            /* Warna biru muda */
+            color: rgb(210, 0, 0) !important;
+            /* Warna teks */
+        }
+
+        .angka-warna-biru {
+            background-color: #00c8ffc5 !important;
+            /* Warna biru muda */
+            color: rgb(0, 4, 255) !important;
+            /* Warna teks */
+            float: right;
+            /* Posisikan elemen di sebelah kanan */
+            /* Tambahan gaya lainnya sesuai kebutuhan */
+        }
+
+        .angka-warna-merah {
+            background-color: rgba(255, 47, 0, 0.434) !important;
+            /* Warna biru muda */
+            color: rgb(255, 0, 0) !important;
+            /* Warna teks */
+            float: right;
+            /* Posisikan elemen di sebelah kanan */
+            /* Tambahan gaya lainnya sesuai kebutuhan */
+        }
+
+        .angka-warna-kuning {
+            background-color: rgba(255, 221, 0, 0.549) !important;
+            /* Warna biru muda */
+            color: rgb(255, 166, 0) !important;
+            /* Warna teks */
+            float: right;
+            /* Posisikan elemen di sebelah kanan */
+            /* Tambahan gaya lainnya sesuai kebutuhan */
+        }
+
+
+=======
+>>>>>>> e8c55c08ade1bf2139aab9b641f50796b51003dc
+        #DataTables_Table_0_filter.dataTables_filter label {
+            display: flex;
+            align-items: center;
+            justify-content: end;
+        }
+
+        #DataTables_Table_0_filter.dataTables_filter label input {
+            width: 200px;
+        }
+
+<<<<<<< HEAD
+        .dataTables_filter {
+            display: flex !important;
+            justify-content: flex-end;
+        }
+
+        .dataTables_filter label {
+            display: flex !important;
+            align-items: center;
+        }
+    </style>
+
+
+=======
+        .search-wrapper .input-holder {
+            overflow: unset !important;
+        }
+
+    </style>
+
+>>>>>>> e8c55c08ade1bf2139aab9b641f50796b51003dc
 </head>
 
 <body>
