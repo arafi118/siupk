@@ -104,94 +104,128 @@
     </form>
 </div>
 
+<form action="/perguliran_i/{{ $perguliran_i->id }}" method="post" id="FormInput">
+    @csrf
+    @method('PUT')
 
 <div class="tab-content">
     <div class="tab-pane fade show active" id="" role="tabpanel">
         <div class="main-card mb-3 card">
             <div class="card-body">
                 <h5 class="card-title">Input Rekom Verifikator</h5>
-                <form class="">
+                <input type="hidden" name="_id" id="_id" value="{{ $perguliran_i->id }}">
+                <input type="hidden" name="status" id="status" value="W">
                     <div class="row">
                         <div class="col-md-3">
                             <div class="position-relative mb-3">
-                                <label for="exampleEmail11" class="form-label">Tgl Tunggu</label>
-                                <input name="email" id="exampleEmail11" placeholder="with a placeholder"
-                                    type="email" class="form-control">
+                                <label for="tgl_tunggu" class="form-label">Tgl Tunggu</label>
+                                <input autocomplete="off" type="text" name="tgl_tunggu" id="tgl_tunggu"
+                                    class="form-control date" value="{{ Tanggal::tglIndo($perguliran_i->tgl_verifikasi) }}">
+                                <small class="text-danger" id="msg_tgl_tunggu"></small>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="position-relative mb-3">
-                                <label for="examplePassword11" class="form-label">Alokasi Rp.</label>
-                                <input name="password" id="examplePassword11" placeholder="password placeholder"
-                                    type="password" class="form-control">
+                                <label for="alokasi" class="form-label">Alokasi Rp.</label>
+                                <input autocomplete="off" type="text" name="alokasi" id="alokasi"
+                                class="form-control money" value="{{ number_format($perguliran_i->verifikasi, 2) }}">
+                            <small class="text-danger" id="msg_alokasi"></small>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="position-relative mb-3">
-                                <label for="exampleEmail11" class="form-label">Jangka</label>
-                                <input name="email" id="exampleEmail11" placeholder="with a placeholder"
-                                    type="email" class="form-control">
+                                <label for="jangka" class="form-label">Jangka</label>
+                                <input autocomplete="off" type="number" name="jangka" id="jangka" class="form-control"
+                                value="{{ $perguliran_i->jangka }}">
+                            <small class="text-danger" id="msg_jangka"></small>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="position-relative mb-3">
-                                <label for="examplePassword11" class="form-label">Prosentase Jasa (%)</label>
-                                <input name="password" id="examplePassword11" placeholder="password placeholder"
-                                    type="password" class="form-control">
+                                <label for="pros_jasa" class="form-label">Prosentase Jasa (%)</label>
+                                <input autocomplete="off" type="number" name="pros_jasa" id="pros_jasa"
+                                    class="form-control" value="{{ $perguliran_i->pros_jasa }}">
+                                <small class="text-danger" id="msg_pros_jasa"></small>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="position-relative mb-3">
-                                <label for="exampleCity" class="form-label">Jenis Jasa</label>
-                                <input name="city" id="exampleCity" type="text" class="form-control">
+                                <label for="jenis_jasa" class="form-label">Jenis Jasa</label>
+                                <select class="form-control" name="jenis_jasa" id="jenis_jasa">
+                                    @foreach ($jenis_jasa as $jj)
+                                        <option {{ $jj->id == $perguliran_i->jenis_jasa ? 'selected' : '' }}
+                                            value="{{ $jj->id }}">
+                                            {{ $jj->nama_jj }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <small class="text-danger" id="msg_jenis_jasa"></small>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="position-relative mb-3">
-                                <label for="exampleState" class="form-label">Sistem Ang. Pokok</label>
-                                <input name="state" id="exampleState" type="text" class="form-control">
+                                <label for="sistem_angsuran_pokok" class="form-label">Sistem Ang. Pokok</label>
+                                <select class="form-control" name="sistem_angsuran_pokok" id="sistem_angsuran_pokok">
+                                    @foreach ($sistem_angsuran as $sa)
+                                        <option {{ $sa->id == $perguliran_i->sistem_angsuran ? 'selected' : '' }}
+                                            value="{{ $sa->id }}">
+                                            {{ $sa->nama_sistem }} ({{ $sa->deskripsi_sistem }})
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <small class="text-danger" id="msg_sistem_angsuran_pokok"></small>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="position-relative mb-3">
-                                <label for="exampleZip" class="form-label">Sistem Ang. Jasa</label>
-                                <input name="zip" id="exampleZip" type="text" class="form-control">
+                                <label for="sistem_angsuran_jasa" class="form-label">Sistem Ang. Jasa</label>
+                                <select class="form-control" name="sistem_angsuran_jasa" id="sistem_angsuran_jasa">
+                                    @foreach ($sistem_angsuran as $sa)
+                                        <option {{ $sa->id == $perguliran_i->sa_jasa ? 'selected' : '' }}
+                                            value="{{ $sa->id }}">
+                                            {{ $sa->nama_sistem }} ({{ $sa->deskripsi_sistem }})
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <small class="text-danger" id="msg_sistem_angsuran_jasa"></small>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="position-relative mb-3">
-                                <label for="exampleCity" class="form-label">Tgl Cair</label>
-                                <input name="city" id="exampleCity" type="text" class="form-control">
+                                <label for="tgl_cair" class="form-label">Tgl Cair</label>
+                                <input autocomplete="off" type="text" name="tgl_cair" id="tgl_cair"
+                                class="form-control date" value="{{ Tanggal::tglIndo($perguliran_i->tgl_verifikasi) }}">
+                            <small class="text-danger" id="msg_tgl_cair"></small>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="position-relative mb-3">
-                                <label for="exampleCity" class="form-label">Nomor SPK</label>
-                                <input name="city" id="exampleCity" type="text" class="form-control">
+                                <label for="nomor_spk" class="form-label">Nomor SPK</label>
+                                <input autocomplete="off" type="text" name="nomor_spk" id="nomor_spk"
+                                class="form-control" value="{{ $perguliran_i->spk_no }}">
+                            <small class="text-danger" id="msg_nomor_spk"></small>
                             </div>
                         </div>
                     </div>
+
                     <div class="card-body">
-                        <button type="submit" name="report" value="RekomendasiVerifikator#pdf"
-                            class="btn btn-info flex-grow-1 me-2" style="background-color: rgb(240, 148, 0);">
+                        <button type="button" id="kembaliProposal" class="btn btn-info flex-grow-1 me-2" style="background-color: rgb(240, 148, 0);">
                             <b><i class="fa fa-refresh"></i> &nbsp; KEMBALI KE PROPOSAL</b>
                         </button>
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#CetakDokumenProposal"
-                            class="btn btn-secondary flex-grow-1 ms-2" style="background-color: rgb(112, 109, 109);">
+                        <button type="button" id="Simpan" class="btn btn-secondary flex-grow-1 ms-2" style="background-color: rgb(112, 109, 109);">
                             <b><i class="fa fa-search-plus"></i> &nbsp; SIMPAN KEPUTUSAN PENDANAAN</b>
                         </button>
                     </div>
-
-                </form>
+               
             </div>
         </div>
     </div>
 </div>
-
+</form>
 <form action="/perguliran_i/kembali_proposal/{{ $perguliran_i->id }}" method="post" id="formKembaliProposal">
     @csrf
 </form>

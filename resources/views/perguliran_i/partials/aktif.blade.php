@@ -127,31 +127,29 @@
 </div>
 
 <div class="main-card mb-3 card">
-    <form action="/perguliran_i/dokumen?status=P" target="_blank" method="post">
+    <form action="/perguliran_i/dokumen?status=A" target="_blank" method="post">
         @csrf
         <input type="hidden" name="id" value="{{ $perguliran_i->id }}">
         <div class="card-body d-flex justify-content-between">
-            <a href="/perguliran_i/dokumen/kartu_angsuran/{{ $perguliran_i->id }}" target="_blank"button type="submit"
-                name="report" value="CetakDokumenProposal#pdf" class="btn btn-outline-info flex-grow-1 me-2">
+            <a href="/perguliran_i/dokumen/kartu_angsuran/{{ $perguliran_i->id }}" target="_blank"  class="btn btn-outline-info flex-grow-1 me-2">
                 <b style="color: rgb(2, 102, 251);">Kartu Angsuran</b>
             </a>
-            <button type="button" data-bs-toggle="modal" name="report" value="rencanaAngsuran#pdf"
-                class="btn btn-outline-info flex-grow-1 ms-2">
+            <button type="submit" data-bs-toggle="modal" name="report" value="rencanaAngsuran#pdf"
+                class="btn btn-outline-info flex-grow-1 me-2">
                 <b style="color: rgb(2, 102, 251)">Rencana Angsuran</b>
             </button>
-            <button type="button" data-bs-toggle="modal" name="report" value="rekeningKoran#pdf"
-                class="btn btn-outline-info flex-grow-1 ms-2">
+            <button type="submit" data-bs-toggle="modal" name="report" value="rekeningKoran#pdf"
+                class="btn btn-outline-info flex-grow-1 me-2">
                 <b style="color: rgb(2, 102, 251)">Rekening Koran</b>
             </button>
         </div>
     </form>
 </div>
+
 <div class="main-card mb-3 card">
-    <form action="/perguliran_i/dokumen?status=P" target="_blank" method="post">
-        @csrf
-        <input type="hidden" name="id" value="{{ $perguliran_i->id }}">
         <div class="card-body d-flex justify-content-between">
-            <button type="submit" name="report" value="CetakDokumenProposal#pdf" class="btn btn-info flex-grow-1 me-2"
+            <button type="button" data-bs-toggle="modal" data-bs-target="#CetakDokumenProposal"
+            class="btn btn-info flex-grow-1 me-2"
                 style="background-color: rgb(23, 203, 20);">
                 <b>Cetak Dokumen Proposal</b>
             </button>
@@ -160,7 +158,6 @@
                 <b>Cetak Dokumen Pencairan</b>
             </button>
         </div>
-    </form>
 </div>
 <div class="row">
     <div class="col-lg-12">
@@ -246,14 +243,15 @@
                 </table>
 
             </div>
+            
             @if ($perguliran_i->status == 'A')
                 <div class="card-body ">
-                    <button type="button" name="report" data-bs-toggle="modal" data-bs-target="#Rescedule"
-                        class="btn btn-info flex-grow-1 me-2" style="background-color: rgb(240, 148, 0);">
+                <button type="button" data-bs-toggle="modal" data-bs-target="#Rescedule"
+                    class="btn btn-info flex-grow-1 me-2" style="background-color: rgb(240, 148, 0);">
                         <b><i class="fa fa-recycle"></i> &nbsp; Resceduling Pinjaman</b>
                     </button>
                     <button type="button" data-bs-toggle="modal" data-bs-target="#Penghapusan"
-                        class="btn btn-secondary flex-grow-1 ms-2" style="background-color: rgb(253, 5, 5);">
+                    class="btn btn-secondary flex-grow-1 ms-2" style="background-color: rgb(253, 5, 5);">
                         <b><i class="fa fa-trash"></i> &nbsp; Penghapusan Pinjaman</b>
                     </button>
                 </div>

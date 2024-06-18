@@ -147,11 +147,11 @@
             @csrf
             <input type="hidden" name="id" value="{{ $perguliran_i->id }}">
             <div class="card-body d-flex justify-content-between">
-                <button type="submit" name="report" value="RekomendasiVerifikator#pdf"
+                <button type="button" data-bs-toggle="modal" data-bs-target="#CetakDokumenProposal"
                     class="btn btn-info flex-grow-1 me-2" style="background-color: rgb(23, 203, 20);">
                     <b>Cetak Dokumen Proposal</b>
                 </button>
-                <button type="button" data-bs-toggle="modal" data-bs-target="#CetakDokumenProposal"
+                <button type="button" data-bs-toggle="modal" data-bs-target="#CetakDokumenPencairan"
                     class="btn btn-info flex-grow-1 ms-2" style="background-color: rgb(4, 172, 250);">
                     <b>Cetak Dokumen Pencairan</b>
                 </button>
@@ -164,39 +164,52 @@
             <div class="main-card mb-3 card">
                 <div class="card-body">
                     <h5 class="card-title">Input Realisasi Pencairan </h5>
-                    <form class="">
+                    <div class="card-body p-3">
+                        <input type="hidden" name="_id" id="_id" value="{{ $perguliran_i->id }}">
+                        <input type="hidden" name="status" id="status" value="A">
+                        <input type="hidden" name="debet" id="debet" value="{{ $debet->kode_akun }}">
+                                               
+                    </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="position-relative mb-3">
-                                    <label for="exampleCity" class="form-label">Tgl Cair</label>
-                                    <input name="city" id="exampleCity" type="text" class="form-control">
+                                    <label for="tgl_cair" class="form-label">Tgl Cair</label>
+                                    <input autocomplete="off" type="text" name="tgl_cair" id="tgl_cair"
+                                        class="form-control date" value="{{ Tanggal::tglIndo($perguliran_i->tgl_cair) }}">
+                                    <small class="text-danger" id="msg_tgl_cair"></small>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="position-relative mb-3">
-                                    <label for="exampleState" class="form-label">Alokasi Rp.</label>
-                                    <input name="state" id="exampleState" type="text" class="form-control">
+                                    <label for="alokasi" class="form-label">Alokasi Rp.</label>
+                                    <input autocomplete="off" readonly type="text" name="alokasi" id="alokasi"
+                                        class="form-control money" value="{{ number_format($perguliran_i->alokasi, 2) }}">
+                                    <small class="text-danger" id="msg_alokasi"></small>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="position-relative mb-3">
-                                    <label for="exampleZip" class="form-label">Sumber Pembayaran (Kredit)</label>
-                                    <input name="zip" id="exampleZip" type="text" class="form-control">
+                                    <label for="sumber_pembayaran" class="form-label">Sumber Pembayaran (Kredit)</label>
+                                    <select class="form-control" name="sumber_pembayaran" id="sumber_pembayaran">
+                                        @foreach ($sumber_bayar as $sb)
+                                            <option value="{{ $sb->kode_akun }}">
+                                                {{ $sb->kode_akun }}. {{ $sb->nama_akun }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <small class="text-danger" id="msg_sistem_angsuran_jasa"></small>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <button type="submit" name="report" value="RekomendasiVerifikator#pdf"
-                                    class="btn btn-info flex-grow-1 me-2" style="background-color: rgb(240, 148, 0);">
+                                <button type="button" id="kembaliProposal" class="btn btn-info flex-grow-1 me-2" style="background-color: rgb(240, 148, 0);">
                                     <b><i class="fa fa-refresh"></i> &nbsp; KEMBALI KE PROPOSAL</b>
                                 </button>
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#CetakDokumenProposal"
-                                    class="btn btn-secondary flex-grow-1 ms-2"
+                                <button type="button" id="Simpan" {{ $pinj_aktif ? 'disabled' : '' }} class="btn btn-secondary flex-grow-1 ms-2"
                                     style="background-color: rgb(112, 109, 109);">
                                     <b><i class="fa fa-search-plus"></i> &nbsp; SIMPAN KEPUTUSAN PENDANAAN</b>
                                 </button>
                             </div>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>

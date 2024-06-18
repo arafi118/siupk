@@ -45,7 +45,7 @@
 
 @section('modal')
 <div class="modal fade" id="EditDesa" tabindex="-1" aria-labelledby="EditDesaLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="dmodal-dialog moal-lg">
 
 
     </div>

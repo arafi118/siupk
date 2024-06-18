@@ -66,79 +66,109 @@
                 class="btn btn-info btn-sm mb-2">Cetak Dokumen Proposal</button>
         </div>
     </div>
-
     <div class="tab-content">
         <div class="tab-pane fade show active" id="" role="tabpanel">
             <div class="main-card mb-3 card">
                 <div class="card-body">
                     <h5 class="card-title">Input Rekom Verifikator</h5>
-                    <form class="">
+                    <input type="hidden" name="_id" id="_id" value="{{ $perguliran_i->id }}">
+                    <input type="hidden" name="status" id="status" value="V">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="position-relative mb-3">
-                                    <label for="exampleEmail11" class="form-label">Tgl Verifikasi</label>
-                                    <input name="email" id="exampleEmail11" placeholder="with a placeholder"
-                                        type="email" class="form-control">
+                                    <label for="tgl_verifikasi" class="form-label">Tgl Verifikasi</label>
+                                    <input autocomplete="off" type="text" name="tgl_verifikasi" id="tgl_verifikasi"
+                                        class="form-control date" value="{{ Tanggal::tglIndo($perguliran_i->tgl_proposal) }}">
+                                    <small class="text-danger" id="msg_tgl_verifikasi"></small>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="position-relative mb-3">
-                                    <label for="examplePassword11" class="form-label">Verifikasi Rp.</label>
-                                    <input name="password" id="examplePassword11" placeholder="password placeholder"
-                                        type="password" class="form-control">
+                                    <label for="verifikasi" class="form-label">Verifikasi Rp.</label>
+                                    <input autocomplete="off" type="text" name="verifikasi" id="verifikasi"
+                                        class="form-control money" value="{{ number_format($perguliran_i->proposal, 2) }}">
+                                    <small class="text-danger" id="msg_verifikasi"></small>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="position-relative mb-3">
-                                    <label for="exampleEmail11" class="form-label">Jangka</label>
-                                    <input name="email" id="exampleEmail11" placeholder="with a placeholder"
-                                        type="email" class="form-control">
+                                    <label for="jangka" class="form-label">Jangka</label>
+                                    <input autocomplete="off" type="number" name="jangka" id="jangka" class="form-control"
+                                        value="{{ $perguliran_i->jangka }}">
+                                    <small class="text-danger" id="msg_jangka"></small>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="position-relative mb-3">
-                                    <label for="examplePassword11" class="form-label">Prosentase Jasa (%)</label>
-                                    <input name="password" id="examplePassword11" placeholder="password placeholder"
-                                        type="password" class="form-control">
+                                    <label for="pros_jasa" class="form-label">Prosentase Jasa (%)</label>
+                                    <input autocomplete="off" type="number" name="pros_jasa" id="pros_jasa" class="form-control"
+                                        value="{{ $perguliran_i->pros_jasa }}">
+                                    <small class="text-danger" id="msg_pros_jasa"></small>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="position-relative mb-3">
-                                    <label for="exampleCity" class="form-label">Jenis Jasa</label>
-                                    <input name="city" id="exampleCity" type="text" class="form-control">
+                                    <label for="jenis_jasa" class="form-label">Jenis Jasa</label>
+                                    <select class="form-control" name="jenis_jasa" id="jenis_jasa">
+                                        @foreach ($jenis_jasa as $jj)
+                                            <option {{ $jj->id == $perguliran_i->jenis_jasa ? 'selected' : '' }}
+                                                value="{{ $jj->id }}">
+                                                {{ $jj->nama_jj }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <small class="text-danger" id="msg_jenis_jasa"></small>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="position-relative mb-3">
-                                    <label for="exampleState" class="form-label">Sistem Ang. Pokok</label>
-                                    <input name="state" id="exampleState" type="text" class="form-control">
+                                    <label for="sistem_angsuran_pokok" class="form-label">Sistem Ang. Pokok</label>
+                                    <select class="form-control" name="sistem_angsuran_pokok" id="sistem_angsuran_pokok">
+                                        @foreach ($sistem_angsuran as $sa)
+                                            <option {{ $sa->id == $perguliran_i->sistem_angsuran ? 'selected' : '' }}
+                                                value="{{ $sa->id }}">
+                                                {{ $sa->nama_sistem }} ({{ $sa->deskripsi_sistem }})
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <small class="text-danger" id="msg_sistem_angsuran_pokok"></small>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="position-relative mb-3">
-                                    <label for="exampleZip" class="form-label">Sistem Ang. Jasa</label>
-                                    <input name="zip" id="exampleZip" type="text" class="form-control">
+                                    <label for="sistem_angsuran_jasa" class="form-label">Sistem Ang. Jasa</label>
+                                    <select class="form-control" name="sistem_angsuran_jasa" id="sistem_angsuran_jasa">
+                                        @foreach ($sistem_angsuran as $sa)
+                                            <option {{ $sa->id == $perguliran_i->sa_jasa ? 'selected' : '' }}
+                                                value="{{ $sa->id }}">
+                                                {{ $sa->nama_sistem }} ({{ $sa->deskripsi_sistem }})
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <small class="text-danger" id="msg_sistem_angsuran_jasa"></small>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="position-relative mb-3">
-                                    <label for="exampleCity" class="form-label">Catatan Verifikasi</label>
-                                    <input name="city" id="exampleCity" type="text" class="form-control">
+                                    <label for="catatan_verifikasi" class="form-label">Catatan Verifikasi</label>
+                                    <textarea class="form-control" name="catatan_verifikasi" id="catatan_verifikasi" rows="3"
+                                    placeholder="Catatan" spellcheck="false">{{ $perguliran_i->catatan_verifikasi }}</textarea>
+                                <small class="text-danger" id="msg_catatan_verifikasi"></small>
                                 </div>
                             </div>
                         </div>
-                        <button class="mt-2 btn btn-primary">SIMPAN REKOM VERIFIKATOR</button>
-                    </form>
+                        <button id="Simpan" class="mt-2 btn btn-primary float-end btn-sm">SIMPAN REKOM VERIFIKATOR</button>
                 </div>
             </div>
         </div>
     </div>
 
 </form>
+
 
 <script>
     var formatter = new Intl.NumberFormat('en-US', {
@@ -202,3 +232,4 @@
         })
     })
 </script>
+

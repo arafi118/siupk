@@ -236,112 +236,380 @@
             </div>
         </div><br><br><br>
     </div>
-    {{-- Modal Cetak Dokumen Proposal --}}
-    <div class="modal fade" id="CetakDokumenProposal" tabindex="-1" aria-labelledby="CetakDokumenProposalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    
+    @section('modal')
+     {{-- Modal Edit Proposal --}}
+     <div class="modal fade" id="EditProposal" tabindex="-1" aria-labelledby="EditProposalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="CetakDokumenProposalLabel">Cetak Dokumen Proposal</h1>
+                    <h1 class="modal-title fs-5" id="EditProposalLabel">
+                        Edit Proposal Individu {{ $perguliran_i->anggota->namadepan }} Loan ID. {{ $perguliran_i->id }}
+                    </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="input-group input-group-outline my-3">
-                                <label class="form-label" for="tglProposal">Tanggal Proposal</label>
-                                <input autocomplete="off" type="text" name="tglProposal" id="tglProposal"
-                                    class="form-control" readonly
-                                    value="{{ Tanggal::tglIndo($perguliran_i->tgl_proposal) }}">
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="input-group input-group-outline my-3">
-                                <label class="form-label" for="tglVerifikasi">Tanggal Verifikasi</label>
-                                <input autocomplete="off" type="text" name="tglVerifikasi" id="tglVerifikasi"
-                                    class="form-control" readonly
-                                    value="{{ Tanggal::tglIndo($perguliran_i->tgl_verifikasi) }}">
-                            </div>
-                        </div>
-                    </div>
+                <div class="modal-body" id="LayoutEditProposal">
 
-                    <form action="/perguliran_i/dokumen?status=P" target="_blank" method="post">
-                        @csrf
-
-                        <input type="hidden" name="id" value="{{ $perguliran_i->id }}">
-                        <div class="row">
-                            @foreach ($dokumen_proposal as $doc => $val)
-                                <div class="col-md-3 d-grid">
-                                    @if ($val['withExcel'])
-                                        <div class="btn-group">
-                                            <button class="btn btn-linkedin btn-sm text-start" type="submit" name="report"
-                                                value="{{ $val['file'] }}#pdf">
-                                                {{ $loop->iteration }}. {{ $val['title'] }}
-                                            </button>
-                                            <button class="btn btn-icon btn-sm btn-instagram" type="submit" name="report"
-                                                value="{{ $val['file'] }}#excel">
-                                                <i class="fas fa-file-excel"></i>
-                                            </button>
-                                        </div>
-                                    @else
-                                        <button class="btn btn-linkedin btn-sm text-start" type="submit" name="report"
-                                            value="{{ $val['file'] }}#pdf">
-                                            {{ $loop->iteration }}. {{ $val['title'] }}
-                                        </button>
-                                    @endif
-                                </div>
-                            @endforeach
-                        </div>
-                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Tutup</button>
+                    <button type="button" id="SimpanEditProposal" class="btn btn-github btn-sm">Simpan Perubahan</button>
                 </div>
             </div>
         </div>
     </div>
 
-    @php
-        $readonly = 'readonly';
-        if ($perguliran_i->status == 'W') {
-            $readonly = '';
-        }
+        {{-- Modal Cetak Dokumen Proposal --}}
+        <div class="modal fade" id="CetakDokumenProposal" tabindex="-1" aria-labelledby="CetakDokumenProposalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="CetakDokumenProposalLabel">Cetak Dokumen Proposal</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="position-relative mb-3">
+                                        <label for="tglProposal" class="form-label">Tanggal Proposal</label>
+                                        <input autocomplete="off" type="text" name="tglProposal" id="tglProposal"
+                                        class="form-control" readonly
+                                        value="{{ Tanggal::tglIndo($perguliran_i->tgl_proposal) }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="position-relative mb-3">
+                                        <label for="tglVerifikasi" class="form-label">Tanggal Verifikasi</label>
+                                        <input autocomplete="off" type="text" name="tglVerifikasi" id="tglVerifikasi"
+                                        class="form-control" readonly
+                                        value="{{ Tanggal::tglIndo($perguliran_i->tgl_verifikasi) }}">
+                                    </div>
+                                </div>
 
-        $wt_cair = explode('_', $perguliran_i->wt_cair);
-        if (count($wt_cair) == 1) {
-            $waktu = $wt_cair[0];
-        }
+                        <form action="/perguliran_i/dokumen?status=P" target="_blank" method="post">
+                            @csrf
 
-        if (count($wt_cair) == 2) {
-            $waktu = $wt_cair[0];
-            $tempat = $wt_cair[1];
-        }
-    @endphp
-   <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Launch static backdrop modal
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <input type="hidden" name="id" value="{{ $perguliran_i->id }}">
+                            <div class="row">
+                                @foreach ($dokumen_proposal as $doc => $val)
+                                    <div class="col-md-3 d-grid">
+                                        @if ($val['withExcel'])
+                                            <div class="btn-group">
+                                                <button class="btn btn-primary flex-grow-1 me-2" style="background-color: rgb(2, 111, 254); text-start" type="submit" name="report"
+                                                    value="{{ $val['file'] }}#pdf">
+                                                    {{ $loop->iteration }}. {{ $val['title'] }}
+                                                </button><br>
+                                                <button class="btn btn-primary flex-grow-1 me-2"
+                                                style="background-color :rgb(2, 111, 254);" type="submit" name="report"
+                                                    value="{{ $val['file'] }}#excel">
+                                                    <i class="fas fa-file-excel"></i>
+                                                </button>
+                                            </div>
+                                        @else
+                                       
+                                            <button class="btn btn-primary flex-grow-1 me-2"
+                                            style="background-color: rgb(2, 111, 254); type="submit" name="report"
+                                                value="{{ $val['file'] }}#pdf">
+                                                {{ $loop->iteration }}. {{ $val['title'] }}
+                                            </button>
+                                            <br>
+                                        @endif
+                                    </div>
+                                @endforeach
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Tutup</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          ...
+                @php
+                    $readonly = 'readonly';
+                    if ($perguliran_i->status == 'W') {
+                        $readonly = '';
+                    }
+
+                    $wt_cair = explode('_', $perguliran_i->wt_cair);
+                    if (count($wt_cair) == 1) {
+                        $waktu = $wt_cair[0];
+                    }
+
+                    if (count($wt_cair) == 2) {
+                        $waktu = $wt_cair[0];
+                        $tempat = $wt_cair[1];
+                    }
+                @endphp 
+                
+   {{-- Modal Cetak Dokumen Pencairan --}}
+   <div class="modal fade" id="CetakDokumenPencairan" tabindex="-1" aria-labelledby="CetakDokumenPencairanLabel"
+   aria-hidden="true">
+   <div class="modal-dialog modal-xl modal-dialog-scrollable">
+       <div class="modal-content">
+           <div class="modal-header">
+               <h1 class="modal-title fs-5" id="CetakDokumenPencairanLabel">Cetak Dokumen Pencairan</h1>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+           </div>
+           <div class="modal-body">
+               <form action="/perguliran_i/simpan_data/{{ $perguliran_i->id }}?save=true" method="post"
+                   id="simpanData">
+                   @csrf
+
+                   <div class="row">
+                       <div class="col-lg-6">
+                           <div class="input-group input-group-outline my-3">
+                               <label class="form-label" for="spk_no">Nomor SPK</label>
+                               <input autocomplete="off" type="text" name="spk_no" id="spk_no"
+                                   class="form-control save" {{ $readonly }}
+                                   value="{{ $perguliran_i->spk_no }}">
+                           </div>
+                       </div>
+                       <div class="col-lg-6">
+                           <div class="input-group input-group-outline my-3">
+                               <label class="form-label" for="tempat">Tempat</label>
+                               <input autocomplete="off" type="text" name="tempat" id="tempat"
+                                   class="form-control save" {{ $readonly }} value="{{ $tempat }}">
+                           </div>
+                       </div>
+                       <div class="col-lg-6">
+                           <div class="input-group input-group-outline my-3">
+                               <label class="form-label" for="tgl_cair">Tanggal Cair</label>
+                               <input autocomplete="off" type="text" name="tgl_cair" id="tgl_cair"
+                                   class="form-control date save" {{ $readonly }}
+                                   value="{{ Tanggal::tglIndo($perguliran_i->tgl_cair) }}">
+                           </div>
+                       </div>
+                       <div class="col-lg-6">
+                           <div class="input-group input-group-outline my-3">
+                               <label class="form-label" for="waktu">Waktu</label>
+                               <input autocomplete="off" type="text" name="waktu" id="waktu"
+                                   class="form-control save" {{ $readonly }} value="{{ $waktu }}">
+                           </div>
+                       </div>
+                   </div>
+               </form>
+
+               <form action="/perguliran_i/dokumen?status={{ $perguliran_i->status }}" target="_blank"
+                   method="post">
+                   @csrf
+
+                   <input type="hidden" name="id" value="{{ $perguliran_i->id }}">
+                   <div class="row">
+                       @foreach ($dokumen_pencairan as $doc => $val)
+                           <div class="col-md-3 d-grid">
+                               @if ($val['withExcel'])
+                                   <div class="btn-group">
+                                       <button class="btn btn-linkedin btn-sm text-start" type="submit"
+                                           name="report" value="{{ $val['file'] }}#pdf">
+                                           {{ $loop->iteration }}. {{ $val['title'] }}
+                                       </button>
+                                       <button class="btn btn-icon btn-sm btn-instagram" type="submit"
+                                           name="report" value="{{ $val['file'] }}#excel">
+                                           <i class="fas fa-file-excel"></i>
+                                       </button>
+                                   </div>
+                               @else
+                                   <button class="btn btn-linkedin btn-sm text-start" type="submit" name="report"
+                                       value="{{ $val['file'] }}#pdf">
+                                       {{ $loop->iteration }}. {{ $val['title'] }}
+                                   </button>
+                               @endif
+                           </div>
+                       @endforeach
+                   </div>
+               </form>
+           </div>
+           <div class="modal-footer">
+               <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Tutup</button>
+           </div>
+       </div>
+   </div>
+</div>
+
+{{-- Modal Rescedule Pinjaman --}}
+<div class="modal fade" id="Rescedule" tabindex="-1" aria-labelledby="ResceduleLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="ResceduleLabel">
+                    Resceduling <span class="badge badge-info">Loan ID. {{ $perguliran_i->id }}</span>
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-justify">
+                    Fitur ini dapat Anda gunakan jika Anda akan menjadwal ulang (<b>Resceduling</b>) Pinjaman.
+                    Dengan klik tombol <b>Rescedule Pinjaman</b> maka pinjaman ini akan berstatus <b>R</b>, dan akan
+                    membuat pinjaman baru dengan Alokasi sebesar saldo yang ada, yaitu
+                    <b>Rp. {{ number_format($saldo_pokok) }}</b> ;
+                </div>
+
+                <form action="/perguliran_i/rescedule" method="post" id="formRescedule">
+                    @csrf
+
+                    <input type="hidden" name="id" id="id" value="{{ $perguliran_i->id }}">
+                    <input type="hidden" name="_pengajuan" id="_pengajuan" value="{{ $saldo_pokok }}">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group input-group-static my-3">
+                                <label for="tgl_resceduling">Tanggal Resceduling</label>
+                                <input autocomplete="off" type="text" name="tgl_resceduling" id="tgl_resceduling"
+                                    class="form-control date" value="{{ date('d/m/Y') }}">
+                                <small class="text-danger" id="msg_tgl_resceduling"></small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group input-group-static my-3">
+                                <label for="pengajuan">Pengajuan Rp.</label>
+                                <input autocomplete="off" type="text" name="pengajuan" id="pengajuan"
+                                    class="form-control money" disabled value="{{ number_format($saldo_pokok, 2) }}">
+                                <small class="text-danger" id="msg_pengajuan"></small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="my-2">
+                                <label class="form-label" for="sistem_angsuran_pokok">Sistem Angs. Pokok</label>
+                                <select class="form-control" name="sistem_angsuran_pokok" id="sistem_angsuran_pokok">
+                                    @foreach ($sistem_angsuran as $sa)
+                                        <option {{ $perguliran_i->sistem_angsuran == $sa->id ? 'selected' : '' }}
+                                            value="{{ $sa->id }}">
+                                            {{ $sa->nama_sistem }} ({{ $sa->deskripsi_sistem }})
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <small class="text-danger" id="msg_sistem_angsuran_pokok"></small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="my-2">
+                                <label class="form-label" for="sistem_angsuran_jasa">Sistem Angs. Jasa</label>
+                                <select class="form-control" name="sistem_angsuran_jasa" id="sistem_angsuran_jasa">
+                                    @foreach ($sistem_angsuran as $sa)
+                                        <option {{ $perguliran_i->sa_jasa == $sa->id ? 'selected' : '' }}
+                                            value="{{ $sa->id }}">
+                                            {{ $sa->nama_sistem }} ({{ $sa->deskripsi_sistem }})
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <small class="text-danger" id="msg_sistem_angsuran_jasa"></small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group input-group-static my-3">
+                                <label for="jangka">Jangka</label>
+                                <input autocomplete="off" type="number" name="jangka" id="jangka"
+                                    class="form-control" value="{{ $perguliran_i->jangka }}">
+                                <small class="text-danger" id="msg_jangka"></small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group input-group-static my-3">
+                                <label for="pros_jasa">Prosentase Jasa (%)</label>
+                                <input autocomplete="off" type="number" name="pros_jasa" id="pros_jasa"
+                                    class="form-control" value="{{ $perguliran_i->pros_jasa }}">
+                                <small class="text-danger" id="msg_pros_jasa"></small>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Tutup</button>
+                <button type="button" id="SimpanRescedule" class="btn btn-github btn-sm">
+                    Rescedule Pinjaman
+                </button>
+            </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Understood</button>
-        </div>
-      </div>
     </div>
-  </div>
-  
+</div>
 
+{{-- Modal Penghapusan Pinjaman --}}
+<div class="modal fade" id="Penghapusan" tabindex="-1" aria-labelledby="PenghapusanLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="PenghapusanLabel">
+                    Penghapusan Piutang <span class="badge badge-info">Loan ID. {{ $perguliran_i->id }}</span>
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/perguliran_i/hapus" method="post" id="FormPenghapusanPinjaman">
+                    @csrf
+
+                    <input type="hidden" name="id" id="id" value="{{ $perguliran_i->id }}">
+                    <input type="hidden" name="saldo" id="saldo" value="{{ $saldo_pokok }}">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group input-group-static my-3">
+                                <label for="tgl_penghapusan">Tanggal Penghapusan</label>
+                                <input autocomplete="off" type="text" name="tgl_penghapusan" id="tgl_penghapusan"
+                                    class="form-control date" value="{{ date('d/m/Y') }}">
+                                <small class="text-danger" id="msg_tgl_penghapusan"></small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group input-group-static my-3">
+                                <label for="alokasi">Alokasi Rp.</label>
+                                <input autocomplete="off" type="text" name="alokasi" id="alokasi"
+                                    class="form-control money" disabled value="{{ number_format($saldo_pokok, 2) }}">
+                                <small class="text-danger" id="msg_alokasi"></small>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-group input-group-static my-3">
+                                <label for="alasan_penghapusan">Alasan Penghapusan</label>
+                                <textarea class="form-control" name="alasan_penghapusan" id="alasan_penghapusan"></textarea>
+                                <small class="text-danger" id="msg_alasan_penghapusan"></small>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Tutup</button>
+                <button type="button" id="SimpanHapus" class="btn btn-github btn-sm">
+                    Hapus Pinjaman
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form action="/perguliran_i/{{ $perguliran_i->id }}" method="post" id="FormDeleteProposal">
+    @csrf
+    @method('DELETE')
+</form>
+
+<div id="placeholder" class="d-none">
+    <div class="row">
+        <div class="col-lg-4 mb-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="placeholder rounded-circle border" style="width: 150px; height: 150px;"></span>
+
+                    <h5 class="mb-2">
+                        <b><span class="placeholder col-12"></span></b>
+                    </h5>
+
+                    <div class="text-muted">
+                        <span class="placeholder col-12"></span>
+                    </div>
+                    <div class="text-muted"><span class="placeholder col-12"></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="alert placeholder col-12 p-4"></div>
+            <div class="alert placeholder col-12 p-5"></div>
+            <div class="alert placeholder col-12 p-5"></div>
+            <div class="alert placeholder col-12 p-4"></div>
+        </div>
+    </div>
+</div>
+    @endsection
 @endsection
 
 @section('script')
