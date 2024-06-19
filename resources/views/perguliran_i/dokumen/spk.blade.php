@@ -256,15 +256,8 @@
         <h3 class="fa fa-align-center" aria-hidden="true"style="font-size: 10px;">Penyelesaian Perselisihan </i></h3>
 
         <ol class="centered-text">
-            <li>Apabila ada hal-hal yang tidak atau belum diatur dalam perjanjian ini dan juga jika
-                terjadi perbedaan penafsiran atas seluruh atau sebagian dari perjanjian ini maka
-                kedua belah pihak sepakat untuk menyelesaikannya secara musyawarah untuk mufakat.
-            </li>
-            <li>
-                Apabila ada hal-hal yang tidak atau belum diatur dalam perjanjian ini dan juga jika
-                terjadi perbedaan penafsiran atas seluruh atau sebagian dari perjanjian ini maka
-                kedua belah pihak sepakat untuk menyelesaikannya secara musyawarah untuk mufakat.
-            </li>
+            <li>Apabila ada hal-hal yang tidak atau belum diatur dalam perjanjian ini dan juga jika terjadi perbedaan penafsiran atas seluruh atau sebagian dari perjanjian ini maka kedua belah pihak sepakat untuk menyelesaikannya secara musyawarah untuk mufakat.</li>
+            <li>Jika penyelesaian secara musyawarah untuk mufakat juga ternyata tidak menyelesaikan perselisihan tersebut maka perselisihan tersebut akan diselesaikan secara hukum yang berlaku di Indonesia dan oleh karena itu kedua belah pihak setuju menunjuk Pengadilan Negeri {{ $nama_kab }} sebagai upaya hukum dalam menyelesaikan persengketaan tersebut.</li>
         </ol>
     </div>
     <div style="text-align: center;">
