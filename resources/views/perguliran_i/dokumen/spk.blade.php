@@ -10,7 +10,7 @@
     if (count($wt_cair) == 1) {
         $waktu = $wt_cair[0];
     }
-    
+
     if (count($wt_cair) == 2) {
         $waktu = $wt_cair[0];
         $tempat = $wt_cair[1] ?? ' . . . . . . . ';
@@ -55,6 +55,7 @@
         {{ $keuangan->terbilang(Tanggal::tahun($pinkel->tgl_cair)) }}, bertempat di {{ $tempat }} kami yang bertanda
         tangan dibawah ini;
     </div>
+
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 10px;">
         <tr>
             <td width="5">&nbsp;</td>
@@ -186,7 +187,7 @@
             jasa <b> {{ $pinkel->pros_jasa / $pinkel->jangka }} % Flat</b> sebesar
             <b>{{ number_format($pinkel->alokasi * ($pinkel->pros_jasa / $pinkel->jangka / 100)) }}
                 ({{ $keuangan->terbilang($pinkel->alokasi * ($pinkel->pros_jasa / $pinkel->jangka / 100)) }} Rupiah)</b>
-            setiap bulan, selama 6 bulan,
+            setiap bulan, selama {{ $pinkel->jangka }} bulan,
             yang dimulai pada {{ Tanggal::namaHari($pinkel->tgl_cair) }},
             {{ \Carbon\Carbon::parse($pinkel->anggota->tgl_cair)->translatedFormat('d F Y') }} dan
             sampai target pelunasan, sebagaimana jadwal angsuran terlampir.
@@ -298,16 +299,50 @@
                                 </div>
                             </td>
                         </tr>
+                    </table><br>
+                    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
+                        <tr>
+                            <td width="10" align="center">&nbsp;</td>
+                            <td width="70" align="center">Pihak Pertama</td>
+                            <td width="60" align="center">&nbsp;</td>
+                            <td width="50" align="center" colspan="2">Pihak Kedua</td>
+                        </tr><br><br><br><br><br>
+                        <tr>
+                            <td width="10" align="center">&nbsp;</td>
+                            <td width="70" align="center">{{ $dir->namadepan }} {{ $dir->namabelakang }}<br> Kepala
+                                UPK</td>
+                            <td width="50" align="center">&nbsp;</td>
+                            <td width="60" align="center">{{ $pinkel->anggota->namadepan }}<br>Peminjam
+                            </td>
+                            <td width="50" align="center">{{ $pinkel->anggota->penjamin }} <br> Penjamin</td>
+                        </tr><br>
+                        {{-- <tr>
+                            <td width="10" align="center">&nbsp;</td>
+                            <td width="70" align="center">&nbsp;</td>
+                            <td width="60" align="center">Mengetahui
+                                <br>{{ $pinkel->anggota->d->sebutan_desa->sebutan_kades }}&nbsp;{{ $pinkel->anggota->d->nama_desa }}
+                            </td>
+                            <td width="50" align="center">&nbsp;</td>
+                            <td width="50" align="center">&nbsp;</td>
+                        </tr><br><br><br><br><br>
+                        <tr>
+                            <td width="10" align="center">&nbsp;</td>
+                            <td width="70" align="center">&nbsp;</td>
+                            <td width="60" align="center">{{ $pinkel->anggota->d->kades }}
+                            </td>
+                            <td width="50" align="center">&nbsp;</td>
+                            <td width="50" align="center">&nbsp;</td>
+                        </tr> --}}
                     </table>
-                    
-                    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;"
+
+                    {{-- <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;"
                         class="p">
                         <tr>
                             <td>
                                 {!! $ttd !!}
                             </td>
                         </tr>
-                    </table>
+                    </table> --}}
                 </td>
             </tr>
         </table>
