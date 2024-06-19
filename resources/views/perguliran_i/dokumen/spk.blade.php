@@ -268,7 +268,7 @@
     </div>
     <div style="text-align: center;">
         <b class="centered-text">PASAL 7</b>
-        <h3 class="fa fa-align-center" aria-hidden="true"style="font-size: 10px;">Sistem Pengembalian
+        <h3 class="fa fa-align-center" aria-hidden="true"style="font-size: 10px;">Lain - Lain
             </i></h3>
         <div class="centered-text">
             Hal-hal yang belum atau belum cukup diatur dalam perjanjian ini akan diatur lebih lanjut dalam bentuk surat

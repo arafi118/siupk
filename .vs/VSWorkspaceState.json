@@ -7,9 +7,10 @@
     "\\app\\Models",
     "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\desa",
     "\\resources\\views\\perguliran",
-    "\\resources\\views\\perguliran\\dokumen"
+    "\\resources\\views\\perguliran\\dokumen",
+    "\\resources\\views\\perguliran_i"
   ],
+  "SelectedNode": "\\app\\Http\\Controllers\\PinjamanKelompokController.php",
   "PreviewInSolutionExplorer": false
 }
