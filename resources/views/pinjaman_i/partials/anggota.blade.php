@@ -46,6 +46,11 @@
         </div>
     </div>
 </div> --}}
+<select class="js-example-basic-single" name="state">
+    <option value="AL">Alabama</option>
+      ...
+    <option value="WY">Wyoming</option>
+  </select>
 <div class="row">
     <div class="col-md-8">
         <div class="position-relative mb-3">
@@ -102,4 +107,8 @@
             distance: 1000
         }
     })
+// In your Javascript (external .js resource or <script> tag)
+    $(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
 </script>

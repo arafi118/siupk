@@ -7,19 +7,19 @@
             <div class="card-body">
                 <h5 class="card-title"></h5>
                 <ul class="nav nav-pills nav-fill">
-                    <li class="nav-item"><a data-bs-toggle="tab" id="tab-0" href="#tab-content-0" class="active nav-link">
+                    <li class="nav-item"><a data-bs-toggle="tab" id="tab-0" href="#Proposal" class="active nav-link">
                             <i class="fa-solid fa-tree-city"></i> &nbsp; Proposal (P)</a>
                     </li>
-                    <li class="nav-item"><a data-bs-toggle="tab" id="tab-1" href="#tab-content-1" class="nav-link">
+                    <li class="nav-item"><a data-bs-toggle="tab" id="tab-1" href="#Verified" class="nav-link">
                             <i class="fa-solid fa-calendar-check-o"></i> &nbsp; Verified (V)</a>
                     </li>
-                    <li class="nav-item"><a data-bs-toggle="tab" id="tab-2" href="#tab-content-2" class="nav-link">
+                    <li class="nav-item"><a data-bs-toggle="tab" id="tab-2" href="#Waiting" class="nav-link">
                             <i class="fa-solid fa-tree-city"></i> &nbsp; Waiting (W)</a>
                     </li>
-                    <li class="nav-item"><a data-bs-toggle="tab" id="tab-3" href="#tab-content-3" class="nav-link">
+                    <li class="nav-item"><a data-bs-toggle="tab" id="tab-3" href="#Aktif" class="nav-link">
                             <i class="fa-solid fa-tree-city"></i> &nbsp;Aktif (A)</a>
                     </li>
-                    <li class="nav-item"><a data-bs-toggle="tab" id="tab-4" href="#tab-content-4" class="nav-link">
+                    <li class="nav-item"><a data-bs-toggle="tab" id="tab-4" href="#Lunas" class="nav-link">
                             <i class="fa-solid fa-tree-city"></i> &nbsp;Lunas (L)</a>
                     </li>
                 </ul>
