@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pe7-icon@1.0.4/dist/dist/pe-icon-7-stroke.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script defer src="/assets/scripts/main.js"></script>
     <script defer src="/assets/scripts/demo.js"></script>
     <script defer src="/assets/scripts/toastr.js"></script>
@@ -849,7 +850,7 @@
 
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script async src="/assets/js/material-dashboard.min.js?v=1716515606"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </body>
 
 </html>
