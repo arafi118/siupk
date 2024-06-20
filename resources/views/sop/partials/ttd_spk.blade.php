@@ -1,40 +1,49 @@
 @extends('layouts.base')
 
 @section('content')
-    <div class="card">
-        <div class="card-body p-2">
-            <form action="/pengaturan/sop/simpanttdpelaporan" method="post" id="formTtdPelaporan" height>
-                @csrf
-
-                <input type="hidden" name="field" id="field" value="tanda_tangan_spk">
-                <textarea class="tiny-mce-editor" name="tanda_tangan" id="tanda_tangan" rows="20">
-@if ($kec->ttd)
-{!! json_decode($kec->ttd->tanda_tangan_spk, true) !!}
-@else
-<table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
-    <tr>
-        <td align="center">Pihak Pertama</td>
-        <td>&nbsp;</td>
-        <td align="center">Pihak Kedua</td>
-    </tr>
-    <tr>
-        <td></td>
-    </tr>
-</table>
-@endif
-</textarea>
-            </form>
-
-            <div class="d-flex justify-content-end mt-3">
-                <button type="button" data-bs-toggle="modal" data-bs-target="#kataKunci" class="btn btn-info btn-sm">
-                    Kata Kunci
-                </button>
-                <button type="button" id="simpanTtdPelaporan" class="btn btn-github btn-sm ms-2">
-                    Simpan Perubahan
-                </button>
+    <div class="app-main__inner">
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="main-card mb-3 card">
+                            <div class="card-body"><h5 class="card-title">Controls Types</h5>
+                                <form action="/pengaturan/sop/simpanttdpelaporan" method="post" id="formTtdPelaporan" height>
+                                    @csrf
+                    
+                                    <input type="hidden" name="field" id="field" value="tanda_tangan_spk">
+                                    <textarea class="tiny-mce-editor" name="tanda_tangan" id="tanda_tangan" rows="20">
+                    @if ($kec->ttd)
+                    {!! json_decode($kec->ttd->tanda_tangan_spk, true) !!}
+                    @else
+                    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
+                        <tr>
+                            <td align="center">Pihak Pertama</td>
+                            <td>&nbsp;</td>
+                            <td align="center">Pihak Kedua</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                    </table>
+                    @endif
+                    </textarea>
+                                </form>
+                                <div class="d-flex justify-content-end mt-3">
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#kataKunci" class="btn btn-info btn-sm">
+                                        Kata Kunci
+                                    </button>
+                                    <button type="button" id="simpanTtdPelaporan" class="btn btn-dark btn-sm ms-2">
+                                        Simpan Perubahan
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </div> <br><br><br><br>
 @endsection
 
 @section('modal')
