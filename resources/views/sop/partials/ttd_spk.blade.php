@@ -35,7 +35,9 @@
             </div>
         </div>
     </div>
+@endsection
 
+@section('modal')
     <div class="modal fade" id="kataKunci" tabindex="-1" aria-labelledby="kataKunciLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
