@@ -75,11 +75,14 @@
             </div>
             <ul class="header-menu nav">
                 <li class="nav-item">
-                    <a href="javascript:void(0);" class="nav-link">
+                    <a href="#" class="nav-link text-body p-0 position-relative" target="_blank"
+                        id="btnLaporanPelunasan" data-bs-toggle="tooltip" data-bs-placement="top" title="Reminder"
+                        data-container="body" data-animation="true">
                         <i class="nav-link-icon fa-solid fa-bell"> </i>
                         Reminder
                     </a>
                 </li>
+                
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -93,7 +96,8 @@
                     </ul>
                 </li>
                 <li class="dropdown nav-item">
-                    <a href="javascript:void(0);" class="nav-link">
+                    <a href="javascript:;" class="nav-link text-body p-0" id="logout" data-bs-toggle="tooltip"
+                    data-bs-placement="top" title="Logout" data-container="body" data-animation="true">
                         <i class="nav-link-icon fa-solid fa-arrow-up-right-from-square"></i>
                         Logout
                     </a>

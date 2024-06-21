@@ -18,10 +18,6 @@
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pe7-icon@1.0.4/dist/dist/pe-icon-7-stroke.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script defer src="/assets/scripts/main.js"></script>
     <script defer src="/assets/scripts/demo.js"></script>
     <script defer src="/assets/scripts/toastr.js"></script>
@@ -106,7 +102,7 @@
             /* Tambahan gaya lainnya sesuai kebutuhan */
         }       
     </style>
-
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -553,8 +549,11 @@
 
     @yield('modal')
 
-    <form action="/logout" method="post" id="formLogout">
+    {{-- <form action="/logout" method="post" id="formLogout">
         <input type="hidden" name="_token" value="yZaBRXeawdWlSwzP4com4AIEfVtTtwcAPgf6mA40">
+    </form> --}}
+    <form action="/logout" method="post" id="formLogout">
+        @csrf
     </form>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -571,6 +570,8 @@
 <script src="/assets/js/plugins/chartjs.min.js"></script>
 <script src="/assets/js/html5-qrcode.js?v=1716515606"></script>
 <script src="http://siupk.test/vendor/tinymce/tinymce.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
@@ -851,11 +852,6 @@
 
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script async src="/assets/js/material-dashboard.min.js?v=1716515606"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<link href="vendor/select2/dist/css/select2.min.css" rel="stylesheet" />
-<script src="vendor/select2/dist/js/select2.min.js"></script>
-<link href="path/to/select2.min.css" rel="stylesheet" />
-<script src="path/to/select2.min.js"></script>
 </body>
 
 </html>

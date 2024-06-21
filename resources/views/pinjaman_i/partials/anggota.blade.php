@@ -46,15 +46,10 @@
         </div>
     </div>
 </div> --}}
-<select class="js-example-basic-single" name="state">
-    <option value="AL">Alabama</option>
-      ...
-    <option value="WY">Wyoming</option>
-  </select>
 <div class="row">
     <div class="col-md-8">
         <div class="position-relative mb-3">
-            <select class="form-select" name="label" id="label">
+            <select class="js-example-basic-single form-select" name="label" id="label">
                 @foreach ($anggota as $ang)
                     @php
                         $pinjaman = 'N';
@@ -100,15 +95,7 @@
 </div>
 
 <script>
-    new Choices($('#individu')[0], {
-        shouldSort: false,
-        fuseOptions: {
-            threshold: 0.1,
-            distance: 1000
-        }
-    })
-// In your Javascript (external .js resource or <script> tag)
-    $(document).ready(function() {
+$(document).ready(function() {
     $('.js-example-basic-single').select2();
 });
 </script>

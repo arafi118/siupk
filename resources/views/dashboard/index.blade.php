@@ -1,322 +1,592 @@
 @extends('layouts.base')
 
 @section('content')
+    <form action="" method="post" id="defaultForm">
+        @csrf
+
+        <input type="hidden" name="tgl" id="tgl" value="{{ date('d/m/Y') }}">
+    </form>
+
+    
+
     <div class="app-main__inner">
-                <div class="row">
-                    <div class="col-lg-6 col-xl-4">
-                        <div class="card mb-3 widget-content">
-                            <div class="widget-content-outer">
-                                <div class="widget-content-wrapper">
-                                    <div class="widget-content-left">
-                                        <div class="widget-heading">Total Orders</div>
-                                        <div class="widget-subheading">Last year expenses</div>
-                                    </div>
-                                    <div class="widget-content-right">
-                                        <div class="widget-numbers text-success">1896</div>
-                                    </div>
-                                </div>
-                                <div class="widget-progress-wrapper">
-                                    <div class="progress-bar-xs progress">
-                                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="width: 65%;"></div>
-                                    </div>
-                                    <div class="progress-sub-label">
-                                        <div class="sub-label-left">YoY Growth</div>
-                                        <div class="sub-label-right">100%</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-4">
-                        <div class="card mb-3 widget-content">
-                            <div class="widget-content-outer">
-                                <div class="widget-content-wrapper">
-                                    <div class="widget-content-left">
-                                        <div class="widget-heading">Clients</div>
-                                        <div class="widget-subheading">Total Clients Profit</div>
-                                    </div>
-                                    <div class="widget-content-right">
-                                        <div class="widget-numbers text-primary">$12.6k</div>
-                                    </div>
-                                </div>
-                                <div class="widget-progress-wrapper">
-                                    <div class="progress-bar-lg progress-bar-animated progress">
-                                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="47" aria-valuemin="0" aria-valuemax="100" style="width: 47%;"></div>
-                                    </div>
-                                    <div class="progress-sub-label">
-                                        <div class="sub-label-left">Retention</div>
-                                        <div class="sub-label-right">100%</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-4">
-                        <div class="card mb-3 widget-content">
-                            <div class="widget-content-outer">
-                                <div class="widget-content-wrapper">
-                                    <div class="widget-content-left">
-                                        <div class="widget-heading">Products Sold</div>
-                                        <div class="widget-subheading">Total revenue streams</div>
-                                    </div>
-                                    <div class="widget-content-right">
-                                        <div class="widget-numbers text-warning">$3M</div>
-                                    </div>
-                                </div>
-                                <div class="widget-progress-wrapper">
-                                    <div class="progress-bar-xs progress-bar-animated-alt progress">
-                                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%;"></div>
-                                    </div>
-                                    <div class="progress-sub-label">
-                                        <div class="sub-label-left">Sales</div>
-                                        <div class="sub-label-right">100%</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <div class="row">
+            @if ($jumlah_saldo <= $jumlah)
+                <div class="col-12">
+                    <div class="alert alert-warning text-white" role="alert">
+                        Sepertinya saldo transaksi anda belum tersimpan di aplikasi. Silahkan Klik <a href="#"
+                            data-href="/simpan_saldo?bulan=00&tahun={{ date('Y') }}" class="alert-link"
+                            id="simpanSaldo">Disini</a> untuk menyimpan
+                        saldo transaksi anda
                     </div>
                 </div>
-            <div class="divider mt-0" style="margin-bottom: 30px;"></div>
-            <div class="row">
-                <div class="col-md-12 col-lg-4">
-                    <div class="mb-3 card">
-                        <div class="card-header-tab card-header-tab-animation card-header">
-                            <div class="card-header-title">
-                                <i class="header-icon lnr-apartment icon-gradient bg-love-kiss"> </i>
-                                Sales Report
+            @endif
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body p-3 position-relative pointer" id="btnAktif">
+                        <div class="row">
+                            <div class="col-7 text-start">
+                                <p class="text-sm mb-1 text-capitalize font-weight-bold">Pinjaman Aktif</p>
+                                <h5 class="font-weight-bolder mb-0">
+                                    {{ $pinjaman_kelompok }} Kelompok
+                                </h5>
+                                <span class="text-sm text-end text-success font-weight-bolder mt-auto mb-0">
+                                    {{ $pinjaman_anggota }}
+                                    <span class="font-weight-normal text-secondary">Pemanfaat</span>
+                                </span>
                             </div>
-                            <ul class="nav">
-                                <li class="nav-item"><a href="javascript:void(0);"
-                                        class="active nav-link">Last</a></li>
-                                <li class="nav-item"><a href="javascript:void(0);"
-                                        class="nav-link second-tab-toggle">Current</a></li>
-                            </ul>
-                        </div>
-                        <div class="card-body">
-                            <div class="tab-content">
-                                <div class="tab-pane fade show active" id="tabs-eg-77">
-                                    <div class="card mb-3 widget-chart widget-chart2 text-start w-100">
-                                        <div class="widget-chat-wrapper-outer">
-                                            <div
-                                                class="widget-chart-wrapper widget-chart-wrapper-lg opacity-10 m-0">
-                                                <div class="chart-container">
-                                                    <canvas id="chart-vert-bar" style="height: 227px;"></canvas>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h6 class="text-muted text-uppercase font-size-md opacity-5 fw-normal">Top
-                                        Authors</h6>
-                                    <div class="scroll-area-sm">
-                                        <div class="scrollbar-container">
-                                            <ul
-                                                class="rm-list-borders rm-list-borders-scroll list-group list-group-flush">
-                                                <li class="list-group-item">
-                                                    <div class="widget-content p-0">
-                                                        <div class="widget-content-wrapper">
-                                                            <div class="widget-content-left me-3">
-                                                                <img width="42" class="rounded-circle"
-                                                                    src="assets/images/avatars/9.jpg" alt="">
-                                                            </div>
-                                                            <div class="widget-content-left">
-                                                                <div class="widget-heading">Ella-Rose Henry
-                                                                </div>
-                                                                <div class="widget-subheading">Web Developer
-                                                                </div>
-                                                            </div>
-                                                            <div class="widget-content-right">
-                                                                <div class="font-size-xlg text-muted">
-                                                                    <small class="opacity-5 pe-1">$</small>
-                                                                    <span>129</span>
-                                                                    <small class="text-danger ps-2">
-                                                                        <i class="fa fa-angle-down"></i>
-                                                                    </small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item">
-                                                    <div class="widget-content p-0">
-                                                        <div class="widget-content-wrapper">
-                                                            <div class="widget-content-left me-3">
-                                                                <img width="42" class="rounded-circle"
-                                                                    src="assets/images/avatars/5.jpg" alt="">
-                                                            </div>
-                                                            <div class="widget-content-left">
-                                                                <div class="widget-heading">Ruben Tillman</div>
-                                                                <div class="widget-subheading">UI Designer</div>
-                                                            </div>
-                                                            <div class="widget-content-right">
-                                                                <div class="font-size-xlg text-muted">
-                                                                    <small class="opacity-5 pe-1">$</small>
-                                                                    <span>54</span>
-                                                                    <small class="text-success ps-2">
-                                                                        <i class="fa fa-angle-up"></i>
-                                                                    </small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item">
-                                                    <div class="widget-content p-0">
-                                                        <div class="widget-content-wrapper">
-                                                            <div class="widget-content-left me-3">
-                                                                <img width="42" class="rounded-circle"
-                                                                    src="assets/images/avatars/4.jpg" alt="">
-                                                            </div>
-                                                            <div class="widget-content-left">
-                                                                <div class="widget-heading">Vinnie Wagstaff
-                                                                </div>
-                                                                <div class="widget-subheading">Java Programmer
-                                                                </div>
-                                                            </div>
-                                                            <div class="widget-content-right">
-                                                                <div class="font-size-xlg text-muted">
-                                                                    <small class="opacity-5 pe-1">$</small>
-                                                                    <span>429</span>
-                                                                    <small class="text-warning ps-2">
-                                                                        <i class="fa fa-dot-circle"></i>
-                                                                    </small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item">
-                                                    <div class="widget-content p-0">
-                                                        <div class="widget-content-wrapper">
-                                                            <div class="widget-content-left me-3">
-                                                                <img width="42" class="rounded-circle"
-                                                                    src="assets/images/avatars/3.jpg" alt="">
-                                                            </div>
-                                                            <div class="widget-content-left">
-                                                                <div class="widget-heading">Ella-Rose Henry
-                                                                </div>
-                                                                <div class="widget-subheading">Web Developer
-                                                                </div>
-                                                            </div>
-                                                            <div class="widget-content-right">
-                                                                <div class="font-size-xlg text-muted">
-                                                                    <small class="opacity-5 pe-1">$</small>
-                                                                    <span>129</span>
-                                                                    <small class="text-danger ps-2">
-                                                                        <i class="fa fa-angle-down"></i>
-                                                                    </small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item">
-                                                    <div class="widget-content p-0">
-                                                        <div class="widget-content-wrapper">
-                                                            <div class="widget-content-left me-3">
-                                                                <img width="42" class="rounded-circle"
-                                                                    src="assets/images/avatars/2.jpg" alt="">
-                                                            </div>
-                                                            <div class="widget-content-left">
-                                                                <div class="widget-heading">Ruben Tillman</div>
-                                                                <div class="widget-subheading">UI Designer</div>
-                                                            </div>
-                                                            <div class="widget-content-right">
-                                                                <div class="font-size-xlg text-muted">
-                                                                    <small class="opacity-5 pe-1">$</small>
-                                                                    <span>54</span>
-                                                                    <small class="text-success ps-2">
-                                                                        <i class="fa fa-angle-up"></i>
-                                                                    </small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 col-lg-8">
-                    <div class="mb-3 card">
-                        <div class="card-header-tab card-header">
-                            <div class="card-header-title">
-                                <i class="header-icon lnr-rocket icon-gradient bg-tempting-azure"> </i>
-                                Bandwidth Reports
-                            </div>
-                            <div class="btn-actions-pane-right">
-                                <div class="nav">
-                                    <a href="javascript:void(0);"
-                                        class="border-0 btn-pill btn-wide btn-transition active btn btn-outline-alternate">Tab
-                                        1</a>
-                                    <a href="javascript:void(0);"
-                                        class="ms-1 btn-pill btn-wide border-0 btn-transition  btn btn-outline-alternate second-tab-toggle-alt">Tab
-                                        2</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-content">
-                            <div class="tab-pane fade active show" id="tab-eg-55">
-                                <div class="widget-chart p-3">
-                                    <div style="height: 350px">
-                                        <canvas id="line-chart"></canvas>
-                                    </div>
-                                    <div class="widget-chart-content text-center mt-5">
-                                        <div class="widget-description mt-0 text-warning">
-                                            <i class="fa fa-arrow-left"></i>
-                                            <span class="ps-1">175.5%</span>
-                                            <span class="text-muted opacity-8 ps-1">increased server
-                                                resources</span>
-                                        </div>
-                                    </div>
+                            <div class="col-5">
+                                <div class="dropdown text-end">
+                                    <span class="text-xs text-secondary">Periode {{ date('d/m/y') }}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-    </div>
-@endsection
-   {{-- Modal Tagihan --}}
-   <div class="modal fade" id="tagihanPinjaman" aria-labelledby="tagihanPinjamanLabel" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="tagihanPinjamanLabel">Tagihan</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="col-sm-4 mt-sm-0 mt-4">
+                <div class="card">
+                    <div class="card-body p-3 position-relative pointer" id="btnpinjaman">
+                        <div class="row">
+                            <div class="col-7 text-start">
+                                <p class="text-sm mb-1 text-capitalize font-weight-bold">Proposal Pinjaman</p>
+                                <h5 class="font-weight-bolder mb-0">
+                                    {{ $proposal }} Proposal
+                                </h5>
+                                <span class="text-sm text-end text-success font-weight-bolder mt-auto mb-0">
+                                    {{ $verifikasi }}
+                                    <span class="font-weight-normal text-secondary">verifikasi</span>
+                                </span>
+                            </div>
+                            <div class="col-5">
+                                <div class="dropdown text-end">
+                                    <span class="text-xs text-secondary">{{ $waiting }} waiting</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-                <div id="TbTagihan"></div>
+            <div class="col-sm-4 mt-sm-0 mt-4">
+                <div class="card">
+                    <div class="card-body p-3 position-relative pointer" id="btnjatuhTempo">
+                        <div class="row">
+                            <div class="col-7 text-start">
+                                <p class="text-sm mb-1 text-capitalize font-weight-bold">Jatuh Tempo</p>
+                                <h5 class="font-weight-bolder mb-0">
+                                    <span id="jatuh_tempo">
+                                        <div class="spinner-border sm text-info" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </span> Hari Ini
+                                </h5>
+                                <span class="font-weight-normal text-secondary text-sm">
+                                    <span class="font-weight-bolder text-success" id="nunggak">
+                                        <div class="spinner-border xs text-info" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </span> menunggak
+                                </span>
+                            </div>
+                            <div class="col-5">
+                                <div class="dropdown text-end">
+                                    <span class="text-xs text-warning">&#33; tagihan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-github btn-sm" id="KirimPesan">Kirim Pesan</button>
-                <button type="button" class="btn btn-danger btn-sm" id="closeTagihan">Tutup</button>
+        </div>
+        <div class="row mt-4">
+            <div class="col-lg-4 col-sm-6">
+                <div class="card h-100">
+                    <div class="card-header pb-0 p-3">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="mb-0">Angsuran Hari Ini</h6>
+                            <button type="button"
+                                class="btn btn-icon-only btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center"
+                                data-bs-toggle="tooltip" data-bs-placement="bottom" title=""
+                                data-bs-original-title="See traffic channels">
+                                <i class="material-icons text-sm">priority_high</i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0 p-3 pt-0 mt-4">
+                        <div class="row">
+                            <div class="col-7 text-start">
+                                <div class="chart">
+                                    <canvas id="chart-pie" class="chart-canvas" height="400"
+                                        style="display: block; box-sizing: border-box; height: 200px; width: 169.7px;"
+                                        width="339"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-5 my-auto">
+                                <span class="badge badge-md badge-dot me-4 d-block text-start">
+                                    <i class="bg-info"></i>
+                                    <span class="text-dark text-xs">SPP Pokok</span>
+                                </span>
+                                <span class="badge badge-md badge-dot me-4 d-block text-start">
+                                    <i class="bg-success"></i>
+                                    <span class="text-dark text-xs">SPP Jasa</span>
+                                </span>
+                                <span class="badge badge-md badge-dot me-4 d-block text-start">
+                                    <i class="bg-dark"></i>
+                                    <span class="text-dark text-xs">UEP Pokok</span>
+                                </span>
+                                <span class="badge badge-md badge-dot me-4 d-block text-start">
+                                    <i class="bg-secondary"></i>
+                                    <span class="text-dark text-xs">UEP Jasa</span>
+                                </span>
+                                <span class="badge badge-md badge-dot me-4 d-block text-start">
+                                    <i class="bg-danger"></i>
+                                    <span class="text-dark text-xs">PL Pokok</span>
+                                </span>
+                                <span class="badge badge-md badge-dot me-4 d-block text-start">
+                                    <i class="bg-warning"></i>
+                                    <span class="text-dark text-xs">PL Jasa</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer pt-0 pb-2 p-3 d-flex align-items-center">
+                        <div class="w-60">
+                            <div class="text-sm">
+                                Total Angsuran
+                                <div>
+                                    <b>Rp. <span id="total_angsur"></span></b>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-40 text-end">
+                            <button type="button" id="btnDetailAngsuran" class="btn bg-light mb-0 text-end">Detail</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-sm-6 mt-sm-0 mt-4">
+                <div class="card">
+                    <div class="card-header pb-0 p-3">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="mb-0">Pendapatan dan Beban</h6>
+                            <button type="button"
+                                class="btn btn-icon-only btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center"
+                                data-bs-toggle="tooltip" data-bs-placement="left"
+                                data-bs-original-title="See which ads perform better">
+                                <i class="material-icons text-sm">priority_high</i>
+                            </button>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span class="badge badge-md badge-dot me-4">
+                                <i class="bg-success"></i>
+                                <span class="text-dark text-xs">Pendapatan</span>
+                            </span>
+                            <span class="badge badge-md badge-dot me-4">
+                                <i class="bg-warning"></i>
+                                <span class="text-dark text-xs">Beban</span>
+                            </span>
+                            <span class="badge badge-md badge-dot me-4">
+                                <i class="bg-info"></i>
+                                <span class="text-dark text-xs">Laba</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body p-3">
+                        <div class="chart">
+                            <canvas id="chart-line" class="chart-canvas" height="400"
+                                style="display: block; box-sizing: border-box; height: 210px; width: 844.4px;"
+                                width="1688"></canvas>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    {{-- Modal Jatuh Dempo --}}
+    <div class="modal fade" id="jatuhTempo" aria-labelledby="jatuhTempoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="jatuhTempoLabel">Jatuh Tempo</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="nav-wrapper position-relative end-0">
+                        <ul class="nav nav-pills nav-fill p-1" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link mb-0 px-0 py-1 active text-danger" data-bs-toggle="tab"
+                                    href="#tagihan_hari_ini" role="tab" aria-controls="tagihan_hari_ini"
+                                    aria-selected="true">
+                                    Hari Ini
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mb-0 px-0 py-1 text-warning" data-bs-toggle="tab" href="#menunggak"
+                                    role="tab" aria-controls="menunggak" aria-selected="false">
+                                    Menunggak
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mb-0 px-0 py-1 text-info" data-bs-toggle="tab" href="#tagihan"
+                                    role="tab" aria-controls="tagihan" aria-selected="false">
+                                    Tagihan
+                                </a>
+                            </li>
+                        </ul>
 
-<form action="/pelaporan/preview" method="post" id="FormLaporanDashboard" target="_blank">
-    @csrf
+                        <div class="tab-content mt-2">
+                            <div class="tab-pane fade show active" id="tagihan_hari_ini" role="tabpanel"
+                                aria-labelledby="tagihan_hari_ini">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped midle" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <td align="center">No</td>
+                                                        <td align="center">Nama Kelompok</td>
+                                                        <td align="center">Tanggal Cair</td>
+                                                        <td align="center">Alokasi</td>
+                                                        <td align="center">Tunggakan Pokok</td>
+                                                        <td align="center">Tunggakan Jasa</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="TbHariIni"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="menunggak" role="tabpanel" aria-labelledby="menunggak">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped midle" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <td align="center">No</td>
+                                                        <td align="center">Nama Kelompok</td>
+                                                        <td align="center">Tanggal Cair</td>
+                                                        <td align="center">Alokasi</td>
+                                                        <td align="center">Tunggakan Pokok</td>
+                                                        <td align="center">Tunggakan Jasa</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="TbMenunggak"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tagihan" role="tabpanel" aria-labelledby="tagihan">
+                                <div class="card">
+                                    <div class="card-body p-3">
+                                        <form action="/dashboard/tagihan" method="post" id="formTagihan">
+                                            @csrf
 
-    <input type="hidden" name="type" id="type" value="pdf">
-    <input type="hidden" name="tahun" id="tahun" value="{{ date('Y') }}">
-    <input type="hidden" name="bulan" id="bulan" value="{{ date('m') }}">
-    <input type="hidden" name="hari" id="hari" value="{{ date('d') }}">
-    <input type="hidden" name="laporan" id="laporan" value="">
-    <input type="hidden" name="sub_laporan" id="sub_laporan" value="">
-</form>
+                                            <div class="alert alert-info text-white">
+                                                Kirim Whatsapp Tagihan berdasarkan tanggal jatuh tempo. Pastikan nomor HP
+                                                kelompok dapat menerima pesan Whatsapp.
+                                            </div>
 
-@php
-    $p = $saldo[4];
-    $b = $saldo[5];
-    $surplus = $saldo['surplus'];
-@endphp
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="input-group input-group-static mb-3">
+                                                        <label for="tgl_tagihan">Tgl Jatuh Tempo</label>
+                                                        <input autocomplete="off" type="text" name="tgl_tagihan"
+                                                            id="tgl_tagihan" class="form-control date pesan"
+                                                            value="{{ date('d/m/Y') }}">
+                                                        <small class="text-danger" id="msg_tgl_tagihan"></small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="input-group input-group-static mb-3">
+                                                        <label for="tgl_pembayaran">Tgl Pembayaran</label>
+                                                        <input autocomplete="off" type="text" name="tgl_pembayaran"
+                                                            id="tgl_pembayaran" class="form-control date pesan"
+                                                            value="{{ date('d/m/Y') }}">
+                                                        <small class="text-danger" id="msg_tgl_pembayaran"></small>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-<textarea name="msgInvoice" id="msgInvoice" class="d-none">{{ Session::get('msg') }}</textarea>
+                                            <textarea class="form-control d-none" name="pesan_whatsapp" id="pesan_whatsapp"></textarea>
+                                        </form>
+
+                                        <div class="d-flex justify-content-end">
+                                            <button type="button" id="CekTagihan" class="btn btn-sm btn-github"
+                                                {{ strlen($user->hp) >= 11 ? '' : 'disabled' }}>Preview</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info btn-sm me-2 btn-pelaporan">
+                        Print
+                    </button>
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">
+                        Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Modal Pinjaman --}}
+    <div class="modal fade" id="pinjaman" aria-labelledby="pinjamanLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="pinjamanLabel">Pinjaman</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="nav-wrapper position-relative end-0">
+                        <ul class="nav nav-pills nav-fill p-1" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link mb-0 px-0 py-1 active text-info" data-bs-toggle="tab" href="#proposal"
+                                    role="tab" aria-controls="proposal" aria-selected="true">
+                                    Proposal
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mb-0 px-0 py-1 text-danger" data-bs-toggle="tab" href="#verifikasi"
+                                    role="tab" aria-controls="verifikasi" aria-selected="false">
+                                    Verifikasi
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mb-0 px-0 py-1 text-warning" data-bs-toggle="tab" href="#waiting"
+                                    role="tab" aria-controls="waiting" aria-selected="false">
+                                    Waiting
+                                </a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content mt-2">
+                            <div class="tab-pane fade show active" id="proposal" role="tabpanel"
+                                aria-labelledby="proposal">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped midle" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <td align="center">No</td>
+                                                        <td align="center">Tanggal Proposal</td>
+                                                        <td align="center">Nama Kelompok</td>
+                                                        <td align="center">Alokasi</td>
+                                                        <td align="center">Anggota</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbProposal"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="verifikasi" role="tabpanel" aria-labelledby="verifikasi">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped midle" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <td align="center">No</td>
+                                                        <td align="center">Tanggal Verifikasi</td>
+                                                        <td align="center">Nama Kelompok</td>
+                                                        <td align="center">Alokasi</td>
+                                                        <td align="center">Anggota</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbVerifikasi"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="waiting" role="tabpanel" aria-labelledby="waiting">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped midle" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <td align="center">No</td>
+                                                        <td align="center">Tanggal Tunggu</td>
+                                                        <td align="center">Nama Kelompok</td>
+                                                        <td align="center">Alokasi</td>
+                                                        <td align="center">Anggota</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbWaiting"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info btn-sm me-2 btn-pelaporan">
+                        Print
+                    </button>
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">
+                        Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Kelompok Aktif --}}
+    <div class="modal fade" id="aktif" aria-labelledby="aktifLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="aktifLabel">Pinjaman Aktif</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="nav-wrapper position-relative end-0">
+                        <ul class="nav nav-pills nav-fill p-1" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link mb-0 px-0 py-1 active text-info" data-bs-toggle="tab"
+                                    href="#kelompok_aktif" role="tab" aria-controls="kelompok_aktif"
+                                    aria-selected="true">
+                                    Kelompok
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mb-0 px-0 py-1 text-danger" data-bs-toggle="tab"
+                                    href="#pemanfaat_aktif" role="tab" aria-controls="pemanfaat_aktif"
+                                    aria-selected="false">
+                                    Pemanfaat
+                                </a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content mt-2">
+                            <div class="tab-pane fade show active" id="kelompok_aktif" role="tabpanel"
+                                aria-labelledby="kelompok_aktif">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped midle" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <td align="center">No</td>
+                                                        <td align="center">Tanggal Cair</td>
+                                                        <td align="center">Nama Kelompok</td>
+                                                        <td align="center">Alokasi</td>
+                                                        <td align="center">Saldo</td>
+                                                        <td align="center">Anggota</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbKelompok"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pemanfaat_aktif" role="tabpanel"
+                                aria-labelledby="pemanfaat_aktif">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped midle" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <td align="center">No</td>
+                                                        <td align="center">Nik</td>
+                                                        <td align="center">Nama Anggota</td>
+                                                        <td align="center">Alamat</td>
+                                                        <td align="center">Tanggal Cair</td>
+                                                        <td align="center">Alokasi</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbPemanfaat"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info btn-sm me-2 btn-pelaporan">
+                        Print
+                    </button>
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">
+                        Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Modal Detail Angsuran --}}
+    <div class="modal fade" id="detailAngsuran" aria-labelledby="detailAngsuranLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="detailAngsuranLabel">Pinjaman detailAngsuran</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Modal Tagihan --}}
+    <div class="modal fade" id="tagihanPinjaman" aria-labelledby="tagihanPinjamanLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="tagihanPinjamanLabel">Tagihan</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="TbTagihan"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-github btn-sm" id="KirimPesan">Kirim Pesan</button>
+                    <button type="button" class="btn btn-danger btn-sm" id="closeTagihan">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form action="/pelaporan/preview" method="post" id="FormLaporanDashboard" target="_blank">
+        @csrf
+
+        <input type="hidden" name="type" id="type" value="pdf">
+        <input type="hidden" name="tahun" id="tahun" value="{{ date('Y') }}">
+        <input type="hidden" name="bulan" id="bulan" value="{{ date('m') }}">
+        <input type="hidden" name="hari" id="hari" value="{{ date('d') }}">
+        <input type="hidden" name="laporan" id="laporan" value="">
+        <input type="hidden" name="sub_laporan" id="sub_laporan" value="">
+    </form>
+
+    @php
+        $p = $saldo[4];
+        $b = $saldo[5];
+        $surplus = $saldo['surplus'];
+    @endphp
+
+    <textarea name="msgInvoice" id="msgInvoice" class="d-none">{{ Session::get('msg') }}</textarea>
+@endsection
+
 @section('script')
     <script>
         $(".date").flatpickr({
