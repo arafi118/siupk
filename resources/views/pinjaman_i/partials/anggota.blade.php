@@ -49,7 +49,7 @@
 <div class="row">
     <div class="col-md-8">
         <div class="position-relative mb-3">
-            <select class="js-example-basic-single form-select" name="label" id="label">
+            <select class="js-example-basic-single form-select" name="individu" id="individu">
                 @foreach ($anggota as $ang)
                     @php
                         $pinjaman = 'N';

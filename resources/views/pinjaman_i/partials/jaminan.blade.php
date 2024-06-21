@@ -1,4 +1,5 @@
 @if ($id == '1')
+<div class="app-main__inner">
     <div class="col-md-6">
         <div class="input-group input-group-static my-3">
             <label for="nomor_sertifikat">Nomor Sertifikat</label>
@@ -37,6 +38,7 @@
             <small class="text-danger" id="msg_nilai_jual_tanah"></small>
         </div>
     </div>
+</div>
 
     <script>
         $("#nilai_jual_tanah").maskMoney();
