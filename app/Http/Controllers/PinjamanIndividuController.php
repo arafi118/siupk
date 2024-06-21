@@ -826,7 +826,7 @@ class PinjamanIndividuController extends Controller
         $pros_jasa = $request->pros_jasa;
 
         $last_idtp = Transaksi::where('idtp', '!=', '0')->max('idtp');
-        $pinj_i = PinjamanAnggota::where('id', $id)->with([
+        $pinj_i = PinjamanIndividu::where('id', $id)->with([
             'anggota',
             'sis_pokok',
             'sis_jasa'
@@ -849,14 +849,14 @@ class PinjamanIndividuController extends Controller
             'id_user' => auth()->user()->id
         ]);
 
-        $update_pinkel = PinjamanAnggota::where('id', $id)->update([
+        $update_pinkel = PinjamanIndividu::where('id', $id)->update([
             'tgl_lunas' => Tanggal::tglNasional($tgl_resceduling),
             'status' => 'R',
             'lu' => date('Y-m-d H:i:s'),
             'user_id' => auth()->user()->id
         ]);
 
-        $pinjaman = PinjamanAnggota::create([
+        $pinjaman = PinjamanIndividu::create([
             'jenis_pinjaman' => 'I',
             'id_kel' => '0',
             'id_pinkel' => '0',

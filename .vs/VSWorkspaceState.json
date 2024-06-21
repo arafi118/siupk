@@ -9,8 +9,9 @@
     "\\resources\\views",
     "\\resources\\views\\perguliran",
     "\\resources\\views\\perguliran\\dokumen",
-    "\\resources\\views\\perguliran_i"
+    "\\resources\\views\\perguliran_i",
+    "\\resources\\views\\perguliran_i\\dokumen"
   ],
-  "SelectedNode": "\\app\\Http\\Controllers\\PinjamanKelompokController.php",
+  "SelectedNode": "\\resources\\views\\perguliran\\dokumen\\spk.blade.php",
   "PreviewInSolutionExplorer": false
 }
