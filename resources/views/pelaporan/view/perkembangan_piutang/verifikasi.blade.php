@@ -49,7 +49,8 @@
                 <th class="t l b" width="10%">Anggota</th>
                 <th class="t l b" width="15%">Tgl Verifikasi</th>
                 <th class="t l b" width="10%">Tempo</th>
-                <th class="t l b r" width="15%">Rekom Verifikator</th>
+                <th class="t l b " width="15%">Rekom Verifikator</th>
+                <th class="t l b r" width="15%">Catatan Verifikasi</th>
             </tr>
 
             @foreach ($jpp->pinjaman_kelompok as $pinkel)
@@ -65,12 +66,13 @@
                         @endphp
                         <tr style="font-weight: bold;">
                             <td class="t l b" colspan="5">Jumlah {{ $nama_desa }}</td>
-                            <td class="t l b r" align="right">{{ number_format($j_alokasi) }}</td>
+                            <td class="t l b" align="right">{{ number_format($j_alokasi) }}</td>
+                            <td class="t l b r">&nbsp;</td>
                         </tr>
                     @endif
 
                     <tr style="font-weight: bold;">
-                        <td class="t l b r" colspan="6" align="left">
+                        <td class="t l b r" colspan="7" align="left">
                             {{ $pinkel->kode_desa }}. {{ $pinkel->nama_desa }}
                         </td>
                     </tr>
@@ -92,7 +94,8 @@
                     <td class="t l b" align="center">{{ $pinkel->pinjaman_anggota_count }}</td>
                     <td class="t l b" align="center">{{ Tanggal::tglIndo($pinkel->tgl_verifikasi) }}</td>
                     <td class="t l b" align="center">{{ $pinkel->jangka }}/{{ $pinkel->sis_pokok->sistem }}</td>
-                    <td class="t l b r" align="right">{{ number_format($pinkel->verifikasi) }}</td>
+                    <td class="t l b " align="right">{{ number_format($pinkel->verifikasi) }}</td>
+                    <td class="t l b r" align="center">{{ $pinkel->catatan_verifikasi }}</td>
                 </tr>
 
                 @php
@@ -108,7 +111,9 @@
 
                 <tr style="font-weight: bold;">
                     <td class="t l b" colspan="5">Jumlah {{ $nama_desa }}</td>
-                    <td class="t l b r" align="right">{{ number_format($j_alokasi) }}</td>
+                    <td class="t l b" align="right">{{ number_format($j_alokasi) }}</td>
+                    <td class="t l b r">&nbsp;</td>
+
                 </tr>
 
                 <tr>
