@@ -220,6 +220,7 @@
         <input type="hidden" name="del_idt" id="del_idt">
         <input type="hidden" name="del_idtp" id="del_idtp">
         <input type="hidden" name="del_id_pinj" id="del_id_pinj">
+        <input type="hidden" name="del_id_pinj_i" id="del_id_pinj_i">
     </form>
 @endsection
 
@@ -563,6 +564,7 @@
                 $('#del_idt').val(result.idt)
                 $('#del_idtp').val(result.idtp)
                 $('#del_id_pinj').val(result.id_pinj)
+                $('#del_id_pinj_i').val(result.id_pinj_i)
                 Swal.fire({
                     title: 'Peringatan',
                     text: 'Setelah menekan tombol Hapus Transaksi dibawah, maka transaksi ini akan dihapus dari aplikasi secara permanen.',
