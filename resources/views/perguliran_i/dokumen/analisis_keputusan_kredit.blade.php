@@ -286,7 +286,7 @@
             <td width="40%">a. Provisi Kredit</td>
             <td align="center"width="5%">:</td>
             <td>
-                {{-- <b>{{ $pinkel->anggota->u->nama_usaha }}</b> --}}
+                {{-- <b>{{ is_numeric($pinkel->anggota->usaha) ? $pinkel->anggota->u->nama_usaha : $pinkel->anggota->usaha }}</b> --}}
             </td>
         </tr>
         <tr>
@@ -295,7 +295,7 @@
             <td width="40%">b. Premi Angsuran</td>
             <td align="center"width="5%">:</td>
             <td>
-                {{-- <b>{{ $pinkel->anggota->u->nama_usaha }}</b> --}}
+                {{-- <b>{{ is_numeric($pinkel->anggota->usaha) ? $pinkel->anggota->u->nama_usaha : $pinkel->anggota->usaha }}</b> --}}
             </td>
         </tr>
         <tr>
@@ -304,7 +304,7 @@
             <td width="40%">c. Biaya</td>
             <td align="center"width="5%">:</td>
             <td>
-                {{-- <b>{{ $pinkel->anggota->u->nama_usaha }}</b> --}}
+                {{-- <b>{{ is_numeric($pinkel->anggota->usaha) ? $pinkel->anggota->u->nama_usaha : $pinkel->anggota->usaha }}</b> --}}
             </td>
         </tr>
         <tr>
@@ -313,7 +313,7 @@
             <td width="40%">d. Pelunasan kredit Lama</td>
             <td align="center"width="5%">:</td>
             <td>
-                {{-- <b>{{ $pinkel->anggota->u->nama_usaha }}</b> --}}
+                {{-- <b>{{ is_numeric($pinkel->anggota->usaha) ? $pinkel->anggota->u->nama_usaha : $pinkel->anggota->usaha }}</b> --}}
             </td>
         </tr>
         <tr>
@@ -328,7 +328,7 @@
             <td width="40%">a. Nilai Pertangungan Asuransi</td>
             <td align="center"width="5%">:</td>
             <td>
-                {{-- <b>{{ $pinkel->anggota->u->nama_usaha }}</b> --}}
+                {{-- <b>{{ is_numeric($pinkel->anggota->usaha) ? $pinkel->anggota->u->nama_usaha : $pinkel->anggota->usaha }}</b> --}}
             </td>
         </tr>
         <tr>
@@ -337,7 +337,7 @@
             <td width="40%">b. Rencana Realisasi Hari/Tanggal</td>
             <td align="center"width="5%">:</td>
             <td>
-                {{-- <b>{{ $pinkel->anggota->u->nama_usaha }}</b> --}}
+                {{-- <b>{{ is_numeric($pinkel->anggota->usaha) ? $pinkel->anggota->u->nama_usaha : $pinkel->anggota->usaha }}</b> --}}
             </td>
         </tr>
     </table>

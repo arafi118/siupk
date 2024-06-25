@@ -49,7 +49,7 @@
       </tr>
       <tr>
         <td height="10" class="style9">Jenis Usaha</td>
-        <td class="style27">: {{ $pinkel->anggota->u->nama_usaha }}</td>
+        <td class="style27">: {{ is_numeric($pinkel->anggota->usaha) ? $pinkel->anggota->u->nama_usaha : $pinkel->anggota->usaha }}</td>
         <td height="10" class="style9">&nbsp;</td>
       </tr>
 	  <tr>
