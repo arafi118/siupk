@@ -152,7 +152,7 @@
         <td width="30">&nbsp;</td>
         <td>Jenis Usaha</td>
         <td width="5" align="right">:</td>
-        <td style="font-weight:">{{ $pinkel->anggota->usaha }}</td>
+        <td style="font-weight:">{{ is_numeric($pinkel->anggota->usaha) ? $pinkel->anggota->u->nama_usaha : $pinkel->anggota->usaha }}</td>
     </tr>
     <tr>
         <td>&nbsp;</td>
