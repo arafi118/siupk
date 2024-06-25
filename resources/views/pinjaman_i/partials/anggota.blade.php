@@ -31,9 +31,9 @@
                 @endphp
                 <option {{ $select ? 'selected' : '' }} value="{{ $ang->id }}">
                     @if (isset($ang->d))
-                        [{{ $pinjaman }}] {{ $ang->namadepan }} [{{ $ang->d->nama_desa }}]
+                        [{{ $pinjaman }}] {{ $ang->nik }} {{ $ang->namadepan }} [{{ $ang->d->nama_desa }}]
                     @else
-                        [{{ $pinjaman }}] {{ $ang->namadepan }} []
+                        [{{ $pinjaman }}] {{ $ang->namadepan1 }} []
                     @endif
                 </option>
             @endforeach
