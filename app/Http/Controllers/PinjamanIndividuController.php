@@ -43,7 +43,7 @@ class PinjamanIndividuController extends Controller
     public function proposal()
     {
         if (request()->ajax()) {
-            $pinj_i = PinjamanIndividu::where('status', 'P')
+             $pinj_i = PinjamanIndividu::where('status', 'P')
                 ->where('jenis_pinjaman', 'I')
                 ->with('anggota', 'anggota.d', 'jpp', 'sts')->get();
 
@@ -517,7 +517,7 @@ class PinjamanIndividuController extends Controller
         } elseif ($request->status == 'W') {
             $tgl = 'tgl_tunggu';
             $alokasi = 'alokasi';
-        } elseif ($request->status == 'A') {
+        } else {
             $tgl = 'tgl_cair';
             $alokasi = 'alokasi';
         }

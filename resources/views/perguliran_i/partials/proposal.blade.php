@@ -75,10 +75,10 @@
                     <input type="hidden" name="status" id="status" value="V">
                         <div class="row">
                             <div class="col-md-3">
-                                <div class="position-relative mb-3">
+                                <div class="DOMContentLoaded position-relative mb-3">
                                     <label for="tgl_verifikasi" class="form-label">Tgl Verifikasi</label>
-                                    <input autocomplete="off" type="text" name="tgl_verifikasi" id="tgl_verifikasi"
-                                        class="form-control date" value="{{ Tanggal::tglIndo($perguliran_i->tgl_proposal) }}">
+                                    <input autocomplete="off" type="date" name="tgl_verifikasi" id="tgl_verifikasi"
+                                           class="form-control date" value="{{ Tanggal::tglIndo($perguliran_i->tgl_proposal) }}">
                                     <small class="text-danger" id="msg_tgl_verifikasi"></small>
                                 </div>
                             </div>
@@ -111,7 +111,7 @@
                             <div class="col-md-4">
                                 <div class="position-relative mb-3">
                                     <label for="jenis_jasa" class="form-label">Jenis Jasa</label>
-                                    <select class="form-control" name="jenis_jasa" id="jenis_jasa">
+                                    <select class="js-example-basic-single form-control" name="jenis_jasa" id="jenis_jasa">
                                         @foreach ($jenis_jasa as $jj)
                                             <option {{ $jj->id == $perguliran_i->jenis_jasa ? 'selected' : '' }}
                                                 value="{{ $jj->id }}">
@@ -125,7 +125,7 @@
                             <div class="col-md-4">
                                 <div class="position-relative mb-3">
                                     <label for="sistem_angsuran_pokok" class="form-label">Sistem Ang. Pokok</label>
-                                    <select class="form-control" name="sistem_angsuran_pokok" id="sistem_angsuran_pokok">
+                                    <select class="js-example-basic-single form-control" name="sistem_angsuran_pokok" id="sistem_angsuran_pokok">
                                         @foreach ($sistem_angsuran as $sa)
                                             <option {{ $sa->id == $perguliran_i->sistem_angsuran ? 'selected' : '' }}
                                                 value="{{ $sa->id }}">
@@ -139,7 +139,7 @@
                             <div class="col-md-4">
                                 <div class="position-relative mb-3">
                                     <label for="sistem_angsuran_jasa" class="form-label">Sistem Ang. Jasa</label>
-                                    <select class="form-control" name="sistem_angsuran_jasa" id="sistem_angsuran_jasa">
+                                    <select class="js-example-basic-single form-control" name="sistem_angsuran_jasa" id="sistem_angsuran_jasa">
                                         @foreach ($sistem_angsuran as $sa)
                                             <option {{ $sa->id == $perguliran_i->sa_jasa ? 'selected' : '' }}
                                                 value="{{ $sa->id }}">
@@ -176,33 +176,12 @@
         maximumFractionDigits: 2,
     })
 
-    new Choices($('#jenis_jasa')[0], {
-        shouldSort: false,
-        fuseOptions: {
-            threshold: 0.1,
-            distance: 1000
-        }
-    })
-    new Choices($('#sistem_angsuran_pokok')[0], {
-        shouldSort: false,
-        fuseOptions: {
-            threshold: 0.1,
-            distance: 1000
-        }
-    })
-    new Choices($('#sistem_angsuran_jasa')[0], {
-        shouldSort: false,
-        fuseOptions: {
-            threshold: 0.1,
-            distance: 1000
-        }
-    })
+    $('.js-example-basic-single').select2({
+        theme: 'bootstrap-5'
+    });
 
     $(".money").maskMoney();
 
-    $(".date").flatpickr({
-        dateFormat: "d/m/Y"
-    })
 
     $(document).on('click', '#Simpan', async function(e) {
         e.preventDefault()
@@ -231,5 +210,6 @@
             }
         })
     })
+   
 </script>
 

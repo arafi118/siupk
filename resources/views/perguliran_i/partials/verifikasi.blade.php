@@ -119,7 +119,7 @@
                         <div class="col-md-3">
                             <div class="position-relative mb-3">
                                 <label for="tgl_tunggu" class="form-label">Tgl Tunggu</label>
-                                <input autocomplete="off" type="text" name="tgl_tunggu" id="tgl_tunggu"
+                                <input autocomplete="off" type="date" name="tgl_tunggu" id="tgl_tunggu"
                                     class="form-control date" value="{{ Tanggal::tglIndo($perguliran_i->tgl_verifikasi) }}">
                                 <small class="text-danger" id="msg_tgl_tunggu"></small>
                             </div>
@@ -153,7 +153,7 @@
                         <div class="col-md-4">
                             <div class="position-relative mb-3">
                                 <label for="jenis_jasa" class="form-label">Jenis Jasa</label>
-                                <select class="form-control" name="jenis_jasa" id="jenis_jasa">
+                                <select class="js-example-basic-single form-control" name="jenis_jasa" id="jenis_jasa">
                                     @foreach ($jenis_jasa as $jj)
                                         <option {{ $jj->id == $perguliran_i->jenis_jasa ? 'selected' : '' }}
                                             value="{{ $jj->id }}">
@@ -181,7 +181,7 @@
                         <div class="col-md-4">
                             <div class="position-relative mb-3">
                                 <label for="sistem_angsuran_jasa" class="form-label">Sistem Ang. Jasa</label>
-                                <select class="form-control" name="sistem_angsuran_jasa" id="sistem_angsuran_jasa">
+                                <select class="js-example-basic-single form-control" name="sistem_angsuran_jasa" id="sistem_angsuran_jasa">
                                     @foreach ($sistem_angsuran as $sa)
                                         <option {{ $sa->id == $perguliran_i->sa_jasa ? 'selected' : '' }}
                                             value="{{ $sa->id }}">
@@ -197,7 +197,7 @@
                         <div class="col-md-6">
                             <div class="position-relative mb-3">
                                 <label for="tgl_cair" class="form-label">Tgl Cair</label>
-                                <input autocomplete="off" type="text" name="tgl_cair" id="tgl_cair"
+                                <input autocomplete="off" type="date" name="tgl_cair" id="tgl_cair"
                                 class="form-control date" value="{{ Tanggal::tglIndo($perguliran_i->tgl_verifikasi) }}">
                             <small class="text-danger" id="msg_tgl_cair"></small>
                             </div>
@@ -236,33 +236,12 @@
         maximumFractionDigits: 2,
     })
 
-    new Choices($('#jenis_jasa')[0], {
-        shouldSort: false,
-        fuseOptions: {
-            threshold: 0.1,
-            distance: 1000
-        }
-    })
-    new Choices($('#sistem_angsuran_pokok')[0], {
-        shouldSort: false,
-        fuseOptions: {
-            threshold: 0.1,
-            distance: 1000
-        }
-    })
-    new Choices($('#sistem_angsuran_jasa')[0], {
-        shouldSort: false,
-        fuseOptions: {
-            threshold: 0.1,
-            distance: 1000
-        }
-    })
+    $('.js-example-basic-single').select2({
+        theme: 'bootstrap-5'
+    });
 
     $(".money").maskMoney();
 
-    $(".date").flatpickr({
-        dateFormat: "d/m/Y"
-    })
 
     $(document).on('click', '#Simpan', async function(e) {
         e.preventDefault()
