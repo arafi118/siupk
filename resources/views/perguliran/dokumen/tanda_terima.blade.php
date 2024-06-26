@@ -107,7 +107,7 @@
                         <td width="60%">&nbsp;</td>
                         <td width="60">Diterima Di</td>
                         <td width="2">:</td>
-                        <td>{{ $values[0] }}</td>
+                        <td>{{ $values[1] }}</td>
                     </tr>
                     <tr>
                         <td width="60%">&nbsp;</td>
