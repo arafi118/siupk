@@ -190,7 +190,7 @@ class GenerateController extends Controller
                     $tgl_cair = $pinkel->tgl_tunggu;
                 }
             }
-
+            $simpan_tgl =$tgl_cair;
             if ($is_pinkel) {
                 $desa = $pinkel->kelompok->d;
             } else {
@@ -333,7 +333,7 @@ class GenerateController extends Controller
             $data_rencana[strtotime($tgl_cair)] = [
                 'loan_id' => $pinkel->id,
                 'angsuran_ke' => 0,
-                'jatuh_tempo' => $tgl_cair,
+                'jatuh_tempo' => $simpan_tgl,
                 'wajib_pokok' => 0,
                 'wajib_jasa' => 0,
                 'target_pokok' => $target_pokok,

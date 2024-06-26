@@ -3,15 +3,8 @@
     "",
     "\\app",
     "\\app\\Http",
-    "\\app\\Http\\Controllers",
-    "\\app\\Models",
-    "\\resources",
-    "\\resources\\views",
-    "\\resources\\views\\perguliran",
-    "\\resources\\views\\perguliran\\dokumen",
-    "\\resources\\views\\perguliran_i",
-    "\\resources\\views\\perguliran_i\\dokumen"
+    "\\public"
   ],
-  "SelectedNode": "\\resources\\views\\perguliran\\dokumen\\spk.blade.php",
+  "SelectedNode": "\\public\\migrasi.php",
   "PreviewInSolutionExplorer": false
 }
