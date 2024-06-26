@@ -2258,11 +2258,7 @@ class TransaksiController extends Controller
 
                 if ($data['rek']->jenis_mutasi == 'debet') {
                     $_saldo = $debit - $kredit;
-                } else {
-                    $_saldo = $kredit - $debit;
-                }
-
-                $total_saldo += $_saldo;
+                } 
             }
         }
 

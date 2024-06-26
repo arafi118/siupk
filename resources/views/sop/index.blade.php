@@ -254,28 +254,10 @@
         var bulan = "{{ date('m') }}"
 
         $(".money").maskMoney();
-        new Choices($('#pembulatan')[0], {
-            shouldSort: false,
-            fuseOptions: {
-                threshold: 0.1,
-                distance: 1000
-            }
-        })
-        new Choices($('#sistem')[0], {
-            shouldSort: false,
-            fuseOptions: {
-                threshold: 0.1,
-                distance: 1000
-            }
-        })
-        new Choices($('#jenis_asuransi')[0], {
-            shouldSort: false,
-            fuseOptions: {
-                threshold: 0.1,
-                distance: 1000
-            }
-        })
-
+        $(document).ready(function() {
+        $('#spk').summernote();
+        });
+        
         var quill = new Quill('#editor', {
             theme: 'snow'
         });

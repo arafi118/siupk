@@ -2,19 +2,13 @@
     @csrf
     @method('PUT')
 
-    <div class="my-3">
-        <div id="editor">
-            <ol>
-                {!! json_decode($kec->redaksi_spk, true) !!}
-            </ol>
-        </div>
-    </div>
+    
 
-    <textarea name="spk" id="spk" class="d-none"></textarea>
+    <textarea name="spk" id="spk"></textarea>
 </form>
 
 <div class="d-flex justify-content-end">
-    <button type="button" id="SimpanSPK" data-target="#FormSPK" class="btn btn-sm btn-github mb-0 btn-simpan">
+    <button type="button" id="SimpanSPK" data-target="#FormSPK" class="btn btn-sm btn-github mb-0 btn-simpan btn btn-sm btn-dark mb-0">
         Simpan Perubahan
     </button>
 </div>

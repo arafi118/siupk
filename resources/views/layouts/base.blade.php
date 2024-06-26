@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pe7-icon@1.0.4/dist/dist/pe-icon-7-stroke.css">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
     <script defer src="/assets/scripts/main.js"></script>
     <script defer src="/assets/scripts/demo.js"></script>
     <script defer src="/assets/scripts/toastr.js"></script>
@@ -571,6 +573,8 @@
 <script src="/assets/js/html5-qrcode.js?v=1716515606"></script>
 <script src="http://siupk.test/vendor/tinymce/tinymce.min.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js">
+
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
@@ -716,6 +720,7 @@
         })
     }
 
+    
     function angsuran(destroy = false, result) {
         $('#pokok').val(formatter.format(result.saldo_pokok))
         $('#jasa').val(formatter.format(result.saldo_jasa))

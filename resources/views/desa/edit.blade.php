@@ -20,19 +20,31 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-4">
-                        <label for="telp_desa">Telpon &nbsp; &nbsp;&nbsp;&nbsp;</label>
-                        <input type="text" name="telp_desa" id="telp_desa" class="form-control"
-                            value="{{ $desa->telp_desa }}">
-                        <small class="text-danger" id="msg_telp_desa"></small>
+                    <div class="my-2">
+                        <label class="form-label" for="sebutan">Sebutan Desa &nbsp;</label>
+                        <select class="form-control" name="sebutan" id="sebutan">
+                            @foreach ($sebutan as $seb)
+                                <option value="{{ $seb->id }}"
+                                    {{ $seb->id == $desa->sebutan ? 'selected' : '' }}>
+                                    {{ $seb->sebutan_desa }} [{{ $seb->sebutan_kades }}]
+                                </option>
+                            @endforeach
+                        </select>
+                        <small class="text-danger" id="msg_sebutan"></small>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-4">
-                        <label for="alamat_desa">Alamat Desa &nbsp;</label>
-                        <input type="text" name="alamat_desa" id="alamat_desa" class="form-control"
-                            value="{{ $desa->alamat_desa }}">
-                        <small class="text-danger" id="msg_alamat_desa"></small>
+                    <div class="my-2">
+                        <label class="form-label" for="jadwal_angsuran_desa">Jadwal Angsuran Desa &nbsp;</label>
+                        <select class="form-control" name="jadwal_angsuran_desa" id="jadwal_angsuran_desa">
+                            <option value="0">Setiap Tanggal Cair</option>
+                            @for ($i = 1; $i <= 41; $i++)
+                                @php $tgl=sprintf("%02d", $i); @endphp <option value="{{ $tgl }}"
+                                    {{ $desa->jadwal_angsuran_desa == $tgl ? 'selected' : '' }}>
+                                    Setiap Tanggal {{ $tgl }}</option>
+                            @endfor
+                        </select>
+                        <small class="text-danger" id="msg_jadwal_angsuran_desa"></small>
                     </div>
                 </div>
             </div>
@@ -97,32 +109,20 @@
                     </div>
                     <small class="text-danger" id="msg_ked"></small>
                 </div>
-                <div class="col-md-4">
-                    <div class="my-2">
-                        <label class="form-label" for="sebutan">Sebutan Desa &nbsp;</label>
-                        <select class="form-control" name="sebutan" id="sebutan">
-                            @foreach ($sebutan as $seb)
-                                <option value="{{ $seb->id }}"
-                                    {{ $seb->id == $desa->sebutan ? 'selected' : '' }}>
-                                    {{ $seb->sebutan_desa }} [{{ $seb->sebutan_kades }}]
-                                </option>
-                            @endforeach
-                        </select>
-                        <small class="text-danger" id="msg_sebutan"></small>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="my-2">
-                        <label class="form-label" for="jadwal_angsuran_desa">Jadwal Angsuran Desa &nbsp;</label>
-                        <select class="form-control" name="jadwal_angsuran_desa" id="jadwal_angsuran_desa">
-                            <option value="0">Setiap Tanggal Cair</option>
-                            @for ($i = 1; $i <= 41; $i++)
-                                @php $tgl=sprintf("%02d", $i); @endphp <option value="{{ $tgl }}"
-                                    {{ $desa->jadwal_angsuran_desa == $tgl ? 'selected' : '' }}>
-                                    Setiap Tanggal {{ $tgl }}</option>
-                            @endfor
-                        </select>
-                        <small class="text-danger" id="msg_jadwal_angsuran_desa"></small>
+            <div class="col-md-4">
+            <div class="input-group input-group-static my-4">
+                <label for="telp_desa">Telpon &nbsp; &nbsp;&nbsp;&nbsp;</label>
+                <input type="text" name="telp_desa" id="telp_desa" class="form-control"
+                    value="{{ $desa->telp_desa }}">
+                <small class="text-danger" id="msg_telp_desa"></small>
+            </div>
+            </div>
+                    <div class="col-md-4">
+                         <div class="input-group input-group-static my-4">
+                        <label for="alamat_desa">Alamat Desa &nbsp;</label>
+                        <input type="text" name="alamat_desa" id="alamat_desa" class="form-control"
+                            value="{{ $desa->alamat_desa }}">
+                        <small class="text-danger" id="msg_alamat_desa"></small>
                     </div>
                 </div>
             </div>
