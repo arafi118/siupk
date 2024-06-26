@@ -96,6 +96,10 @@
                         <td class="t l b r" width="14%">&nbsp;</td>
                     </tr>
                 </table>
+                
+                        @php
+                            $values = explode('_', $pinkel->wt_cair);
+                        @endphp
 
                 <table class="p" border="0" width="100%" cellspacing="0" cellpadding="0"
                     style="font-size: 11px;">
@@ -103,14 +107,7 @@
                         <td width="60%">&nbsp;</td>
                         <td width="60">Diterima Di</td>
                         <td width="2">:</td>
-                        <td>
-                            @if (is_numeric(substr($pinkel->wt_cair, 0, 1)))
-                                {{ $pinkel->wt_cair }}
-                            @else
-                                {{ substr($pinkel->wt_cair, 6) }}
-                            @endif
-                        </td>
-
+                        <td>{{ $values[0] }}</td>
                     </tr>
                     <tr>
                         <td width="60%">&nbsp;</td>
