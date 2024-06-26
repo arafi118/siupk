@@ -56,6 +56,7 @@
                 </td>
             </tr>
             <tr>
+
                 <td>Hubungan dengan Peminjam</td>
                 <td align="center">:</td>
                 <td>

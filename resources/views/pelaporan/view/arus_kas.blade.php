@@ -1,6 +1,9 @@
 @php
     $array_saldo = [];
     $j_saldo = 0;
+
+    $index = 1;
+    $total_bulan_ini = 0;
 @endphp
 
 @extends('pelaporan.layout.base')
@@ -37,105 +40,143 @@
                     $bg = '128, 128, 128';
                 }
 
-                $section = false;
+                $romawi = 0;
+                if (!($dot == '.' && $ak->id != '2') && $ak->id != '9') {
+                    $romawi = $index;
+                }
+
+                $sub_total = 0;
             @endphp
+
+            @if (!($dot == '.' && $ak->id != '2') && $ak->id != '9')
+                @if ($ak->id > 2)
+                    @php
+                        $section = explode(' ', $section);
+                        $section = ucwords(strtolower(end($section)));
+
+                        $title = 'Kas Bersih yang diperoleh dari aktivitas ' . $section;
+                        if ($section == 'Operasi') {
+                            $title .= ' (A-B-C)';
+                        } else {
+                            $title .= ' (A-B)';
+                        }
+
+                        $total_bulan_ini += $total;
+                    @endphp
+                    <tr style="background: rgb(128, 128, 128)">
+                        <td>&nbsp;</td>
+                        <td>{{ $title }}</td>
+                        <td align="right">{{ number_format($total, 2) }}</td>
+                    </tr>
+                @endif
+
+                @php
+                    $total = 0;
+                @endphp
+            @endif
+
             <tr>
                 <td colspan="3" height="3"></td>
             </tr>
             <tr style="background: rgb({{ $bg }})">
-                <td width="5%" align="center">{{ $keuangan->romawi($ak->super_sub) }}</td>
+                <td width="5%" align="center">{{ $keuangan->romawi($romawi) }}</td>
                 <td width="80%">{{ $ak->nama_akun }}</td>
                 <td width="15%" align="right">
                     @if ($ak->id == 1)
                         {{ number_format($saldo_bulan_lalu, 2) }}
-                    @else
                     @endif
                 </td>
             </tr>
 
+            @php
+                $number = 0;
+            @endphp
             @foreach ($ak->child as $child)
                 @php
-                    $arus_kas = $keuangan->arus_kas($child->rekening, $tgl_kondisi, $jenis);
-                    // dd($child->rekening, $tgl_kondisi, $jenis, $arus_kas);
-                    if ($loop->iteration % 2 == 0) {
-                        $bg = '240, 240, 240';
-                    } else {
-                        $bg = '200, 200, 200';
+                    $akun3 = $child->rek_debit;
+                    if ($child->rek_kredit) {
+                        $akun3 = $child->rek_kredit;
                     }
-
-                    $section = true;
-                    $j_saldo += $arus_kas;
                 @endphp
-                <tr style="background: rgb({{ $bg }})">
-                    <td align="center">&nbsp;</td>
-                    <td>{{ $child->nama_akun }}</td>
-                    <td align="right">{{ number_format($arus_kas, 2) }}</td>
-                </tr>
-            @endforeach
-            @if ($ak->id == 1 or $ak->id == 16 or $ak->id == 46 or $ak->id == 61)
-            @else
-                @if ($ak->id == 64)
-                    <tr>
-                        <td colspan="3" style="padding: 0px !important;">
-                            <table class="p" border="0" width="100%" cellspacing="0" cellpadding="0"
-                                style="font-size: 11px;">
-                                <tr style="background: rgb(150, 150, 150); font-weight: bold;">
-                                    <td width="5%" align="center">&nbsp;</td>
-                                    <td width="80%">Jumlah {{ $ak->nama_akun }}</td>
-                                    <td width="15%" align="right">{{ number_format($j_saldo, 2) }}</td>
-                                </tr>
-                            </table>
 
-                            <div style="margin-top: 24px;"></div>
-                            {!! json_decode($kec->ttd->tanda_tangan_pelaporan, true) !!}
-                        </td>
+                @if ($akun3)
+                    @php
+                        $number++;
+                        if ($number % 2 == 0) {
+                            $bg = '240, 240, 240';
+                        } else {
+                            $bg = '200, 200, 200';
+                        }
+
+                        $jumlah = 0;
+                    @endphp
+                    @foreach ($akun3->rek as $rek)
+                        @php
+                            $transaksi = $rek->trx_kredit;
+                            if ($child->rek_debit) {
+                                $transaksi = $rek->trx_debit;
+                            }
+
+                            foreach ($transaksi as $trx) {
+                                $jumlah += $trx->jumlah;
+                            }
+
+                        @endphp
+                    @endforeach
+
+                    <tr style="background: rgb({{ $bg }})">
+                        <td>&nbsp;</td>
+                        <td>{{ $akun3->nama_akun }}</td>
+                        <td align="right">{{ number_format($jumlah, 2) }}</td>
                     </tr>
-                @else
-                    <tr style="background: rgb(150, 150, 150); font-weight: bold;">
-                        <td align="center">&nbsp;</td>
-                        <td>Jumlah {{ $ak->nama_akun }}</td>
-                        <td align="right">{{ number_format($j_saldo, 2) }}</td>
-                    </tr>
+
+                    @php
+                        $sub_total += $jumlah;
+                        if ($child->rek_debit) {
+                            $total -= $jumlah;
+                        } else {
+                            $total += $jumlah;
+                        }
+                    @endphp
                 @endif
-                @php
-                    $array_saldo[] = $j_saldo;
-                    $j_saldo = 0;
-                @endphp
-            @endif
+            @endforeach
 
-            @if ($ak->id == 22)
-                @php
-                    $total1 = $array_saldo[0] - ($array_saldo[1] + $array_saldo[2]);
-                @endphp
-                <tr style="background: rgb(128, 128, 128)">
-                    <td align="center">&nbsp;</td>
-                    <td>Kas Bersih yang diperoleh dari aktivitas Operasi (A-B-C)</td>
-                    <td align="right">{{ number_format($array_saldo[0] - ($array_saldo[1] + $array_saldo[2]), 2) }}</td>
+            @if ($dot == '.')
+                <tr style="background: rgb(150, 150, 150); font-weight: bold;">
+                    <td>&nbsp;</td>
+                    <td>Jumlah {{ substr(ucwords(strtolower($ak->nama_akun)), 3) }}</td>
+                    <td align="right">{{ number_format($sub_total, 2) }}</td>
                 </tr>
             @endif
+            @php
+                if (!($dot == '.' && $ak->id != '2') && $ak->id != '9') {
+                    $index++;
 
-            @if ($ak->id == 52)
-                @php
-                    $total2 = $array_saldo[3] - $array_saldo[4];
-                @endphp
-                <tr style="background: rgb(128, 128, 128)">
-                    <td align="center">&nbsp;</td>
-                    <td>Kas Bersih yang diperoleh dari aktivitas Investasi (A-B)</td>
-                    <td align="right">{{ number_format($array_saldo[3] - $array_saldo[4], 2) }}</td>
-                </tr>
-            @endif
-
-            @if ($ak->id == 66)
-                @php
-                    $total3 = $array_saldo[5] - $array_saldo[6];
-                @endphp
-                <tr style="background: rgb(128, 128, 128)">
-                    <td align="center">&nbsp;</td>
-                    <td>Kas Bersih yang diperoleh dari aktivitas Pendanaan (A-B)</td>
-                    <td align="right">{{ number_format($array_saldo[5] - $array_saldo[6], 2) }}</td>
-                </tr>
-            @endif
+                    $section = $ak->nama_akun;
+                } else {
+                    continue;
+                }
+            @endphp
         @endforeach
+
+        @php
+            $section = explode(' ', $section);
+            $section = ucwords(strtolower(end($section)));
+
+            $title = 'Kas Bersih yang diperoleh dari aktivitas ' . $section;
+            if ($section == 'Operasi') {
+                $title .= ' (A-B-C)';
+            } else {
+                $title .= ' (A-B)';
+            }
+
+            $total_bulan_ini += $total;
+        @endphp
+        <tr style="background: rgb(128, 128, 128)">
+            <td>&nbsp;</td>
+            <td>{{ $title }}</td>
+            <td align="right">{{ number_format($total, 2) }}</td>
+        </tr>
 
         <tr>
             <td colspan="3" style="padding: 0px !important;">
@@ -144,12 +185,12 @@
                     <tr style="background: rgb(128, 128, 128)">
                         <td width="5%" align="center">&nbsp;</td>
                         <td width="80%">Kenaikan (Penurunan) Kas</td>
-                        <td width="15%" align="right">{{ number_format($total1 + $total2 + $total3, 2) }}</td>
+                        <td width="15%" align="right">{{ number_format($total_bulan_ini, 2) }}</td>
                     </tr>
                     <tr style="background: rgb(128, 128, 128)">
                         <td align="center">&nbsp;</td>
                         <td>SALDO AKHIR KAS SETARA KAS</td>
-                        <td align="right">{{ number_format($total1 + $total2 + $total3 + $saldo_bulan_lalu, 2) }}</td>
+                        <td align="right">{{ number_format($total_bulan_ini + $saldo_bulan_lalu, 2) }}</td>
                     </tr>
                 </table>
 
