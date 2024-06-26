@@ -6,9 +6,9 @@
     <div class="row">
         <div class="col-md-3">
             <div class="position-relative mb-3">
-                    <label for="tgl_proposal" class="form-label">Tgl Proposal</label>
-                    <input autocomplete="off" type="text" name="tgl_proposal" id="tgl_proposal" class="form-control date"
-                    value="{{ Tanggal::tglIndo($perguliran_i->tgl_proposal) }}">
+                <label for="tgl_proposal" class="form-label">Tgl proposal</label>
+                <input autocomplete="off" type="date" name="tgl_proposal" id="tgl_proposal"
+                       class="form-control date" value="{{ date('Y-m-d') }}">
                 <small class="text-danger" id="msg_tgl_proposal"></small>
             </div>
         </div>
@@ -137,7 +137,4 @@
 
     $(".money").maskMoney();
 
-    $(".date").flatpickr({
-        dateFormat: "d/m/Y"
-    })
 </script>
