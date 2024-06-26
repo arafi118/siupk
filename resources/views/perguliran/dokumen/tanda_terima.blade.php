@@ -103,7 +103,14 @@
                         <td width="60%">&nbsp;</td>
                         <td width="60">Diterima Di</td>
                         <td width="2">:</td>
-                        <td>{{ substr($pinkel->wt_cair, 6) }}</td>
+                        <td>
+                            @if (is_numeric(substr($pinkel->wt_cair, 0, 1)))
+                                {{ substr($pinkel->wt_cair, 6) }}
+                            @else
+                                {{ $pinkel->wt_cair }}
+                            @endif
+                        </td>
+
                     </tr>
                     <tr>
                         <td width="60%">&nbsp;</td>
