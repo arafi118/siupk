@@ -105,9 +105,9 @@
                         <td width="2">:</td>
                         <td>
                             @if (is_numeric(substr($pinkel->wt_cair, 0, 1)))
-                                {{ substr($pinkel->wt_cair, 6) }}
-                            @else
                                 {{ $pinkel->wt_cair }}
+                            @else
+                                {{ substr($pinkel->wt_cair, 6) }}
                             @endif
                         </td>
 
