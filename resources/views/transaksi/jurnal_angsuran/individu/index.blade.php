@@ -1,129 +1,133 @@
 @extends('layouts.base')
 
 @section('content')
-<div class="row">
-    <div class="col-12" id="notif">
+<div class="app-main__inner">
+    <div class="tab-content">
+    <div class="row">
+        <div class="col-12" id="notif">
 
+        </div>
+        <div class="col-md-8 mb-3">
+            <div class="card mb-3">
+                <div class="card-body py-2">
+                    <form action="/transaksi/angsuran_individu" method="post" id="FormAngsuranIndividu">
+                        @csrf
+
+                        <input type="hidden" name="id" id="id" value="{{ Request::get('pinkel') ?: 0 }}">
+                        <input type="hidden" name="_pokok" id="_pokok">
+                        <input type="hidden" name="_jasa" id="_jasa">
+                        <input type="hidden" name="tgl_pakai_aplikasi" id="tgl_pakai_aplikasi"
+                            value="{{ $kec->tgl_pakai }}">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="position-relative mb-3">
+                                    <label for="tgl_transaksi">Tgl Transaksi &nbsp;</label>
+                                    <input autocomplete="off" type="date" name="tgl_transaksi" id="tgl_transaksi"
+                                        class="form-control date" value="{{ date('d/m/Y') }}">
+                                    <small class="text-danger" id="msg_tgl_transaksi"></small>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-static my-3">
+                                    <label for="pokok">Pokok &nbsp;</label>
+                                    <input autocomplete="off" type="text" name="pokok" id="pokok" class="form-control">
+                                    <small class="text-danger" id="msg_pokok"></small>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-static my-3">
+                                    <label for="jasa">Jasa &nbsp;</label>
+                                    <input autocomplete="off" type="text" name="jasa" id="jasa" class="form-control">
+                                    <small class="text-danger" id="msg_jasa"></small>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-static my-3">
+                                    <label for="denda">Denda &nbsp;</label>
+                                    <input autocomplete="off" type="text" name="denda" id="denda" class="form-control">
+                                    <small class="text-danger" id="msg_denda"></small>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-static my-3">
+                                    <label for="total">Total Bayar &nbsp;</label>
+                                    <input autocomplete="off" readonly disabled type="text" name="total" id="total"
+                                        class="form-control">
+                                    <small class="text-danger" id="msg_total"></small>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="d-flex justify-content-end">
+                        <button type="button" id="btnDetailIndividu" class="btn btn-info btn-sm me-3">
+                            Detail Pemanfaat <span class="badge badge-info" id="loan-id"></span>
+                        </button>
+                        <button type="button" id="SimpanAngsuran" class="btn btn-github btn-sm btn btn-sm btn-dark mb-0">Posting</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-body p-2 pb-0 mb-3">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="d-grid">
+                            <a id="cetakKartuAngsuran" class="btn btn-success btn-sm mb-2">Kartu</a>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="d-grid">
+                            <button class="btn btn-danger btn-sm mb-2" id="btnDetailAngsuran">Detail</button>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="d-grid">
+                            <button class="btn btn-info btn-sm mb-2" id=cetakLPP>LPP per bulan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="nav-wrapper position-relative end-0">
+                <ul class="nav nav-pills nav-fill p-1" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab" href="#Pokok" role="tab"
+                            aria-controls="Pokok" aria-selected="true">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            Pokok
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#Jasa" role="tab" aria-controls="Jasa"
+                            aria-selected="false">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            Jasa
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="tab-content mt-3">
+                    <div class="tab-pane fade show active" id="Pokok" role="tabpanel" aria-labelledby="Pokok">
+                        <div class="card card-body p-2">
+                            <canvas id="chartP"></canvas>
+                            <div class="d-flex justify-content-between mt-3 mb-1 mx-3 text-sm fw-bold">
+                                <span>Alokasi</span>
+                                <span id="alokasi_pokok"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="Jasa" role="tabpanel" aria-labelledby="Jasa">
+                        <div class="card card-body p-2">
+                            <canvas id="chartJ"></canvas>
+                            <div class="d-flex justify-content-between mt-3 mb-1 mx-3 text-sm fw-bold">
+                                <span>Jasa</span>
+                                <span id="alokasi_jasa"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-8 mb-3">
-        <div class="card mb-3">
-            <div class="card-body py-2">
-                <form action="/transaksi/angsuran_individu" method="post" id="FormAngsuranIndividu">
-                    @csrf
-
-                    <input type="hidden" name="id" id="id" value="{{ Request::get('pinkel') ?: 0 }}">
-                    <input type="hidden" name="_pokok" id="_pokok">
-                    <input type="hidden" name="_jasa" id="_jasa">
-                    <input type="hidden" name="tgl_pakai_aplikasi" id="tgl_pakai_aplikasi"
-                        value="{{ $kec->tgl_pakai }}">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="position-relative mb-3">
-                                <label for="tgl_transaksi">Tgl Transaksi &nbsp;</label>
-                                <input autocomplete="off" type="date" name="tgl_transaksi" id="tgl_transaksi"
-                                    class="form-control date" value="{{ date('d/m/Y') }}">
-                                <small class="text-danger" id="msg_tgl_transaksi"></small>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="input-group input-group-static my-3">
-                                <label for="pokok">Pokok &nbsp;</label>
-                                <input autocomplete="off" type="text" name="pokok" id="pokok" class="form-control">
-                                <small class="text-danger" id="msg_pokok"></small>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="input-group input-group-static my-3">
-                                <label for="jasa">Jasa &nbsp;</label>
-                                <input autocomplete="off" type="text" name="jasa" id="jasa" class="form-control">
-                                <small class="text-danger" id="msg_jasa"></small>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="input-group input-group-static my-3">
-                                <label for="denda">Denda &nbsp;</label>
-                                <input autocomplete="off" type="text" name="denda" id="denda" class="form-control">
-                                <small class="text-danger" id="msg_denda"></small>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="input-group input-group-static my-3">
-                                <label for="total">Total Bayar &nbsp;</label>
-                                <input autocomplete="off" readonly disabled type="text" name="total" id="total"
-                                    class="form-control">
-                                <small class="text-danger" id="msg_total"></small>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
-                <div class="d-flex justify-content-end">
-                    <button type="button" id="btnDetailIndividu" class="btn btn-info btn-sm me-3">
-                        Detail Pemanfaat <span class="badge badge-info" id="loan-id"></span>
-                    </button>
-                    <button type="button" id="SimpanAngsuran" class="btn btn-github btn-sm btn btn-sm btn-dark mb-0">Posting</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="card card-body p-2 pb-0 mb-3">
-            <div class="row">
-                <div class="col-4">
-                    <div class="d-grid">
-                        <a id="cetakKartuAngsuran" class="btn btn-success btn-sm mb-2">Kartu</a>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="d-grid">
-                        <button class="btn btn-danger btn-sm mb-2" id="btnDetailAngsuran">Detail</button>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="d-grid">
-                        <button class="btn btn-info btn-sm mb-2" id=cetakLPP>LPP per bulan</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4 mb-3">
-        <div class="nav-wrapper position-relative end-0">
-            <ul class="nav nav-pills nav-fill p-1" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab" href="#Pokok" role="tab"
-                        aria-controls="Pokok" aria-selected="true">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        Pokok
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#Jasa" role="tab" aria-controls="Jasa"
-                        aria-selected="false">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        Jasa
-                    </a>
-                </li>
-            </ul>
-
-            <div class="tab-content mt-3">
-                <div class="tab-pane fade show active" id="Pokok" role="tabpanel" aria-labelledby="Pokok">
-                    <div class="card card-body p-2">
-                        <canvas id="chartP"></canvas>
-                        <div class="d-flex justify-content-between mt-3 mb-1 mx-3 text-sm fw-bold">
-                            <span>Alokasi</span>
-                            <span id="alokasi_pokok"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="Jasa" role="tabpanel" aria-labelledby="Jasa">
-                    <div class="card card-body p-2">
-                        <canvas id="chartJ"></canvas>
-                        <div class="d-flex justify-content-between mt-3 mb-1 mx-3 text-sm fw-bold">
-                            <span>Jasa</span>
-                            <span id="alokasi_jasa"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 @endsection
