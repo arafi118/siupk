@@ -473,13 +473,13 @@ class GenerateController extends Controller
 
         if ($is_pinkel) {
             RencanaAngsuran::whereIn('loan_id', $data_id_pinj)->delete();
-            RealAngsuran::whereIn('id', $data_id_real)->delete();
+            RealAngsuran::whereIn('loan_id', $data_id_pinj)->delete();
 
             RencanaAngsuran::insert($rencana);
             RealAngsuran::insert($real);
         } else {
             RencanaAngsuranI::whereIn('loan_id', $data_id_pinj)->delete();
-            RealAngsuranI::whereIn('id', $data_id_real)->delete();
+            RealAngsuranI::whereIn('loan_id', $data_id_pinj)->delete();
 
             RencanaAngsuranI::insert($rencana);
             RealAngsuranI::insert($real);

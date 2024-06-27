@@ -1849,12 +1849,23 @@ class TransaksiController extends Controller
         $id_pinj = $request->rev_id_pinj;
         $idtp_baru = $last_idtp + 1;
 
+        $bulan = 0;
+        $tahun = 0;
+        $kode_akun = [];
+
         $angsuran = false;
         if ($idtp != '0') {
             $trx_reversal = [];
             $pinkel = PinjamanKelompok::where('id', $id_pinj)->with('pinjaman_anggota')->first();
             $transaksi = Transaksi::where('idtp', $idtp)->orderBy('idtp', 'ASC')->get();
             foreach ($transaksi as $trx) {
+                $tgl = explode('-', $trx->tgl_transaksi);
+                $tahun = $tgl[0];
+                $bulan = $tgl[1];
+
+                $kode_akun[$trx->rekening_debit] = $trx->rekening_debit;
+                $kode_akun[$trx->rekening_kredit] = $trx->rekening_kredit;
+
                 $trx_reversal[] = [
                     'tgl_transaksi' => (string) date('Y-m-d'),
                     'rekening_debit' => (string) $trx->rekening_debit,
@@ -1898,6 +1909,13 @@ class TransaksiController extends Controller
         } else {
             $trx = Transaksi::where('idt', $idt)->first();
 
+            $tgl = explode('-', $trx->tgl_transaksi);
+            $tahun = $tgl[0];
+            $bulan = $tgl[1];
+
+            $kode_akun[$trx->rekening_debit] = $trx->rekening_debit;
+            $kode_akun[$trx->rekening_kredit] = $trx->rekening_kredit;
+
             $reversal = Transaksi::create([
                 'tgl_transaksi' => (string) date('Y-m-d'),
                 'rekening_debit' => (string) $trx->rekening_debit,
@@ -1937,40 +1955,42 @@ class TransaksiController extends Controller
         $id_pinj = $request->del_id_pinj;
 
         if ($idtp != '0') {
-            $trview = Transaksi::where('idt', $idt)->first();
-                if ($trview['id_pinj'] == '0' || $trview['id_pinj'] === NULL) {
-                    $trx = Transaksi::where('idtp', $idtp)->delete();
-                    $pinkel = PinjamanAnggota::where('id', $trview['id_pinj_i'])->first();
-                    $this->regenerateReali($pinkel);
-                }else{
+            $transaksi = Transaksi::where('idtp', $idtp)->get();
+            $pinj_i = $transaksi->first()->pinj_i;
             $trx = Transaksi::where('idtp', $idtp)->delete();
-            $pinkel = PinjamanKelompok::where('id', $id_pinj)->with('pinjaman_anggota')->first();
 
-            $pinjaman_anggota = $pinkel->pinjaman_anggota;
-            foreach ($pinjaman_anggota as $pa) {
-                $kom_pokok = json_decode($pa->kom_pokok, true);
-                $kom_jasa = json_decode($pa->kom_jasa, true);
+            
+            if ($pinj_i != '0') {
+                $pinkel = PinjamanIndividu::where('id', $id_pinj)->first();
+                $this->regenerateReali($pinkel);
+            }elseif ($id_pinj != '0') {
+                $pinkel = PinjamanKelompok::where('id', $id_pinj)->with('pinjaman_anggota')->first();
 
-                if (is_array($kom_pokok)) {
-                    unset($kom_pokok[$idtp]);
-                } else {
-                    $kom_pokok = [];
+                $pinjaman_anggota = $pinkel->pinjaman_anggota;
+                foreach ($pinjaman_anggota as $pa) {
+                    $kom_pokok = json_decode($pa->kom_pokok, true);
+                    $kom_jasa = json_decode($pa->kom_jasa, true);
+
+                    if (is_array($kom_pokok)) {
+                        unset($kom_pokok[$idtp]);
+                    } else {
+                        $kom_pokok = [];
+                    }
+
+                    if (is_array($kom_jasa)) {
+                        unset($kom_jasa[$idtp]);
+                    } else {
+                        $kom_jasa = [];
+                    }
+
+                    PinjamanAnggota::where('id', $pa->id)->update([
+                        'kom_pokok' => $kom_pokok,
+                        'kom_jasa' => $kom_jasa
+                    ]);
                 }
 
-                if (is_array($kom_jasa)) {
-                    unset($kom_jasa[$idtp]);
-                } else {
-                    $kom_jasa = [];
-                }
-
-                PinjamanAnggota::where('id', $pa->id)->update([
-                    'kom_pokok' => $kom_pokok,
-                    'kom_jasa' => $kom_jasa
-                ]);
+                $this->regenerateReal($pinkel);
             }
-
-            $this->regenerateReal($pinkel);
-                }
         } else {
             if ($id_pinj != '0') {
                 $pinkel = PinjamanKelompok::where('id', $id_pinj)->update([
@@ -1982,14 +2002,47 @@ class TransaksiController extends Controller
                     'kom_pokok' => 0,
                     'kom_jasa' => 0
                 ]);
-            } 
+            }
 
+            $rek_inventaris = ['1.2.01.01', '1.2.01.02', '1.2.01.03', '1.2.01.04', '1.2.03.01', '1.2.03.02', '1.2.03.03', '1.2.03.04'];
+
+            $trx = Transaksi::where('idt', $idt)->first();
+            if (in_array($trx->rekening_debit, $rek_inventaris)) {
+                $jenis = intval(explode('.', $trx->rekening_debit)[2]);
+                $kategori = intval(explode('.', $trx->rekening_debit)[3]);
+                $nama_barang = trim(explode(')', $trx->keterangan_transaksi)[1]);
+
+                $inv = Inventaris::Where([
+                    ['jenis', $jenis],
+                    ['kategori', $kategori],
+                    ['tgl_beli', $trx->tgl_transaksi],
+                    ['nama_barang', $nama_barang]
+                ])->delete();
+            }
+
+            $transaksi = Transaksi::where('idt', $idt)->get();
             $trx = Transaksi::where('idt', $idt)->delete();
         }
 
+        $bulan = 0;
+        $tahun = 0;
+        $kode_akun = [];
+        foreach ($transaksi as $trx) {
+            $tgl = explode('-', $trx->tgl_transaksi);
+            $tahun = $tgl[0];
+            $bulan = $tgl[1];
+
+            $kode_akun[$trx->rekening_debit] = $trx->rekening_debit;
+            $kode_akun[$trx->rekening_kredit] = $trx->rekening_kredit;
+        }
+        $kode_akun = array_values($kode_akun);
+
         return response()->json([
             'success' => true,
-            'msg' => 'Transaksi Berhasil Dihapus.'
+            'msg' => 'Transaksi Berhasil Dihapus.',
+            'kode_akun' => implode(',', $kode_akun),
+            'bulan' => str_pad($bulan, 2, "0", STR_PAD_LEFT),
+            'tahun' => $tahun
         ]);
     }
 
