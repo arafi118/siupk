@@ -38,13 +38,13 @@ class AnggotaController extends Controller
                 ->addColumn('status', function ($row) {
                     $pinjaman = $row->pinjaman;
 
-                    $status = '<span class="badge badge-secondary">n</span>';
+                    $status = '<span class="badge bg-secondary">n</span>';
                     if ($row->pinjaman) {
                         $status_pinjaman = $pinjaman->status;
 
                         if ($pinjaman->sts) {
                             $badge = $pinjaman->sts->warna_status;
-                            $status = '<span class="badge badge-' . $badge . '">' . $status_pinjaman . '</span>';
+                            $status = '<span class="badge bg-' . $badge . '">' . $status_pinjaman . '</span>';
                         }
                     }
 

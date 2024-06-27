@@ -1,6 +1,20 @@
 @extends('layouts.base')
 
 @section('content')
+<style>
+    .status-active {
+        color: green;
+    }
+    .status-inactive {
+        color: red;
+    }
+    .status-pending {
+        color: orange;
+    }
+    .status-default {
+        color: black;
+    }
+</style>
 <div class="app-main__inner">
     <div class="card-body">
         <div class="row">
@@ -28,11 +42,11 @@
             </div>
         </div>
         <div class="text-sm">
-            <span class="badge badge-secondary">
+            <span class="badge bg-secondary">
                 (N) Belum ada pinjaman
             </span>
             @foreach ($status_pinjaman as $status)
-            <span class="badge badge-{{ $status->warna_status }}">
+            <span class="badge bg-{{ $status->warna_status }}">
                 ({{ $status->kd_status }})
                 {{ $status->nama_status }}
             </span>
@@ -74,9 +88,9 @@
                 name: 'nik'
             },
             {
-                 data: 'namadepan',
-                 name: 'namadepan'
-             },
+                data: 'namadepan',
+                name: 'namadepan'
+            },
             {
                 data: 'alamat',
                 name: 'alamat'
@@ -89,7 +103,7 @@
                 data: 'status',
                 name: 'status',
                 orderable: false,
-                searchable: false
+                searchable: false,
             }
         ],
         order: [
@@ -99,9 +113,8 @@
 
     $('.table').on('click', 'tbody tr', function (e) {
         var data = table.row(this).data();
-
-        window.location.href = '/database/penduduk/' + data.nik
-    })
-
+        window.location.href = '/database/penduduk/' + data.nik;
+    });
 </script>
+
 @endsection
