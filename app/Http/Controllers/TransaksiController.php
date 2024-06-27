@@ -1923,7 +1923,10 @@ class TransaksiController extends Controller
             'msg' => 'Transaksi Reversal untuk id ' . $idt . ' dengan nominal berhasil.',
             'idtp' => $last_idtp + 1,
             'tgl_transaksi' => date('Y-m-d'),
-            'id_pinkel' => $id_pinj
+            'id_pinkel' => $id_pinj,
+            'kode_akun' => implode(',', $kode_akun),
+            'bulan' => str_pad($bulan, 2, "0", STR_PAD_LEFT),
+            'tahun' => $tahun
         ]);
     }
 
