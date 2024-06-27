@@ -83,7 +83,7 @@
             <li>
                 <a href="#">
                     <i class="metismenu-icon pe-7s-display2"></i>
-                    Tahapan Perguliran
+                    Pelayanan Kredit
                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                 </a>
                 <ul>
