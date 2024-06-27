@@ -136,7 +136,7 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Pendidikan</label>
-                                        <select class="form-control" name="pendidikan" id="pendidikan">
+                                        <select class="pendidikan form-control" name="pendidikan" id="pendidikan">
                                             @foreach ($pendidikan as $p)
                                                 <option value="{{ $p->id }}"
                                                     {{ $p->id == $user->pendidikan ? 'selected' : '' }}>
@@ -239,13 +239,9 @@
 
 @section('script')
     <script>
-        new Choices($('#pendidikan')[0], {
-            shouldSort: false,
-            fuseOptions: {
-                threshold: 0.1,
-                distance: 1000
-            }
-        })
+        $('.pendidikan').select2({
+        theme: 'bootstrap-5'
+        });
 
         $(document).on('click', '#SimpanDataDiri', function(e) {
             e.preventDefault()

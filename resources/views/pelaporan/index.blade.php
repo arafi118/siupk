@@ -74,7 +74,7 @@
                         <div id="namaLaporan" class="col-md-6">
                             <div class="my-2">
                                 <label class="form-label" for="laporan">Nama Laporan</label>
-                                <select class="form-control" name="laporan" id="laporan">
+                                <select class="js-example-basic-single form-control" name="laporan" id="laporan">
                                     <option value="">---</option>
                                     @foreach ($laporan as $lap)
                                         <option value="{{ $lap->file }}">
@@ -89,7 +89,7 @@
                         <div id="subLaporan" class="col-md-6">
                             <div class="my-2">
                                 <label class="form-label" for="sub_laporan">Nama Sub Laporan</label>
-                                <select class="form-control" name="sub_laporan" id="sub_laporan">
+                                <select class="js-example-basic-single form-control" name="sub_laporan" id="sub_laporan">
                                     <option value="">---</option>
                                 </select>
                                 <small class="text-danger" id="msg_sub_laporan"></small>
@@ -141,6 +141,9 @@
 
 @section('script')
     <script>
+         $('.js-example-basic-single').select2({
+        theme: 'bootstrap-5'
+    });
         $(document).on('change', '#tahun, #bulan', function(e) {
             e.preventDefault()
 
