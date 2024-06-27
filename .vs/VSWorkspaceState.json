@@ -1,10 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\app",
-    "\\app\\Http",
     "\\public"
   ],
-  "SelectedNode": "\\public\\migrasi.php",
+  "SelectedNode": "\\public\\robots.txt",
   "PreviewInSolutionExplorer": false
 }

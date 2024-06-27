@@ -337,7 +337,7 @@ class PinjamanKelompokController extends Controller
             'sa_jasa' => $request->sistem_angsuran_jasa,
             'status' => 'P',
             'catatan_verifikasi' => '0',
-            'wt_cair' => '0',
+            'wt_cair' => '0_0',
             'lu' => date('Y-m-d H:i:s'),
             'user_id' => auth()->user()->id
         ];
