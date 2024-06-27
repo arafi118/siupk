@@ -2,8 +2,6 @@
     @csrf
     @method('PUT')
 
-    
-
     <textarea name="spk" id="spk"></textarea>
 </form>
 
