@@ -90,13 +90,13 @@
                     <li>
                         <a href="/register_proposal_i">
                             <i class="metismenu-icon">
-                            </i>Register Proposal
+                            </i>Register Pinjaman
                         </a>
                     </li>
                     <li>
                         <a href="/perguliran_i">
                             <i class="metismenu-icon">
-                            </i>Status Proposal
+                            </i>Status Pinjaman
                         </a>
                     </li>
                 </ul>
