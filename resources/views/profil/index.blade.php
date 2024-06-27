@@ -5,237 +5,237 @@
 @extends('layouts.base')
 
 @section('content')
-    <div class="app-main__inner">
 
-        <div class="main-card mb-3 card" id="profile">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-auto col-4">
-                        <div class="avatar avatar-xl position-relative pointer" id="fileUpload">
-                            <img src="{{ asset('/storage/profil/' . $user->foto) }}" alt="bruce"
-                                class="w-100 rounded-circle shadow-sm" id="preview">
+
+        <div class="app-main__inner">
+            <div class="main-card mb-3 card" id="profile">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-auto col-4">
+                            <div class="avatar avatar-xl position-relative pointer" id="fileUpload">
+                                <img src="{{ asset('/storage/profil/' . $user->foto) }}" alt="bruce"
+                                    class="w-100 rounded-circle shadow-sm" id="preview">
+                            </div>
+    
+                            <form action="/profil/{{ $user->id }}" method="post" enctype="multipart/form-data"
+                                id="formUpload">
+                                @csrf
+                                @method('PUT')
+    
+                                <input type="file" name="logo" id="logo" class="d-none">
+                            </form>
                         </div>
-
-                        <form action="/profil/{{ $user->id }}" method="post" enctype="multipart/form-data"
-                            id="formUpload">
-                            @csrf
-                            @method('PUT')
-
-                            <input type="file" name="logo" id="logo" class="d-none">
-                        </form>
-                    </div>
-
-                    <div class="col-md-10 mb-3">
-                        <div class="h-30">
-                            <h5 class="mb-1 font-weight-bolder nama_user">
-                                <b> {{ Session::get('nama') }}</b>
-                            </h5>
-                            <p class="mb-0 font-weight-normal text-sm">
-                                {{ $user->j ? $user->j->nama_jabatan : '' }}
-                            </p>
+    
+                        <div class="col-md-10 mb-3">
+                            <div class="h-30">
+                                <h5 class="mb-1 font-weight-bolder nama_user">
+                                    <b> {{ Session::get('nama') }}</b>
+                                </h5>
+                                <p class="mb-0 font-weight-normal text-sm">
+                                    {{ $user->j ? $user->j->nama_jabatan : '' }}
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-auto ms-sm-auto mt-sm-0 mt-3 d-flex">
-
+                        <div class="col-sm-auto ms-sm-auto mt-sm-0 mt-3 d-flex">
+    
+                        </div>
                     </div>
                 </div>
-            </div>
+            </div>      
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card mt-4">
+                        <div class="card-header pb-0">
+                            <h5>Data Diri</h5>
+                        </div>
+                        <div class="card-body pt-0">
+                            <form action="/profil/{{ $user->id }}" method="post" id="formDataDiri">
+                                @csrf
+                                @method('PUT')
+
+                                <input type="hidden" name="type" id="type" value="data_diri">
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label">NIK</label>
+                                        <input type="text" class="form-control" name="nik" id="nik"
+                                            placeholder="{{ str_replace('.', '', $user->kec->kd_kec) }}" value="{{ $user->nik }}"
+                                            maxlength="16">
+                                        <small class="text-danger" id="msg_nik"></small>
+                                        <div class="valid-feedback">
+                                            success!!
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Nama Depan</label>
+                                        <input type="text" name="nama_depan" id="nama_depan" class="form-control"
+                                            placeholder="Nama Depan" value="{{ $user->namadepan }}">
+                                        <small class="text-danger" id="msg_nama_depan"></small>
+                                        <div class="valid-feedback">
+                                            success!!
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Nama Belakang</label>
+                                        <input type="text" name="nama_belakang" id="nama_belakang" class="form-control"
+                                            placeholder="Nama Belakang" value="{{ $user->namabelakang }}">
+                                        <small class="text-danger" id="msg_nama_belakang"></small>
+                                        <div class="valid-feedback">
+                                            success!!
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label">Inisial</label>
+                                        <input type="text" name="inisial" id="inisial" class="form-control" placeholder="Ins"
+                                            value="{{ $user->ins }}">
+                                        <small class="text-danger" id="msg_inisial"></small>
+                                        <div class="valid-feedback">
+                                            success!!
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label class="form-label">Tempat Lahir</label>
+                                        <input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control"
+                                            placeholder="{{ $user->kec->kabupaten->nama_kab }}" value="{{ $user->tempat_lahir }}">
+                                        <small class="text-danger" id="msg_tempat_lahir"></small>
+                                        <div class="valid-feedback">
+                                            success!!
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Tanggal Lahir</label>
+                                        <input autocomplete="off" type="date" name="tanggal_lahir" id="tanggal_lahir"
+                                            class="form-control date" value="{{ Tanggal::tglIndo($user->tgl_lahir) }}">
+                                        <small class="text-danger" id="msg_tanggal_lahir"></small>
+                                        <div class="valid-feedback">
+                                            success!!
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label">Alamat</label>
+                                        <textarea name="alamat" id="alamat" class="form-control" placeholder="Alamat">{{ $user->alamat }}</textarea>
+                                        <div class="valid-feedback">
+                                            success!!
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label">Telepon</label>
+                                        <input type="text" name="telpon" id="telpon" class="form-control" placeholder="628"
+                                            value="{{ $user->hp }}" maxlength="13">
+                                        <small class="text-danger" id="msg_telpon"></small>
+                                        <div class="valid-feedback">
+                                            success!!
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Pendidikan</label>
+                                        <select class="form-control" name="pendidikan" id="pendidikan">
+                                            @foreach ($pendidikan as $p)
+                                                <option value="{{ $p->id }}"
+                                                    {{ $p->id == $user->pendidikan ? 'selected' : '' }}>
+                                                    {{ $p->deskripsi_p }} ({{ $p->tingkat }})
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <small class="text-danger" id="msg_pendidikan"></small>
+                                        <div class="valid-feedback">
+                                            success!!
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label">Menjabat Sejak</label>
+                                        <input autocomplete="off" type="date" name="menjabat_sejak" id="menjabat_sejak"
+                                            class="form-control date" value="{{ Tanggal::tglIndo($user->sejak) }}">
+                                        <small class="text-danger" id="msg_menjabat_sejak"></small>
+                                        <div class="valid-feedback">
+                                            success!!
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div class="d-flex justify-content-end">
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#EditUser"
+                                    class="btn btn-info btn-sm mb-0 mt-2">
+                                    Edit User
+                                </button>
+                                <button type="submit" id="SimpanDataDiri" class="btn btn-dark btn-sm mb-0 mt-2 ms-3">
+                                    Simpan Perubahan
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- Modal Edit User --}}
+                <div class="modal fade" id="EditUser" tabindex="-1" aria-labelledby="EditUserLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="EditUserLabel">
+                                    Edit User Login
+                                </h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body pt-0">
+                                <form action="/profil/{{ $user->id }}" method="post" id="FormEditUser">
+                                    @csrf
+                                    @method('PUT')
+
+                                    <input type="hidden" name="type" id="type" value="data_user">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="input-group input-group-static my-3">
+                                                <label>Username</label>
+                                                <input type="text" class="form-control" name="username" id="username"
+                                                    value="{{ $user->uname }}">
+                                                <small class="text-danger" id="msg_username"></small>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group input-group-static my-3">
+                                                <label>Password</label>
+                                                <input type="password" class="form-control" name="password" id="password"
+                                                    disabled value="{{ $pass }}">
+                                                <small class="text-danger" id="msg_password"></small>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group input-group-static my-3">
+                                                <label>Password Baru</label>
+                                                <input type="password" class="form-control" name="password_baru"
+                                                    id="password_baru">
+                                                <small class="text-danger" id="msg_password_baru"></small>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group input-group-static my-3">
+                                                <label>Konfirmasi Password</label>
+                                                <input type="password" class="form-control" name="konfirmasi_password"
+                                                    id="konfirmasi_password">
+                                                <small class="text-danger" id="msg_konfirmasi_password"></small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger btn-sm mb-0" data-bs-dismiss="modal">Tutup</button>
+                                <button type="button" id="SimpanEditUser"
+                                    class="btn bg-gradient-dark btn-sm float-end mb-0">Simpan Perubahan</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><br><br><br>
         </div>
-
-        <div class="main-card mb-3 card">
-            <div class="card-body">
-                <form action="/profil/{{ $user->id }}"class="needs-validation" novalidate method="post"
-                    id="formDataDiri">
-                    @csrf
-                    @method('PUT')
-
-                    <input type="hidden" name="type" id="type" value="data_diri">
-                    <br>
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">NIK</label>
-                            <input type="text" class="form-control" name="nik" id="nik"
-                                placeholder="{{ str_replace('.', '', $user->kec->kd_kec) }}" value="{{ $user->nik }}"
-                                maxlength="16">
-                            <small class="text-danger" id="msg_nik"></small>
-                            <div class="valid-feedback">
-                                success!!
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Nama Depan</label>
-                            <input type="text" name="nama_depan" id="nama_depan" class="form-control"
-                                placeholder="Nama Depan" value="{{ $user->namadepan }}">
-                            <small class="text-danger" id="msg_nama_depan"></small>
-                            <div class="valid-feedback">
-                                success!!
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Nama Belakang</label>
-                            <input type="text" name="nama_belakang" id="nama_belakang" class="form-control"
-                                placeholder="Nama Belakang" value="{{ $user->namabelakang }}">
-                            <small class="text-danger" id="msg_nama_belakang"></small>
-                            <div class="valid-feedback">
-                                success!!
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2 mb-3">
-                            <label class="form-label">Inisial</label>
-                            <input type="text" name="inisial" id="inisial" class="form-control" placeholder="Ins"
-                                value="{{ $user->ins }}">
-                            <small class="text-danger" id="msg_inisial"></small>
-                            <div class="valid-feedback">
-                                success!!
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">Tempat Lahir</label>
-                            <input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control"
-                                placeholder="{{ $user->kec->kabupaten->nama_kab }}" value="{{ $user->tempat_lahir }}">
-                            <small class="text-danger" id="msg_tempat_lahir"></small>
-                            <div class="valid-feedback">
-                                success!!
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Tanggal Lahir</label>
-                            <input autocomplete="off" type="text" name="tanggal_lahir" id="tanggal_lahir"
-                                class="form-control date" value="{{ Tanggal::tglIndo($user->tgl_lahir) }}">
-                            <small class="text-danger" id="msg_tanggal_lahir"></small>
-                            <div class="valid-feedback">
-                                success!!
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Alamat</label>
-                            <textarea name="alamat" id="alamat" class="form-control" placeholder="Alamat">{{ $user->alamat }}</textarea>
-                            <div class="valid-feedback">
-                                success!!
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3 mb-3">
-                            <label class="form-label">Telepon</label>
-                            <input type="text" name="telpon" id="telpon" class="form-control" placeholder="628"
-                                value="{{ $user->hp }}" maxlength="13">
-                            <small class="text-danger" id="msg_telpon"></small>
-                            <div class="valid-feedback">
-                                success!!
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Pendidikan</label>
-                            <select class="form-control" name="pendidikan" id="pendidikan">
-                                @foreach ($pendidikan as $p)
-                                    <option value="{{ $p->id }}"
-                                        {{ $p->id == $user->pendidikan ? 'selected' : '' }}>
-                                        {{ $p->deskripsi_p }} ({{ $p->tingkat }})
-                                    </option>
-                                @endforeach
-                            </select>
-                            <small class="text-danger" id="msg_pendidikan"></small>
-                            <div class="valid-feedback">
-                                success!!
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label class="form-label">Menjabat Sejak</label>
-                            <input autocomplete="off" type="text" name="menjabat_sejak" id="menjabat_sejak"
-                                class="form-control date" value="{{ Tanggal::tglIndo($user->sejak) }}">
-                            <small class="text-danger" id="msg_menjabat_sejak"></small>
-                            <div class="valid-feedback">
-                                success!!
-                            </div>
-                        </div>
-                    </div>
-                    <input type="hidden" name="type" id="type" value="pdf">
-
-                    <br>
-                    <div class="d-flex justify-content-end">
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#EditUser"
-                            class="btn btn-info btn-sm mb-0 mt-2">
-                            Edit User
-                        </button>
-                        <button type="submit" id="SimpanDataDiri" class="btn btn-secondary btn-sm mb-0 mt-2 ms-3">
-                            Simpan Perubahan
-                        </button>
-                    </div>
-                    <br><br>
-                </form>
-
-            </div>
-        </div>
-
-    </div>
 @endsection
-
-{{-- Modal Edit User --}}
-<div class="modal fade" id="EditUser" tabindex="-1" aria-labelledby="EditUserLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="EditUserLabel">
-                    Edit User Login
-                </h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body pt-0">
-                <form action="/profil/{{ $user->id }}" method="post" id="FormEditUser">
-                    @csrf
-                    @method('PUT')
-
-                    <input type="hidden" name="type" id="type" value="data_user">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="input-group input-group-static my-3">
-                                <label>Username</label>
-                                <input type="text" class="form-control" name="username" id="username"
-                                    value="{{ $user->uname }}">
-                                <small class="text-danger" id="msg_username"></small>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="input-group input-group-static my-3">
-                                <label>Password</label>
-                                <input type="password" class="form-control" name="password" id="password" disabled
-                                    value="{{ $pass }}">
-                                <small class="text-danger" id="msg_password"></small>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="input-group input-group-static my-3">
-                                <label>Password Baru</label>
-                                <input type="password" class="form-control" name="password_baru" id="password_baru">
-                                <small class="text-danger" id="msg_password_baru"></small>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="input-group input-group-static my-3">
-                                <label>Konfirmasi Password</label>
-                                <input type="password" class="form-control" name="konfirmasi_password"
-                                    id="konfirmasi_password">
-                                <small class="text-danger" id="msg_konfirmasi_password"></small>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger btn-sm mb-0" data-bs-dismiss="modal">Tutup</button>
-                <button type="button" id="SimpanEditUser" class="btn bg-gradient-dark btn-sm float-end mb-0">Simpan
-                    Perubahan</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 @section('script')
     <script>
@@ -245,10 +245,6 @@
                 threshold: 0.1,
                 distance: 1000
             }
-        })
-
-        $(".date").flatpickr({
-            dateFormat: "d/m/Y"
         })
 
         $(document).on('click', '#SimpanDataDiri', function(e) {
@@ -361,26 +357,5 @@
                 })
             }
         })
-    </script>
-
-    <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (function() {
-            'use strict';
-            window.addEventListener('load', function() {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.getElementsByClassName('needs-validation');
-                // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function(form) {
-                    form.addEventListener('submit', function(event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
     </script>
 @endsection
