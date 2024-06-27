@@ -24,7 +24,7 @@
                     </li>
                 </ul>
             </div>
-        </div> --}}
+        </div> --}} 
         <div class="card-body">
             <ul class="nav nav-pills nav-fill">
                 <li class="nav-item"><a data-bs-toggle="tab" id="tab-0" href="#Proposal" class="active nav-link">
@@ -47,7 +47,8 @@
         </div>
 
         <div class="tab-content">
-            <div class="tab-pane tabs-animation fade {{ $status == 'p' ? 'show active' : '' }}" id="Proposal" role="tabpanel" aria-labelledby="Proposal">
+            <div class="tab-pane tabs-animation fade  {{ $status == 'p' ? 'show active' : '' }}" id="Proposal" role="tabpanel"
+                aria-labelledby="Proposal">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="main-card mb-3 card">
