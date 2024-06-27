@@ -338,7 +338,7 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
 
         if (count($wt_cair) == 2) {
         $waktu = $wt_cair[0];
-        $tempat = $wt_cair[1];
+        $tempat = $wt_cair[1]; 
         }
         @endphp
     </div>
@@ -520,7 +520,7 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" id="SimpanRescedule" class="btn btn-github btn-sm">
+                    <button type="button" id="SimpanRescedule" class="btn btn-dark btn-sm">
                         Rescedule Pinjaman
                     </button>
                 </div>
@@ -575,7 +575,7 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" id="SimpanHapus" class="btn btn-github btn-sm">
+                    <button type="button" id="SimpanHapus" class="btn btn-dark btn-sm">
                         Hapus Pinjaman
                     </button>
                 </div>
@@ -748,6 +748,7 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
         $(document).on('click', '#SimpanRescedule', async function (e) {
             e.preventDefault()
             $('#Rescedule').modal('hide')
+            $('.modal-backdrop').remove()
 
             const {
                 value: spk

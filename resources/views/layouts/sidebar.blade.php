@@ -61,7 +61,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="/supplier">
                             <i class="metismenu-icon">
                             </i>DS. Data Supplier
                         </a>
@@ -69,13 +69,13 @@
                     <li>
                         <a href="/database/penduduk/register_penduduk">
                             <i class="metismenu-icon">
-                            </i>Ra. Register Anggota
+                            </i>Ra. Register Pelangan
                         </a>
                     </li>
                     <li>
                         <a href="/database/penduduk">
                             <i class="metismenu-icon">
-                            </i>Da. Data Anggota
+                            </i>Da. Data Pelangan
                         </a>
                     </li>
                 </ul>
