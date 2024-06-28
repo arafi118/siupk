@@ -8,7 +8,7 @@
                     <div class="col-md-12">
                         <div class="main-card mb-3 card">
                             <div class="card-body">
-                                <h5 class="card-title">Controls Types</h5>
+                                <h5 class="card-title">Tanda tangan <b>Pelaporan</b></h5>
                                 <form action="/pengaturan/sop/simpanttdpelaporan" method="post" id="formTtdPelaporan" height>
                                     @csrf
                     

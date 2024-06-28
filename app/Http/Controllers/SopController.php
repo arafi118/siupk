@@ -373,10 +373,10 @@ class SopController extends Controller
                 })
                 ->editColumn('status', function ($row) {
                     if ($row->status == 'PAID') {
-                        return '<span class="badge badge-success">' . $row->status . '</span>';
+                        return '<span class="badge bg-success">' . $row->status . '</span>';
                     }
 
-                    return '<span class="badge badge-danger">' . $row->status . '</span>';
+                    return '<span class="badge bg-danger">' . $row->status . '</span>';
                 })
                 ->addColumn('saldo', function ($row) {
                     if ($row->trx_sum_jumlah) {
