@@ -34,7 +34,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item mb-1 me-1">
-                                    <a role="tab" class="btn btn-outline-primary" id="spk" data-bs-toggle="tab" href="#tab-content-5">
+                                    <a role="tab" class="btn btn-outline-primary" data-bs-toggle="tab" href="#tab-content-5">
                                         <i class="fa-solid fa-laptop-file"></i>&nbsp;<span>Redaksi SPK</span>
                                     </a>
                                 </li>

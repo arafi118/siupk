@@ -2,10 +2,13 @@
     @csrf
     @method('PUT')
 
-    <div name="spk" id="editor">
+    <div id="editor">
         <p>1.</p>
         <p><br /></p>
       </div>
+
+      <textarea name="spk" id="spk" class="d-none"></textarea>
+
 </form><br>
 
 <div class="d-flex justify-content-end">
