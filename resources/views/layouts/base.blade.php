@@ -578,7 +578,7 @@
 <script src="/assets/js/plugins/sweetalert.min.js"></script>
 <script src="/assets/js/plugins/chartjs.min.js"></script>
 <script src="/assets/js/html5-qrcode.js?v=1716515606"></script>
-<script src="http://siupk.test/vendor/tinymce/tinymce.min.js"></script>
+<script src="{{ asset('vendor/tinymce/tinymce.min.js') }}"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js">
 
