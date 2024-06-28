@@ -238,7 +238,7 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
     @section('modal')
     {{-- Modal Edit Proposal --}}
     <div class="modal fade" id="EditProposal" tabindex="-1" aria-labelledby="EditProposalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="EditProposalLabel">
@@ -260,7 +260,7 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
     {{-- Modal Cetak Dokumen Proposal --}}
     <div class="modal fade" id="CetakDokumenProposal" tabindex="-1" aria-labelledby="CetakDokumenProposalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="CetakDokumenProposalLabel">Cetak Dokumen Proposal</h1>
@@ -346,7 +346,7 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
     {{-- Modal Cetak Dokumen Pencairan --}}
     <div class="modal fade" id="CetakDokumenPencairan" tabindex="-1" aria-labelledby="CetakDokumenPencairanLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="CetakDokumenPencairanLabel">Cetak Dokumen Pencairan</h1>
@@ -430,7 +430,7 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
 
     {{-- Modal Rescedule Pinjaman --}}
     <div class="modal fade" id="Rescedule" tabindex="-1" aria-labelledby="ResceduleLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="ResceduleLabel">
@@ -530,7 +530,7 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
 
     {{-- Modal Penghapusan Pinjaman --}}
     <div class="modal fade" id="Penghapusan" tabindex="-1" aria-labelledby="PenghapusanLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="PenghapusanLabel">

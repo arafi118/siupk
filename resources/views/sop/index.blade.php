@@ -39,7 +39,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item mb-1 me-1">
-                                    <a role="tab" class="btn btn-outline-primary" id="logo" data-bs-toggle="tab" href="#tab-content-6">
+                                    <a role="tab" class="btn btn-outline-primary" id="logo " data-bs-toggle="tab" href="#tab-content-6">
                                         <i class="fa-solid fa-panorama"></i>&nbsp;<span>Logo</span>
                                     </a>
                                 </li>
