@@ -12,9 +12,9 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-auto col-4">
-                            <div class="avatar avatar-xl position-relative pointer" id="fileUpload">
+                            <div class="avatar avatar-xl position-relative pointer" id="fileUpload" style="width: 100px; height: 100px; margin-top: 30px;">
                                 <img src="{{ asset('/storage/profil/' . $user->foto) }}" alt="bruce"
-                                    class="w-100 rounded-circle shadow-sm" id="preview">
+                                     class="w-100 rounded-circle shadow-sm" id="preview">
                             </div>
     
                             <form action="/profil/{{ $user->id }}" method="post" enctype="multipart/form-data"

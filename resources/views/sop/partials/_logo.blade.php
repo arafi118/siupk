@@ -6,7 +6,6 @@
                     <img src="{{ asset('storage/logo/' . Session::get('logo')) }}" alt="img-blur-shadow"
                          class="img-fluid shadow border-radius-lg" id="previewLogo" style="width: 200px; height: auto;">
                 </a>
-                
                 <div class="colored-shadow"
                     style="background-image: url(&quot;{{ asset('storage/logo/' . Session::get('logo')) }}&quot;);">
                 </div>
