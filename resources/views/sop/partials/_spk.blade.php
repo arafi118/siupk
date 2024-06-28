@@ -3,6 +3,7 @@
     @method('PUT')
 
     <textarea name="spk" id="spk"></textarea>
+    
 </form>
 
 <div class="d-flex justify-content-end">
@@ -10,3 +11,9 @@
         Simpan Perubahan
     </button>
 </div>
+
+<script>
+    const quill = new Quill('#spk', {
+      theme: 'snow'
+    });
+  </script>

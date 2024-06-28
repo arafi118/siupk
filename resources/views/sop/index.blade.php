@@ -174,7 +174,7 @@
 
             Swal.fire({
                 title: 'Peringatan',
-                text: 'Kami selaku tim pengembang aplikasi SIDBM tidak bertanggung jawab jika terjadi sesuatu pada nomor anda ke depannya.',
+                text: 'Kami selaku tim pengembang aplikasi LKM tidak bertanggung jawab jika terjadi sesuatu pada nomor anda ke depannya.',
                 showCancelButton: true,
                 confirmButtonText: 'Lanjutkan',
                 cancelButtonText: 'Batal',
