@@ -75,7 +75,7 @@ class PinjamanIndividuController extends Controller
                     $status = $row->sts->warna_status;
 
                     $namadepan = $row->anggota->namadepan . '(' . $jpp->nama_jpp . ')';
-                    return '<div>' . $namadepan . ' <small class="float-end badge badge-' . $status . '">Loan ID.' . $row->id . '</small></div>';
+                    return '<div>'. $namadepan . ' <small class="float-end badge badge-' . $status . '">Loan ID.' . $row->id . '</small></div>';
                 })
                 ->editColumn('tgl_proposal', function ($row) {
                     return Tanggal::tglIndo($row->tgl_proposal);

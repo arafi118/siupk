@@ -131,7 +131,7 @@
                         </ul>
                     </li>
                     <li class="dropdown nav-item">
-                        <a href="javascript:;" class="nav-link text-body p-0" id="logout" data-bs-toggle="tooltip" data-bs-placement="top" title="Logout" data-container="body" data-animation="true">
+                        <a href="javascript:;" class="nav-link text-body p-0" id="logout" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-container="body" data-animation="true">
                             <i class="nav-link-icon fa-solid fa-arrow-up-right-from-square"></i> Logout
                         </a>
                     </li>
