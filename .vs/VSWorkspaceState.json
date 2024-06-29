@@ -1,7 +1,12 @@
 {
   "ExpandedNodes": [
     "",
+    "\\app",
+    "\\app\\Http",
+    "\\app\\Http\\Controllers",
+    "\\config",
     "\\public"
   ],
+  "SelectedNode": "\\app\\Http\\Controllers\\GenerateController.php",
   "PreviewInSolutionExplorer": false
 }
