@@ -47,8 +47,7 @@
         </div>
 
         <div class="tab-content">
-            <div class="tab-pane tabs-animation fade  {{ $status == 'p' ? 'show active' : '' }}" id="Proposal" role="tabpanel"
-                aria-labelledby="Proposal">
+            <div class="tab-pane tabs-animation fade  {{ $status == 'p' ? 'show active' : '' }}" id="Proposal" role="tabpanel">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="main-card mb-3 card">
@@ -74,7 +73,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane tabs-animation fade{{ $status == 'v' ? 'show active' : '' }}" id="Verified" role="tabpanel" aria-labelledby="Verified">
+            <div class="tab-pane tabs-animation fade{{ $status == 'v' ? 'show active' : '' }}" id="Verified" role="tabpanel" >
                 <div class="row">
                     <div class="col-md-12">
                         <div class="mb-3 card">
@@ -100,7 +99,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane tabs-animation fade{{ $status == 'w' ? 'show active' : '' }}" id="Waiting" role="tabpanel" aria-labelledby="Waiting">
+            <div class="tab-pane tabs-animation fade{{ $status == 'w' ? 'show active' : '' }}" id="Waiting" role="tabpanel" >
                 <div class="row">
                     <div class="col-md-12">
                         <div class="main-card mb-3 card">
@@ -123,7 +122,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane tabs-animation fade{{ $status == 'a' ? 'show active' : '' }}" id="Aktif" role="tabpanel" aria-labelledby="Aktif">
+            <div class="tab-pane tabs-animation fade{{ $status == 'a' ? 'show active' : '' }}" id="Aktif" role="tabpanel" >
                 <div class="row">
                     <div class="col-md-12">
                         <div class="main-card mb-3 card">
@@ -146,7 +145,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane tabs-animation fade{{ $status == 'l' ? 'show active' : '' }}" id="Lunas" role="tabpanel" aria-labelledby="Lunas">
+            <div class="tab-pane tabs-animation fade{{ $status == 'l' ? 'show active' : '' }}" id="Lunas" role="tabpanel" >
                 <div class="row">
                     <div class="col-md-12">
                         <div class="main-card mb-3 card">
