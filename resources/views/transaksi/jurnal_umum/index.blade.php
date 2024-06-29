@@ -180,10 +180,12 @@
         </div>
     </div>
     <div id="notifikasi"></div>
+@endsection
 
+@section('modal')
 <div class="modal fade" id="detailTransaksi" tabindex="-1" aria-labelledby="detailTransaksiLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="detailTransaksiLabel">
@@ -206,7 +208,7 @@
 
 <div class="modal fade" id="CetakBuktiTransaksi" tabindex="-1" aria-labelledby="CetakBuktiTransaksiLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="CetakBuktiTransaksiLabel">
@@ -226,6 +228,8 @@
         </div>
     </div>
 </div>
+@endsection
+@section('content')
 
 <form action="/transaksi/reversal" method="post" id="formReversal">
     @csrf
