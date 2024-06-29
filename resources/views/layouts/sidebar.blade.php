@@ -69,13 +69,13 @@
                     <li>
                         <a href="/database/penduduk/register_penduduk">
                             <i class="metismenu-icon">
-                            </i>Ra. Register Pelangan
+                            </i>Ra. Register Pelanggan
                         </a>
                     </li>
                     <li>
                         <a href="/database/penduduk">
                             <i class="metismenu-icon">
-                            </i>Da. Data Pelangan
+                            </i>Da. Data Pelanggan
                         </a>
                     </li>
                 </ul>
