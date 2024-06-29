@@ -17,7 +17,7 @@
                     <div class="row">
                         <div class="col-md-4 mb-3">
                             <label for="validationCustom01" class="form-label">Tahunan</label>
-                            <select class="form-control" name="tahun" id="tahun">
+                            <select class=" js-example-basic-single form-control" name="tahun" id="tahun">
                                 <option value="">---</option>
                                 @for ($i = $thn_awal; $i <= date('Y'); $i++)
                                     <option {{ $i == date('Y') ? 'selected' : '' }} value="{{ $i }}">
@@ -32,7 +32,7 @@
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="validationCustom02" class="form-label">Bulanan</label>
-                            <select class="form-control" name="bulan" id="bulan">
+                            <select class="js-example-basic-single form-control" name="bulan" id="bulan">
                                 <option value="">---</option>
                                 <option {{ date('m') == '01' ? 'selected' : '' }} value="01">01. JANUARI</option>
                                 <option {{ date('m') == '02' ? 'selected' : '' }} value="02">02. FEBRUARI</option>
@@ -54,7 +54,7 @@
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="hari" class="form-label">Harian</label>
-                            <select class="form-control" name="hari" id="hari">
+                            <select class="js-example-basic-single form-control" name="hari" id="hari">
                                 <option value="">---</option>
                                 @for ($j = 1; $j <= 31; $j++)
                                     @if ($j < 10)

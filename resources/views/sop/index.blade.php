@@ -34,12 +34,12 @@
                                     </a>
                                 </li>
                                 <li class="nav-item mb-1 me-1">
-                                    <a role="tab" class="btn btn-outline-primary" id="spk" data-bs-toggle="tab" href="#tab-content-5">
+                                    <a role="tab" class="btn btn-outline-primary" data-bs-toggle="tab" href="#tab-content-5">
                                         <i class="fa-solid fa-laptop-file"></i>&nbsp;<span>Redaksi SPK</span>
                                     </a>
                                 </li>
                                 <li class="nav-item mb-1 me-1">
-                                    <a role="tab" class="btn btn-outline-primary" id="logo" data-bs-toggle="tab" href="#tab-content-6">
+                                    <a role="tab" class="btn btn-outline-primary" id="logo " data-bs-toggle="tab" href="#tab-content-6">
                                         <i class="fa-solid fa-panorama"></i>&nbsp;<span>Logo</span>
                                     </a>
                                 </li>
@@ -174,7 +174,7 @@
 
             Swal.fire({
                 title: 'Peringatan',
-                text: 'Kami selaku tim pengembang aplikasi SIDBM tidak bertanggung jawab jika terjadi sesuatu pada nomor anda ke depannya.',
+                text: 'Kami selaku tim pengembang aplikasi LKM tidak bertanggung jawab jika terjadi sesuatu pada nomor anda ke depannya.',
                 showCancelButton: true,
                 confirmButtonText: 'Lanjutkan',
                 cancelButtonText: 'Batal',

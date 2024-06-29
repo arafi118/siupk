@@ -91,6 +91,13 @@
                         <ul class="dropdown-menu">
                             <li>
                                 {{-- @if ($jumlah > 0)
+                                <span
+                                    class="position-absolute top-5 start-100 translate-middle badge rounded-pill bg-danger border border-white small py-1 px-2">
+                                    <span class="small">{{ $jumlah }}</span>
+                                    <span class="visually-hidden">Notifikasi</span>
+                                </span>
+                            @endif
+                                @if ($jumlah > 0)
                                 @foreach ($inv as $in)
                                     <a class="dropdown-item border-radius-md"
                                         href="/pelaporan/invoice/{{ $in->idv }}" target="_blank">
@@ -171,6 +178,7 @@
                                         </a>
                                         <ul class="dropdown-menu">
                                             <li>
+                                               
                                                 {{-- @if ($jumlah > 0)
                                                 @foreach ($inv as $in)
                                                     <a class="dropdown-item border-radius-md"
