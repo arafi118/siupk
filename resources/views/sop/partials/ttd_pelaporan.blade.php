@@ -14,11 +14,11 @@
                     
                                     <input type="hidden" name="field" id="field" value="tanda_tangan_pelaporan">
                                     <textarea class="tiny-mce-editor" name="tanda_tangan" id="tanda_tangan" rows="20">
-                    @if ($kec->ttd)
-                    {!! json_decode($kec->ttd->tanda_tangan_pelaporan, true) !!}
-                    @else
-                    @endif
-                    </textarea>
+                                    @if ($kec->ttd)
+                                    {!! json_decode($kec->ttd->tanda_tangan_pelaporan, true) !!}
+                                    @else
+                                    @endif
+                                    </textarea>
                                 </form>
                     
                                 @if (!$tanggal)

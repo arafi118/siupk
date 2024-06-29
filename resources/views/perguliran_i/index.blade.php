@@ -60,6 +60,7 @@
                                         <tr>
                                             <th>Nama Anggota P</th>
                                             <th>Alamat</th>
+                                            <th>Nama Barang</th>
                                             <th>Tgl Pengajuan</th>
                                             <th>Pengajuan</th>
                                             <th>Jasa/Jangka</th>
@@ -181,6 +182,9 @@
         }, {
             data: 'anggota.alamat',
             name: 'anggota.alamat'
+        }, {
+            data: 'nama_barang',
+            name: 'nama_barang'
         }, {
             data: 'tgl_proposal',
             name: 'tgl_proposal'

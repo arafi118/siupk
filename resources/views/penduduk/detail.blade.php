@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="col-md-4">
                                         <div class="my-2">
-                                            <label class="form-label" for="desa">Desa/Kelurahan;</label>
+                                            <label class="form-label" for="desa">Desa/Kelurahan</label>
                                             <select class="form-control" name="desa" id="desa">
                                                 @foreach ($desa as $ds)
                                                     <option {{ $desa_dipilih == $ds->kd_desa ? 'selected' : '' }}
