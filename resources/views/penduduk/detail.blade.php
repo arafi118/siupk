@@ -8,14 +8,14 @@
                 <li class="nav-item">
                     <a class="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab" href="#ProfilPenduduk" role="tab"
                         aria-controls="ProfilPenduduk" aria-selected="true">&nbsp;&nbsp;
-                        <i class="fa-solid fa-file-circle-plus"></i> &nbsp;&nbsp;
+                        <i class="fa-solid fa fa-users"></i> &nbsp;&nbsp;
                         Profil Penduduk
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#RiwayatPiutang" role="tab"
                         aria-controls="RiwayatPiutang" aria-selected="false">&nbsp;&nbsp;
-                        <i class="fa-solid fa-file-circle-plus"></i> &nbsp;&nbsp;
+                        <i class="fa-solid fa fa-history"></i> &nbsp;&nbsp;
                         Riwayat Piutang
                     </a>
                 </li>
