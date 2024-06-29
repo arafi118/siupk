@@ -22,7 +22,7 @@
                             <div class="col-md-6">
                                 <div class="position-relative mb-3">
                                     <label for="tgl_transaksi">Tgl Transaksi &nbsp;</label>
-                                    <input autocomplete="off" type="date" name="tgl_transaksi" id="tgl_transaksi"
+                                    <input autocomplete="off" type="text" name="tgl_transaksi" id="tgl_transaksi"
                                         class="form-control date" value="{{ date('d/m/Y') }}">
                                     <small class="text-danger" id="msg_tgl_transaksi"></small>
                                 </div>
@@ -218,6 +218,9 @@
 
 @section('script')
 <script>
+    $('#tgl_transaksi').datepicker();
+
+
     var formatter = new Intl.NumberFormat('en-US', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
@@ -241,7 +244,7 @@
         allowNegative: true
     });
 
-
+    
     var id_pinkel = "{{ Request::get('pinkel') ?: 0 }}"
 
     if (id_pinkel > 0) {

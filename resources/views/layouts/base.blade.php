@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pe7-icon@1.0.4/dist/dist/pe-icon-7-stroke.css">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+
 
     <script defer src="/assets/scripts/main.js"></script>
     <script defer src="/assets/scripts/demo.js"></script>
@@ -579,6 +581,7 @@
 <script src="/assets/js/plugins/chartjs.min.js"></script>
 <script src="/assets/js/html5-qrcode.js?v=1716515606"></script>
 <script src="http://siupk.test/vendor/tinymce/tinymce.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js">
 

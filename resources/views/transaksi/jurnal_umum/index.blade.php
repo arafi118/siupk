@@ -16,7 +16,7 @@
                                         <div class="position-relative mb-3">
                                         <label for="tgl_transaksi">Tgl Transaksi</label>
                                     <input autocomplete="off" type="date" name="tgl_transaksi" id="tgl_transaksi"
-                                        class="form-control date" value="{{ date('d/m/Y') }}">
+                                        class="form-control date" value="{{ date('Y-m-d') }}">
                                     <small class="text-danger" id="msg_tgl_transaksi"></small>
                                             </div>
                                     </div>
