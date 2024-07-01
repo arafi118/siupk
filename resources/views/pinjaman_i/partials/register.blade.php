@@ -140,6 +140,16 @@
                                         <small class="text-danger" id="msg_jenis_produk_pinjaman"></small>       
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="position-relative mb-3">
+                                        <label for="nama_barang" class="form-label">Nama Barang</label>
+                                        <input autocomplete="off" type="text" name="nama_barang" id="nama_barang" class="form-control">
+                                        <small class="text-danger" id="msg_nama_barang"></small>
+                                    </div>
+                                </div>                               
+                            </div>                            
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="position-relative mb-3">

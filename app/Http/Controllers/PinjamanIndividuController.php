@@ -192,7 +192,7 @@ class PinjamanIndividuController extends Controller
                     return number_format($row->alokasi);
                 })
                 ->editColumn('anggota.alamat', function ($row) {
-                    return $row->anggota->alamat . ' ' . $row->anggota->d->nama_desa;
+                    return $row->anggota->alamat . ' ' .$row->anggota->d->nama_desa;
                 })
                 ->rawColumns(['namadepan'])
                 ->make(true);
@@ -323,7 +323,8 @@ class PinjamanIndividuController extends Controller
             'jenis_jasa',
             'sistem_angsuran_pokok',
             'sistem_angsuran_jasa',
-            'jenis_produk_pinjaman'
+            'jenis_produk_pinjaman',
+            'nama_barang'
         ]);
 
 
@@ -336,6 +337,7 @@ class PinjamanIndividuController extends Controller
             'sistem_angsuran_pokok' => 'required',
             'sistem_angsuran_jasa' => 'required',
             'jenis_produk_pinjaman' => 'required',
+            'nama_barang' => 'required',
             'data_jaminan' => 'required|array',
             'data_jaminan.*' => 'required',
         ]);
@@ -350,12 +352,14 @@ class PinjamanIndividuController extends Controller
 
             $jaminan[$key] = $val;
         }
+        $jaminan['jenis_jaminan'] = $request->jaminan;
 
         $insert = [
             'jenis_pinjaman' => 'I',
             'id_kel' => '0',
             'id_pinkel' => '0',
             'jenis_pp' => $request->jenis_produk_pinjaman,
+            'nama_barang' => $request->nama_barang,
             'nia' => $request->nia,
             'tgl_proposal' => Tanggal::tglNasional($request->tgl_proposal),
             'tgl_verifikasi' => Tanggal::tglNasional($request->tgl_proposal),
@@ -838,7 +842,8 @@ class PinjamanIndividuController extends Controller
             'jenis_pinjaman' => 'I',
             'id_kel' => '0',
             'id_pinkel' => '0',
-            'jenis_pp' => $pinj_i->jenis_pp,
+            'jenis_pp' => $pinj_i->jenis_pp,    
+            'nama_barang' => $pinj_i->nama_barang,
             'nia' => $pinj_i->nia,
             'tgl_proposal' => Tanggal::tglNasional($tgl_resceduling),
             'tgl_verifikasi' => Tanggal::tglNasional($tgl_resceduling),

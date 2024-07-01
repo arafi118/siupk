@@ -201,6 +201,38 @@
                                 <small class="text-danger" id="msg_sistem_angsuran_jasa"></small>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="position-relative mb-3">
+                                <label for="tgl_cair" class="form-label">Free Dari Supplier</label>
+                                <input autocomplete="off" type="date" name="tgl_cair" id="tgl_cair" class="form-control"
+                                    value="{{ Tanggal::tglIndo($perguliran_i->tgl_cair) }}">
+                                <small class="text-danger" id="msg_tgl_cair"></small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="position-relative mb-3">
+                                <label for="alokasi" class="form-label">Free Agen</label>
+                                <input autocomplete="off" readonly type="text" name="alokasi" id="alokasi"
+                                    class="form-control money" value="{{ number_format($perguliran_i->alokasi, 2) }}">
+                                <small class="text-danger" id="msg_alokasi"></small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="position-relative mb-3">
+                                <label for="sumber_pembayaran" class="form-label">Down Payment</label>
+                                <select class="js-example-basic-single form-control" name="sumber_pembayaran"
+                                    id="sumber_pembayaran">
+                                    @foreach ($sumber_bayar as $sb)
+                                    <option value="{{ $sb->kode_akun }}">
+                                        {{ $sb->kode_akun }}. {{ $sb->nama_akun }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                                <small class="text-danger" id="msg_sistem_angsuran_jasa"></small>
+                            </div>
+                        </div>
                         <div class="card-body">
                             <button type="button" id="kembaliProposal" class="btn btn-info flex-grow-1 me-2"
                                 style="background-color: rgb(240, 148, 0);">

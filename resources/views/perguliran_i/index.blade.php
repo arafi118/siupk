@@ -57,8 +57,9 @@
                                 <table class="table table-flush table-hover table-click " width="100%" id="TbProposal">
                                     <thead>
                                         <tr>
+                                            <th>Loan id</th>
                                             <th>Nama Anggota P</th>
-                                            <th>Alamat</th>
+                                            <th>Desa</th>
                                             <th>Nama Barang</th>
                                             <th>Tgl Pengajuan</th>
                                             <th>Pengajuan</th>
@@ -175,12 +176,15 @@
 
 @section('script')
     <script>
-        var tbProposal = CreateTable('#TbProposal', '/perguliran_i/proposal', [{
+        var tbProposal = CreateTable('#TbProposal', '/perguliran_i/proposal', [ {
+            data: 'anggota.id',
+            name: 'anggota.id'
+        }, {
             data: 'anggota.namadepan',
             name: 'anggota.namadepan'
         }, {
-            data: 'anggota.alamat',
-            name: 'anggota.alamat'
+            data: 'anggota.d.nama_desa',
+            name: 'anggota.d.nama_desa'
         }, {
             data: 'nama_barang',
             name: 'nama_barang'

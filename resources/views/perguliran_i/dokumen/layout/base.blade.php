@@ -117,31 +117,26 @@
             }
         </style>
         <header>
-            <table width="100%" style="border-bottom: 1px solid grey;">
+            <table width="100%" style="border-bottom: 1px double #000; border-width: 4px;">
                 <tr>
-                    <td width="30">
-                        <img src="../storage/app/public/logo/{{ $logo }}" width="40" height="40"
-                            alt="{{ $logo }}">
+                    <td width="70">
+                        <img src="../storage/app/public/logo/{{ $logo }}" height="70"
+                            alt="{{ $kec->id }}">
                     </td>
-                    <td>
-                        <div style="font-size: 12px;">{{ strtoupper($nama_lembaga) }}</div>
-                        <div style="font-size: 12px;">
+                    <td align="center">
+                        <div>{{ strtoupper($nama_lembaga) }}</div>
+                        <div>
                             <b>{{ strtoupper($nama_kecamatan) }}</b>
                         </div>
-                    </td>
-                </tr>
-            </table>
-            <table width="100%" style="position: relative; top: -10px;">
-                <tr>
-                    <td>
-                        <span style="font-size: 8px; color: grey;">
+                        <div style="font-size: 10px; color: grey;">
                             <i>{{ $nomor_usaha }}</i>
-                        </span>
-                    </td>
-                    <td align="right">
-                        <span style="font-size: 8px; color: grey;">
+                        </div>
+                        <div style="font-size: 10px; color: grey;">
                             <i>{{ $info }}</i>
-                        </span>
+                        </div>
+                        <div style="font-size: 10px; color: grey;">
+                            <i>{{ $email }}</i>
+                        </div>
                     </td>
                 </tr>
             </table>
