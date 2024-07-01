@@ -206,31 +206,25 @@
                         <div class="col-md-4">
                             <div class="position-relative mb-3">
                                 <label for="tgl_cair" class="form-label">Free Dari Supplier</label>
-                                <input autocomplete="off" type="date" name="tgl_cair" id="tgl_cair" class="form-control"
-                                    value="{{ Tanggal::tglIndo($perguliran_i->tgl_cair) }}">
-                                <small class="text-danger" id="msg_tgl_cair"></small>
+                                <input autocomplete="off"  type="text" name="fee_supplier" id="fee_supplier" class="form-control"
+                                value="{{ $perguliran_i->fee_supplier }}">
+                            <small class="text-danger" id="msg_fee_supplier"></small>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="position-relative mb-3">
                                 <label for="alokasi" class="form-label">Free Agen</label>
-                                <input autocomplete="off" readonly type="text" name="alokasi" id="alokasi"
-                                    class="form-control money" value="{{ number_format($perguliran_i->alokasi, 2) }}">
-                                <small class="text-danger" id="msg_alokasi"></small>
+                                <input autocomplete="off"  type="text" name="fee_agent" id="fee_agent" class="form-control"
+                                        value="{{ $perguliran_i->fee_agent }}">
+                                    <small class="text-danger" id="msg_fee_agent"></small>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="position-relative mb-3">
                                 <label for="sumber_pembayaran" class="form-label">Down Payment</label>
-                                <select class="js-example-basic-single form-control" name="sumber_pembayaran"
-                                    id="sumber_pembayaran">
-                                    @foreach ($sumber_bayar as $sb)
-                                    <option value="{{ $sb->kode_akun }}">
-                                        {{ $sb->kode_akun }}. {{ $sb->nama_akun }}
-                                    </option>
-                                    @endforeach
-                                </select>
-                                <small class="text-danger" id="msg_sistem_angsuran_jasa"></small>
+                                <input autocomplete="off"  type="text" name="depe" id="depe" class="form-control"
+                                value="{{ $perguliran_i->depe }}">
+                            <small class="text-danger" id="msg_depe"></small>
                             </div>
                         </div>
                         <div class="card-body">

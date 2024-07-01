@@ -324,7 +324,10 @@ class PinjamanIndividuController extends Controller
             'sistem_angsuran_pokok',
             'sistem_angsuran_jasa',
             'jenis_produk_pinjaman',
-            'nama_barang'
+            'nama_barang',
+            'fee_supplier',
+            'fee_agent',
+            'depe'
         ]);
 
 
@@ -338,6 +341,9 @@ class PinjamanIndividuController extends Controller
             'sistem_angsuran_jasa' => 'required',
             'jenis_produk_pinjaman' => 'required',
             'nama_barang' => 'required',
+            'fee_supplier' => 'required',
+            'fee_agent' => 'required',
+            'depe' => 'required',
             'data_jaminan' => 'required|array',
             'data_jaminan.*' => 'required',
         ]);
@@ -360,6 +366,9 @@ class PinjamanIndividuController extends Controller
             'id_pinkel' => '0',
             'jenis_pp' => $request->jenis_produk_pinjaman,
             'nama_barang' => $request->nama_barang,
+            'fee_supplier' => $request->fee_supplier,
+            'fee_agent' => $request->fee_agent,
+            'depe' => $request->depe,
             'nia' => $request->nia,
             'tgl_proposal' => Tanggal::tglNasional($request->tgl_proposal),
             'tgl_verifikasi' => Tanggal::tglNasional($request->tgl_proposal),
@@ -844,6 +853,9 @@ class PinjamanIndividuController extends Controller
             'id_pinkel' => '0',
             'jenis_pp' => $pinj_i->jenis_pp,    
             'nama_barang' => $pinj_i->nama_barang,
+            'fee_supplier' => $pinj_i->fee_supplier,
+            'fee_agent' => $pinj_i->fee_agent,
+            'depe' => $pinj_i->depe,
             'nia' => $pinj_i->nia,
             'tgl_proposal' => Tanggal::tglNasional($tgl_resceduling),
             'tgl_verifikasi' => Tanggal::tglNasional($tgl_resceduling),
