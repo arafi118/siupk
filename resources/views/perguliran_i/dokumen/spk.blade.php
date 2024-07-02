@@ -178,9 +178,9 @@
                        : <table>
                             @foreach ($jaminan as $key => $value)
                                 <tr>
-                                    <td>{{ $key }}</td>
+                                    <td>{{ ucwords(str_replace('_', ' ', $key)) }}</td>
                                     <td>:</td>
-                                    <td>{{ $value }}</td>
+                                    <td>{{  ucwords($value) }}</td>
                                 </tr>
                             @endforeach
                         </table>

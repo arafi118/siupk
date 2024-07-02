@@ -10,7 +10,7 @@
         
 <tr>
         <td height="50" colspan="3" class="bottom">
-        <p align="center" class="style6" style="font-size: 18px; font-weight: bold;">KESANGGUPAN<br>PENYERAHAN JAMINAN</p>
+        <p align="center" class="style6" style="font-size: 18px; font-weight: bold;">KESANGGUPAN PENGADAAN<br>BARANG JAMINAN</p>
 
         </td>
     </tr>
@@ -46,21 +46,25 @@
       
       
       <tr>
-        <td height="20" colspan="3" class="style9">Menyatakan sanggup menyerahkan barang jaminan berupa 
+        <td height="20" colspan="3" class="style9">Menyatakan sanggup melakukan pengadaan  barang jaminan berupa 
                     @php
                         $jaminan = json_decode($pinkel->jaminan, true);
                     @endphp
 
                     @if (is_array($jaminan) || is_object($jaminan))
-                       : <table>
+                    
+        </td>
+      </tr>
                             @foreach ($jaminan as $key => $value)
-                                <tr>
-                                    <td>{{ $key }}</td>
-                                    <td>:</td>
-                                    <td>{{ $value }}</td>
+                                
+	  <tr>
+        <td height="10" class="style9">{{ ucwords(str_replace('_', ' ', $key)) }}</td>
+        <td class="style27">: {{ ucwords($value)}}</td>
+        <td height="10" class="style9">&nbsp;</td>
                                 </tr>
-                            @endforeach
-                        </table>
+                            @endforeach                 
+	  <tr>
+        <td height="20" colspan="3" class="style9">
                     @else
                          <STRONG> {{$pinkel->jaminan}} </STRONG>
                     @endif guna
