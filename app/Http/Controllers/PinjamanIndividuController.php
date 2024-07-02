@@ -685,7 +685,7 @@ class PinjamanIndividuController extends Controller
                 'status' => 'A'
             ];
 
-            $keterangan = 'Pencairan Kel. ' . $perguliran_i->anggota->namadepan;
+            $keterangan = 'Pencairan  ' . $perguliran_i->anggota->namadepan;
             $keterangan .= ' (' . $perguliran_i->jpp->nama_jpp . ')';
 
             Transaksi::create([
@@ -693,8 +693,8 @@ class PinjamanIndividuController extends Controller
                 'rekening_debit' => (string) $request->debet,
                 'rekening_kredit' => (string) $request->sumber_pembayaran,
                 'idtp' => '0',
-                'id_pinj' => $perguliran_i->id,
-                'id_pinj_i' => '0',
+                'id_pinj' => '0',
+                'id_pinj_i' => $perguliran_i->id,
                 'keterangan_transaksi' => (string) $keterangan,
                 'relasi' => (string) $perguliran_i->anggota->namadepan . " [" . $perguliran_i->id . "] " . $perguliran_i->anggota->ketua,
                 'jumlah' => str_replace(',', '', str_replace('.00', '', $data[$alokasi])),
