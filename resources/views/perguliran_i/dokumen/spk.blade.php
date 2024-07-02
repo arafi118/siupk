@@ -279,20 +279,21 @@
                     </table> <br>
                     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
                         <tr>
-                            <td width="10" align="center"> &nbsp; </td>
-                            <td width="70" align="center"> Pihak Pertama </td>
-                            <td width="60" align="center"> &nbsp; </td>
-                            <td width="50" align="center" colspan="2"> Pihak Kedua </td>
+                            <td width="10%" align="center"> &nbsp; </td>
+                            <td width="30%" align="center"> Pihak Pertama </td>
+                            <td width="20%" align="center"> &nbsp; </td>
+                            <td width="30%" align="center"> Pihak Kedua </td>
+                            <td width="10%" align="center"> &nbsp; </td>
                         </tr> <br> <br> <br> <br> <br><br><br><br>
                         <tr>
-                            <td width="10" align="center"> &nbsp; </td>
-                            <td width="70" align="center"> <strong>{{ $dir->namadepan }}</strong> <strong>{{ $dir->namabelakang }}</strong> <br>
+                            <td align="center"> &nbsp; </td>
+                            <td align="center"> <strong>{{ $dir->namadepan }}</strong> <strong>{{ $dir->namabelakang }}</strong> <br>
                                 Kepala
                                 UPK </td>
-                            <td width="50" align="center"> &nbsp; </td>
-                            <td width="60" align="center"> <strong>{{ $pinkel->anggota->namadepan }}</strong> <br> Peminjam
+                            <td align="center"> &nbsp; </td>
+                            <td align="center"> <strong>{{ $pinkel->anggota->namadepan }}</strong> <br> Peminjam
                             </td>
-                            <td width="50" align="center"> <strong>{{ $pinkel->anggota->penjamin }}</strong> <br> Penjamin </td>
+                            <td align="center"> &nbsp; </td>
                         </tr> <br>
                         <strong>{{-- <tr>
                         <td width="10" align="center"> &nbsp; </td>
