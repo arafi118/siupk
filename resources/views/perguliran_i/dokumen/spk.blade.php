@@ -169,7 +169,25 @@
         <div class="centered-text">
             <ol class="centered-text">
                 <li>
-                    Guna menjamin pembayaran utang dilakukan secara tertib sesuai rencana angsuran sebagaimana dimaksud dalam Pasal 2 dan agar dilakukan sebagaimana mestinya sesuai dengan perjanjian ini, maka berkaitan dengan barang jamainan berupa <STRONG> {{$pinkel->jaminan}} </STRONG>yang dijadikan agunan oleh <b> Pihak Kedua </b> kepada <b> Pihak Pertama </b> yang selanjutnya dibuatkan bukti penyerahan barang jaminan/agunan dari <b> Pihak Kedua </b> kepada <b> Pihak Pertama </b> dan selanjutnya bisa diambil kembali apabila sudah dinyatakan lunas atas angsuran pokok maupun jasa dan segala kewajiban yang timbul dari pelayanan atas pelayanan kredit ini terpenuhi.
+                    Guna menjamin pembayaran utang dilakukan secara tertib sesuai rencana angsuran sebagaimana dimaksud dalam Pasal 2 dan agar dilakukan sebagaimana mestinya sesuai dengan perjanjian ini, maka berkaitan dengan barang jamainan berupa
+                    @php
+                        $jaminan = json_decode($pinkel->jaminan, true);
+                    @endphp
+
+                    @if (is_array($jaminan) || is_object($jaminan))
+                       : <table>
+                            @foreach ($jaminan as $key => $value)
+                                <tr>
+                                    <td>{{ $key }}</td>
+                                    <td>:</td>
+                                    <td>{{ $value }}</td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    @else
+                         <STRONG> {{$pinkel->jaminan}} </STRONG>
+                    @endif
+                    yang dijadikan agunan oleh <b> Pihak Kedua </b> kepada <b> Pihak Pertama </b> yang selanjutnya dibuatkan bukti penyerahan barang jaminan/agunan dari <b> Pihak Kedua </b> kepada <b> Pihak Pertama </b> dan selanjutnya bisa diambil kembali apabila sudah dinyatakan lunas atas angsuran pokok maupun jasa dan segala kewajiban yang timbul dari pelayanan atas pelayanan kredit ini terpenuhi.
                 </li>
                 <li>
                     <b> Pihak Pertama </b> wajib melakukan penyimpanan/pengamanan atas barang jaminan/agunan sebagaimana dimaksud dalam Pasal 3 Ayat 1 secara layak dan sebagaimana mestinya serta menyerahkan kembali kepada <b> Pihak Kedua </b> apabila <b> Pihak Kedua </b> sudah dinyatakan lunas atas seluruh kewajiban angsuran pokok dan jasa beserta segala kewajiban lain yang timbul dalam pelayanan dan penanganan kredit ini.
