@@ -56,7 +56,29 @@ use App\Utils\Tanggal;
 
         <tr>
             <td height="20" colspan="3" class="style9">Menyatakan telah menerima kembali / melakukan
-                pengambilan barang jaminan berupa {{$pinkel->jaminan}} sehubungan telah terselesaikannya
+                pengambilan barang jaminan berupa 
+                    @php
+                        $jaminan = json_decode($pinkel->jaminan, true);
+                    @endphp
+
+                    @if (is_array($jaminan) || is_object($jaminan))
+                    
+        </td>
+      </tr>
+                            @foreach ($jaminan as $key => $value)
+                                
+	  <tr>
+        <td height="10" class="style9">{{ ucwords(str_replace('_', ' ', $key)) }}</td>
+        <td class="style27">: {{ ucwords($value)}}</td>
+        <td height="10" class="style9">&nbsp;</td>
+                                </tr>
+                            @endforeach                 
+	  <tr>
+        <td height="20" colspan="3" class="style9">
+                    @else
+                         <STRONG> {{$pinkel->jaminan}} </STRONG>
+                    @endif
+                    sehubungan telah terselesaikannya
                 kewajiban pokok dan jasa pinjaman di {{$kec->nama_lembaga_sort}} dengan loan id {{$pinkel->id}}.
             </td>
         </tr>

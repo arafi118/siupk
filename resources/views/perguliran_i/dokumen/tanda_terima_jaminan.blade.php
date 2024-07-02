@@ -67,8 +67,8 @@
         <td height="20" colspan="3" class="style9">
                     @else
                          <STRONG> {{$pinkel->jaminan}} </STRONG>
-                    @endif guna
-          memenuhi persyaratan permohonan pinjaman dengan Nomor Registrasi {{$pinkel->id}} di {{$kec->nama_lembaga_sort}},<br>
+                    @endif
+                    guna memenuhi persyaratan permohonan pinjaman dengan Nomor Registrasi {{$pinkel->id}} di {{$kec->nama_lembaga_sort}},<br>
           Demikian surat pernyataan kesanggupan ini kami buat dengan penuh kesadaran dan untuk menjadikan
           periksa bagi yang berkepentingan.
         </td>
