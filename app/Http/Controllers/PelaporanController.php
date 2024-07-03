@@ -2437,17 +2437,8 @@ class PelaporanController extends Controller
                     ['tahun', $data['tahun']],
                     ['bulan', '0']
                 ]);
-            },
-            'akun2.akun3.rek.trx_kredit' => function ($query) use ($data) {
-                $query->where('keterangan_transaksi', 'Like', '%tahun ' . $data['tahun'] - 1);
-            },
+            }
         ])->orderBy('kode_akun', 'ASC')->get();
-
-        $data['dir'] = User::where([
-            ['level', '1'],
-            ['jabatan', '1'],
-            ['lokasi', Session::get('lokasi')],
-        ])->first();
 
         $data['sekr'] = User::where([
             ['level', '1'],
@@ -2464,6 +2455,12 @@ class PelaporanController extends Controller
         $data['pengawas'] = User::where([
             ['level', '3'],
             ['jabatan', '1'],
+            ['lokasi', Session::get('lokasi')],
+        ])->first();
+
+        $data['dir_utama'] = User::where([
+            ['level', '2'],
+            ['jabatan', '65'],
             ['lokasi', Session::get('lokasi')],
         ])->first();
 

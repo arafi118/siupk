@@ -4,8 +4,13 @@
     "\\app",
     "\\app\\Http",
     "\\app\\Http\\Controllers",
-    "\\config",
-    "\\public"
+    "\\resources",
+    "\\resources\\views",
+    "\\resources\\views\\pelaporan",
+    "\\resources\\views\\pelaporan\\view",
+    "\\resources\\views\\pelaporan\\view\\perkembangan_piutang",
+    "\\resources\\views\\perguliran_i\\partials"
   ],
+  "SelectedNode": "\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\kolek_individu.blade.php",
   "PreviewInSolutionExplorer": false
 }
