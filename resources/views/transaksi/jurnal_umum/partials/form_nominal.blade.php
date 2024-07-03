@@ -41,8 +41,3 @@
     </div>
 @endif
 
-<script>
-    $("#nominal").maskMoney({
-        allowNegative: true
-    });
-</script>

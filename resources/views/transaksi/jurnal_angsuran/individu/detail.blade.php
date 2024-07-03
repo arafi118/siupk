@@ -85,12 +85,17 @@
                             data-bs-placement="top" title="kartu angsuran" data-container="body" data-animation="true">
                             <span class="btn-inner--icon"><i class="fas fa-file-invoice"></i></span>
                         </button>
-
                         <button type="button" data-action="/transaksi/dokumen/bkm_angsuran/{{ $idt }}"
                             class="btn btn-github btn-icon-only btn-tooltip btn-link" data-bs-toggle="tooltip"
                             data-bs-placement="top" title="BKM" data-container="body" data-animation="true">
                             <span class="btn-inner--icon"><i class="fas fa-file-circle-exclamation"></i></span>
                         </button>
+                        <button type="button" data-idt="{{ $idt }}"
+                        class="btn btn-github btn-icon-only btn-tooltip btn-delete"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus"
+                                    data-container="body" data-animation="true">
+                                    <span class="btn-inner--icon"><i class="fas fa-trash-can"></i></span>
+                                </button>
                     </div>
                 </td>
             </tr>

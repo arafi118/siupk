@@ -12,8 +12,8 @@
             <input type="hidden" name="kd_desa" id="kd_desa" value="{{ $desa->kd_desa }}">
             <div class="row">
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-4">
-                        <label for="nama_desa">Nama Desa &nbsp;&nbsp;&nbsp;</label>
+                    <div class="position-relative mb-3">
+                        <label for="nama_desa">Nama Desa</label>
                         <input type="text" name="nama_desa" id="nama_desa" class="form-control"
                             value="{{ $desa->nama_desa }}">
                         <small class="text-danger" id="msg_nama_desa"></small>
@@ -21,7 +21,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="my-2">
-                        <label class="form-label" for="sebutan">Sebutan Desa &nbsp;</label>
+                        <label class="form-label" for="sebutan">Sebutan Desa</label>
                         <select class="form-control" name="sebutan" id="sebutan">
                             @foreach ($sebutan as $seb)
                                 <option value="{{ $seb->id }}"
@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="my-2">
-                        <label class="form-label" for="jadwal_angsuran_desa">Jadwal Angsuran Desa &nbsp;</label>
+                        <label class="form-label" for="jadwal_angsuran_desa">Jadwal Angsuran Desa</label>
                         <select class="form-control" name="jadwal_angsuran_desa" id="jadwal_angsuran_desa">
                             <option value="0">Setiap Tanggal Cair</option>
                             @for ($i = 1; $i <= 41; $i++)
@@ -50,24 +50,24 @@
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-4">
-                        <label for="kades">Nama Kades &nbsp;</label>
+                    <div class="position-relative mb-3">
+                        <label for="kades">Nama Kades</label>
                         <input type="text" name="kades" id="kades" class="form-control"
                             value="{{ $desa->kades }}">
                         <small class="text-danger" id="msg_kades"></small>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-4">
-                        <label for="no_kades">Telp Kades &nbsp;</label>
+                    <div class="position-relative mb-3">
+                        <label for="no_kades">Telp Kades</label>
                         <input type="text" name="no_kades" id="no_kades" class="form-control"
                             value="{{ $desa->no_kades }}">
                         <small class="text-danger" id="msg_no_kades"></small>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-4">
-                        <label for="nip">NIP Kades &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;</label>
+                    <div class="position-relative mb-3">
+                        <label for="nip">NIP Kades</label>
                         <input type="text" name="nip" id="nip" class="form-control"
                             value="{{ $desa->nip }}">
                         <small class="text-danger" id="msg_nip"></small>
@@ -76,25 +76,25 @@
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-4">
-                        <label for="sekdes">Nama Sekdes &nbsp;</label>
+                    <div class="position-relative mb-3">
+                        <label for="sekdes">Nama Sekdes</label>
                         <input type="text" name="sekdes" id="sekdes" class="form-control"
                             value="{{ $desa->sekdes }}">
                         <small class="text-danger" id="msg_sekdes"></small>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-4">
-                        <label for="no_sekdes">Telp Sekdes &nbsp;</label>
+                    <div class="position-relative mb-3">
+                        <label for="no_sekdes">Telp Sekdes</label>
                         <input type="text" name="no_sekdes" id="no_sekdes" class="form-control"
                             value="{{ $desa->no_sekdes }}">
                         <small class="text-danger" id="msg_no_sekdes"></small>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-4">
-                        <label for="deskripsi_desa">Deskripsi Desa &nbsp;</label>
-                        <input type="text" name="deskripsi_desa" id="deskripsi_desa" class="form-control"
+                    <div class="position-relative mb-3">
+                        <label for="deskripsi_desa">Deskripsi Desa</label>
+                        <input type="text" name="deskripsi_desa"id="deskripsi_desa" class="form-control"
                             value="{{ $desa->deskripsi_desa }}">
                     </div>
                     <small class="text-danger" id="msg_deskripsi_desa"></small>
@@ -102,24 +102,24 @@
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-4">
-                        <label for="ked">Nama KED/LPMD/BPD &nbsp;</label>
+                    <div class="position-relative mb-3">
+                        <label for="ked">Nama KED/LPMD/BPD</label>
                         <input type="text" name="ked" id="ked" class="form-control"
                             value="{{ $desa->ked }}">
                     </div>
                     <small class="text-danger" id="msg_ked"></small>
                 </div>
             <div class="col-md-4">
-            <div class="input-group input-group-static my-4">
-                <label for="telp_desa">Telpon &nbsp; &nbsp;&nbsp;&nbsp;</label>
+            <div class="position-relative mb-3">
+                <label for="telp_desa">Telpon</label>
                 <input type="text" name="telp_desa" id="telp_desa" class="form-control"
                     value="{{ $desa->telp_desa }}">
                 <small class="text-danger" id="msg_telp_desa"></small>
             </div>
             </div>
                     <div class="col-md-4">
-                         <div class="input-group input-group-static my-4">
-                        <label for="alamat_desa">Alamat Desa &nbsp;</label>
+                         <div class="position-relative mb-3">
+                        <label for="alamat_desa">Alamat Desa</label>
                         <input type="text" name="alamat_desa" id="alamat_desa" class="form-control"
                             value="{{ $desa->alamat_desa }}">
                         <small class="text-danger" id="msg_alamat_desa"></small>

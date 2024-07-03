@@ -82,8 +82,8 @@
                                 <div class="col-md-3">
                                     <div class="position-relative mb-3">
                                         <label for="tgl_proposal" class="form-label">Tgl proposal</label>
-                                        <input autocomplete="off" type="date" name="tgl_proposal" id="tgl_proposal"
-                                               class="form-control date" value="{{ date('Y-m-d') }}">
+                                        <input autocomplete="off" type="text" name="tgl_proposal" id="tgl_proposal"
+                                               class="form-control date" value="{{ date('d/m/Y') }}">
                                         <small class="text-danger" id="msg_tgl_proposal"></small>
                                     </div>
                                 </div>
@@ -201,6 +201,11 @@
             
 
 <script>
+
+$('.date').datepicker({
+        dateFormat: 'dd/mm/yy'
+    });
+
   
     $('.js-example-basic-single').select2({
         theme: 'bootstrap-5'

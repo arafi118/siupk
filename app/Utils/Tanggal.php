@@ -32,8 +32,8 @@ class Tanggal
 
     public static function tglNasional($tanggal)
     {
-        // $tgl = Carbon::createFromFormat('d/m/Y', $tanggal)->format('Y-m-d');
-        return $tanggal;
+        $tgl = Carbon::createFromFormat('d/m/Y', $tanggal)->format('Y-m-d');
+        return $tgl;
     }
 
     public static function tglRomawi($tanggal)

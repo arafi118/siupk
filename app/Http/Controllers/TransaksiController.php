@@ -1987,7 +1987,7 @@ class TransaksiController extends Controller
 
         if ($idtp != '0') {
             $trx = Transaksi::where('idtp', $idtp)->delete();
-            $pinkel = PinjamanKelompok::where('id', $id_pinj)->with('pinjaman_anggota')->first();
+            $pinkel = PinjamanAnggota::where('id', $id_pinj)->with('pinjaman_anggota')->first();
 
             $pinjaman_anggota = $pinkel->pinjaman_anggota;
             foreach ($pinjaman_anggota as $pa) {
@@ -2015,7 +2015,7 @@ class TransaksiController extends Controller
             $this->regenerateReal($pinkel);
         } else {
             if ($id_pinj != '0') {
-                $pinkel = PinjamanKelompok::where('id', $id_pinj)->update([
+                $pinkel = PinjamanAnggota::where('id', $id_pinj)->update([
                     'status' => 'W'
                 ]);
 

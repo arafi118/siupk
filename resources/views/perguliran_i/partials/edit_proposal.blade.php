@@ -7,8 +7,8 @@
         <div class="col-md-3">
             <div class="position-relative mb-3">
                 <label for="tgl_proposal" class="form-label">Tgl proposal</label>
-                <input autocomplete="off" type="date" name="tgl_proposal" id="tgl_proposal"
-                       class="form-control date" value="{{ date('Y-m-d') }}">
+                <input autocomplete="off" type="text" name="tgl_proposal" id="tgl_proposal"
+                       class="form-control date" value="{{ date('d/m/Y') }}">
                 <small class="text-danger" id="msg_tgl_proposal"></small>
             </div>
         </div>
@@ -106,35 +106,10 @@
 </form>
 
 <script>
-    new Choices($('#jenis_jasa_proposal')[0], {
-        shouldSort: false,
-        fuseOptions: {
-            threshold: 0.1,
-            distance: 1000
-        }
-    })
-    new Choices($('#sistem_angsuran_pokok_proposal')[0], {
-        shouldSort: false,
-        fuseOptions: {
-            threshold: 0.1,
-            distance: 1000
-        }
-    })
-    new Choices($('#sistem_angsuran_jasa_proposal')[0], {
-        shouldSort: false,
-        fuseOptions: {
-            threshold: 0.1,
-            distance: 1000
-        }
-    })
-    new Choices($('#jenis_produk_pinjaman')[0], {
-        shouldSort: false,
-        fuseOptions: {
-            threshold: 0.1,
-            distance: 1000
-        }
-    })
-
     $(".money").maskMoney();
+
+    $('.date').datepicker({
+        dateFormat: 'dd/mm/yy'
+    });
 
 </script>

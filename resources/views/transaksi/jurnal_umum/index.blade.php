@@ -15,8 +15,8 @@
                                     <div class="col-md-6">
                                         <div class="position-relative mb-3">
                                         <label for="tgl_transaksi">Tgl Transaksi</label>
-                                    <input autocomplete="off" type="date" name="tgl_transaksi" id="tgl_transaksi"
-                                        class="form-control date" value="{{ date('Y-m-d') }}">
+                                    <input autocomplete="off" type="text" name="tgl_transaksi" id="tgl_transaksi"
+                                        class="form-control date" value="{{ date('d/m/Y') }}">
                                     <small class="text-danger" id="msg_tgl_transaksi"></small>
                                             </div>
                                     </div>
@@ -185,7 +185,7 @@
 @section('modal')
 <div class="modal fade" id="detailTransaksi" tabindex="-1" aria-labelledby="detailTransaksiLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-fullscreen modal-dialog-scrollable"">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="detailTransaksiLabel">
@@ -208,7 +208,7 @@
 
 <div class="modal fade" id="CetakBuktiTransaksi" tabindex="-1" aria-labelledby="CetakBuktiTransaksiLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-fullscreen modal-dialog-scrollable"">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="CetakBuktiTransaksiLabel">
@@ -250,6 +250,10 @@
 
 @section('script')
 <script>
+    $('.date').datepicker({
+        dateFormat: 'dd/mm/yy'
+    });
+
         var formatter = new Intl.NumberFormat('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
@@ -273,8 +277,8 @@
             var bulan = tgl_transaksi[1];
             var hari = tgl_transaksi[0];
 
-            selectTahun.setChoiceByValue(tahun)
-            selectBulan.setChoiceByValue(bulan)
+            $('select#tahun').val(tahun).change()
+            $('select#bulan').val(bulan).change()
         })
 
         $(document).on('change', '#sumber_dana', function(e) {
