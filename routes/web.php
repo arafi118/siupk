@@ -105,6 +105,7 @@ Route::post('/database/penduduk/{nik}/blokir', [AnggotaController::class, 'bloki
 Route::get('/database/kelompok/detail_kelompok/{id}', [KelompokController::class, 'detailKelompok'])->middleware('auth');
 Route::get('/database/anggota/detail_anggota/{id}', [AnggotaController::class, 'detailAnggota'])->middleware('auth');
 
+Route::get('/database/supplier/', [SupplierController::class, 'register'])->middleware('auth');
 
 Route::resource('/database/desa', DesaController::class)->middleware('auth');
 Route::resource('/database/supplier', SupplierController::class)->middleware('auth');

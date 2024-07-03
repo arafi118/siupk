@@ -64,7 +64,7 @@ class AnggotaController extends Controller
     }
 
     public function register()
-    {
+    { 
         $title = 'Register Penduduk';
         return view('penduduk.register')->with(compact('title'));
     }

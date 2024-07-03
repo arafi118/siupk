@@ -6,8 +6,7 @@
         <div class="page-title-wrapper">
             <div class="page-title-heading">
                 <div class="page-title-icon">
-                    <i class="fa fa-shopping-cart">
-                    </i>
+                    <i class="fa fa-shopping-cart"></i>
                 </div>
                 <div><b>Data Supplier</b>
                     <div class="page-title-subheading">
@@ -18,13 +17,8 @@
             <div class="page-title-actions">
 
                 <div class="d-inline-block dropdown">
-                    <button type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn-shadow dropdown-toggle btn btn-info">
-                        <span class="btn-icon-wrapper pe-2 opacity-7">
-                            <i class="fa fa-calendar-plus"></i>
-                        </span>Register Supplier
-                    </button>
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#CetakDokumenProposal"
-                    class="btn btn-info btn-sm mb-2">Cetak Dokumen Proposal</button>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#RegisterSupplier"
+                    class="btn btn-info btn-sm mb-2"><i class="fa fa-shopping-cart"></i> &nbsp;Registrer Supplier</button>
                 </div>
             </div> 
         </div>
@@ -61,6 +55,12 @@
 <div class="modal fade bd-example-modal-lg" id="EditSupplier" tabindex="-1" role="dialog"
     aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
+    </div>
+</div>
+<div class="modal fade bd-example-modal-lg" id="RegisterSupplier" tabindex="-1" role="dialog"
+    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        
     </div>
 </div>
 @endsection
@@ -105,7 +105,7 @@
     });
 
     $.get('/database/supplier/create', function(result) {
-            $('#RegisterSupplier').html(result)
+            $('#RegisterSupplier .modal-dialog').html(result)
         })
 
         $(document).on('keyup', '#id', function(e) {
@@ -114,7 +114,7 @@
             var id = $(this).val()
             if (id.length == 16) {
                 $.get('/database/supplier/create?id=' + id, function(result) {
-                    $('#RegisterSupplier').html(result)
+                    $('#RegisterSupplier .modal-dialog').html(result)
                 })
             }
         })
@@ -123,7 +123,7 @@
             e.preventDefault()
             $('small').html('')
 
-            var form = $('#supplier')
+            var form = $('#FormRegisterSupplier')
             $.ajax({
                 type: 'post',
                 url: form.attr('action'),
@@ -140,7 +140,7 @@
                         }).then((res) => {
                             if (res.isConfirmed) {
                                 $.get('/database/supplier/create', function(result) {
-                                    $('#RegisterSupplier').html(result)
+                                    $('#RegisterSupplier  .modal-dialog').html(result)
                                 })
                             } else {
                                 window.location.href = '/database/supplier'
