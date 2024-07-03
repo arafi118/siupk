@@ -127,7 +127,7 @@
             </table>
             </p>
         </li>
-        <li style="margin-top: 12px;">
+        <li style="margin-top: 12px;"> 
             <div style="text-transform: uppercase;">
                 Ikhtisar Kebijakan Akutansi
             </div>
