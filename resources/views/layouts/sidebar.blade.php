@@ -61,7 +61,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/supplier">
+                        <a href="/database/supplier">
                             <i class="metismenu-icon">
                             </i>DS. Data Supplier
                         </a>

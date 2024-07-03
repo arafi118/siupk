@@ -19,6 +19,7 @@ use App\Http\Controllers\PinjamanAnggotaController;
 use App\Http\Controllers\PinjamanIndividuController;
 use App\Http\Controllers\PinjamanKelompokController;
 use App\Http\Controllers\SopController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
 use App\Models\Kecamatan;
@@ -106,6 +107,7 @@ Route::get('/database/anggota/detail_anggota/{id}', [AnggotaController::class, '
 
 
 Route::resource('/database/desa', DesaController::class)->middleware('auth');
+Route::resource('/database/supplier', SupplierController::class)->middleware('auth');
 Route::resource('/database/kelompok', KelompokController::class)->middleware('auth');
 Route::resource('/database/penduduk', AnggotaController::class)->middleware('auth');
 
