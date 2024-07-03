@@ -27,5 +27,10 @@ class Supplier extends Model
     {
         return $this->belongsTo(Desa::class, 'desa', 'kd_desa');
     }
+
+    public function kec()
+    {
+        return $this->belongsTo(Kecamatan::class, 'lokasi','id');
+    }
     
 }

@@ -20,8 +20,8 @@ class SupplierController extends Controller
      */
     public function index()
     {
+        $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         if (request()->ajax()) {
-            $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
             $data = supplier::where('lokasi', $kec->id)->get();
             return DataTables::of($data)
                 ->make(true);
@@ -29,7 +29,7 @@ class SupplierController extends Controller
 
         $title = 'Data Supplier';
         $sebutan = SebutanSupplier::all();
-        return view('supplier.index')->with(compact('sebutan', 'title'));
+        return view('supplier.index')->with(compact('sebutan', 'title','kec'));
     }
 
     /**

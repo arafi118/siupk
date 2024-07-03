@@ -1,7 +1,7 @@
 <div class="modal-content">
     <div class="modal-header">
         <h1 class="modal-title fs-4" id="NamaDesa">
-            TAMBAH SUPLIER
+            TAMBAH DATA SUPPLIER
         </h1>
     </div>
     <div class="modal-body">

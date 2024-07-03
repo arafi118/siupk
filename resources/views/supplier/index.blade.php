@@ -10,7 +10,7 @@
                 </div>
                 <div><b>Data Supplier</b>
                     <div class="page-title-subheading">
-                         {{ Session::get('nama_lembaga') }} Kecamatan 
+                         {{ Session::get('nama_lembaga') }} Kecamatan {{ $kec->nama_kec }}
                     </div>
                 </div>
             </div>
@@ -18,7 +18,7 @@
 
                 <div class="d-inline-block dropdown">
                     <button type="button" data-bs-toggle="modal" data-bs-target="#RegisterSupplier"
-                    class="btn btn-info btn-sm mb-2"><i class="fa fa-shopping-cart"></i> &nbsp;Registrer Supplier</button>
+                    class="btn btn-info btn-sm mb-2"><i class="fa fa-shopping-cart"></i> &nbsp; &nbsp;Registrer Supplier</button>
                 </div>
             </div> 
         </div>
