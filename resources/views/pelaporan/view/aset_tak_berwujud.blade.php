@@ -78,14 +78,14 @@
                     if ($umur >= $inv->umur_ekonomis) {
                         $harga = $inv->harsat * $inv->unit;
                         $_susut = $satuan_susut * ($inv->umur_ekonomis - 1);
-                        $satuan_susut = $harga - $_susut - 1;
+                        $satuan_susut = $harga - $_susut ;
                     }
 
                     $susut = $satuan_susut * $umur;
                     if ($umur >= $inv->umur_ekonomis && $inv->harsat * $inv->unit > 0) {
                         $akum_umur = $inv->umur_ekonomis;
                         $_akum_susut = $inv->harsat * $inv->unit;
-                        $akum_susut = $_akum_susut - 1;
+                        $akum_susut = $_akum_susut ;
                         $nilai_buku = 0;
                     } else {
                         $akum_umur = $umur;
@@ -107,7 +107,7 @@
                     }
 
                     if ($inv->status == 'Rusak' and $tgl_kondisi >= $inv->tgl_validasi) {
-                        $akum_susut = $inv->harsat * $inv->unit - 1;
+                        $akum_susut = $inv->harsat * $inv->unit;
                         $nilai_buku = 0;
                         $penyusutan = 0;
                         $umur_pakai = 0;

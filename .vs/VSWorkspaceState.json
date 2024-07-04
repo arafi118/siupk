@@ -1,16 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\app",
-    "\\app\\Http",
-    "\\app\\Http\\Controllers",
-    "\\resources",
-    "\\resources\\views",
-    "\\resources\\views\\pelaporan",
-    "\\resources\\views\\pelaporan\\view",
-    "\\resources\\views\\pelaporan\\view\\perkembangan_piutang",
-    "\\resources\\views\\perguliran_i\\partials"
+    "\\public",
+    "\\resources"
   ],
-  "SelectedNode": "\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\kolek_individu.blade.php",
+  "SelectedNode": "\\public\\index.php",
   "PreviewInSolutionExplorer": false
 }
