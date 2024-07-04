@@ -104,7 +104,7 @@
         <style>
             header {
                 position: fixed;
-                top: -10px;
+                top: -30px;
                 left: 0px;
                 right: 0px;
             }
@@ -123,7 +123,7 @@
                         <img src="../storage/app/public/logo/{{ $logo }}" height="70"
                             alt="{{ $kec->id }}">
                     </td>
-                    <td align="center">
+                    <td>
                         <div>{{ strtoupper($nama_lembaga) }}</div>
                         <div>
                             <b>{{ strtoupper($nama_kecamatan) }}</b>
