@@ -117,7 +117,7 @@
                         <td>Jenis Kredit</td>
                         <td align="center"width="5%">:</td>
                         <td>
-                            Rp. {{ number_format($pinkel->jenis_pp) }}
+                            {{$pinkel->sis_pokok->nama_sistem}}
                         </td>
                     </tr>
                     <tr>
@@ -125,7 +125,7 @@
                         <td>Suku Jasa Kredit</td>
                         <td align="center"width="5%">:</td>
                         <td>
-                            Rp. {{ number_format($pinkel->pros_jasa) }}
+                            {{ $pinkel->pros_jasa / $pinkel->jangka}} % per bulan
                         </td>
                     </tr>
                     <tr>
