@@ -1,170 +1,160 @@
 @extends('layouts.base')
 
 @section('content')
-    <form action="" method="post" id="defaultForm">
-        @csrf
-
-        <input type="hidden" name="tgl" id="tgl" value="{{ date('d/m/Y') }}">
-    </form>
-
-    
-
     <div class="app-main__inner">
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div class="page-title-icon">
+                        <i class="pe-7s-car icon-gradient bg-mean-fruit">
+                        </i>
+                    </div>
+                    <div>Analytics Dashboard
+                        <div class="page-title-subheading">This is an example dashboard created using
+                            build-in elements and components.
+                        </div>
+                    </div>
+                </div>
+                <div class="page-title-actions">
+                    <button type="button" data-bs-toggle="tooltip" title="Example Tooltip"
+                        data-bs-placement="bottom" class="btn-shadow me-3 btn btn-dark">
+                        <i class="fa fa-star"></i>
+                    </button>
+                    <div class="d-inline-block dropdown">
+                        <button type="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false" class="btn-shadow dropdown-toggle btn btn-info">
+                            <span class="btn-icon-wrapper pe-2 opacity-7">
+                                <i class="fa fa-business-time fa-w-20"></i>
+                            </span>
+                            Buttons
+                        </button>
+                        <div tabindex="-1" role="menu" aria-hidden="true"
+                            class="dropdown-menu dropdown-menu-right">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a href="javascript:void(0);" class="nav-link">
+                                        <i class="nav-link-icon lnr-inbox"></i>
+                                        <span>
+                                            Inbox
+                                        </span>
+                                        <div class="ms-auto badge rounded-pill bg-secondary">86</div>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="javascript:void(0);" class="nav-link">
+                                        <i class="nav-link-icon lnr-book"></i>
+                                        <span>
+                                            Book
+                                        </span>
+                                        <div class="ms-auto badge rounded-pill bg-danger">5</div>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="javascript:void(0);" class="nav-link">
+                                        <i class="nav-link-icon lnr-picture"></i>
+                                        <span>
+                                            Picture
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a disabled href="javascript:void(0);" class="nav-link disabled">
+                                        <i class="nav-link-icon lnr-file-empty"></i>
+                                        <span>
+                                            File Disabled
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
-            @if ($jumlah_saldo <= $jumlah)
-                <div class="col-12">
-                    <div class="alert alert-warning text-white" role="alert">
-                        Sepertinya saldo transaksi anda belum tersimpan di aplikasi. Silahkan Klik <a href="#"
-                            data-href="/simpan_saldo?bulan=00&tahun={{ date('Y') }}" class="alert-link"
-                            id="simpanSaldo">Disini</a> untuk menyimpan
-                        saldo transaksi anda
-                    </div>
-                </div>
-            @endif
-            <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-body p-3 position-relative pointer" id="btnAktif">
-                        <div class="row">
-                            <div class="col-7 text-start">
-                                <p class="text-sm mb-1 text-capitalize font-weight-bold">Pinjaman Aktif</p>
-                                <h5 class="font-weight-bolder mb-0">
-                                    {{ $pinjaman_kelompok }} Kelompok
-                                </h5>
-                                <span class="text-sm text-end text-success font-weight-bolder mt-auto mb-0">
-                                    {{ $pinjaman_anggota }}
-                                    <span class="font-weight-normal text-secondary">Pemanfaat</span>
-                                </span>
+            <div class="col-md-6 col-xl-4">
+                <div class="card mb-3 widget-content">
+                    <div class="widget-content-outer">
+                        <div class="widget-content-wrapper">
+                            <div class="widget-content-left">
+                                <div class="widget-heading">Total Orders</div>
+                                <div class="widget-subheading">Last year expenses</div>
                             </div>
-                            <div class="col-5">
-                                <div class="dropdown text-end">
-                                    <span class="text-xs text-secondary">Periode {{ date('d/m/y') }}</span>
-                                </div>
+                            <div class="widget-content-right">
+                                <div class="widget-numbers text-success">1896</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4 mt-sm-0 mt-4">
-                <div class="card">
-                    <div class="card-body p-3 position-relative pointer" id="btnpinjaman">
-                        <div class="row">
-                            <div class="col-7 text-start">
-                                <p class="text-sm mb-1 text-capitalize font-weight-bold">Proposal Pinjaman</p>
-                                <h5 class="font-weight-bolder mb-0">
-                                    {{ $proposal }} Proposal
-                                </h5>
-                                <span class="text-sm text-end text-success font-weight-bolder mt-auto mb-0">
-                                    {{ $verifikasi }}
-                                    <span class="font-weight-normal text-secondary">verifikasi</span>
-                                </span>
+            <div class="col-md-6 col-xl-4">
+                <div class="card mb-3 widget-content">
+                    <div class="widget-content-outer">
+                        <div class="widget-content-wrapper">
+                            <div class="widget-content-left">
+                                <div class="widget-heading">Products Sold</div>
+                                <div class="widget-subheading">Revenue streams</div>
                             </div>
-                            <div class="col-5">
-                                <div class="dropdown text-end">
-                                    <span class="text-xs text-secondary">{{ $waiting }} waiting</span>
-                                </div>
+                            <div class="widget-content-right">
+                                <div class="widget-numbers text-warning">$3M</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4 mt-sm-0 mt-4">
-                <div class="card">
-                    <div class="card-body p-3 position-relative pointer" id="btnjatuhTempo">
-                        <div class="row">
-                            <div class="col-7 text-start">
-                                <p class="text-sm mb-1 text-capitalize font-weight-bold">Jatuh Tempo</p>
-                                <h5 class="font-weight-bolder mb-0">
-                                    <span id="jatuh_tempo">
-                                        <div class="spinner-border sm text-info" role="status">
-                                            <span class="sr-only">Loading...</span>
-                                        </div>
-                                    </span> Hari Ini
-                                </h5>
-                                <span class="font-weight-normal text-secondary text-sm">
-                                    <span class="font-weight-bolder text-success" id="nunggak">
-                                        <div class="spinner-border xs text-info" role="status">
-                                            <span class="sr-only">Loading...</span>
-                                        </div>
-                                    </span> menunggak
-                                </span>
+            <div class="col-md-6 col-xl-4">
+                <div class="card mb-3 widget-content">
+                    <div class="widget-content-outer">
+                        <div class="widget-content-wrapper">
+                            <div class="widget-content-left">
+                                <div class="widget-heading">Followers</div>
+                                <div class="widget-subheading">People Interested</div>
                             </div>
-                            <div class="col-5">
-                                <div class="dropdown text-end">
-                                    <span class="text-xs text-warning">&#33; tagihan</span>
-                                </div>
+                            <div class="widget-content-right">
+                                <div class="widget-numbers text-danger">45,9%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-xl-none d-lg-block col-md-6 col-xl-4">
+                <div class="card mb-3 widget-content">
+                    <div class="widget-content-outer">
+                        <div class="widget-content-wrapper">
+                            <div class="widget-content-left">
+                                <div class="widget-heading">Income</div>
+                                <div class="widget-subheading">Expected totals</div>
+                            </div>
+                            <div class="widget-content-right">
+                                <div class="widget-numbers text-focus">$147</div>
+                            </div>
+                        </div>
+                        <div class="widget-progress-wrapper">
+                            <div class="progress-bar-sm progress-bar-animated-alt progress">
+                                <div class="progress-bar bg-info" role="progressbar" aria-valuenow="54"
+                                    aria-valuemin="0" aria-valuemax="100" style="width: 54%;"></div>
+                            </div>
+                            <div class="progress-sub-label">
+                                <div class="sub-label-left">Expenses</div>
+                                <div class="sub-label-right">100%</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row mt-4">
-            <div class="col-lg-4 col-sm-6">
-                <div class="card h-100">
-                    <div class="card-header pb-0 p-3">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="mb-0">Angsuran Hari Ini</h6>
-                            <button type="button"
-                                class="btn btn-icon-only btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center"
-                                data-bs-toggle="tooltip" data-bs-placement="bottom" title=""
-                                data-bs-original-title="See traffic channels">
-                                <i class="material-icons text-sm">priority_high</i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-body pb-0 p-3 pt-0 mt-4">
-                        <div class="row">
-                            <div class="col-7 text-start">
-                                <div class="chart">
-                                    <canvas id="chart-pie" class="chart-canvas" height="400"
-                                        style="display: block; box-sizing: border-box; height: 200px; width: 169.7px;"
-                                        width="339"></canvas>
-                                </div>
-                            </div>
-                            <div class="col-5 my-auto">
-                                <span class="badge badge-md badge-dot me-4 d-block text-start">
-                                    <i class="bg-info"></i>
-                                    <span class="text-dark text-xs">SPP Pokok</span>
-                                </span>
-                                <span class="badge badge-md badge-dot me-4 d-block text-start">
-                                    <i class="bg-success"></i>
-                                    <span class="text-dark text-xs">SPP Jasa</span>
-                                </span>
-                                <span class="badge badge-md badge-dot me-4 d-block text-start">
-                                    <i class="bg-dark"></i>
-                                    <span class="text-dark text-xs">UEP Pokok</span>
-                                </span>
-                                <span class="badge badge-md badge-dot me-4 d-block text-start">
-                                    <i class="bg-secondary"></i>
-                                    <span class="text-dark text-xs">UEP Jasa</span>
-                                </span>
-                                <span class="badge badge-md badge-dot me-4 d-block text-start">
-                                    <i class="bg-danger"></i>
-                                    <span class="text-dark text-xs">PL Pokok</span>
-                                </span>
-                                <span class="badge badge-md badge-dot me-4 d-block text-start">
-                                    <i class="bg-warning"></i>
-                                    <span class="text-dark text-xs">PL Jasa</span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer pt-0 pb-2 p-3 d-flex align-items-center">
-                        <div class="w-60">
-                            <div class="text-sm">
-                                Total Angsuran
-                                <div>
-                                    <b>Rp. <span id="total_angsur"></span></b>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="w-40 text-end">
-                            <button type="button" id="btnDetailAngsuran" class="btn bg-light mb-0 text-end">Detail</button>
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+                <div class="main-card mb-3 card">
+                    <div class="card-body">
+                        <h5 class="card-title">Pie Chart</h5>
+                        <div class="chart-container">
+                            <canvas id="pie-chart"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-8 col-sm-6 mt-sm-0 mt-4">
+            <div class="col-md-6 col-lg-8">
                 <div class="card">
                     <div class="card-header pb-0 p-3">
                         <div class="d-flex justify-content-between">
@@ -173,7 +163,7 @@
                                 class="btn btn-icon-only btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center"
                                 data-bs-toggle="tooltip" data-bs-placement="left"
                                 data-bs-original-title="See which ads perform better">
-                                <i class="material-icons text-sm">priority_high</i>
+                                <i class="fa fa-exclamation">tanda seru</i>
                             </button>
                         </div>
                         <div class="d-flex align-items-center">
@@ -202,6 +192,8 @@
             </div>
         </div>
     </div>
+
+
     {{-- Modal Jatuh Dempo --}}
     <div class="modal fade" id="jatuhTempo" aria-labelledby="jatuhTempoLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
@@ -462,10 +454,9 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mb-0 px-0 py-1 text-danger" data-bs-toggle="tab"
-                                    href="#pemanfaat_aktif" role="tab" aria-controls="pemanfaat_aktif"
-                                    aria-selected="false">
-                                    Pemanfaat
+                                <a class="nav-link mb-0 px-0 py-1 text-danger" data-bs-toggle="tab" href="#anggota"
+                                    role="tab" aria-controls="anggota" aria-selected="false">
+                                    Anggota
                                 </a>
                             </li>
                         </ul>
@@ -493,8 +484,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="pemanfaat_aktif" role="tabpanel"
-                                aria-labelledby="pemanfaat_aktif">
+                            <div class="tab-pane fade" id="anggota" role="tabpanel" aria-labelledby="anggota">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="table-responsive">
@@ -509,7 +499,7 @@
                                                         <td align="center">Alokasi</td>
                                                     </tr>
                                                 </thead>
-                                                <tbody id="tbPemanfaat"></tbody>
+                                                <tbody id="tbAnggota"></tbody>
                                             </table>
                                         </div>
                                     </div>
@@ -586,6 +576,8 @@
 
     <textarea name="msgInvoice" id="msgInvoice" class="d-none">{{ Session::get('msg') }}</textarea>
 @endsection
+
+
 
 @section('script')
     <script>
@@ -676,7 +668,7 @@
 
         $.get('/dashboard/pemanfaat?status=A', function(result) {
             if (result.success) {
-                $('#tbPemanfaat').html(result.table)
+                $('#d').html(result.table)
             }
         })
 
