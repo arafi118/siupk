@@ -4,7 +4,20 @@
         $status = '1';
     }
 @endphp
-<div class="app-main__inner">
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="fa fa-user-secret"></i>
+            </div>
+            <div><b>Edit data Pelanggan</b>
+                <div class="page-title-subheading">
+                     {{ Session::get('nama_lembaga') }} 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     <div class="card-body">
         <form action="/database/penduduk/{{ $data_anggota->nik }}" method="post" id="Penduduk">
             @csrf
@@ -13,15 +26,15 @@
             <input type="hidden" name="_nik" id="_nik" value="{{ $data_anggota->nik }}">
             <div class="row">
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-3">
+                    <div class="position-relative mb-3">
                         <label for="nik">NIK</label>
                         <input autocomplete="off" maxlength="16" type="text" name="nik" id="nik"
-                            class="form-control" value="{{ $data_anggota->nik }}">
-                        <small class="text-danger" id="msg_nik"></small>
+                        class="form-control" value="{{ $data_anggota->nik }}">
+                    <small class="text-danger" id="msg_nik"></small>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-3">
+                    <div class="position-relative mb-3">
                         <label for="nama_lengkap">Nama lengkap</label>
                         <input autocomplete="off" type="text" name="nama_lengkap" id="nama_lengkap" class="form-control"
                             value="{{ $data_anggota->namadepan }}">
@@ -29,9 +42,9 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="my-2">
-                        <label class="form-label" for="desa">Desa/Kelurahan</label>
-                        <select class="form-control" name="desa" id="desa">
+                    <div class="position-relative mb-3">
+                        <label for="jenis_usaha" for="desa">Desa/Kelurahan</label>
+                        <select class="js-example-basic-singl form-control" name="desa" id="desa">
                             @foreach ($desa as $ds)
                                 <option {{ $desa_dipilih == $ds->kd_desa ? 'selected' : '' }} value="{{ $ds->kd_desa }}">
                                     {{ $ds->sebutan_desa->sebutan_desa }} {{ $ds->nama_desa }}
@@ -44,29 +57,25 @@
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <div class="row">
-                        <div class="col-7">
-                            <div class="input-group input-group-static my-3">
-                                <label for="tempat_lahir">Tempat Lahir</label>
-                                <input autocomplete="off" type="text" name="tempat_lahir" id="tempat_lahir"
-                                    class="form-control" value="{{ $data_anggota->tempat_lahir }}">
-                                <small class="text-danger" id="msg_tempat_lahir"></small>
-                            </div>
-                        </div>
-                        <div class="col-5">
-                            <div class="input-group input-group-static my-3">
-                                <label for="tgl_lahir">Tgl Lahir</label>
-                                <input autocomplete="off" type="text" name="tgl_lahir" id="tgl_lahir"
-                                    class="form-control date" value="{{ $data_anggota->tgl_lahir }}">
-                                <small class="text-danger" id="msg_tgl_lahir"></small>
-                            </div>
-                        </div>
+                    <div class="my-2">
+                        <label class="form-label" for="tempat_lahir">Tempat Lahir</label>
+                        <input autocomplete="off" type="text" name="tempat_lahir" id="tempat_lahir"
+                                class="form-control" value="{{ $data_anggota->tempat_lahir }}">
+                            <small class="text-danger" id="msg_tempat_lahir"></small>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
+                    <div class="my-2">
+                        <label class="form-label" for="tgl_lahir">Tgl Lahir</label>
+                        <input autocomplete="off" type="text" name="tgl_lahir" id="tgl_lahir"
+                        class="form-control date" value="{{ $data_anggota->tgl_lahir }}">
+                        <small class="text-danger" id="msg_tgl_lahir"></small>
+                    </div>
+                </div>
+                <div class="col-md-2">
                     <div class="my-2">
                         <label class="form-label" for="jenis_kelamin">Jenis Kelamin</label>
-                        <select class="form-control" name="jenis_kelamin" id="jenis_kelamin">
+                        <select class="js-example-basic-singl form-control" name="jenis_kelamin" id="jenis_kelamin">
                             <option {{ $jk_dipilih == 'L' ? 'selected' : '' }} value="L">Laki Laki</option>
                             <option {{ $jk_dipilih == 'P' ? 'selected' : '' }} value="P">Perempuan</option>
                         </select>
@@ -74,26 +83,26 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-3">
-                        <label for="no_telp">No. Telp</label>
+                    <div class="my-2">
+                        <label class="form-label" for="no_telp">No. Telp</label>
                         <input autocomplete="off" type="text" name="no_telp" id="no_telp" class="form-control"
-                            value="{{ strlen($data_anggota->hp) < 11 ? '628' : $data_anggota->hp }}">
+                        value="{{ strlen($data_anggota->hp) < 11 ? '628' : $data_anggota->hp }}">
                         <small class="text-danger" id="msg_no_telp"></small>
                     </div>
                 </div>
             </div>
-
+        
             <div class="row">
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-3">
+                    <div class="position-relative mb-3">
                         <label for="alamat">Alamat</label>
                         <input autocomplete="off" type="text" name="alamat" id="alamat" class="form-control"
-                            value="{{ $data_anggota->alamat }}">
+                        value="{{ $data_anggota->alamat }}">
                         <small class="text-danger" id="msg_alamat"></small>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-3">
+                    <div class="position-relative mb-3">
                         <label for="no_kk">No. KK</label>
                         <input autocomplete="off" type="text" name="no_kk" id="no_kk" class="form-control"
                             value="{{ $data_anggota->kk }}">
@@ -101,36 +110,36 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-3">
+                    <div class="position-relative mb-3">
                         <label for="jenis_usaha">Jenis Usaha</label>
                         <input autocomplete="off" type="text" name="jenis_usaha" id="jenis_usaha" class="form-control"
-                            value="{{ $data_anggota->usaha }}">
+                        value="{{ $data_anggota->usaha }}">
                         <small class="text-danger" id="msg_jenis_usaha"></small>
                     </div>
                 </div>
             </div>
-
+        
             <div class="row">
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-3">
+                    <div class="position-relative mb-3">
                         <label for="nik_penjamin">NIK Penjamin</label>
                         <input autocomplete="off" type="text" name="nik_penjamin" id="nik_penjamin" class="form-control"
-                            value="{{ $data_anggota->nik_penjamin }}">
-                        <small class="text-danger" id="msg_nik_penjamin"></small>
+                        value="{{ $data_anggota->nik_penjamin }}">
+                    <small class="text-danger" id="msg_nik_penjamin"></small>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="input-group input-group-static my-3">
+                    <div class="position-relative mb-3">
                         <label for="penjamin">Penjamin</label>
                         <input autocomplete="off" type="text" name="penjamin" id="penjamin" class="form-control"
-                            value="{{ $data_anggota->penjamin }}">
-                        <small class="text-danger" id="msg_penjamin"></small>
+                        value="{{ $data_anggota->penjamin }}">
+                    <small class="text-danger" id="msg_penjamin"></small>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="my-2">
-                        <label class="form-label" for="hubungan">Hubungan</label>
-                        <select class="form-control" name="hubungan" id="hubungan">
+                    <div class="position-relative mb-3">
+                        <label for="no_telp">Hubungan</label>
+                        <select class="js-example-basic-singl form-control" name="hubungan" id="hubungan">
                             @foreach ($hubungan as $hb)
                                 <option {{ $hubungan_dipilih == $hb->id ? 'selected' : '' }} value="{{ $hb->id }}">
                                     {{ $hb->kekeluargaan }}
@@ -142,7 +151,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-github btn-sm float-end" id="SimpanPenduduk">Simpan Penduduk</button>
+            <button type="submit" class="btn btn-dark btn-sm float-end" id="SimpanPenduduk">Simpan Penduduk</button>
             <button type="button" class="btn btn-danger btn-sm me-3 float-end" id="BlokirPenduduk">
                 @if ($status == '0')
                     Blokir Penduduk
@@ -152,7 +161,6 @@
             </button>
         </form>
     </div>
-</div>
 <form action="/database/penduduk/{{ $data_anggota->nik }}/blokir" method="post" id="Blokir">
     @csrf
 
@@ -160,29 +168,12 @@
 </form>
 
 <script>
-    new Choices($('#desa')[0], {
-        shouldSort: false,
-        fuseOptions: {
-            threshold: 0.1,
-            distance: 1000
-        }
-    })
-    new Choices($('#jenis_kelamin')[0], {
-        shouldSort: false,
-        fuseOptions: {
-            threshold: 0.1,
-            distance: 1000
-        }
-    })
-    new Choices($('#hubungan')[0], {
-        shouldSort: false,
-        fuseOptions: {
-            threshold: 0.1,
-            distance: 1000
-        }
-    })
-
-    $(".date").flatpickr({
-        dateFormat: "d/m/Y"
-    })
+    
+    $('.js-example-basic-single').select2({
+        theme: 'bootstrap-5'
+        });
+    
+   $('.date').datepicker({
+        dateFormat: 'dd/mm/yy'
+    });
 </script>

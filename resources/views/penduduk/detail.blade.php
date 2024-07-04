@@ -72,7 +72,7 @@
                                             <div class="col-5">
                                                 <div class="position-relative mb-3">
                                                     <label for="tgl_lahir">Tgl Lahir</label>
-                                                    <input autocomplete="off" type="date" name="tgl_lahir" id="tgl_lahir"
+                                                    <input autocomplete="off" type="text" name="tgl_lahir" id="tgl_lahir"
                                                         class="form-control date" value="{{ $penduduk->tgl_lahir }}">
                                                     <small class="text-danger" id="msg_tgl_lahir"></small>
                                                 </div>
@@ -90,7 +90,7 @@
                                 <div class="col-md-4">
                                         <div class="my-2">
                                             <label class="form-label" for="desa">Desa/Kelurahan</label>
-                                            <select class="form-control" name="desa" id="desa">
+                                            <select class="js-example-basic-single form-control" name="desa" id="desa">
                                                 @foreach ($desa as $ds)
                                                     <option {{ $desa_dipilih == $ds->kd_desa ? 'selected' : '' }}
                                                         value="{{ $ds->kd_desa }}">
@@ -124,7 +124,7 @@
                                     <div class="col-md-4">
                                         <div class="my-2">
                                             <label class="form-label" for="jenis_kelamin">Jenis Kelamin</label>
-                                            <select class="form-control" name="jenis_kelamin" id="jenis_kelamin">
+                                            <select class="js-example-basic-single form-control" name="jenis_kelamin" id="jenis_kelamin">
                                                 <option {{ $jk_dipilih == 'L' ? 'selected' : '' }} value="L">Laki Laki
                                                 </option>
                                                 <option {{ $jk_dipilih == 'P' ? 'selected' : '' }} value="P">Perempuan
@@ -155,7 +155,7 @@
                                     <div class="col-md-4">
                                         <div class="my-2">
                                             <label class="form-label" for="hubungan">Hubungan</label>
-                                            <select class="form-control" name="hubungan" id="hubungan">
+                                            <select class="js-example-basic-single form-control" name="hubungan" id="hubungan">
                                                 @foreach ($hubungan as $hb)
                                                     <option {{ $hubungan_dipilih == $hb->id ? 'selected' : '' }}
                                                         value="{{ $hb->id }}">
@@ -265,7 +265,7 @@
         </div>
     </div>
 </div>
-
+<br><br><br><br>
     <form action="/database/penduduk/{{ $penduduk->nik }}/blokir" method="post" id="Blokir">
         @csrf
 
@@ -281,6 +281,14 @@
 
 @section('script')
     <script>
+    
+        $('.js-example-basic-single').select2({
+            theme: 'bootstrap-5'
+            });
+        
+    $('.date').datepicker({
+            dateFormat: 'dd/mm/yy'
+        });
 
         $(document).on('click', '#SimpanPenduduk', function(e) {
             e.preventDefault()

@@ -1,3 +1,17 @@
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="fa fa-user-plus"></i>
+            </div>
+            <div><b>Form Register Pelanggan</b>
+                <div class="page-title-subheading">
+                    {{ Session::get('nama_lembaga') }} 
+               </div>
+            </div>
+        </div> 
+    </div>
+</div>   
 <form action="/database/penduduk" method="post" id="Penduduk">
     @csrf
 
@@ -18,8 +32,8 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="my-2">
-                <label class="form-label" for="desa">Desa/Kelurahan</label>
+            <div class="position-relative mb-3">
+                <label for="jenis_usaha" for="desa">Desa/Kelurahan</label>
                 <select class="form-control" name="desa" id="desa">
                     @foreach ($desa as $ds)
                         <option {{ $desa_dipilih == $ds->kd_desa ? 'selected' : '' }} value="{{ $ds->kd_desa }}">
@@ -33,26 +47,22 @@
     </div>
     <div class="row">
         <div class="col-md-4">
-            <div class="row">
-                <div class="col-7">
-                    <div class="position-relative mb-3">
-                        <label for="tempat_lahir">Tempat Lahir</label>
-                        <input autocomplete="off" type="text" name="tempat_lahir" id="tempat_lahir"
+            <div class="my-2">
+                <label class="form-label" for="jenis_kelamin">Tempat Lahir</label>
+                <input autocomplete="off" type="text" name="tempat_lahir" id="tempat_lahir"
                             class="form-control">
                         <small class="text-danger" id="msg_tempat_lahir"></small>
-                    </div>
-                </div>
-                <div class="col-5">
-                    <div class="position-relative mb-3">
-                        <label for="tgl_lahir">Tgl Lahir</label>
-                        <input autocomplete="off" type="text" name="tgl_lahir" id="tgl_lahir"
-                            class="form-control date"  value="{{ date('d/m/Y') }}">
-                        <small class="text-danger" id="msg_tgl_lahir"></small>
-                    </div>
-                </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-2">
+            <div class="my-2">
+                <label class="form-label" for="jenis_kelamin">Tgl Lahir</label>
+                <input autocomplete="off" type="text" name="tgl_lahir" id="tgl_lahir"
+                            class="form-control date"  value="{{ date('d/m/Y') }}">
+                        <small class="text-danger" id="msg_tgl_lahir"></small>
+            </div>
+        </div>
+        <div class="col-md-2">
             <div class="my-2">
                 <label class="form-label" for="jenis_kelamin">Jenis Kelamin</label>
                 <select class="form-control" name="jenis_kelamin" id="jenis_kelamin">
@@ -76,7 +86,6 @@
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-4">
             <div class="position-relative mb-3">

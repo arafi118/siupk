@@ -10,7 +10,7 @@
 @section('content')
     <div class="app-main__inner">
         <div class="tab-content">
-            <br>
+             
             <div class="row">
                 <div class="col-md-12">
                     <div class="main-card mb-3 card">
@@ -20,7 +20,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div><br><br><br><br>
         </div>
     </div>
 @endsection
