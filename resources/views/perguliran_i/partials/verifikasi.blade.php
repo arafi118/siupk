@@ -119,8 +119,8 @@
                         <div class="col-md-3">
                             <div class="position-relative mb-3">
                                 <label for="tgl_tunggu" class="form-label">Tgl Tunggu</label>
-                                <input autocomplete="off" type="date" name="tgl_tunggu" id="tgl_tunggu"
-                                    class="form-control date" value="{{ Tanggal::tglIndo($perguliran_i->tgl_verifikasi) }}">
+                                <input autocomplete="off" type="text" name="tgl_tunggu" id="tgl_tunggu"
+                                    class="form-control date" value="{{ date('d/m/Y') }}">
                                 <small class="text-danger" id="msg_tgl_tunggu"></small>
                             </div>
                         </div>
@@ -197,8 +197,8 @@
                         <div class="col-md-6">
                             <div class="position-relative mb-3">
                                 <label for="tgl_cair" class="form-label">Tgl Cair</label>
-                                <input autocomplete="off" type="date" name="tgl_cair" id="tgl_cair"
-                                class="form-control date" value="{{ Tanggal::tglIndo($perguliran_i->tgl_verifikasi) }}">
+                                <input autocomplete="off" type="text" name="tgl_cair" id="tgl_cair"
+                                class="form-control date" value="{{ date('d/m/Y') }}">
                             <small class="text-danger" id="msg_tgl_cair"></small>
                             </div>
                         </div>
@@ -231,6 +231,9 @@
 </form>
 
 <script>
+    $('.date').datepicker({
+        dateFormat: 'dd/mm/yy'
+    });
     var formatter = new Intl.NumberFormat('en-US', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,

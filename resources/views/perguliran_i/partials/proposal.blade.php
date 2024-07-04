@@ -77,8 +77,8 @@
                             <div class="col-md-3">
                                 <div class="DOMContentLoaded position-relative mb-3">
                                     <label for="tgl_verifikasi" class="form-label">Tgl Verifikasi</label>
-                                    <input autocomplete="off" type="date" name="tgl_verifikasi" id="tgl_verifikasi"
-                                           class="form-control date" value="{{ Tanggal::tglIndo($perguliran_i->tgl_proposal) }}">
+                                    <input autocomplete="off" type="text" name="tgl_verifikasi" id="tgl_verifikasi"
+                                           class="form-control date" value="{{ date('d/m/Y') }}">
                                     <small class="text-danger" id="msg_tgl_verifikasi"></small>
                                 </div>
                             </div>
@@ -171,6 +171,10 @@
 
 
 <script>
+
+$('.date').datepicker({
+        dateFormat: 'dd/mm/yy'
+    });
     var formatter = new Intl.NumberFormat('en-US', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,

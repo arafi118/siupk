@@ -21,36 +21,36 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="position-relative mb-3">
-                                    <label for="tgl_transaksi">Tgl Transaksi &nbsp;</label>
+                                    <label for="tgl_transaksi">Tgl Transaksi </label>
                                     <input autocomplete="off" type="text" name="tgl_transaksi" id="tgl_transaksi"
                                         class="form-control date" value="{{ date('d/m/Y') }}">
                                     <small class="text-danger" id="msg_tgl_transaksi"></small>
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <div class="input-group input-group-static my-3">
-                                    <label for="pokok">Pokok &nbsp;</label>
+                                <div class="position-relative mb-3">
+                                    <label for="pokok">Pokok </label>
                                     <input autocomplete="off" type="text" name="pokok" id="pokok" class="form-control">
                                     <small class="text-danger" id="msg_pokok"></small>
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <div class="input-group input-group-static my-3">
-                                    <label for="jasa">Jasa &nbsp;</label>
+                                <div class="position-relative mb-3">
+                                    <label for="jasa">Jasa </label>
                                     <input autocomplete="off" type="text" name="jasa" id="jasa" class="form-control">
                                     <small class="text-danger" id="msg_jasa"></small>
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <div class="input-group input-group-static my-3">
-                                    <label for="denda">Denda &nbsp;</label>
+                                <div class="position-relative mb-3">
+                                    <label for="denda">Denda </label>
                                     <input autocomplete="off" type="text" name="denda" id="denda" class="form-control">
                                     <small class="text-danger" id="msg_denda"></small>
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <div class="input-group input-group-static my-3">
-                                    <label for="total">Total Bayar &nbsp;</label>
+                                <div class="position-relative mb-3">
+                                    <label for="total">Total Bayar </label>
                                     <input autocomplete="off" readonly disabled type="text" name="total" id="total"
                                         class="form-control">
                                     <small class="text-danger" id="msg_total"></small>
@@ -218,32 +218,15 @@
 
 @section('script')
 <script>
-    $('#tgl_transaksi').datepicker();
+       $('.date').datepicker({
+        dateFormat: 'dd/mm/yy'
+    });
 
 
     var formatter = new Intl.NumberFormat('en-US', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
     })
-
-    var pokok, jasa = 0;
-
-    $("#pokok").maskMoney({
-        allowNegative: true
-    });
-
-    $("#jasa").maskMoney({
-        allowNegative: true
-    });
-
-    $("#denda").maskMoney({
-        allowNegative: true
-    });
-
-    $("#total").maskMoney({
-        allowNegative: true
-    });
-
     
     var id_pinkel = "{{ Request::get('pinkel') ?: 0 }}"
 
@@ -374,6 +357,43 @@
             })
         }
     })
+
+    $(document).on('click', '.btn-delete', function(e) {
+            e.preventDefault()
+
+            var idt = $(this).attr('data-idt')
+            $.get('/transaksi/data/' + idt, function(result) {
+
+                $('#del_idt').val(result.idt)
+                $('#del_idtp').val(result.idtp)
+                $('#del_id_pinj').val(result.id_pinj)
+                Swal.fire({
+                    title: 'Peringatan',
+                    text: 'Setelah menekan tombol Hapus Transaksi dibawah, maka transaksi ini akan dihapus dari aplikasi secara permanen.',
+                    showCancelButton: true,
+                    confirmButtonText: 'Hapus Transaksi',
+                    cancelButtonText: 'Batal',
+                    icon: 'warning'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var form = $('#formHapus')
+                        $.ajax({
+                            type: form.attr('method'),
+                            url: form.attr('action'),
+                            data: form.serialize(),
+                            success: function(result) {
+                                if (result.success) {
+                                    Swal.fire('Berhasil!', result.msg, 'success')
+                                        .then(() => {
+                                            $('#detailTransaksi').modal('hide')
+                                        })
+                                }
+                            }
+                        })
+                    }
+                })
+            })
+        })
 
     $(document).on('click', '#cetakKartuAngsuran', function (e) {
         e.preventDefault()

@@ -174,8 +174,8 @@
                         <div class="col-md-4">
                             <div class="position-relative mb-3">
                                 <label for="tgl_cair" class="form-label">Tgl Cair</label>
-                                <input autocomplete="off" type="date" name="tgl_cair" id="tgl_cair" class="form-control"
-                                    value="{{ Tanggal::tglIndo($perguliran_i->tgl_cair) }}">
+                                <input autocomplete="off" type="text" name="tgl_cair" id="tgl_cair" class="form-control date"
+ value="{{ date('d/m/Y') }}">
                                 <small class="text-danger" id="msg_tgl_cair"></small>
                             </div>
                         </div>
@@ -250,6 +250,11 @@
 </form>
 
 <script>
+    
+$('.date').datepicker({
+        dateFormat: 'dd/mm/yy'
+    });
+
     var formatter = new Intl.NumberFormat('en-US', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
