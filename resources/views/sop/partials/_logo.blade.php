@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-12"><br><br><br><br>
+    <div class="col-md-8"><br><br><br><br>
         <div class="card mt-4 border" data-animation="true">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <a class="d-block blur-shadow-image">

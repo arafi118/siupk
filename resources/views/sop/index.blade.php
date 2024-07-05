@@ -79,14 +79,14 @@
                                 </a>
                             </div>
                              <div class="mb-3">&nbsp;
-                                <a role="tab" class="btn btn-white " style="width: 225px;"  data-bs-toggle="tab" href="#tab-content-7">
+                                <a role="tab" class="btn btn-white " style="width: 225px;"  data-bs-toggle="tab" href="#tab-content-6">
                                     <div class="left-align">
                                         <i class="fa-solid fa-panorama"></i>&nbsp;&nbsp;<span>Logo</span>
                                     </div>
                                 </a>   
                             </div> 
                             <div class="mb-3">&nbsp;
-                                <a role="tab" class="btn btn-white " style="width: 225px;"  data-bs-toggle="tab" href="#tab-content-8">
+                                <a role="tab" class="btn btn-white " style="width: 225px;"  data-bs-toggle="tab" href="#tab-content-7">
                                     <div class="left-align">
                                         <i class="fa-solid fa-camera-rotate"></i>&nbsp;&nbsp;<span>Whatsapp</span>
                                     </div>
@@ -148,16 +148,13 @@
                         <div class="tab-pane tabs-animation fade" id="tab-content-5" role="tabpanel">
                             <div class="row">
                                   <div class="main-card mb-3 card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Redaksi Dokumen SPK</h5>
-                                            <div class="position-relative mb-3">
-                                                @include('sop.partials._spk')
-                                            </div>
+                                        <div class="card-body"><h5 class="card-title">Redaksi Dokumen SPK</h5>
+                                            @include('sop.partials._spk')
                                         </div>
                                     </div>
                             </div>
                         </div>
-                        <div class="tab-pane tabs-animation fade" id="tab-content-7" role="tabpanel">
+                        <div class="tab-pane tabs-animation fade" id="tab-content-6" role="tabpanel">
                             <div class="row">
                                   <div class="main-card mb-3 card">
                                         <div class="card-body"><h5 class="card-title">Upload LOGO</h5>
@@ -166,7 +163,7 @@
                                     </div>
                             </div>
                         </div>
-                        <div class="tab-pane tabs-animation fade" id="tab-content-8" role="tabpanel">
+                        <div class="tab-pane tabs-animation fade" id="tab-content-7" role="tabpanel">
                             <div class="row">
                                   <div class="main-card mb-3 card">
                                         <div class="card-body"><h5 class="card-title">Pengaturan Whatsapp</h5>
@@ -185,7 +182,7 @@
     <br><br>
     <br><br>
 
-        {{-- <div class="app-page-title">
+    {{-- <div class="app-page-title">
             <div class="page-title-wrapper">
                 <div class="page-title-heading">
                     <div class="col-md-12">
@@ -237,8 +234,6 @@
                 </div>
             </div>
         </div> 
-   
-    
     <div class="tab-content">
         <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
             <div class="row">
@@ -334,7 +329,6 @@
                 </div>
             </div>
         </div>
-
     </div> --}}
 </div>
 <form action="/pengaturan/whatsapp/{{ $token }}" method="post" id="FormWhatsapp">

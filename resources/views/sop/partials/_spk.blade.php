@@ -17,5 +17,3 @@
         Simpan Perubahan
     </button>
 </div>
-
-<script>
