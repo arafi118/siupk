@@ -103,7 +103,7 @@
             @php
                 $no = $loop->iteration;
 
-                $j_a = $pa->pengaturan_asuransi;
+                $j_a = $kec->pengaturan_asuransi;
                 $row_pokok = $pa->alokasi;
                 
                 if($j_a == "2") {
