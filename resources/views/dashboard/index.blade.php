@@ -238,7 +238,6 @@
 
                                             <textarea class="form-control d-none" name="pesan_whatsapp" id="pesan_whatsapp"></textarea>
                                         </form>
-
                                         <div class="d-flex justify-content-end">
                                             <button type="button" id="CekTagihan" class="btn btn-sm btn-github"
                                                 {{ strlen($user->hp) >= 11 ? '' : 'disabled' }}>Preview</button>

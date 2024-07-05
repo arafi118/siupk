@@ -150,13 +150,19 @@ class SopController extends Controller
             'default_jasa',
             'default_jangka',
             'pembulatan',
-            'sistem'
+            'sistem',
+            'def_fee_supp',
+            'def_fee_agen',
+            'def_admin'
         ]);
 
         $validate = Validator::make($data, [
-            'default_jasa' => 'required',
-            'default_jangka' => 'required',
-            'pembulatan' => 'required'
+            'default_jasa'      => 'required',
+            'default_jangka'    => 'required',
+            'pembulatan'        => 'required',
+            'def_fee_supp'      => 'required',
+            'def_fee_agen'      => 'required',
+            'def_admin'         => 'required'
         ]);
 
         if ($validate->fails()) {
@@ -166,9 +172,12 @@ class SopController extends Controller
         $data['pembulatan'] = "$data[sistem]$data[pembulatan]";
 
         $kecamatan = Kecamatan::where('id', $kec->id)->update([
-            'def_jasa' => $data['default_jasa'],
-            'def_jangka' => $data['default_jangka'],
-            'pembulatan' => $data['pembulatan'],
+            'def_jasa'      => $data['default_jasa'],
+            'def_jangka'    => $data['default_jangka'],
+            'pembulatan'    => $data['pembulatan'],
+            'def_fee_supp'  => $data['def_fee_supp'],
+            'def_fee_agen'  => $data['def_fee_agen'],
+            'def_admin'     => $data['def_admin'],
         ]);
 
         return response()->json([
@@ -489,4 +498,5 @@ class SopController extends Controller
         $title = 'Invoice #' . $inv->nomor . ' - ' . $inv->jp->nama_jp;
         return view('sop.detail_invoice')->with(compact('title', 'inv'));
     }
+
 }

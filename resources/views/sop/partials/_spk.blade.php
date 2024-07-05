@@ -3,11 +3,12 @@
     @method('PUT')
 
     <div id="editor">
-        <p>1.</p>
-        <p><br /></p>
-      </div>
-
-      <textarea name="spk" id="spk" class="d-none"></textarea>
+        <ol>
+            <li></li>
+        </ol>
+    </div>
+    
+    <textarea name="spk" id="spk" class="d-none"></textarea>
 
 </form><br>
 
@@ -18,7 +19,3 @@
 </div>
 
 <script>
-    var quill = new Quill('#editor', {
-            theme: 'snow'
-        });
-  </script>

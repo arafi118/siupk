@@ -13,7 +13,7 @@
     .btn-white-custom:hover,
     .btn-white-custom:focus,
     .btn-white-custom.active {
-        background-color: #0064f9; /* Warna asli saat aktif atau hover */
+        background-color: #202b3c; /* Warna asli saat aktif atau hover */
         color: rgb(255, 250, 250);
     }
     .left-align {
@@ -27,7 +27,7 @@
 
 
 <div class="app-main__inner">
-
+{{-- 
     <div class="tab-content">
         <div class="tab-pane  fade show active" id="" role="tabpanel">
             <div class="row">
@@ -201,16 +201,16 @@
         </div>
     </div>
     <br><br>
-    <br><br>
+    <br><br> --}}
 
-    {{-- <div class="app-page-title">
+    <div class="app-page-title">
         <div class="page-title-wrapper">
             <div class="page-title-heading">
                 <div class="col-md-12">
                     <div class="main-card mb-3 card">
                             <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">&nbsp;&nbsp;
                                 <li class="nav-item mb-1 me-1">
-                                    <a role="tab" class="btn btn-outline-primary active" id="wellcome" data-bs-toggle="tab" href="#tab-content-0">
+                                    <a role="tab" class="btn btn-outline-white active" id="wellcome" data-bs-toggle="tab" href="#tab-content-0">
                                         <i class="fa-solid fa-home"></i>&nbsp;<span>Wellcome</span>
                                     </a>
                                 </li>
@@ -352,7 +352,7 @@
             </div>
         </div>
 
-    </div> --}}
+    </div>
 </div>
 <form action="/pengaturan/whatsapp/{{ $token }}" method="post" id="FormWhatsapp">
     @csrf
@@ -463,9 +463,8 @@
 
         $(".money").maskMoney();
         $(document).ready(function() {
-        $('#spk').summernote();
+        
         });
-
         var quill = new Quill('#editor', {
             theme: 'snow'
         });
