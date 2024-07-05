@@ -107,7 +107,7 @@
                 $row_pokok = $pa->alokasi;
                 
                 if($j_a == "2") {
-                    $row_jasa = $pa->alokasi * $pa->pros_jasa / 100 * $pa->jangka;
+                    $row_jasa = $pa->alokasi * $pa->pros_jasa / 100;
                 } else {
                     $row_jasa = "0";
                 }
