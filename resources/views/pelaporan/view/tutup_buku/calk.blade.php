@@ -354,6 +354,7 @@
                                             @php
                                                 $laba_th_lalu = 0;
                                                 $laba_th_ini = 0;
+                                                //if ($desa->saldo && $tgl_kondisi >= $tgl_mad)
                                                 if ($desa->saldo) {
                                                     $laba_th_lalu = floatval($desa->saldo->debit);
                                                     $laba_th_ini = floatval($desa->saldo->kredit);
