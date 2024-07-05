@@ -567,7 +567,6 @@
         @csrf
     </form>
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
 <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
@@ -577,7 +576,6 @@
 <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
 <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
 <script src="/assets/js/plugins/choices.min.js"></script>
-<script src="/assets/js/plugins/sweetalert.min.js"></script>
 <script src="/assets/js/plugins/chartjs.min.js"></script>
 <script src="/assets/js/html5-qrcode.js?v=1716515606"></script>
 {{-- <script src="http://siupk.test/vendor/tinymce/tinymce.min.js"></script> --}}
@@ -618,93 +616,6 @@
             selectors: ['.g-sidenav-show']
         }
     }
-
-    $('#cariKelompok').typeahead({
-        source: function (query, process) {
-            var states = [];
-            return $.get('/perguliran/cari_kelompok', {
-                query: query
-            }, function (result) {
-                var resultList = result.map(function (item) {
-                    states.push({
-                        "id": item.id,
-                        "name": item.nama_kelompok +
-                            ' [' + item.nama_desa + ']' +
-                            ' [' + item.ketua + ']' +
-                            ' [' + item.kd_kelompok + ']',
-                        "value": item.id
-                    });
-                });
-
-                return process(states);
-            })
-        },
-        afterSelect: function (item) {
-            var path = 'database/desa'
-            if (path == 'transaksi/jurnal_angsuran') {
-                $.get('/transaksi/form_angsuran/' + item.id, function (result) {
-                    var ch_pokok = document.getElementById('chartP').getContext("2d");
-                    var ch_jasa = document.getElementById('chartJ').getContext("2d");
-
-                    angsuran(true, result)
-
-                    makeChart('pokok', ch_pokok, result.sisa_pokok, result.sum_pokok)
-                    makeChart('jasa', ch_jasa, result.sisa_jasa, result.sum_jasa)
-
-                    $('#loan-id').html(item.id)
-
-                    var id = $('#id').val()
-                    $.get('/transaksi/angsuran/form_anggota/' + id, function (result) {
-                        if (result.success) {
-                            $('#LayoutAngsuranAnggota').html(result.view)
-                            $('#AngsuranAnggotaLabel').text(result.title)
-                        }
-                    })
-                })
-            } else {
-                window.location.href = '/transaksi/jurnal_angsuran?pinkel=' + item.id
-            }
-        }
-    });
-
-
-    $('#cariAnggota').typeahead({
-        source: function (query, process) {
-            var states = [];
-            return $.get('/perguliran/cari_anggota', {
-                query: query
-            }, function (result) {
-                var resultList = result.map(function (item) {
-                    states.push({
-                        "id": item.id,
-                        "name": item.namadepan +
-                            ' [' + item.nik + ']',
-                        "value": item.id
-                    });
-                });
-
-                return process(states);
-            })
-        },
-        afterSelect: function (item) {
-            var path = 'database/desa'
-            if (path == 'transaksi/jurnal_angsuran_individu') {
-                $.get('/transaksi/form_angsuran_individu/' + item.id, function (result) {
-                    var ch_pokok = document.getElementById('chartP').getContext("2d");
-                    var ch_jasa = document.getElementById('chartJ').getContext("2d");
-
-                    angsuran(true, result)
-
-                    makeChart('pokok', ch_pokok, result.sisa_pokok, result.sum_pokok)
-                    makeChart('jasa', ch_jasa, result.sisa_jasa, result.sum_jasa)
-
-                    $('#loan-id').html(item.id)
-                })
-            } else {
-                window.location.href = '/transaksi/jurnal_angsuran_individu?pinkel=' + item.id
-            }
-        }
-    });
 
     function makeChart(id, target, sisa_saldo, sum_saldo) {
         window[id] = new Chart(target, {

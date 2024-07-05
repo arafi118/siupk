@@ -44,49 +44,49 @@
                                 </a>   
                             </div> 
                             <div class="mb-3">&nbsp;
-                                <a role="tab" class="btn btn-white " style="width: 225px;" id="lembaga" data-bs-toggle="tab" href="#tab-content-1">
+                                <a role="tab" class="btn btn-white " style="width: 220px;" id="lembaga" data-bs-toggle="tab" href="#tab-content-1">
                                     <div class="left-align">
                                         <i class="fa-solid fa-tree-city"></i>&nbsp;&nbsp;<span>Identitas Lembaga</span>
                                     </div>
                                 </a>
                             </div>
                             <div class="mb-3">&nbsp;
-                                <a role="tab" class="btn btn-white " style="width: 225px;" id="pengelola" data-bs-toggle="tab" href="#tab-content-2">
+                                <a role="tab" class="btn btn-white " style="width: 220px;" id="pengelola" data-bs-toggle="tab" href="#tab-content-2">
                                     <div class="left-align">
                                         <i class="fa-solid fa-person-chalkboard"></i>&nbsp;&nbsp;<span>Sebutan Pengelola</span>
                                     </div>
                                 </a>  
                             </div> 
                             <div class="mb-3">&nbsp;
-                                <a role="tab" class="btn btn-white " style="width: 225px;" id="peminjam" data-bs-toggle="tab" href="#tab-content-3">
+                                <a role="tab" class="btn btn-white " style="width: 220px;" id="peminjam" data-bs-toggle="tab" href="#tab-content-3">
                                     <div class="left-align">
                                         <i class="fa-solid fa-chart-simple"></i>&nbsp;&nbsp;<span>Sistem Pinjaman</span>
                                     </div>
                                 </a>
                             </div>
                             <div class="mb-3">&nbsp;
-                                <a role="tab" class="btn btn-white " style="width: 225px;" id="asuransi" data-bs-toggle="tab" href="#tab-content-4">
+                                <a role="tab" class="btn btn-white " style="width: 220px;" id="asuransi" data-bs-toggle="tab" href="#tab-content-4">
                                     <div class="left-align">
                                         <i class="fa-solid fa-money-bill-transfer"></i>&nbsp;&nbsp;<span> Pengaturan Asuransi</span>
                                     </div>
                                 </a>   
                             </div> 
                             <div class="mb-3">&nbsp;
-                                <a role="tab" class="btn btn-white " style="width: 225px;" data-bs-toggle="tab" href="#tab-content-5">
+                                <a role="tab" class="btn btn-white " style="width: 220px;" data-bs-toggle="tab" href="#tab-content-5">
                                     <div class="left-align">
                                         <i class="fa-solid fa-laptop-file"></i>&nbsp;&nbsp;<span>Redaksi SPK</span>
                                     </div>
                                 </a>
                             </div>
                              <div class="mb-3">&nbsp;
-                                <a role="tab" class="btn btn-white " style="width: 225px;"  data-bs-toggle="tab" href="#tab-content-6">
+                                <a role="tab" class="btn btn-white " style="width: 220px;"  data-bs-toggle="tab" href="#tab-content-6">
                                     <div class="left-align">
                                         <i class="fa-solid fa-panorama"></i>&nbsp;&nbsp;<span>Logo</span>
                                     </div>
                                 </a>   
                             </div> 
                             <div class="mb-3">&nbsp;
-                                <a role="tab" class="btn btn-white " style="width: 225px;"  data-bs-toggle="tab" href="#tab-content-7">
+                                <a role="tab" class="btn btn-white " style="width: 220px;"  data-bs-toggle="tab" href="#tab-content-7">
                                     <div class="left-align">
                                         <i class="fa-solid fa-camera-rotate"></i>&nbsp;&nbsp;<span>Whatsapp</span>
                                     </div>
@@ -341,7 +341,7 @@
 
     <script>
         const form = $('#FormWhatsapp')
-        const socket = io("{{ $api }}")
+        // const socket = io("{{ $api }}")
         const token = "{{ $token }}"
         const pesan = $('#Pesan')
         var scan = 0
@@ -371,33 +371,33 @@
             })
         })
 
-        socket.on('qrCode', (res) => {
-            if (res.token == token) {
-                $('#QrCode').attr('src', res.url)
+        // socket.on('qrCode', (res) => {
+        //     if (res.token == token) {
+        //         $('#QrCode').attr('src', res.url)
 
-                if (scan < 1) {
-                    pesan.append('<li>' + res.msg + '</li>')
-                }
-                scan += 1
-            }
-        })
+        //         if (scan < 1) {
+        //             pesan.append('<li>' + res.msg + '</li>')
+        //         }
+        //         scan += 1
+        //     }
+        // })
 
-        socket.on('aktif', (res) => {
-            if (res.token == token) {
-                if (connect < 1) {
-                    $.ajax({
-                        type: form.attr('method'),
-                        url: form.attr('action'),
-                        data: form.serialize(),
-                        success: function(result) {
-                            pesan.append('<li>' + res.msg + '</li>')
-                            waActive()
-                        }
-                    })
-                }
-                connect += 1
-            }
-        })
+        // socket.on('aktif', (res) => {
+        //     if (res.token == token) {
+        //         if (connect < 1) {
+        //             $.ajax({
+        //                 type: form.attr('method'),
+        //                 url: form.attr('action'),
+        //                 data: form.serialize(),
+        //                 success: function(result) {
+        //                     pesan.append('<li>' + res.msg + '</li>')
+        //                     waActive()
+        //                 }
+        //             })
+        //         }
+        //         connect += 1
+        //     }
+        // })
 
         $(document).on('click', '#WaLogout', function(e) {
             e.preventDefault()

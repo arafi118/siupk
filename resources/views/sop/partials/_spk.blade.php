@@ -4,7 +4,7 @@
 
     <div id="editor">
         <ol>
-            <li></li>
+            <li>{{ $kec->redaksi_spk }}</li>
         </ol>
     </div>
     
