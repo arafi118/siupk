@@ -7,6 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <meta name="description" content="Sistem Informasi Unit Pengelola Kegiatan Berbasis Web">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords" content="lkm, situnai, upk, online, siupk, upk online, siupk online, asta brata teknologi, abt">
+    <meta name="author" content="Enfii">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ Session::get('icon') }}">
+    <link rel="icon" type="image/png" href="{{ Session::get('icon') }}">
     <title>
         {{ $title }} &mdash; Aplikasi SI UPK Online
     </title>
@@ -560,9 +567,6 @@
 
     @yield('modal')
 
-    {{-- <form action="/logout" method="post" id="formLogout">
-        <input type="hidden" name="_token" value="yZaBRXeawdWlSwzP4com4AIEfVtTtwcAPgf6mA40">
-    </form> --}}
     <form action="/logout" method="post" id="formLogout">
         @csrf
     </form>
@@ -689,7 +693,7 @@
         }
     })
 
-    $(document).on('click', '#logout', function (e) {
+    $('#logout').click(function (e) {
         e.preventDefault()
 
         Swal.fire({
@@ -706,11 +710,23 @@
         })
     })
 
-    $(document).on('click', '#btnLaporanPelunasan', function (e) {
+    $('#btnLaporanPelunasan').click(function (e) {
         e.preventDefault()
 
         $('input#laporan').val('pelunasan')
         $('#FormLaporanSisipan').submit()
+    })
+
+    $('#btnInvoiceTs').click(function (e) {
+        e.preventDefault()
+
+        window.open('/pelaporan/ts')
+    })
+
+    $('#btnLaporanMou').click(function (e) {
+        e.preventDefault()
+
+        window.open('/pelaporan/mou')
     })
 
 </script>

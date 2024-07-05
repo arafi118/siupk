@@ -514,10 +514,6 @@
 
 @section('script')
     <script>
-        $(".date").flatpickr({
-            dateFormat: "d/m/Y"
-        })
-
         $.ajax({
             type: 'post',
             url: '/dashboard/jatuh_tempo',
