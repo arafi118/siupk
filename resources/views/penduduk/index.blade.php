@@ -22,7 +22,7 @@
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <h5 class="card-title"></h5>
-                        <table class="table table-flush table-hover table-click table-borderless" width="100%">
+                        <table class="table table-hover" width="100%">
                             <thead>
                                 <tr>
                                      <th>ID</th>
@@ -67,7 +67,7 @@
 
 @section('script')
 <script>
-    var table = $('.table-borderless').DataTable({
+    var table = $('.table-hover').DataTable({
         language: {
             paginate: {
                 previous: "&laquo;",

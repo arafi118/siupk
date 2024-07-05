@@ -84,6 +84,7 @@
                                 <table class="table table-flush table-hover table-click" width="100%" id="TbVerified">
                                     <thead>
                                         <tr>
+                                            <th>Loan id</th>
                                             <th>Nama Anggota</th>
                                             <th>Alamat</th>
                                             <th>Tgl Verified</th>
@@ -109,6 +110,7 @@
                                 <table class="table table-flush table-hover table-click" width="100%" id="TbWaiting">
                                     <thead>
                                         <tr>
+                                            <th>Loan id</th>
                                             <th>Nama Anggota</th>
                                             <th>Alamat</th>
                                             <th>Tgl Waiting</th>
@@ -132,6 +134,7 @@
                                 <table class="table table-flush table-hover table-click" width="100%" id="TbAktif">
                                     <thead>
                                         <tr>
+                                            <th>Loan id</th>
                                             <th>Nama Anggota</th>
                                             <th>Alamat</th>
                                             <th>Tgl Cair</th>
@@ -202,6 +205,9 @@
         }])
 
         var tbVerified = CreateTable('#TbVerified', '/perguliran_i/verified', [{
+            data: 'anggota.id',
+            name: 'anggota.id'
+        },{
             data: 'anggota.namadepan',
             name: 'anggota.namadepan'
         }, {
@@ -221,6 +227,9 @@
         }])
 
         var tbWaiting = CreateTable('#TbWaiting', '/perguliran_i/waiting', [{
+            data: 'anggota.id',
+            name: 'anggota.id'
+        },{
             data: 'anggota.namadepan',
             name: 'anggota.namadepan'
         }, {
@@ -240,6 +249,9 @@
         }])
 
         var tbAktif = CreateTable('#TbAktif', '/perguliran_i/aktif', [{
+            data: 'anggota.id',
+            name: 'anggota.id'
+        },{
             data: 'anggota.namadepan',
             name: 'anggota.namadepan'
         }, {

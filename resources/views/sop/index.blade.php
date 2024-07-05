@@ -1,6 +1,8 @@
 @extends('layouts.base')
 
 @section('content')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
 <style>
     .btn-white-custom {
         display: flex;
@@ -25,16 +27,15 @@
         }
 </style>
 
-
 <div class="app-main__inner">
-{{-- 
+
     <div class="tab-content">
         <div class="tab-pane  fade show active" id="" role="tabpanel">
             <div class="row">
                 <div class="col-md-3">
                     <div class="main-card mb-3 card">                       
                         <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
-                            <h5 class="card-title">&nbsp;Pengaturan !</h5>
+                            <h5 class="card-title">&nbsp;&nbsp;&nbsp;Pengaturan !</h5>
                             <div class="mb-3">&nbsp;
                                 <a role="tab" class="btn btn-white  active" style="width: 220px;" id="wellcome" data-bs-toggle="tab" href="#tab-content-0">
                                  <div class="left-align">
@@ -77,22 +78,15 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="mb-3">&nbsp;
-                                <a role="tab" class="btn btn-white " style="width: 225px;" data-bs-toggle="tab" href="#tab-content-6">
-                                    <div class="left-align">
-                                        <i class="fa-solid fa-gears"></i>&nbsp;&nbsp;<span>Sistem Pelayanan Kredit</span>
-                                    </div>
-                                </a>
-                            </div>
                              <div class="mb-3">&nbsp;
-                                <a role="tab" class="btn btn-white " style="width: 225px;" id="logo " data-bs-toggle="tab" href="#tab-content-7">
+                                <a role="tab" class="btn btn-white " style="width: 225px;"  data-bs-toggle="tab" href="#tab-content-7">
                                     <div class="left-align">
                                         <i class="fa-solid fa-panorama"></i>&nbsp;&nbsp;<span>Logo</span>
                                     </div>
                                 </a>   
                             </div> 
                             <div class="mb-3">&nbsp;
-                                <a role="tab" class="btn btn-white " style="width: 225px;" id="whatsapp" data-bs-toggle="tab" href="#tab-content-8">
+                                <a role="tab" class="btn btn-white " style="width: 225px;"  data-bs-toggle="tab" href="#tab-content-8">
                                     <div class="left-align">
                                         <i class="fa-solid fa-camera-rotate"></i>&nbsp;&nbsp;<span>Whatsapp</span>
                                     </div>
@@ -163,18 +157,6 @@
                                     </div>
                             </div>
                         </div>
-                        <div class="tab-pane tabs-animation fade" id="tab-content-6" role="tabpanel">
-                            <div class="row">
-                                  <div class="main-card mb-3 card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Sistem Pelayanan Kredit</h5>
-                                            <div class="position-relative mb-3">
-                                                @include('sop.partials._pelayanan_kredit')
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
                         <div class="tab-pane tabs-animation fade" id="tab-content-7" role="tabpanel">
                             <div class="row">
                                   <div class="main-card mb-3 card">
@@ -201,60 +183,61 @@
         </div>
     </div>
     <br><br>
-    <br><br> --}}
+    <br><br>
 
-    <div class="app-page-title">
-        <div class="page-title-wrapper">
-            <div class="page-title-heading">
-                <div class="col-md-12">
-                    <div class="main-card mb-3 card">
-                            <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">&nbsp;&nbsp;
+        {{-- <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div class="col-md-12">
+                        <div class="main-card mb-3 card">
+                            <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav flex-wrap">&nbsp;
                                 <li class="nav-item mb-1 me-1">
-                                    <a role="tab" class="btn btn-outline-white active" id="wellcome" data-bs-toggle="tab" href="#tab-content-0">
+                                    <a role="tab" class="btn btn-outline-primary active" id="wellcome" data-bs-toggle="tab" href="#tab-content-0">
                                         <i class="fa-solid fa-home"></i>&nbsp;<span>Wellcome</span>
                                     </a>
-                                </li>
+                                </li>&nbsp;
                                 <li class="nav-item mb-1 me-1">
                                     <a role="tab" class="btn btn-outline-primary" id="lembaga" data-bs-toggle="tab" href="#tab-content-1">
                                         <i class="fa-solid fa-tree-city"></i>&nbsp;<span>Identitas Lembaga</span>
                                     </a>
-                                </li>
+                                </li>&nbsp;
                                 <li class="nav-item mb-1 me-1">
                                     <a role="tab" class="btn btn-outline-primary" id="pengelola" data-bs-toggle="tab" href="#tab-content-2">
-                                        <i class="fa-solid fa-person-chalkboard"></i><span>Sebutan Pengelola</span>
+                                        <i class="fa-solid fa-person-chalkboard"></i>&nbsp;<span>Sebutan Pengelola</span>
                                     </a>
-                                </li>
+                                </li>&nbsp;
                                 <li class="nav-item mb-1 me-1">
                                     <a role="tab" class="btn btn-outline-primary" id="peminjam" data-bs-toggle="tab" href="#tab-content-3">
-                                        <i class="fa-solid fa-chart-simple"></i>&nbsp; <span>Sistem Pinjaman</span>
+                                        <i class="fa-solid fa-chart-simple"></i>&nbsp;<span>Sistem Pinjaman</span>
                                     </a>
-                                </li>
+                                </li>&nbsp;
                                 <li class="nav-item mb-1 me-1">
                                     <a role="tab" class="btn btn-outline-primary" id="asuransi" data-bs-toggle="tab" href="#tab-content-4">
-                                        <i class="fa-solid fa-money-bill-transfer"></i>&nbsp;<span> Peng. Asuransi</span>
+                                        <i class="fa-solid fa-money-bill-transfer"></i>&nbsp;<span>Peng. Asuransi</span>
                                     </a>
-                                </li>
+                                </li>&nbsp;
                                 <li class="nav-item mb-1 me-1">
                                     <a role="tab" class="btn btn-outline-primary" data-bs-toggle="tab" href="#tab-content-5">
                                         <i class="fa-solid fa-laptop-file"></i>&nbsp;<span>Redaksi SPK</span>
                                     </a>
-                                </li>
+                                </li>&nbsp;
                                 <li class="nav-item mb-1 me-1">
-                                    <a role="tab" class="btn btn-outline-primary" id="logo " data-bs-toggle="tab" href="#tab-content-6">
+                                    <a role="tab" class="btn btn-outline-primary" id="logo" data-bs-toggle="tab" href="#tab-content-6">
                                         <i class="fa-solid fa-panorama"></i>&nbsp;<span>Logo</span>
                                     </a>
-                                </li>
+                                </li>&nbsp;
                                 <li class="nav-item mb-1 me-1">
                                     <a role="tab" class="btn btn-outline-primary" id="whatsapp" data-bs-toggle="tab" href="#tab-content-7">
                                         <i class="fa-solid fa-camera-rotate"></i>&nbsp;<span>Whatsapp</span>
                                     </a>
-                                </li>&nbsp;
+                                </li>
                             </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div> 
+        </div> 
+   
     
     <div class="tab-content">
         <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
@@ -352,7 +335,7 @@
             </div>
         </div>
 
-    </div>
+    </div> --}}
 </div>
 <form action="/pengaturan/whatsapp/{{ $token }}" method="post" id="FormWhatsapp">
     @csrf
@@ -543,4 +526,7 @@
             }
         })
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
 @endsection
