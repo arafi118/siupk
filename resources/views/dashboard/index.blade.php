@@ -1,19 +1,48 @@
 @extends('layouts.base')
 
 @section('content')
+    <form action="" method="post" id="defaultForm">
+        @csrf
+
+        <input type="hidden" name="tgl" id="tgl" value="{{ date('d/m/Y') }}">
+    </form>
+
     <div class="app-main__inner">
+        
         <div class="app-page-title">
             <div class="row">
+                @if ($jumlah_saldo <= $jumlah)
+                    <div class="col-12">
+                        <div class="alert alert-warning text-white" role="alert">
+                            Sepertinya saldo transaksi anda belum tersimpan di aplikasi. Silahkan Klik <a href="#"
+                                data-href="/simpan_saldo?bulan=00&tahun={{ date('Y') }}" class="alert-link"
+                                id="simpanSaldo">Disini</a> untuk menyimpan
+                            saldo transaksi anda
+                        </div>
+                    </div>
+                @endif
                 <div class="col-md-6 col-xl-4">
                     <div class="card mb-3 widget-content">
                         <div class="widget-content-outer">
-                            <div class="widget-content-wrapper">
+                            <div class="widget-content-wrapper" id="btnAktif">
                                 <div class="widget-content-left">
-                                    <div class="widget-heading">Total Orders</div>
-                                    <div class="widget-subheading">Last year expenses</div>
+                                    <div class="widget-heading" style="display: flex; justify-content: space-between; align-items: right; font-size: 11px;">
+                                        <span><h6><b>Pinjaman Aktif</b></h6></span>
+                                        <div class="dropdown text-end">
+                                            <span class="text-xs text-secondary">&nbsp;&nbsp; {{ date('d/m/y') }}</span>
+                                        </div>
+                                    </div> <br>                                   
+                                    <div class="widget-subheading">
+                                        <span class="text-sm text-end text-success font-weight-bolder mt-auto mb-0">
+                                            {{ $pinjaman_anggota }}
+                                            <span class="font-weight-normal text-secondary">Individu</span>
+                                        </span>
+                                    </div>
                                 </div>
                                 <div class="widget-content-right">
-                                    <div class="widget-numbers text-success">1896</div>
+                                    <div class="widget-numbers text-success" style="font-size: 22px;">
+                                        {{ $pinjaman_kelompok }} Kelompok
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -22,13 +51,25 @@
                 <div class="col-md-6 col-xl-4">
                     <div class="card mb-3 widget-content">
                         <div class="widget-content-outer">
-                            <div class="widget-content-wrapper">
+                            <div class="widget-content-wrapper" id="btnpinjaman">
                                 <div class="widget-content-left">
-                                    <div class="widget-heading">Products Sold</div>
-                                    <div class="widget-subheading">Revenue streams</div>
+                                    <div class="widget-heading" style="display: flex; justify-content: space-between; align-items: right; font-size: 11px;">
+                                        <span><h6><b>Proposal Pinjaman</b></h6></span>
+                                        <div class="dropdown text-end">
+                                            <span class="text-xs text-secondary">&nbsp;&nbsp; {{ $waiting }} waiting</span>
+                                        </div>
+                                    </div> <br>
+                                    <div class="widget-subheading">
+                                        <span class="text-sm text-end text-success font-weight-bolder mt-auto mb-0">
+                                            {{ $verifikasi }}
+                                            <span class="font-weight-normal text-secondary">verifikasi</span>
+                                        </span>
+                                    </div>
                                 </div>
                                 <div class="widget-content-right">
-                                    <div class="widget-numbers text-warning">$3M</div>
+                                    <div class="widget-numbers text-warning" style="font-size: 18px;">
+                                            {{ $proposal }} Proposal                                       
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -37,38 +78,30 @@
                 <div class="col-md-6 col-xl-4">
                     <div class="card mb-3 widget-content">
                         <div class="widget-content-outer">
-                            <div class="widget-content-wrapper">
+                            <div class="widget-content-wrapper" id="btnjatuhTempo">
                                 <div class="widget-content-left">
-                                    <div class="widget-heading">Followers</div>
-                                    <div class="widget-subheading">People Interested</div>
+                                    <div class="widget-heading" style="display: flex; justify-content: space-between; align-items: right; font-size: 11px;">
+                                        <span><h6><b>Jatuh tempo</b></h6></span>
+                                        <div class="dropdown text-end">
+                                            <span class="text-xs text-danger">&nbsp;&nbsp; &#33; tagihan</span>
+                                        </div>
+                                    </div> <br>
+                                    <div class="widget-subheading">
+                                        <span class="font-weight-bolder text-success" id="nunggak">
+                                            <div class="spinner-border xs text-info" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </span> menunggak
+                                    </div>
                                 </div>
                                 <div class="widget-content-right">
-                                    <div class="widget-numbers text-danger">45,9%</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="d-xl-none d-lg-block col-md-6 col-xl-4">
-                    <div class="card mb-3 widget-content">
-                        <div class="widget-content-outer">
-                            <div class="widget-content-wrapper">
-                                <div class="widget-content-left">
-                                    <div class="widget-heading">Income</div>
-                                    <div class="widget-subheading">Expected totals</div>
-                                </div>
-                                <div class="widget-content-right">
-                                    <div class="widget-numbers text-focus">$147</div>
-                                </div>
-                            </div>
-                            <div class="widget-progress-wrapper">
-                                <div class="progress-bar-sm progress-bar-animated-alt progress">
-                                    <div class="progress-bar bg-info" role="progressbar" aria-valuenow="54"
-                                        aria-valuemin="0" aria-valuemax="100" style="width: 54%;"></div>
-                                </div>
-                                <div class="progress-sub-label">
-                                    <div class="sub-label-left">Expenses</div>
-                                    <div class="sub-label-right">100%</div>
+                                    <div class="widget-numbers text-danger" style="font-size: 23px;">
+                                        <span id="jatuh_tempo">
+                                            <div class="spinner-border sm text-info" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </span> Hari Ini
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -127,6 +160,17 @@
         </div>
     </div>
 
+    @php
+        $p = $saldo[4];
+        $b = $saldo[5];
+        $surplus = $saldo['surplus'];
+    @endphp
+
+    <textarea name="msgInvoice" id="msgInvoice" class="d-none">{{ Session::get('msg') }}</textarea>
+@endsection
+
+
+@section('modal')
 
     {{-- Modal Jatuh Dempo --}}
     <div class="modal fade" id="jatuhTempo" aria-labelledby="jatuhTempoLabel" aria-hidden="true">
@@ -143,19 +187,19 @@
                                 <a class="nav-link mb-0 px-0 py-1 active text-danger" data-bs-toggle="tab"
                                     href="#tagihan_hari_ini" role="tab" aria-controls="tagihan_hari_ini"
                                     aria-selected="true">
-                                    Hari Ini
+                                    &nbsp;&nbsp;Hari Ini
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link mb-0 px-0 py-1 text-warning" data-bs-toggle="tab" href="#menunggak"
                                     role="tab" aria-controls="menunggak" aria-selected="false">
-                                    Menunggak
+                                    &nbsp;&nbsp;Menunggak
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link mb-0 px-0 py-1 text-info" data-bs-toggle="tab" href="#tagihan"
                                     role="tab" aria-controls="tagihan" aria-selected="false">
-                                    Tagihan
+                                    &nbsp;&nbsp;Tagihan
                                 </a>
                             </li>
                         </ul>
@@ -210,7 +254,7 @@
                                         <form action="/dashboard/tagihan" method="post" id="formTagihan">
                                             @csrf
 
-                                            <div class="alert alert-info text-white">
+                                            <div class="alert alert-info text-black">
                                                 Kirim Whatsapp Tagihan berdasarkan tanggal jatuh tempo. Pastikan nomor HP
                                                 kelompok dapat menerima pesan Whatsapp.
                                             </div>
@@ -239,7 +283,7 @@
                                             <textarea class="form-control d-none" name="pesan_whatsapp" id="pesan_whatsapp"></textarea>
                                         </form>
                                         <div class="d-flex justify-content-end">
-                                            <button type="button" id="CekTagihan" class="btn btn-sm btn-github"
+                                            <button type="button" id="CekTagihan" class="btn btn-sm btn-dark"
                                                 {{ strlen($user->hp) >= 11 ? '' : 'disabled' }}>Preview</button>
                                         </div>
                                     </div>
@@ -274,19 +318,19 @@
                             <li class="nav-item">
                                 <a class="nav-link mb-0 px-0 py-1 active text-info" data-bs-toggle="tab" href="#proposal"
                                     role="tab" aria-controls="proposal" aria-selected="true">
-                                    Proposal
+                                    &nbsp;&nbsp;Proposal
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link mb-0 px-0 py-1 text-danger" data-bs-toggle="tab" href="#verifikasi"
                                     role="tab" aria-controls="verifikasi" aria-selected="false">
-                                    Verifikasi
+                                    &nbsp;&nbsp;Verifikasi
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link mb-0 px-0 py-1 text-warning" data-bs-toggle="tab" href="#waiting"
                                     role="tab" aria-controls="waiting" aria-selected="false">
-                                    Waiting
+                                    &nbsp;&nbsp;Waiting
                                 </a>
                             </li>
                         </ul>
@@ -383,13 +427,13 @@
                                 <a class="nav-link mb-0 px-0 py-1 active text-info" data-bs-toggle="tab"
                                     href="#kelompok_aktif" role="tab" aria-controls="kelompok_aktif"
                                     aria-selected="true">
-                                    Kelompok
+                                    &nbsp;&nbsp;<b>Kelompok</b>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link mb-0 px-0 py-1 text-danger" data-bs-toggle="tab" href="#anggota"
                                     role="tab" aria-controls="anggota" aria-selected="false">
-                                    Anggota
+                                    &nbsp;&nbsp;<b>Anggota</b>
                                 </a>
                             </li>
                         </ul>
@@ -500,17 +544,7 @@
         <input type="hidden" name="laporan" id="laporan" value="">
         <input type="hidden" name="sub_laporan" id="sub_laporan" value="">
     </form>
-
-    @php
-        $p = $saldo[4];
-        $b = $saldo[5];
-        $surplus = $saldo['surplus'];
-    @endphp
-
-    <textarea name="msgInvoice" id="msgInvoice" class="d-none">{{ Session::get('msg') }}</textarea>
 @endsection
-
-
 
 @section('script')
     <script>

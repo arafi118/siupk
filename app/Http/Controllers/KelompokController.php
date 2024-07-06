@@ -45,7 +45,7 @@ class KelompokController extends Controller
                         $status_pinjaman = $pinjaman->status;
 
                         $badge = ($pinjaman->sts) ? $pinjaman->sts->warna_status : '';
-                        $status = '<span class="badge badge-' . $badge . '">' . $status_pinjaman . '</span>';
+                        $status = '<span class="badge bg-' . $badge . '">' . $status_pinjaman . '</span>';
                     }
 
                     return $status;

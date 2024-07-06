@@ -130,7 +130,7 @@ class DashboardController extends Controller
             if ($pinkel->status == 'A') {
                 $table .= '<td align="center">' . $no . '</td>';
                 $table .= '<td align="center">' . Tanggal::tglIndo($pinkel->tgl_cair) . '</td>';
-                $table .= '<td class="text-start d-flex justify-content-between">' . $pinkel->kelompok->nama_kelompok . '(' . $pinkel->jpp->nama_jpp . ') <span class="badge badge-' . $status . '">Loan ID. ' . $pinkel->id . '</span></td>';
+                $table .= '<td class="text-start d-flex justify-content-between">' . $pinkel->kelompok->nama_kelompok . '(' . $pinkel->jpp->nama_jpp . ') <span class="badge bg-' . $status . '">Loan ID. ' . $pinkel->id . '</span></td>';
                 $table .= '<td align="right">' . number_format($pinkel->alokasi) . '</td>';
                 if ($pinkel->saldo) {
                     $table .= '<td align="right">' . number_format($pinkel->saldo->saldo_pokok) . '</td>';
@@ -141,7 +141,7 @@ class DashboardController extends Controller
             } else {
                 $table .= '<td align="center">' . $no . '</td>';
                 $table .= '<td align="center">' . Tanggal::tglIndo($pinkel->$tgl) . '</td>';
-                $table .= '<td class="text-start d-flex justify-content-between">' . $pinkel->kelompok->nama_kelompok . '(' . $pinkel->jpp->nama_jpp . ') <span class="badge badge-' . $status . '">Loan ID. ' . $pinkel->id . '</span></td>';
+                $table .= '<td class="text-start d-flex justify-content-between">' . $pinkel->kelompok->nama_kelompok . '(' . $pinkel->jpp->nama_jpp . ') <span class="badge bg-' . $status . '">Loan ID. ' . $pinkel->id . '</span></td>';
                 $table .= '<td align="right">' . number_format($pinkel->$alokasi) . '</td>';
                 $table .= '<td align="center">' . $pinkel->pinjaman_anggota_count . '</td>';
             }
