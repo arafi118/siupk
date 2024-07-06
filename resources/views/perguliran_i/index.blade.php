@@ -62,8 +62,8 @@
                                     <thead>
                                         <tr>
                                             <th>Loan id</th>
+                                            <th>Nama Anggota V</th>
                                             <th>Desa</th>
-                                            <th>Alamat</th>
                                             <th>Tgl Verified</th>
                                             <th>Verifikasi</th>
                                             <th>Jasa/Jangka</th>
@@ -88,8 +88,8 @@
                                     <thead>
                                         <tr>
                                             <th>Loan id</th>
+                                            <th>Nama Anggota W</th>
                                             <th>Desa</th>
-                                            <th>Alamat</th>
                                             <th>Tgl Waiting</th>
                                             <th>Alokasi</th>
                                             <th>Jasa/Jangka</th>
@@ -112,8 +112,8 @@
                                     <thead>
                                         <tr>
                                             <th>Loan id</th>
+                                            <th>Nama Anggota A</th>
                                             <th>Desa</th>
-                                            <th>Alamat</th>
                                             <th>Tgl Cair</th>
                                             <th>Alokasi</th>
                                             <th>Jasa/Jangka</th>
