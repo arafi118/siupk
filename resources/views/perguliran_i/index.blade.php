@@ -3,28 +3,6 @@
 @section('content')
 
     <div class="app-main__inner">
-        {{-- <div class="main-card mb-3 card">
-            <div class="card-body">
-                <h5 class="card-title"></h5>
-                <ul class="nav nav-pills nav-fill">
-                    <li class="nav-item"><a data-bs-toggle="tab" id="tab-0" href="#Proposal" class="active nav-link">
-                            <i class="fa-solid fa-tree-city"></i> &nbsp; Proposal (P)</a>
-                    </li>
-                    <li class="nav-item"><a data-bs-toggle="tab" id="tab-1" href="#Verified" class="nav-link">
-                            <i class="fa-solid fa-calendar-check-o"></i> &nbsp; Verified (V)</a>
-                    </li>
-                    <li class="nav-item"><a data-bs-toggle="tab" id="tab-2" href="#Waiting" class="nav-link">
-                            <i class="fa-solid fa-tree-city"></i> &nbsp; Waiting (W)</a>
-                    </li>
-                    <li class="nav-item"><a data-bs-toggle="tab" id="tab-3" href="#Aktif" class="nav-link">
-                            <i class="fa-solid fa-tree-city"></i> &nbsp;Aktif (A)</a>
-                    </li>
-                    <li class="nav-item"><a data-bs-toggle="tab" id="tab-4" href="#Lunas" class="nav-link">
-                            <i class="fa-solid fa-tree-city"></i> &nbsp;Lunas (L)</a>
-                    </li>
-                </ul>
-            </div>
-        </div> --}} 
         <div class="card-body">
             <ul class="nav nav-pills nav-fill">
                 <li class="nav-item"><a data-bs-toggle="tab" id="tab-0" href="#Proposal" class="{{ $status == 'p' ? 'active' : '' }} nav-link">
@@ -84,7 +62,7 @@
                                     <thead>
                                         <tr>
                                             <th>Loan id</th>
-                                            <th>Nama Anggota</th>
+                                            <th>Desa</th>
                                             <th>Alamat</th>
                                             <th>Tgl Verified</th>
                                             <th>Verifikasi</th>
@@ -110,7 +88,7 @@
                                     <thead>
                                         <tr>
                                             <th>Loan id</th>
-                                            <th>Nama Anggota</th>
+                                            <th>Desa</th>
                                             <th>Alamat</th>
                                             <th>Tgl Waiting</th>
                                             <th>Alokasi</th>
@@ -134,7 +112,7 @@
                                     <thead>
                                         <tr>
                                             <th>Loan id</th>
-                                            <th>Nama Anggota</th>
+                                            <th>Desa</th>
                                             <th>Alamat</th>
                                             <th>Tgl Cair</th>
                                             <th>Alokasi</th>
@@ -210,8 +188,8 @@
             data: 'anggota.namadepan',
             name: 'anggota.namadepan'
         }, {
-            data: 'anggota.alamat',
-            name: 'anggota.alamat'
+            data: 'anggota.d.nama_desa',
+            name: 'anggota.d.nama_desa'
         }, {
             data: 'tgl_verifikasi',
             name: 'tgl_verifikasi'
@@ -232,8 +210,8 @@
             data: 'anggota.namadepan',
             name: 'anggota.namadepan'
         }, {
-            data: 'anggota.alamat',
-            name: 'anggota.alamat'
+            data: 'anggota.d.nama_desa',
+            name: 'anggota.d.nama_desa'
         }, {
             data: 'tgl_tunggu',
             name: 'tgl_tunggu'
@@ -254,8 +232,8 @@
             data: 'anggota.namadepan',
             name: 'anggota.namadepan'
         }, {
-            data: 'anggota.alamat',
-            name: 'anggota.alamat'
+            data: 'anggota.d.nama_desa',
+            name: 'anggota.d.nama_desa'
         }, {
             data: 'tgl_cair',
             name: 'tgl_cair'
