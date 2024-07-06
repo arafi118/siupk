@@ -24,7 +24,7 @@
         ? true
         : false;
     $id_search = 'cariKelompok';
-    $label = 'Kelompok';
+    $label = 'Pelanggan';
     if (in_array('jurnal_angsuran_individu', $path)) {
         $id_search = 'cariAnggota';
         $label = 'Individu (NIK/Nama Peminjam)';
