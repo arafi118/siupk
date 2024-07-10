@@ -172,7 +172,7 @@
 
 <script>
 
-$('.date').datepicker({
+    $('.date').datepicker({
         dateFormat: 'dd/mm/yy'
     });
     var formatter = new Intl.NumberFormat('en-US', {

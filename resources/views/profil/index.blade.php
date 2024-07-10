@@ -239,6 +239,13 @@
 
 @section('script')
     <script>
+        $('.date').datepicker({
+        dateFormat: 'dd/mm/yy'
+        });
+        var formatter = new Intl.NumberFormat('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        })
         $('.pendidikan').select2({
         theme: 'bootstrap-5'
         });

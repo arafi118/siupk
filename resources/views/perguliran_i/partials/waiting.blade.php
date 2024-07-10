@@ -202,17 +202,17 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="row">
+                    <div class="row">
                         <div class="col-md-4">
                             <div class="position-relative mb-3">
-                                <label for="fee_supplier" class="form-label">Free Dari Supplier</label>
+                                <label for="fee_supplier" class="form-label">Fee Dari Supplier</label>
                                 <input autocomplete="off"  type="text" name="fee_supplier" id="fee_supplier" class="form-control">
                             <small class="text-danger" id="msg_fee_supplier"></small>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="position-relative mb-3">
-                                <label for="fee_agent" class="form-label">Free Agent</label>
+                                <label for="fee_agent" class="form-label">Fee Agent</label>
                                 <input autocomplete="off"  type="text" name="fee_agent" id="fee_agent" class="form-control">
                                     <small class="text-danger" id="msg_fee_agent"></small>
                             </div>
@@ -224,7 +224,7 @@
                             <small class="text-danger" id="msg_depe"></small>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                     <div class="card-body">
                         <button type="button" id="kembaliProposal" class="btn btn-info flex-grow-1 me-2"
                             style="background-color: rgb(240, 148, 0);">

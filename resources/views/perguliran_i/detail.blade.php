@@ -424,66 +424,72 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
                         <input type="hidden" name="id" id="id" value="{{ $perguliran_i->id }}">
                         <input type="hidden" name="_pengajuan" id="_pengajuan" value="{{ $saldo_pokok }}">
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="input-group input-group-static my-3">
-                                    <label for="tgl_resceduling">Tanggal Resceduling</label>
-                                    <input autocomplete="off" type="text" name="tgl_resceduling" id="tgl_resceduling"
-                                        class="form-control date" value="{{ date('d/m/Y') }}">
-                                    <small class="text-danger" id="msg_tgl_resceduling"></small>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="position-relative mb-3">
+                                        <label for="tgl_resceduling">Tanggal Resceduling</label>
+                                        <input autocomplete="off" type="text" name="tgl_resceduling" id="tgl_resceduling"
+                                            class="form-control date" value="{{ date('d/m/Y') }}">
+                                        <small class="text-danger" id="msg_tgl_resceduling"></small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="position-relative mb-3">
+                                        <label for="pengajuan">Pengajuan Rp.</label>
+                                        <input autocomplete="off" type="text" name="pengajuan" id="pengajuan"
+                                            class="form-control money" disabled
+                                            value="{{ number_format($saldo_pokok, 2) }}">
+                                        <small class="text-danger" id="msg_pengajuan"></small>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="input-group input-group-static my-3">
-                                    <label for="pengajuan">Pengajuan Rp.</label>
-                                    <input autocomplete="off" type="text" name="pengajuan" id="pengajuan"
-                                        class="form-control money" disabled
-                                        value="{{ number_format($saldo_pokok, 2) }}">
-                                    <small class="text-danger" id="msg_pengajuan"></small>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="position-relative mb-3">
+                                        <label class="form-label" for="sistem_angsuran_pokok">Sistem Angs. Pokok</label>
+                                        <select class="js-example-basic-single form-control" name="sistem_angsuran_pokok"
+                                            id="sistem_angsuran_pokok">
+                                            @foreach ($sistem_angsuran as $sa)
+                                            <option {{ $perguliran_i->sistem_angsuran == $sa->id ? 'selected' : '' }}
+                                                value="{{ $sa->id }}">
+                                                {{ $sa->nama_sistem }} ({{ $sa->deskripsi_sistem }})
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                        <small class="text-danger" id="msg_sistem_angsuran_pokok"></small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="position-relative mb-3">
+                                        <label class="form-label" for="sistem_angsuran_jasa">Sistem Angs. Jasa</label>
+                                        <select class="js-example-basic-single form-control" name="sistem_angsuran_jasa" id="sistem_angsuran_jasa">
+                                            @foreach ($sistem_angsuran as $sa)
+                                            <option {{ $perguliran_i->sa_jasa == $sa->id ? 'selected' : '' }}
+                                                value="{{ $sa->id }}">
+                                                {{ $sa->nama_sistem }} ({{ $sa->deskripsi_sistem }})
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                        <small class="text-danger" id="msg_sistem_angsuran_jasa"></small>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="my-2">
-                                    <label class="form-label" for="sistem_angsuran_pokok">Sistem Angs. Pokok</label>
-                                    <select class="form-control" name="sistem_angsuran_pokok"
-                                        id="sistem_angsuran_pokok">
-                                        @foreach ($sistem_angsuran as $sa)
-                                        <option {{ $perguliran_i->sistem_angsuran == $sa->id ? 'selected' : '' }}
-                                            value="{{ $sa->id }}">
-                                            {{ $sa->nama_sistem }} ({{ $sa->deskripsi_sistem }})
-                                        </option>
-                                        @endforeach
-                                    </select>
-                                    <small class="text-danger" id="msg_sistem_angsuran_pokok"></small>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="position-relative mb-3">
+                                        <label for="jangka">Jangka</label>
+                                        <input autocomplete="off" type="number" name="jangka" id="jangka"
+                                            class="form-control" value="{{ $perguliran_i->jangka }}">
+                                        <small class="text-danger" id="msg_jangka"></small>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="my-2">
-                                    <label class="form-label" for="sistem_angsuran_jasa">Sistem Angs. Jasa</label>
-                                    <select class="form-control" name="sistem_angsuran_jasa" id="sistem_angsuran_jasa">
-                                        @foreach ($sistem_angsuran as $sa)
-                                        <option {{ $perguliran_i->sa_jasa == $sa->id ? 'selected' : '' }}
-                                            value="{{ $sa->id }}">
-                                            {{ $sa->nama_sistem }} ({{ $sa->deskripsi_sistem }})
-                                        </option>
-                                        @endforeach
-                                    </select>
-                                    <small class="text-danger" id="msg_sistem_angsuran_jasa"></small>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="input-group input-group-static my-3">
-                                    <label for="jangka">Jangka</label>
-                                    <input autocomplete="off" type="number" name="jangka" id="jangka"
-                                        class="form-control" value="{{ $perguliran_i->jangka }}">
-                                    <small class="text-danger" id="msg_jangka"></small>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="input-group input-group-static my-3">
-                                    <label for="pros_jasa">Prosentase Jasa (%)</label>
-                                    <input autocomplete="off" type="number" name="pros_jasa" id="pros_jasa"
-                                        class="form-control" value="{{ $perguliran_i->pros_jasa }}">
-                                    <small class="text-danger" id="msg_pros_jasa"></small>
+                                <div class="col-md-6">
+                                    <div class="position-relative mb-3">
+                                        <label for="pros_jasa">Prosentase Jasa (%)</label>
+                                        <input autocomplete="off" type="number" name="pros_jasa" id="pros_jasa"
+                                            class="form-control" value="{{ $perguliran_i->pros_jasa }}">
+                                        <small class="text-danger" id="msg_pros_jasa"></small>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -516,29 +522,33 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
                         <input type="hidden" name="id" id="id" value="{{ $perguliran_i->id }}">
                         <input type="hidden" name="saldo" id="saldo" value="{{ $saldo_pokok }}">
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="input-group input-group-static my-3">
-                                    <label for="tgl_penghapusan">Tanggal Penghapusan</label>
-                                    <input autocomplete="off" type="date" name="tgl_penghapusan" id="tgl_penghapusan"
-                                        class="form-control date" value="{{ date('d/m/Y') }}">
-                                    <small class="text-danger" id="msg_tgl_penghapusan"></small>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="position-relative mb-3">
+                                        <label for="tgl_penghapusan">Tanggal Penghapusan</label>
+                                        <input autocomplete="off" type="text" name="tgl_penghapusan" id="tgl_penghapusan"
+                                            class="form-control date" value="{{ date('d/m/Y') }}">
+                                        <small class="text-danger" id="msg_tgl_penghapusan"></small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="position-relative mb-3">
+                                        <label for="alokasi">Alokasi Rp.</label>
+                                        <input autocomplete="off" type="text" name="alokasi" id="alokasi"
+                                            class="form-control money" disabled
+                                            value="{{ number_format($saldo_pokok, 2) }}">
+                                        <small class="text-danger" id="msg_alokasi"></small>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="input-group input-group-static my-3">
-                                    <label for="alokasi">Alokasi Rp.</label>
-                                    <input autocomplete="off" type="text" name="alokasi" id="alokasi"
-                                        class="form-control money" disabled
-                                        value="{{ number_format($saldo_pokok, 2) }}">
-                                    <small class="text-danger" id="msg_alokasi"></small>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="input-group input-group-static my-3">
-                                    <label for="alasan_penghapusan">Alasan Penghapusan</label>
-                                    <textarea class="form-control" name="alasan_penghapusan"
-                                        id="alasan_penghapusan"></textarea>
-                                    <small class="text-danger" id="msg_alasan_penghapusan"></small>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="position-relative mb-3">
+                                        <label for="alasan_penghapusan">Alasan Penghapusan</label>
+                                        <textarea class="form-control" name="alasan_penghapusan"
+                                            id="alasan_penghapusan"></textarea>
+                                        <small class="text-danger" id="msg_alasan_penghapusan"></small>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -589,6 +599,17 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
 
     @section('script')
     <script>
+         $('.date').datepicker({
+        dateFormat: 'dd/mm/yy'
+        });
+        var formatter = new Intl.NumberFormat('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        })
+
+        $('.js-example-basic-single').select2({
+            theme: 'bootstrap-5'
+        });
         var formatter = new Intl.NumberFormat('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
