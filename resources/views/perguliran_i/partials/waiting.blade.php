@@ -175,7 +175,7 @@
                             <div class="position-relative mb-3">
                                 <label for="tgl_cair" class="form-label">Tgl Cair</label>
                                 <input autocomplete="off" type="text" name="tgl_cair" id="tgl_cair" class="form-control date"
- value="{{ date('d/m/Y') }}">
+                                    value="{{ date('d/m/Y') }}">
                                 <small class="text-danger" id="msg_tgl_cair"></small>
                             </div>
                         </div>
@@ -202,39 +202,39 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-md-4">
                             <div class="position-relative mb-3">
-                                <label for="tgl_cair" class="form-label">Free Dari Supplier</label>
+                                <label for="fee_supplier" class="form-label">Free Dari Supplier</label>
                                 <input autocomplete="off"  type="text" name="fee_supplier" id="fee_supplier" class="form-control">
                             <small class="text-danger" id="msg_fee_supplier"></small>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="position-relative mb-3">
-                                <label for="alokasi" class="form-label">Free Agen</label>
+                                <label for="fee_agent" class="form-label">Free Agent</label>
                                 <input autocomplete="off"  type="text" name="fee_agent" id="fee_agent" class="form-control">
                                     <small class="text-danger" id="msg_fee_agent"></small>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="position-relative mb-3">
-                                <label for="sumber_pembayaran" class="form-label">Down Payment</label>
+                                <label for="depe" class="form-label">Down Payment</label>
                                 <input autocomplete="off"  type="text" name="depe" id="depe" class="form-control">
                             <small class="text-danger" id="msg_depe"></small>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <button type="button" id="kembaliProposal" class="btn btn-info flex-grow-1 me-2"
-                                style="background-color: rgb(240, 148, 0);">
-                                <b><i class="fa fa-refresh"></i> &nbsp; KEMBALI KE PROPOSAL</b>
-                            </button>
-                            <button type="button" id="Simpan" {{ $pinj_aktif ? 'disabled' : '' }}
-                                class="btn btn-secondary flex-grow-1 ms-2"
-                                style="background-color: rgb(112, 109, 109);">
-                                <b><i class="fa fa-search-plus"></i> &nbsp; SIMPAN KEPUTUSAN PENDANAAN</b>
-                            </button>
-                        </div>
+                    </div> --}}
+                    <div class="card-body">
+                        <button type="button" id="kembaliProposal" class="btn btn-info flex-grow-1 me-2"
+                            style="background-color: rgb(240, 148, 0);">
+                            <b><i class="fa fa-refresh"></i> &nbsp; KEMBALI KE PROPOSAL</b>
+                        </button>
+                        <button type="button" id="Simpan" {{ $pinj_aktif ? 'disabled' : '' }}
+                            class="btn btn-secondary flex-grow-1 ms-2"
+                            style="background-color: rgb(112, 109, 109);">
+                            <b><i class="fa fa-search-plus"></i> &nbsp; SIMPAN KEPUTUSAN PENDANAAN</b>
+                        </button>
                     </div>
                 </div>
             </div>

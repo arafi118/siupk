@@ -57,25 +57,25 @@
                         <a href="/database/desa">
                             <i class="metismenu-icon">
                                 <i class="metismenu-icon pe-7s-note"></i>
-                            </i>D. Data Desa
+                            </i>Data Desa
                         </a>
                     </li>
                     <li>
                         <a href="/database/supplier">
                             <i class="metismenu-icon">
-                            </i>DS. Data Supplier
+                            </i>Data Supplier
                         </a>
                     </li>
                     <li>
                         <a href="/database/penduduk/register_penduduk">
                             <i class="metismenu-icon">
-                            </i>Ra. Register Pelanggan
+                            </i>Register Pelanggan
                         </a>
                     </li>
                     <li>
                         <a href="/database/penduduk">
                             <i class="metismenu-icon">
-                            </i>Da. Data Pelanggan
+                            </i>Data Pelanggan
                         </a>
                     </li>
                 </ul>
