@@ -107,7 +107,7 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Tanggal Lahir</label>
-                                        <input autocomplete="off" type="date" name="tanggal_lahir" id="tanggal_lahir"
+                                        <input autocomplete="off" type="text" name="tanggal_lahir" id="tanggal_lahir"
                                             class="form-control date" value="{{ Tanggal::tglIndo($user->tgl_lahir) }}">
                                         <small class="text-danger" id="msg_tanggal_lahir"></small>
                                         <div class="valid-feedback">
@@ -151,7 +151,7 @@
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label class="form-label">Menjabat Sejak</label>
-                                        <input autocomplete="off" type="date" name="menjabat_sejak" id="menjabat_sejak"
+                                        <input autocomplete="off" type="text" name="menjabat_sejak" id="menjabat_sejak"
                                             class="form-control date" value="{{ Tanggal::tglIndo($user->sejak) }}">
                                         <small class="text-danger" id="msg_menjabat_sejak"></small>
                                         <div class="valid-feedback">

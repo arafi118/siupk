@@ -174,35 +174,6 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
                     </button>
                 </div>
                 @endif
-                {{-- <div class="card-body d-flex justify-content-end">
-                    @if ($perguliran_i->status == 'L' || $perguliran_i->status == 'H')
-                        @if ($perguliran_i->status != 'H')
-                            <button type="button" data-bs-toggle="tooltip"
-                                onclick="window.open('/cetak_keterangan_lunas/{{ $perguliran_i->id }}')" type="button"
-                class="btn-shadow me-3 btn btn-danger">
-                <i class="fa fa-print"></i>&nbsp; Cetak Keterangan Pelunasan
-                </button>
-                @endif
-                <a href="/database/anggota/{{ $perguliran_i->anggota->nia }}" class="btn-shadow me-3 btn btn-primary"
-                    style="float: right;">
-                    <i class="fa fa-reply-all"></i>&nbsp;<b>KEMBALI</b></a>
-                @else
-                @if ($perguliran_i->status == 'P')
-                <button type="button" data-bs-toggle="tooltip" title="EDIT PROPOSAL" data-bs-placement="bottom"
-                    class="btn-shadow me-2 btn btn-success" id="BtnEditProposal">
-                    <i class="fa fa-edit"></i>&nbsp; EDIT PROPOSAL
-                </button>
-                <button type="button" data-bs-toggle="tooltip" title="HAPUS PROPOSAL" data-bs-placement="bottom"
-                    class="btn-shadow btn btn-danger" id="HapusProposal">
-                    <i class="fa fa-trash"></i>&nbsp; HAPUS PROPOSAL
-                </button>&nbsp;&nbsp;
-                @endif
-                <a href="/perguliran_i?status={{ $perguliran_i->status }}" class="btn-shadow me-3 btn btn-primary"
-                    style="float: right;">
-                    <i class="fa fa-reply-all"></i>&nbsp;<b>KEMBALI</b></a>
-                @endif
-            </div> --}}
-
         </div>
     </div>
 

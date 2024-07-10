@@ -1,9 +1,9 @@
 @if ($pinj_aktif)
-<div class="alert alert-danger text-white" role="alert">
+<div class="alert alert-danger text-black" role="alert">
     <span class="text-sm">
         <b>{{ ucwords(strtolower($pinj_aktif->anggota->namadepan)) }}</b> masih memiliki kewajiban
         angsuran pinjaman dengan
-        <a href="/detail_i/{{ $pinj_aktif->id }}" target="_blank" class="alert-link text-white">
+        <a href="/detail_i/{{ $pinj_aktif->id }}" target="_blank" class="alert-link text-black">
             Loan ID. {{ $pinj_aktif->id }}
         </a>
     </span>
@@ -206,24 +206,21 @@
                         <div class="col-md-4">
                             <div class="position-relative mb-3">
                                 <label for="tgl_cair" class="form-label">Free Dari Supplier</label>
-                                <input autocomplete="off"  type="text" name="fee_supplier" id="fee_supplier" class="form-control"
-                                value="{{ $perguliran_i->fee_supplier }}">
+                                <input autocomplete="off"  type="text" name="fee_supplier" id="fee_supplier" class="form-control">
                             <small class="text-danger" id="msg_fee_supplier"></small>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="position-relative mb-3">
                                 <label for="alokasi" class="form-label">Free Agen</label>
-                                <input autocomplete="off"  type="text" name="fee_agent" id="fee_agent" class="form-control"
-                                        value="{{ $perguliran_i->fee_agent }}">
+                                <input autocomplete="off"  type="text" name="fee_agent" id="fee_agent" class="form-control">
                                     <small class="text-danger" id="msg_fee_agent"></small>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="position-relative mb-3">
                                 <label for="sumber_pembayaran" class="form-label">Down Payment</label>
-                                <input autocomplete="off"  type="text" name="depe" id="depe" class="form-control"
-                                value="{{ $perguliran_i->depe }}">
+                                <input autocomplete="off"  type="text" name="depe" id="depe" class="form-control">
                             <small class="text-danger" id="msg_depe"></small>
                             </div>
                         </div>

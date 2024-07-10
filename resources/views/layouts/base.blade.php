@@ -74,7 +74,9 @@
             display: flex !important;
             align-items: center;
             width: 200px;
+            gap: 10px; /* Tambahkan jarak antara label dan input */
         }
+
 
 
         .badge-light-blue {

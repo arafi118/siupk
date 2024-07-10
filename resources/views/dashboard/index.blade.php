@@ -114,10 +114,54 @@
             <div class="col-md-6 col-lg-4">
                 <div class="main-card mb-3 card">
                     <div class="card-body">
-                        <h5 class="card-title">Pie Chart</h5>
-                        <div class="chart-container">
-                            <canvas id="pie-chart"></canvas>
-                        </div>
+                        <h5 class="card-title">Angsuran Hari Ini</h5>
+                            <div class="chart-container">
+                                {{-- <canvas id="pie-chart" class="chart-canvas" height="400" style="display: block; box-sizing: border-box; height: 200px; width: 169.7px;"
+                                width="339"></canvas> --}}
+                                <canvas id="chart-pie" class="chart-canvas" height="400"
+                                style="display: block; box-sizing: border-box; height: 200px; width: 169.7px;"
+                                width="339"></canvas>
+                            </div>
+                                <div class="col-5 my-auto">
+                                    <span class="badge badge-md badge-dot me-4 d-block text-start">
+                                        <i class="bg-info"></i>
+                                        <span class="text-dark text-xs">SPP Pokok</span>
+                                    </span>
+                                    <span class="badge badge-md badge-dot me-4 d-block text-start">
+                                        <i class="bg-success"></i>
+                                        <span class="text-dark text-xs">SPP Jasa</span>
+                                    </span>
+                                    <span class="badge badge-md badge-dot me-4 d-block text-start">
+                                        <i class="bg-dark"></i>
+                                        <span class="text-dark text-xs">UEP Pokok</span>
+                                    </span>
+                                    <span class="badge badge-md badge-dot me-4 d-block text-start">
+                                        <i class="bg-secondary"></i>
+                                        <span class="text-dark text-xs">UEP Jasa</span>
+                                    </span>
+                                    <span class="badge badge-md badge-dot me-4 d-block text-start">
+                                        <i class="bg-danger"></i>
+                                        <span class="text-dark text-xs">PL Pokok</span>
+                                    </span>
+                                    <span class="badge badge-md badge-dot me-4 d-block text-start">
+                                        <i class="bg-warning"></i>
+                                        <span class="text-dark text-xs">PL Jasa</span>
+                                    </span>
+                                </div>
+                                <div class="card-footer pt-0 pb-2 p-3 d-flex align-items-center justify-content-between">
+                                    <div class="w-60">
+                                        <div class="text-sm">
+                                            Total Angsuran
+                                            <div>
+                                                <b>Rp. <span id="total_angsur"></span></b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="w-40 d-flex justify-content-end">
+                                        <button type="button" id="btnDetailAngsuran" class="btn btn-outline-secondary">Detail</button>
+                                    </div>                                    
+                                </div>
+                                
                     </div>
                 </div>
             </div>
@@ -125,7 +169,7 @@
                 <div class="card">
                     <div class="card-header pb-0 p-3">
                         <div class="d-flex justify-content-between">
-                            <h6 class="mb-0">Pendapatan dan Beban</h6>
+                            <h6 class="card-title">Pendapatan dan Beban</h6>
                             <button type="button"
                                 class="btn btn-icon-only btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center"
                                 data-bs-toggle="tooltip" data-bs-placement="left"
