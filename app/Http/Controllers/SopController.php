@@ -153,6 +153,8 @@ class SopController extends Controller
             'sistem',
             'def_fee_supp',
             'def_fee_agen',
+            'hit_fee_agent',
+            'jdwl_angsuran',
             'def_admin'
         ]);
 
@@ -162,6 +164,8 @@ class SopController extends Controller
             'pembulatan'        => 'required',
             'def_fee_supp'      => 'required',
             'def_fee_agen'      => 'required',
+            'hit_fee_agent'     => 'required',
+            'jdwl_angsuran'     => 'required',
             'def_admin'         => 'required'
         ]);
 
@@ -177,6 +181,8 @@ class SopController extends Controller
             'pembulatan'    => $data['pembulatan'],
             'def_fee_supp'  => $data['def_fee_supp'],
             'def_fee_agen'  => $data['def_fee_agen'],
+            'hit_fee_agent' => $data['hit_fee_agent'],
+            'jdwl_angsuran' => $data['jdwl_angsuran'],
             'def_admin'     => $data['def_admin'],
         ]);
 

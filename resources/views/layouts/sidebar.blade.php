@@ -54,10 +54,16 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="/database/desa">
+                        <a href="/database/desa"> 
                             <i class="metismenu-icon">
                                 <i class="metismenu-icon pe-7s-note"></i>
                             </i>Data Desa
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/database/agent">
+                            <i class="metismenu-icon">
+                            </i>Data Agent
                         </a>
                     </li>
                     <li>

@@ -711,12 +711,18 @@
             }
         })
     })
-
+    
     $('#btnLaporanPelunasan').click(function (e) {
         e.preventDefault()
 
         $('input#laporan').val('pelunasan')
         $('#FormLaporanSisipan').submit()
+    })
+
+    $('#btnAcount').click(function (e) {
+        e.preventDefault()
+
+        window.open('/profil')
     })
 
     $('#btnInvoiceTs').click(function (e) {

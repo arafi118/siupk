@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anggota;
+use App\Models\Agent;
 use App\Models\DataPemanfaat;
 use App\Models\JenisJasa;
 use App\Models\JenisProdukPinjaman;
 use App\Models\Kecamatan;
 use App\Models\PinjamanIndividu;
+use App\Models\PinjamanAnggota;
 use App\Models\RealAngsuranI;
 use App\Models\Rekening;
 use App\Models\RencanaAngsuranI;
 use App\Models\SistemAngsuran;
+use App\Models\Supplier;
 use App\Models\Transaksi;
 use App\Models\User;
 use App\Utils\Keuangan;
@@ -268,6 +271,7 @@ class PinjamanIndividuController extends Controller
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $jenis_jasa = JenisJasa::all();
         $sistem_angsuran = SistemAngsuran::all();
+        $agent = Agent::all(); 
         $jenis_pp = JenisProdukPinjaman::where('lokasi', '0')->get();
 
         $jenis_pp_dipilih = $anggota->jenis_produk_pinjaman;
@@ -275,7 +279,7 @@ class PinjamanIndividuController extends Controller
         if ($anggota->pinjaman) {
             $status = $anggota->pinjaman->status;
             if ($status == 'P' || $status == 'V' || $status == 'W') {
-                return view('pinjaman_i.partials.pinjaman')->with(compact('anggota', 'kec', 'jenis_jasa', 'sistem_angsuran', 'jenis_pp', 'jenis_pp_dipilih'));
+                return view('pinjaman_i.partials.pinjaman')->with(compact('anggota', 'kec', 'jenis_jasa', 'sistem_angsuran', 'agent', 'jenis_pp', 'jenis_pp_dipilih'));
             }
         }
 
@@ -298,7 +302,7 @@ class PinjamanIndividuController extends Controller
             ],
         ];
 
-        return view('pinjaman_i.partials.register')->with(compact('anggota', 'kec', 'jenis_jasa', 'sistem_angsuran', 'jenis_pp', 'jenis_pp_dipilih', 'jaminan'));
+        return view('pinjaman_i.partials.register')->with(compact('anggota', 'kec', 'jenis_jasa', 'sistem_angsuran', 'agent', 'jenis_pp', 'jenis_pp_dipilih', 'jaminan'));
     }
 
     public function Jaminan($id)

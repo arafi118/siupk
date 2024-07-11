@@ -203,6 +203,28 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-md-6">
+                            <div class="position-relative mb-3">
+                                <label for="fee_supplier" class="form-label">Nama Agent</label>
+                                <input autocomplete="off" type="text" name="fee_supplier" id="fee_supplier" class="form-control" disabled>
+                            <small class="text-danger" id="msg_fee_supplier"></small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="position-relative mb-3">
+                                <label for="id_supplier" class="form-label">Nama Supplier</label>
+                                <select class="js-example-basic-single form-control" name="id_supplier" id="id_supplier" style="width: 100%;">
+                                    {{-- @foreach ($supplier as $sp)
+                                        <option value="{{ $sp->id }}">
+                                            ( {{ $sp->nomorid}} )  {{ $sp->nama}}
+                                        </option>
+                                    @endforeach --}}
+                                </select>
+                                <small class="text-danger" id="msg_id_supplier"></small>            
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-4">
                             <div class="position-relative mb-3">
                                 <label for="fee_supplier" class="form-label">Fee Dari Supplier</label>

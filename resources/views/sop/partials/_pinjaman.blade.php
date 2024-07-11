@@ -89,22 +89,20 @@
     <div class="row">
         <div class="col-md-6">
             <div class="position-relative mb-3">
-                <label class="form-label"for="kabag_keuangan">Rumus Fee Agen</label><br>
-                    
-                    <input type="radio" id="female" name="gender" value="female">
-                    <label for="female"> Rumus 1 (Pros % Fee x Harga Barang)</label><br>
-                    <input type="radio" id="other" name="gender" value="other">
-                    <label for="other"> Rumus 2 (Pros % Fee x Total Jasa)</label><br><br>
+                <label class="form-label"for="hit_fee_agent">Rumus Fee Agen</label><br>
+                    <input type="radio" id="hit_fee_agent" name="hit_fee_agent" value="1">
+                    <label> Rumus 1 (Pros % Fee x Harga Barang)</label><br>
+                    <input type="radio" id="hit_fee_agent" name="hit_fee_agent" value="2">
+                    <label> Rumus 2 (Pros % Fee x Total Jasa)</label><br><br>
             </div>
         </div>
         <div class="col-md-6">
             <div class="position-relative mb-3">
-                <label class="form-label" for="bkk_bkm">Jenis Angsuran</label><br>
-                
-                <input type="radio" id="female" name="gender" value="female">
-                <label for="female"> Angsuran di Awal</label><br>
-                <input type="radio" id="other" name="gender" value="other">
-                <label for="other"> Angsuran di Akhir Periode</label><br><br>
+                <label class="form-label" for="jdwl_angsuran">Jenis Angsuran</label><br>
+                <input type="radio" id="jdwl_angsuran" name="jdwl_angsuran" value="1">
+                <label> Angsuran di Awal</label><br>
+                <input type="radio" id="jdwl_angsuran" name="jdwl_angsuran" value="2">
+                <label> Angsuran di Akhir Periode</label><br><br>
             </div>
         </div>
     </div>
