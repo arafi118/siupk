@@ -234,9 +234,6 @@
                     Ketua Tim
                    </p>
                     </u>
-                    @if ($pinkel->anggota->d->nip)
-                        <div><small>NIP. {{ $pinkel->anggota->d->nip }}</small></div>
-                    @endif
                 </td>
             </tr>
         </table>

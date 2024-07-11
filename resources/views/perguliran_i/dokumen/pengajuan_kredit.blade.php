@@ -65,7 +65,7 @@
         <td width="30">Nomor</td>
         <td width="5" align="right">:</td>
         <td width="500">
-            ______/{{ $pinkel->jpp->nama_jpp }}/{{ Tanggal::tglRomawi($pinkel->tgl_proposal) }}
+            ______/ ______/{{ Tanggal::tglRomawi($pinkel->tgl_proposal) }}
         </td>
     </tr>
     
@@ -74,7 +74,7 @@
         <td width="30">Perihal</td>
         <td width="5" align="right">:</td>
         <td width="500">
-            <b>Pengajuan Pinjaman {{ $pinkel->jpp->nama_jpp }}</b>
+            <b>Pengajuan Kredit</b>
         </td>
     </tr>
 </table>

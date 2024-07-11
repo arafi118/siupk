@@ -77,8 +77,8 @@
               <td class="style27">: {{$jaminan['nilai_jual_tanah']}}</td>
             </tr>
             <tr>
-              <td  height="10" colspan="3" class="style9"> guna memenuhi persyaratan permohonan pinjaman dengan Nomor Registrasi {{$pinkel->id}} di {{$kec->nama_lembaga_sort}}.
-                    Demikian surat pernyataan kesanggupan ini kami buat dengan penuh kesadaran dan untuk menjadikan
+              <td  height="10" colspan="3" class="style9"> guna memenuhi persyaratan permohonan kredit dengan Nomor Registrasi {{$pinkel->id}} pada {{$kec->nama_lembaga_sort}}.
+                    Demikian surat pernyataan kesanggupan ini saya buat dengan penuh kesadaran dan untuk menjadikan
                     periksa bagi yang berkepentingan.
               </td>
             </tr>
@@ -107,10 +107,10 @@
               <td class="style27">: {{ $jaminan['nilai_jual_kendaraan']}}</td>
             </tr>
             <tr>
-              <td  height="10" colspan="3" class="style9"> guna memenuhi persyaratan permohonan pinjaman dengan Nomor Registrasi {{$pinkel->id}} di {{$kec->nama_lembaga_sort}}.
-                    Demikian surat pernyataan kesanggupan ini kami buat dengan penuh kesadaran dan untuk menjadikan
-                    periksa bagi yang berkepentingan.
-              </td>
+              <td  height="10" colspan="3" class="style9"> guna memenuhi persyaratan permohonan kredit dengan Nomor Registrasi {{$pinkel->id}} pada {{$kec->nama_lembaga_sort}}.
+                Demikian surat pernyataan kesanggupan ini saya buat dengan penuh kesadaran dan untuk menjadikan
+                periksa bagi yang berkepentingan.
+          </td>
             </tr>
         @elseif ($jaminan['jenis_jaminan'] == '3')
             <tr>
@@ -132,10 +132,10 @@
               <td class="style27">: {{$jaminan['nama_kuitansi_penerbit']}}</td>
             </tr>
             <tr>
-              <td  height="10" colspan="3" class="style9"> guna memenuhi persyaratan permohonan pinjaman dengan Nomor Registrasi {{$pinkel->id}} di {{$kec->nama_lembaga_sort}}.
-                    Demikian surat pernyataan kesanggupan ini kami buat dengan penuh kesadaran dan untuk menjadikan
-                    periksa bagi yang berkepentingan.
-              </td>
+              <td  height="10" colspan="3" class="style9"> guna memenuhi persyaratan permohonan kredit dengan Nomor Registrasi {{$pinkel->id}} pada {{$kec->nama_lembaga_sort}}.
+                Demikian surat pernyataan kesanggupan ini saya buat dengan penuh kesadaran dan untuk menjadikan
+                periksa bagi yang berkepentingan.
+          </td>
             </tr>
         @else
             <tr>
@@ -157,10 +157,10 @@
               <td class="style27">: {{$jaminan['nilai_jaminan']}}</td>
             </tr>
             <tr>
-              <td  height="10" colspan="3" class="style9"> guna memenuhi persyaratan permohonan pinjaman dengan Nomor Registrasi {{$pinkel->id}} di {{$kec->nama_lembaga_sort}}.
-                    Demikian surat pernyataan kesanggupan ini kami buat dengan penuh kesadaran dan untuk menjadikan
-                    periksa bagi yang berkepentingan.
-              </td>
+              <td  height="10" colspan="3" class="style9"> guna memenuhi persyaratan permohonan kredit dengan Nomor Registrasi {{$pinkel->id}} pada {{$kec->nama_lembaga_sort}}.
+                Demikian surat pernyataan kesanggupan ini saya buat dengan penuh kesadaran dan untuk menjadikan
+                periksa bagi yang berkepentingan.
+          </td>
             </tr>
       @endif
       <br colspan="3">

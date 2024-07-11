@@ -106,18 +106,18 @@
             </div>
         </div>
     </div>
-    {{-- <div class="row">
+    <div class="row">
         <div class="col-md-12">
             <div class="position-relative mb-3">
-                <label class="form-label"for="kabag_keuangan">Rumus Fee Agen</label><br>
+                <label class="form-label"for="hak_kredit">Jumlah Maksimal Kredit (Per Pelanggan)</label><br>
                     
-                    <input type="radio" id="female" name="gender" value="female">
-                    <label for="female">Hanya satu</label><br>
-                    <input type="radio" id="other" name="gender" value="other">
-                    <label for="other">Lebih dari satu</label><br><br>
+                    <input type="radio" id="hak_kredit" name="hak_kredit" value="1">
+                    <label>Hanya satu</label><br>
+                    <input type="radio" id="hak_kredit" name="hak_kredit" value="2">
+                    <label>Lebih dari satu</label><br><br>
             </div>
         </div>
-    </div> --}}
+    </div>
 </form>
 
 <div class="d-flex justify-content-end">

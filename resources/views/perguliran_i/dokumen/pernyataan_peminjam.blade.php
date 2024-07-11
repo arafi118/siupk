@@ -9,7 +9,7 @@
         <tr class="b">
             <td colspan="3" align="center">
                 <div style="font-size: 18px;">
-                    <b>SURAT PERNYATAAN PEMINJAM</b>
+                    <b>SURAT PERNYATAAN</b>
                 </div>
             </td>
         </tr>
@@ -33,7 +33,7 @@
 
         </tr>
         <tr>
-            <td>Tempat, Tangal lahir</td>
+            <td>Tempat, Tgl. lahir</td>
             <td align="right">:</td>
             <td>{{ $pinkel->anggota->tempat_lahir }}
             {{ Tanggal::tglLatin($pinkel->anggota->tgl_lahir) }} 
@@ -47,7 +47,9 @@
         <tr>
             <td>Alamat</td>
             <td align="right">:</td>
-            <td>{{ $pinkel->anggota->d->nama_desa}}</td>
+            <td>{{ $pinkel->anggota->alamat}} {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }}
+                {{ $pinkel->anggota->d->desa }} {{$kec->sebutan_kec }} {{ $kec->nama_kec }}
+                {{ $nama_kabupaten }} </td>
         </tr>
         <tr>
             <td>Jenis Usaha</td>
@@ -62,9 +64,7 @@
 
                 <ol>
                     <li>
-                    Saya selaku Pemanfaat pinjaman individu pada Kecamatan {{ $kec->nama_kec }}
-                        melalui  {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }} {{ $pinkel->anggota->d->nama_desa }}, Kecamatan {{ $kec->nama_kec }}
-                        {{ $nama_kabupaten }}, benar-benar telah meminjam uang sebesar Rp. _____________________,
+                    Saya selaku Nasabah {{ $kec->nama_lembaga_sort }} menyatakan benar-benar telah meminjam uang sebesar <br> Rp. _____________________,
                         dengan jaminan berupa barang sebagai berikut :
                         <ul style="list-style: disc;">
                             @for ($i = 0; $i < 3; $i++)

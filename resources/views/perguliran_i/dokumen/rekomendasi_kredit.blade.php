@@ -102,7 +102,7 @@
             <tr>
                 <td align="center">
                     <div style="font-size: 18px;">
-                        <b>REKOMENDASI KREDIT {{ $pinkel->jpp->nama_jpp }}</b>
+                        <b>REKOMENDASI KREDIT</b>
                     </div>
                     <div style="font-size: 12px;">
                         Nomor: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
@@ -171,7 +171,7 @@
             <tr>
                 <td align="justify" colspan="3">
                 Benar-benar warga Desa {{ $pinkel->anggota->d->nama_desa}} 
-                yang berkepribadian baik dan kami memberikan rekomendasi atas pengajuan kredit Modal {{ $pinkel->jpp->deskripsi_jpp }} ({{ $pinkel->jpp->nama_jpp }}) pada
+                yang berkepribadian baik dan kami memberikan rekomendasi atas pengajuan kredit kepada
                     {{ $kec->nama_lembaga_sort }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }}
                     {{ $nama_kabupaten }}.
                 </td>

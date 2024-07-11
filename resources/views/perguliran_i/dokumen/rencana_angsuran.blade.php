@@ -41,16 +41,12 @@
         <tr class="b">
             <td colspan="3" align="center">
                 <div style="font-size: 18px;">
-                    <b>RENCANA ANGSURAN PINJAMAN INDIVIDU {{ $pinkel->jpp->nama_jpp }} </b>
+                    <b>RENCANA ANGSURAN</b>
                 </div>
                 <div style="font-size: 16px;">
-<<<<<<< HEAD
                     <b>
-                        {{ strtoupper($pinkel->anggota->namadepan) }}
-                        ( NIK {{ strtoupper($pinkel->anggota->nik) }} )
-=======
-                    <b>&nbsp;
->>>>>>> c8014486a1beef4ddc091f3e97a67c2bc5a0f280
+                       &nbsp;
+                    
                     </b>
                 </div>
             </td>
@@ -61,7 +57,7 @@
     </table>
     <table border="0" width="100%" align="center"cellspacing="0" cellpadding="0" style="font-size: 11px;">
         <tr>
-            <td width="90">Nama calon pemanfaat</td>
+            <td width="90">Nama calon Nasabah</td>
             <td width="5" align="center">:</td>
             <td>
                 <b>{{ $pinkel->anggota->namadepan }} </b>
@@ -97,7 +93,7 @@
             </td>
         </tr>
         <tr>
-            <td>Alokasi Pinjaman</td>
+            <td>Nilai Kredit</td>
             <td align="center">:</td>
             <td>
                 <b>Rp. {{ number_format($alokasi_pinjaman) }}</b>
@@ -167,42 +163,32 @@
                         <td class="l t b r" width="13%" align="right">{{ number_format($saldo_jasa) }}</td>
                     </tr>
                 </table>
-
+<br>
                 <table class="p" border="0" width="100%" cellspacing="0" cellpadding="0"
                     style="font-size: 11px;">
                    
                     <tr>
-                        <td align="center" colspan="5">&nbsp;</td>
-                        <td align="center" colspan="3">
+                        <td width="55%">&nbsp;</td>
+                        <td align="center">
                             {{ $kec->nama_kec }}, {{ Tanggal::tglLatin($tgl) }}
                         </td>
                     </tr>
                    
                     <tr>
-                        <td align="center" colspan="5">
-                            {{ $kec->sebutan_level_1 }} {{ $kec->nama_lembaga_sort }}
-                        </td>
-                        <td align="center" colspan="3">
-<<<<<<< HEAD
+                        <td width="55%">&nbsp;</td>
+                        <td align="center">
                             Pemanfaat
-=======
-                            Pemanfaat 
->>>>>>> c8014486a1beef4ddc091f3e97a67c2bc5a0f280
                         </td>
                         
                     </tr>
                     <tr>
-                        <td align="center" colspan="8" height="40">&nbsp;</td>
+                        <td width="55%">&nbsp;</td>
+                        <td align="center">&nbsp;</td>
                     </tr>
                     <tr>
-
-                        <td align="center" colspan="3">
-<<<<<<< HEAD
+                        <td width="55%">&nbsp;</td>
+                        <td align="center">
                             <b>{{ $pinkel->anggota->namadepan }}</b>
-=======
-                            <b>{{ $pinkel->anggota->ketua }}
-                                &nbsp;&nbsp;&nbsp;{{ $pinkel->anggota->namadepan }} </b>
->>>>>>> c8014486a1beef4ddc091f3e97a67c2bc5a0f280
                         </td>
                     </tr>
                 </table>

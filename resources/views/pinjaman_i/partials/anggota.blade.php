@@ -61,7 +61,7 @@
     </div>
     <div class="col-md-4 position-relative mb-3 resizeable">
         <div class="d-grid w-100 mb-2">
-            <a href="/database/penduduk/register_penduduk" class="btn btn-info btn-sm" style="width: 300px; height: 35px;">Register Individu</a>
+            <a href="/database/penduduk/register_penduduk" class="btn btn-info btn-sm" style="width: 300px; height: 35px;">Reg. Calon Nasabah</a>
         </div>
     </div>
     

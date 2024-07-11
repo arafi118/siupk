@@ -75,13 +75,13 @@
                     <li>
                         <a href="/database/penduduk/register_penduduk">
                             <i class="metismenu-icon">
-                            </i>Register Pelanggan
+                            </i>Register Nasabah
                         </a>
                     </li>
                     <li>
                         <a href="/database/penduduk">
                             <i class="metismenu-icon">
-                            </i>Data Pelanggan
+                            </i>Data Nasabah
                         </a>
                     </li>
                 </ul>
@@ -96,13 +96,13 @@
                     <li>
                         <a href="/register_proposal_i">
                             <i class="metismenu-icon">
-                            </i>Register Pinjaman
+                            </i>Register Kredit
                         </a>
                     </li>
                     <li>
                         <a href="/perguliran_i">
                             <i class="metismenu-icon">
-                            </i>Status Pinjaman
+                            </i>Status Kredit
                         </a>
                     </li>
                 </ul>
