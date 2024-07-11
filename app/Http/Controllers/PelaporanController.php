@@ -17,6 +17,7 @@ use App\Models\Kelompok;
 use App\Models\PinjamanKelompok;
 use App\Models\PinjamanIndividu;
 use App\Models\Rekening;
+use App\Models\SubLaporan;
 use App\Models\Saldo;
 use App\Models\Transaksi;
 use App\Models\User;
@@ -44,6 +45,12 @@ class PelaporanController extends Controller
         if ($file == 3) {
             $rekening = Rekening::orderBy('kode_akun', 'ASC')->get();
             return view('pelaporan.partials.sub_laporan')->with(compact('file', 'rekening'));
+        }
+
+        if ($file == 20) {
+            $ojk = SubLaporan::orderBy('id')->get();
+
+            return view('pelaporan.partials.sub_laporan')->with(compact('file', 'ojk'));
         }
 
         if ($file == 'calk') {
@@ -213,11 +220,14 @@ class PelaporanController extends Controller
 
         $file = $request->laporan;
         if ($file == 3) {
-            $laporan = explode('_', $request->sub_laporan);
+            $laporan = explode('_', $request->sub_laporan); 
             $file = $laporan[0];
 
             $data['kode_akun'] = $laporan[1];
             $data['laporan'] = 'buku_besar ' . $laporan[1];
+            return $this->$file($data);
+        } elseif ($file == 20) {
+            $file = $request->sub_laporan;
             return $this->$file($data);
         } elseif ($file == 5) {
             $file = $request->sub_laporan;
@@ -260,6 +270,100 @@ class PelaporanController extends Controller
         } else {
             return $view;
         }
+    }
+    private function cv(array $data)
+    {
+        $thn = $data['tahun'];
+        $bln = $data['bulan'];
+        $hari = $data['hari'];
+
+        $tgl = $thn . '-' . $bln . '-' . $hari;
+        $data['judul'] = 'Laporan Keuangan';
+        $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
+        if ($data['bulanan']) {
+            $data['judul'] = 'Laporan Keuangan';
+            $data['sub_judul'] = 'Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+        }
+
+        $view = view('pelaporan.view.ojk.cover_o', $data)->render();
+
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view);
+            return $pdf->stream();
+        } else {
+            return $view;
+        }
+    }
+    private function pf(array $data)
+    {
+        $thn = $data['tahun'];
+        $bln = $data['bulan'];
+        $hari = $data['hari'];
+
+        $tgl = $thn . '-' . $bln . '-' . $hari;
+        $data['judul'] = 'Laporan Keuangan';
+        $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
+        if ($data['bulanan']) {
+            $data['judul'] = 'Laporan Keuangan';
+            $data['sub_judul'] = 'Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+        }
+
+        $view = view('pelaporan.view.ojk.profil_o', $data)->render();
+
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view);
+            return $pdf->stream();
+        } else {
+            return $view;
+        }
+    }
+
+
+    private function OJKN(array $data) 
+    {
+        $data['keuangan'] = new Keuangan;
+        $data['subsaldo'] = 0;
+        $data['categories'] = '';
+        $data['reks'] = explode("#", $rows['rekening']);
+
+        if ($data['reks'][0] == "C") { /////////////////////            133
+            $data['susut'] = DB::statement("select sum(r.$tb) AS jrl, r.kd_rekening AS kd_rekening from $table_rekening r WHERE  r.kd_rekening='215.01'");
+            $data['rdua'] = DB::statement("select sum(r.$tb) AS jrl, r.kd_rekening AS kd_rekening from $table_rekening r WHERE r.kd_rekening='215.02'");
+            $data['satu'] = DB::statement("select (sum(jumlah)) AS jrl from $table_transaksi t, $table_rekening r  WHERE $kondisi AND t.rekening_kredit=r.kd_rekening AND t.rekening_kredit='215.01'");
+            $data['dua'] = DB::statement("select (sum(jumlah)) AS jrl from $table_transaksi t, $table_rekening r  WHERE $kondisi AND t.rekening_debit=r.kd_rekening AND t.rekening_debit='215.02' ");
+            $data['subsaldo'] = (($rdata['satu']['jrl'] - $data['rdua']['jrl']) + ($data['satu']['jrl'] - $data['dua']['jrl'])) * -1;
+        } elseif ($data['reks'][0] == "A") { /////////////////////////   140
+            $data['raset'] = DB::statement("select sum(r.$tb) AS jaset, r.kd_rekening AS kd_rekening from $table_rekening r WHERE r.kd_rekening='141.01' OR r.kd_rekening='151.01' OR r.kd_rekening='161.01'");
+            $data['aset'] = DB::statement("select (sum(jumlah)) AS jaset from $table_transaksi t, $table_rekening r WHERE $kondisi AND t.rekening_debit=r.kd_rekening AND (t.rekening_debit='141.01' OR t.rekening_debit='151.01' OR t.rekening_debit='161.01')");
+            $data['subsaldo'] = $data['aset']['jaset'] + $data['raset']['jaset'];
+        } elseif ($data['reks'][0] == "P") { /////////////////////       141
+            $data['rsusut'] = DB::statement("select sum(r.$tb) AS jsusut, r.kd_rekening AS kd_rekening from $table_rekening r WHERE r.kd_rekening='141.02' OR r.kd_rekening='151.02' OR r.kd_rekening='161.02' OR r.kd_rekening='141.03' OR r.kd_rekening='151.03' OR r.kd_rekening='161.03'");
+            $data['susut'] = DB::statement("select (sum(jumlah)) AS jsusut from $table_transaksi t, $table_rekening r  WHERE $kondisi AND t.rekening_kredit=r.kd_rekening AND (t.rekening_kredit='141.02' OR t.rekening_kredit='151.02' OR t.rekening_kredit='161.02' OR t.rekening_kredit='141.03' OR t.rekening_kredit='151.03' OR t.rekening_kredit='161.03')");
+            $data['subsaldo'] = ($data['rsusut']['jsusut'] + $data['susut']['jsusut']) * -1;
+        } elseif ($data['reks'][0] == "R") { /////////////////////       342
+            $data['rempat'] = DB::statement("select sum(r.$tb) AS jrl, r.kd_rekening AS kd_rekening from $table_rekening r WHERE  SUBSTR(r.kd_rekening,1,1)='4'");
+            $data['rlima'] = DB::statement("select sum(r.$tb) AS jrl, r.kd_rekening AS kd_rekening from $table_rekening r WHERE SUBSTR(r.kd_rekening,1,1)='5'");
+            $data['empat'] = DB::statement("select (sum(jumlah)) AS jrl from $table_transaksi t, $table_rekening r  WHERE $kondisi AND t.rekening_kredit=r.kd_rekening AND SUBSTR(t.rekening_kredit,1,1)='4'");
+            $data['lima'] = DB::statement("select (sum(jumlah)) AS jrl from $table_transaksi t, $table_rekening r  WHERE $kondisi AND t.rekening_debit=r.kd_rekening AND SUBSTR(t.rekening_debit,1,1)='5' ");
+            $data['subsaldo'] = (($data['rempat']['jrl'] - $data['rlima']['jrl']) + ($data['empat']['jrl'] - $data['lima']['jrl'])) * -1;
+        } else {
+            foreach ($data['reks'] as $rek) {
+                $rek = trim($rek);
+                $saldo = saldo("$tgl_kondisi-" . $rek);
+                $data['subsaldo'] = $data['subsaldo'] + $saldo;
+            
+            }
+        }
+                
+        $view = view('pelaporan.view.ojk.pelaporan_ojk', $data)->render();
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view);
+            return $pdf->stream();
+        } else {
+            return $view;
+        }
+
+
     }
 
     private function surat_pengantar(array $data)
