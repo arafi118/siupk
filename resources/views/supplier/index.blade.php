@@ -37,7 +37,6 @@
                                     <th>Alamat</th>
                                     <th>Brand</th>
                                     <th>No HP</th>
-                                    <th>Ins</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -96,10 +95,6 @@
             {
                 data: 'nohp',
                 name: 'nohp'
-            },
-            {
-                data: 'ins',
-                name: 'ins'
             }
         ]
     });

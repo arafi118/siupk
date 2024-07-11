@@ -19,7 +19,7 @@
                         <small class="text-danger" id="msg_nomorid"></small>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <div class="position-relative mb-3">
                         <label for="nama" class="form-label">Nama</label>
                         <input autocomplete="off" type="text" name="nama" id="nama"
@@ -27,7 +27,7 @@
                         <small class="text-danger" id="msg_nama"></small>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <div class="position-relative mb-3">
                         <label for="alamat" class="form-label">Alamat</label>
                         <input autocomplete="off" type="text" name="alamat" id="alamat" class="form-control"
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="DOMContentLoaded position-relative mb-3">
                         <label for="brand" class="form-label">Brand</label>
                         <input autocomplete="off" type="text" name="brand" id="brand"
@@ -45,20 +45,12 @@
                         <small class="text-danger" id="msg_brand"></small>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="position-relative mb-3">
                         <label for="nohp" class="form-label">Nomor HP</label>
                         <input autocomplete="off" type="text" name="nohp" id="nohp"
                             class="form-control money" value="{{$supplier->nohp}}">
                         <small class="text-danger" id="msg_nohp"></small>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="position-relative mb-3">
-                        <label for="ins" class="form-label">Ins</label>
-                        <input autocomplete="off" type="text" name="ins" id="ins" class="form-control"
-                            value="{{ $supplier->ins }}">
-                        <small class="text-danger" id="msg_ins"></small>
                     </div>
                 </div>
             </div>

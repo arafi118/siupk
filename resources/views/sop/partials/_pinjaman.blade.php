@@ -106,7 +106,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-md-12">
             <div class="position-relative mb-3">
                 <label class="form-label"for="kabag_keuangan">Rumus Fee Agen</label><br>
@@ -117,7 +117,7 @@
                     <label for="other">Lebih dari satu</label><br><br>
             </div>
         </div>
-    </div>
+    </div> --}}
 </form>
 
 <div class="d-flex justify-content-end">

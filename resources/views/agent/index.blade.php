@@ -33,12 +33,10 @@
                             <thead>
                                 <tr>
                                     <th>Nomor ID</th>
-                                    <th>Agent</th>
+                                    <th>Nama</th>
+                                    <th>Desa</th>
                                     <th>Alamat</th>
                                     <th>No HP</th>
-                                    <th>Username</th>
-                                    <th>Password</th>
-                                    <th>Ins</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -87,6 +85,10 @@
                 name: 'agent'
             },
             {
+                data: 'desa',
+                nama: 'desa'
+            },
+            {
                 data: 'alamat',
                 name: 'alamat'
             },
@@ -94,18 +96,6 @@
                 data: 'nohp',
                 name: 'nohp'
             },
-            {
-                data: 'uname',
-                nama: 'uname'
-            },
-            {
-                data: 'pass',
-                nama: 'pass'
-            },
-            {
-                data: 'ins',
-                name: 'ins'
-            }
         ]
     });
 

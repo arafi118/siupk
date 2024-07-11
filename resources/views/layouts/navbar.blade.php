@@ -91,13 +91,14 @@
                                 </a>
                                 <div tabindex="-1" role="menu" aria-hidden="true"
                                     class="dropdown-menu dropdown-menu-right">
-                                    <button type="button" tabindex="0" class="dropdown-item" id="btnAcount">Account</button>
-                                    <button type="button" tabindex="0" class="dropdown-item" id="btnLaporanPelunasan">Reminder</button>
-                                    <button type="button" tabindex="0" class="dropdown-item" id="btnInvoiceTs">TS dan Invoice</button>
-                                    <button type="button" tabindex="0" class="dropdown-item">Maintenance dan Server</button>
-                                    <button type="button" tabindex="0" class="dropdown-item" id="btnLaporanMou">MoU</button>
+                                    
+                                    <button type="button" tabindex="0" class="dropdown-item" id="btnAcount"><i class="pe-7s-users">&nbsp;</i>&nbsp;Account</button>
+                                    <button type="button" tabindex="0" class="dropdown-item" id="btnLaporanPelunasan"><i class="pe-7s-cloud-download">&nbsp;</i>&nbsp;Reminder</button>
+                                    <button type="button" tabindex="0" class="dropdown-item" id="btnInvoiceTs"><i class="pe-7s-monitor">&nbsp;</i>&nbsp;TS dan Invoice</button>
+                                    <button type="button" tabindex="0" class="dropdown-item"><i class="pe-7s-mail">&nbsp;</i>&nbsp;Maintenance dan Server</button>
+                                    <button type="button" tabindex="0" class="dropdown-item" id="btnLaporanMou"><i class="pe-7s-comment">&nbsp;</i>&nbsp;MoU</button>
                                     <div tabindex="-1" class="dropdown-divider"></div>
-                                    <button type="button" tabindex="0" class="dropdown-item" id="logout">Logout</button>
+                                    <button type="button" tabindex="0" class="dropdown-item" id="logout"><i class="pe-7s-next-2">&nbsp;</i>&nbsp;Logout</button>
                                 </div>
                             </div>
                         </div>
