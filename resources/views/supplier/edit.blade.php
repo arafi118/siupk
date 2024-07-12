@@ -11,7 +11,7 @@
             @method('PUT')
             <input type="hidden" name="supplier" id="supplier" value="{{ $supplier->id }}">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <div class="DOMContentLoaded position-relative mb-3">
                         <label for="nomorid" class="form-label">Nomor ID</label>
                         <input autocomplete="off" type="text" name="nomorid" id="nomorid"

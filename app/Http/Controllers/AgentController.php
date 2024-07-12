@@ -99,20 +99,14 @@ class AgentController extends Controller
             'agent',
             'alamat',
             'desa',
-            'nohp',
-            'uname',
-            'pass',
-            'ins' 
+            'nohp'
         ]);
         $rules = [
             'nomorid'   => 'required',
             'agent'     => 'required',
             'alamat'    => 'required',
             'desa'      => 'required',
-            'nohp'      => 'required',
-            'uname'     => 'required',
-            'pass'      => 'required',
-            'ins'       => 'required'
+            'nohp'      => 'required'
         ];
 
         $validate = Validator::make($data,$rules);
@@ -127,10 +121,7 @@ class AgentController extends Controller
             'agent'     => $request->agent,
             'alamat'    => $request->alamat,
             'desa'      => $request->desa,
-            'nohp'      => $request->nohp,
-            'uname'     => $request->uname,
-            'pass'      => $request->pass,
-            'ins'       => $request->ins
+            'nohp'      => $request->nohp
         ];
 
         $agent = agent::create($insert);
@@ -166,10 +157,7 @@ class AgentController extends Controller
             "agent",
             "alamat",
             "desa",
-            "nohp",
-            "uname",
-            "pass",
-            "ins"
+            "nohp"
             
         ]);
 
@@ -178,10 +166,7 @@ class AgentController extends Controller
             "agent"     => 'required',
             "alamat"    => 'required',
             "desa"      => 'required',
-            "nohp"      => 'required',
-            "uname"     => 'required',
-            "pass"      => 'required',
-            "ins"       => 'required'
+            "nohp"      => 'required'
             
         ]);
 

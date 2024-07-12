@@ -99,16 +99,14 @@ class SupplierController extends Controller
             'nama',
             'alamat',
             'brand',
-            'nohp',
-            'ins' 
+            'nohp'
         ]);
         $rules = [
             'nomorid' => 'required',
             'nama' => 'required',
             'alamat' => 'required',
             'brand' => 'required',
-            'nohp' => 'required',
-            'ins' => 'required'
+            'nohp' => 'required'
         ];
 
         $validate = Validator::make($data,$rules);
@@ -123,8 +121,7 @@ class SupplierController extends Controller
             'nama' => $request->nama,
             'alamat' => $request->alamat,
             'brand' => $request->brand,
-            'nohp' => $request->nohp,
-            'ins' => $request->ins,
+            'nohp' => $request->nohp
         ];
 
         $supplier = supplier::create($insert);
@@ -160,8 +157,7 @@ class SupplierController extends Controller
             "nama",
             "alamat",
             "brand",
-            "nohp",
-            "ins"
+            "nohp"
             
         ]);
 
@@ -170,8 +166,7 @@ class SupplierController extends Controller
             "nama" => 'required',
             "alamat" => 'required',
             "brand" => 'required',
-            "nohp" => 'required',
-            "ins" => 'required'
+            "nohp" => 'required'
             
         ]);
 
