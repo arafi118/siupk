@@ -1854,8 +1854,7 @@ class PinjamanIndividuController extends Controller
             'jpp',
             'anggota',
             'anggota.d',
-            'anggota.d.sebutan_desa',
-            'pinjaman_anggota.anggota'
+            'anggota.d.sebutan_desa'
         ])->first();
 
         $data['judul'] = 'Daftar Hadir Pencairan (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
@@ -2017,8 +2016,7 @@ class PinjamanIndividuController extends Controller
             'anggota',
             'anggota.d',
             'anggota.d.sebutan_desa',
-            'pinjaman_anggota',
-            'pinjaman_anggota.anggota'
+          
         ])->first();
 
         $data['dir'] = User::where([
