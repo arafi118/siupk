@@ -55,7 +55,7 @@ class PinjamanIndividuController extends Controller
                     $jasa = number_format($pros / $jangka, 2);
                     return $jasa . '% / ' . $jangka . ' bln';
                 })
-                ->editColumn('namadepan', function ($row) {
+                ->editColumn('anggota.namadepan', function ($row) {
                     $jpp = $row->jpp;
                     $status = $row->sts->warna_status;
 
@@ -71,7 +71,7 @@ class PinjamanIndividuController extends Controller
                 ->editColumn('anggota.alamat', function ($row) {
                     return $row->anggota->alamat . ' ' . $row->anggota->d->nama_desa;
                 })
-                ->rawColumns(['namadepan'])
+                ->rawColumns(['anggota.namadepan'])
                 ->make(true);
         }
     }
@@ -91,7 +91,7 @@ class PinjamanIndividuController extends Controller
                     $jasa = number_format($pros / $jangka, 2);
                     return $jasa . '% / ' . $jangka . ' bln';
                 })
-                ->editColumn('namadepan', function ($row) {
+                ->editColumn('anggota.namadepan', function ($row) {
                     $jpp = $row->jpp;
                     $status = $row->sts->warna_status;
 
@@ -107,7 +107,7 @@ class PinjamanIndividuController extends Controller
                 ->editColumn('anggota.alamat', function ($row) {
                     return $row->anggota->alamat . ' ' . $row->anggota->d->nama_desa;
                 })
-                ->rawColumns(['namadepan'])
+                ->rawColumns(['anggota.namadepan'])
                 ->make(true);
         }
     }
@@ -127,7 +127,7 @@ class PinjamanIndividuController extends Controller
                     $jasa = number_format($pros / $jangka, 2);
                     return $jasa . '% / ' . $jangka . ' bln';
                 })
-                ->editColumn('namadepan', function ($row) {
+                ->editColumn('anggota.namadepan', function ($row) {
                     $jpp = $row->jpp;
                     $status = $row->sts->warna_status;
 
@@ -143,7 +143,7 @@ class PinjamanIndividuController extends Controller
                 ->editColumn('anggota.alamat', function ($row) {
                     return $row->anggota->alamat . ' ' . $row->anggota->d->nama_desa;
                 })
-                ->rawColumns(['namadepan'])
+                ->rawColumns(['anggota.namadepan'])
                 ->make(true);
         }
     }
@@ -163,7 +163,7 @@ class PinjamanIndividuController extends Controller
                     $jasa = number_format($pros / $jangka, 2);
                     return $jasa . '% / ' . $jangka . ' bln';
                 })
-                ->editColumn('namadepan', function ($row) {
+                ->editColumn('anggota.namadepan', function ($row) {
                     $jpp = $row->jpp;
                     $status = $row->sts->warna_status;
 
@@ -179,7 +179,7 @@ class PinjamanIndividuController extends Controller
                 ->editColumn('anggota.alamat', function ($row) {
                     return $row->anggota->alamat . ' ' . $row->anggota->d->nama_desa;
                 })
-                ->rawColumns(['namadepan'])
+                ->rawColumns(['anggota.namadepan'])
                 ->make(true);
         }
     }
@@ -201,7 +201,7 @@ class PinjamanIndividuController extends Controller
                     $jasa = number_format($pros / $jangka, 2);
                     return $jasa . '% / ' . $jangka . ' bln';
                 })
-                ->editColumn('namadepan', function ($row) {
+                ->editColumn('anggota.namadepan', function ($row) {
                     $jpp = $row->jpp;
                     $status = $row->sts->warna_status;
 
@@ -214,7 +214,7 @@ class PinjamanIndividuController extends Controller
                 ->editColumn('alokasi', function ($row) {
                     return number_format($row->alokasi);
                 })
-                ->rawColumns(['namadepan'])
+                ->rawColumns(['anggota.namadepan'])
                 ->make(true);
         }
     }
