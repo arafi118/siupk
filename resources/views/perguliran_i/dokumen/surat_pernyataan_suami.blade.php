@@ -90,10 +90,10 @@
         <tr>
             <td colspan="4" align="justify">
                 <p>
-                    Menerangkan dengan sebenarnya, bahwa saya mengetahui dan menyetujui pinjaman sebesar Rp.
+                    Menerangkan dengan sebenarnya, bahwa saya mengetahui dan menyetujui permohonan kredit sebesar Rp.
                     {{ number_format($pinkel->alokasi) }} ({{ $keuangan->terbilang($pinkel->alokasi) }} Rupiah) yang akan
                     diajukan kepada {{ $kec->nama_lembaga_sort }} Sebagai salah satu syarat
-                    pengajuan pinjaman.
+                    pengajuan permohonan kredit.
                 </p>
                 <p>
                     Sebagai bentuk tanggung jawab saya sebagai Suami, maka saya akan turut bertanggung jawab dalam

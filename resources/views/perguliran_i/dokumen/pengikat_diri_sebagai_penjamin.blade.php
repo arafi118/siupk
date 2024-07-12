@@ -70,7 +70,7 @@
         <tr>
             <td width="5%" align="center">1.</td>
             <td colspan="3">
-                Saya <b>menyetujui dan menjamin</b> sepenuhnya peminjam sebagai berikut :
+                Saya <b>menyetujui dan menjamin</b> sepenuhnya nasabah sebagai berikut :
             </td>
         </tr>
         <tr>
@@ -123,12 +123,12 @@
             </td>
         </tr>
         <tr>
-            <td width="5%" align="center">2.</td>
+            <td width="5%" align="center" style="vertical-align: top;">2.</td>
             <td colspan="3">
                 Apabila orang tersebut diatas tidak memenuhi kewajibannya (membayar angsuran dan kewajiban lainnya)
                 sesuai ketentuan dalam surat perjanjian kredit (SPK) maka dengan ini saya mengikatkan diri dan mejamin untuk
                 membayar seluruh tagihan yang menjadi kewajiban peminjam tersebut diatas sesuai hasil perhitungan saldo
-                pinjaman dan tagihan jasa serta kewajiban lainnya di {{ $kec->nama_lembaga_sort }}.
+                utang dan tagihan jasa serta kewajiban lainnya di {{ $kec->nama_lembaga_sort }}.
             </td>
         </tr>
     </table>

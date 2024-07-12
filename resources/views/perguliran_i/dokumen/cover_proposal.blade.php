@@ -8,7 +8,7 @@
     }
 @endphp
 
-<title>COVER PERMOHONAN ({{$pinkel->id }})</title>
+<title>COVER PROPOSAL ({{ $pinkel->anggota->namadepan . ' - Loan ID. ' . $pinkel->id }})</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <style>

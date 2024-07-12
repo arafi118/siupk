@@ -92,13 +92,13 @@
                     antara {{ $PL }} {{ $pinkel->anggota->namadepan }}
                     {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }} {{ $pinkel->anggota->d->nama_desa }}
                     dengan
-                    {{ $kec->nama_lembaga_sort }} Tanggal {{ Tanggal::tglLatin($pinkel->tgl_cair) }} dengan rincian pinjaman
+                    {{ $kec->nama_lembaga_sort }} Tanggal {{ Tanggal::tglLatin($pinkel->tgl_cair) }} dengan rincian kredit
                     sebagai berikut ;
                 </div>
                 <table>
                     <tr>
                         <td width="10">1.</td>
-                        <td width="140">Alokasi Pinjaman</td>
+                        <td width="140">Nilai perincian kredit</td>
                         <td width="5">:</td>
                         <td>
                             <b>Rp. {{ number_format($pinkel->alokasi) }}</b>
