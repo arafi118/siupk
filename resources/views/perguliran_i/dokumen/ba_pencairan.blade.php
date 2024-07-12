@@ -22,9 +22,9 @@
                 <div style="font-size: 18px;">
                     <b>BERITA ACARA PENCAIRAN</b>
                 </div>
-                <div style="font-size: 16px;">
+                {{-- <div style="font-size: 16px;">
                     <b>PINJAMAN INDIVIDU {{ $pinkel->jpp->nama_jpp }}</b>
-                </div>
+                </div> --}}
             </td>
         </tr>
         <tr>
@@ -34,14 +34,14 @@
 
 
     <p style="text-align: justify;">
-        Sesuai Surat Perjanjian Kredit (SPK) nomor : {{ $pinkel->spk_no }}. Pada hari ini
+        Sesuai Surat Pengajuan Kredit (SPK) nomor : {{ $pinkel->spk_no }}. Pada hari ini
         {{ Tanggal::namaHari($pinkel->tgl_cair) }}
         tanggal
         {{ $keuangan->terbilang(Tanggal::hari($pinkel->tgl_cair)) }} bulan {{ Tanggal::namaBulan($pinkel->tgl_cair) }}
         tahun
         {{ $keuangan->terbilang(Tanggal::tahun($pinkel->tgl_cair)) }}, telah diadakan pencairan dana
         perguliran {{ $kec->nama_lembaga_sort }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }}
-        {{ $pinkel->anggota->kd_kelompok }} dengan detail identitas pemanfaat dan detail pinjaman sebagai
+        {{ $pinkel->anggota->kd_kelompok }} dengan detail identitas pemanfaat dan detail pengajuan sebagai
         berikut :
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
 
@@ -175,7 +175,7 @@
     </table>
 
     <p>
-        Demikian, berita acara ini dibuat sekaligus sebagai bukti pencairan dana pinjaman di atas.
+        Demikian, berita acara ini dibuat sekaligus sebagai bukti pencairan dana pengajuan di atas.
     </p>
     </div>
 

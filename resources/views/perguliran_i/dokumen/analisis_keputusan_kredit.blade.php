@@ -25,7 +25,7 @@
                     <b>ANALISA DAN KEPUTUSAN KREDIT</b>
                 </div>
                 <div style="font-size: 12px;">
-                    <b>Pinjaman Perorangan {{ $kec->nama_lembaga_sort }}</b>
+                    <b>Pengajuan Perorangan {{ $kec->nama_lembaga_sort }}</b>
                 </div>
                 <div style="font-size: 13px;">
                     <b>Nomor : 53 /VIII/2018</b>

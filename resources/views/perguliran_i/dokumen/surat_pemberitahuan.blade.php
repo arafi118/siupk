@@ -42,7 +42,7 @@
             <td width="50">Nomor</td>
             <td width="10" align="center">:</td>
             <td colspan="2">
-                ______/DBM/{{ Tanggal::tglRomawi(date('Y-m-d')) }}
+                ______/LKM/{{ Tanggal::tglRomawi(date('Y-m-d')) }}
             </td>
         </tr>
         <tr>
@@ -56,7 +56,7 @@
             <td>Perihal</td>
             <td align="center">:</td>
             <td colspan="2">
-                <b>Surat Persetujuan Perjanjian Kredit (SP2K)</b>
+                <b>Surat Persetujuan Kredit (SP2K)</b>
             </td>
         </tr>
         <tr>
@@ -88,7 +88,7 @@
             <td colspan="3">
                 <div style="text-align: justify;">
                     Dengan ini diberitahukan bahwa sesuai dengan surat permohonan kredit saudara dan setelah diadakan
-                    verifikasi serta penilaian, maka {{ $kec->nama_lembaga_sort }} menyetujui permohonan tersebut dengan
+                    verifikasi serta penilaian Analisa dan kredit, maka {{ $kec->nama_lembaga_sort }} menyetujui permohonan tersebut dengan
                     ketentuan
                     dan syarat- syarat sebagai berikut:
                 </div>
