@@ -2016,8 +2016,7 @@ class PinjamanIndividuController extends Controller
             'anggota',
             'anggota.d',
             'anggota.d.sebutan_desa',
-            'pinjaman_anggota',
-            'pinjaman_anggota.anggota'
+          
         ])->first();
 
         $data['dir'] = User::where([
