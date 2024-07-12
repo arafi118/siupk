@@ -48,16 +48,6 @@
         </div>
         <div class="col-md-6">
             <div class="position-relative mb-3">
-                <label class="form-label" for="def_fee_supp">Default Fee dari Supplier (%)</label>
-                <input autocomplete="off" type="text" name="def_fee_supp" id="def_fee_supp" class="form-control"
-                    value="{{ $kec->def_fee_supp }}">
-                <small class="text-danger" id="msg_def_fee_supp"></small>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="position-relative mb-3">
                 <label for="sistem" class="form-label">Sistem Pembulatan </label>
                 <select class="form-control" name="sistem" id="sistem">
                     <option {{ $sistem == 'auto' ? 'selected' : '' }} value="">Auto</option>
@@ -65,6 +55,24 @@
                     <option {{ $sistem == 'kebawah' ? 'selected' : '' }} value="-">Kebawah</option>
                 </select>
                 <small class="text-danger" id="msg_sistem"></small>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="position-relative mb-3">
+                <label class="form-label" for="provisi">Provisi</label>
+                <input autocomplete="off" type="text" name="provisi" id="provisi" class="form-control"
+                    value="{{ $kec->provisi }}">
+                <small class="text-danger" id="msg_provisi"></small>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="position-relative mb-3">
+                <label class="form-label" for="def_fee_supp">Default Fee dari Supplier (%)</label>
+                <input autocomplete="off" type="text" name="def_fee_supp" id="def_fee_supp" class="form-control"
+                    value="{{ $kec->def_fee_supp }}">
+                <small class="text-danger" id="msg_def_fee_supp"></small>
             </div>
         </div>
     </div>

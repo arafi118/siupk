@@ -156,6 +156,7 @@ class SopController extends Controller
             'hit_fee_agent',
             'jdwl_angsuran',
             'hak_kredit',
+            'provisi',
             'def_admin'
         ]);
 
@@ -168,6 +169,7 @@ class SopController extends Controller
             'hit_fee_agent'     => 'required',
             'jdwl_angsuran'     => 'required',
             'hak_kredit'        => 'required',
+            'provisi'           => 'required',
             'def_admin'         => 'required'
         ]);
 
@@ -186,6 +188,7 @@ class SopController extends Controller
             'hit_fee_agent' => $data['hit_fee_agent'],
             'jdwl_angsuran' => $data['jdwl_angsuran'],
             'hak_kredit'    => $data['hak_kredit'],
+            'provisi'       => $data['provisi'],
             'def_admin'     => $data['def_admin'],
         ]);
 
