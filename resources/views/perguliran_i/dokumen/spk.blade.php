@@ -295,7 +295,7 @@
                             </td>
                         </tr>
                     </table> <br>
-                    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
+                    {{-- <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
                         <tr>
                             <td width="10" align="center"> &nbsp; </td>
                             <td width="70" align="center"> Pihak Pertama </td>
@@ -312,7 +312,7 @@
                             </td>
                             <td width="50" align="center"> {{ $pinkel->anggota->penjamin }} <br> Penjamin </td>
                         </tr> <br>
-                        {{-- <tr>
+                        <tr>
                         <td width="10" align="center"> &nbsp; </td>
                         <td width="70" align="center"> &nbsp; </td>
                         <td width="60" align="center"> Mengetahui
@@ -328,15 +328,15 @@
                         </td>
                         <td width="50" align="center"> &nbsp; </td>
                         <td width="50" align="center"> &nbsp; </td>
-                    </tr> --}}
-                    </table>
-                    {{-- <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;" class="p">
+                    </tr>
+                    </table> --}}
+                    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;" class="p">
                     <tr>
                         <td>
                             {!! $ttd !!}
                         </td>
                     </tr>
-                </table> --}}
+                </table>
                 </td>
             </tr>
         </table>
