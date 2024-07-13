@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="position-relative mb-3">
-                        <label for="nomorid" class="form-label">Kd. Desa</label>
+                        <label for="nomorid" class="form-label">NomorID</label>
                         <input autocomplete="off"type="text" name="nomorid" id="nomorid" class="form-control" readonly>
                         <small class="text-danger" id="msg_nomorid" ></small>
                     </div>

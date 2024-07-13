@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="DOMContentLoaded position-relative mb-3">
-                        <label for="nomorid" class="form-label">kd. Desa</label>
+                        <label for="nomorid" class="form-label">NomorID</label>
                         <input autocomplete="off" type="text" name="nomorid" id="nomorid"
                                class="form-control" value="{{ $agent->nomorid }}" readonly>
                         <small class="text-danger" id="msg_nomorid"></small>
