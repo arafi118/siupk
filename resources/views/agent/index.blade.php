@@ -66,6 +66,10 @@
 
 @section('script')
 <script>
+     $('.js-example-basic-single').select2({
+        theme: 'bootstrap-5'
+        });
+
     var table = $('.table-hover').DataTable({
         language: {
             paginate: {
