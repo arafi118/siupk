@@ -114,6 +114,16 @@ class PinjamanIndividu extends Model
         return $this->hasOne(PinjamanAnggota::class, 'nia', 'nia')->orderBy('tgl_cair', 'DESC');
     }
 
+    public function agen()
+    {
+        return $this->belongsTo(Agent::class, 'id_agent');
+    }
+
+    public function supp()
+    {
+        return $this->belongsTo(Supplier::class, 'id_supplier');
+    }
+
     public function getTableStructure()
     {
         return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());

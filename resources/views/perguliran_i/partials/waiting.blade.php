@@ -1,13 +1,13 @@
 @if ($pinj_aktif)
-<div class="alert alert-danger text-black" role="alert">
-    <span class="text-sm">
-        <b>{{ ucwords(strtolower($pinj_aktif->anggota->namadepan)) }}</b> masih memiliki kewajiban
-        angsuran pinjaman dengan
-        <a href="/detail_i/{{ $pinj_aktif->id }}" target="_blank" class="alert-link text-black">
-            Loan ID. {{ $pinj_aktif->id }}
-        </a>
-    </span>
-</div>
+    <div class="alert alert-danger text-black" role="alert">
+        <span class="text-sm">
+            <b>{{ ucwords(strtolower($pinj_aktif->anggota->namadepan)) }}</b> masih memiliki kewajiban
+            angsuran pinjaman dengan
+            <a href="/detail_i/{{ $pinj_aktif->id }}" target="_blank" class="alert-link text-black">
+                Loan ID. {{ $pinj_aktif->id }}
+            </a>
+        </span>
+    </div>
 @endif
 
 <div class="row">
@@ -174,8 +174,8 @@
                         <div class="col-md-4">
                             <div class="position-relative mb-3">
                                 <label for="tgl_cair" class="form-label">Tgl Cair</label>
-                                <input autocomplete="off" type="text" name="tgl_cair" id="tgl_cair" class="form-control date"
-                                    value="{{ date('d/m/Y') }}">
+                                <input autocomplete="off" type="text" name="tgl_cair" id="tgl_cair"
+                                    class="form-control date" value="{{ date('d/m/Y') }}">
                                 <small class="text-danger" id="msg_tgl_cair"></small>
                             </div>
                         </div>
@@ -183,7 +183,8 @@
                             <div class="position-relative mb-3">
                                 <label for="alokasi" class="form-label">Alokasi Rp.</label>
                                 <input autocomplete="off" readonly type="text" name="alokasi" id="alokasi"
-                                    class="form-control money" value="{{ number_format($perguliran_i->alokasi, 2) }}">
+                                    class="form-control money"
+                                    value="{{ number_format($perguliran_i->alokasi, 2) }}">
                                 <small class="text-danger" id="msg_alokasi"></small>
                             </div>
                         </div>
@@ -193,34 +194,37 @@
                                 <select class="js-example-basic-single form-control" name="sumber_pembayaran"
                                     id="sumber_pembayaran">
                                     @foreach ($sumber_bayar as $sb)
-                                    <option value="{{ $sb->kode_akun }}">
-                                        {{ $sb->kode_akun }}. {{ $sb->nama_akun }}
-                                    </option>
+                                        <option value="{{ $sb->kode_akun }}">
+                                            {{ $sb->kode_akun }}. {{ $sb->nama_akun }}
+                                        </option>
                                     @endforeach
                                 </select>
-                                <small class="text-danger" id="msg_sistem_angsuran_jasa"></small>
+                                <small class="text-danger" id="msg_sumber_pembayaran"></small>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="position-relative mb-3">
-                                <label for="fee_supplier" class="form-label">Nama Agent</label>
-                                <input autocomplete="off" type="text" name="fee_supplier" id="fee_supplier" class="form-control" disabled>
-                            <small class="text-danger" id="msg_fee_supplier"></small>
+                                <label for="nama_agent" class="form-label">Nama Agent</label>
+                                <input autocomplete="off" type="text" name="nama_agent" id="nama_agent"
+                                    class="form-control" readonly value="{{ $perguliran_i->agen->agent }}">
+                                <small class="text-danger" id="msg_nama_agent"></small>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="position-relative mb-3">
-                                <label for="id_supplier" class="form-label">Nama Supplier</label>
-                                <select class="js-example-basic-single form-control" name="id_supplier" id="id_supplier" style="width: 100%;">
-                                    {{-- @foreach ($supplier as $sp)
+                                <label for="supplier" class="form-label">Nama Supplier</label>
+                                <select class="js-example-basic-single form-control" name="supplier" id="supplier"
+                                    style="width: 100%;">
+                                    @foreach ($supplier as $sp)
                                         <option value="{{ $sp->id }}">
-                                            ( {{ $sp->nomorid}} )  {{ $sp->nama}}
+                                            ({{ $sp->nomorid }})
+                                            {{ $sp->nama }}
                                         </option>
-                                    @endforeach --}}
+                                    @endforeach
                                 </select>
-                                <small class="text-danger" id="msg_id_supplier"></small>            
+                                <small class="text-danger" id="msg_supplier"></small>
                             </div>
                         </div>
                     </div>
@@ -228,29 +232,36 @@
                         <div class="col-md-3">
                             <div class="position-relative mb-3">
                                 <label for="fee_supplier" class="form-label">Fee Dari Supplier</label>
-                                <input autocomplete="off"  type="text" name="fee_supplier" id="fee_supplier" class="form-control">
-                            <small class="text-danger" id="msg_fee_supplier"></small>
+                                <input autocomplete="off" readonly type="text" name="fee_supplier"
+                                    id="fee_supplier" class="form-control"
+                                    value="{{ number_format($perguliran_i->alokasi * ($kec->def_fee_supp / 100), 2) }}">
+                                <small class="text-danger" id="msg_fee_supplier"></small>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="position-relative mb-3">
                                 <label for="fee_agent" class="form-label">Fee Agent</label>
-                                <input autocomplete="off"  type="text" name="fee_agent" id="fee_agent" class="form-control">
-                                    <small class="text-danger" id="msg_fee_agent"></small>
+                                <input autocomplete="off" readonly type="text" name="fee_agent" id="fee_agent"
+                                    class="form-control"
+                                    value="{{ number_format($perguliran_i->alokasi * ($kec->def_fee_agen / 100), 2) }}">
+                                <small class="text-danger" id="msg_fee_agent"></small>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="position-relative mb-3">
                                 <label for="depe" class="form-label">Down Payment</label>
-                                <input autocomplete="off"  type="text" name="depe" id="depe" class="form-control">
-                            <small class="text-danger" id="msg_depe"></small>
+                                <input autocomplete="off" type="text" name="depe" id="depe"
+                                    class="form-control money">
+                                <small class="text-danger" id="msg_depe"></small>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="position-relative mb-3">
                                 <label for="provisi" class="form-label">Provisi</label>
-                                <input autocomplete="off"  type="text" name="provisi" id="provisi" class="form-control">
-                            <small class="text-danger" id="msg_provisi"></small>
+                                <input autocomplete="off" readonly type="text" name="provisi" id="provisi"
+                                    class="form-control"
+                                    value="{{ number_format($perguliran_i->alokasi * ($kec->provisi / 100), 2) }}">
+                                <small class="text-danger" id="msg_provisi"></small>
                             </div>
                         </div>
                     </div>
@@ -260,9 +271,8 @@
                             <b><i class="fa fa-refresh"></i> &nbsp; KEMBALI KE PROPOSAL</b>
                         </button>
                         <button type="button" id="Simpan" {{ $pinj_aktif ? 'disabled' : '' }}
-                            class="btn btn-secondary flex-grow-1 ms-2"
-                            style="background-color: rgb(112, 109, 109);">
-                            <b><i class="fa fa-search-plus"></i> &nbsp; SIMPAN KEPUTUSAN PENDANAAN</b>
+                            class="btn btn-secondary flex-grow-1 ms-2" style="background-color: rgb(112, 109, 109);">
+                            <b><i class="fa fa-search-plus"></i> Cairkan</b>
                         </button>
                     </div>
                 </div>
@@ -276,8 +286,7 @@
 </form>
 
 <script>
-    
-$('.date').datepicker({
+    $('.date').datepicker({
         dateFormat: 'dd/mm/yy'
     });
 
@@ -292,7 +301,7 @@ $('.date').datepicker({
         theme: 'bootstrap-5'
     });
 
-    $(document).on('click', '#Simpan', async function (e) {
+    $(document).on('click', '#Simpan', async function(e) {
         e.preventDefault()
         $('small').html('')
 
@@ -323,7 +332,7 @@ $('.date').datepicker({
                 type: 'POST',
                 url: form.attr('action') + '?save=true',
                 data: form.serialize(),
-                success: function (result) {
+                success: function(result) {
                     if (result.success) {
                         Swal.fire('Berhasil', result.msg, 'success').then(() => {
                             window.location.href = '/detail_i/' + result.id
@@ -332,11 +341,11 @@ $('.date').datepicker({
                         Swal.fire('Error', result.msg, 'error')
                     }
                 },
-                error: function (result) {
+                error: function(result) {
                     const respons = result.responseJSON;
 
                     Swal.fire('Error', 'Cek kembali input yang anda masukkan', 'error')
-                    $.map(respons, function (res, key) {
+                    $.map(respons, function(res, key) {
                         $('#' + key).parent('.input-group.input-group-static')
                             .addClass(
                                 'is-invalid')
@@ -346,5 +355,4 @@ $('.date').datepicker({
             })
         }
     })
-
 </script>
