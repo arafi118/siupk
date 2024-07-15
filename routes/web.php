@@ -16,6 +16,7 @@ use App\Http\Controllers\Kabupaten\AuthController as KabupatenAuthController;
 use App\Http\Controllers\Kabupaten\KabupatenController;
 use App\Http\Controllers\KelompokController;
 use App\Http\Controllers\PelaporanController;
+use App\Http\Controllers\SimpananController;
 use App\Http\Controllers\PinjamanAnggotaController;
 use App\Http\Controllers\PinjamanIndividuController;
 use App\Http\Controllers\PinjamanKelompokController;
@@ -123,7 +124,7 @@ Route::get('/perguliran/lunas', [PinjamanKelompokController::class, 'lunas'])->m
 Route::get('/perguliran/generate/{id_pinj}', [PinjamanKelompokController::class, 'generate'])->middleware('auth');
 Route::get('/lunas/{perguliran}', [PinjamanKelompokController::class, 'pelunasan'])->middleware('auth');
 Route::get('/cetak_keterangan_lunas/{perguliran}', [PinjamanKelompokController::class, 'keterangan'])->middleware('auth');
-
+ 
 Route::get('/perguliran/cari_kelompok', [PinjamanKelompokController::class, 'cariKelompok'])->middleware('auth');
 Route::get('/perguliran/cari_anggota', [PinjamanAnggotaController::class, 'cariAnggota'])->middleware('auth');
 
@@ -290,5 +291,15 @@ Route::get('/generate', [GenerateController::class, 'index']);
 Route::get('/generate/individu', [GenerateController::class, 'individu']);
 Route::get('/generate/kelompok', [GenerateController::class, 'kelompok']);
 Route::post('/generate/save/{offset?}', [GenerateController::class, 'generate']);
+
+
+Route::get('/simpanan/register_penduduk', [SimpananController::class, 'register'])->middleware('auth');
+Route::get('/simpanan/cari_nik', [SimpananController::class, 'cariNik'])->middleware('auth');
+
+Route::post('/simpanan/{nik}/blokir', [SimpananController::class, 'blokir'])->middleware('auth');
+
+Route::get('/simpanan/detail_simpanan/{id}', [SimpananController::class, 'detailAnggota'])->middleware('auth');//here
+
+Route::resource('/simpanan', SimpananController::class)->middleware('auth');
 
 Route::get('/{invoice}', [PelaporanController::class, 'invoice']);
