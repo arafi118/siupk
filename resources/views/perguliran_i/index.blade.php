@@ -31,20 +31,22 @@
 
                             <div class="card-body">
                                 <h5 class="card-title"></h5>
-                                <table class="table table-flush table-hover table-click " width="100%" id="TbProposal">
-                                    <thead>
-                                        <tr>
-                                            <th>Loan id</th>
-                                            <th>Nama Anggota P</th>
-                                            <th>Desa</th>
-                                            <th>Nama Barang</th>
-                                            <th>Tgl Pengajuan</th>
-                                            <th>Pengajuan</th>
-                                            <th>Jasa/Jangka</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
+                                <div class="table-responsive">
+                                    <table class="table table-flush table-hover table-click " width="100%" id="TbProposal">
+                                        <thead>
+                                            <tr>
+                                                <th>Loan id</th>
+                                                <th>Nama Anggota P</th>
+                                                <th>Desa</th>
+                                                <th>Nama Barang</th>
+                                                <th>Tgl Pengajuan</th>
+                                                <th>Pengajuan</th>
+                                                <th>Jasa/Jangka</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
                             </div>
 
                         </div>
@@ -58,19 +60,21 @@
 
                             <div class="card-body">
                                 <h5 class="card-title"></h5>
-                                <table class="table table-flush table-hover table-click" width="100%" id="TbVerified">
-                                    <thead>
-                                        <tr>
-                                            <th>Loan id</th>
-                                            <th>Nama Anggota V</th>
-                                            <th>Desa</th>
-                                            <th>Tgl Verified</th>
-                                            <th>Verifikasi</th>
-                                            <th>Jasa/Jangka</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
+                                <div class="table-responsive">
+                                    <table class="table table-flush table-hover table-click" width="100%" id="TbVerified">
+                                        <thead>
+                                            <tr>
+                                                <th>Loan id</th>
+                                                <th>Nama Anggota V</th>
+                                                <th>Desa</th>
+                                                <th>Tgl Verified</th>
+                                                <th>Verifikasi</th>
+                                                <th>Jasa/Jangka</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
                             </div>
 
                         </div>
@@ -84,19 +88,21 @@
                         <div class="main-card mb-3 card">
                             <div class="card-body">
                                 <h5 class="card-title"></h5>
-                                <table class="table table-flush table-hover table-click" width="100%" id="TbWaiting">
-                                    <thead>
-                                        <tr>
-                                            <th>Loan id</th>
-                                            <th>Nama Anggota W</th>
-                                            <th>Desa</th>
-                                            <th>Tgl Waiting</th>
-                                            <th>Alokasi</th>
-                                            <th>Jasa/Jangka</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
+                                <div class="table-responsive">
+                                    <table class="table table-flush table-hover table-click" width="100%" id="TbWaiting">
+                                        <thead>
+                                            <tr>
+                                                <th>Loan id</th>
+                                                <th>Nama Anggota W</th>
+                                                <th>Desa</th>
+                                                <th>Tgl Waiting</th>
+                                                <th>Alokasi</th>
+                                                <th>Jasa/Jangka</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -108,19 +114,21 @@
                         <div class="main-card mb-3 card">
                             <div class="card-body">
                                 <h5 class="card-title"></h5>
-                                <table class="table table-flush table-hover table-click" width="100%" id="TbAktif">
-                                    <thead>
-                                        <tr>
-                                            <th>Loan id</th>
-                                            <th>Nama Anggota A</th>
-                                            <th>Desa</th>
-                                            <th>Tgl Cair</th>
-                                            <th>Alokasi</th>
-                                            <th>Jasa/Jangka</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
+                                <div class="table-responsive">
+                                    <table class="table table-flush table-hover table-click" width="100%" id="TbAktif">
+                                        <thead>
+                                            <tr>
+                                                <th>Loan id</th>
+                                                <th>Nama Anggota A</th>
+                                                <th>Desa</th>
+                                                <th>Tgl Cair</th>
+                                                <th>Alokasi</th>
+                                                <th>Jasa/Jangka</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -132,18 +140,20 @@
                         <div class="main-card mb-3 card">
                             <div class="card-body">
                                 <h5 class="card-title"></h5>
-                                <table class="table table-flush table-hover table-click" width="100%" id="TbLunas">
-                                    <thead>
-                                        <tr>
-                                            <th>Nama Anggota</th>
-                                            <th>Alamat</th>
-                                            <th>Tgl Cair</th>
-                                            <th>Verifikasi</th>
-                                            <th>Jasa/Jangka</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
+                                <div class="table-responsive">
+                                    <table class="table table-flush table-hover table-click" width="100%" id="TbLunas">
+                                        <thead>
+                                            <tr>
+                                                <th>Nama Anggota</th>
+                                                <th>Alamat</th>
+                                                <th>Tgl Cair</th>
+                                                <th>Verifikasi</th>
+                                                <th>Jasa/Jangka</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
