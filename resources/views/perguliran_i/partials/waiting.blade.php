@@ -229,25 +229,33 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <div class="position-relative mb-3">
                                 <label for="fee_supplier" class="form-label">Fee Dari Supplier</label>
-                                <input autocomplete="off" readonly type="text" name="fee_supplier"
-                                    id="fee_supplier" class="form-control"
+                                <input autocomplete="off" type="text" name="fee_supplier" id="fee_supplier"
+                                    class="form-control"
                                     value="{{ number_format($perguliran_i->alokasi * ($kec->def_fee_supp / 100), 2) }}">
                                 <small class="text-danger" id="msg_fee_supplier"></small>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <div class="position-relative mb-3">
                                 <label for="fee_agent" class="form-label">Fee Agent</label>
-                                <input autocomplete="off" readonly type="text" name="fee_agent" id="fee_agent"
+                                <input autocomplete="off" type="text" name="fee_agent" id="fee_agent"
                                     class="form-control"
                                     value="{{ number_format($perguliran_i->alokasi * ($kec->def_fee_agen / 100), 2) }}">
                                 <small class="text-danger" id="msg_fee_agent"></small>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
+                            <div class="position-relative mb-3">
+                                <label for="admin" class="form-label">Admin</label>
+                                <input autocomplete="off" type="text" name="admin" id="admin"
+                                    class="form-control money">
+                                <small class="text-danger" id="msg_admin"></small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <div class="position-relative mb-3">
                                 <label for="depe" class="form-label">Down Payment</label>
                                 <input autocomplete="off" type="text" name="depe" id="depe"
@@ -255,10 +263,10 @@
                                 <small class="text-danger" id="msg_depe"></small>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="position-relative mb-3">
                                 <label for="provisi" class="form-label">Provisi</label>
-                                <input autocomplete="off" readonly type="text" name="provisi" id="provisi"
+                                <input autocomplete="off" type="text" name="provisi" id="provisi"
                                     class="form-control"
                                     value="{{ number_format($perguliran_i->alokasi * ($kec->provisi / 100), 2) }}">
                                 <small class="text-danger" id="msg_provisi"></small>
