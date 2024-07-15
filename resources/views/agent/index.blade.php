@@ -29,19 +29,21 @@
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <h5 class="card-title"></h5>
-                        <table class="mb-0 table table-hover" width="100%">
-                            <thead>
-                                <tr>
-                                    <th>Nomor ID</th>
-                                    <th>Nama</th>
-                                    <th>Desa</th>
-                                    <th>Alamat</th>
-                                    <th>No HP</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="mb-0 table table-hover" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Nomor ID</th>
+                                        <th>Nama</th>
+                                        <th>Desa</th>
+                                        <th>Alamat</th>
+                                        <th>No HP</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
