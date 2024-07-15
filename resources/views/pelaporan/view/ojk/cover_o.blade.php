@@ -40,7 +40,7 @@
 </style>
 
 <body>
-<table width="100%">
+<table width="100%" border="0"style="font-size: 10px;>
             <tr>
                 <td align="center">
                     <div>{{ strtoupper($nama_lembaga) }}</div>
@@ -62,8 +62,32 @@
 
         <h1 style="margin: 0px;">{{ strtoupper($judul) }}</h1>
         <div style="margin: 0px; font-size: 24px;">{{ strtoupper($sub_judul) }}</div>
-        <main>   
-            <div>ppppppppppp</div>
+        <main><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <table width="25%" border="0" align="center"style="font-size: 13px;">
+        <tr>
+            <td align="center"colspan="2">Disusun Oleh</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="15">Ketua</td>
+            <td width="15" colspan="1">:</td>
+        </tr>
+        <tr>
+            <td width="15">Sekretaris</td>
+            <td width="15" colspan="1">:</td>
+        </tr>
+        <tr>
+            <td width="15">Bendahara</td>
+            <td width="15" colspan="1">:</td>
+        </tr>
+        <tr>
+            <td width="15">Staff UPK</td>
+            <td width="15" colspan="1">:</td>
+        </tr>
+       </table>
+
 </main>
     </header>
 
