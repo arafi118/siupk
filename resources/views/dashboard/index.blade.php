@@ -231,19 +231,19 @@
                                 <a class="nav-link mb-0 px-0 py-1 active text-danger" data-bs-toggle="tab"
                                     href="#tagihan_hari_ini" role="tab" aria-controls="tagihan_hari_ini"
                                     aria-selected="true">
-                                    &nbsp;&nbsp;Hari Ini
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hari Ini
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link mb-0 px-0 py-1 text-warning" data-bs-toggle="tab" href="#menunggak"
                                     role="tab" aria-controls="menunggak" aria-selected="false">
-                                    &nbsp;&nbsp;Menunggak
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Menunggak
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link mb-0 px-0 py-1 text-info" data-bs-toggle="tab" href="#tagihan"
                                     role="tab" aria-controls="tagihan" aria-selected="false">
-                                    &nbsp;&nbsp;Tagihan
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tagihan
                                 </a>
                             </li>
                         </ul>
@@ -362,19 +362,19 @@
                             <li class="nav-item">
                                 <a class="nav-link mb-0 px-0 py-1 active text-info" data-bs-toggle="tab" href="#proposal"
                                     role="tab" aria-controls="proposal" aria-selected="true">
-                                    &nbsp;&nbsp;Proposal
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Proposal
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link mb-0 px-0 py-1 text-danger" data-bs-toggle="tab" href="#verifikasi"
                                     role="tab" aria-controls="verifikasi" aria-selected="false">
-                                    &nbsp;&nbsp;Verifikasi
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verifikasi
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link mb-0 px-0 py-1 text-warning" data-bs-toggle="tab" href="#waiting"
                                     role="tab" aria-controls="waiting" aria-selected="false">
-                                    &nbsp;&nbsp;Waiting
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Waiting
                                 </a>
                             </li>
                         </ul>
@@ -471,13 +471,13 @@
                                 <a class="nav-link mb-0 px-0 py-1 active text-info" data-bs-toggle="tab"
                                     href="#kelompok_aktif" role="tab" aria-controls="kelompok_aktif"
                                     aria-selected="true">
-                                    &nbsp;&nbsp;<b>Kelompok</b>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Kelompok</b>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link mb-0 px-0 py-1 text-danger" data-bs-toggle="tab" href="#anggota"
                                     role="tab" aria-controls="anggota" aria-selected="false">
-                                    &nbsp;&nbsp;<b>Anggota</b>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Anggota</b>
                                 </a>
                             </li>
                         </ul>
