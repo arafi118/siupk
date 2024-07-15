@@ -348,7 +348,7 @@
                 <button type="button" data-bs-toggle="modal" data-bs-target="#Rescedule"
                     class="btn btn-warning btn-sm">Resceduling Pinjaman</button>
                 <button type="button" data-bs-toggle="modal" data-bs-target="#Penghapusan"
-                    class="btn btn-danger btn-sm ms-1">Penghapusan Pinjaman</button>
+                    class="btn btn-danger btn-sm ms-1">Penghapusan a Pinjaman</button>
             </div>
         @endif
     </div>
