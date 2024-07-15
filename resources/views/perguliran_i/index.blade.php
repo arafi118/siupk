@@ -5,23 +5,43 @@
     <div class="app-main__inner">
         <div class="card-body">
             <ul class="nav nav-pills nav-fill">
-                <li class="nav-item"><a data-bs-toggle="tab" id="tab-0" href="#Proposal" class="{{ $status == 'p' ? 'active' : '' }} nav-link">
-                        <i class="fa-solid fa-file-circle-plus"></i><b>&nbsp; &nbsp;Proposal (P)</b></a>
+                <li class="nav-item">
+                    <a data-bs-toggle="tab" id="tab-0" href="#Proposal" class="nav-link {{ $status == 'p' ? 'active' : '' }}">
+                        <i class="fa-solid fa-file-circle-plus"></i><b>&nbsp; &nbsp;Proposal (P)</b>
+                    </a>
                 </li>
-                <li class="nav-item"><a data-bs-toggle="tab" id="tab-1" href="#Verified" class="{{ $status == 'v' ? 'active' : '' }} nav-link">
-                        <i class=" fa fa-window-restore"></i> <b>&nbsp; &nbsp;Verified (V)</b></a>
+                <li class="nav-item">
+                    <a data-bs-toggle="tab" id="tab-1" href="#Verified" class="nav-link {{ $status == 'v' ? 'active' : '' }}">
+                        <i class="fa fa-window-restore"></i><b>&nbsp; &nbsp;Verified (V)</b>
+                    </a>
                 </li>
-                <li class="nav-item"><a data-bs-toggle="tab" id="tab-2" href="#Waiting" class="{{ $status == 'w' ? 'active' : '' }} nav-link">
-                        <i class="fa-solid fa-history"></i> <b> &nbsp; &nbsp;Waiting (W)</b></a>
+                <li class="nav-item">
+                    <a data-bs-toggle="tab" id="tab-2" href="#Waiting" class="nav-link {{ $status == 'w' ? 'active' : '' }}">
+                        <i class="fa-solid fa-history"></i><b>&nbsp; &nbsp;Waiting (W)</b>
+                    </a>
                 </li>
-                <li class="nav-item"><a data-bs-toggle="tab" id="tab-3" href="#Aktif" class="{{ $status == 'a' ? 'active' : '' }} nav-link">
-                        <i class="fa-solid fa-arrow-down-up-across-line"></i> <b>&nbsp; &nbsp; &nbsp;Aktif (A)</b></a>
+                <li class="nav-item">
+                    <a data-bs-toggle="tab" id="tab-3" href="#Aktif" class="nav-link {{ $status == 'a' ? 'active' : '' }}">
+                        <i class="fa-solid fa-arrow-down-up-across-line"></i><b>&nbsp; &nbsp;Aktif (A)</b>
+                    </a>
                 </li>
-                <li class="nav-item"><a data-bs-toggle="tab" id="tab-4" href="#Lunas" class="{{ $status == 'l' ? 'active' : '' }} nav-link">
-                        <i class="fa-solid fa-person-circle-check"></i> <b>&nbsp;&nbsp;Lunas (L)</b></a>
+                <li class="nav-item">
+                    <a data-bs-toggle="tab" id="tab-4" href="#Lunas" class="nav-link {{ $status == 'l' ? 'active' : '' }}">
+                        <i class="fa-solid fa-person-circle-check"></i><b>&nbsp; &nbsp;Lunas (L)</b>
+                    </a>
                 </li>
             </ul>
         </div>
+        
+        <style>
+            @media (max-width: 576px) {
+                .nav-item .nav-link {
+                    display: flex;
+                    justify-content: center;
+                }
+            }
+        </style>
+        
 
         <div class="tab-content">
             <div class="tab-pane tabs-animation fade  {{ $status == 'p' ? 'show active' : '' }}" id="Proposal" role="tabpanel">
