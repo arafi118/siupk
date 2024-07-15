@@ -159,8 +159,7 @@
               "ViewState": "AQIAABoBAAAAAAAAAAAuwCoBAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
               "WhenOpened": "2024-06-03T03:41:34.399Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -204,8 +203,7 @@
               "RelativeToolTip": "app\\Http\\Controllers\\AuthController.php",
               "ViewState": "AQIAANcAAAAAAAAAAAAgwO8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-07-15T03:53:40.271Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-15T03:53:40.271Z"
             },
             {
               "$type": "Document",
@@ -215,7 +213,7 @@
               "RelativeDocumentMoniker": "resources\\views\\perguliran\\partials\\aktif.blade.php",
               "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran\\partials\\aktif.blade.php",
               "RelativeToolTip": "resources\\views\\perguliran\\partials\\aktif.blade.php",
-              "ViewState": "AQIAAEYBAAAAAAAAAAAuwFoBAAA5AAAA",
+              "ViewState": "AQIAAEYBAAAAAAAAAAAuwE8BAABFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
               "WhenOpened": "2024-07-12T07:22:03.773Z",
               "EditorCaption": ""
@@ -254,8 +252,7 @@
               "RelativeToolTip": "public\\index.php",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-07-03T08:12:46.333Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-03T08:12:46.333Z"
             },
             {
               "$type": "Document",
@@ -267,8 +264,7 @@
               "RelativeToolTip": "resources\\views\\perguliran\\index.blade.php",
               "ViewState": "AQIAABoAAAAAAAAAAAAAACkAAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-07-12T07:39:18.755Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-12T07:39:18.755Z"
             },
             {
               "$type": "Document",
