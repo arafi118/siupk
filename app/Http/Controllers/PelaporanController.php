@@ -271,7 +271,7 @@ class PelaporanController extends Controller
             return $view;
         }
     }
-    private function cv(array $data)
+    private function CV(array $data)
     {
         $thn = $data['tahun'];
         $bln = $data['bulan'];
@@ -294,7 +294,7 @@ class PelaporanController extends Controller
             return $view;
         }
     }
-    private function pf(array $data)
+    private function PF(array $data)
     {
         $thn = $data['tahun'];
         $bln = $data['bulan'];
@@ -321,38 +321,16 @@ class PelaporanController extends Controller
 
     private function OJKN(array $data) 
     {
-        $data['keuangan'] = new Keuangan;
-        $data['subsaldo'] = 0;
-        $data['categories'] = '';
-        $data['reks'] = explode("#", $rows['rekening']);
+        $thn = $data['tahun'];
+        $bln = $data['bulan'];
+        $hari = $data['hari'];
 
-        if ($data['reks'][0] == "C") { /////////////////////            133
-            $data['susut'] = DB::statement("select sum(r.$tb) AS jrl, r.kd_rekening AS kd_rekening from $table_rekening r WHERE  r.kd_rekening='215.01'");
-            $data['rdua'] = DB::statement("select sum(r.$tb) AS jrl, r.kd_rekening AS kd_rekening from $table_rekening r WHERE r.kd_rekening='215.02'");
-            $data['satu'] = DB::statement("select (sum(jumlah)) AS jrl from $table_transaksi t, $table_rekening r  WHERE $kondisi AND t.rekening_kredit=r.kd_rekening AND t.rekening_kredit='215.01'");
-            $data['dua'] = DB::statement("select (sum(jumlah)) AS jrl from $table_transaksi t, $table_rekening r  WHERE $kondisi AND t.rekening_debit=r.kd_rekening AND t.rekening_debit='215.02' ");
-            $data['subsaldo'] = (($rdata['satu']['jrl'] - $data['rdua']['jrl']) + ($data['satu']['jrl'] - $data['dua']['jrl'])) * -1;
-        } elseif ($data['reks'][0] == "A") { /////////////////////////   140
-            $data['raset'] = DB::statement("select sum(r.$tb) AS jaset, r.kd_rekening AS kd_rekening from $table_rekening r WHERE r.kd_rekening='141.01' OR r.kd_rekening='151.01' OR r.kd_rekening='161.01'");
-            $data['aset'] = DB::statement("select (sum(jumlah)) AS jaset from $table_transaksi t, $table_rekening r WHERE $kondisi AND t.rekening_debit=r.kd_rekening AND (t.rekening_debit='141.01' OR t.rekening_debit='151.01' OR t.rekening_debit='161.01')");
-            $data['subsaldo'] = $data['aset']['jaset'] + $data['raset']['jaset'];
-        } elseif ($data['reks'][0] == "P") { /////////////////////       141
-            $data['rsusut'] = DB::statement("select sum(r.$tb) AS jsusut, r.kd_rekening AS kd_rekening from $table_rekening r WHERE r.kd_rekening='141.02' OR r.kd_rekening='151.02' OR r.kd_rekening='161.02' OR r.kd_rekening='141.03' OR r.kd_rekening='151.03' OR r.kd_rekening='161.03'");
-            $data['susut'] = DB::statement("select (sum(jumlah)) AS jsusut from $table_transaksi t, $table_rekening r  WHERE $kondisi AND t.rekening_kredit=r.kd_rekening AND (t.rekening_kredit='141.02' OR t.rekening_kredit='151.02' OR t.rekening_kredit='161.02' OR t.rekening_kredit='141.03' OR t.rekening_kredit='151.03' OR t.rekening_kredit='161.03')");
-            $data['subsaldo'] = ($data['rsusut']['jsusut'] + $data['susut']['jsusut']) * -1;
-        } elseif ($data['reks'][0] == "R") { /////////////////////       342
-            $data['rempat'] = DB::statement("select sum(r.$tb) AS jrl, r.kd_rekening AS kd_rekening from $table_rekening r WHERE  SUBSTR(r.kd_rekening,1,1)='4'");
-            $data['rlima'] = DB::statement("select sum(r.$tb) AS jrl, r.kd_rekening AS kd_rekening from $table_rekening r WHERE SUBSTR(r.kd_rekening,1,1)='5'");
-            $data['empat'] = DB::statement("select (sum(jumlah)) AS jrl from $table_transaksi t, $table_rekening r  WHERE $kondisi AND t.rekening_kredit=r.kd_rekening AND SUBSTR(t.rekening_kredit,1,1)='4'");
-            $data['lima'] = DB::statement("select (sum(jumlah)) AS jrl from $table_transaksi t, $table_rekening r  WHERE $kondisi AND t.rekening_debit=r.kd_rekening AND SUBSTR(t.rekening_debit,1,1)='5' ");
-            $data['subsaldo'] = (($data['rempat']['jrl'] - $data['rlima']['jrl']) + ($data['empat']['jrl'] - $data['lima']['jrl'])) * -1;
-        } else {
-            foreach ($data['reks'] as $rek) {
-                $rek = trim($rek);
-                $saldo = saldo("$tgl_kondisi-" . $rek);
-                $data['subsaldo'] = $data['subsaldo'] + $saldo;
-            
-            }
+        $tgl = $thn . '-' . $bln . '-' . $hari;
+        $data['judul'] = 'Laporan Keuangan';
+        $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
+        if ($data['bulanan']) {
+            $data['judul'] = 'Laporan Keuangan';
+            $data['sub_judul'] = 'Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         }
                 
         $view = view('pelaporan.view.ojk.pelaporan_ojk', $data)->render();
@@ -365,7 +343,174 @@ class PelaporanController extends Controller
 
 
     }
+    private function LRL(array $data) 
+    {
+        $thn = $data['tahun'];
+        $bln = $data['bulan'];
+        $hari = $data['hari'];
 
+        $tgl = $thn . '-' . $bln . '-' . $hari;
+        $data['judul'] = 'Laporan Keuangan';
+        $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
+        if ($data['bulanan']) {
+            $data['judul'] = 'Laporan Keuangan';
+            $data['sub_judul'] = 'Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+        }
+
+        $view = view('pelaporan.view.ojk.labarugi', $data)->render();
+
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view);
+            return $pdf->stream();
+        } else {
+            return $view;
+        }
+
+    }
+    private function DRP(array $data) 
+    {
+        $thn = $data['tahun'];
+        $bln = $data['bulan'];
+        $hari = $data['hari'];
+
+        $tgl = $thn . '-' . $bln . '-' . $hari;
+        $data['judul'] = 'Laporan Keuangan';
+        $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
+        if ($data['bulanan']) {
+            $data['judul'] = 'Laporan Keuangan';
+            $data['sub_judul'] = 'Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+        }
+
+        $view = view('pelaporan.view.ojk.daftar_rincian_pinjamanaktif', $data)->render();
+
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view);
+            return $pdf->stream();
+        } else {
+            return $view;
+        }
+
+    }
+    private function DRPL(array $data) 
+    {
+        $thn = $data['tahun'];
+        $bln = $data['bulan'];
+        $hari = $data['hari'];
+
+        $tgl = $thn . '-' . $bln . '-' . $hari;
+        $data['judul'] = 'Laporan Keuangan';
+        $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
+        if ($data['bulanan']) {
+            $data['judul'] = 'Laporan Keuangan';
+            $data['sub_judul'] = 'Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+        }
+
+        $view = view('pelaporan.view.ojk.rincian_pinjaman_lunas', $data)->render();
+
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view);
+            return $pdf->stream();
+        } else {
+            return $view;
+        }
+
+    }
+    private function DRT(array $data) 
+    {
+        $thn = $data['tahun'];
+        $bln = $data['bulan'];
+        $hari = $data['hari'];
+
+        $tgl = $thn . '-' . $bln . '-' . $hari;
+        $data['judul'] = 'Laporan Keuangan';
+        $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
+        if ($data['bulanan']) {
+            $data['judul'] = 'Laporan Keuangan';
+            $data['sub_judul'] = 'Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+        }
+
+        $view = view('pelaporan.view.ojk.daftar_rincian_tabungan', $data)->render();
+
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view);
+            return $pdf->stream();
+        } else {
+            return $view;
+        }
+
+    }
+    private function DRPY(array $data) 
+    {
+        $thn = $data['tahun'];
+        $bln = $data['bulan'];
+        $hari = $data['hari'];
+
+        $tgl = $thn . '-' . $bln . '-' . $hari;
+        $data['judul'] = 'Laporan Keuangan';
+        $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
+        if ($data['bulanan']) {
+            $data['judul'] = 'Laporan Keuangan';
+            $data['sub_judul'] = 'Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+        }
+
+        $view = view('pelaporan.view.ojk.rincian_pinjaman_diterima', $data)->render();
+
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view);
+            return $pdf->stream();
+        } else {
+            return $view;
+        }
+
+    }
+    private function KBP(array $data) 
+    {
+        $thn = $data['tahun'];
+        $bln = $data['bulan'];
+        $hari = $data['hari'];
+
+        $tgl = $thn . '-' . $bln . '-' . $hari;
+        $data['judul'] = 'Laporan Keuangan';
+        $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
+        if ($data['bulanan']) {
+            $data['judul'] = 'Laporan Keuangan';
+            $data['sub_judul'] = 'Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+        }
+
+        $view = view('pelaporan.view.ojk.kolekbilitas_pinjaman', $data)->render();
+
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view);
+            return $pdf->stream();
+        } else {
+            return $view;
+        }
+
+    }
+    private function pcpp(array $data) 
+    {
+        $thn = $data['tahun'];
+        $bln = $data['bulan'];
+        $hari = $data['hari'];
+
+        $tgl = $thn . '-' . $bln . '-' . $hari;
+        $data['judul'] = 'Laporan Keuangan';
+        $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
+        if ($data['bulanan']) {
+            $data['judul'] = 'Laporan Keuangan';
+            $data['sub_judul'] = 'Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+        }
+
+        $view = view('pelaporan.view.ojk.penyisihan_cadangan', $data)->render();
+
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view);
+            return $pdf->stream();
+        } else {
+            return $view;
+        }
+
+    }
     private function surat_pengantar(array $data)
     {
         $thn = $data['tahun'];

@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Agent;
 use App\Models\Usaha;
+use App\Models\Desa;
 use App\Models\Keluarga;
 use App\Models\Kecamatan;
 use App\Models\SebutanAgent;
@@ -21,6 +22,7 @@ class AgentController extends Controller
     public function index()
     {
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
+        $desa = Desa::all(); 
         if (request()->ajax()) {
             $data = agent::where('lokasi', $kec->id)->get();
             return DataTables::of($data)
@@ -29,7 +31,7 @@ class AgentController extends Controller
 
         $title = 'Data Agent';
         $sebutan = SebutanAgent::all();
-        return view('agent.index')->with(compact('sebutan', 'title','kec'));
+        return view('agent.index')->with(compact('sebutan', 'title', 'kec', 'desa'));
     }
 
     /**
@@ -37,6 +39,7 @@ class AgentController extends Controller
      */
     public function create()
     {
+        $desa = Desa::all(); 
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $jenis_usaha = Usaha::orderBy('nama_usaha', 'ASC')->get();
         $hubungan = Keluarga::orderBy('kekeluargaan', 'ASC')->get();
@@ -86,7 +89,7 @@ class AgentController extends Controller
             $value_tanggal = Tanggal::tglIndo("$thn-$bulan-$tgl");
         }
 
-        return view('agent.create')->with(compact( 'jenis_usaha', 'jenis_usaha_dipilih', 'hubungan', 'hubungan_dipilih', 'nik', 'jk_dipilih', 'value_tanggal'));
+        return view('agent.create')->with(compact( 'jenis_usaha', 'jenis_usaha_dipilih', 'hubungan', 'hubungan_dipilih', 'nik', 'jk_dipilih', 'value_tanggal','desa'));
     }
 
     /**
