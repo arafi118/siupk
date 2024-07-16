@@ -123,7 +123,7 @@
             </td>
         </tr>
         <tr>
-            <td width="5%" align="center">2.</td>
+		<td width="5%" style="text-align: center; vertical-align: top;">2.</td>
             <td colspan="3">
                 Apabila orang tersebut diatas tidak memenuhi kewajibannya (membayar angsuran dan kewajiban lainnya)
                 sesuai ketentuan dalam surat perjanjian kredit (SPK) maka dengan ini saya mengikatkan diri dan mejamin untuk
