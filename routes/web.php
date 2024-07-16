@@ -302,4 +302,10 @@ Route::get('/simpanan/detail_simpanan/{id}', [SimpananController::class, 'detail
 
 Route::resource('/simpanan', SimpananController::class)->middleware('auth');
 
+Route::get('/register_simpanan', [SimpananController::class, 'create'])->middleware('auth');
+Route::get('/register_simpanan/{nia}', [PinjamanIndividuController::class, 'register'])->middleware('auth');
+
+
+
+
 Route::get('/{invoice}', [PelaporanController::class, 'invoice']);

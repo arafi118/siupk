@@ -3,7 +3,13 @@
     "",
     "\\app",
     "\\app\\Http",
-    "\\app\\Http\\Controllers"
+    "\\app\\Http\\Controllers",
+    "\\resources",
+    "\\resources\\views",
+    "\\resources\\views\\pinjaman_i",
+    "\\resources\\views\\pinjaman_i\\partials",
+    "\\resources\\views\\simpanan"
   ],
+  "SelectedNode": "\\resources\\views\\pinjaman_i\\partials",
   "PreviewInSolutionExplorer": false
 }

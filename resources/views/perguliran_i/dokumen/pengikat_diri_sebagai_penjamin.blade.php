@@ -134,7 +134,7 @@
     </table>
     <p>Demikian pernyataan penjaminan ini saya buat dengan sebenar-benarnya dan merupakan bagian tidak terpisahkan dari
         Surat Perjanjian Kredit, dalam kondisi sehat lahir dan batin serta tanpa paksan dari pihak manapun serta bersedia
-        dituntut dimuka hukum apabila dikemudian hari saya mengkingkari pernyataan ini.
+        dituntut dimuka hukum apabila dikemudian hari saya mengingkari pernyataan ini.
 
 
     </p>
