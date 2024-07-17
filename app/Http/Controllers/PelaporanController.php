@@ -198,6 +198,7 @@ class PelaporanController extends Controller
         $data['email'] = $kec->email_kec;
         $data['kec'] = $kec;
         $data['kab'] = $kab;
+        $data['desa'] = $kec->desa;
         $data['dir'] = $dir;
 
         if ($data['tahun'] == null) {
@@ -221,7 +222,7 @@ class PelaporanController extends Controller
 
         $file = $request->laporan;
         if ($file == 3) {
-            $laporan = explode('_', $request->sub_laporan); 
+            $laporan = explode('_', $request->sub_laporan);
             $file = $laporan[0];
 
             $data['kode_akun'] = $laporan[1];
@@ -320,7 +321,7 @@ class PelaporanController extends Controller
     }
 
 
-    private function OJKN(array $data) 
+    private function OJKN(array $data)
     {
         $thn = $data['tahun'];
         $bln = $data['bulan'];
@@ -333,7 +334,7 @@ class PelaporanController extends Controller
             $data['judul'] = 'Laporan Keuangan';
             $data['sub_judul'] = 'Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         }
-                
+
         $view = view('pelaporan.view.ojk.pelaporan_ojk', $data)->render();
         if ($data['type'] == 'pdf') {
             $pdf = PDF::loadHTML($view);
@@ -341,10 +342,8 @@ class PelaporanController extends Controller
         } else {
             return $view;
         }
-
-
     }
-    private function LRL(array $data) 
+    private function LRL(array $data)
     {
         $thn = $data['tahun'];
         $bln = $data['bulan'];
@@ -366,9 +365,8 @@ class PelaporanController extends Controller
         } else {
             return $view;
         }
-
     }
-    private function DRP(array $data) 
+    private function DRP(array $data)
     {
         $thn = $data['tahun'];
         $bln = $data['bulan'];
@@ -390,9 +388,8 @@ class PelaporanController extends Controller
         } else {
             return $view;
         }
-
     }
-    private function DRPL(array $data) 
+    private function DRPL(array $data)
     {
         $thn = $data['tahun'];
         $bln = $data['bulan'];
@@ -414,9 +411,8 @@ class PelaporanController extends Controller
         } else {
             return $view;
         }
-
     }
-    private function DRT(array $data) 
+    private function DRT(array $data)
     {
         $thn = $data['tahun'];
         $bln = $data['bulan'];
@@ -438,9 +434,8 @@ class PelaporanController extends Controller
         } else {
             return $view;
         }
-
     }
-    private function DRPY(array $data) 
+    private function DRPY(array $data)
     {
         $thn = $data['tahun'];
         $bln = $data['bulan'];
@@ -462,9 +457,8 @@ class PelaporanController extends Controller
         } else {
             return $view;
         }
-
     }
-    private function KBP(array $data) 
+    private function KBP(array $data)
     {
         $thn = $data['tahun'];
         $bln = $data['bulan'];
@@ -486,9 +480,8 @@ class PelaporanController extends Controller
         } else {
             return $view;
         }
-
     }
-    private function pcpp(array $data) 
+    private function pcpp(array $data)
     {
         $thn = $data['tahun'];
         $bln = $data['bulan'];
@@ -510,7 +503,6 @@ class PelaporanController extends Controller
         } else {
             return $view;
         }
-
     }
     private function surat_pengantar(array $data)
     {
@@ -1005,7 +997,7 @@ class PelaporanController extends Controller
             return $view;
         }
     }
-    
+
     private function individu_aktif(array $data)
     {
         $thn = $data['tahun'];
@@ -1361,7 +1353,7 @@ class PelaporanController extends Controller
             return $view;
         }
     }
-    
+
     private function pinjaman_individu(array $data)
     {
         $thn = $data['tahun'];

@@ -622,6 +622,7 @@ class PinjamanIndividuController extends Controller
                 'sumber_pembayaran',
                 'fee_supplier',
                 'fee_agent',
+                'admin',
                 'depe',
                 'provisi',
             ]);
@@ -632,10 +633,7 @@ class PinjamanIndividuController extends Controller
                 'sumber_pembayaran' => 'required',
                 'debet' => 'required',
                 'sumber_pembayaran' => 'required',
-                'fee_supplier' => 'required',
-                'fee_agent' => 'required',
                 'depe' => 'required',
-                'provisi' => 'required'
             ]);
         } else {
             $data = $request->only([
@@ -673,7 +671,6 @@ class PinjamanIndividuController extends Controller
 
         if ($request->status == 'A') {
             if (strtotime(Tanggal::tglNasional($data[$tgl])) < strtotime($kec->tgl_pakai)) {
-
                 return response()->json([
                     'success' => false,
                     'msg' => 'Tanggal pencairan tidak boleh sebelum tanggal pakai aplikasi.',
@@ -682,20 +679,23 @@ class PinjamanIndividuController extends Controller
 
             $fee_supplier = str_replace(',', '', str_replace('.00', '', $data['fee_supplier']));
             $fee_agent = str_replace(',', '', str_replace('.00', '', $data['fee_agent']));
+
+            $admin = str_replace(',', '', str_replace('.00', '', $data['admin']));
             $provisi = str_replace(',', '', str_replace('.00', '', $data['provisi']));
             $alokasi_pinjaman = str_replace(',', '', str_replace('.00', '', $data[$alokasi]));
             $depe = str_replace(',', '', str_replace('.00', '', $data['depe']));
 
             $update = [
                 $tgl => Tanggal::tglNasional($data[$tgl]),
-                $alokasi => intval($alokasi_pinjaman) - intval($depe),
+                $alokasi => intval($alokasi_pinjaman),
+                'admin' => intval($admin),
+                'provisi' => intval($provisi),
+                'fee_agent' => intval($fee_agent),
+                'fee_supplier' => intval($fee_supplier),
+                'harga' => (intval($alokasi_pinjaman) + intval($admin) + intval($provisi)) - intval($depe),
                 'id_supplier' => $data['supplier'],
                 'status' => 'A'
             ];
-
-            if (intval($fee_agent) > 0) {
-                $update['fee_agent'] = $fee_agent;
-            }
 
             // Transaksi [Warning]
             $keterangan = 'Pencairan Kredit ' . $perguliran_i->anggota->namadepan;
@@ -710,24 +710,38 @@ class PinjamanIndividuController extends Controller
                 'id_pinj_i' => $perguliran_i->id,
                 'keterangan_transaksi' => (string) $keterangan,
                 'relasi' => (string) $perguliran_i->anggota->namadepan . " [" . $perguliran_i->id . "]",
-                'jumlah' => intval($alokasi_pinjaman) - intval($depe),
+                'jumlah' => intval($alokasi_pinjaman),
                 'urutan' => '0',
                 'id_user' => auth()->user()->id,
             ]);
 
-            if (intval($fee_supplier) > 0) {
-                $supplier = Supplier::where('id', $data['supplier'])->first();
-
+            if (intval($admin) > 0) {
                 Transaksi::create([
                     'tgl_transaksi' => (string) Tanggal::tglNasional($data[$tgl]),
                     'rekening_debit' => (string) $request->sumber_pembayaran,
-                    'rekening_kredit' => '4.1.03.05',
+                    'rekening_kredit' => '4.1.03.04',
                     'idtp' => '0',
                     'id_pinj' => '0',
                     'id_pinj_i' => $perguliran_i->id,
-                    'keterangan_transaksi' => "FEE Supplier a.n. " . $supplier->nama,
-                    'relasi' => $supplier->nama,
-                    'jumlah' => intval($fee_supplier),
+                    'keterangan_transaksi' => "Pendapatan Admin kredit",
+                    'relasi' => '-',
+                    'jumlah' => intval($admin),
+                    'urutan' => '0',
+                    'id_user' => auth()->user()->id,
+                ]);
+            }
+
+            if (intval($depe) > 0) {
+                Transaksi::create([
+                    'tgl_transaksi' => (string) Tanggal::tglNasional($data[$tgl]),
+                    'rekening_debit' => (string) $request->sumber_pembayaran,
+                    'rekening_kredit' => '1.1.03.0' . $perguliran_i->jenis_pp,
+                    'idtp' => '0',
+                    'id_pinj' => '0',
+                    'id_pinj_i' => $perguliran_i->id,
+                    'keterangan_transaksi' => "Pendapatan Admin kredit",
+                    'relasi' => '-',
+                    'jumlah' => intval($depe),
                     'urutan' => '0',
                     'id_user' => auth()->user()->id,
                 ]);
