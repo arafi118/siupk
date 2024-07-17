@@ -88,4 +88,29 @@ class PinjamanAnggota extends Model
     {
         return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
     }
+    public function jpp()
+    {
+        return $this->belongsTo(JenisProdukPinjaman::class, 'jenis_pp', 'id');
+    }
+    public function saldo()
+    {
+        return $this->hasOne(RealAngsuran::class, 'loan_id')->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC');
+    }
+
+    public function saldo2()
+    {
+        return $this->hasOne(RealAngsuran::class, 'loan_id')->orderBy('tgl_transaksi', 'ASC')->orderBy('id', 'ASC');
+    }
+    public function saldo_pinjaman()
+    {
+        return $this->hasOne(Penghapusan::class, 'id_pinj', 'id');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+    public function real()
+    {
+        return $this->hasMany(RealAngsuran::class, 'loan_id')->orderBy('tgl_transaksi', 'ASC')->orderBy('id', 'ASC');
+    }
 }
