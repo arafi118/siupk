@@ -65,6 +65,8 @@
                 <div>
                     Tembusan :
                     <ol>
+                        <li>Camat Purwareeja Klampok</li>
+                        <li>Kades / Dewan Penasehat</li>
                         <li>Arsip</li>
                     </ol>
                 </div>
