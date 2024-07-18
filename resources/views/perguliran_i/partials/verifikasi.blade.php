@@ -213,7 +213,7 @@
                     </div>
 
                     <div class="card-body">
-                        <button type="button" id="kembaliVerifikasi" class="btn btn-info flex-grow-1 me-2" style="background-color: rgb(240, 148, 0);">
+                        <button type="button" id="kembaliProposal" class="btn btn-info flex-grow-1 me-2" style="background-color: rgb(240, 148, 0);">
                             <b><i class="fa fa-refresh"></i> &nbsp; KEMBALI KE PROPOSAL</b>
                         </button>
                         <button type="button" id="Simpan" class="btn btn-secondary flex-grow-1 ms-2" style="background-color: rgb(112, 109, 109);">

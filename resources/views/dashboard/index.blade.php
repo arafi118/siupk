@@ -220,7 +220,7 @@
                 <div class="modal-body">
                     <div class="nav-wrapper position-relative end-0">
                         <ul class="nav nav-pills nav-fill p-1" role="tablist">
-                            <li class="nav-item">
+                            <li class="nav-item ">
                                 <a class="nav-link mb-0 px-0 py-1 active text-danger" data-bs-toggle="tab"
                                     href="#tagihan_hari_ini" role="tab" aria-controls="tagihan_hari_ini"
                                     aria-selected="true">
@@ -465,7 +465,7 @@
     </div>
 
     {{-- Kelompok Aktif --}}
-    <div class="modal fade" id="aktif" aria-labelledby="aktifLabel" aria-hidden="true">
+    <div class="modal fade" id="aktif" aria-controls="individu_aktif" aria-labelledby="aktifLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
@@ -638,12 +638,6 @@
             }
         })
 
-        $.get('/dashboard/pinjaman?status=A', function(result) {
-            if (result.success) {
-                $('#tbKelompok').html(result.table)
-            }
-        })
-
         $.get('/dashboard/pemanfaat?status=A', function(result) {
             if (result.success) {
                 $('#tbAnggota').html(result.table)
@@ -742,10 +736,7 @@
             $('#aktif').modal('show')
             $('.btn-pelaporan').show()
 
-            let tab = $('#aktif').find('ul li a.active')
-            if (tab.length > 0) {
-                setLaporan('5', tab.attr('aria-controls'))
-            }
+            setLaporan('5', $('#aktif').attr('aria-controls'))
         })
 
         $(document).on('click', '.nav.nav-pills .nav-item', function() {
@@ -756,7 +747,7 @@
             } else {
                 $('.btn-pelaporan').show()
             }
-            setLaporan('5', a.attr('aria-controls'))
+            setLaporan('5', a.attr('aria-controls')) 
         })
 
         $(document).on('click', '.btn-pelaporan', function(e) {
@@ -985,7 +976,8 @@
         new Chart(ctx2, {
             type: "pie",
             data: {
-                labels: [
+                labels: 
+                [
                     'SPP Pokok',
                     'SPP Jasa',
                     'UEP Pokok',
