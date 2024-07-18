@@ -1331,8 +1331,11 @@ class PelaporanController extends Controller
             },
             'pinjaman_kelompok.target' => function ($query) use ($data) {
                 $query->where('jatuh_tempo', '<=', $data['tgl_kondisi']);
-            }
+            },
+            'pinjaman_kelompok.angsuran_pokok',
+            'pinjaman_kelompok.angsuran_jasa',
         ])->get();
+
 
         $data['lunas'] = PinjamanKelompok::where([
             ['tgl_lunas', '<', $thn . '-01-01'],
