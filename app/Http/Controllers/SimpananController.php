@@ -8,7 +8,6 @@ use App\Models\Kecamatan;
 use App\Models\Keluarga;
 use App\Models\PinjamanAnggota;
 use App\Models\PinjamanIndividu;
-use App\Models\Simpanan;
 use App\Models\StatusPinjaman;
 use App\Models\Usaha;
 use App\Utils\Tanggal;
