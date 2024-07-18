@@ -13,7 +13,7 @@
             <div class="row">
                 @if ($jumlah_saldo <= $jumlah)
                     <div class="col-12">
-                        <div class="alert alert-warning text-white" role="alert">
+                        <div class="alert alert-warning text-black" role="alert">
                             Sepertinya saldo transaksi anda belum tersimpan di aplikasi. Silahkan Klik <a href="#"
                                 data-href="/simpan_saldo?bulan=00&tahun={{ date('Y') }}" class="alert-link"
                                 id="simpanSaldo">Disini</a> untuk menyimpan
@@ -34,14 +34,13 @@
                                     </div> <br>                                   
                                     <div class="widget-subheading">
                                         <span class="text-sm text-end text-success font-weight-bolder mt-auto mb-0">
-                                            {{ $pinjaman_anggota }}
-                                            <span class="font-weight-normal text-secondary">Individu</span>
+                                            &nbsp;<span class="font-weight-normal text-secondary">&nbsp;</span>
                                         </span>
                                     </div>
                                 </div>
                                 <div class="widget-content-right">
                                     <div class="widget-numbers text-success" style="font-size: 22px;">
-                                        {{ $pinjaman_kelompok }} Kelompok
+                                        {{ $pinjaman_anggota }} Nasabah
                                     </div>
                                 </div>
                             </div>
@@ -54,7 +53,7 @@
                             <div class="widget-content-wrapper" id="btnpinjaman">
                                 <div class="widget-content-left">
                                     <div class="widget-heading" style="display: flex; justify-content: space-between; align-items: right; font-size: 11px;">
-                                        <span><h6><b>Proposal Pinjaman</b></h6></span>
+                                        <span><h6><b>Permohonan Kredit</b></h6></span>
                                         <div class="dropdown text-end">
                                             <span class="text-xs text-secondary">&nbsp;&nbsp; {{ $waiting }} waiting</span>
                                         </div>
@@ -169,13 +168,7 @@
                 <div class="card">
                     <div class="card-header pb-0 p-3">
                         <div class="d-flex justify-content-between">
-                            <h6 class="card-title">Pendapatan dan Beban</h6>
-                            <button type="button"
-                                class="btn btn-icon-only btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center"
-                                data-bs-toggle="tooltip" data-bs-placement="left"
-                                data-bs-original-title="See which ads perform better">
-                                <i class="fa fa-exclamation">tanda seru</i>
-                            </button>
+                            <h6 class="card-title">Realisasi Pendapatan dan Beban</h6>
                         </div>
                         <div class="d-flex align-items-center">
                             <span class="badge badge-md badge-dot me-4">
@@ -258,11 +251,13 @@
                                                 <thead>
                                                     <tr>
                                                         <td align="center">No</td>
-                                                        <td align="center">Nama Kelompok</td>
+                                                        <td align="center">Load ID</td>
+                                                        <td align="center">Nama Pemohon</td>
                                                         <td align="center">Tanggal Cair</td>
-                                                        <td align="center">Alokasi</td>
                                                         <td align="center">Tunggakan Pokok</td>
                                                         <td align="center">Tunggakan Jasa</td>
+                                                        <td align="center">Jumlah</td>
+                                                        <td align="center">Keterangan</td>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="TbHariIni"></tbody>
@@ -279,11 +274,15 @@
                                                 <thead>
                                                     <tr>
                                                         <td align="center">No</td>
-                                                        <td align="center">Nama Kelompok</td>
+                                                        <td align="center">Load ID</td>
                                                         <td align="center">Tanggal Cair</td>
+                                                        <td align="center">Nama Pemohon</td>
+                                                        <td align="center">Desa</td>
                                                         <td align="center">Alokasi</td>
                                                         <td align="center">Tunggakan Pokok</td>
                                                         <td align="center">Tunggakan Jasa</td>
+                                                        <td align="center">Jumlah</td>
+                                                        <td align="center">Keterangan</td>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="TbMenunggak"></tbody>
@@ -389,10 +388,13 @@
                                                 <thead>
                                                     <tr>
                                                         <td align="center">No</td>
+                                                        <td align="center">Load id</td>
                                                         <td align="center">Tanggal Proposal</td>
-                                                        <td align="center">Nama Kelompok</td>
+                                                        <td align="center">Nama Pemohon P</td>
+                                                        <td align="center">Jenis</td>
                                                         <td align="center">Alokasi</td>
-                                                        <td align="center">Anggota</td>
+                                                        <td align="center">Nama Barang</td>
+                                                        <td align="center">Keterangan</td>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="tbProposal"></tbody>
@@ -409,10 +411,13 @@
                                                 <thead>
                                                     <tr>
                                                         <td align="center">No</td>
+                                                        <td align="center">Load id</td>
                                                         <td align="center">Tanggal Verifikasi</td>
-                                                        <td align="center">Nama Kelompok</td>
+                                                        <td align="center">Nama Pemohon V</td>
+                                                        <td align="center">Jenis</td>
                                                         <td align="center">Alokasi</td>
-                                                        <td align="center">Anggota</td>
+                                                        <td align="center">Nama Barang</td>
+                                                        <td align="center">Keterangan</td>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="tbVerifikasi"></tbody>
@@ -429,10 +434,13 @@
                                                 <thead>
                                                     <tr>
                                                         <td align="center">No</td>
+                                                        <td align="center">Load id</td>
                                                         <td align="center">Tanggal Tunggu</td>
-                                                        <td align="center">Nama Kelompok</td>
+                                                        <td align="center">Nama Pemohon W</td>
+                                                        <td align="center">Jenis</td>
                                                         <td align="center">Alokasi</td>
-                                                        <td align="center">Anggota</td>
+                                                        <td align="center">Nama Barang</td>
+                                                        <td align="center">Keterangan</td>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="tbWaiting"></tbody>
@@ -466,46 +474,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="nav-wrapper position-relative end-0">
-                        <ul class="nav nav-pills nav-fill p-1" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link mb-0 px-0 py-1 active text-info" data-bs-toggle="tab"
-                                    href="#kelompok_aktif" role="tab" aria-controls="kelompok_aktif"
-                                    aria-selected="true">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Kelompok</b>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link mb-0 px-0 py-1 text-danger" data-bs-toggle="tab" href="#anggota"
-                                    role="tab" aria-controls="anggota" aria-selected="false">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Anggota</b>
-                                </a>
-                            </li>
-                        </ul>
-
-                        <div class="tab-content mt-2">
-                            <div class="tab-pane fade show active" id="kelompok_aktif" role="tabpanel"
-                                aria-labelledby="kelompok_aktif">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-striped midle" width="100%">
-                                                <thead>
-                                                    <tr>
-                                                        <td align="center">No</td>
-                                                        <td align="center">Tanggal Cair</td>
-                                                        <td align="center">Nama Kelompok</td>
-                                                        <td align="center">Alokasi</td>
-                                                        <td align="center">Saldo</td>
-                                                        <td align="center">Anggota</td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="tbKelompok"></tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="anggota" role="tabpanel" aria-labelledby="anggota">
+                      <div class="tab-content mt-2">
+                            <div class="" id="anggota" role="" aria-labelledby="anggota">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="table-responsive">
@@ -514,8 +484,9 @@
                                                     <tr>
                                                         <td align="center">No</td>
                                                         <td align="center">Nik</td>
-                                                        <td align="center">Nama Anggota</td>
+                                                        <td align="center">Nama Nasabah</td>
                                                         <td align="center">Alamat</td>
+                                                        <td align="center">T/S</td>
                                                         <td align="center">Tanggal Cair</td>
                                                         <td align="center">Alokasi</td>
                                                     </tr>
@@ -675,7 +646,7 @@
 
         $.get('/dashboard/pemanfaat?status=A', function(result) {
             if (result.success) {
-                $('#d').html(result.table)
+                $('#tbAnggota').html(result.table)
             }
         })
 

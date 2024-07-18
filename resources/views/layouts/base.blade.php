@@ -77,8 +77,6 @@
             gap: 10px; /* Tambahkan jarak antara label dan input */
         }
 
-
-
         .badge-light-blue {
             background-color: #00c8ffc8 !important;
             /* Warna biru muda */
@@ -801,6 +799,11 @@
 
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script async src="/assets/js/material-dashboard.min.js?v=1716515606"></script>
+@if (session('pesan'))
+        <script>
+            Toastr('success', "{{ session('pesan') }}")
+        </script>
+    @endif
 </body>
 
 </html>
