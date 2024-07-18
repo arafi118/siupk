@@ -2,33 +2,38 @@
 
 @section('content')
     <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Daftar Simpanan</h3>
+        </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-flush table-hover table-click" width="100%">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>NIK</th>
-                            <th>Nama Lengkap</th>
-                            <th>Alamat</th>
-                            <th>Telpon</th>
+                            <th>Nomor Rekening</th>
+                            <th>Nama Anggota</th>
                             <th>Jenis Simpanan</th>
+                            <th>Jumlah</th>
+                            <th>Tanggal Buka</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
                 </table>
             </div>
 
-            <div class="text-sm">
-                <span class="badge badge-secondary">
-                    (N) Belum ada pinjaman
+            <div class="text-sm mt-3">
+                <span class="badge badge-success">
+                    Simpanan Umum
                 </span>
-                @foreach ($status_pinjaman as $status)
-                    <span class="badge badge-{{ $status->warna_status }}">
-                        ({{ $status->kd_status }})
-                        {{ $status->nama_status }}
-                    </span>
-                @endforeach
+                <span class="badge badge-danger">
+                    Simpanan Deposito
+                </span>
+                <span class="badge badge-warning">
+                    Simpanan Program
+                </span>
+                <!-- Tambahkan status lain sesuai kebutuhan -->
             </div>
         </div>
     </div>
@@ -45,33 +50,52 @@
             },
             processing: true,
             serverSide: true,
-            ajax: "/database/penduduk",
-            columns: [{
+            ajax: "/simpanan",
+            columns: [
+                {
                     data: 'id',
                     name: 'id',
                     visible: false,
                     searchable: false
-                }, {
-                    data: 'nik',
-                    name: 'nik'
                 },
                 {
-                    data: 'namadepan',
-                    name: 'namadepan'
+                    data: 'nomor_rekening',
+                    name: 'nomor_rekening'
                 },
                 {
-                    data: 'alamat',
-                    name: 'alamat'
+                    data: 'anggota.namadepan',
+                    name: 'anggota.namadepan'
                 },
                 {
-                    data: 'hp',
-                    name: 'hp'
+                    data: 'jenis_simpanan',
+                    name: 'jenis_simpanan'
+                },
+                {
+                    data: 'jumlah',
+                    name: 'jumlah',
+                    render: function(data, type, row) {
+                        return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(data);
+                    }
+                },
+                {
+                    data: 'tgl_buka',
+                    name: 'tgl_buka'
                 },
                 {
                     data: 'status',
                     name: 'status',
                     orderable: false,
-                    searchable: false
+                    searchable: false,
+                    render: function(data, type, row) {
+                        if (data === 'A') {
+                            return '<span class="badge badge-success">Aktif</span>';
+                        } else if (data === 'T') {
+                            return '<span class="badge badge-danger">Ditutup</span>';
+                        } else if (data === 'P') {
+                            return '<span class="badge badge-warning">Pending</span>';
+                        }
+                        return '<span class="badge badge-secondary">' + data + '</span>';
+                    }
                 }
             ],
             order: [
@@ -81,8 +105,7 @@
 
         $('.table').on('click', 'tbody tr', function(e) {
             var data = table.row(this).data();
-
-            window.location.href = '/database/penduduk/' + data.nik
-        })
+            window.location.href = '/simpanan/' + data.id;
+        });
     </script>
 @endsection

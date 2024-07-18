@@ -103,14 +103,33 @@ public function index()
             if ($password === $user->pass) {
                 if (Auth::loginUsingId($user->id)) {
                     $hak_akses = explode(',', $user->hak_akses);
-                    $menu = Menu::where('parent_id', '0')->whereNotIn('id', $hak_akses)->where('aktif', 'Y')->with([
-                        'child' => function ($query) use ($hak_akses) {
-                            $query->whereNotIn('id', $hak_akses);
-                        },
-                        'child.child'  => function ($query) use ($hak_akses) {
-                            $query->whereNotIn('id', $hak_akses);
-                        }
-                    ])->orderBy('sort', 'ASC')->orderBy('id', 'ASC')->get();
+                    $menu = Menu::where('parent_id', '0')
+                        ->whereNotIn('id', $hak_akses)
+                        ->where('aktif', 'Y')
+                        ->where(function ($query) use ($lokasi) {
+                            $query->where('lokasi', 0)
+                                  ->orWhere('lokasi', $lokasi);
+                        })
+                        ->with([
+                            'child' => function ($query) use ($hak_akses, $lokasi) {
+                                $query->whereNotIn('id', $hak_akses)
+                                      ->where(function ($query) use ($lokasi) {
+                                          $query->where('lokasi', 0)
+                                                ->orWhere('lokasi', $lokasi);
+                                      });
+                            },
+                            'child.child'  => function ($query) use ($hak_akses, $lokasi) {
+                                $query->whereNotIn('id', $hak_akses)
+                                      ->where(function ($query) use ($lokasi) {
+                                          $query->where('lokasi', 0)
+                                                ->orWhere('lokasi', $lokasi);
+                                      });
+                            }
+                        ])
+                        ->orderBy('sort', 'ASC')
+                        ->orderBy('id', 'ASC')
+                        ->get();
+
 
                     $angsuran = true;
                     if (in_array('19', $hak_akses) || in_array('21', $hak_akses)) {
@@ -181,14 +200,33 @@ public function index()
             if ($password === $user->pass) {
                 if (Auth::loginUsingId($user->id)) {
                     $hak_akses = explode(',', $user->hak_akses);
-                    $menu = Menu::where('parent_id', '0')->whereNotIn('id', $hak_akses)->where('aktif', 'Y')->with([
-                        'child' => function ($query) use ($hak_akses) {
-                            $query->whereNotIn('id', $hak_akses);
-                        },
-                        'child.child'  => function ($query) use ($hak_akses) {
-                            $query->whereNotIn('id', $hak_akses);
-                        }
-                    ])->orderBy('sort', 'ASC')->orderBy('id', 'ASC')->get();
+                    $menu = Menu::where('parent_id', '0')
+                        ->whereNotIn('id', $hak_akses)
+                        ->where('aktif', 'Y')
+                        ->where(function ($query) use ($lokasi) {
+                            $query->where('lokasi', 0)
+                                  ->orWhere('lokasi', $lokasi);
+                        })
+                        ->with([
+                            'child' => function ($query) use ($hak_akses, $lokasi) {
+                                $query->whereNotIn('id', $hak_akses)
+                                      ->where(function ($query) use ($lokasi) {
+                                          $query->where('lokasi', 0)
+                                                ->orWhere('lokasi', $lokasi);
+                                      });
+                            },
+                            'child.child'  => function ($query) use ($hak_akses, $lokasi) {
+                                $query->whereNotIn('id', $hak_akses)
+                                      ->where(function ($query) use ($lokasi) {
+                                          $query->where('lokasi', 0)
+                                                ->orWhere('lokasi', $lokasi);
+                                      });
+                            }
+                        ])
+                        ->orderBy('sort', 'ASC')
+                        ->orderBy('id', 'ASC')
+                        ->get();
+
 
                     $angsuran = true;
                     if (in_array('19', $hak_akses) || in_array('21', $hak_akses)) {

@@ -14,6 +14,6 @@ class JenisSimpanan extends Model
 
     public function simpanan()
     {
-        return $this->hasMany(Simpanan::class, 'jenis_simp');
+        return $this->hasMany(Simpanan::class, 'jenis_simpanan');
     }
 }

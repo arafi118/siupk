@@ -2,14 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\app",
-    "\\app\\Http",
-    "\\app\\Http\\Controllers",
+    "\\public",
     "\\resources",
     "\\resources\\views",
     "\\resources\\views\\pinjaman_i",
-    "\\resources\\views\\pinjaman_i\\partials",
-    "\\resources\\views\\simpanan"
+    "\\resources\\views\\simpanan",
+    "\\resources\\views\\simpanan\\partials"
   ],
-  "SelectedNode": "\\resources\\views\\pinjaman_i\\partials",
   "PreviewInSolutionExplorer": false
 }

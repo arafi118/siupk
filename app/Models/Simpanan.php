@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Session;
 
-class SimpananIndividu extends Model
+class Simpanan extends Model
 {
     use HasFactory;
     protected $table;
@@ -21,7 +21,7 @@ class SimpananIndividu extends Model
 
     public function js()
     {
-        return $this->belongsTo(JenisSimpanan::class, 'jenis_simp');
+        return $this->belongsTo(JenisSimpanan::class, 'jenis_simpanan');
     }
 
     public function jasa()

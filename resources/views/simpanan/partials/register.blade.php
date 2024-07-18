@@ -4,7 +4,7 @@
             <i class="material-icons opacity-10">note_add</i>
         </div>
         <h6 class="mb-0">
-            Register Proposal {{ $anggota->namadepan }}
+            Register Simpanan {{ $anggota->namadepan }}
         </h6>
         <div class="text-xs">
             {{ $anggota->d->sebutan_desa->sebutan_desa }} {{ $anggota->d->nama_desa }},
@@ -12,42 +12,27 @@
         </div>
     </div>
     <div class="card-body pt-0">
-        <form action="/perguliran_i" method="post" id="FormRegisterProposal">
+        <form action="/simpanan/store" method="post" id="FormRegisterProposal">
             @csrf
 
             <input type="hidden" name="nia" id="nia" value="{{ $anggota->id }}">
-            
             <div class="row">
                 <div class="col-md-12">
                     <div class="my-2">
-                        <label class="form-label" for="jenis_simpanan">Jenis Simpanan</label>
+                        <label class="form-label" for="jenis_simpanan">Jenis Produk Simpanan</label>
                         <select class="form-control" name="jenis_simpanan" id="jenis_simpanan">
-                            @foreach ($jenis_pp as $jpp)
-                                <option {{ $jenis_pp_dipilih == $jpp->id ? 'selected' : '' }}
-                                    value="{{ $jpp->id }}">
-                                    {{ $jpp->nama_jpp }} ({{ $jpp->deskripsi_jpp }})
+                            @foreach ($js as $jps)
+                                <option {{ $js_dipilih == $jps->id ? 'selected' : '' }}
+                                    value="{{ $jps->id }}">
+                                    {{ $jps->nama_js }} ({{ $jps->deskripsi_js }})
                                 </option>
                             @endforeach
                         </select>
-                        <small class="text-danger" id="msg_jenis_produk_pinjaman"></small>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="my-2">
-                        <label class="form-label" for="jaminan">Jaminan</label>
-                        <select class="form-control" name="jaminan" id="jaminan">
-                            @foreach ($jaminan as $j)
-                                <option value="{{ $j['id'] }}">
-                                    {{ $j['nama'] }}
-                                </option>
-                            @endforeach
-                        </select>
-                        <small class="text-danger" id="msg_jaminan"></small>
+                        <small class="text-danger" id="msg_jenis_simpanan"></small>
                     </div>
                 </div>
             </div>
-
-            <div class="row" id="formJaminan"></div>
+            <div class="row" id="FormSimpanan">mohon menunggu . . . </div>
         </form>
 
         <button type="submit" id="SimpanProposal" class="btn btn-github btn-sm float-end">Simpan Proposal</button>
@@ -55,58 +40,75 @@
 </div>
 
 <script>
-    new Choices($('#jenis_jasa')[0], {
-        shouldSort: false,
-        fuseOptions: {
-            threshold: 0.1,
-            distance: 1000
-        }
-    })
-    new Choices($('#sistem_angsuran_pokok')[0], {
-        shouldSort: false,
-        fuseOptions: {
-            threshold: 0.1,
-            distance: 1000
-        }
-    })
-    new Choices($('#sistem_angsuran_jasa')[0], {
-        shouldSort: false,
-        fuseOptions: {
-            threshold: 0.1,
-            distance: 1000
-        }
-    })
-    new Choices($('#jaminan')[0], {
-        shouldSort: false,
-        fuseOptions: {
-            threshold: 0.1,
-            distance: 1000
-        }
-    })
-    new Choices($('#jenis_produk_pinjaman')[0], {
-        shouldSort: false,
-        fuseOptions: {
-            threshold: 0.1,
-            distance: 1000
-        }
-    })
-
-    $("#pengajuan").maskMoney();
-
+$(document).ready(function() {
     $(".date").flatpickr({
         dateFormat: "d/m/Y"
-    })
-    6
-    $(document).on('change', '#jaminan', function() {
-        jaminan()
-    })
+    });
+    
+    // Atur nilai awal jenis_simpanan ke 1
+    $('#jenis_simpanan').val('1');
 
-    function jaminan() {
-        let jaminan = $('#jaminan').val();
-        $.get('/register_proposal_i/jaminan/' + jaminan, function(result) {
-            $('#formJaminan').html(result.view)
-        })
+    // Panggil fungsi jenis_simpanan() saat halaman dimuat
+    jenis_simpanan();
+
+    $(document).on('change', '#jenis_simpanan', function() {
+        jenis_simpanan();
+    });
+
+    function jenis_simpanan() {
+        let jenis_simpanan = $('#jenis_simpanan').val();
+        let nia = $('#nia').val();
+        $.get('/register_simpanan/jenis_simpanan/' + jenis_simpanan, { nia: nia }, function(result) {
+            if(result.success) {
+                $('#FormSimpanan').html(result.view);
+            } else {
+                console.error('Error saat mengambil jenis_simpanan');
+            }
+        }).fail(function(xhr, status, error) {
+            console.error('Error AJAX:', status, error);
+        });
     }
-
-    jaminan()
+    
+     $(document).on('click', '#SimpanProposal', function(e) {
+        e.preventDefault();
+        $('small.text-danger').html('');
+        $('.input-group.input-group-static').removeClass('is-invalid');
+        
+    var form = $('#FormRegisterProposal');
+    
+    // Tambahkan debugging log di sini
+    var formData = form.serialize();
+    console.log('Form Data:', formData);
+    
+        $.ajax({
+            type: 'POST',
+            url: '/simpanan/store',
+            data: form.serialize(),
+            success: function(result) {
+                if (result.success) {
+                    Swal.fire('Berhasil', result.message, 'success').then(() => {
+                        window.location.href = '/simpanan/detail_simpanan/' + result.id;
+                    });
+                } else {
+                    Swal.fire('Error', 'Terjadi kesalahan', 'error');
+                }
+            },
+            error: function(xhr) {
+                if (xhr.status === 422) {
+                    const errors = xhr.responseJSON.errors;
+                    let errorMessage = '';
+                    $.each(errors, function(key, value) {
+                        $('#' + key).closest('.input-group.input-group-static').addClass('is-invalid');
+                        $('#msg_' + key).html(value[0]);
+                        errorMessage += key + ': ' + value[0] + '\n';
+                    });
+                    console.log('Validation Errors:', errorMessage);
+                    Swal.fire('Error', 'Cek kembali input yang Anda masukkan:\n' + errorMessage, 'error');
+                } else {
+                    Swal.fire('Error', 'Terjadi kesalahan pada server', 'error');
+                }
+            }
+        });
+    });
+});
 </script>

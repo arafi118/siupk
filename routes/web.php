@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\UpkController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\KabupatenController as AdminKabupatenController;
+use App\Http\Controllers\Admin\KecamatanController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DesaController;
 use App\Http\Controllers\GenerateController;
@@ -38,6 +40,51 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/master', [AdminAuthController::class, 'index'])->middleware('guest');
+Route::post('/master/login', [AdminAuthController::class, 'login'])->middleware('guest');
+
+Route::group(['prefix' => 'master', 'as' => 'master.', 'middleware' => 'master'], function () {
+    Route::get('/dashboard', [AdminController::class, 'index']);
+    Route::get('/simpan_saldo', [DashboardController::class, 'simpanSaldo']);
+
+    Route::get('/kecamatan/{kd_prov}/{kd_kab}/{kd_kec}', [KecamatanController::class, 'index']);
+
+    Route::get('/kabupaten/{kd_prov}/{kd_kab}/', [AdminKabupatenController::class, 'index']);
+    Route::get('/kabupaten/laporan/sub_laporan/{laporan}/', [AdminKabupatenController::class, 'subLaporan']);
+    Route::get('/kabupaten/laporan/data/{lokasi}/', [AdminKabupatenController::class, 'data']);
+    Route::post('/kabupaten/laporan/preview/{kd_kab}', [AdminKabupatenController::class, 'preview']);
+
+    Route::resource('/users', AdminUserController::class);
+
+    Route::get('/laporan', [AdminController::class, 'laporan']);
+
+    Route::get('/buat_invoice', [InvoiceController::class, 'index']);
+    Route::get('/nomor_invoice', [InvoiceController::class, 'InvoiceNo']);
+    Route::get('/jumlah_tagihan', [InvoiceController::class, 'Tagihan']);
+
+    Route::get('/unpaid', [InvoiceController::class, 'Unpaid']);
+    Route::get('/{invoice}/unpaid', [InvoiceController::class, 'DetailUnpaid']);
+
+    Route::get('/paid', [InvoiceController::class, 'Paid']);
+    Route::get('/{invoice}/paid', [InvoiceController::class, 'DetailPaid']);
+
+    Route::post('/buat_invoice', [InvoiceController::class, 'store']);
+    Route::put('/{invoice}/simpan', [InvoiceController::class, 'simpan']);
+
+    Route::resource('/menu', MenuController::class);
+
+    Route::get('/migrasi_upk/server/{server}', [UpkController::class, 'Server']);
+    Route::get('/migrasi_upk/{id}/rekening', [UpkController::class, 'Rekening']);
+    Route::get('/migrasi_upk/{id}/rekening/insert', [UpkController::class, 'InsertRekening']);
+    Route::get('/migrasi_upk/{id}/transaksi', [UpkController::class, 'Transaksi']);
+    Route::get('/migrasi_upk/{id}/desa', [UpkController::class, 'Desa']);
+
+    Route::resource('/migrasi_upk', UpkController::class);
+
+    Route::post('/logout', [AdminAuthController::class, 'logout']);
+});
+
 
 Route::get('/kab', [KabupatenAuthController::class, 'index'])->middleware('guest');
 Route::post('/kab/login', [KabupatenAuthController::class, 'login'])->middleware('guest');
@@ -298,14 +345,21 @@ Route::get('/simpanan/cari_nik', [SimpananController::class, 'cariNik'])->middle
 
 Route::post('/simpanan/{nik}/blokir', [SimpananController::class, 'blokir'])->middleware('auth');
 
-Route::get('/simpanan/detail_simpanan/{id}', [SimpananController::class, 'detailAnggota'])->middleware('auth');//here
+Route::get('/simpanan/detail_simpanan/{id}', [SimpananController::class, 'detailAnggota'])->middleware('auth');//her
 
 Route::resource('/simpanan', SimpananController::class)->middleware('auth');
 
 Route::get('/register_simpanan', [SimpananController::class, 'create'])->middleware('auth');
-Route::get('/register_simpanan/{nia}', [PinjamanIndividuController::class, 'register'])->middleware('auth');
+Route::get('/register_simpanan/{nia}', [SimpananController::class, 'register'])->middleware('auth');
+Route::get('/register_simpanan/jenis_simpanan/{id}', [SimpananController::class, 'jenis_simpanan'])->middleware('auth');
+
+Route::get('/simpanan/kuasa/{id}', [SimpananController::class, 'Kuasa'])->middleware('auth');
+
+Route::post('/simpanan/store', [SimpananController::class, 'store'])->middleware('auth');
 
 
-
-
+Route::get('/cetak_kop/{simpanan}', [SimpananController::class, 'kop'])->middleware('auth');
+ 
+Route::get('/cetak_koran/{simpanan}', [SimpananController::class, 'koran'])->middleware('auth');
+ 
 Route::get('/{invoice}', [PelaporanController::class, 'invoice']);
