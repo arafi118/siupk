@@ -1,7 +1,9 @@
 <title>PINJAMAN AKTIF</title>
 @php
-    use App\Utils\Keuangan;
-    $keuangan = new Keuangan();
+use App\Utils\Keuangan;
+$keuangan = new Keuangan();
+$section = 0;
+$empty = false;
 @endphp
 
 @extends('pelaporan.layout.base')
@@ -9,88 +11,200 @@
 @section('content')
 
 <style type="text/css">
+    .style6 {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        -webkit-print-color-adjust: exact;
+    }
 
-.style6 {font-family: Arial, Helvetica, sans-serif; font-size: 16px;font-weight: bold;  }
-.style9 {font-family: Arial, Helvetica, sans-serif; font-size: 11px; }
-.style10 {font-family: Arial, Helvetica, sans-serif; font-size: 10px; }
-.top	{border-top: 1px solid #000000; }
-.bottom	{border-bottom: 1px solid #000000; }
-.left	{border-left: 1px solid #000000; }
-.right	{border-right: 1px solid #000000; }
-.all	{border: 1px solid #000000; }
-.style26 {font-family: Arial, Helvetica, sans-serif}
-.style27 {font-family: Arial, Helvetica, sans-serif; font-size: 11px; font-weight: bold; }
-.align-justify {text-align:justify; }
-.align-center {text-align:center; }
-.align-right {text-align:right; }
+    .style9 {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 11px;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .style10 {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .top {
+        border-top: 1px solid #000000;
+    }
+
+    .bottom {
+        border-bottom: 1px solid #000000;
+    }
+
+    .left {
+        border-left: 1px solid #000000;
+    }
+
+    .right {
+        border-right: 1px solid #000000;
+    }
+
+    .all {
+        border: 1px solid #000000;
+    }
+
+    .style26 {
+        font-family: Arial, Helvetica, sans-serif
+    }
+
+    .style27 {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+    }
+
+    .align-justify {
+        text-align: justify;
+    }
+
+    .align-center {
+        text-align: center;
+    }
+
+    .align-right {
+        text-align: right;
+    }
+
+    .align-left {
+        text-align: left;
+    }
 
 </style>
+
+@foreach ($jenis_pp as $jpp)
+@php
+	if ($jpp->pinjaman_individu->isEmpty()) {
+		$empty = true;
+		continue;
+	}
+
+	$kd_desa = [];
+@endphp
+
+@if ($jpp->nama_jpp != 'Kendaraan' && !$empty)
+	<div class="break"></div>
+	@php
+		$empty = false;
+	@endphp
+@endif
+
+
 <table width="96%" border="0" align="center" cellpadding="3" cellspacing="0">
-	<tr>
-		<td height="20" colspan="10" class="bottom">
+    <tr>
+        <td height="20" colspan="10" class="bottom"></td>
+        <td height="20" colspan="2" class="bottom">
+            <div align="right" class="style9">Dokumen Laporan <br>
+                Kd.Doc. I2 Lembar-1</div>
         </td>
-		<td height="20" colspan="2" class="bottom">
-			<div align="right" class="style9">Dokumen Laporan <?php echo $laporan;?><br>
-			Kd.Doc. I2 Lembar-1 </div>
-		</td>
-	</tr> 
-     <tr>
-        <td height="20" colspan="12" class="style6 bottom align-center"><br>DAFTAR RINCIAN PENGKREDITAN BARANG YANG DIBERIKAN (Aktif) <br><br></td>
     </tr>
     <tr>
-            <td colspan="2" width="30%" class="style9">NAMA LKM</td>
-            <td colspan="10"  width="60%" class="style9">: -----</td>
-	    </tr>
-	     <tr>
-            <td colspan="2" width="30%" class="style9">SANDI LKM</td>
-            <td colspan="10"  width="60%" class="style9">: -----</td>
-	    </tr>
-	     <tr>
-            <td colspan="2" width="30%" class="style9 bottom">PERIODE LAPORAN</td>
-            <td colspan="10" width="60%" class="style9 bottom">:  -----</td>
-	    </tr>
-			<tr align="center" height="30px" class="style9 ">
-              <th width="2%" rowspan="2" class="left bottom">No</th>
-              <th width="20%" rowspan="2" class="left bottom">Peminjam - Loan ID</a></th>
-              <th width="10%" rowspan="2" class="left bottom">Jenis Penggunaan</a></th>
-			  <th width="7%" rowspan="2" class="left bottom">Periode Pembayaran</a></th>
-			  <th colspan="2" class="left bottom">Jangka Waktu</a></th>
-			  <th colspan="2" class="left bottom">Suku Bunga</a></th>
-              <th width="3%" rowspan="2" class="left bottom">Plafon</a></th>
-              <th width="7%" rowspan="2" class="left bottom">Baki Debet</a></th>
-			  <th width="3%" rowspan="2" class="left bottom">Jumlah Tunggakan (X)</a></th>
-			  <th width="3%" rowspan="2" class="left right bottom">Kolektibilitas</a></th>
-            </tr>
-            <tr align="center"  height="30px" class="style9">
-			  <th width="5%" class="left bottom">Mulai </th>
-              <th width="5%" class="left bottom">Jatuh Tempo</th>
-			  <th width="5%" class="left bottom">%</th>
-              <th width="5%" class="left bottom">Keterangan</th>
-            </tr>
-            <tr>
-			<td class="style27 left top right" colspan="12"> -----</td>
+        <td height="20" colspan="12" class="style6 bottom align-center"><br>DAFTAR RINCIAN PINJAMAN YANG DIBERIKAN
+            (Aktif) <br><br></td>
+    </tr>
+    <tr>
+        <td colspan="3" width="30%" class="style9">NAMA LKM</td>
+        <td colspan="9" width="70%" class="style9">:{{$lkm->nama_lkm_long}}</td>
+    </tr>
+    <tr>
+        <td colspan="3" width="30%" class="style9">SANDI LKM</td>
+        <td colspan="9" width="70%" class="style9">:{{$lkm->sandi_lkm}}</td>
+    </tr>
+    <tr>
+        <td colspan="3" width="30%" class="style9 bottom">PERIODE LAPORAN</td>
+        <td colspan="9" width="70%" class="style9 bottom">:{{ $tgl }}</td>
+    </tr>
+
+    <tr align="center" height="30px" class="style9">
+        <th width="2%" rowspan="2" class="left bottom">No</th>
+        <th width="20%" rowspan="2" class="left bottom">Peminjam - Loan ID</th>
+        <th width="10%" rowspan="2" class="left bottom">Jenis Penggunaan</th>
+        <th width="7%" rowspan="2" class="left bottom">Periode Pembayaran</th>
+        <th colspan="2" class="left bottom">Jangka Waktu</th>
+        <th colspan="2" class="left bottom">Suku Bunga</th>
+        <th width="3%" rowspan="2" class="left bottom">Plafon</th>
+        <th width="7%" rowspan="2" class="left bottom">Baki Debet</th>
+        <th width="3%" rowspan="2" class="left bottom">Jumlah Tunggakan (X)</th>
+        <th width="3%" rowspan="2" class="left right bottom">Kolektibilitas</th>
+    </tr>
+    <tr align="center" height="30px" class="style9">
+        <th width="5%" class="left bottom">Mulai</th>
+        <th width="5%" class="left bottom">Jatuh Tempo</th>
+        <th width="5%" class="left bottom">%</th>
+        <th width="5%" class="left bottom">Keterangan</th>
+    </tr>
+    <tr>
+        <th colspan="12" class="style27 top left right align-left">NASABAH PENERIMA INDIVIDU</th>
+    </tr>
+
+	@foreach ($jpp->pinjaman_individu as $pinj_i)
+		@php
+			$kd_desa[] = $pinj_i->kd_desa;
+			$desa = $pinj_i->kd_desa;
+		@endphp
+		@if (array_count_values($kd_desa)[$pinj_i->kd_desa] <= '1')
+			@if ($section != $desa && count($kd_desa) > 1)
+			<tr class="style9">
+				<th colspan="8" class="left top" align="center">TOTAL----Anggota</th>
+				<th class="left top" align="right">----</th>
+				<th class="left top" align="right">----</th>
+				<th colspan="2" class="left right top" align="right"></th>
+			</tr>
+			@endif
+
+			<tr>
+				<td class="t l b" align="center">{{ $pinj_i->kode_desa }}</td>
+				<td class="style27 left top right" colspan="11">{{$pinj_i->nama_desa}}</td>
+			</tr>
+
+			@php
+				{}$nomor = 1;
+				$section = $pinj_i->kd_desa;
+				$nama_desa = $pinj_i->sebutan_desa . ' ' . $pinj_i->nama_desa;
+			@endphp
+		@endif
+        
+		
+		<tr align="right" height="15px" class="style9">
+			<td class="left top" align="center">{{ $nomor++ }}</td>
+			<td class="left top" align="left">{{ $pinj_i->namadepan }} {{$pinj_i->nik}}</td>
+			<td class="left top" align="left">Pinjaman Modal Kerja</td>
+			<td class="left top" align="center">----</td>
+			<td class="left top" align="center">----</td>
+			<td class="left top" align="center">----</td>
+			<td class="left top">----%</td>
+			<td class="left top" align="center">----</td>
+			<td class="left top">----</td>
+			<td class="left top">----</td>
+			<td class="left top">----</td>
+			<td class="left top right" align="left"></td>
 		</tr>
-        <tr align="right" height="15px" class="style9">
-              <td class="left top" align="center">	 -----</td>
-			  <td class="left top" align="left"> -----</td>
-			  <td class="left top" align="left">	Pinjaman Modal Kerja</td>
-			  <td class="left top" align="center"> -----</td>
-              <td class="left top" align="center"> -----</td>
-              <td class="left top" align="center"> -----</td>
-			  <td class="left top">	 -----%</td>
-              <td class="left top" align="center"> -----</td>
-			  <td class="left top">	 -----</td>
-              <td class="left top"> -----</td>
-			  <td class="left top">	 -----</td>
-			  <td class="left top right" align="left">	
-              <tr class="style9">
-		    <th colspan="8" class="left top" align="center">TOTAL  -----</th>
-		    <th class="left top" align="right"> -----</th>
-		    <th class="left top" align="right"> -----</th>
-		    <th colspan="2" class="left right top" align="right"></th>
+	@endforeach
+    
+	@if (count($kd_desa) > 0)
+		<tr class="style9">
+			<th colspan="12" class="top" align="center">&nbsp;</th>
+		</tr>
+		<tr class="style9">
+			<th colspan="8" class="left top" align="center" style="background:rgba(0,0,0, 0.3);">TOTAL KESELURUHAN (----
+				pinjaman)</th>
+			<th class="left top" align="right">----</th>
+			<th class="left top" align="right">----</th>
+			<th colspan="2" class="left right top" align="right"></th>
 		</tr>
 		<tr>
-		<td class="style10 top" colspan="12"><b>Keterangan</b> : Data yang ditampilkan diatas merupakan Individu aktif pada tahun berjalan  -----, untuk menampilkan data Individu aktif tahun lalu dapat memilih mode tahun lalu  -----.</td>
+			<td class="style10 top" colspan="12"><b>Keterangan</b> : Data yang ditampilkan diatas merupakan Individu aktif
+				pada tahun berjalan----, untuk menampilkan data Individu aktif tahun lalu dapat memilih mode tahun lalu
+				----.</td>
 		</tr>
+	@endif
 </table>
+@endforeach
+
 @endsection
