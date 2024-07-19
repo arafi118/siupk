@@ -118,12 +118,13 @@ public function jenis_simpanan($id, Request $request)
     {
         $nia = $request->input('nia');
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
+        $urutan = Simpanan::where('nia', $nia)->count();
         $anggota = Anggota::where('id', $nia)->first();
-    
+
         if ($kec && $anggota) {
             $kec_id = str_pad($kec->id, 3, '0', STR_PAD_LEFT);
             $anggota_id = str_pad($anggota->id, 3, '0', STR_PAD_LEFT);
-            $urutan = 1 + \App\Models\Simpanan::where('id', $nia)->count();
+            $urutan = 1 + $urutan;
             $urutan_formatted = str_pad($urutan, 2, '0', STR_PAD_LEFT);
             $nomor_rekening = "{$id}-{$kec_id}.{$anggota_id}-{$urutan_formatted}";
         } else {
@@ -248,7 +249,27 @@ public function jenis_simpanan($id, Request $request)
     $simpanan->pengampu = $request->ahli_waris;
     $simpanan->hubungan = $request->hubungan;
     $simpanan->user_id = auth()->id();
+    $simpanan->lu = date('Y-m-d H:i:s');
     $simpanan->save();
+
+    $maxId = Simpanan::max('id');
+
+    $js = JenisSimpanan::where('id', $request->jenis_simpanan)->first();
+    $anggota = Anggota::where('id', $request->nia)->first();
+            Transaksi::create([
+                'tgl_transaksi' => Tanggal::tglNasional($request->tgl_buka_rekening),
+                'rekening_debit' => $js->rek_kas,
+                'rekening_kredit' =>  $js->rek_simp,
+                'idtp' => '0',
+                'id_pinj' => '0',
+                'id_pinj_i' => '0',
+                'id_simp' => $maxId,
+                'keterangan_transaksi' => 'Setoran Awal '. $js->nama_js.' '.$anggota->namadepan.'',
+                'relasi' => $anggota->namadepan. '['.$request->nia.']',
+                'jumlah' => str_replace(',', '', str_replace('.00', '', $request->setoran_awal)),
+                'urutan' => '0',
+                'id_user' => auth()->user()->id,
+            ]);
 
     return response()->json([
         'success' => true,

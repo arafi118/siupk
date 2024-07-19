@@ -4,7 +4,7 @@
             <div class="input-group input-group-static my-3">
                 <label for="nomor_rekening">Nomor Rekening</label>
                 <input autocomplete="off" type="text" name="nomor_rekening" id="nomor_rekening" class="form-control"
-                    value="{{$nomor_rekening}}" disabled>
+                    value="{{$nomor_rekening}}" readonly>
                 <small class="text-danger" id="msg_nomor_rekening"></small>
             </div>
         </div>
@@ -14,6 +14,13 @@
                 <input autocomplete="off" type="text" name="tgl_buka_rekening" id="tgl_buka_rekening"
                     class="form-control date" value="{{ date('d/m/Y') }}">
                 <small class="text-danger" id="msg_tgl_buka_rekening"></small>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+                <input autocomplete="off" type="hidden" name="tgl_minimal_tutup_rekening" id="tgl_minimal_tutup_rekening"
+                    class="form-control date" value="{{ date('d/m/Y') }}">
+                
             </div>
         </div>
     </div>
@@ -87,7 +94,7 @@
             <div class="input-group input-group-static my-3">
                 <label for="nomor_rekening">Nomor Rekening</label>
                 <input autocomplete="off" type="text" name="nomor_rekening" id="nomor_rekening" class="form-control"
-                    value="{{$nomor_rekening}}" disabled>
+                    value="{{$nomor_rekening}}" readonly>
                 <small class="text-danger" id="msg_nomor_rekening"></small>
             </div>
         </div>
@@ -178,7 +185,7 @@
             <div class="input-group input-group-static my-3">
                 <label for="nomor_rekening">Nomor Rekening</label>
                 <input autocomplete="off" type="text" name="nomor_rekening" id="nomor_rekening" class="form-control"
-                    value="{{$nomor_rekening}}" disabled>
+                    value="{{$nomor_rekening}}" readonly>
                 <small class="text-danger" id="msg_nomor_rekening"></small>
             </div>
         </div>
