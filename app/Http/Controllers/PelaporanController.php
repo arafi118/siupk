@@ -310,26 +310,26 @@ class PelaporanController extends Controller
         $data['tgl'] = Tanggal::tglLatin($tgl);
         
         $n_saham = $data['lkm']->nama_saham;
-$rp_saham = $data['lkm']->rp_saham;
-$pros_saham = $data['lkm']->pros_saham;
+        $rp_saham = $data['lkm']->rp_saham;
+        $pros_saham = $data['lkm']->pros_saham;
 
-$jsaham = substr_count($n_saham, "#") + 1;
-$sahamData = [];
-$jrp_saham1 = 0;
-$jpros_saham1 = 0;
+        $jsaham = substr_count($n_saham, "#") + 1;
+        $sahamData = [];
+        $jrp_saham1 = 0;
+        $jpros_saham1 = 0;
 
-$exps1 = explode("#", $n_saham);
-$exps2 = explode("#", $rp_saham);
-$exps3 = explode("#", $pros_saham);
+        $exps1 = explode("#", $n_saham);
+        $exps2 = explode("#", $rp_saham);
+        $exps3 = explode("#", $pros_saham);
 
-$n_saham1 = ''; 
-$rp_saham1 = '0';
-$pros_saham1 = '';
+        $n_saham1 = ''; 
+        $rp_saham1 = '0';
+        $pros_saham1 = '';
 
-// Inisialisasi variabel dalam array $data
-$data['jrp_saham1'] = 0;
-$data['jpros_saham1'] = 0;
-$data['sahamData'] = [];
+        // Inisialisasi variabel dalam array $data
+        $data['jrp_saham1'] = 0;
+        $data['jpros_saham1'] = 0;
+        $data['sahamData'] = [];
 
 for ($s = 1; $s <= $jsaham; $s++) {
     $data['n_saham1'] = $exps1[$s - 1];
@@ -471,9 +471,8 @@ for ($s = 1; $s <= $jsaham; $s++) {
             'pinjaman_individu.target' => function ($query) use ($data) {
                 $query->where('jatuh_tempo', '<=', $data['tgl_kondisi']);
             },
-            'pinjaman_individu.sis_pokok'
-            'pinjaman_kelompok.angsuran_pokok',
-            'pinjaman_kelompok.angsuran_jasa',
+            'pinjaman_individu.angsuran_pokok',
+            'pinjaman_individu.angsuran_jasa'
         ])->get();
 
         $view = view('pelaporan.view.ojk.daftar_rincian_pinjamanaktif', $data)->render();
