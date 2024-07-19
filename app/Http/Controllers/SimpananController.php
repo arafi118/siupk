@@ -111,33 +111,7 @@ class SimpananController extends Controller
 
         $js_dipilih = $anggota->jenis_produk_pinjaman;
 
-        if ($anggota->pinjaman) {
-            $status = $anggota->pinjaman->status;
-            if ($status == 'P' || $status == 'V' || $status == 'W') {
-                return view('simpanan.partials.pinjaman')->with(compact('anggota', 'kec', 'jenis_jasa', 'sistem_angsuran', 'js', 'js_dipilih'));
-            }
-        }
-
-        $jaminan = [
-            [
-                'id' => '1',
-                'nama' => 'Surat Tanah',
-            ],
-            [
-                'id' => '2',
-                'nama' => 'BPKB',
-            ],
-            [
-                'id' => '3',
-                'nama' => 'SK. Pegawai',
-            ],
-            [
-                'id' => '4',
-                'nama' => 'Lain Lain',
-            ],
-        ];
-
-        return view('simpanan.partials.register')->with(compact('anggota', 'kec', 'jenis_jasa', 'sistem_angsuran', 'js', 'js_dipilih', 'jaminan'));
+        return view('simpanan.partials.register')->with(compact('anggota', 'kec', 'jenis_jasa', 'sistem_angsuran', 'js', 'js_dipilih'));
     }
 
 public function jenis_simpanan($id, Request $request)
