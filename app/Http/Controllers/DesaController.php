@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Desa;
+use App\Models\Agent;
 use App\Models\Kecamatan;
 use App\Models\SebutanDesa;
 use Illuminate\Http\Request;

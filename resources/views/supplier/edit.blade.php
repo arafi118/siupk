@@ -1,7 +1,7 @@
 <div class="modal-content">
     <div class="modal-header">
         <h1 class="modal-title fs-4">
-            Edit Supplier {{ $supplier->nama }} [{{ $supplier->nomorid }}]
+            Edit Supplier {{ $supplier->supplier }} [{{ $supplier->kd_supplier }}]
         </h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
@@ -12,19 +12,17 @@
             <input type="hidden" name="supplier" id="supplier" value="{{ $supplier->id }}">
             <div class="row">
                 <div class="col-md-2">
-                    <div class="DOMContentLoaded position-relative mb-3">
-                        <label for="nomorid" class="form-label">Nomor ID</label>
-                        <input autocomplete="off" type="text" name="nomorid" id="nomorid"
-                               class="form-control" value="{{ $supplier->nomorid }}">
-                        <small class="text-danger" id="msg_nomorid"></small>
+                    <div class="position-relative mb-3">
+                        <label for="" class="form-label">KD Supplier</label>
+                        <input autocomplete="off"type="text" name="" id="" class="form-control" value="{{ $supplier->kd_supplier  }}" readonly>
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div class="position-relative mb-3">
-                        <label for="nama" class="form-label">Nama</label>
-                        <input autocomplete="off" type="text" name="nama" id="nama"
-                            class="form-control money" value="{{ $supplier->nama}}">
-                        <small class="text-danger" id="msg_nama"></small>
+                        <label for="supplier" class="form-label">Nama Supplier</label>
+                        <input autocomplete="off" type="text" name="supplier" id="supplier"
+                            class="form-control money" value="{{ $supplier->supplier}}">
+                        <small class="text-danger" id="msg_supplier"></small>
                     </div>
                 </div>
                 <div class="col-md-5">
@@ -58,7 +56,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
-        <button type="submit" id="simpanSupplier" class="btn btn-sm btn-github btn btn-sm btn-dark mb-0">Simpan</button>
+        <button type="submit" id="simpanEditSupplier" class="btn btn-sm btn-github btn btn-sm btn-dark mb-0">Simpan</button>
     </div>
 </div>
 

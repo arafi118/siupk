@@ -97,6 +97,8 @@ Route::post('/pengaturan/sop/simpanttdpelaporan', [SopController::class, 'simpan
 
 Route::get('/database/kelompok/register_kelompok', [KelompokController::class, 'register'])->middleware('auth');
 Route::get('/database/kelompok/generatekode', [KelompokController::class, 'generateKode'])->middleware('auth');
+Route::get('/database/agent/generatekode', [AgentController::class, 'generateKode'])->middleware('auth');
+Route::get('/database/supplier/generatekode', [AgentController::class, 'generateKode'])->middleware('auth');
 
 Route::get('/database/penduduk/register_penduduk', [AnggotaController::class, 'register'])->middleware('auth');
 Route::get('/database/penduduk/cari_nik', [AnggotaController::class, 'cariNik'])->middleware('auth');
@@ -290,6 +292,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
 Route::get('/generate', [GenerateController::class, 'index']);
 Route::get('/generate/individu', [GenerateController::class, 'individu']);
 Route::get('/generate/kelompok', [GenerateController::class, 'kelompok']);
+Route::get('/generate/agent', [GenerateController::class, 'agent']);
+Route::get('/generate/supplier', [GenerateController::class, 'agent']);
 Route::post('/generate/save/{offset?}', [GenerateController::class, 'generate']);
 
 Route::get('/{invoice}', [PelaporanController::class, 'invoice']);

@@ -22,16 +22,20 @@ class AgentController extends Controller
     public function index()
     {
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
-        $desa = Desa::all(); 
+        $desa = Desa::where('kd_kec', $kec['kd_kec'])->with('sebutan_desa')->get();
         if (request()->ajax()) {
-            $data = agent::where('lokasi', $kec->id)->get();
+            $data = Agent::where('lokasi', $kec->id)->with('d')->get();
             return DataTables::of($data)
                 ->make(true);
         }
 
+        $desa_dipilih = 0;
+        if (request()->get('desa')) {
+            $desa_dipilih = request()->get('desa');
+        }
         $title = 'Data Agent';
         $sebutan = SebutanAgent::all();
-        return view('agent.index')->with(compact('sebutan', 'title', 'kec', 'desa'));
+        return view('agent.index')->with(compact('sebutan', 'title', 'kec', 'desa', 'desa_dipilih'));
     }
 
     /**
@@ -39,76 +43,75 @@ class AgentController extends Controller
      */
     public function create()
     {
-        $desa = Desa::all(); 
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
-        $jenis_usaha = Usaha::orderBy('nama_usaha', 'ASC')->get();
-        $hubungan = Keluarga::orderBy('kekeluargaan', 'ASC')->get();
+        $desa = Desa::where('kd_kec', $kec['kd_kec'])->with('sebutan_desa')->get();
 
+        
+        $desa_dipilih = 0;
         $agent_dipilih = 0;
-        $jenis_usaha_dipilih = 0;
-        $hubungan_dipilih = 0;
-        $jk_dipilih = 0;
 
-        $nik = '';
-        $value_tanggal = '';
-        if (request()->get('nik')) {
-            $anggota = Anggota::where('nik', request()->get('nik'));
-            if ($anggota->count() > 0) {
-                $data_anggota = $anggota->first();
-
-                $agent_dipilih = $data_anggota->agent;
-                $jenis_usaha_dipilih = $data_anggota->usaha;
-                $hubungan_dipilih = $data_anggota->hubungan;
-                $jk_dipilih = $data_anggota->jk;
-
-                $data_anggota->tgl_lahir = Tanggal::tglIndo($data_anggota->tgl_lahir);
-                return view('agent.edit')->with(compact( 'jenis_usaha', 'jenis_usaha_dipilih', 'hubungan', 'hubungan_dipilih', 'jk_dipilih', 'data_anggota'));
-            }
-
-            $nik = request()->get('nik');
-            $kk = substr($nik, 0, 6);
-            $tanggal = substr($nik, 6, 2);
-            $bulan = substr($nik, 8, 2);
-            $tahun = substr($nik, 10, 2);
-            if ($tanggal >= 40) {
-                $tgl = $tanggal - 40;
-                $jk_dipilih = 'P';
-            } else {
-                $tgl = $tanggal;
-                $jk_dipilih = 'L';
-            }
-            if ($tgl < 10) {
-                $tgl = "$tgl";
-            }
-            if ($tahun < 20) {
-                $thn = "20$tahun";
-            } else {
-                $thn = "19$tahun";
-            }
-
-            $value_tanggal = Tanggal::tglIndo("$thn-$bulan-$tgl");
-        }
-
-        return view('agent.create')->with(compact( 'jenis_usaha', 'jenis_usaha_dipilih', 'hubungan', 'hubungan_dipilih', 'nik', 'jk_dipilih', 'value_tanggal','desa'));
+        return view('agent.create')->with(compact('desa', 'desa_dipilih'));
     }
+    
+        public function generateKode()
+        {
+            $lokasi = Session::get('lokasi');
+            $kd_desa = request()->get('kode');
 
+            $jumlah_agent_by_kd_desa = Agent::where('desa', $kd_desa)->orderBy('kd_agent', 'DESC');
+            if ($jumlah_agent_by_kd_desa->count() > 0) {
+                $data_agent = $jumlah_agent_by_kd_desa->first();
+                $kode_agent = explode('-',$data_agent->kd_agent);
+
+                if (count($kode_agent) >= 2) {
+                    $kd_agent = $kode_agent[0] . '-' . str_pad(($kode_agent[1] + 1), 3, "0", STR_PAD_LEFT);
+                } else {
+                    $jumlah_agent = str_pad(Agent::where('desa', $kd_desa)->count() + 1, 3, "0", STR_PAD_LEFT);
+                    $kd_agent = $kd_desa . '-' . $jumlah_agent;
+                }
+
+                // $kd_agent = $data_agent->kd_agent + 1;
+
+            } else {
+                $jumlah_agent = str_pad(Agent::where('desa', $kd_desa)->count() + 1, 3, "0", STR_PAD_LEFT);
+                $kd_agent = $kd_desa . '-' . $jumlah_agent;
+                // $kd_agent = $kd_desa . $jumlah_agent;
+
+            }
+
+            if (request()->get('kd_agent')) {
+                $kd_kel = request()->get('kd_agent');
+                $agent = Agent::where('kd_agent', $kd_kel);
+                if ($agent->count() > 0) {
+                    $data_kel = $agent->first();
+
+                    if ($kd_desa == $data_kel->desa) {
+                        $kd_agent = $data_kel->kd_agent;
+                    }
+                }
+            }
+
+            return response()->json([
+                'kd_agent' => $kd_agent
+            ], Response::HTTP_ACCEPTED);
+        }
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
         $data = $request->only([
-            'nomorid',
+            'desa',
+            'kd_agent',
             'agent',
             'alamat',
-            'desa',
             'nohp'
         ]);
         $rules = [
-            'nomorid'   => 'required',
+            'desa'      => 'required',
+            'kd_agent' => 'required|unique:agent,kd_agent',
             'agent'     => 'required',
             'alamat'    => 'required',
-            'desa'      => 'required',
             'nohp'      => 'required'
         ];
 
@@ -118,18 +121,18 @@ class AgentController extends Controller
             return response()->json($validate->errors(), Response::HTTP_MOVED_PERMANENTLY);
         }
 
-        $insert = [
+        $insert = [ 
             'lokasi'    => Session::get('lokasi'),
-            'nomorid'   => $request->nomorid,
+            'kd_agent'  => $request->kd_agent,
             'agent'     => $request->agent,
             'alamat'    => $request->alamat,
             'desa'      => $request->desa,
             'nohp'      => $request->nohp
         ];
 
-        $agent = agent::create($insert);
+        $agent = Agent::create($insert);
         return response()->json([
-            'msg' => 'Register Agent dengan nomor ID ' . $insert['nomorid'] . ' berhasil disimpan'
+            'msg' => 'Register Agent dengan Kode Agent ' . $insert['kd_agent'] . ' berhasil disimpan'
         ], Response::HTTP_ACCEPTED);
     }
     /**
@@ -147,7 +150,12 @@ class AgentController extends Controller
     public function edit(Agent $agent)
     {
         $sebutan = SebutanAgent::all();
-        return view('agent.edit')->with(compact('agent', 'sebutan'));
+        $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
+        $desa = Desa::where('kd_kec', $kec['kd_kec'])->with('sebutan_desa')->get();
+
+        $desa_dipilih = 0;
+
+        return view('agent.edit')->with(compact('kec', 'agent', 'sebutan', 'desa', 'desa_dipilih'));
     }
 
     /**
@@ -156,19 +164,19 @@ class AgentController extends Controller
     public function update(Request $request, Agent $agent)
     {
         $data = $request->only([
-            "nomorid",
+            "desa",
+            "kd_agent",
             "agent",
             "alamat",
-            "desa",
             "nohp"
             
         ]);
 
         $validate = Validator::make($data, [
-            "nomorid"   => 'required',
+            "desa"      => 'required',
+            "kd_agent" => 'required|unique:agent,kd_agent',
             "agent"     => 'required',
             "alamat"    => 'required',
-            "desa"      => 'required',
             "nohp"      => 'required'
             
         ]);

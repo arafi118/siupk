@@ -15,12 +15,12 @@
                 </div>
             </div>
             <div class="page-title-actions">
-
                 <div class="d-inline-block dropdown">
                     <button type="button" data-bs-toggle="modal" data-bs-target="#RegisterSupplier"
-                    class="btn btn-info btn-sm mb-2"><i class="fa fa-shopping-cart"></i> &nbsp; &nbsp;Registrer Supplier</button>
+                    class="btn btn-info btn-sm mb-2" onclick="replaceContent()"><i class="fa fa-shopping-cart"></i> &nbsp; &nbsp;Register Supplier</button>
                 </div>
-            </div> 
+            </div>
+            
         </div>
     </div>    
     <div class="card-body">
@@ -33,7 +33,7 @@
                             <table class="mb-0 table table-hover" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Nomor ID</th>
+                                        <th>KD Supplier</th>
                                         <th>Nama</th>
                                         <th>Alamat</th>
                                         <th>Brand</th>
@@ -79,12 +79,12 @@
         serverSide: true,
         ajax: "/database/supplier",
         columns: [{
-                data: 'nomorid',
-                name: 'nomorid'
+                data: 'kd_supplier',
+                name: 'kd_supplier'
             },
             {
-                data: 'nama',
-                name: 'nama'
+                data: 'supplier',
+                name: 'supplier'
             },
             {
                 data: 'alamat',
@@ -170,7 +170,7 @@
 
     })
 
-    $(document).on('click', '#simpanSupplier', function (e) {
+    $(document).on('click', '#simpanEditSupplier', function (e) {
         e.preventDefault()
 
         var form = $('#FormEditSupplier')
@@ -196,6 +196,12 @@
         })
 
     })
+
+    function replaceContent() {
+    console.log("replaceContent dipanggil");
+        // Anda bisa menambahkan logika tambahan di sini jika perlu
+    }
+
 
 </script>
 @endsection

@@ -44,13 +44,9 @@ class DashboardController extends Controller
             ['tgl_cair', '<=', $tgl]
         ])->count();
 
-        $pinkel = PinjamanKelompok::where([
-            ['status', 'A'],
-            ['tgl_cair', '<=', $tgl]
-        ])->count();
+      
 
         $data['pinjaman_anggota'] = $pinj_anggota;
-        $data['pinjaman_kelompok'] = $pinkel;
 
         $tb = 'pinjaman_anggota_' . Session::get('lokasi');
         $pinj = PinjamanAnggota::select([

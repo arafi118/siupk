@@ -299,7 +299,7 @@
 
                                             <div class="alert alert-info text-black">
                                                 Kirim Whatsapp Tagihan berdasarkan tanggal jatuh tempo. Pastikan nomor HP
-                                                kelompok dapat menerima pesan Whatsapp.
+                                                Nasabah dapat menerima pesan Whatsapp.
                                             </div>
 
                                             <div class="row">
@@ -652,10 +652,10 @@
                 setTimeout(() => {
                     var pesan = this.value
                     var number = pesan.split('||')[0]
-                    var kelompok = pesan.split('||')[1]
+                    var anggota = pesan.split('||')[1]
                     var msg = pesan.split('||')[2]
 
-                    sendMsg(number, kelompok, msg)
+                    sendMsg(number, anggota, msg)
                 }, i * 1500);
             }).get();
         })
@@ -678,14 +678,14 @@
                 }),
                 success: function(result) {
                     if (result.status) {
-                        MultiToast('success', 'Pesan untuk kelompok ' + nama + ' berhasil dikirim')
+                        MultiToast('success', 'Pesan untuk anggota ' + nama + ' berhasil dikirim')
                     } else {
                         if (repeat < 1) {
                             setTimeout(function() {
                                 sendMsg(number, nama, msg, repeat + 1)
                             }, 1000)
                         } else {
-                            MultiToast('error', 'Pesan untuk kelompok ' + nama + ' gagal dikirim')
+                            MultiToast('error', 'Pesan untuk anggota ' + nama + ' gagal dikirim')
                         }
                     }
                 },
@@ -695,7 +695,7 @@
                             sendMsg(number, nama, msg, repeat + 1)
                         }, 1000)
                     } else {
-                        MultiToast('error', 'Pesan untuk kelompok ' + nama + ' gagal dikirim')
+                        MultiToast('error', 'Pesan untuk anggota ' + nama + ' gagal dikirim')
                     }
                 }
             })

@@ -33,7 +33,7 @@
                             <table class="mb-0 table table-hover" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Nomor ID</th>
+                                        <th>Kode Agent</th>
                                         <th>Nama</th>
                                         <th>Desa</th>
                                         <th>Alamat</th>
@@ -83,16 +83,16 @@
         serverSide: true,
         ajax: "/database/agent",
         columns: [{
-                data: 'nomorid',
-                name: 'nomorid'
+                data: 'kd_agent',
+                name: 'kd_agent'
             },
             {
                 data: 'agent',
                 name: 'agent'
             },
             {
-                data: 'desa',
-                nama: 'desa'
+                data: 'd.nama_desa',
+                nama: 'd.nama_desa'
             },
             {
                 data: 'alamat',
@@ -164,42 +164,42 @@
 
 
 
-    $('.table').on('click', 'tbody tr', function (e) {
-        var data = table.row(this).data();
+        $('.table').on('click', 'tbody tr', function (e) {
+            var data = table.row(this).data();
 
-        $.get('/database/agent/' + data.id + "/edit", function (result) {
-            $('#EditAgent .modal-dialog').html(result)
-            $('#EditAgent').modal('show')
+            $.get('/database/agent/' + data.id + "/edit", function (result) {
+                $('#EditAgent .modal-dialog').html(result)
+                $('#EditAgent').modal('show')
+            })
+
         })
 
-    })
+        $(document).on('click', '#SimpanEditAgent', function (e) {
+            e.preventDefault()
 
-    $(document).on('click', '#SimpanAgent', function (e) {
-        e.preventDefault()
+            var form = $('#FormEditAgent')
+            $.ajax({
+                type: "POST",
+                url: form.attr('action'),
+                data: form.serialize(),
+                success: function (result) {
+                    Swal.fire('Berhasil', result.msg, 'success').then(async (result) => {
+                        await $('#EditAgent').modal('toggle')
+                        table.ajax.reload();
+                    })
+                },
+                error: function (result) {
+                    const respons = result.responseJSON;
 
-        var form = $('#FormEditAgent')
-        $.ajax({
-            type: "POST",
-            url: form.attr('action'),
-            data: form.serialize(),
-            success: function (result) {
-                Swal.fire('Berhasil', result.msg, 'success').then(async (result) => {
-                    await $('#EditAgent').modal('toggle')
-                    table.ajax.reload();
-                })
-            },
-            error: function (result) {
-                const respons = result.responseJSON;
+                    Swal.fire('Error', 'Cek kembali input yang anda masukkan', 'error')
+                    $.map(respons, function (res, key) {
+                        $('#' + key).parent('.input-group').addClass('is-invalid')
+                        $('#msg_' + key).html(res)
+                    })
+                }
+            })
 
-                Swal.fire('Error', 'Cek kembali input yang anda masukkan', 'error')
-                $.map(respons, function (res, key) {
-                    $('#' + key).parent('.input-group').addClass('is-invalid')
-                    $('#msg_' + key).html(res)
-                })
-            }
         })
-
-    })
 
 </script>
 @endsection

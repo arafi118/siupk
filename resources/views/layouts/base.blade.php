@@ -100,6 +100,14 @@
             /* Tambahan gaya lainnya sesuai kebutuhan */
         }
 
+        .modal-open .select2-dropdown {
+            z-index: 10060;
+            }
+
+            .modal-open .select2-close-mask {
+            z-index: 10055;
+            }
+
         .angka-warna-merah {
             background-color: rgba(255, 47, 0, 0.434) !important;
             /* Warna biru muda */

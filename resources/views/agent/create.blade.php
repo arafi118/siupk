@@ -12,22 +12,23 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="position-relative mb-3">
-                        <label for="desa" class="form-label">Desa</label>
-                        <select class="js-example-basic-single form-control" name="desa" id="desa" style="width: 100%;">
+                        <label class="form-label" for="desa">Desa/Kelurahan</label>
+                        <select class="js-example-basic-single form-control" name="desa" id="desa">
+                            <option value="">Pilih ......</option>
                             @foreach ($desa as $ds)
-                                <option value="{{ $ds->id }}">
-                                    {{ $ds->nama_desa}}
+                                <option {{ $desa_dipilih == $ds->kd_desa ? 'selected' : '' }} value="{{ $ds->kd_desa }}">
+                                    {{ $ds->sebutan_desa->sebutan_desa }} {{ $ds->nama_desa }}
                                 </option>
                             @endforeach
                         </select>
-                        <small class="text-danger" id="msg_desa"></small>  
+                        <small class="text-danger" id="msg_desa"></small>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="position-relative mb-3">
-                        <label for="nomorid" class="form-label">NomorID</label>
-                        <input autocomplete="off"type="text" name="nomorid" id="nomorid" class="form-control" readonly>
-                        <small class="text-danger" id="msg_nomorid" ></small>
+                        <label for="kd_agent" class="form-label">Kode Agent</label>
+                        <input autocomplete="off" type="text" name="kd_agent" id="kd_agent" class="form-control" readonly>
+                        <small class="text-danger" id="msg_kd_agent"></small>
                     </div>
                 </div>
                 <div class="col-md-5">
@@ -54,29 +55,6 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="row">
-                <div class="col-md-5">
-                    <div class="position-relative mb-3">
-                        <label for="uname" class="form-label">Username</label>
-                        <input autocomplete="off" type="text" name="uname" id="uname" class="form-control">
-                        <small class="text-danger" id="msg_uname"></small>
-                    </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="position-relative mb-3">
-                        <label for="pass" class="form-label">Password</label>
-                        <input autocomplete="off" type="text" name="pass" id="pass" class="form-control">
-                        <small class="text-danger" id="msg_pass"></small>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="position-relative mb-3">
-                        <label for="ins" class="form-label">Ins</label>
-                        <input autocomplete="off" type="text" name="ins" id="ins" class="form-control">
-                        <small class="text-danger" id="msg_ins"></small>
-                    </div>
-                </div>
-            </div> --}}
         </form>
     </div>
     <div class="modal-footer">
@@ -85,7 +63,17 @@
     </div>
 </div>
 <script>
+    $.fn.modal.Constructor.prototype.enforceFocus = function() {};
      $('.js-example-basic-single').select2({
         theme: 'bootstrap-5'
+        });
+    
+        $(document).on('change', '#desa', function (e) {
+        e.preventDefault()
+
+            var kd_desa = $(this).val()
+            $.get('/database/agent/generatekode?kode=' + kd_desa, function (result) {
+                $('#kd_agent').val(result.kd_agent)
+            })
         });
 </script>
