@@ -164,26 +164,40 @@ $empty = false;
 			</tr>
 
 			@php
+            $kidp	=$pinj_i['id'];
+
 				{}$nomor = 1;
 				$section = $pinj_i->kd_desa;
 				$nama_desa = $pinj_i->sebutan_desa . ' ' . $pinj_i->nama_desa;
+                $kpros_jasa =number_format($pinj_i['pros_jasa'] - $pinj_i['jangka'],2);
+
+                $ktgl1 = $pinj_i['tgl_cair'];
+                $kpenambahan ="+".$pinj_i['jangka']." month";
+                $ktgl2 = date('Y-m-d', strtotime($kpenambahan, strtotime($ktgl1)));
+                $kpros_jasa =number_format($pinj_i['pros_jasa']/$pinj_i['jangka'],2);
+		$saldopinjaman	=date($tgl."-".$kidp);
+
+
 			@endphp
 		@endif
-        
+      
 		
 		<tr align="right" height="15px" class="style9">
 			<td class="left top" align="center">{{ $nomor++ }}</td>
 			<td class="left top" align="left">{{ $pinj_i->namadepan }} {{$pinj_i->nik}}</td>
 			<td class="left top" align="left">Pinjaman Modal Kerja</td>
-			<td class="left top" align="center">----</td>
-			<td class="left top" align="center">----</td>
-			<td class="left top" align="center">----</td>
-			<td class="left top">----%</td>
-			<td class="left top" align="center">----</td>
+			<td class="left top" align="center">{{$pinj_i->angsuran_pokok->nama_sistem}}</td>
+			<td class="left top" align="center">{{ Tanggal::tglIndo($pinj_i->tgl_cair) }}</td>
+			<td class="left top" align="center">{{ Tanggal::tglIndo($ktgl2)}}</td>
+			<td class="left top">{{$kpros_jasa}}%</td>
+			<td class="left top" align="center">per bulan</td>
+			<td class="left top">{{$pinj_i->alokasi}}</td>
+			<td class="left top">-</td>
 			<td class="left top">----</td>
-			<td class="left top">----</td>
-			<td class="left top">----</td>
-			<td class="left top right" align="left"></td>
+			<td class="left top right" align="left">
+               
+        
+            </td>
 		</tr>
 	@endforeach
     
