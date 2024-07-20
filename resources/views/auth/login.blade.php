@@ -11,7 +11,7 @@
     <meta name="author" content="Enfii">
     <link rel="apple-touch-icon" sizes="76x76" href="{{ $logo }}">
     <link rel="icon" type="image/png" href="{{ $logo }}">
-    <title> LKM Tegalrejo V.9.10</title>
+    <title> Aplikasi LKM V.9.10</title>
 
     <link rel="stylesheet" type="text/css"
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />

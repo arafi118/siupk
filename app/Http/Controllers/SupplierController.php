@@ -49,16 +49,15 @@ class SupplierController extends Controller
             $data_supplier = $jumlah_supplier_by_kd_kec->first();
             $kode_supplier = explode('-',$data_supplier->kd_supplier);
 
-            if (count($kode_supplier) >= 2) {
-                $kd_supplier =$kode_supplier[0] . '-' . str_pad(($kode_supplier[1] + 1), 3, "0", STR_PAD_LEFT);
+            if (count($kode_supplier) >= 3) {
+                $kd_supplier =$kode_supplier[0] . '-' . $kode_supplier[1] . '-' . str_pad(($kode_supplier[2] + 1), 3, "0", STR_PAD_LEFT);
             } else {
                 $jumlah_supplier = str_pad(Supplier::where('lokasi', $lokasi)->count() + 1, 3, "0", STR_PAD_LEFT);
-                $kd_supplier =str_replace('.','', $kd_kec) . '-' . $jumlah_supplier;
+                $kd_supplier = 'SP-'.str_replace('.','', $kd_kec) . '-' . $jumlah_supplier;
             }
         } else {
             $jumlah_supplier = str_pad(Supplier::where('lokasi', $lokasi)->count() + 1, 3, "0", STR_PAD_LEFT);
             $kd_supplier = 'SP-' .   str_replace('.','', $kd_kec) . '-' . $jumlah_supplier;
-
         }
 
         return view('supplier.create')->with(compact('kec', 'kd_supplier'));

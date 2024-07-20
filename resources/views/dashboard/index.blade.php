@@ -39,7 +39,7 @@
                                     </div>
                                 </div>
                                 <div class="widget-content-right">
-                                    <div class="widget-numbers text-success" style="font-size: 22px;">
+                                    <div class="widget-numbers text-success" style="font-size: 17px;">
                                         {{ $pinjaman_anggota }} Nasabah
                                     </div>
                                 </div>
@@ -66,7 +66,7 @@
                                     </div>
                                 </div>
                                 <div class="widget-content-right">
-                                    <div class="widget-numbers text-warning" style="font-size: 18px;">
+                                    <div class="widget-numbers text-warning" style="font-size: 17px;">
                                             {{ $proposal }} Proposal                                       
                                     </div>
                                 </div>
@@ -94,7 +94,7 @@
                                     </div>
                                 </div>
                                 <div class="widget-content-right">
-                                    <div class="widget-numbers text-danger" style="font-size: 23px;">
+                                    <div class="widget-numbers text-danger" style="font-size: 17px;">
                                         <span id="jatuh_tempo">
                                             <div class="spinner-border sm text-info" role="status">
                                                 <span class="sr-only">Loading...</span>

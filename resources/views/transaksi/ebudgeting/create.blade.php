@@ -4,7 +4,7 @@
     <input type="hidden" name="bulan" id="bulan" value="{{ $bulan }}">
     <input type="hidden" name="tahun" id="tahun" value="{{ $tahun }}">
     <table class="table table-striped">
-        <thead class="bg-dark text-white">
+        <thead class="bg-dark text-black">
             <tr>
                 <th>Kode Akun</th>
                 <th>Rencana</th>
@@ -17,7 +17,7 @@
                     $total = 0;
                 @endphp
                 <tr class="bg-secondary">
-                    <td colspan="2" class="text-white fw-bold">
+                    <td colspan="2" class="text-black fw-bold">
                         <b>{{ $lev1->kode_akun }}. {{ $lev1->nama_akun }}</b>
                     </td>
                 </tr>
@@ -51,7 +51,7 @@
                     @endforeach
                 @endforeach
 
-                <tr class="bg-dark text-white">
+                <tr class="bg-dark text-black">
                     <td>
                         <b>Total Rencana {{ $lev1->nama_akun }}</b>
                     </td>
