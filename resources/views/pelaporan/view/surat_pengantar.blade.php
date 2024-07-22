@@ -70,7 +70,6 @@
                         @else
                             <li>Penewu {{ $kec->nama_kec }}</li>
                         @endif
-
                         <li>Kades/Lurah</li>
                         <li>Arsip</li>
                     </ol>
