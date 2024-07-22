@@ -1,13 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\app",
-    "\\public",
-    "\\resources",
-    "\\resources\\views",
-    "\\resources\\views\\pinjaman_i",
-    "\\resources\\views\\simpanan",
-    "\\resources\\views\\simpanan\\partials"
+    ""
   ],
+  "SelectedNode": "\\config",
   "PreviewInSolutionExplorer": false
 }

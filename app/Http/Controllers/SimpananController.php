@@ -74,7 +74,21 @@ class SimpananController extends Controller
         return view('simpanan.index')->with(compact('title'));
     }
 
-    
+public function getTransaksi(Request $request)
+{
+    $bulan = $request->input('bulan');
+    $tahun = $request->input('tahun');
+    $nia_id = $request->input('nia_id');
+
+    $transaksi = Transaksi::where('id_simp', $nia_id)
+                          ->whereMonth('tgl_transaksi', $bulan)
+                          ->whereYear('tgl_transaksi', $tahun)
+                          ->orderBy('tgl_transaksi', 'asc')
+                          ->get();
+
+    return view('simpanan.partials.detail-transaksi', compact('transaksi'));
+}
+
     public function detailAnggota($id)
     {
         $nia = Simpanan::where('id', $id)->with(['anggota'])->first();

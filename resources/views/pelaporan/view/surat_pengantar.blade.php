@@ -65,8 +65,13 @@
                 <div>
                     Tembusan :
                     <ol>
-                        {{-- <li>Camat Purwareeja Klampok</li>
-                        <li>Kades / Dewan Penasehat</li> --}}
+                    @if ($kec->sebutan_kec == "Kecamatan") {
+                        <li>Camat {{ $kec->nama_kec }}</li>
+}
+@else{
+                        <li>Penewu {{ $kec->nama_kec }}</li>
+}
+                        <li>Kades/Lurah</li>
                         <li>Arsip</li>
                     </ol>
                 </div>

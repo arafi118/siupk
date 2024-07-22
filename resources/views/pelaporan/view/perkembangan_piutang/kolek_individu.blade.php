@@ -6,6 +6,12 @@
 @extends('pelaporan.layout.base')
 
 @section('content')
+    <style>
+        html {
+            margin-left: 40px;
+            margin-right: 40px;
+        }
+    </style>
     @foreach ($jenis_pp as $jpp)
         @php
             if ($jpp->pinjaman_kelompok->isEmpty()) {
