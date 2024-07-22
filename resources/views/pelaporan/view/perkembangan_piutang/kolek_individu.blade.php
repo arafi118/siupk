@@ -14,7 +14,7 @@
     </style>
     @foreach ($jenis_pp as $jpp)
         @php
-            if ($jpp->pinjaman_kelompok->isEmpty()) {
+            if ($jpp->pinjaman_individu->isEmpty()) {
                 continue;
             }
         @endphp
