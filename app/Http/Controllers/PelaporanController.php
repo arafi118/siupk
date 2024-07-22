@@ -1475,6 +1475,8 @@ class PelaporanController extends Controller
             $data['tgl'] = Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         }
 
+        $data['tgl_lalu'] = $data['tahun'] . '-' . $data['bulan'] . '-01';
+
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $data['jenis_pp'] = JenisProdukPinjaman::where(function ($query) use ($kec) {
             $query->where('lokasi', '0')
