@@ -65,14 +65,13 @@
                 <div>
                     Tembusan :
                     <ol>
-                    @if ($kec->sebutan_kec == "Kecamatan") {
-                        <li>Camat {{ $kec->nama_kec }}</li>
-}
-@else{
-                        <li>Penewu {{ $kec->nama_kec }}</li>
-}
-                        <li>Kades/Lurah</li>
-                        <li>Arsip</li>
+                        @if ($kec->sebutan_kec == 'Kecamatan')
+                            <li>Camat {{ $kec->nama_kec }}</li>
+                        @else
+                            <li>Penewu {{ $kec->nama_kec }}</li>
+                            <li>Kades/Lurah</li>
+                            <li>Arsip</li>
+                        @endif
                     </ol>
                 </div>
             </td>
