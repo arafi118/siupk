@@ -31,4 +31,9 @@ class Kecamatan extends Model
     {
         return $this->hasMany(Saldo::class, 'kode_akun', 'kd_kec');
     }
+
+    public function u()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

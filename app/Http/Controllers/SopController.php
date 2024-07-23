@@ -30,6 +30,35 @@ class SopController extends Controller
         return view('sop.index')->with(compact('title', 'kec', 'api', 'token'));
     }
 
+    public function users()
+    {
+
+        $kec = Kecamatan::where('id', Session::get('lokasi'))->with('ttd')->first();
+
+        $dir = User::where([
+            ['jabatan','1'],
+            ['level', '1']
+        ])->first();
+
+        $seke = User::where([
+            ['jabatan','1'],
+            ['level', '2']
+        ])->first();
+
+        $bend = User::where([
+            ['jabatan','1'],
+            ['level', '3']
+        ])->first();
+
+        $manaj = User::where([
+            ['jabatan','1'],
+            ['level', '7']
+        ])->first();
+
+        $title = "Users aplikasi";
+        return view('sop.users')->with(compact('title', 'kec', 'dir', 'seke', 'bend', 'manaj'));
+    }
+
     public function coa()
     {
         $title = "Chart Of Account (CoA)";
