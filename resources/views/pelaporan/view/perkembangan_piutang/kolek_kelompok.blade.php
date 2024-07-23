@@ -190,7 +190,7 @@
                     }
                     $kolek = ceil($_kolek + ($selisih - $angsuran_ke));
                     
-                    if ($kolek <= 0) {
+                if ($kolek <= 0) {
                     $kolek1 = $saldo_pokok;
                     $kolek2 = 0;
                     $kolek3 = 0;

@@ -82,15 +82,15 @@ $keuangan = new Keuangan();
     </tr>
     <tr>
         <td colspan="2" width="30%" class="style9">NAMA LKM</td>
-        <td colspan="6" width="60%" class="style9">:---</td>
+        <td colspan="6" width="60%" class="style9">:{{$lkm->nama_lkm_long}}</td>
     </tr>
     <tr>
         <td colspan="2" width="30%" class="style9">SANDI LKM</td>
-        <td colspan="6" width="60%" class="style9">: ---</td>
+        <td colspan="6" width="60%" class="style9">:{{$lkm->sandi_lkm}}</td>
     </tr>
     <tr>
         <td colspan="2" width="30%" class="style9 bottom">PERIODE LAPORAN</td>
-        <td colspan="6" width="60%" class="style9 bottom">: ---</td>
+        <td colspan="6" width="60%" class="style9 bottom">:{{$tgl}}</td>
     </tr>
     <tr align="center" height="30px" class="style9 ">
         <th width="2%" rowspan="2" class="left bottom">No</th>

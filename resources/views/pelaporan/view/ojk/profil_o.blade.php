@@ -29,31 +29,32 @@
     <tr align="center">
     <td colspan="3" width="10%" class="style6 bottom">
     <br>
-    <span><b>PT. MANDIRI SEJAHTERA BAHAGIA PERMAI</b></span><br>
-    KECAMATAN KABUPATEN<br>
-						<span class="style9">AHU.002.005.005.005
-Jl. Mandiri Banyusari Kodepos 56192
-Telp. E-mail:</span>
+    <span><b>{{ strtoupper($nama_lembaga) }}</b></span><br>
+    {{ strtoupper($nama_kecamatan) }}<br>
+	<span class="style9">{{ $info }}<br>
+	
+
+</span>
 						</td>
 				  </tr>	
 </table>
 <table width="97%" border="0" align="center" cellpadding="3" cellspacing="0">
 <tr>
 	    <td class="style6 align-center" colspan="3" ><b>PROFIL LKM</b> 
-	    <br>-----</br>
-	    <span class="style9 align-center">Untuk Periode Yang Berakhir Pada Tanggal -- </span>
+	    <br>LKM</br>
+	    <span class="style9 align-center">Untuk Periode Yang Berakhir Pada Tanggal {{ $tgl }}</span>
 	    <p class="style9 align-center"> &nbsp; </p>
 	    </td>
 	  </tr>
     <tr>
 	        <td width="2%" class="style9">1.</td>
             <td width="30%" class="style9">Nama LKM</td>
-            <td width="60%" class="style9">: ------</td>
+            <td width="60%" class="style9">: {{$lkm->nama_lkm_long}}</td>
 	    </tr>
 	     <tr>
 	        <td width="2%" class="style9">2.</td>
             <td width="30%" class="style9">Nomor Sandi LKM</td>
-            <td width="60%" class="style9">: ------</td>
+            <td width="60%" class="style9">: {{$lkm->sandi_lkm}}</td>
 	    </tr>
 	     <tr>
 	        <td width="2%" class="style9">3.</td>
@@ -63,27 +64,27 @@ Telp. E-mail:</span>
 	    <tr>
 	        <td width="2%" class="style9"> </td>
             <td width="30%" class="style9">a. Alamat</td>
-            <td width="60%" class="style9">:  ------</td>
+            <td width="60%" class="style9">: {{$lkm->alamat}} </td>
 	    </tr>
 	    <tr>
 	        <td width="2%" class="style9"> </td>
             <td width="30%" class="style9">b. Kelurahan/Desa</td>
-            <td width="60%" class="style9">: ------</td>
+            <td width="60%" class="style9">: </td>
 	    </tr>
 	    <tr>
 	        <td width="2%" class="style9"> </td>
             <td width="30%" class="style9">c. Kecamatan</td>
-            <td width="60%" class="style9">: ------</td>
+            <td width="60%" class="style9">: {{$kec->nama_kec}}</td>
 	    </tr>
 	    <tr>
 	        <td width="2%" class="style9"> </td>
             <td width="30%" class="style9">d. Kabupaten/Kota</td>
-            <td width="60%" class="style9">: ------</td>
+            <td width="60%" class="style9">: {{$kab->nama_kab}}</td>
 	    </tr>
 	    <tr>
 	        <td width="2%" class="style9"> </td>
             <td width="30%" class="style9">e. Provinsi</td>
-            <td width="60%" class="style9">: ------</td>
+            <td width="60%" class="style9">: {{$kab->nama_prov}}</td>
 	    </tr>
 	    <tr>
 	        <td width="2%" class="style9"> </td>
@@ -93,22 +94,22 @@ Telp. E-mail:</span>
 	    <tr>
 	        <td width="2%" class="style9">4.</td>
             <td width="30%" class="style9">Telepon dan Fax</td>
-            <td width="60%" class="style9">: ------</td>
+            <td width="60%" class="style9">: {{$kec->telpon_kec}}</td>
 	    </tr>
 	    <tr>
 	        <td width="2%" class="style9">5.</td>
             <td width="30%" class="style9">Email</td>
-            <td width="60%" class="style9">: ------</td>
+            <td width="60%" class="style9">: {{$kec->email_kec}}td>
 	    </tr>
 	    <tr>
 	        <td width="2%" class="style9">6.</td>
             <td width="30%" class="style9">No. dan Tanggal Izin Usaha</td>
-            <td width="50%" class="style9">:  ------</td>
+            <td width="50%" class="style9">:  {{$lkm->ijin_usaha}}</td>
 	    </tr>
 	    <tr>
 	        <td width="2%" class="style9">7.</td>
             <td width="30%" class="style9">Dasar Pencatatan</td>
-            <td width="60%" class="style9">: ------</td>
+            <td width="60%" class="style9">: {{$lkm->dasar_catat}}</td>
 	    </tr>
 	    <tr>
 	        <td width="2%" class="style9">8.</td>
@@ -130,9 +131,9 @@ Telp. E-mail:</span>
 	                 <th class="style9 bottom top align-center" width="33%">Persentase(%)</th>
 	                 </tr>
                    <tr>
-	                 <td class="style9 bottom align-center" >---&nbsp;</td>
-	                 <td class="style9 bottom align-center" width="33%">---&nbsp;</td>
-	                 <td class="style9 bottom align-center" width="33%">---&nbsp;</td>
+	                 <td class="style9 bottom align-center" >{{ $n_saham1 }}&nbsp;</td>
+	                 <td class="style9 bottom align-center" width="33%">{{ number_format($rp_saham1) }}&nbsp;</td>
+	                 <td class="style9 bottom align-center" width="33%">{{ $pros_saham1 }}&nbsp;</td>
 	                 </tr>
                    <tr>
 	                 <td class="style9 bottom align-center" >&nbsp;</td>
@@ -141,8 +142,8 @@ Telp. E-mail:</span>
 	                 </tr>
 	               <tr>
 	                 <td class="style9 bottom align-center" >Total</td>
-	                 <td class="style9 bottom align-center" width="33%">---&nbsp;</td>
-	                 <td class="style9 bottom align-center" width="33%">---&nbsp;</td>
+	                 <td class="style9 bottom align-center" width="33%">{{ number_format($jrp_saham1) }}&nbsp;</td>
+	                 <td class="style9 bottom align-center" width="33%">{{ number_format($pros_saham1) }}&nbsp;</td>
 	                 </tr>
 	         </table> 
            </td>
@@ -167,8 +168,8 @@ Telp. E-mail:</span>
                 	                 <th class="style9 bottom top align-center" width="50%">Jabatan</th>
                 	               </tr> 
                                  <tr>
-                	                 <td class="style9 bottom align-center" width="50%">---&nbsp;</td>
-                	                 <td class="style9 bottom align-center" width="50%">---&nbsp;</td>
+                	                 <td class="style9 bottom align-center" width="50%">{{$lkm->nama_direksi}}&nbsp;</td>
+                	                 <td class="style9 bottom align-center" width="50%">{{$lkm->jab_direksi}}&nbsp;</td>
                 	                 </tr>
                                    </table>
                                    </td>
@@ -179,8 +180,8 @@ Telp. E-mail:</span>
                 	                 <th class="style9 bottom top align-center" width="50%">Jabatan</th>
                 	               </tr>            
                                  <tr>
-                	                 <td class="style9 bottom align-center" width="50%">---&nbsp;</td>
-                	                 <td class="style9 bottom align-center" width="50%">---&nbsp;</td>
+                	                 <td class="style9 bottom align-center" width="50%">{{$lkm->nama_kom}}&nbsp;</td>
+                	                 <td class="style9 bottom align-center" width="50%">{{$lkm->jab_kom}}&nbsp;</td>
                 	                 </tr>
                                    </table>
                                    <table>
@@ -200,7 +201,7 @@ Telp. E-mail:</span>
                                 <br> **) hanya diisi untuk LKM berbentuk PT
                                 </td>
                                    </table>
-               <table width="97%" border="0" align="center" cellpadding="3" cellspacing="0">
+               <!-- <table width="97%" border="0" align="center" cellpadding="3" cellspacing="0">
                <tr>
               <td width="49%" height="36" colspan="1" class="style26"><div align="center" class="style9">
                 <p>&nbsp;</p>
@@ -220,5 +221,5 @@ Telp. E-mail:</span>
               <p>--------</p></th>
         </tr>
         </tr>
-	</table>
+	</table> -->
 @endsection

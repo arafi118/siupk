@@ -1,8 +1,3 @@
-@php
-    use App\Utils\Keuangan;
-    $keuangan = new Keuangan();
-@endphp
-
 @extends('pelaporan.layout.base')
 
 @section('content')
