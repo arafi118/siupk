@@ -323,116 +323,43 @@
         </li>
         <li style="margin-top: 12px;">
             <div style="text-transform: uppercase;">
-                Ketentuan Pembagian Laba Usaha
+                Ketentuan Pembagian Surplus :
+            </div>
+            <div>
+                Pembagian atas surplus yang diperoleh dalam satu tahun buku setelah dikurangi cadangan resiko dialokasikan
+                untuk
+                :
             </div>
             <ol>
                 <li>
-                    Pembagian atas laba usaha dibagi menjadi Laba dibagikan dan laba ditahan sesuai dengan ketentuan pada
-                    Permendesa PDTT nomor 15 tahun 2021 yaitu:
-                    <ol style="list-style: lower-latin;">
-                        <li>
-                            Hasil usaha yang dibagikan paling sedikit terdiri atas: bagian milik bersama masyarakat Desa;
-                            dan bagian Desa;
-                        </li>
-                        <li>
-                            Besaran masing-masing bagian dihitung berdasarkan persentase penyertaan modal dan dituangkan
-                            dalamanggaran dasar.
-                        </li>
-                        <li>
-                            <div>Bagian Desa;</div>
-                            <ul>
-                                <li style="list-style: none; margin-left: -20px;">
-                                    <table cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td class="b" colspan="3" align="center">Desa</td>
-                                            <td class="b" align="center">s/d Tahun lalu</td>
-                                            <td class="b" align="center">Tahun ini</td>
-                                            <td class="b" align="center">s/d Tahun Ini</td>
-                                        </tr>
-
-                                        @foreach ($kec->desa as $desa)
-                                            @php
-                                                $laba_th_lalu = 0;
-                                                $laba_th_ini = 0;
-                                                //if ($desa->saldo && $tgl_kondisi >= $tgl_mad)
-                                                if ($desa->saldo) {
-                                                    $laba_th_lalu = floatval($desa->saldo->debit);
-                                                    $laba_th_ini = floatval($desa->saldo->kredit);
-                                                }
-                                            @endphp
-                                            <tr>
-                                                <td>{{ $loop->iteration }}.</td>
-                                                <td>{{ $desa->sebutan_desa->sebutan_desa }} {{ $desa->nama_desa }}</td>
-                                                <td>:</td>
-                                                <td width="70" align="right">{{ number_format($laba_th_lalu, 2) }}
-                                                </td>
-                                                <td width="70" align="right">
-                                                    {{ number_format($laba_th_ini - $laba_th_lalu, 2) }}</td>
-                                                <td width="70" align="right">{{ number_format($laba_th_ini, 2) }}
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </table>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            Bagian milik bersama masyarakat Desa digunakan untuk:
-                            <ol>
-                                <li>
-                                    Kegiatan sosial kemasyarakatan dan bantuan rumah tangga miskin
-                                    <ul style="list-style: lower-alpha">
-                                        <li>
-                                            s/d Tahun Lalu Rp. {{ number_format($calk[0]['th_lalu'], 2) }}
-                                        </li>
-                                        <li>
-                                            dan Tahun Ini Rp. {{ number_format($calk[0]['th_ini'], 2) }}
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    Pengembangan kapasitas kelompok simpan pinjam perempuan/usaha ekonomi produktif
-                                    <ul style="list-style: lower-alpha">
-                                        <li>
-                                            s/d Tahun Lalu Rp. {{ number_format($calk[1]['th_lalu'], 2) }}
-                                        </li>
-                                        <li>
-                                            dan Tahun Ini Rp. {{ number_format($calk[1]['th_ini'], 2) }}
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    Pelatihan masyarakat, dan kelompok pemanfaat umum
-                                    <ul style="list-style: lower-alpha">
-                                        <li>
-                                            s/d Tahun Lalu Rp. {{ number_format($calk[2]['th_lalu'], 2) }}
-                                        </li>
-                                        <li>
-                                            dan Tahun Ini Rp. {{ number_format($calk[2]['th_ini'], 2) }}
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ol>
-                        </li>
-                    </ol>
+                    Kelembagaan maksimal maksimal 30%
                 </li>
                 <li>
-                    <div>Laba Ditahan</div>
-                    <ol style="list-style: lower-latin;">
-                        <li>
-                            Laba Ditahan untuk Penambahan Modal Kegiatan DBM Rp. {{ number_format($calk[3]['th_ini'], 2) }}
-                        </li>
-                        <li>
-                            Laba Ditahan untuk Penambahan Investasi Usaha Rp. {{ number_format($calk[4]['th_ini'], 2) }}
-                        </li>
-                        <li>
-                            Laba Ditahan untuk Pendirian Unit Usaha Rp. {{ number_format($calk[5]['th_ini'], 2) }}
-                        </li>
-                    </ol>
+                    Dana Sosial minimal 15%
+                </li>
+                <li>
+                    Bonus {{ $kec->nama_lembaga_sort }} 5%
+                </li>
+                <li>
+                    Penambahan modal 50%
+                </li>
+                <li>
+                    Lain-lain.
                 </li>
             </ol>
         </li>
-        
+
+        @if ($keterangan)
+            <li style="margin-top: 12px;">
+                <div style="text-transform: uppercase;">
+                    Lain Lain
+                </div>
+                <div style="text-align: justify">
+                    {!! $keterangan->catatan !!}.
+                </div>
+            </li>
+        @endif
+
         <li style="margin-top: 12px;">
             <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
                 <tr>

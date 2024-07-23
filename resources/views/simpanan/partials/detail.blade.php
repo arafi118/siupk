@@ -162,7 +162,7 @@ $(document).ready(function() {
 
     function tableTransaksi(bulan, tahun) {
         $.get('/simpanan/get-transaksi', {
-            nia: '{{ $nia->id }}',
+            nia: '{{ $nia->nia }}',
             bulan: bulan,
             tahun: tahun
         }, function(result) {
