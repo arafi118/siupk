@@ -14,8 +14,7 @@
             </tr>
         </thead>
         <tbody>
-            @if(count($transaksi) > 0)
-                @foreach($transaksi as $index => $trx)
+            @forelse($transaksi as $index => $trx)
                 <tr>
                     <td>{{ $index + 1 }}</td>
                     <td>{{ \Carbon\Carbon::parse($trx->tgl_transaksi)->format('d/m/Y') }}</td>
@@ -26,19 +25,14 @@
                     <td>{{ number_format($trx->saldo, 0, ',', '.') }}</td>
                     <td>{{ $trx->petugas ?? '-' }}</td>
                     <td>
-
-
-
-
-
+                        <!-- TOMBOL -->
                     </td>
                 </tr>
-                @endforeach
-            @else
+            @empty
                 <tr>
-                    <td colspan="8" class="text-center">Tidak ada transaksi di periode ini</td>
+                    <td colspan="9" class="text-center">Tidak ada transaksi di periode ini</td>
                 </tr>
-            @endif
+            @endforelse
         </tbody>
     </table>
 </div>

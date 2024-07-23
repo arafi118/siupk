@@ -138,7 +138,7 @@
                         <li>
                             Laporan keuangan disusun menggunakan Standar Akuntansi Keuangan Usaha Jasa Keuangan Mikro.
                         </li>
-                        <li>Laporan keuangan disusun berdasarkan hasil Keputusan  Musyawarah Antar Desa (MAD) dan/atau Forum Musyawarah Kecamatan (FMK) berkaitan dengan Tata kelola keuangan dan Penatausahaannya beserta penyajian pelaporan keuangan UPK.</li>
+                        <li>Laporan keuangan disusun berdasarkan hasil Keputusan  Musyawarah Antar Desa (MAD) dan/atau Forum Musyawarah Kecamatan (FMK) berkaitan dengan Tata kelola keuangan dan Penatausahaannya beserta penyajian pelaporan keuangan {{ $kec->nama_lembaga_sort }}.</li>
                         <li>
                             Dasar penyusunan laporan keuangan adalah biaya historis dan menggunakan asumsi dasar kas basis.
                             Mata uang penyajian yang digunakan untuk menyusun laporan keuangan ini adalah Rupiah.
@@ -158,7 +158,7 @@
                     <ol style="list-style: lower-alpha">
                         <li>
                             Aset tetap dan Inventaris beserta Aset tak berwujud dicatat sebesar biaya perolehannya pada saat
-                            aset tersebut secara hukum mulai dimiliki oleh UPK.
+                            aset tersebut secara hukum mulai dimiliki oleh {{ $kec->nama_lembaga_sort }}.
                         </li>
                         <li>
                             Aset tetap beserta Inventaris disusutkan menggunakan metode garis lurus tanpa nilai.

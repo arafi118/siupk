@@ -78,7 +78,7 @@ public function getTransaksi(Request $request)
 {
     $bulan = $request->input('bulan');
     $tahun = $request->input('tahun');
-    $nia_id = $request->input('nia_id');
+    $nia_id = $request->input('nia');
 
     $transaksi = Transaksi::where('id_simp', $nia_id)
                           ->whereMonth('tgl_transaksi', $bulan)

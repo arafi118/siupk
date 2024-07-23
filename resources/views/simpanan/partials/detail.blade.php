@@ -92,6 +92,11 @@
                                         Simpan Transaksi
                                     </button>
                                 </div>
+
+
+
+
+
                                 <div class="col-md-9">
                                     <div class="row mb-3">
                                         <div class="col-md-6">&nbsp;</div>
@@ -138,138 +143,41 @@
         </div>
     </div>
 </div>
-<div class="card mt-3">
-</div>
-</div>
-<form action="/database/penduduk/{{ $nia->nik }}/blokir" method="post" id="Blokir">
-    @csrf
-    @php
-    $status = '0';
-    if ($nia->status == '0') {
-    $status = '1';
-    }
-    @endphp
-    <input type="hidden" name="status" id="status" value="{{ $status }}">
-</form>
+
 @endsection
 @section('script')
 <script>
-new Choices($('#desa')[0], {
-    shouldSort: false,
-    fuseOptions: {
-        threshold: 0.1,
-        distance: 1000
-    }
-})
-new Choices($('#jenis_kelamin')[0], {
-    shouldSort: false,
-    fuseOptions: {
-        threshold: 0.1,
-        distance: 1000
-    }
-})
-new Choices($('#hubungan')[0], {
-    shouldSort: false,
-    fuseOptions: {
-        threshold: 0.1,
-        distance: 1000
-    }
-})
-
 $(".date").flatpickr({
     dateFormat: "d/m/Y"
 })
+$(document).ready(function() {
+    var currentDate = new Date();
+    var currentMonth = currentDate.getMonth() + 1; 
+    var currentYear = currentDate.getFullYear();
 
-$(document).on('click', '#SimpanPenduduk', function(e) {
-    e.preventDefault()
-    $('small').html('')
+    $('#bulan').val(currentMonth);
+    $('#tahun').val(currentYear);
 
-    var form = $('#Penduduk')
-    $.ajax({
-        type: 'post',
-        url: form.attr('action'),
-        data: form.serialize(),
-        success: function(result) {
-            Swal.fire('Berhasil', result.msg, 'success')
-        },
-        error: function(result) {
-            const respons = result.responseJSON;
+    tableTransaksi(currentMonth, currentYear);
 
-            Swal.fire('Error', 'Cek kembali input yang anda masukkan', 'error')
-            $.map(respons, function(res, key) {
-                $('#' + key).parent('.input-group.input-group-static').addClass(
-                    'is-invalid')
-                $('#msg_' + key).html(res)
-            })
-        }
-    })
-})
-
-$(document).on('click', '#BlokirPenduduk', function(e) {
-    e.preventDefault()
-    let blokir = $('#Blokir #status').val()
-    let title = 'Blokir Penduduk?'
-    let text = 'Dengan klik Ya maka penduduk ini tidak akan bisa mengajukan pinjaman lagi. Yakin?'
-    if (blokir != '0') {
-        title = 'Lepaskan Blokiran?'
-        text = 'Dengan klik Ya maka penduduk ini akan dilepas dari blokirannya. Yakin lepaskan?'
+    function tableTransaksi(bulan, tahun) {
+        $.get('/simpanan/get-transaksi', {
+            nia: '{{ $nia->id }}',
+            bulan: bulan,
+            tahun: tahun
+        }, function(result) {
+            $('#transaksi-container').html(result);
+        }).fail(function(xhr, status, error) {
+            console.error("Error loading transactions:", error);
+            $('#transaksi-container').html('<p>Error loading transactions. Please try again.</p>');
+        });
     }
 
-    Swal.fire({
-        title: title,
-        text: text,
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonText: 'Ya',
-        cancelButtonText: 'Tidak'
-    }).then((res) => {
-        if (res.isConfirmed) {
-            var form = $('#Blokir')
-            $.ajax({
-                type: form.attr('method'),
-                url: form.attr('action'),
-                data: form.serialize(),
-                success: function(result) {
-                    if (result.success) {
-                        Swal.fire({
-                            title: 'Berhasil',
-                            text: result.msg,
-                            icon: 'success',
-                        }).then(() => {
-                            window.location.reload();
-                        })
-                    }
-                }
-            })
-        }
-    })
-})
-
-$(document).on('click', '.blockquote', function(e) {
-    e.preventDefault()
-
-    var link = $(this).attr('data-link')
-    window.location.href = link
-})
-
-function updateTransaksi() {
-    var bulan = $('#bulan').val();
-    var tahun = $('#tahun').val();
-    var nia_id = '{{ $nia->id }}';
-    
-    $.ajax({
-        url: '{{ route("simpanan.getTransaksi") }}',
-        method: 'GET',
-        data: { bulan: bulan, tahun: tahun, nia_id: nia_id },
-        success: function(data) {
-            $('#transaksi-container').html(data);
-        }
+    $('#bulan, #tahun').change(function() {
+        var bulan = $('#bulan').val();
+        var tahun = $('#tahun').val();
+        tableTransaksi(bulan, tahun);
     });
-}
-
-$(document).ready(function() {
-    $('#bulan, #tahun').change(updateTransaksi);
-    updateTransaksi(); 
 });
 </script>
 @endsection
