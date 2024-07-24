@@ -1,12 +1,4 @@
 @extends('layouts.base')
-
-{{-- @section('content')
-    <div class="card">
-        <div class="card-body" id="RegisterPenduduk">
-
-        </div>
-    </div>
-@endsection --}}
 @section('content')
     <div class="app-main__inner">
         <div class="tab-content">
