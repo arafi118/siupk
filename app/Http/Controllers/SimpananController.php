@@ -74,20 +74,20 @@ class SimpananController extends Controller
         return view('simpanan.index')->with(compact('title'));
     }
 
-public function getTransaksi(Request $request)
-{
-    $bulan = $request->input('bulan');
-    $tahun = $request->input('tahun');
-    $nia_id = $request->input('nia');
+    public function getTransaksi()
+    {
+        $bulan = request()->input('bulan');
+        $tahun = request()->input('tahun');
+        $nia_id = request()->input('nia');
 
-    $transaksi = Transaksi::where('id_simp', $nia_id)
-                          ->whereMonth('tgl_transaksi', $bulan)
-                          ->whereYear('tgl_transaksi', $tahun)
-                          ->orderBy('tgl_transaksi', 'asc')
-                          ->get();
+        $transaksi = Transaksi::where('id_simp', $nia_id)
+            ->whereMonth('tgl_transaksi', $bulan)
+            ->whereYear('tgl_transaksi', $tahun)
+            ->orderBy('tgl_transaksi', 'asc')
+            ->get();
 
-    return view('simpanan.partials.detail-transaksi', compact('transaksi'));
-}
+        return view('simpanan.partials.detail-transaksi', compact('transaksi'));
+    }
 
     public function detailAnggota($id)
     {
@@ -128,7 +128,7 @@ public function getTransaksi(Request $request)
         return view('simpanan.partials.register')->with(compact('anggota', 'kec', 'jenis_jasa', 'sistem_angsuran', 'js', 'js_dipilih'));
     }
 
-public function jenis_simpanan($id, Request $request)
+    public function jenis_simpanan($id, Request $request)
     {
         $nia = $request->input('nia');
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
@@ -144,7 +144,7 @@ public function jenis_simpanan($id, Request $request)
         } else {
             $nomor_rekening = 'Data tidak valid';
         }
-    
+
         return response()->json([
             'success' => true,
             'view' => view('simpanan.partials.simpanan', compact('id', 'kec', 'anggota', 'nomor_rekening'))->render()
@@ -169,7 +169,7 @@ public function jenis_simpanan($id, Request $request)
 
 
 
-    
+
     public function show(Simpanan $simpanan)
     {
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
@@ -181,7 +181,7 @@ public function jenis_simpanan($id, Request $request)
         return view('simpanan.partials.detail')->with(compact('nia', 'title'));
     }
 
-    
+
     public function kop(Simpanan $simpanan)
     {
         $simpanan = $simpanan->where('id', $simpanan->id)->with(['anggota', 'js'])->first();
@@ -197,36 +197,36 @@ public function jenis_simpanan($id, Request $request)
     }
 
     public function simpanTransaksi(Request $request)
-{
-    $jenisMutasi = $request->jenis_mutasi;
-    $tglTransaksi = $request->tgl_transaksi;
-    $jumlah = $request->jumlah;
-    $nomorRekening = $request->nomor_rekening;
-    $namaDebitur = $request->nama_debitur;
-    $nia = $request->nia;
+    {
+        $jenisMutasi = $request->jenis_mutasi;
+        $tglTransaksi = $request->tgl_transaksi;
+        $jumlah = $request->jumlah;
+        $nomorRekening = $request->nomor_rekening;
+        $namaDebitur = $request->nama_debitur;
+        $nia = $request->nia;
 
-    $jenisSimpanan = JenisSimpanan::where('id', substr($nomorRekening, 0, 1))->first();
+        $jenisSimpanan = JenisSimpanan::where('id', substr($nomorRekening, 0, 1))->first();
 
-    $transaksi = new Transaksi();
-    $transaksi->tgl_transaksi = Tanggal::tglNasional($tglTransaksi);
-    $transaksi->rekening_debit = $jenisMutasi == '1' ? $jenisSimpanan->rek_kas : $jenisSimpanan->rek_simp;
-    $transaksi->rekening_kredit = $jenisMutasi == '1' ? $jenisSimpanan->rek_simp : $jenisSimpanan->rek_kas;
-    $transaksi->idtp = 0;
-    $transaksi->id_pinj = 0;
-    $transaksi->id_pinj_i = 0;
-    $transaksi->id_simp = $jenisMutasi == '1' ? "2-{$nia}" : "3-{$nia}";
-    $transaksi->keterangan_transaksi = $jenisMutasi == '1' ? "Setor Tunai Rekening {$nomorRekening}" : "Tarik Tunai Rekening {$nomorRekening}";
-    $transaksi->relasi = $namaDebitur;
-    $transaksi->jumlah = $jumlah;
-    $transaksi->urutan = 0;
-    $transaksi->id_user = auth()->user()->id;
+        $transaksi = new Transaksi();
+        $transaksi->tgl_transaksi = Tanggal::tglNasional($tglTransaksi);
+        $transaksi->rekening_debit = $jenisMutasi == '1' ? $jenisSimpanan->rek_kas : $jenisSimpanan->rek_simp;
+        $transaksi->rekening_kredit = $jenisMutasi == '1' ? $jenisSimpanan->rek_simp : $jenisSimpanan->rek_kas;
+        $transaksi->idtp = 0;
+        $transaksi->id_pinj = 0;
+        $transaksi->id_pinj_i = 0;
+        $transaksi->id_simp = $jenisMutasi == '1' ? "2-{$nia}" : "3-{$nia}";
+        $transaksi->keterangan_transaksi = $jenisMutasi == '1' ? "Setor Tunai Rekening {$nomorRekening}" : "Tarik Tunai Rekening {$nomorRekening}";
+        $transaksi->relasi = $namaDebitur;
+        $transaksi->jumlah = $jumlah;
+        $transaksi->urutan = 0;
+        $transaksi->id_user = auth()->user()->id;
 
-    if ($transaksi->save()) {
-        return response()->json(['success' => true]);
-    } else {
-        return response()->json(['success' => false, 'message' => 'Gagal menyimpan transaksi']);
+        if ($transaksi->save()) {
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Gagal menyimpan transaksi']);
+        }
     }
-}
 
 
 
@@ -235,91 +235,91 @@ public function jenis_simpanan($id, Request $request)
 
 
     public function store(Request $request)
-{    $rules = [
-        'nomor_rekening' => 'required|string|max:255',
-        'jenis_simpanan' => 'required',
-        'nia' => 'required',
-        'setoran_awal' => 'required|numeric',
-        'tgl_buka_rekening' => 'required|date_format:d/m/Y',
-        'tgl_minimal_tutup_rekening' => 'required|date_format:d/m/Y',
-        'bunga' => 'required|numeric',
-        'pajak_bunga' => 'required|numeric',
-        'admin' => 'required|numeric',
-        'kuasa' => 'required',
-        'ahli_waris' => 'required',
-        'hubungan' => 'required',
-    ];
+    {
+        $rules = [
+            'nomor_rekening' => 'required|string|max:255',
+            'jenis_simpanan' => 'required',
+            'nia' => 'required',
+            'setoran_awal' => 'required|numeric',
+            'tgl_buka_rekening' => 'required|date_format:d/m/Y',
+            'tgl_minimal_tutup_rekening' => 'required|date_format:d/m/Y',
+            'bunga' => 'required|numeric',
+            'pajak_bunga' => 'required|numeric',
+            'admin' => 'required|numeric',
+            'kuasa' => 'required',
+            'ahli_waris' => 'required',
+            'hubungan' => 'required',
+        ];
 
-    \Log::info('Validation Rules:', $rules);
-    \Log::info('Received Data:', $request->all());
+        \Log::info('Validation Rules:', $rules);
+        \Log::info('Received Data:', $request->all());
 
-    $validator = Validator::make($request->all(), $rules);
+        $validator = Validator::make($request->all(), $rules);
 
-    if ($validator->fails()) {
-        \Log::info('Validation Errors:', $validator->errors()->toArray());
-        return response()->json(['errors' => $validator->errors()], 422);
+        if ($validator->fails()) {
+            \Log::info('Validation Errors:', $validator->errors()->toArray());
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+        $validator = Validator::make($request->all(), [
+            'nomor_rekening' => 'required',
+            'jenis_simpanan' => 'required',
+            'nia' => 'required',
+            'setoran_awal' => 'required|numeric',
+            'tgl_buka_rekening' => 'required|date_format:d/m/Y',
+            'tgl_minimal_tutup_rekening' => 'required|date_format:d/m/Y',
+            'bunga' => 'required|numeric',
+            'pajak_bunga' => 'required|numeric',
+            'admin' => 'required|numeric',
+            'kuasa' => 'required',
+            'ahli_waris' => 'required',
+            'hubungan' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $simpanan = new Simpanan();
+        $simpanan->nomor_rekening = $request->nomor_rekening;
+        $simpanan->jenis_simpanan = $request->jenis_simpanan;
+        $simpanan->nia = $request->nia;
+        $simpanan->jumlah = $request->setoran_awal;
+        $simpanan->tgl_buka = Tanggal::tglNasional($request->tgl_buka_rekening);
+        $simpanan->tgl_tutup = Tanggal::tglNasional($request->tgl_minimal_tutup_rekening);
+        $simpanan->bunga = $request->bunga;
+        $simpanan->pajak = $request->pajak_bunga;
+        $simpanan->admin = $request->admin;
+        $simpanan->status = 'A';
+        $simpanan->sp = $request->kuasa;
+        $simpanan->pengampu = $request->ahli_waris;
+        $simpanan->hubungan = $request->hubungan;
+        $simpanan->user_id = auth()->id();
+        $simpanan->lu = date('Y-m-d H:i:s');
+        $simpanan->save();
+
+        $maxId = Simpanan::max('id');
+
+        $js = JenisSimpanan::where('id', $request->jenis_simpanan)->first();
+        $anggota = Anggota::where('id', $request->nia)->first();
+        Transaksi::create([
+            'tgl_transaksi' => Tanggal::tglNasional($request->tgl_buka_rekening),
+            'rekening_debit' => $js->rek_kas,
+            'rekening_kredit' =>  $js->rek_simp,
+            'idtp' => '0',
+            'id_pinj' => '0',
+            'id_pinj_i' => '0',
+            'id_simp' => $maxId,
+            'keterangan_transaksi' => 'Setoran Awal ' . $js->nama_js . ' ' . $anggota->namadepan . '',
+            'relasi' => $anggota->namadepan . '[' . $request->nia . ']',
+            'jumlah' => str_replace(',', '', str_replace('.00', '', $request->setoran_awal)),
+            'urutan' => '0',
+            'id_user' => auth()->user()->id,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data simpanan berhasil disimpan',
+            'id' => $simpanan->id
+        ]);
     }
-    $validator = Validator::make($request->all(), [
-        'nomor_rekening' => 'required',
-        'jenis_simpanan' => 'required',
-        'nia' => 'required',
-        'setoran_awal' => 'required|numeric',
-        'tgl_buka_rekening' => 'required|date_format:d/m/Y',
-        'tgl_minimal_tutup_rekening' => 'required|date_format:d/m/Y',
-        'bunga' => 'required|numeric',
-        'pajak_bunga' => 'required|numeric',
-        'admin' => 'required|numeric',
-        'kuasa' => 'required',
-        'ahli_waris' => 'required',
-        'hubungan' => 'required',
-    ]);
-
-    if ($validator->fails()) {
-        return response()->json(['errors' => $validator->errors()], 422);
-    }
-
-    $simpanan = new Simpanan();
-    $simpanan->nomor_rekening = $request->nomor_rekening;
-    $simpanan->jenis_simpanan = $request->jenis_simpanan;
-    $simpanan->nia = $request->nia;
-    $simpanan->jumlah = $request->setoran_awal;
-    $simpanan->tgl_buka = Tanggal::tglNasional($request->tgl_buka_rekening);
-    $simpanan->tgl_tutup = Tanggal::tglNasional($request->tgl_minimal_tutup_rekening);
-    $simpanan->bunga = $request->bunga;
-    $simpanan->pajak = $request->pajak_bunga;
-    $simpanan->admin = $request->admin;
-    $simpanan->status = 'A';
-    $simpanan->sp = $request->kuasa;
-    $simpanan->pengampu = $request->ahli_waris;
-    $simpanan->hubungan = $request->hubungan;
-    $simpanan->user_id = auth()->id();
-    $simpanan->lu = date('Y-m-d H:i:s');
-    $simpanan->save();
-
-    $maxId = Simpanan::max('id');
-
-    $js = JenisSimpanan::where('id', $request->jenis_simpanan)->first();
-    $anggota = Anggota::where('id', $request->nia)->first();
-            Transaksi::create([
-                'tgl_transaksi' => Tanggal::tglNasional($request->tgl_buka_rekening),
-                'rekening_debit' => $js->rek_kas,
-                'rekening_kredit' =>  $js->rek_simp,
-                'idtp' => '0',
-                'id_pinj' => '0',
-                'id_pinj_i' => '0',
-                'id_simp' => $maxId,
-                'keterangan_transaksi' => 'Setoran Awal '. $js->nama_js.' '.$anggota->namadepan.'',
-                'relasi' => $anggota->namadepan. '['.$request->nia.']',
-                'jumlah' => str_replace(',', '', str_replace('.00', '', $request->setoran_awal)),
-                'urutan' => '0',
-                'id_user' => auth()->user()->id,
-            ]);
-
-    return response()->json([
-        'success' => true,
-        'message' => 'Data simpanan berhasil disimpan',
-        'id' => $simpanan->id
-    ]);
-}
-
 }

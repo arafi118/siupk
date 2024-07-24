@@ -171,7 +171,7 @@ Route::get('/perguliran/lunas', [PinjamanKelompokController::class, 'lunas'])->m
 Route::get('/perguliran/generate/{id_pinj}', [PinjamanKelompokController::class, 'generate'])->middleware('auth');
 Route::get('/lunas/{perguliran}', [PinjamanKelompokController::class, 'pelunasan'])->middleware('auth');
 Route::get('/cetak_keterangan_lunas/{perguliran}', [PinjamanKelompokController::class, 'keterangan'])->middleware('auth');
- 
+
 Route::get('/perguliran/cari_kelompok', [PinjamanKelompokController::class, 'cariKelompok'])->middleware('auth');
 Route::get('/perguliran/cari_anggota', [PinjamanAnggotaController::class, 'cariAnggota'])->middleware('auth');
 
@@ -345,9 +345,7 @@ Route::get('/simpanan/cari_nik', [SimpananController::class, 'cariNik'])->middle
 
 Route::post('/simpanan/{nik}/blokir', [SimpananController::class, 'blokir'])->middleware('auth');
 
-Route::get('/simpanan/detail_simpanan/{id}', [SimpananController::class, 'detailAnggota'])->middleware('auth');//her
-
-Route::resource('/simpanan', SimpananController::class)->middleware('auth');
+Route::get('/simpanan/detail_simpanan/{id}', [SimpananController::class, 'detailAnggota'])->middleware('auth'); //her
 
 Route::get('/register_simpanan', [SimpananController::class, 'create'])->middleware('auth');
 Route::get('/register_simpanan/{nia}', [SimpananController::class, 'register'])->middleware('auth');
@@ -358,11 +356,12 @@ Route::get('/simpanan/kuasa/{id}', [SimpananController::class, 'Kuasa'])->middle
 Route::post('/simpanan/store', [SimpananController::class, 'store'])->middleware('auth');
 
 Route::get('/cetak_kop/{simpanan}', [SimpananController::class, 'kop'])->middleware('auth');
- 
+
 Route::get('/cetak_koran/{simpanan}', [SimpananController::class, 'koran'])->middleware('auth');
 
 Route::get('/simpanan/get-transaksi', [SimpananController::class, 'getTransaksi'])->middleware('auth');
 
 Route::post('/simpanan/simpan-transaksi', [SimpananController::class, 'simpanTransaksi']);
+Route::resource('/simpanan', SimpananController::class)->middleware('auth');
 
 Route::get('/{invoice}', [PelaporanController::class, 'invoice']);
