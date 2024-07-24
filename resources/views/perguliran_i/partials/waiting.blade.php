@@ -208,7 +208,7 @@
                             <div class="position-relative mb-3">
                                 <label for="nama_agent" class="form-label">Nama Agent</label>
                                 <input autocomplete="off" type="text" name="nama_agent" id="nama_agent"
-                                    class="form-control" readonly value="{{ ($perguliran_i->agen) ? $perguliran_i->agen->agent:''; }}">
+                                    class="form-control" readonly value="{{ ($perguliran_i->agent) ? $perguliran_i->agent->agent:''; }}">
                                 <small class="text-danger" id="msg_nama_agent"></small>
                             </div>
                         </div>

@@ -114,39 +114,43 @@
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <h5 class="card-title">Angsuran Hari Ini</h5>
-                            <div class="chart-container">
-                                {{-- <canvas id="pie-chart" class="chart-canvas" height="400" style="display: block; box-sizing: border-box; height: 200px; width: 169.7px;"
-                                width="339"></canvas> --}}
-                                <canvas id="chart-pie" class="chart-canvas" height="400"
-                                style="display: block; box-sizing: border-box; height: 200px; width: 169.7px;"
-                                width="339"></canvas>
-                            </div>
-                                <div class="col-5 my-auto">
-                                    <span class="badge badge-md badge-dot me-4 d-block text-start">
-                                        <i class="bg-info"></i>
-                                        <span class="text-dark text-xs">SPP Pokok</span>
-                                    </span>
-                                    <span class="badge badge-md badge-dot me-4 d-block text-start">
-                                        <i class="bg-success"></i>
-                                        <span class="text-dark text-xs">SPP Jasa</span>
-                                    </span>
-                                    <span class="badge badge-md badge-dot me-4 d-block text-start">
-                                        <i class="bg-dark"></i>
-                                        <span class="text-dark text-xs">UEP Pokok</span>
-                                    </span>
-                                    <span class="badge badge-md badge-dot me-4 d-block text-start">
-                                        <i class="bg-secondary"></i>
-                                        <span class="text-dark text-xs">UEP Jasa</span>
-                                    </span>
-                                    <span class="badge badge-md badge-dot me-4 d-block text-start">
-                                        <i class="bg-danger"></i>
-                                        <span class="text-dark text-xs">PL Pokok</span>
-                                    </span>
-                                    <span class="badge badge-md badge-dot me-4 d-block text-start">
-                                        <i class="bg-warning"></i>
-                                        <span class="text-dark text-xs">PL Jasa</span>
-                                    </span>
+                                <div class="card-body pb-0 p-3 pt-0 mt-4">
+                                    <div class="row">
+                                        <div class="col-7 text-start">
+                                            <div class="chart">
+                                                <canvas id="chart-pie" class="chart-canvas" height="400"
+                                                    style="display: block; box-sizing: border-box; height: 200px; width: 169.7px;" width="339"></canvas>
+                                            </div>
+                                        </div>
+                                        <div class="col-5 my-auto">
+                                            <span class="badge badge-md badge-dot me-4 d-block text-start">
+                                                <i class="bg-info"></i>
+                                                <span class="text-dark text-xs" style="color: black;">SPP Pokok</span>
+                                            </span>
+                                            <span class="badge badge-md badge-dot me-4 d-block text-start">
+                                                <i class="bg-success"></i>
+                                                <span class="text-dark text-xs" style="color: black;">SPP Jasa</span>
+                                            </span>
+                                            <span class="badge badge-md badge-dot me-4 d-block text-start">
+                                                <i class="bg-dark"></i>
+                                                <span class="text-dark text-xs" style="color: black;">UEP Pokok</span>
+                                            </span>
+                                            <span class="badge badge-md badge-dot me-4 d-block text-start">
+                                                <i class="bg-secondary"></i>
+                                                <span class="text-dark text-xs" style="color: black;">UEP Jasa</span>
+                                            </span>
+                                            <span class="badge badge-md badge-dot me-4 d-block text-start">
+                                                <i class="bg-danger"></i>
+                                                <span class="text-dark text-xs" style="color: black;">PL Pokok</span>
+                                            </span>
+                                            <span class="badge badge-md badge-dot me-4 d-block text-start">
+                                                <i class="bg-warning"></i>
+                                                <span class="text-dark text-xs" style="color: black;">PL Jasa</span>
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
+
                                 <div class="card-footer pt-0 pb-2 p-3 d-flex align-items-center justify-content-between">
                                     <div class="w-60">
                                         <div class="text-sm">
@@ -218,28 +222,19 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+
                     <div class="nav-wrapper position-relative end-0">
-                        <ul class="nav nav-pills nav-fill p-1" role="tablist">
-                            <li class="nav-item ">
-                                <a class="nav-link mb-0 px-0 py-1 active text-danger" data-bs-toggle="tab"
-                                    href="#tagihan_hari_ini" role="tab" aria-controls="tagihan_hari_ini"
-                                    aria-selected="true">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hari Ini
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link mb-0 px-0 py-1 text-warning" data-bs-toggle="tab" href="#menunggak"
-                                    role="tab" aria-controls="menunggak" aria-selected="false">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Menunggak
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link mb-0 px-0 py-1 text-info" data-bs-toggle="tab" href="#tagihan"
-                                    role="tab" aria-controls="tagihan" aria-selected="false">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tagihan
-                                </a>
-                            </li>
-                        </ul>
+                        <div class="d-flex justify-content-between p-1" role="tablist">
+                            <button class="btn btn-outline-danger flex-fill me-1 active" data-bs-toggle="tab" data-bs-target="#tagihan_hari_ini" role="tab" aria-controls="tagihan_hari_ini" aria-selected="true">
+                                Hari ini
+                            </button>
+                            <button class="btn btn-outline-warning flex-fill me-1" data-bs-toggle="tab" data-bs-target="#menunggak" role="tab" aria-controls="menunggak" aria-selected="false">
+                                Menunggak
+                            </button>
+                            <button class="btn btn-outline-info flex-fill" data-bs-toggle="tab" data-bs-target="#tagihan" role="tab" aria-controls="tagihan" aria-selected="false">
+                                Tagihan
+                            </button>
+                        </div>
 
                         <div class="tab-content mt-2">
                             <div class="tab-pane fade show active" id="tagihan_hari_ini" role="tabpanel"
@@ -355,26 +350,16 @@
                     <h1 class="modal-title fs-5" id="pinjamanLabel">Pinjaman</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <style>
-                    .btn-custom {
-                        background-color: white;
-                        border: 1px solid #dee2e6;
-                        color: black;
-                    }
-                    .btn-custom.active {
-                        color: white;
-                    }
-                </style>
                 <div class="modal-body">
                     <div class="nav-wrapper position-relative end-0">
                         <div class="d-flex justify-content-between p-1" role="tablist">
-                            <button class="btn btn-info flex-fill me-1 active" data-bs-toggle="tab" data-bs-target="#proposal" role="tab" aria-controls="proposal" aria-selected="true">
+                            <button class="btn btn-outline-info flex-fill me-1 active" data-bs-toggle="tab" data-bs-target="#proposal" role="tab" aria-controls="proposal" aria-selected="true">
                                 Proposal
                             </button>
-                            <button class="btn btn-danger flex-fill me-1" data-bs-toggle="tab" data-bs-target="#verifikasi" role="tab" aria-controls="verifikasi" aria-selected="false">
+                            <button class="btn btn-outline-danger flex-fill me-1" data-bs-toggle="tab" data-bs-target="#verifikasi" role="tab" aria-controls="verifikasi" aria-selected="false">
                                 Verifikasi
                             </button>
-                            <button class="btn btn-warning flex-fill" data-bs-toggle="tab" data-bs-target="#waiting" role="tab" aria-controls="waiting" aria-selected="false">
+                            <button class="btn btn-outline-warning flex-fill" data-bs-toggle="tab" data-bs-target="#waiting" role="tab" aria-controls="waiting" aria-selected="false">
                                 Waiting
                             </button>
                         </div>

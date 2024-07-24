@@ -417,7 +417,7 @@ class PinjamanIndividuController extends Controller
     {
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $perguliran_i = $perguliran_i->with([
-            'agen',
+            'agent',
             'supp',
             'sis_pokok',
             'sis_jasa',
@@ -698,7 +698,7 @@ class PinjamanIndividuController extends Controller
             ];
 
             // Transaksi [Warning]
-            $keterangan = 'Pencairan Kredit ' . $perguliran_i->anggota->namadepan;
+            $keterangan = 'Pencairan Kredit ' . $perguliran_i->anggota->namadepan .'-'. $perguliran_i->id;
             $keterangan .= ' (' . $perguliran_i->jpp->nama_jpp . ')';
 
             Transaksi::create([
@@ -739,7 +739,7 @@ class PinjamanIndividuController extends Controller
                     'idtp' => '0',
                     'id_pinj' => '0',
                     'id_pinj_i' => $perguliran_i->id,
-                    'keterangan_transaksi' => "Pendapatan Admin kredit",
+                    'keterangan_transaksi' => "Pembayaran DP an." . $perguliran_i->anggota->namadepan .'-'. $perguliran_i->id,
                     'relasi' => '-',
                     'jumlah' => intval($depe),
                     'urutan' => '0',

@@ -56,9 +56,9 @@
                                     <div class="col-md-6">
                                         <div class="position-relative mb-3">
                                             <label for="pokok" class="form-label">Pokok</label>
-                                            <input autocomplete="off" type="text" name="pokok" id="pokok"
+                                            <input autocomplete="off" readonly disabled type="text" name="pokok" id="pokok"
                                             class="form-control">
-                                        <small class="text-danger" id="msg_pokok"></small>
+                                            <small class="text-danger" id="msg_pokok"></small>
                                         </div>
                                     </div>
                                     <div class="col-md-6">

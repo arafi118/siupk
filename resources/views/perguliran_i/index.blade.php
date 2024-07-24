@@ -187,8 +187,8 @@
 @section('script')
     <script>
         var tbProposal = CreateTable('#TbProposal', '/perguliran_i/proposal', [ {
-            data: 'anggota.id',
-            name: 'anggota.id'
+            data: 'id',
+            name: 'id'
         }, {
             data: 'anggota.namadepan',
             name: 'anggota.namadepan'
@@ -212,8 +212,8 @@
         }])
 
         var tbVerified = CreateTable('#TbVerified', '/perguliran_i/verified', [{
-            data: 'anggota.id',
-            name: 'anggota.id'
+            data: 'id',
+            name: 'id'
         },{
             data: 'anggota.namadepan',
             name: 'anggota.namadepan'
@@ -234,8 +234,8 @@
         }])
 
         var tbWaiting = CreateTable('#TbWaiting', '/perguliran_i/waiting', [{
-            data: 'anggota.id',
-            name: 'anggota.id'
+            data: 'id',
+            name: 'id'
         },{
             data: 'anggota.namadepan',
             name: 'anggota.namadepan'
@@ -256,8 +256,8 @@
         }])
 
         var tbAktif = CreateTable('#TbAktif', '/perguliran_i/aktif', [{
-            data: 'anggota.id',
-            name: 'anggota.id'
+            data: 'id',
+            name: 'id'
         },{
             data: 'anggota.namadepan',
             name: 'anggota.namadepan'
