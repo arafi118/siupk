@@ -108,8 +108,8 @@
                     <div class="position-relative mb-3">
                         <label for="desa">Desa/Kelurahan</label>
                         <select class="js-select-2 form-control" name="desa" id="desa">
+                            <option>Pilih Desa/Kelurahan</option>
                             @foreach ($desa as $ds)
-                                <option>Pilih Desa/Kelurahan</option>
                                 <option {{ $desa_dipilih == $ds->kd_desa ? 'selected' : '' }} value="{{ $ds->kd_desa }}">
                                     {{ $ds->sebutan_desa->sebutan_desa }} {{ $ds->nama_desa }}
                                 </option>
@@ -141,9 +141,9 @@
                         <label for="pendidikan">Pendidikan</label>
                         <select class="js-select-2 form-control" name="pendidikan" id="pendidikan" class="form-control">
                             <option value="">{{ $data_anggota->pendidikan}}</option>
-                            <option value="sd_mi">SD/MI Sederajat</option>
-                            <option value="smp_mts">SMP/MTs Sederajat</option>
-                            <option value="sma_smk_ma">SMA/SMK/MA Sederajat</option>
+                            <option value="sd_mi">SD/MI</option>
+                            <option value="smp_mts">SMP/MTs</option>
+                            <option value="sma_smk_ma">SMA/SMK/MA</option>
                             <option value="diploma_1">Diploma 1 (D1)</option>
                             <option value="diploma_2">Diploma 2 (D2)</option>
                             <option value="diploma_3">Diploma 3 (D3)</option>
@@ -229,7 +229,7 @@
                                 </option>
                             @endforeach
                         </select>
-                        <small class="text-danger" id="msg_desa"></small>
+                        <small class="text-danger" id="msg_hubungan"></small>
                     </div>
                 </div>
             </div>

@@ -8,7 +8,7 @@
                 <div class="page-title-icon">
                     <i class="fa fa-address-card"></i>
                 </div>
-                <div><b>Data Agent</b>
+                <div><b>Data Agen</b>
                     <div class="page-title-subheading">
                          {{ Session::get('nama_lembaga') }} Kecamatan {{ $kec->nama_kec }}
                     </div>
@@ -33,7 +33,7 @@
                             <table class="mb-0 table table-hover" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Kode Agent</th>
+                                        <th>Kode Agen</th>
                                         <th>Nama</th>
                                         <th>Desa</th>
                                         <th>Alamat</th>

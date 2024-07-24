@@ -57,7 +57,7 @@
                         <a href="/pengaturan/users"> 
                             <i class="metismenu-icon">
                                 <i class="metismenu-icon pe-7s-note"></i>
-                            </i>Data Users
+                            </i>Data User
                         </a>
                     </li>
                     <li>
@@ -70,7 +70,7 @@
                     <li>
                         <a href="/database/agent">
                             <i class="metismenu-icon">
-                            </i>Data Agent
+                            </i>Data Agen
                         </a>
                     </li>
                     <li>

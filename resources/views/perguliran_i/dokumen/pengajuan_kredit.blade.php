@@ -150,7 +150,7 @@
     </tr>
     <tr>
         <td width="30">&nbsp;</td>
-        <td>Jenis Usaha</td>
+        <td>Usaha</td>
         <td width="5" align="right">:</td>
         <td style="font-weight:">{{ $pinkel->anggota->u->nama_usaha }}</td>
     </tr>
@@ -160,7 +160,7 @@
             <div>
             Dalam  hal ini bertindak untuk dan atas nama diri sendiri, dengan ini bermaksud mengajukan               
                 permohonan kredit sebesar Rp. {{ number_format($pinkel->proposal) }}
-                ({{ $keuangan->terbilang($pinkel->proposal) }}) untuk memenuhi kebutuhan tambahan modal usaha. 
+                ({{ $keuangan->terbilang($pinkel->proposal) }}). 
                 {{ $pinkel->pinjaman_anggota_count }}Kredit atau pinjaman tersebut di atas, akan kami
                 kembalikan dalam jangka waktu {{ $pinkel->jangka }} bulan, dengan sistem angsuran
                 {{ $pinkel->sis_pokok->nama_sistem }} ({{ $pinkel->sis_pokok->deskripsi_sistem }}).

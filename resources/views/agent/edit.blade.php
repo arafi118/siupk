@@ -1,7 +1,7 @@
 <div class="modal-content">
     <div class="modal-header">
         <h1 class="modal-title fs-4">
-            Edit Agent {{ $agent->nama }} [{{ $agent->nomorid }}]
+            Edit Agen {{ $agent->nama }} [{{ $agent->nomorid }}]
         </h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="DOMContentLoaded position-relative mb-3">
-                        <label for="kd_agent" class="form-label">Kd Agent</label>
+                        <label for="kd_agent" class="form-label">Kd Agen</label>
                         <input autocomplete="off" type="text" name="kd_agent" id="kd_agent"
                                class="form-control" value="{{ $agent->kd_agent }}" readonly>
                         <small class="text-danger" id="msg_kd_agent"></small>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-md-5">
                     <div class="position-relative mb-3">
-                        <label for="agent" class="form-label">Agent</label>
+                        <label for="agent" class="form-label">Agen</label>
                         <input autocomplete="off" type="text" name="agent" id="agent"
                             class="form-control money" value="{{ $agent->agent}}">
                         <small class="text-danger" id="msg_agent"></small>
