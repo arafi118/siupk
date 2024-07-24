@@ -9,7 +9,7 @@
                         <div class="col-md-6">
                             <div class="card-body p-3">
                                 <h5 class="mb-1">
-                                    Nasabah {{ $nia->anggota->namadepan }} CIF. {{ $nia->id}}
+                                    Nasabah {{ $nia->anggota->namadepan }} CIF. {{$nia->id}}
                                     ({{ $nia->js->nama_js }})
                                 </h5>
                                 <p class="mb-0">
@@ -48,47 +48,47 @@
                                         <small class="text-danger" id="msg_nomor_rekening"></small>
                                     </div>
                                     <div class="input-group input-group-static my-3">
-                                        <label for="nomor_rekening">Nama Debitur</label>
-                                        <input autocomplete="off" type="text" name="nomor_rekening" id="nomor_rekening" class="form-control" value="{{$nia->anggota->namadepan}}" disabled>
-                                        <small class="text-danger" id="msg_nomor_rekening"></small>
+                                        <label for="nama_debitur">Nama Debitur</label>
+                                        <input autocomplete="off" type="text" name="nama_debitur" id="nama_debitur" class="form-control" value="{{$nia->anggota->namadepan}}" disabled>
+                                        <small class="text-danger" id="msg_nama_debitur"></small>
                                     </div>
                                     <div class="input-group input-group-static my-3">
-                                        <label for="nomor_rekening">NIK</label>
-                                        <input autocomplete="off" type="text" name="nomor_rekening" id="nomor_rekening" class="form-control" value="{{$nia->anggota->nik}}" disabled>
-                                        <small class="text-danger" id="msg_nomor_rekening"></small>
+                                        <label for="nik">NIK</label>
+                                        <input autocomplete="off" type="text" name="nik" id="nik" class="form-control" value="{{$nia->anggota->nik}}" disabled>
+                                        <small class="text-danger" id="msg_nik"></small>
                                     </div>
                                     <div class="input-group input-group-static my-3">
-                                        <label for="nomor_rekening">TRANSAKSI SIMPANAN</label>
+                                        <label>TRANSAKSI SIMPANAN</label>
                                     </div>
                                     <div class="input-group input-group-static my-3">
-                                        <label for="tgl_buka_rekening">Tgl Transaksi</label>
-                                        <input autocomplete="off" type="text" name="tgl_buka_rekening" id="tgl_buka_rekening" class="form-control date" value="{{ date('d/m/Y') }}">
-                                        <small class="text-danger" id="msg_tgl_buka_rekening"></small>
+                                        <label for="tgl_transaksi">Tgl Transaksi</label>
+                                        <input autocomplete="off" type="text" name="tgl_transaksi" id="tgl_transaksi" class="form-control date" value="{{ date('d/m/Y') }}">
+                                        <small class="text-danger" id="msg_tgl_transaksi"></small>
                                     </div>
                                     <div class="input-group input-group-static my-3">
-                                        <label for="nomor_rekening">Jenis Mutasi</label>
+                                        <label>Jenis Mutasi</label>
                                         <div class="row">
                                             <div class="col-xs-1">
                                                 <div class="radio radio-success">
-                                                    <input type="radio" name="radio1" id="radio1" value="option1">
-                                                    <label for="radio1">Setor Tunai</label>
+                                                    <input type="radio" name="jenis_mutasi" id="setor_tunai" value="1">
+                                                    <label for="setor_tunai">Setor Tunai</label>
                                                 </div>
                                             </div>
                                             <div class="col-xs-1">
                                                 <div class="radio radio-danger">
-                                                    <input type="radio" name="radio1" id="radio2" value="option2">
-                                                    <label for="radio2">Tarik Tunai</label>
+                                                    <input type="radio" name="jenis_mutasi" id="tarik_tunai" value="2">
+                                                    <label for="tarik_tunai">Tarik Tunai</label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <small class="text-danger" id="msg_nomor_rekening"></small>
+                                        <small class="text-danger" id="msg_jenis_mutasi"></small>
                                     </div>
                                     <div class="input-group input-group-static my-3">
-                                        <label for="nomor_rekening">Jumlah (Rp.)</label>
-                                        <input autocomplete="off" type="text" name="nomor_rekening" id="nomor_rekening" class="form-control" value="">
-                                        <small class="text-danger" id="msg_nomor_rekening"></small>
+                                        <label for="jumlah">Jumlah (Rp.)</label>
+                                        <input autocomplete="off" type="text" name="jumlah" id="jumlah" class="form-control" value="">
+                                        <small class="text-danger" id="msg_jumlah"></small>
                                     </div>
-                                    <button class="btn btn-primary btn-sm float-end ms-2" onclick="window.open('/cetak_keterangan_lunas/" type="button">
+                                    <button id="simpanTransaksi" class="btn btn-primary btn-sm float-end ms-2" type="button">
                                         Simpan Transaksi
                                     </button>
                                 </div>
@@ -145,14 +145,16 @@
 </div>
 
 @endsection
+
 @section('script')
 <script>
 $(".date").flatpickr({
     dateFormat: "d/m/Y"
-})
+});
+
 $(document).ready(function() {
     var currentDate = new Date();
-    var currentMonth = currentDate.getMonth() + 1; 
+    var currentMonth = currentDate.getMonth() + 1;
     var currentYear = currentDate.getFullYear();
 
     $('#bulan').val(currentMonth);
@@ -178,6 +180,89 @@ $(document).ready(function() {
         var tahun = $('#tahun').val();
         tableTransaksi(bulan, tahun);
     });
+
+    $('#simpanTransaksi').click(function() {
+        var jenisMutasi = $('input[name="jenis_mutasi"]:checked').val();
+        var tglTransaksi = $('#tgl_transaksi').val();
+        var jumlah = $('#jumlah').val();
+        var nomorRekening = $('#nomor_rekening').val();
+        var namaDebitur = $('#nama_debitur').val();
+        var nia = '{{ $nia->id }}';
+
+        if (!jenisMutasi || !tglTransaksi || !jumlah) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Mohon lengkapi semua field.',
+            });
+            return;
+        }
+
+        Swal.fire({
+            title: 'Mohon menunggu',
+            text: 'Sedang memproses transaksi...',
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            willOpen: () => {
+                Swal.showLoading();
+            },
+        });
+
+        $.ajax({
+            url: '/simpanan/simpan-transaksi',
+            method: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                jenis_mutasi: jenisMutasi,
+                tgl_transaksi: tglTransaksi,
+                jumlah: jumlah,
+                nomor_rekening: nomorRekening,
+                nama_debitur: namaDebitur,
+                nia: nia
+            },
+            success: function(response) {
+                if (response.success) {
+                    Swal.close();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil',
+                        text: 'Transaksi ' + (jenisMutasi == '1' ? 'setor' : 'tarik') + ' berhasil disimpan',
+                        confirmButtonText: 'Oke'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            refreshTransaksiContainer();
+                            resetForm();
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal',
+                        text: 'Gagal menyimpan transaksi: ' + response.message,
+                    });
+                }
+            },
+            error: function(xhr, status, error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Terjadi kesalahan: ' + error,
+                });
+            }
+        });
+    });
+
+    function refreshTransaksiContainer() {
+        var bulan = $('#bulan').val();
+        var tahun = $('#tahun').val();
+        tableTransaksi(bulan, tahun);
+    }
+
+    function resetForm() {
+        $('input[name="jenis_mutasi"]').prop('checked', false);
+        $('#tgl_transaksi').val('');
+        $('#jumlah').val('');
+    }
 });
 </script>
 @endsection

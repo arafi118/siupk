@@ -45,4 +45,9 @@ class Transaksi extends Model
     {
         return $this->hasMany(Transaksi::class, 'idtp', 'idtp');
     }
+
+    public function simpanan()
+    {
+        return $this->belongsTo(Simpanan::class, 'id_simp', 'id');
+    }
 }

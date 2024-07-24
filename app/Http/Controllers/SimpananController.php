@@ -196,7 +196,37 @@ public function jenis_simpanan($id, Request $request)
         return view('simpanan.partials.cetak_koran')->with(compact('title', 'simpanan', 'kec'));
     }
 
+    public function simpanTransaksi(Request $request)
+{
+    $jenisMutasi = $request->jenis_mutasi;
+    $tglTransaksi = $request->tgl_transaksi;
+    $jumlah = $request->jumlah;
+    $nomorRekening = $request->nomor_rekening;
+    $namaDebitur = $request->nama_debitur;
+    $nia = $request->nia;
 
+    $jenisSimpanan = JenisSimpanan::where('id', substr($nomorRekening, 0, 1))->first();
+
+    $transaksi = new Transaksi();
+    $transaksi->tgl_transaksi = Tanggal::tglNasional($tglTransaksi);
+    $transaksi->rekening_debit = $jenisMutasi == '1' ? $jenisSimpanan->rek_kas : $jenisSimpanan->rek_simp;
+    $transaksi->rekening_kredit = $jenisMutasi == '1' ? $jenisSimpanan->rek_simp : $jenisSimpanan->rek_kas;
+    $transaksi->idtp = 0;
+    $transaksi->id_pinj = 0;
+    $transaksi->id_pinj_i = 0;
+    $transaksi->id_simp = $jenisMutasi == '1' ? "2-{$nia}" : "3-{$nia}";
+    $transaksi->keterangan_transaksi = $jenisMutasi == '1' ? "Setor Tunai Rekening {$nomorRekening}" : "Tarik Tunai Rekening {$nomorRekening}";
+    $transaksi->relasi = $namaDebitur;
+    $transaksi->jumlah = $jumlah;
+    $transaksi->urutan = 0;
+    $transaksi->id_user = auth()->user()->id;
+
+    if ($transaksi->save()) {
+        return response()->json(['success' => true]);
+    } else {
+        return response()->json(['success' => false, 'message' => 'Gagal menyimpan transaksi']);
+    }
+}
 
 
 

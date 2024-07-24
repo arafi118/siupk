@@ -361,6 +361,8 @@ Route::get('/cetak_kop/{simpanan}', [SimpananController::class, 'kop'])->middlew
  
 Route::get('/cetak_koran/{simpanan}', [SimpananController::class, 'koran'])->middleware('auth');
 
-Route::get('/simpanan/get-transaksi', [SimpananController::class, 'getTransaksi'])->name('simpanan.getTransaksi');
- 
+Route::get('/simpanan/get-transaksi', [SimpananController::class, 'getTransaksi'])->middleware('auth');
+
+Route::post('/simpanan/simpan-transaksi', [SimpananController::class, 'simpanTransaksi']);
+
 Route::get('/{invoice}', [PelaporanController::class, 'invoice']);

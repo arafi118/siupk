@@ -20,7 +20,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="keywords" content="upk, online, siupk, upk online, siupk online, asta brata teknologi, abt">
     <meta name="author" content="Enfii">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="apple-touch-icon" sizes="76x76" href="{{ Session::get('icon') }}">
     <link rel="icon" type="image/png" href="{{ Session::get('icon') }}">
     <title>
@@ -216,6 +217,8 @@
     </form>
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
