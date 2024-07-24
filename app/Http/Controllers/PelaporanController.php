@@ -17,6 +17,7 @@ use App\Models\Kelompok;
 use App\Models\Lkm;
 use App\Models\PinjamanKelompok;
 use App\Models\PinjamanIndividu;
+use App\Models\PinjamanAnggota;
 use App\Models\Rekening;
 use App\Models\SubLaporan;
 use App\Models\Saldo;
@@ -2084,7 +2085,7 @@ for ($s = 1; $s <= $jsaham; $s++) {
         $data['sub_judul'] = $hari . ' ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         $data['tgl'] = Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
 
-        $data['pinjaman'] = PinjamanKelompok::where('status', 'A')->whereDay('tgl_cair', date('d', strtotime($tgl)))->with([
+        $data['pinjaman'] = PinjamanAnggota::where('status', 'A')->whereDay('tgl_cair', date('d', strtotime($tgl)))->with([
             'target' => function ($query) use ($tgl) {
                 $query->where([
                     ['jatuh_tempo', $tgl],
@@ -2094,8 +2095,8 @@ for ($s = 1; $s <= $jsaham; $s++) {
             'saldo' => function ($query) use ($tgl) {
                 $query->where('tgl_transaksi', '<=', $tgl);
             },
-            'kelompok',
-            'kelompok.d'
+            'anggota',
+            'anggota.d'
         ])->get();
 
         $view = view('pelaporan.view.perkembangan_piutang.jatuh_tempo', $data)->render();
