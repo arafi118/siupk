@@ -33,9 +33,71 @@
         </div>
         <div class="col-md-4">
             <div class="position-relative mb-3">
+                <label for="nama_pangilan">Nama Pangilan</label>
+                <input autocomplete="off" type="text" name="nama_pangilan" id="nama_pangilan" class="form-control">
+                <small class="text-danger" id="msg_nama_pangilan"></small>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="position-relative mb-3">
+                <label for="tempat_lahir">Tempat Lahir</label>
+                <input autocomplete="off" type="text" name="tempat_lahir" id="tempat_lahir" class="form-control"
+                    value="">
+                <small class="text-danger" id="msg_tempat_lahir"></small>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="position-relative mb-3">
+                <label for="tgl_lahir">Tgl Lahir</label>
+                <input autocomplete="off" type="text" name="tgl_lahir" id="tgl_lahir"
+                        class="form-control date" value="{{ date('d/m/Y') }}">
+                        <small class="text-danger" id="msg_tgl_lahir"></small>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="position-relative mb-3">
+                <label for="jenis_kelamin">Jenis Kelamin</label>
+                <select class="js-select-2 form-control" name="jenis_kelamin" id="jenis_kelamin">
+                    <option>Pilih Jenis Kelamin</option>
+                    <option {{ $jk_dipilih == 'L' ? 'selected' : '' }} value="L">Laki Laki</option>
+                    <option {{ $jk_dipilih == 'P' ? 'selected' : '' }} value="P">Perempuan</option>
+                </select>
+                <small class="text-danger" id="msg_desa"></small>
+            </div>
+        </div>        
+        <div class="col-md-4">
+            <div class="position-relative mb-3">
+                <label for="no_kk">No. KK</label>
+                <input autocomplete="off" type="text" name="no_kk" id="no_kk" class="form-control"
+                    value="{{ substr($nik, 0, 6) }}">
+                <small class="text-danger" id="msg_no_kk"></small>
+            </div>
+        </div>      
+    </div> 
+    <div class="row">
+        <div class="col-md-4">
+            <div class="position-relative mb-3">
+                <label for="alamat">Alamat KTP</label>
+                <input autocomplete="off" maxlength="16" type="text" name="alamat" id="alamat" class="form-control"
+                    value="">
+                <small class="text-danger" id="msg_alamat"></small>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="position-relative mb-3">
+                <label for="domisi">Domisi saat ini</label>
+                <input autocomplete="off" type="text" name="domisi" id="domisi" class="form-control">
+                <small class="text-danger" id="msg_domisi"></small>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="position-relative mb-3">
                 <label for="jenis_usaha" for="desa">Desa/Kelurahan</label>
-                <select class="form-control" name="desa" id="desa">
+                <select class="js-select-2 form-control" name="desa" id="desa">
                     @foreach ($desa as $ds)
+                        <option>Pilih Desa/Kelurahan</option>
                         <option {{ $desa_dipilih == $ds->kd_desa ? 'selected' : '' }} value="{{ $ds->kd_desa }}">
                             {{ $ds->sebutan_desa->sebutan_desa }} {{ $ds->nama_desa }}
                         </option>
@@ -47,59 +109,74 @@
     </div>
     <div class="row">
         <div class="col-md-4">
-            <div class="my-2">
-                <label class="form-label" for="jenis_kelamin">Tempat Lahir</label>
-                <input autocomplete="off" type="text" name="tempat_lahir" id="tempat_lahir"
-                            class="form-control">
-                        <small class="text-danger" id="msg_tempat_lahir"></small>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="my-2">
-                <label class="form-label" for="jenis_kelamin">Tgl Lahir</label>
-                <input autocomplete="off" type="text" name="tgl_lahir" id="tgl_lahir"
-                            class="form-control date"  value="{{ date('d/m/Y') }}">
-                        <small class="text-danger" id="msg_tgl_lahir"></small>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="my-2">
-                <label class="form-label" for="jenis_kelamin">Jenis Kelamin</label>
-                <select class="form-control" name="jenis_kelamin" id="jenis_kelamin">
-                    <option {{ $jk_dipilih == 'L' ? 'selected' : '' }} value="L">Laki Laki</option>
-                    <option {{ $jk_dipilih == 'P' ? 'selected' : '' }} value="P">Perempuan</option>
+            <div class="position-relative mb-3">
+                <label for="agama">Agama</label>
+                <select class="js-select-2 form-control" name="agama" id="agama" class="form-control">
+                    <option value="">Pilih Agama</option>
+                    <option value="islam">Islam</option>
+                    <option value="kristen_protestan">Kristen Protestan</option>
+                    <option value="kristen_katolik">Kristen Katolik</option>
+                    <option value="hindu">Hindu</option>
+                    <option value="buddha">Buddha</option>
+                    <option value="konghucu">Konghucu</option>
                 </select>
-                <small class="text-danger" id="msg_desa"></small>
+                <small class="text-danger" id="msg_agama"></small>
             </div>
         </div>
+        
+        <div class="col-md-2">
+            <div class="position-relative mb-3">
+                <label for="pendidikan">Pendidikan</label>
+                <select class="js-select-2 form-control" name="pendidikan" id="pendidikan" class="form-control">
+                    <option value="">Pilih Pendidikan</option>
+                    <option value="sd_mi">SD/MI Sederajat</option>
+                    <option value="smp_mts">SMP/MTs Sederajat</option>
+                    <option value="sma_smk_ma">SMA/SMK/MA Sederajat</option>
+                    <option value="diploma_1">Diploma 1 (D1)</option>
+                    <option value="diploma_2">Diploma 2 (D2)</option>
+                    <option value="diploma_3">Diploma 3 (D3)</option>
+                    <option value="sarjana">Sarjana (S1)</option>
+                    <option value="magister">Magister (S2)</option>
+                    <option value="doktor">Doktor (S3)</option>
+                </select>
+                <small class="text-danger" id="msg_pendidikan"></small>
+            </div>
+        </div>
+        
+        <div class="col-md-2">
+            <div class="position-relative mb-3">
+                <label for="status_pernikahan">Status Pernikahan</label>
+                <select class="js-select-2 form-control" name="status_pernikahan" id="status_pernikahan" class="form-control">
+                    <option value="">Pilih Status Pernikahan</option>
+                    <option value="lajang">Lajang</option>
+                    <option value="menikah">Menikah</option>
+                </select>
+                <small class="text-danger" id="msg_status_pernikahan"></small>
+            </div>
+        </div>
+        
         <div class="col-md-4">
-            <div class="my-2">
-                <label class="form-label" for="hubungan">Hubungan</label>
-                <select class="form-control" name="hubungan" id="hubungan">
-                    @foreach ($hubungan as $hb)
-                        <option {{ $hubungan_dipilih == $hb->id ? 'selected' : '' }} value="{{ $hb->id }}">
-                            {{ $hb->kekeluargaan }}
-                        </option>
-                    @endforeach
-                </select>
-                <small class="text-danger" id="msg_desa"></small>
+            <div class="position-relative mb-3">
+                <label for="no_telp">No. Telp</label>
+                <input autocomplete="off" type="text" name="no_telp" id="no_telp" class="form-control"
+                    value="+62">
+                <small class="text-danger" id="msg_no_telp"></small>
             </div>
-        </div>
+        </div> 
     </div>
     <div class="row">
         <div class="col-md-4">
             <div class="position-relative mb-3">
-                <label for="alamat">Alamat</label>
-                <input autocomplete="off" type="text" name="alamat" id="alamat" class="form-control">
-                <small class="text-danger" id="msg_alamat"></small>
+                <label for="nama_ibu">Nama Ibu Kandung</label>
+                <input autocomplete="off" type="text" name="nama_ibu" id="nama_ibu" class="form-control">
+                <small class="text-danger" id="msg_nama_ibu"></small>
             </div>
         </div>
         <div class="col-md-4">
             <div class="position-relative mb-3">
-                <label for="no_kk">No. KK</label>
-                <input autocomplete="off" type="text" name="no_kk" id="no_kk" class="form-control"
-                    value="{{ substr($nik, 0, 6) }}">
-                <small class="text-danger" id="msg_no_kk"></small>
+                <label for="tempat_kerja">Alamat Tempat Kerja</label>
+                <input autocomplete="off" type="text" name="tempat_kerja" id="tempat_kerja" class="form-control">
+                <small class="text-danger" id="msg_tempat_kerja"></small>
             </div>
         </div>
         <div class="col-md-4">
@@ -110,7 +187,6 @@
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-4">
             <div class="position-relative mb-3">
@@ -127,12 +203,17 @@
                 <small class="text-danger" id="msg_penjamin"></small>
             </div>
         </div>
-        <div class="col-md-4">
+         <div class="col-md-4">
             <div class="position-relative mb-3">
-                <label for="no_telp">No. Telp</label>
-                <input autocomplete="off" type="text" name="no_telp" id="no_telp" class="form-control"
-                    value="628">
-                <small class="text-danger" id="msg_no_telp"></small>
+                <label for="hubungan">Hubungan</label>
+                <select class="form-control" name="hubungan" id="hubungan">
+                    @foreach ($hubungan as $hb)
+                        <option {{ $hubungan_dipilih == $hb->id ? 'selected' : '' }} value="{{ $hb->id }}">
+                            {{ $hb->kekeluargaan }}
+                        </option>
+                    @endforeach
+                </select>
+                <small class="text-danger" id="msg_desa"></small>
             </div>
         </div>
     </div>
@@ -141,7 +222,9 @@
 </form>
 
 <script>
-   
+   $('.js-select-2').select2({
+        theme: 'bootstrap-5'
+        });
 
    $('.date').datepicker({
         dateFormat: 'dd/mm/yy'

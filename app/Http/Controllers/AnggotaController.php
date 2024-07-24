@@ -144,17 +144,24 @@ class AnggotaController extends Controller
         $data = $request->only([
             'nik',
             'nama_lengkap',
+            'nama_pangilan',
             'desa',
             'tempat_lahir',
             'tgl_lahir',
             'jenis_kelamin',
             'no_telp',
+            'agama',
+            'pendidikan',
+            'status_pernikahan',
             'alamat',
+            'domisi',
             'no_kk',
             'jenis_usaha',
             'nik_penjamin',
             'penjamin',
-            'hubungan'
+            'hubungan',
+            'nama_ibu',
+            'tempat_kerja'
         ]);
 
 
@@ -162,17 +169,24 @@ class AnggotaController extends Controller
         $rules = [
             'nik' => 'required|unique:anggota_' . Session::get('lokasi') . ',nik|min:16|max:16',
             'nama_lengkap' => 'required',
+            'nama_pangilan' => 'required',
             'desa' => 'required',
             'tempat_lahir' => 'required',
             'tgl_lahir' => 'required',
             'jenis_kelamin' => 'required',
             'no_telp' => 'required',
+            'agama' => 'required',
+            'pendidikan' => 'required',
+            'status_pernikahan' => 'required',
             'alamat' => 'required',
+            'domisi' => 'required',
             'no_kk' => 'required',
             'jenis_usaha' => 'required',
             'nik_penjamin' => 'required|max:16',
             'penjamin' => 'required',
-            'hubungan' => 'required'
+            'hubungan' => 'required',
+            'nama_ibu' => 'required',
+            'tempat_kerja' => 'required'
         ];
 
         if (strlen($request->no_kk) >= 16) {
@@ -188,17 +202,24 @@ class AnggotaController extends Controller
         $insert = [
             'nik' => $request->nik,
             'namadepan' => $request->nama_lengkap,
+            'nama_pangilan' => $request->nama_pangilan,
             'jk' => $request->jenis_kelamin,
             'tempat_lahir' => $request->tempat_lahir,
             'tgl_lahir' => Tanggal::tglNasional($request->tgl_lahir),
             'alamat' => $request->alamat,
+            'domisi' => $request->domisi,
             'desa' => $request->desa,
             'lokasi' => Session::get('lokasi'),
             'hp' => $request->no_telp,
+            'agama' => $request->agama,
+            'pendidikan' => $request->pendidikan,
+            'status_pernikahan' => $request->status_pernikahan,
             'kk' => $request->no_kk,
             'nik_penjamin' => $request->nik_penjamin,
             'penjamin' => $request->penjamin,
             'hubungan' => $request->hubungan,
+            'nama_ibu' => $request->nama_ibu,
+            'tempat_kerja' => $request->tempat_kerja,
             'usaha' => $request->jenis_usaha,
             'foto' => '1',
             'terdaftar' => date('Y-m-d'),
@@ -256,32 +277,46 @@ class AnggotaController extends Controller
         $data = $request->only([
             'nik',
             'nama_lengkap',
+            'nama_pangilan',
             'desa',
             'tempat_lahir',
             'tgl_lahir',
             'jenis_kelamin',
             'no_telp',
+            'agama',
+            'pendidikan',
+            'status_pernikahan',
             'alamat',
+            'domisi',
             'no_kk',
             'jenis_usaha',
             'nik_penjamin',
             'penjamin',
-            'hubungan'
+            'hubungan',
+            'nama_ibu',
+            'tempat_kerja'
         ]);
 
         $rules = [
             'nama_lengkap' => 'required',
+            'nama_pangilan' => 'required',
             'desa' => 'required',
             'tempat_lahir' => 'required',
             'tgl_lahir' => 'required',
             'jenis_kelamin' => 'required',
             'no_telp' => 'required',
+            'agama' => 'required',
+            'pendidikan' => 'required',
+            'status_pernikahan' => 'required',
             'alamat' => 'required',
+            'domisi' => 'required',
             'no_kk' => 'required',
             'jenis_usaha' => 'required',
             'nik_penjamin' => 'required|max:16',
             'penjamin' => 'required',
-            'hubungan' => 'required'
+            'hubungan' => 'required',
+            'nama_ibu' => 'required',
+            'tempat_kerja' => 'required'
         ];
 
         if ($request->nik != $penduduk->nik) {
@@ -304,17 +339,24 @@ class AnggotaController extends Controller
         $update = [
             'nik' => $request->nik,
             'namadepan' => $request->nama_lengkap,
+            'nama_pangilan' => $request->nama_pangilan,
             'jk' => $request->jenis_kelamin,
             'tempat_lahir' => $request->tempat_lahir,
             'tgl_lahir' => Tanggal::tglNasional($request->tgl_lahir),
             'alamat' => $request->alamat,
+            'domisi' => $request->domisi,
             'desa' => $request->desa,
             'lokasi' => Session::get('lokasi'),
             'hp' => $request->no_telp,
+            'agama' => $request->agama,
+            'pendidikan' => $request->pendidikan,
+            'status_pernikahan' => $request->status_pernikahan,
             'kk' => $request->no_kk,
             'nik_penjamin' => $request->nik_penjamin,
             'penjamin' => $request->penjamin,
             'hubungan' => $request->hubungan,
+            'nama_ibu' => $request->nama_ibu,
+            'tempat_kerja' => $request->tempat_kerja,
             'usaha' => $request->jenis_usaha,
             'foto' => '1',
             'terdaftar' => date('Y-m-d'),

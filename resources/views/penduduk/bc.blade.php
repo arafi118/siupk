@@ -130,7 +130,7 @@
                                         <div class="position-relative mb-3">
                                             <label for="agama">Agama</label>
                                             <select class="js-select-2 form-control" name="agama" id="agama" class="form-control">
-                                                <option value="{{$penduduk->agama}}">{{ $penduduk->agama}}</option>
+                                                <option value="">{{ $penduduk->agama}}</option>
                                                 <option value="islam">Islam</option>
                                                 <option value="kristen_protestan">Kristen Protestan</option>
                                                 <option value="kristen_katolik">Kristen Katolik</option>
@@ -146,7 +146,7 @@
                                         <div class="position-relative mb-3">
                                             <label for="pendidikan">Pendidikan</label>
                                             <select class="js-select-2 form-control" name="pendidikan" id="pendidikan" class="form-control">
-                                                <option value="{{ $penduduk->pendidikan}}">{{ $penduduk->pendidikan}}</option>
+                                                <option value="">{{ $penduduk->pendidikan}}</option>
                                                 <option value="sd_mi">SD/MI Sederajat</option>
                                                 <option value="smp_mts">SMP/MTs Sederajat</option>
                                                 <option value="sma_smk_ma">SMA/SMK/MA Sederajat</option>
@@ -165,7 +165,7 @@
                                         <div class="position-relative mb-3">
                                             <label for="status_pernikahan">Status Pernikahan</label>
                                             <select class="js-select-2 form-control" name="status_pernikahan" id="status_pernikahan" class="form-control">
-                                                <option value="{{ $penduduk->status_pernikahan}}">{{ $penduduk->status_pernikahan}}</option>
+                                                <option value="">{{ $penduduk->status_pernikahan}}</option>
                                                 <option value="lajang">Lajang</option>
                                                 <option value="menikah">Menikah</option>
                                             </select>
@@ -355,9 +355,9 @@
 @section('script')
     <script>
     
-    $('.js-select-2').select2({
-        theme: 'bootstrap-5'
-        });
+        $('.js-example-basic-single').select2({
+            theme: 'bootstrap-5'
+            });
         
     $('.date').datepicker({
             dateFormat: 'dd/mm/yy'
