@@ -10,7 +10,8 @@
 
     <meta name="description" content="Sistem Informasi Unit Pengelola Kegiatan Berbasis Web">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="keywords" content="lkm, situnai, upk, online, siupk, upk online, siupk online, asta brata teknologi, abt">
+    <meta name="keywords"
+        content="lkm, situnai, upk, online, siupk, upk online, siupk online, asta brata teknologi, abt">
     <meta name="author" content="Enfii">
     <link rel="apple-touch-icon" sizes="76x76" href="{{ Session::get('icon') }}">
     <link rel="icon" type="image/png" href="{{ Session::get('icon') }}">
@@ -24,10 +25,12 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" />
 
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -64,25 +67,27 @@
         .search-wrapper .input-holder {
             overflow: unset !important;
         }
-        
+
         .dataTables_filter {
             display: flex;
-            justify-content: flex-end; 
+            justify-content: flex-end;
         }
 
         .dataTables_filter label {
             display: flex !important;
             align-items: center;
             width: 200px;
-            gap: 10px; /* Tambahkan jarak antara label dan input */
+            gap: 10px;
+            /* Tambahkan jarak antara label dan input */
         }
 
         .badge-light-blue {
             background-color: #00c8ffc8 !important;
             /* Warna biru muda */
-            color: rgb(0, 4, 255) !important; 
+            color: rgb(0, 4, 255) !important;
             /* Warna teks */
         }
+
         .badge-light-reed {
             background-color: #ff00007c !important;
             /* Warna biru muda */
@@ -102,11 +107,11 @@
 
         .modal-open .select2-dropdown {
             z-index: 10060;
-            }
+        }
 
-            .modal-open .select2-close-mask {
+        .modal-open .select2-close-mask {
             z-index: 10055;
-            }
+        }
 
         .angka-warna-merah {
             background-color: rgba(255, 47, 0, 0.434) !important;
@@ -126,7 +131,7 @@
             float: right;
             /* Posisikan elemen di sebelah kanan */
             /* Tambahan gaya lainnya sesuai kebutuhan */
-        }       
+        }
     </style>
 
 </head>
@@ -550,7 +555,6 @@
                                 ©
                                 <script>
                                     document.write(new Date().getFullYear())
-
                                 </script>,
                                 made with <i class="fa fa-heart"></i> by
                                 <a href="https://abt.co.id" class="font-weight-bold" target="_blank">
@@ -579,211 +583,155 @@
         @csrf
     </form>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
-<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 
-<script src="/assets/js/core/popper.min.js"></script>
-<script src="/assets/js/core/bootstrap.min.js"></script>
-<script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
-<script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
-<script src="/assets/js/plugins/choices.min.js"></script>
-<script src="/assets/js/plugins/chartjs.min.js"></script>
-<script src="/assets/js/html5-qrcode.js?v=1716515606"></script>
-{{-- <script src="http://siupk.test/vendor/tinymce/tinymce.min.js"></script> --}}
-<script src="{{ asset('vendor/tinymce/tinymce.min.js') }}"></script>
-<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+    <script src="/assets/js/core/popper.min.js"></script>
+    <script src="/assets/js/core/bootstrap.min.js"></script>
+    <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="/assets/js/plugins/choices.min.js"></script>
+    <script src="/assets/js/plugins/chartjs.min.js"></script>
+    <script src="/assets/js/html5-qrcode.js?v=1716515606"></script>
+    <script src="{{ asset('vendor/tinymce/tinymce.min.js') }}"></script>
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js">
-<script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"
-    integrity="sha512-Rdk63VC+1UYzGSgd3u2iadi0joUrcwX0IWp2rTh6KXFoAmgOjRS99Vynz1lJPT8dLjvo6JZOqpAHJyfCEZ5KoA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
-    integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="//cdn.quilljs.com/1.3.7/quill.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"
+        integrity="sha512-Rdk63VC+1UYzGSgd3u2iadi0joUrcwX0IWp2rTh6KXFoAmgOjRS99Vynz1lJPT8dLjvo6JZOqpAHJyfCEZ5KoA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
+        integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="//cdn.quilljs.com/1.3.7/quill.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
-@yield('script')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
 
-<script>
-    var formatter = new Intl.NumberFormat('en-US', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-    })
+    @yield('script')
 
-    window.paceOptions = {
-        ajax: true,
-        document: false,
-        eventLag: false,
-        elements: {
-            selectors: ['.g-sidenav-show']
+    <script>
+        var formatter = new Intl.NumberFormat('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        })
+
+        window.paceOptions = {
+            ajax: true,
+            document: false,
+            eventLag: false,
+            elements: {
+                selectors: ['.g-sidenav-show']
+            }
         }
-    }
 
+        $('#cariAnggota').typeahead({
+            source: function(query, process) {
+                var states = [];
+                return $.get('/perguliran/cari_anggota', {
+                    query: query
+                }, function(result) {
+                    var resultList = result.map(function(item) {
+                        states.push({
+                            "id": item.id,
+                            "name": item.namadepan +
+                                ' [' + item.nama_desa + ']' +
+                                ' [' + item.nik + ']',
+                            "value": item.id
+                        });
+                    });
 
-    function makeChart(id, target, sisa_saldo, sum_saldo) {
-        window[id] = new Chart(target, {
-            type: 'doughnut',
-            data: {
-                labels: [
-                    'Sisa Saldo',
-                    'Total Pengembalian'
-                ],
-                datasets: [{
-                    label: 'My First Dataset',
-                    data: [sisa_saldo, sum_saldo],
-                    backgroundColor: [
-                        '#e3316e',
-                        '#3A416F'
-                    ],
-                    hoverOffset: 4
-                }]
+                    return process(states);
+                })
             },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+            afterSelect: function(item) {
+                var path = '{{ Request::path() }}'
+                if (path == 'transaksi/jurnal_angsuran_individu') {
+                    $.get('/transaksi/form_angsuran_individu/' + item.id, function(result) {
+                        var ch_pokok = document.getElementById('chartP').getContext("2d");
+                        var ch_jasa = document.getElementById('chartJ').getContext("2d");
+
+                        angsuran(true, result)
+
+                        makeChart('pokok', ch_pokok, result.sisa_pokok, result.sum_pokok)
+                        makeChart('jasa', ch_jasa, result.sisa_jasa, result.sum_jasa)
+
+                        $('#loan-id').html(item.id)
+                    })
+                } else {
+                    window.location.href = '/transaksi/jurnal_angsuran_individu?pinkel=' + item.id
                 }
             }
-        })
-    }
+        });
 
-    
-    function angsuran(destroy = false, result) {
-        $('#pokok').val(formatter.format(result.saldo_pokok))
-        $('#jasa').val(formatter.format(result.saldo_jasa))
-        $('#id').val(result.pinkel.id)
-
-        $('#_pokok').val(result.sisa_pokok)
-        $('#_jasa').val(result.sisa_jasa)
-
-        var ch_pokok = document.getElementById('chartP').getContext("2d");
-        var ch_jasa = document.getElementById('chartJ').getContext("2d");
-
-        if (destroy) {
-            if (pokok) {
-                pokok.destroy()
-            }
-
-            if (jasa) {
-                jasa.destroy()
-            }
+        function makeChart(id, target, sisa_saldo, sum_saldo) {
+            window[id] = new Chart(target, {
+                type: 'doughnut',
+                data: {
+                    labels: [
+                        'Sisa Saldo',
+                        'Total Pengembalian'
+                    ],
+                    datasets: [{
+                        label: 'My First Dataset',
+                        data: [sisa_saldo, sum_saldo],
+                        backgroundColor: [
+                            '#e3316e',
+                            '#3A416F'
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            })
         }
 
-        $('#alokasi_pokok').html("Rp. " + formatter.format(result.alokasi_pokok))
-        $('#alokasi_jasa').html("Rp. " + formatter.format(result.alokasi_jasa))
 
-        $('#pokok,#jasa,#denda').trigger('change')
-    }
+        function angsuran(destroy = false, result) {
+            $('#pokok').val(formatter.format(result.saldo_pokok))
+            $('#jasa').val(formatter.format(result.saldo_jasa))
+            $('#id').val(result.pinkel.id)
 
-    function open_window(link) {
-        return window.open(link)
-    }
+            $('#_pokok').val(result.sisa_pokok)
+            $('#_jasa').val(result.sisa_jasa)
 
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-    })
+            var ch_pokok = document.getElementById('chartP').getContext("2d");
+            var ch_jasa = document.getElementById('chartJ').getContext("2d");
 
-    $('#logout').click(function (e) {
-        e.preventDefault()
+            if (destroy) {
+                if (pokok) {
+                    pokok.destroy()
+                }
 
-        Swal.fire({
-            title: 'Logout',
-            text: 'Dengan klik tombol logout maka anda tidak bisa membuka halaman ini lagi sebelum melakukan login ulang, Logout?',
-            showCancelButton: true,
-            confirmButtonText: 'Logout',
-            cancelButtonText: 'Batal',
-            icon: 'info'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $('#formLogout').submit()
+                if (jasa) {
+                    jasa.destroy()
+                }
             }
-        })
-    })
 
-    $('#btnLaporanPelunasan').click(function (e) {
-        e.preventDefault()
+            $('#alokasi_pokok').html("Rp. " + formatter.format(result.alokasi_pokok))
+            $('#alokasi_jasa').html("Rp. " + formatter.format(result.alokasi_jasa))
 
-        $('input#laporan').val('pelunasan')
-        $('#FormLaporanSisipan').submit()
-    })
-
-    $('#btnInvoiceTs').click(function (e) {
-        e.preventDefault()
-
-        window.open('/pelaporan/ts')
-    })
-
-    $('#btnLaporanMou').click(function (e) {
-        e.preventDefault()
-
-        window.open('/pelaporan/mou')
-    })
-
-</script>
-
-<script>
-    tinymce.init({
-        selector: '.tiny-mce-editor',
-        plugins: 'table visualblocks fullscreen',
-        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | align | table fullscreen | removeformat',
-        font_family_formats: 'Arial=arial,helvetica,sans-serif; Courier New=courier new,courier,monospace;',
-        tinycomments_mode: 'embedded',
-        tinycomments_author: 'ARAFII'
-    });
-
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-        var options = {
-            damping: '0.5'
+            $('#pokok,#jasa,#denda').trigger('change')
         }
-        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
 
-    function Toastr(icon, text) {
-        font = "1.2rem Nimrod MT";
+        function open_window(link) {
+            return window.open(link)
+        }
 
-        canvas = document.createElement("canvas");
-        context = canvas.getContext("2d");
-        context.font = font;
-        width = context.measureText(text).width;
-        formattedWidth = Math.ceil(width) + 100;
-
-        Toast.fire({
-            icon: icon,
-            title: text,
-            width: formattedWidth
-        })
-    }
-
-    function MultiToast(icon, text) {
-        font = "1.2rem Nimrod MT";
-
-        canvas = document.createElement("canvas");
-        context = canvas.getContext("2d");
-        context.font = font;
-        width = context.measureText(text).width;
-        formattedWidth = Math.ceil(width) + 100;
-
-        let MultiToast = Swal.mixin({
+        const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
@@ -795,19 +743,110 @@
             }
         })
 
-        MultiToast.fire({
-            icon: icon,
-            title: text,
-            width: formattedWidth
+        $('#logout').click(function(e) {
+            e.preventDefault()
+
+            Swal.fire({
+                title: 'Logout',
+                text: 'Dengan klik tombol logout maka anda tidak bisa membuka halaman ini lagi sebelum melakukan login ulang, Logout?',
+                showCancelButton: true,
+                confirmButtonText: 'Logout',
+                cancelButtonText: 'Batal',
+                icon: 'info'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#formLogout').submit()
+                }
+            })
         })
-    }
 
-</script>
+        $('#btnLaporanPelunasan').click(function(e) {
+            e.preventDefault()
+
+            $('input#laporan').val('pelunasan')
+            $('#FormLaporanSisipan').submit()
+        })
+
+        $('#btnInvoiceTs').click(function(e) {
+            e.preventDefault()
+
+            window.open('/pelaporan/ts')
+        })
+
+        $('#btnLaporanMou').click(function(e) {
+            e.preventDefault()
+
+            window.open('/pelaporan/mou')
+        })
+    </script>
+
+    <script>
+        tinymce.init({
+            selector: '.tiny-mce-editor',
+            plugins: 'table visualblocks fullscreen',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | align | table fullscreen | removeformat',
+            font_family_formats: 'Arial=arial,helvetica,sans-serif; Courier New=courier new,courier,monospace;',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'ARAFII'
+        });
+
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+
+        function Toastr(icon, text) {
+            font = "1.2rem Nimrod MT";
+
+            canvas = document.createElement("canvas");
+            context = canvas.getContext("2d");
+            context.font = font;
+            width = context.measureText(text).width;
+            formattedWidth = Math.ceil(width) + 100;
+
+            Toast.fire({
+                icon: icon,
+                title: text,
+                width: formattedWidth
+            })
+        }
+
+        function MultiToast(icon, text) {
+            font = "1.2rem Nimrod MT";
+
+            canvas = document.createElement("canvas");
+            context = canvas.getContext("2d");
+            context.font = font;
+            width = context.measureText(text).width;
+            formattedWidth = Math.ceil(width) + 100;
+
+            let MultiToast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            MultiToast.fire({
+                icon: icon,
+                title: text,
+                width: formattedWidth
+            })
+        }
+    </script>
 
 
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-<script async src="/assets/js/material-dashboard.min.js?v=1716515606"></script>
-@if (session('pesan'))
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script async src="/assets/js/material-dashboard.min.js?v=1716515606"></script>
+    @if (session('pesan'))
         <script>
             Toastr('success', "{{ session('pesan') }}")
         </script>

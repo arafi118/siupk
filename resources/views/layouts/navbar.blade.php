@@ -15,20 +15,8 @@
         $jumlah += 1;
     }
 
-    $path = explode('/', Request::path());
-    $show = ((in_array('perguliran', $path)
-                ? true
-                : in_array('detail', $path))
-            ? true
-            : in_array('kelompok', $path))
-        ? true
-        : false;
-    $id_search = 'cariKelompok';
-    $label = 'Pelanggan';
-    if (in_array('jurnal_angsuran_individu', $path)) {
-        $id_search = 'cariAnggota';
-        $label = 'Individu (NIK/Nama Peminjam)';
-    }
+    $id_search = 'cariAnggota';
+    $label = 'Individu (NIK/Nama Peminjam)';
 @endphp
 <div class="app-header header-shadow">
     <div class="app-header__logo">
@@ -68,13 +56,14 @@
         <div class="app-header-left">
             <div class="search-wrapper">
                 <div class="input-holder">
-                    <input id="{{ $id_search }}" type="text" class="search-input" placeholder="{{ $label }}" autocomplete="off">
+                    <input id="{{ $id_search }}" type="text" class="search-input"
+                        placeholder="{{ $label }}" autocomplete="off">
                     <button class="search-icon"><span></span></button>
                 </div>
                 <button class="btn-close"></button>
             </div>
-                      
-            
+
+
         </div>
         <div class="app-header-right">
             <div class="header-btn-lg pe-0">
@@ -91,14 +80,21 @@
                                 </a>
                                 <div tabindex="-1" role="menu" aria-hidden="true"
                                     class="dropdown-menu dropdown-menu-right">
-                                    
-                                    <button type="button" tabindex="0" class="dropdown-item" id="btnAcount"><i class="pe-7s-users">&nbsp;</i>&nbsp;Account</button>
-                                    <button type="button" tabindex="0" class="dropdown-item" id="btnLaporanPelunasan"><i class="pe-7s-cloud-download">&nbsp;</i>&nbsp;Reminder</button>
-                                    <button type="button" tabindex="0" class="dropdown-item" id="btnInvoiceTs"><i class="pe-7s-monitor">&nbsp;</i>&nbsp;TS dan Invoice</button>
-                                    <button type="button" tabindex="0" class="dropdown-item"><i class="pe-7s-mail">&nbsp;</i>&nbsp;Maintenance dan Server</button>
-                                    <button type="button" tabindex="0" class="dropdown-item" id="btnLaporanMou"><i class="pe-7s-comment">&nbsp;</i>&nbsp;MoU</button>
+
+                                    <button type="button" tabindex="0" class="dropdown-item" id="btnAcount"><i
+                                            class="pe-7s-users">&nbsp;</i>&nbsp;Account</button>
+                                    <button type="button" tabindex="0" class="dropdown-item"
+                                        id="btnLaporanPelunasan"><i
+                                            class="pe-7s-cloud-download">&nbsp;</i>&nbsp;Reminder</button>
+                                    <button type="button" tabindex="0" class="dropdown-item" id="btnInvoiceTs"><i
+                                            class="pe-7s-monitor">&nbsp;</i>&nbsp;TS dan Invoice</button>
+                                    <button type="button" tabindex="0" class="dropdown-item"><i
+                                            class="pe-7s-mail">&nbsp;</i>&nbsp;Maintenance dan Server</button>
+                                    <button type="button" tabindex="0" class="dropdown-item" id="btnLaporanMou"><i
+                                            class="pe-7s-comment">&nbsp;</i>&nbsp;MoU</button>
                                     <div tabindex="-1" class="dropdown-divider"></div>
-                                    <button type="button" tabindex="0" class="dropdown-item" id="logout"><i class="pe-7s-next-2">&nbsp;</i>&nbsp;Logout</button>
+                                    <button type="button" tabindex="0" class="dropdown-item" id="logout"><i
+                                            class="pe-7s-next-2">&nbsp;</i>&nbsp;Logout</button>
                                 </div>
                             </div>
                         </div>
@@ -111,9 +107,9 @@
                         </div>
                         <div class="widget-content-right header-user-info ms-3">
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop">
-                            <i class="fa text-white fa-solid fa-image"></i>
-                        </button>
+                                data-bs-target="#staticBackdrop">
+                                <i class="fa text-white fa-solid fa-image"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -161,7 +157,8 @@
         margin-left: auto;
         display: flex;
         align-items: center;
-        gap: 15px; /* Adjust the gap between items if necessary */
+        gap: 15px;
+        /* Adjust the gap between items if necessary */
     }
 
     .header-menu .nav-item {
@@ -169,14 +166,15 @@
     }
 
     .header-menu .dropdown-menu {
-        right: 0; /* Align dropdown menu to the right */
+        right: 0;
+        /* Align dropdown menu to the right */
         left: auto;
     }
 
     .header-menu .nav-link {
         display: flex;
         align-items: center;
-        gap: 5px; /* Adjust the gap between icon and text if necessary */
+        gap: 5px;
+        /* Adjust the gap between icon and text if necessary */
     }
-
 </style>

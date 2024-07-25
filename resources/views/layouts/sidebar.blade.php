@@ -54,14 +54,14 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="/pengaturan/users"> 
+                        <a href="/pengaturan/users">
                             <i class="metismenu-icon">
                                 <i class="metismenu-icon pe-7s-note"></i>
                             </i>Data User
                         </a>
                     </li>
                     <li>
-                        <a href="/database/desa"> 
+                        <a href="/database/desa">
                             <i class="metismenu-icon">
                                 <i class="metismenu-icon pe-7s-note"></i>
                             </i>Data Desa
