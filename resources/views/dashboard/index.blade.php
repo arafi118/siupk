@@ -115,54 +115,17 @@
                     <div class="card-body">
                         <h5 class="card-title">Angsuran Hari Ini</h5>
                                 <div class="card-body pb-0 p-3 pt-0 mt-4">
-                                    <div class="row">
-                                        <div class="col-7 text-start">
-                                            <div class="chart">
-                                                <canvas id="chart-pie" class="chart-canvas" height="400"
-                                                    style="display: block; box-sizing: border-box; height: 200px; width: 169.7px;" width="339"></canvas>
-                                            </div>
-                                        </div>
-                                        <div class="col-5 my-auto">
-                                            <span class="badge badge-md badge-dot me-4 d-block text-start">
-                                                <i class="bg-info"></i>
-                                                <span class="text-dark text-xs" style="color: black;">SPP Pokok</span>
-                                            </span>
-                                            <span class="badge badge-md badge-dot me-4 d-block text-start">
-                                                <i class="bg-success"></i>
-                                                <span class="text-dark text-xs" style="color: black;">SPP Jasa</span>
-                                            </span>
-                                            <span class="badge badge-md badge-dot me-4 d-block text-start">
-                                                <i class="bg-dark"></i>
-                                                <span class="text-dark text-xs" style="color: black;">UEP Pokok</span>
-                                            </span>
-                                            <span class="badge badge-md badge-dot me-4 d-block text-start">
-                                                <i class="bg-secondary"></i>
-                                                <span class="text-dark text-xs" style="color: black;">UEP Jasa</span>
-                                            </span>
-                                            <span class="badge badge-md badge-dot me-4 d-block text-start">
-                                                <i class="bg-danger"></i>
-                                                <span class="text-dark text-xs" style="color: black;">PL Pokok</span>
-                                            </span>
-                                            <span class="badge badge-md badge-dot me-4 d-block text-start">
-                                                <i class="bg-warning"></i>
-                                                <span class="text-dark text-xs" style="color: black;">PL Jasa</span>
-                                            </span>
-                                        </div>
-                                    </div>
+                                    <canvas id="myChart" width="200" height="200"></canvas>
                                 </div>
-
                                 <div class="card-footer pt-0 pb-2 p-3 d-flex align-items-center justify-content-between">
                                     <div class="w-60">
                                         <div class="text-sm">
-                                            Total Angsuran
-                                            <div>
-                                                <b>Rp. <span id="total_angsur"></span></b>
-                                            </div>
+                                            Total Angsuran : <b>Rp. <span id="total_angsur"></span></b>
                                         </div>
                                     </div>
-                                    <div class="w-40 d-flex justify-content-end">
+                                    {{-- <div class="w-40 d-flex justify-content-end">
                                         <button type="button" id="btnDetailAngsuran" class="btn btn-outline-secondary">Detail</button>
-                                    </div>                                    
+                                    </div>--}}
                                 </div>
                                 
                     </div>
@@ -172,7 +135,7 @@
                 <div class="card">
                     <div class="card-header pb-0 p-3">
                         <div class="d-flex justify-content-between">
-                            <h6 class="card-title">Realisasi Pendapatan dan Beban</h6>
+                            <h5 class="card-title">Realisasi Pendapatan dan Beban</h5>
                         </div>
                         <div class="d-flex align-items-center">
                             <span class="badge badge-md badge-dot me-4">
@@ -787,7 +750,6 @@
             }, 1000);
         </script>
     @endif
-
     <script>
         var formatter = new Intl.NumberFormat('en-US', {
             minimumFractionDigits: 2,
@@ -795,7 +757,7 @@
         })
 
         var ctx1 = document.getElementById("chart-line").getContext("2d");
-        var ctx2 = document.getElementById("chart-pie").getContext("2d");
+        var ctx2 = document.getElementById("myChart").getContext("2d");
 
         // Line chart
         new Chart(ctx1, {
@@ -959,20 +921,18 @@
         });
 
         // Pie chart
-        new Chart(ctx2, {
-            type: "pie",
+        var myChart = new Chart(ctx2, {
+            type: 'bar',
             data: {
-                labels: 
-                [
+                labels: [
                     'SPP Pokok',
-                    'SPP Jasa',
-                    'UEP Pokok',
-                    'UEP Jasa',
-                    'PL Pokok',
-                    'PL Jasa'
-                ],
+                    'SPP Jasa', 
+                    'UEP Pokok', 
+                    'UEP Jasa', 
+                    'PL Jasa', 
+                    'PL Pokok'],
                 datasets: [{
-                    label: "Projects",
+                    label: 'Projects',
                     weight: 9,
                     cutout: 0,
                     tension: 0.9,
@@ -995,7 +955,7 @@
                         "{{ $jasa_pl }}",
                     ],
                     fill: false
-                }],
+                }]
             },
             options: {
                 responsive: true,
@@ -1012,30 +972,30 @@
                 scales: {
                     y: {
                         grid: {
-                            drawBorder: false,
-                            display: false,
-                            drawOnChartArea: false,
-                            drawTicks: false,
+                            drawBorder: true,
+                            display: true,
+                            drawOnChartArea: true,
+                            drawTicks: true,
                             color: '#c1c4ce5c'
                         },
                         ticks: {
-                            display: false
+                            display: true
                         }
                     },
                     x: {
                         grid: {
-                            drawBorder: false,
-                            display: false,
-                            drawOnChartArea: false,
-                            drawTicks: false,
+                            drawBorder: true,
+                            display: true,
+                            drawOnChartArea: true,
+                            drawTicks: true,
                             color: '#c1c4ce5c'
                         },
                         ticks: {
-                            display: false,
+                            display: true
                         }
                     },
-                },
-            },
+                }
+            }
         });
 
         var total_angsur =
