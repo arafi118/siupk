@@ -672,7 +672,7 @@
         });
 
         function makeChart(id, target, sisa_saldo, sum_saldo) {
-            window[id] = new Chart(target, {
+            window['chr_' +id] = new Chart(target, {
                 type: 'doughnut',
                 data: {
                     labels: [
@@ -712,12 +712,12 @@
             var ch_jasa = document.getElementById('chartJ').getContext("2d");
 
             if (destroy) {
-                if (pokok) {
-                    pokok.destroy()
+                if (chr_pokok) {
+                    chr_pokok.destroy()
                 }
 
-                if (jasa) {
-                    jasa.destroy()
+                if (chr_jasa) {
+                    chr_jasa.destroy()
                 }
             }
 
