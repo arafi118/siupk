@@ -284,7 +284,7 @@
                                             <textarea class="form-control d-none" name="pesan_whatsapp" id="pesan_whatsapp"></textarea>
                                         </form>
                                         <div class="d-flex justify-content-end">
-                                            <button type="button" id="CekTagihan" class="btn btn-sm btn-dark"
+                                            <button type="button" id="CekTagihan" class="btn btn-secondary"
                                                 {{ strlen($user->hp) >= 11 ? '' : 'disabled' }}>Preview</button>
                                         </div>
                                     </div>
@@ -491,7 +491,7 @@
                     <div id="TbTagihan"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-github btn-sm" id="KirimPesan">Kirim Pesan</button>
+                    <button type="button" class="btn btn-success btn-sm" id="KirimPesan">Kirim Pesan</button>
                     <button type="button" class="btn btn-danger btn-sm" id="closeTagihan">Tutup</button>
                 </div>
             </div>
