@@ -196,8 +196,7 @@ $empty = false;
                 $jum_nunggak = 0;
             }
 
-            $k_alokasi += $pinj_i->alokasi;
-            $k_saldo += $pinj_i->saldo;
+          
             @endphp
         @endforeach
 

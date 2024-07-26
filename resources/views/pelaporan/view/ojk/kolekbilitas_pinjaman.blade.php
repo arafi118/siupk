@@ -82,6 +82,11 @@ $empty = false;
         </tr>
 
         @foreach ($jpp->pinjaman_individu as $pinj_i)
+        @php 
+			$k_alokasi += floatval((string) $pinj_i->alokasi);
+			$k_saldo += isset($pinj_i->saldo->saldo_pokok) ? floatval((string) $pinj_i->saldo->saldo_pokok) : 0; 
+
+		@endphp
             @php
             $nomor = 1;
             $kd_desa[] = $pinj_i->kd_desa;
@@ -191,8 +196,7 @@ $empty = false;
                 $jum_nunggak = 0;
             }
 
-            $k_alokasi += $pinj_i->alokasi;
-            $k_saldo += $pinj_i->saldo;
+           
             @endphp
         @endforeach
 

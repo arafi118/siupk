@@ -117,7 +117,7 @@
             </tr>
             <tr>
                 <td colspan="3" width="30%" class="style9">SANDI LKM</td>
-                <td colspan="9" width="70%" class="style9">:{{$lkm->sandi_lkm}}</td>
+                <td colspan="9" width="70%" class="style9">: {{$lkm->sandi_lkm}}</td>
             </tr>
             <tr>
                 <td colspan="3" width="30%" class="style9 bottom">PERIODE LAPORAN</td>
@@ -151,6 +151,10 @@
             $alokasi = 0;
             @endphp
             @foreach ($jpp->pinjaman_individu as $pinj_i)
+                @php
+                    $j_alokasi += floatval((string) $pinj_i->alokasi);
+                    $j_saldo += isset($pinj_i->saldo->saldo_pokok) ? floatval((string) $pinj_i->saldo->saldo_pokok) : 0;                @endphp
+
                 @php
                     $kd_desa[] = $pinj_i->kd_desa;
                     $desa = $pinj_i->kd_desa;
@@ -282,17 +286,11 @@
                         @endphp
                 @endif
                 @endif
-                @php
-                $j_alokasi += $pinj_i->alokasi;
-                $j_saldo += $pinj_i->saldo;
-
-                @endphp
-
-
+              
 
                 <tr align="right" height="15px" class="style9">
                     <td class="left top" align="center">{{ $nomor++ }}</td>
-                    <td class="left top" align="left">{{ $pinj_i->namadepan }}{{$pinj_i->id}}</td>
+                    <td class="left top" align="left">{{ $pinj_i->namadepan }} -{{$pinj_i->id}}</td>
                     <td class="left top" align="left">Pinjaman Modal Kerja</td>
                     <td class="left top" align="center">{{$pinj_i->angsuran_pokok->nama_sistem}}</td>
                     <td class="left top" align="center">{{ Tanggal::tglIndo($pinj_i->tgl_cair) }}</td>

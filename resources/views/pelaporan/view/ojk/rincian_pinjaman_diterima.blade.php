@@ -124,6 +124,11 @@ $empty = false;
         <th width="5%" class="left bottom">Keterangan</th>
     </tr>
     @foreach ($jpp->pinjaman_individu as $pinj_i)
+		@php 
+			$k_alokasi += floatval((string) $pinj_i->alokasi);
+			$k_saldo += isset($pinj_i->saldo->saldo_pokok) ? floatval((string) $pinj_i->saldo->saldo_pokok) : 0; 
+
+		@endphp
 		@php
         $nomor = 1;
 			$kd_desa[] = $pinj_i->kd_desa;
@@ -255,10 +260,7 @@ $empty = false;
 							@endphp
 						@endif
 						@endif 
-							@php $k_alokasi +=$pinj_i->alokasi;
-								$k_saldo += $pinj_i->saldo;
-
-							@endphp
+							
 
     <tr align="right" height="15px" class="style9">
         <td class="left top" align="center">{{ $nomor++ }}</td>
@@ -276,5 +278,6 @@ $empty = false;
         </td>
     </tr>
 </table>
- 
+@endforeach
+
 @endsection
