@@ -1,3 +1,7 @@
+
+@php
+dd($transaksi);
+@endphp
 <div class="table-responsive">
     <table class="table table-striped align-items-center mb-0" width="100%">
         <thead>

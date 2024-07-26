@@ -80,7 +80,7 @@ class SimpananController extends Controller
         $tahun = request()->input('tahun');
         $nia_id = request()->input('nia');
 
-        $transaksi = Transaksi::where('id_simp', $nia_id)
+        $transaksi = Transaksi::where('id_simp', 'LIKE', "%-$nia_id")
             ->whereMonth('tgl_transaksi', $bulan)
             ->whereYear('tgl_transaksi', $tahun)
             ->orderBy('tgl_transaksi', 'asc')

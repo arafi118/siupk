@@ -12,6 +12,7 @@
         $waktu = $wt_cair[0];
         $tempat = $wt_cair[1];
     }
+    $jumlah=0;
 @endphp
 
 @extends('perguliran.dokumen.layout.base')
@@ -118,7 +119,14 @@
                             <td class="t l b">{{ $pa->anggota->alamat }}</td>
                             <td class="t l b r" align="right">{{ number_format($pa->alokasi) }}</td>
                         </tr>
+@php
+$jumlah=$jumlah+$pa->alokasi;
+@endphp
                     @endforeach
+                        <tr>
+                            <th class="t l b" align="center" colspan=3>JUMLAH</td>
+                            <th class="t l b r" align="right">{{ $jumlah}}</td>
+                        </tr>
                 </table>
             </td>
         </tr>
