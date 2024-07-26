@@ -125,8 +125,8 @@ $jumlah=$jumlah+$pa->alokasi;
                     @endforeach
 
                         <tr>
-                            <th class="t l b" align="center" colspan="3">JUMLAH</td>
-                            <th class="t l b r" align="right">{{ $jumlah}}</td>
+                            <th class="t l b" align="center" colspan="3">JUMLAH</th>
+                            <th class="t l b r" align="right">{{ $jumlah}}</th>
                         </tr>
                 </table>
             </td>
