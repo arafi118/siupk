@@ -120,7 +120,7 @@
 		</tr>
 		<tr>
 			<td colspan="3" width="30%" class="style9 bottom">PERIODE LAPORAN</td>
-			<td colspan="9" width="60%" class="style9 bottom">:</td>
+			<td colspan="9" width="60%" class="style9 bottom">:{{$tgl}}</td>
 		</tr>
 
 

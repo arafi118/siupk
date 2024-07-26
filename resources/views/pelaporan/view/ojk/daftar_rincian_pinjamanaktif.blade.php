@@ -312,7 +312,6 @@
             @endforeach
 
             @if (count($kd_desa) > 0)
-
         
                 <tr class="style9">
                     <th colspan="8" class="left top" align="center"style="background:rgba(0,0,0, 0.3);">TOTAL ({{$jumlah_aktif}} Anggota)</th>
@@ -326,7 +325,7 @@
                 <tr>
                     <td class="style10 top" colspan="12"><b>Keterangan</b> : Data yang ditampilkan diatas
                         merupakan Individu aktif
-                        pada tahun berjalan----, untuk menampilkan data Individu aktif tahun lalu dapat
+                        pada tahun berjalan {{$pinj_i->thn}}, untuk menampilkan data Individu aktif tahun lalu dapat
                         memilih mode tahun lalu
                         ----.</td>
                 </tr>
