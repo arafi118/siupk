@@ -123,6 +123,7 @@
 $jumlah=$jumlah+$pa->alokasi;
 @endphp
                     @endforeach
+
                         <tr>
                             <th class="t l b" align="center" colspan=3>JUMLAH</td>
                             <th class="t l b r" align="right">{{ $jumlah}}</td>
