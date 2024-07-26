@@ -63,7 +63,7 @@
         <h1 style="margin: 0px;">{{ strtoupper($judul) }}</h1>
         <div style="margin: 0px; font-size: 24px;">{{ strtoupper($sub_judul) }}</div>
         <main><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <!-- <table width="25%" border="0" align="center"style="font-size: 13px;">
+        <!-- <table width="100%" border="0" align="center"style="font-size: 13px;">
         <tr>
             <td align="center"colspan="2">Disusun Oleh</td>
         </tr>
