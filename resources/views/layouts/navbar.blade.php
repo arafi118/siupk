@@ -1,20 +1,16 @@
 @php
     use App\Models\TandaTanganLaporan;
     $ttd = TandaTanganLaporan::where([['lokasi', Session::get('lokasi')]])->first();
-
     $tanggal = false;
     if ($ttd) {
         $str = strpos($ttd->tanda_tangan_pelaporan, '{tanggal}');
-
         if ($str !== false) {
             $tanggal = true;
         }
     }
-
     if (!$tanggal) {
         $jumlah += 1;
     }
-
     $id_search = 'cariAnggota';
     $label = 'Individu (NIK/Nama Peminjam)';
 @endphp
@@ -51,7 +47,6 @@
             </button>
         </span>
     </div>
-
     <div class="app-header__content">
         <div class="app-header-left">
             <div class="search-wrapper">
@@ -117,10 +112,8 @@
         </div>
     </div>
 </div>
-
 <form action="/pelaporan/preview" method="post" id="FormLaporanSisipan" target="_blank">
     @csrf
-
     <input type="hidden" name="type" id="type" value="pdf">
     <input type="hidden" name="tahun" id="tahun" value="{{ date('Y') }}">
     <input type="hidden" name="bulan" id="bulan" value="{{ date('m') }}">
@@ -128,8 +121,6 @@
     <input type="hidden" name="laporan" id="laporan" value="pelunasan">
     <input type="hidden" name="sub_laporan" id="sub_laporan" value="">
 </form>
-
-
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -151,7 +142,6 @@
         </div>
     </div>
 </div>
-
 <style>
     .header-menu {
         margin-left: auto;
@@ -160,17 +150,14 @@
         gap: 15px;
         /* Adjust the gap between items if necessary */
     }
-
     .header-menu .nav-item {
         position: relative;
     }
-
     .header-menu .dropdown-menu {
         right: 0;
         /* Align dropdown menu to the right */
         left: auto;
     }
-
     .header-menu .nav-link {
         display: flex;
         align-items: center;

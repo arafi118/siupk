@@ -141,7 +141,7 @@
         </tr>
         <tr>
             <td align="center">7.</td>
-            <td>Contact Person</td>
+            <td>No Hp</td>
             <td align="center">:</td>
             <td>
                 <b>{{ $pinkel->anggota->hp }} </b>

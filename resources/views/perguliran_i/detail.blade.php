@@ -85,12 +85,12 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
     'withExcel' => false,
     ],
     [
-    'title' => 'analisis keputusan kredit',
+    'title' => 'Analisis keputusan kredit',
     'file' => 'analisiskeputusankredit',
     'withExcel' => false,
     ],
     [
-    'title' => 'surat pemberitahuan',
+    'title' => 'Surat pemberitahuan',
     'file' => 'suratpemberitahuan',
     'withExcel' => false,
     ],
@@ -114,11 +114,11 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
     'file' => 'suratKelayakan',
     'withExcel' => false,
     ],
-    [
-    'title' => 'Daftar Hadir Pencairan',
-    'file' => 'daftarHadirPencairan',
-    'withExcel' => false,
-    ],
+    // [
+    // 'title' => 'Daftar Hadir Pencairan',
+    // 'file' => 'daftarHadirPencairan',
+    // 'withExcel' => false,
+    // ],
     [
     'title' => 'Pemberitahuan Ke Desa',
     'file' => 'pemberitahuanDesa',

@@ -114,7 +114,6 @@
                     </li>
                 </ul>
             </li>
-
             <li>
                 <a href="#">
                     <i class="metismenu-icon pe-7s-graph3"></i>
@@ -148,7 +147,6 @@
                     </li>
                 </ul>
             </li>
-
             <li>
                 <a href="/pelaporan">
                     <i class="metismenu-icon pe-7s-diskette"></i>

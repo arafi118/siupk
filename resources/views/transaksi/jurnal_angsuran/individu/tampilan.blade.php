@@ -56,7 +56,7 @@
                                     <div class="col-md-6">
                                         <div class="position-relative mb-3">
                                             <label for="pokok" class="form-label">Pokok</label>
-                                            <input autocomplete="off" readonly disabled type="text" name="pokok" id="pokok"
+                                            <input autocomplete="off" type="text" name="pokok" id="pokok"
                                             class="form-control">
                                             <small class="text-danger" id="msg_pokok"></small>
                                         </div>
@@ -253,6 +253,9 @@
 
 @section('script')
     <script>
+      $("#pokok").maskMoney({
+            allowNegative: true
+        });
         var formatter = new Intl.NumberFormat('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
@@ -512,14 +515,14 @@
                 }),
                 success: function(result) {
                     if (result.status) {
-                        MultiToast('success', 'Pesan untuk kelompok ' + nama + ' berhasil dikirim')
+                        MultiToast('success', 'Pesan untuk Nasabah ' + nama + ' berhasil dikirim')
                     } else {
                         if (repeat < 1) {
                             setTimeout(function() {
                                 sendMsg(number, nama, msg, repeat + 1)
                             }, 1000)
                         } else {
-                            MultiToast('error', 'Pesan untuk kelompok ' + nama + ' gagal dikirim')
+                            MultiToast('error', 'Pesan untuk Nasabah ' + nama + ' gagal dikirim')
                         }
                     }
                 },
@@ -529,7 +532,7 @@
                             sendMsg(number, nama, msg, repeat + 1)
                         }, 1000)
                     } else {
-                        MultiToast('error', 'Pesan untuk kelompok ' + nama + ' gagal dikirim')
+                        MultiToast('error', 'Pesan untuk Nasabah ' + nama + ' gagal dikirim')
                     }
                 }
             })

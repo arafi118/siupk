@@ -95,22 +95,14 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     <div class="nav-wrapper position-relative end-0">
-                        <ul class="nav nav-pills nav-fill p-1" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab" href="#Pokok"
-                                    role="tab" aria-controls="Pokok"
-                                    aria-selected="true">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    Pokok
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#Jasa" role="tab"
-                                    aria-controls="Jasa"
-                                    aria-selected="false">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    Jasa
-                                </a>
-                            </li>
-                        </ul>
+                        <div class="d-flex justify-content-between p-1" role="tablist">
+                            <button class="btn btn-outline-primary flex-fill me-1 active" data-bs-toggle="tab" data-bs-target="#Pokok" role="tab" aria-controls="Pokok" aria-selected="true">
+                                Pokok
+                            </button>
+                            <button class="btn btn-outline-warning flex-fill" data-bs-toggle="tab" data-bs-target="#Jasa" role="tab" aria-controls="Jasa" aria-selected="false">
+                                Jasa
+                            </button>
+                        </div>                        
 
                         <div class="tab-content mt-3">
                             <div class="tab-pane fade show active" id="Pokok" role="tabpanel"
@@ -229,6 +221,9 @@
 
 @section('script')
     <script>
+        $("#pokok").maskMoney({
+            allowNegative: true
+        });
         $('.date').datepicker({
             dateFormat: 'dd/mm/yy'
         });
@@ -507,14 +502,14 @@
                 }),
                 success: function(result) {
                     if (result.status) {
-                        MultiToast('success', 'Pesan untuk kelompok ' + nama + ' berhasil dikirim')
+                        MultiToast('success', 'Pesan untuk Nasabah ' + nama + ' berhasil dikirim')
                     } else {
                         if (repeat < 1) {
                             setTimeout(function() {
                                 sendMsg(number, nama, msg, repeat + 1)
                             }, 1000)
                         } else {
-                            MultiToast('error', 'Pesan untuk kelompok ' + nama + ' gagal dikirim')
+                            MultiToast('error', 'Pesan untuk Nasabah ' + nama + ' gagal dikirim')
                         }
                     }
                 },
@@ -524,7 +519,7 @@
                             sendMsg(number, nama, msg, repeat + 1)
                         }, 1000)
                     } else {
-                        MultiToast('error', 'Pesan untuk kelompok ' + nama + ' gagal dikirim')
+                        MultiToast('error', 'Pesan untuk Nasabah ' + nama + ' gagal dikirim')
                     }
                 }
             })

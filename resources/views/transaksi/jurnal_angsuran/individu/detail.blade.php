@@ -38,15 +38,19 @@
             @endphp
             @foreach ($real_i->trx as $trx)
                 @php
-                    $keterangan .= $trx->keterangan_transaksi . '<br>';
                     if (
-                        $trx->rekening_kredit == '4.1.01.04' ||
-                        $trx->rekening_kredit == '4.1.01.05' ||
-                        $trx->rekening_kredit == '4.1.01.06'
-                    ) {
-                        $denda += $trx->jumlah;
-                    }
-
+                        $trx->rekening_kredit == '4.1.02.01' ||
+                        $trx->rekening_kredit == '4.1.02.02' ||
+                        $trx->rekening_kredit == '4.1.02.03' ||
+                        $trx->rekening_kredit == '4.1.02.04' ||
+                        $trx->rekening_kredit == '4.1.02.05'
+                        ) {
+                            $denda += $trx->jumlah;
+                            $idt = $trx->idt;
+                            continue;
+                        }
+                        
+                    $keterangan .= $trx->keterangan_transaksi . '<br>';
                     $idt = $trx->idt;
                 @endphp
             @endforeach

@@ -3,17 +3,14 @@
         @php
             $link = [];
             $path = '/' . Request::path();
-
             $links = $menu->pluck('link');
             $links->each(function ($menu_link) {
                 $link[] = $menu_link;
             });
-
             $active = '';
             if (in_array($path, $link)) {
                 $active = 'active';
             }
-
             if (in_array(str_replace('#', '', $menu->link), explode('/', $path))) {
                 $active = 'active';
             }

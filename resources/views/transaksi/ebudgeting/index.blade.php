@@ -27,7 +27,7 @@
                             </div>
                         </div>
                         <button type="button" id="anggaran" class="btn btn-sm btn-dark mb-0"
-                            style=" float: right;">TENTUKAN RENCANA ANGARAN</button>
+                            style=" float: right;">TENTUKAN RENCANA ANGGARAN</button>
                     </form>
                 </div>
             </div>

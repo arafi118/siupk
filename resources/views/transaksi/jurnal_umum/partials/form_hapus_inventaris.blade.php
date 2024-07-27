@@ -1,7 +1,7 @@
 @php
     use App\Utils\Inventaris as Inv;
 @endphp
-
+<div class="card-body">
 <input type="hidden" name="harsat" id="harsat">
 <input type="hidden" name="relasi" id="relasi">
 <div class="row">
@@ -54,7 +54,6 @@
         </div>
     </div>
 </div>
-
 <div class="row" id="col_harga_jual" style="display: none">
     <div class="col-md-12">
         <div class="position-relative mb-3">
@@ -64,7 +63,7 @@
         </div>
     </div>
 </div>
-
+</div>
 <script>
     new Choices($('#nama_barang')[0])
     new Choices($('#alasan')[0])

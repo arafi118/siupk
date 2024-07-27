@@ -40,9 +40,9 @@
                                     <div class="col-md-8">
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="position-relative mb-3"><label for="exampleState"
-                                                class="form-label">Total Bayar</label><input name="state"
-                                                id="exampleState" type="text" class="form-control"></div>
+                                        <div class="position-relative mb-3">
+                                            <label for="exampleState" class="form-label">Total Bayar</label>
+                                            <input name="state" id="exampleState" type="text" class="form-control"></div>
                                     </div>
                                 </div>
                                 <div style="text-align: right;">
@@ -132,6 +132,9 @@
 
 @section('script')
     <script>
+            $("#exampleState").maskMoney({
+            allowNegative: true
+        });
         var formatter = new Intl.NumberFormat('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,

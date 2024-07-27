@@ -58,7 +58,7 @@
                                 <div class="row" id="form_nominal">
                                     <div class="col-md-12">
                                         <div class="position-relative mb-3">
-                                            <label for="keterangan">Keterangan&nbsp;</label>
+                                            <label for="keterangan">Keterangan</label>
                                             <input autocomplete="off" type="text" name="keterangan" id="keterangan"
                                             class="form-control">
                                             <small class="text-danger" id="msg_keterangan"></small>
@@ -66,7 +66,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="position-relative mb-3">
-                                             <label for="nominal">Nominal Rp.&nbsp;</label>
+                                             <label for="nominal">Nominal Rp.</label>
                                              <input autocomplete="off" type="text" name="nominal" id="nominal"class="form-control">
                                              <small class="text-danger" id="msg_nominal"></small>
                                         </div>
@@ -248,7 +248,13 @@
 @endsection
 
 @section('script')
+
 <script>
+
+    $("#nominal").maskMoney({
+            allowNegative: true
+        });
+
     $('.date').datepicker({
         dateFormat: 'dd/mm/yy'
     });

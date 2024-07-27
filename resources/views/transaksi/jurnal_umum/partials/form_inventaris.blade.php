@@ -1,4 +1,5 @@
 @if ($relasi)
+<div class="card-body">
 <div class="row">
     <div class="col-md-4">
         <div class="position-relative mb-3">
@@ -22,7 +23,9 @@
         </div>
     </div>
 </div>
+</div>
 @else
+<div class="card-body">
     <input type="hidden" name="relasi" id="relasi" value="">
     <div class="row">
         <div class="col-md-6">
@@ -40,7 +43,9 @@
             </div>
         </div>
     </div>
+</div>
 @endif
+<div class="card-body">
 <div class="row">
     <div class="col-md-4">
         <div class="position-relative mb-3">
@@ -64,6 +69,7 @@
             <small class="text-danger" id="msg_harga_perolehan"></small>
         </div>
     </div>
+</div>
 </div>
 
 <script>
