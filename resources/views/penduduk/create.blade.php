@@ -1,3 +1,9 @@
+<style>
+    .select2-container .select2-selection--single .select2-selection__rendered {
+        font-size: 14px; /* Default font size */
+    }
+</style>
+
 <div class="app-page-title">
     <div class="page-title-wrapper">
         <div class="page-title-heading">
@@ -33,7 +39,7 @@
         </div>
         <div class="col-md-4">
             <div class="position-relative mb-3">
-                <label for="nama_pangilan">Nama Pangilan</label>
+                <label for="nama_pangilan">Nama Panggilan</label>
                 <input autocomplete="off" type="text" name="nama_pangilan" id="nama_pangilan" class="form-control">
                 <small class="text-danger" id="msg_nama_pangilan"></small>
             </div>
@@ -110,24 +116,16 @@
     <div class="row">
         <div class="col-md-4">
             <div class="position-relative mb-3">
-                <label for="agama">Agama</label>
-                <select class="js-select-2 form-control" name="agama" id="agama" class="form-control">
-                    <option value="">Pilih Agama</option>
-                    <option value="islam">Islam</option>
-                    <option value="kristen_protestan">Kristen Protestan</option>
-                    <option value="kristen_katolik">Kristen Katolik</option>
-                    <option value="hindu">Hindu</option>
-                    <option value="buddha">Buddha</option>
-                    <option value="konghucu">Konghucu</option>
-                </select>
-                <small class="text-danger" id="msg_agama"></small>
+                <label for="no_telp">No. Telp</label>
+                <input autocomplete="off" type="text" name="no_telp" id="no_telp" class="form-control"
+                    value="+62">
+                <small class="text-danger" id="msg_no_telp"></small>
             </div>
         </div>
-        
-        <div class="col-md-2">
+        <div class="col-md-4">
             <div class="position-relative mb-3">
                 <label for="pendidikan">Pendidikan</label>
-                <select class="js-select-2 form-control" name="pendidikan" id="pendidikan" class="form-control">
+                <select class="js-select-2 form-control" name="pendidikan" id="pendidikan">
                     <option value="">Pilih Pendidikan</option>
                     <option value="sd_mi">SD/MI</option>
                     <option value="smp_mts">SMP/MTs</option>
@@ -142,27 +140,32 @@
                 <small class="text-danger" id="msg_pendidikan"></small>
             </div>
         </div>
-        
+        <div class="col-md-2">
+            <div class="position-relative mb-3">
+                <label for="agama">Agama</label>
+                <select class="js-select-2 form-control" name="agama" id="agama" class="form-control">
+                    <option value="">Pilih Agama</option>
+                    <option value="islam">Islam</option>
+                    <option value="kristen_protestan">Kristen Protestan</option>
+                    <option value="kristen_katolik">Kristen Katolik</option>
+                    <option value="hindu">Hindu</option>
+                    <option value="buddha">Buddha</option>
+                    <option value="konghucu">Konghucu</option>
+                </select>
+                <small class="text-danger" id="msg_agama"></small>
+            </div>
+        </div>
         <div class="col-md-2">
             <div class="position-relative mb-3">
                 <label for="status_pernikahan">Status Pernikahan</label>
                 <select class="js-select-2 form-control" name="status_pernikahan" id="status_pernikahan" class="form-control">
-                    <option value="">Pilih Status Pernikahan</option>
+                    <option value="">Pilih Status</option>
                     <option value="lajang">Lajang</option>
                     <option value="menikah">Menikah</option>
                 </select>
                 <small class="text-danger" id="msg_status_pernikahan"></small>
             </div>
         </div>
-        
-        <div class="col-md-4">
-            <div class="position-relative mb-3">
-                <label for="no_telp">No. Telp</label>
-                <input autocomplete="off" type="text" name="no_telp" id="no_telp" class="form-control"
-                    value="+62">
-                <small class="text-danger" id="msg_no_telp"></small>
-            </div>
-        </div> 
     </div>
     <div class="row">
         <div class="col-md-4">
@@ -206,7 +209,7 @@
          <div class="col-md-4">
             <div class="position-relative mb-3">
                 <label for="hubungan">Hubungan</label>
-                <select class="form-control" name="hubungan" id="hubungan">
+                <select class="js-select-2 form-control" name="hubungan" id="hubungan">
                     @foreach ($hubungan as $hb)
                         <option {{ $hubungan_dipilih == $hb->id ? 'selected' : '' }} value="{{ $hb->id }}">
                             {{ $hb->kekeluargaan }}
@@ -222,12 +225,17 @@
 </form>
 
 <script>
-   $('.js-select-2').select2({
-        theme: 'bootstrap-5'
+        $('.js-select-2').select2({
+            theme: 'bootstrap-5'
         });
 
-   $('.date').datepicker({
-        dateFormat: 'dd/mm/yy'
-    });
+        // Function to set font size
+        function setFontSize(size) {
+            $('.select2-container .select2-selection--single .select2-selection__rendered').css('font-size', size + 'px');
+        }
+
+        $('.date').datepicker({
+            dateFormat: 'dd/mm/yy'
+        });
 
 </script>
