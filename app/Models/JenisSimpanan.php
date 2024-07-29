@@ -12,4 +12,10 @@ class JenisSimpanan extends Model
     public $timestamps = false;
 
     protected $guarded = ['id'];
+
+    // ambil data dari simpanan anggota
+    public function sa()
+    {
+        return $this->hasMany(SimpananAnggota::class, 'jenis_simpanan', 'id');
+    }
 }

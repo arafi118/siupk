@@ -106,6 +106,7 @@
             
                     @endif
                 @endif
+           
 		<tr>
 			<td class="style27 left top right" colspan="6">{{$pinj_i->nama_desa}}</td>
 		</tr>
@@ -225,14 +226,16 @@
                         @endphp
                 @endif
                 @endif
-			<tr align="right" height="15px" class="style9">
-              <td class="left top" align="center">{{$nomor++}}</td>
-			  <td colspan="2" class="left top" align="left">{{$pinj_i->nik}}{{ $pinj_i->namadepan }} -{{$pinj_i->id}}</td>
-              <td class="left top" align="center"></td>
-              <td class="left top" align="left">- Per Bulan</td>
-			  <td class="left top right">{{ number_format(intval($saldopinjaman)) }}</td>
-			  </tr>
-			  @endforeach
+                @foreach($simpanan_anggota as $sa)
+                    <tr align="right" height="15px" class="style9">
+                    <td class="left top" align="center">{{$nomor++}}</td>
+                    <td colspan="2" class="left top" align="left">{{$pinj_i->nik}}{{ $pinj_i->namadepan }} -{{$pinj_i->id}}</td>
+                    <td class="left top" align="center">{{$sa->bunga}}</td>
+                    <td class="left top" align="left">{{$sa->js->nama_js}}- Per Bulan</td>
+                    <td class="left top right">{{ number_format(intval($saldopinjaman)) }}</td>
+                    </tr>
+                @endforeach      
+	@endforeach
 
 @if (count($kd_desa) > 0)
 
