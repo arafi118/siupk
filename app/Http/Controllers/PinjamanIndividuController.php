@@ -853,7 +853,7 @@ class PinjamanIndividuController extends Controller
 
         return response()->json([
             'success' => true,
-            'msg' => 'Pinjaman anggota ' . $pinj_i->anggota->namadepan . ' Berhasil Diperbarui',
+            'msg' => 'Pinjaman Kredit ' . $pinj_i->anggota->namadepan . ' Berhasil Diperbarui',
             'tgl_cair' => $data['tgl_cair']
         ]);
     }

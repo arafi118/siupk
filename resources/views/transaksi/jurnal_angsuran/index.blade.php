@@ -57,9 +57,6 @@
                                     <button class="mt-2 btn btn-warning btn--text">ANGSURAN ANGGOTA</button>
                                     <button class="mt-2 btn btn-secondary btn--text">POSTING</button>
                                 </div>
-
-
-
                             </form>
                         </div>
                     </div>

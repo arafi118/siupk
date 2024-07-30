@@ -253,9 +253,6 @@
 
 @section('script')
     <script>
-      $("#pokok").maskMoney({
-            allowNegative: true
-        });
         var formatter = new Intl.NumberFormat('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,

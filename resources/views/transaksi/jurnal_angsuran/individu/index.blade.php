@@ -235,6 +235,9 @@
         $("#jasa").maskMoney({
             allowNegative: true
         });
+        $("#denda").maskMoney({
+            allowNegative: true
+        });
         $('.date').datepicker({
             dateFormat: 'dd/mm/yy'
         });

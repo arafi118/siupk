@@ -347,7 +347,7 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
                             <div class="col-md-6">
                                 <div class="position-relative mb-3">
                                     <label for="tgl_cair" class="form-label">Tanggal Cair</label>
-                                    <input autocomplete="off" type="text" name="tgl_cair" id="tgl_cair"
+                                    <input autocomplete="off" type="text" name="tgl_cair" id="_tgl_cair"
                                     class="form-control date save" {{ $readonly }}
                                     value="{{ Tanggal::tglIndo($perguliran_i->tgl_cair) }}">
                                 </div>
