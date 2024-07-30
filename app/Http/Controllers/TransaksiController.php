@@ -1889,7 +1889,7 @@ class TransaksiController extends Controller
         return response()->json([
             'idt' => $trx->idt,
             'idtp' => $trx->idtp,
-            'id_pinj' => $trx->id_pinj,
+            'id_pinj' => $trx->id_pinj_i,
             'jumlah' => number_format($trx->jumlah)
         ]);
     }
@@ -1987,30 +1987,7 @@ class TransaksiController extends Controller
 
         if ($idtp != '0') {
             $trx = Transaksi::where('idtp', $idtp)->delete();
-            $pinkel = PinjamanAnggota::where('id', $id_pinj)->with('pinjaman_anggota')->first();
-
-            $pinjaman_anggota = $pinkel->pinjaman_anggota;
-            foreach ($pinjaman_anggota as $pa) {
-                $kom_pokok = json_decode($pa->kom_pokok, true);
-                $kom_jasa = json_decode($pa->kom_jasa, true);
-
-                if (is_array($kom_pokok)) {
-                    unset($kom_pokok[$idtp]);
-                } else {
-                    $kom_pokok = [];
-                }
-
-                if (is_array($kom_jasa)) {
-                    unset($kom_jasa[$idtp]);
-                } else {
-                    $kom_jasa = [];
-                }
-
-                PinjamanAnggota::where('id', $pa->id)->update([
-                    'kom_pokok' => $kom_pokok,
-                    'kom_jasa' => $kom_jasa
-                ]);
-            }
+            $pinkel = PinjamanAnggota::where('id', $id_pinj)->first();
 
             $this->regenerateReal($pinkel);
         } else {
@@ -2568,18 +2545,18 @@ class TransaksiController extends Controller
             ]);
         }
 
-        $pinkel = PinjamanKelompok::where('id', $id_pinkel)->first();
+        $pinkel = PinjamanAnggota::where('id', $id_pinkel)->first();
 
         $transaksi = Transaksi::where([
-            ['id_pinj', $pinkel->id],
+            ['id_pinj_i', $pinkel->id],
             ['idtp', $idtp]
         ])->get();
 
-        $real = RealAngsuran::where([
+        $real = RealAngsuranI::where([
             ['loan_id', $id_pinkel],
             ['tgl_transaksi', '<=', $tgl_transaksi]
         ])->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC');
-        $ra = RencanaAngsuran::where([
+        $ra = RencanaAngsuranI::where([
             ['loan_id', $id_pinkel],
             ['jatuh_tempo', '<=', $tgl_transaksi],
             ['angsuran_ke', '!=', '0']
@@ -2651,11 +2628,11 @@ class TransaksiController extends Controller
             }
         }
 
-        if (RealAngsuran::where([['id', $idtp], ['loan_id', $pinkel->id]])->count() > 0) {
-            RealAngsuran::where([['id', $idtp], ['loan_id', $pinkel->id]])->delete();
+        if (RealAngsuranI::where([['id', $idtp], ['loan_id', $pinkel->id]])->count() > 0) {
+            RealAngsuranI::where([['id', $idtp], ['loan_id', $pinkel->id]])->delete();
         }
 
-        RealAngsuran::create($insert);
+        RealAngsuranI::create($insert);
         return response()->json([
             'success' => true
         ]);
@@ -2676,7 +2653,7 @@ class TransaksiController extends Controller
             'idtp',
             'tgl_transaksi'
         )->where([
-            ['id_pinj', $pinkel->id],
+            ['id_pinj_i', $pinkel->id],
             ['idtp', '!=', '0']
         ])->with([
             'tr_idtp'
@@ -2692,7 +2669,7 @@ class TransaksiController extends Controller
         $sum_jasa = 0;
 
         // dd($transaksi);
-        RealAngsuran::where('loan_id', $pinkel->id)->delete();
+        RealAngsuranI::where('loan_id', $pinkel->id)->delete();
         foreach ($transaksi as $trx) {
             $tgl_transaksi = $trx->tgl_transaksi;
 
@@ -2713,7 +2690,7 @@ class TransaksiController extends Controller
             ];
 
             if (count($trx->tr_idtp) > 0) {
-                $ra = RencanaAngsuran::where([
+                $ra = RencanaAngsuranI::where([
                     ['loan_id', $id_pinkel],
                     ['jatuh_tempo', '<=', $tgl_transaksi],
                     ['angsuran_ke', '!=', '0']
@@ -2753,7 +2730,7 @@ class TransaksiController extends Controller
                 }
             }
         }
-        RealAngsuran::insert($insert);
+        RealAngsuranI::insert($insert);
 
         return response()->json([
             'success' => true

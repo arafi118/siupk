@@ -217,11 +217,22 @@
             </div>
         </div>
     </div>
+
+    <form action="/transaksi/hapus" method="post" id="formHapus">
+        @csrf
+
+        <input type="hidden" name="del_idt" id="del_idt">
+        <input type="hidden" name="del_id_pinj" id="del_id_pinj">
+        <input type="hidden" name="del_idtp" id="del_idtp">
+    </form>
 @endsection
 
 @section('script')
     <script>
         $("#pokok").maskMoney({
+            allowNegative: true
+        });
+        $("#jasa").maskMoney({
             allowNegative: true
         });
         $('.date').datepicker({

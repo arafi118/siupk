@@ -283,9 +283,9 @@
             <td colspan="4" rowspan="2" class="style2 top">
                 - <br>
                 - Dicetak pada {{ date('Y-m-d H:i:s A') }}<br>
-                - Lembar 1 untuk Kelompok, lembar 2 Arsip DBM<br>
+                - Lembar 1 untuk Nasabah, lembar 2 Arsip LKM<br>
                 - Bawalah kartu angsuran dan slip ini pada saat mengangsur bulan depan<br>
-                - Cek status pinjaman kelompok anda di {{ $kec->web_kec }} </td>
+                - Cek status pinjaman Nasabah anda di {{ $kec->web_kec }} </td>
             <th valign="top">
                 <div align="center" class="bottom">
                     {{ $nama_user }}
@@ -300,5 +300,5 @@
         </tr>
     </table>
 
-    <title>Struk Angsuran Kelompok {{ $pinkel->anggota->namadepan }} &mdash; {{ $pinkel->id }}</title>
+    <title>Struk Angsuran Nasabah {{ $pinkel->anggota->namadepan }} &mdash; {{ $pinkel->id }}</title>
 </body>

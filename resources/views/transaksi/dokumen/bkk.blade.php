@@ -160,7 +160,7 @@
                         <td width="30%">Dibayar Kepada</td>
                         <td width="2%">:</td>
                         @if ($trx->id_pinj > 0)
-                            <td colspan="3" class="keterangan">{{ ucwords('Kelompok ' . $trx->relasi) }}</td>
+                            <td colspan="3" class="keterangan">{{ ucwords('anggota' . $trx->relasi) }}</td>
                         @else
                             <td colspan="3" class="keterangan">{{ ucwords($trx->relasi) }}</td>
                         @endif
