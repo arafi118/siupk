@@ -12,6 +12,8 @@ use App\Models\Desa;
 use App\Models\JenisLaporan;
 use App\Models\JenisLaporanPinjaman;
 use App\Models\JenisProdukPinjaman;
+use App\Models\JenisSimpanan;
+use App\Models\SimpananAnggota;
 use App\Models\Kecamatan;
 use App\Models\Kelompok;
 use App\Models\Lkm;
@@ -171,6 +173,7 @@ class PelaporanController extends Controller
             'ttd'
         ])->first();
         $lkm = Lkm::where('lokasi', $kec->id)->first();
+
         $kab = $kec->kabupaten;
 
         $jabatan = '1';
@@ -199,6 +202,7 @@ class PelaporanController extends Controller
         $data['info'] = $kec->alamat_kec . ', Telp.' . $kec->telpon_kec;
         $data['email'] = $kec->email_kec;
         $data['lkm'] = $lkm;
+
         $data['kec'] = $kec;
         $data['desa'] = $kec->desa;
         $data['kab'] = $kab;
@@ -611,12 +615,30 @@ class PelaporanController extends Controller
             'pinjaman_individu.angsuran_pokok',
             'pinjaman_individu.angsuran_jasa'
             ])->get();
-            
 
+            $simpanan_anggota = SimpananAnggota::where('lokasi', $data['kec']->id)->with([
+                'js',
+                'trx_tarik' => function ($query) use ($data) {
+                    $tgl = $data['tahun'] . '-' . $data['bulan'] . '-01';
+                    $tgl = date('Y-m-t', strtotime($tgl));
+            
+                    $query->where('tgl_transaksi', '<=', $tgl)
+                          ->whereIn('rekening_debit', ['simpanan', 'kas']);
+                },
+                'trx_setor' => function ($query) use ($data) {
+                    $tgl = $data['tahun'] . '-' . $data['bulan'] . '-01';
+                    $tgl = date('Y-m-t', strtotime($tgl));
+            
+                    $query->where('tgl_transaksi', '<=', $tgl)
+                          ->whereIn('rekening_kredit', ['kas', 'simpanan']);
+                },
+            ])->get();
+            
+            
         $view = view('pelaporan.view.ojk.daftar_rincian_tabungan', $data)->render();
 
         if ($data['type'] == 'pdf') {
-            $pdf = PDF::loadHTML($view);
+            $pdf = PDF::loadHTML($view)->setPaper('A4', 'landscape');
             return $pdf->stream();
         } else {
             return $view;
