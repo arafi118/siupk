@@ -2445,11 +2445,6 @@ class PinjamanIndividuController extends Controller
                 $angsuran_jasa = 0;
             }
 
-            if ($jenis_jasa == '2') {
-                $angsuran_jasa = $wajib_jasa;
-                $alokasi_pokok -= $ra[$j]['pokok'];
-            }
-
             $ra[$j]['jasa'] = $angsuran_jasa;
         }
 
@@ -2457,33 +2452,7 @@ class PinjamanIndividuController extends Controller
             $sisa = $i % $sistem_pokok;
             $ke = $i / $sistem_pokok;
 
-            $wajib_pokok = ($alokasi / 10) - $ra[$i]['jasa'];
-            if ($jangka == 24) {
-                $wajib_pokok = Keuangan::pembulatan((($alokasi / 10) - $ra[$i]['jasa']) / 2, -500);
-
-                if ($alokasi > 1000000) {
-                    $wajib_pokok = Keuangan::pembulatan((($alokasi / 10) - $ra[$i]['jasa']) / 2, 5000);
-                }
-
-                if ($alokasi != 20000000) {
-                    if ($alokasi >= 8000000) {
-                        $wajib_pokok -= 5000;
-                    }
-
-                    if ($alokasi == 12000000 || $alokasi >= 14000000) {
-                        $wajib_pokok -= 5000;
-                    }
-
-                    if ($alokasi == 18000000 || $alokasi == 6000000) {
-                        $wajib_pokok -= 5000;
-                    }
-                }
-            }
-
-            if ($kec->pembulatan != '5000') {
-                $wajib_pokok = Keuangan::pembulatan($alokasi / $tempo_pokok, (string) $kec->pembulatan);
-            }
-
+            $wajib_pokok = Keuangan::pembulatan($alokasi / $tempo_pokok, (string) $kec->pembulatan);
             $sum_pokok = $wajib_pokok * ($tempo_pokok - 1);
 
             if ($sisa == 0 and $ke != $tempo_pokok) {
