@@ -2669,6 +2669,7 @@ class TransaksiController extends Controller
         $sum_jasa = 0;
 
         // dd($transaksi);
+        $insert = [];
         RealAngsuranI::where('loan_id', $pinkel->id)->delete();
         foreach ($transaksi as $trx) {
             $tgl_transaksi = $trx->tgl_transaksi;
@@ -2704,7 +2705,7 @@ class TransaksiController extends Controller
                 }
 
                 foreach ($trx->tr_idtp as $tr) {
-                    if (Keuangan::startWith($trx['rekening_kredit'], $poko_kredit)) {
+                    if (Keuangan::startWith($tr->rekening_kredit, $poko_kredit)) {
                         $sum_pokok += intval($tr->jumlah);
 
                         $tunggakan_pokok = $ra->target_pokok - $sum_pokok;
@@ -2716,7 +2717,7 @@ class TransaksiController extends Controller
                         $insert[$trx->idtp]['tunggakan_pokok'] = $tunggakan_pokok;
                     }
 
-                    if (Keuangan::startWith($trx['rekening_kredit'], $jasa_kredit)) {
+                    if (Keuangan::startWith($tr->rekening_kredit, $jasa_kredit)) {
                         $sum_jasa += intval($tr->jumlah);
 
                         $tunggakan_jasa = $ra->target_jasa - $sum_jasa;
@@ -2730,7 +2731,10 @@ class TransaksiController extends Controller
                 }
             }
         }
-        RealAngsuranI::insert($insert);
+
+        if (count($insert) > 0) {
+            RealAngsuranI::insert($insert);
+        }
 
         return response()->json([
             'success' => true

@@ -217,6 +217,14 @@
             </div>
         </div>
     </div>
+    
+    <form action="/transaksi/reversal" method="post" id="formReversal">
+        @csrf
+
+        <input type="hidden" name="rev_idt" id="rev_idt">
+        <input type="hidden" name="rev_idtp" id="rev_idtp">
+        <input type="hidden" name="rev_id_pinj_i" id="rev_id_pinj_">
+    </form>
 
     <form action="/transaksi/hapus" method="post" id="formHapus">
         @csrf
