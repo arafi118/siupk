@@ -369,19 +369,35 @@ class PelaporanController extends Controller
 
     private function OJKP(array $data) 
     {
+        $data['keuangan'] = new Keuangan;
+
         $thn = $data['tahun'];
         $bln = $data['bulan'];
-        $hari = $data['hari'];
+        $hari = ($data['hari']);
 
-        $tgl = $thn . '-' . $bln . '-' . $hari;
-        $data['judul'] = 'Laporan Keuangan';
-        $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
-        if ($data['bulanan']) {
-            $data['judul'] = 'Laporan Keuangan';
-            $data['sub_judul'] = 'Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+        if ($bln == '1' && $hari == '1') {
+            return $this->neraca_tutup_buku($data);
         }
 
-        $view = view('pelaporan.view.ojk.pelaporan_ojk', $data)->render();
+        $tgl = $thn . '-' . $bln . '-' . $hari;
+        $data['sub_judul'] = 'PER ' . date('t', strtotime($tgl)) . ' ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+        $data['tgl'] = Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+
+        $data['debit'] = 0;
+        $data['kredit'] = 0;
+
+        $data['akun1'] = AkunLevel1::where('lev1', '<=', '3')->with([
+            'akun2',
+            'akun2.akun3',
+            'akun2.akun3.rek',
+            'akun2.akun3.rek.kom_saldo' => function ($query) use ($data) {
+                $query->where('tahun', $data['tahun'])->where(function ($query) use ($data) {
+                    $query->where('bulan', '0')->orwhere('bulan', $data['bulan']);
+                });
+            },
+        ])->orderBy('kode_akun', 'ASC')->get();
+
+        $view = view('pelaporan.view.ojk.neraca_ojk', $data)->render();
 
         if ($data['type'] == 'pdf') {
             $pdf = PDF::loadHTML($view);
@@ -421,6 +437,10 @@ class PelaporanController extends Controller
         $thn = $data['tahun'];
         $bln = $data['bulan'];
         $hari = $data['hari'];
+
+        $tahunSaatIni = date('Y');
+        $selisihTahun = $tahunSaatIni - $thn;
+
 
         $tgl = $thn . '-' . $bln . '-' . $hari;
         $data['judul'] = 'Laporan Keuangan';
@@ -590,7 +610,7 @@ class PelaporanController extends Controller
                             [$data['tb_pinj_i'] . '.jenis_pinjaman', 'I'],
                             [$data['tb_pinj_i'] . '.tgl_cair', '<=', $data['tgl_kondisi']]
                         ])->orwhere([
-                            [$data['tb_pinj_i'] . '.status', 'L'],
+                            [$data['tb_pinj_i'] . '.status', 'L'],  
                             [$data['tb_pinj_i'] . '.jenis_pinjaman', 'I'],
                             [$data['tb_pinj_i'] . '.tgl_lunas', '>=', $data['tgl_kondisi']]
                         ])->orwhere([
@@ -616,7 +636,7 @@ class PelaporanController extends Controller
             'pinjaman_individu.angsuran_jasa'
             ])->get();
 
-            $simpanan_anggota = SimpananAnggota::where('lokasi', $data['kec']->id)->with([
+            $data['simpanan_anggota'] = SimpananAnggota::where('lokasi', $data['kec']->id)->with([
                 'js',
                 'trx_tarik' => function ($query) use ($data) {
                     $tgl = $data['tahun'] . '-' . $data['bulan'] . '-01';
@@ -630,7 +650,7 @@ class PelaporanController extends Controller
                     $tgl = date('Y-m-t', strtotime($tgl));
             
                     $query->where('tgl_transaksi', '<=', $tgl)
-                          ->whereIn('rekening_kredit', ['kas', 'simpanan']);
+                          ->whereIn('rekening_debit', ['1.1.01.01', '','']);
                 },
             ])->get();
             

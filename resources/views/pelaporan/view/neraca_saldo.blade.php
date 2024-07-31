@@ -214,5 +214,5 @@
                 {!! json_decode(str_replace('{tanggal}', $tanggal_kondisi, $kec->ttd->tanda_tangan_pelaporan), true) !!}
             </td>
         </tr>
-
-</table @endsection
+ </table>
+ @endsection

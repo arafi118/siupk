@@ -250,10 +250,13 @@
                     $bl_cair = $tgl_cair[1];
                     $tg_cair = $tgl_cair[2];
 
+                   
+
                     $selisih_tahun = ($tahun - $th_cair) * 12;
                     $selisih_bulan = $bulan - $bl_cair;
 
                     $selisih = $selisih_bulan + $selisih_tahun;
+                    $y12 = date('Y')-1;
 
                     $_kolek = 0;
 
@@ -323,9 +326,9 @@
                 <tr>
                     <td class="style10 top" colspan="12"><b>Keterangan</b> : Data yang ditampilkan diatas
                         merupakan Individu aktif
-                        pada tahun berjalan {{$pinj_i->thn}}, untuk menampilkan data Individu aktif tahun lalu dapat
+                        pada tahun berjalan {{$tahun}}, untuk menampilkan data Individu aktif tahun lalu dapat
                         memilih mode tahun lalu
-                        ----.</td>
+                        {{$y12}}.</td>
                 </tr>
             @endif
         </table>
