@@ -194,6 +194,8 @@
                     $selisih_bulan = $bulan - $bl_cair;
 
                     $selisih = $selisih_bulan + $selisih_tahun;
+                    $y12 = date('Y')-1;
+
 
                     $_kolek = 0;
 
@@ -253,7 +255,7 @@
 		    <th class="left right bottom top" align="right" style="background:rgba(192,192,192,0.3);" >---</th>
 		</tr>
 		<tr>
-		<td class="style10 top" colspan="6"><b>Keterangan</b> : Data yang ditampilkan diatas merupakan Tabungan pada tahun berjalan --, untuk menampilkan data Individu aktif tahun lalu dapat memilih mode tahun lalu (--).</td>
+		<td class="style10 top" colspan="6"><b>Keterangan</b> : Data yang ditampilkan diatas merupakan Tabungan pada tahun berjalan {{ $tahun }}, untuk menampilkan data Individu aktif tahun lalu dapat memilih mode tahun lalu {{$y12}}.</td>
 		</tr>
 		@endif
 </table>
