@@ -86,6 +86,10 @@
         #html5-qrcode-button-camera-start {
             display: none !important;
         }
+
+        .swal2-container {
+            z-index: 9999999 !important;
+        }
     </style>
 </head>
 

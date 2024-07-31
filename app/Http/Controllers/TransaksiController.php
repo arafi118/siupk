@@ -1837,6 +1837,7 @@ class TransaksiController extends Controller
             'idt' => $trx->idt,
             'idtp' => $trx->idtp,
             'id_pinj' => $trx->id_pinj,
+            'id_pinj_i' => $trx->id_pinj_i,
             'jumlah' => number_format($trx->jumlah)
         ]);
     }
@@ -1953,18 +1954,22 @@ class TransaksiController extends Controller
         $idt = $request->del_idt;
         $idtp = $request->del_idtp;
         $id_pinj = $request->del_id_pinj;
+        $id_pinj_i = $request->del_id_pinj_i;
 
         if ($idtp != '0') {
             $transaksi = Transaksi::where('idtp', $idtp)->get();
-            $pinj_i = $transaksi->first()->id_pinj_i;
             $trx = Transaksi::where('idtp', $idtp)->delete();
 
-            
-            if ($pinj_i != '0') {
-                $pinkel = PinjamanIndividu::where('id', $id_pinj)->first();
+            if ($id_pinj_i != '0') {
+                $pinkel = PinjamanIndividu::where('id', $id_pinj_i)->with([
+                    'trx'
+                ])->first();
                 $this->regenerateReali($pinkel);
-            }elseif ($id_pinj != '0') {
-                $pinkel = PinjamanKelompok::where('id', $id_pinj)->with('pinjaman_anggota')->first();
+            } elseif ($id_pinj != '0') {
+                $pinkel = PinjamanKelompok::where('id', $id_pinj)->with([
+                    'pinjaman_anggota',
+                    'trx'
+                ])->first();
 
                 $pinjaman_anggota = $pinkel->pinjaman_anggota;
                 foreach ($pinjaman_anggota as $pa) {
@@ -2675,8 +2680,6 @@ class TransaksiController extends Controller
 
     public function regenerateReal($pinkel)
     {
-        $kec = Kecamatan::where('id', Session::get('lokasi'))
-            ->first();
         $keuangan = new Keuangan;
         if (!$pinkel) {
             return response()->json([
@@ -2699,292 +2702,77 @@ class TransaksiController extends Controller
         $alokasi_pokok = intval($pinkel->alokasi);
         $alokasi_jasa = intval($pinkel->alokasi * ($pinkel->pros_jasa / 100));
 
+        $poko_kredit = '1.1.03';
+        $jasa_kredit = '4.1.01';
+        $dend_kredit = '4.1.02';
+
         $sum_pokok = 0;
         $sum_jasa = 0;
 
-                $alokasi = $pinkel->alokasi;
-                $tgl_cair = $pinkel->tgl_cair;
+        // dd($transaksi);
+        RealAngsuran::where('loan_id', $pinkel->id)->delete();
+        foreach ($transaksi as $trx) {
+            $tgl_transaksi = $trx->tgl_transaksi;
 
-                if ($tgl_cair == "0000-00-00") {
-                    $tgl_cair = $pinkel->tgl_tunggu;
-                }
-
-            $simpan_tgl =$tgl_cair;
-                $desa = $pinkel->kelompok->d;
-
-            $tgl_angsur = $tgl_cair;
-            $tanggal_cair = date('d', strtotime($tgl_cair));
-
-            if ($desa) {
-                if ($desa->jadwal_angsuran_desa > 0) {
-                    $angsuran_desa = $desa->jadwal_angsuran_desa;
-                    if ($angsuran_desa > 0) {
-                        $tgl_pinjaman = date('Y-m', strtotime($tgl_cair));
-                        $tgl_cair = $tgl_pinjaman . '-' . $angsuran_desa;
-                    }
-                }
-            }
-
-            if ($kec->batas_angsuran > 0) {
-                $batas_tgl_angsuran = $kec->batas_angsuran;
-                if ($tanggal_cair >= $batas_tgl_angsuran) {
-                    $tgl_cair = date('Y-m-d', strtotime('+1 month', strtotime($tgl_cair)));
-                }
-            }
-
-            $jenis_jasa = $pinkel->jenis_jasa;
-            $jangka = $pinkel->jangka;
-            $sa_pokok = $pinkel->sistem_angsuran;
-            $sa_jasa = $pinkel->sa_jasa;
-            $pros_jasa = $pinkel->pros_jasa;
-
-            $sistem_pokok = ($pinkel->sis_pokok) ? $pinkel->sis_pokok->sistem : '1';
-            $sistem_jasa = ($pinkel->sis_jasa) ? $pinkel->sis_jasa->sistem : '1';
-
-            if ($sa_pokok == 11) {
-                $tempo_pokok        = ($jangka) - 24 / $sistem_pokok;
-            } else if ($sa_pokok == 14) {
-                $tempo_pokok        = ($jangka) - 3 / $sistem_pokok;
-            } else if ($sa_pokok == 15) {
-                $tempo_pokok        = ($jangka) - 2 / $sistem_pokok;
-            } else if ($sa_pokok == 20) {
-                $tempo_pokok        = ($jangka) - 12 / $sistem_pokok;
-            } else {
-                $tempo_pokok        = floor($jangka / $sistem_pokok);
-            }
-
-            if ($sa_jasa == 11) {
-                $tempo_jasa        = ($jangka) - 24 / $sistem_jasa;
-            } else if ($sa_jasa == 14) {
-                $tempo_jasa        = ($jangka) - 3 / $sistem_jasa;
-            } else if ($sa_jasa == 15) {
-                $tempo_jasa        = ($jangka) - 2 / $sistem_jasa;
-            } else if ($sa_jasa == 20) {
-                $tempo_jasa        = ($jangka) - 12 / $sistem_jasa;
-            } else {
-                $tempo_jasa        = floor($jangka / $sistem_jasa);
-            }
-
-            $ra = [];
-            $alokasi_pokok = $alokasi;
-            if ($jenis_jasa == '1') {
-                for ($j = 1; $j <= $jangka; $j++) {
-                    $sisa = $j % $sistem_jasa;
-                    $ke = $j / $sistem_jasa;
-
-                    $alokasi_jasa = $alokasi_pokok * ($pros_jasa / 100);
-                    $wajib_jasa = $alokasi_jasa / $tempo_jasa;
-                    $wajib_jasa = Keuangan::pembulatan($wajib_jasa, (string) $kec->pembulatan);
-                    $sum_jasa = $wajib_jasa * ($tempo_jasa - 1);
-
-                    if ($sisa == 0 and $ke != $tempo_jasa) {
-                        $angsuran_jasa = $wajib_jasa;
-                    } elseif ($sisa == 0 and $ke == $tempo_jasa) {
-                        $angsuran_jasa = $alokasi_jasa - $sum_jasa;
-                    } else {
-                        $angsuran_jasa = 0;
-                    }
-
-                    if ($jenis_jasa == '2') {
-                        $angsuran_jasa = $wajib_jasa;
-                        $alokasi_pokok -= $ra[$j]['pokok'];
-                    }
-
-                    $ra[$j]['jasa'] = $angsuran_jasa;
-                }
-            }
-
-            for ($i = 1; $i <= $jangka; $i++) {
-                $sisa = $i % $sistem_pokok;
-                $ke = $i / $sistem_pokok;
-
-                $wajib_pokok = Keuangan::pembulatan($alokasi / $tempo_pokok, (string) $kec->pembulatan);
-                $sum_pokok = $wajib_pokok * ($tempo_pokok - 1);
-
-                if ($sisa == 0 and $ke != $tempo_pokok) {
-                    $angsuran_pokok = $wajib_pokok;
-                } elseif ($sisa == 0 and $ke == $tempo_pokok) {
-                    $angsuran_pokok = $alokasi - $sum_pokok;
-                } else {
-                    $angsuran_pokok = 0;
-                }
-
-                $ra[$i]['pokok'] = $angsuran_pokok;
-            }
-
-            if ($jenis_jasa != '1') {
-                for ($j = 1; $j <= $jangka; $j++) {
-                    $sisa = $j % $sistem_jasa;
-                    $ke = $j / $sistem_jasa;
-
-                    $alokasi_jasa = $alokasi_pokok * ($pros_jasa / 100);
-                    $wajib_jasa = $alokasi_jasa / $tempo_jasa;
-                    $wajib_jasa = Keuangan::pembulatan($wajib_jasa, (string) $kec->pembulatan);
-                    $sum_jasa = $wajib_jasa * ($tempo_jasa - 1);
-
-                    if ($sisa == 0 and $ke != $tempo_jasa) {
-                        $angsuran_jasa = $wajib_jasa;
-                    } elseif ($sisa == 0 and $ke == $tempo_jasa) {
-                        $angsuran_jasa = $alokasi_jasa - $sum_jasa;
-                    } else {
-                        $angsuran_jasa = 0;
-                    }
-
-                    if ($jenis_jasa == '2') {
-                        $angsuran_jasa = $wajib_jasa;
-                        $alokasi_pokok -= $ra[$j]['pokok'];
-                    }
-
-                    $ra[$j]['jasa'] = $angsuran_jasa;
-                }
-            }
-
-            $ra['alokasi'] = $alokasi;
-
-            $target_pokok = 0;
-            $target_jasa = 0;
-
-            $data_rencana = [];
-            $data_rencana[strtotime($tgl_cair)] = [
+            $insert[$trx->idtp] = [
+                'id' => $trx->idtp,
                 'loan_id' => $pinkel->id,
-                'angsuran_ke' => 0,
-                'jatuh_tempo' => $simpan_tgl,
-                'wajib_pokok' => 0,
-                'wajib_jasa' => 0,
-                'target_pokok' => $target_pokok,
-                'target_jasa' => $target_jasa,
+                'tgl_transaksi' => $tgl_transaksi,
+                'realisasi_pokok' => 0,
+                'realisasi_jasa' => 0,
+                'sum_pokok' => $sum_pokok,
+                'sum_jasa' => $sum_jasa,
+                'saldo_pokok' => $alokasi_pokok - $sum_pokok,
+                'saldo_jasa' => $alokasi_jasa - $sum_jasa,
+                'tunggakan_pokok' => 0,
+                'tunggakan_jasa' => 0,
                 'lu' => date('Y-m-d H:i:s'),
-                'id_user' => 1
+                'id_user' => auth()->user()->id,
             ];
-            $rencana[] = $data_rencana[strtotime($tgl_cair)];
 
-            for ($x = 1; $x <= $jangka; $x++) {
-                $bulan  = substr($tgl_cair, 5, 2);
-                $tahun  = substr($tgl_cair, 0, 4);
+            if (count($trx->tr_idtp) > 0) {
+                $ra = RencanaAngsuran::where([
+                    ['loan_id', $id_pinkel],
+                    ['jatuh_tempo', '<=', $tgl_transaksi],
+                    ['angsuran_ke', '!=', '0']
+                ])->orderBy('jatuh_tempo', 'DESC');
 
-                if ($sa_pokok == 12) {
-                    $tambah = $x * 7;
-                    $penambahan = "+$tambah days";
+                if ($ra->count() > 0) {
+                    $ra = $ra->first();
                 } else {
-                    $penambahan = "+$x month";
-                }
-                $jatuh_tempo = date('Y-m-d', strtotime($penambahan, strtotime($tgl_cair)));
-
-                $pokok = $ra[$x]['pokok'];
-                $jasa = $ra[$x]['jasa'];
-
-                if ($x == 1) {
-                    $target_pokok = $pokok;
-                } elseif ($x >= 2) {
-                    $target_pokok += $pokok;
-                }
-                if ($x == 1) {
-                    $target_jasa = $jasa;
-                } elseif ($x >= 2) {
-                    $target_jasa += $jasa;
+                    $ra->target_pokok = 0;
+                    $ra->target_jasa = 0;
                 }
 
-                $data_rencana[strtotime($jatuh_tempo)] = [
-                    'loan_id' => $pinkel->id,
-                    'angsuran_ke' => $x,
-                    'jatuh_tempo' => $jatuh_tempo,
-                    'wajib_pokok' => $pokok,
-                    'wajib_jasa' => $jasa,
-                    'target_pokok' => $target_pokok,
-                    'target_jasa' => $target_jasa,
-                    'lu' => date('Y-m-d H:i:s'),
-                    'id_user' => 1
-                ];
-                $rencana[] = $data_rencana[strtotime($jatuh_tempo)];
+                foreach ($trx->tr_idtp as $tr) {
+                    if (Keuangan::startWith($tr->rekening_kredit, $poko_kredit)) {
+                        $sum_pokok += intval($tr->jumlah);
+
+                        $tunggakan_pokok = $ra->target_pokok - $sum_pokok;
+                        if ($tunggakan_pokok <= 0) $tunggakan_pokok = 0;
+
+                        $insert[$trx->idtp]['realisasi_pokok'] = $tr->jumlah;
+                        $insert[$trx->idtp]['sum_pokok'] = $sum_pokok;
+                        $insert[$trx->idtp]['saldo_pokok'] = $alokasi_pokok - $sum_pokok;
+                        $insert[$trx->idtp]['tunggakan_pokok'] = $tunggakan_pokok;
+                    }
+
+                    if (Keuangan::startWith($tr->rekening_kredit, $jasa_kredit)) {
+                        $sum_jasa += intval($tr->jumlah);
+
+                        $tunggakan_jasa = $ra->target_jasa - $sum_jasa;
+                        if ($tunggakan_jasa <= 0) $tunggakan_jasa = 0;
+
+                        $insert[$trx->idtp]['realisasi_jasa'] = $tr->jumlah;
+                        $insert[$trx->idtp]['sum_jasa'] = $sum_jasa;
+                        $insert[$trx->idtp]['saldo_jasa'] = $alokasi_jasa - $sum_jasa;
+                        $insert[$trx->idtp]['tunggakan_jasa'] = $tunggakan_jasa;
+                    }
+                }
             }
+        }
+        RealAngsuran::insert($insert);
 
-            $alokasi_pokok = $alokasi;
-            $alokasi_jasa = $target_jasa;
-
-            $data_idtp = [];
-            $sum_pokok = 0;
-            $sum_jasa = 0;
-
-            ksort($data_rencana);
-            foreach ($pinkel->trx as $trx) {
-                $poko_kredit = '1.1.03';
-                $jasa_kredit = '4.1.01';
-                $dend_kredit = '4.1.02';
-
-                if (Keuangan::startWith($trx->rekening_kredit, $dend_kredit)) continue;
-                if (in_array($trx->idtp, $data_idtp)) continue;
-
-                $tgl_transaksi = $trx->tgl_transaksi;
-                $realisasi_pokok = 0;
-                $realisasi_jasa = 0;
-
-                foreach ($trx->tr_idtp as $idtp) {
-                        if ($idtp->id_pinj != $pinkel->id) continue;
-
-                    if (Keuangan::startWith($idtp->rekening_kredit, $poko_kredit)) {
-                        $realisasi_pokok = intval($idtp->jumlah);
-                        $sum_pokok += $realisasi_pokok;
-                        $alokasi_pokok -= $realisasi_pokok;
-                    }
-
-                    if (Keuangan::startWith($idtp->rekening_kredit, $jasa_kredit)) {
-                        $realisasi_jasa = intval($idtp->jumlah);
-                        $sum_jasa += $realisasi_jasa;
-                        $alokasi_jasa -= $realisasi_jasa;
-                    }
-                }
-
-                $ra = [];
-                $time_transaksi = strtotime($tgl_transaksi);
-
-                foreach ($data_rencana as $key => $value) {
-                    if ($key <= $time_transaksi) {
-                        $ra = $value;
-                    }
-                }
-
-                $target_pokok = 0;
-                $target_jasa = 0;
-                if ($ra) {
-                    $target_pokok = $ra['target_pokok'];
-                    $target_jasa = $ra['target_jasa'];
-                }
-
-                $tunggakan_pokok = $target_pokok - $sum_pokok;
-                $tunggakan_jasa = $target_jasa - $sum_jasa;
-
-                if ($tunggakan_pokok < 0) {
-                    $tunggakan_pokok = 0;
-                }
-
-                if ($tunggakan_jasa < 0) {
-                    $tunggakan_jasa = 0;
-                }
-
-                $real[$trx->idtp] = [
-                    'id' => $trx->idtp,
-                    'loan_id' => $pinkel->id,
-                    'tgl_transaksi' => $tgl_transaksi,
-                    'realisasi_pokok' => $realisasi_pokok,
-                    'realisasi_jasa' => $realisasi_jasa,
-                    'sum_pokok' => $sum_pokok,
-                    'sum_jasa' => $sum_jasa,
-                    'saldo_pokok' => $alokasi_pokok,
-                    'saldo_jasa' => $alokasi_jasa,
-                    'tunggakan_pokok' => $tunggakan_pokok,
-                    'tunggakan_jasa' => $tunggakan_jasa,
-                    'lu' => date('Y-m-d H:i:s'),
-                    'id_user' => 1,
-                ];
-
-                $data_id_real[] = $trx->idtp;
-                $data_idtp[] = $trx->idtp;
-            }
-        
-            RealAngsuran::where('loan_id', $pinkel->id)->delete();
-
-            RealAngsuran::insert($real);
-            
         return response()->json([
             'success' => true
         ]);
@@ -3000,319 +2788,102 @@ class TransaksiController extends Controller
         ]);
     }
 
-    
-    public function regenerateReali($pinj_i)
+
+    public function regenerateReali($pinkel)
     {
-        $kec = Kecamatan::where('id', Session::get('lokasi'))
-            ->first();
         $keuangan = new Keuangan;
-        if (!$pinj_i) {
+        if (!$pinkel) {
             return response()->json([
                 'success' => false,
                 'msg' => 'Error'
             ]);
         }
 
-        $id_pinkel = $pinj_i->id;
+        $id_pinkel = $pinkel->id;
         $transaksi = Transaksi::select(
             'idtp',
             'tgl_transaksi'
         )->where([
-            ['id_pinj_i', $pinj_i->id],
+            ['id_pinj_i', $pinkel->id],
             ['idtp', '!=', '0']
         ])->with([
             'tr_idtp'
         ])->groupBy('idtp', 'tgl_transaksi')->orderBy('tgl_transaksi', 'ASC')->orderBy('idtp', 'ASC')->get();
 
-        $alokasi_pokok = intval($pinj_i->alokasi);
-        $alokasi_jasa = intval($pinj_i->alokasi * ($pinj_i->pros_jasa / 100));
+        $alokasi_pokok = intval($pinkel->alokasi);
+        $alokasi_jasa = intval($pinkel->alokasi * ($pinkel->pros_jasa / 100));
+
+        $poko_kredit = '1.1.03';
+        $jasa_kredit = '4.1.01';
+        $dend_kredit = '4.1.02';
 
         $sum_pokok = 0;
         $sum_jasa = 0;
 
-                $alokasi = $pinj_i->alokasi;
-                $tgl_cair = $pinj_i->tgl_cair;
+        // dd($transaksi);
+        RealAngsuranI::where('loan_id', $pinkel->id)->delete();
+        foreach ($transaksi as $trx) {
+            $tgl_transaksi = $trx->tgl_transaksi;
 
-                if ($tgl_cair == "0000-00-00") {
-                    $tgl_cair = $pinj_i->tgl_tunggu;
-                }
-
-            $simpan_tgl =$tgl_cair;
-                $desa = $pinj_i->anggota->d;
-
-            $tgl_angsur = $tgl_cair;
-            $tanggal_cair = date('d', strtotime($tgl_cair));
-
-            if ($desa) {
-                if ($desa->jadwal_angsuran_desa > 0) {
-                    $angsuran_desa = $desa->jadwal_angsuran_desa;
-                    if ($angsuran_desa > 0) {
-                        $tgl_pinjaman = date('Y-m', strtotime($tgl_cair));
-                        $tgl_cair = $tgl_pinjaman . '-' . $angsuran_desa;
-                    }
-                }
-            }
-
-            if ($kec->batas_angsuran > 0) {
-                $batas_tgl_angsuran = $kec->batas_angsuran;
-                if ($tanggal_cair >= $batas_tgl_angsuran) {
-                    $tgl_cair = date('Y-m-d', strtotime('+1 month', strtotime($tgl_cair)));
-                }
-            }
-
-            $jenis_jasa = $pinj_i->jenis_jasa;
-            $jangka = $pinj_i->jangka;
-            $sa_pokok = $pinj_i->sistem_angsuran;
-            $sa_jasa = $pinj_i->sa_jasa;
-            $pros_jasa = $pinj_i->pros_jasa;
-
-            $sistem_pokok = ($pinj_i->sis_pokok) ? $pinj_i->sis_pokok->sistem : '1';
-            $sistem_jasa = ($pinj_i->sis_jasa) ? $pinj_i->sis_jasa->sistem : '1';
-
-            if ($sa_pokok == 11) {
-                $tempo_pokok        = ($jangka) - 24 / $sistem_pokok;
-            } else if ($sa_pokok == 14) {
-                $tempo_pokok        = ($jangka) - 3 / $sistem_pokok;
-            } else if ($sa_pokok == 15) {
-                $tempo_pokok        = ($jangka) - 2 / $sistem_pokok;
-            } else if ($sa_pokok == 20) {
-                $tempo_pokok        = ($jangka) - 12 / $sistem_pokok;
-            } else {
-                $tempo_pokok        = floor($jangka / $sistem_pokok);
-            }
-
-            if ($sa_jasa == 11) {
-                $tempo_jasa        = ($jangka) - 24 / $sistem_jasa;
-            } else if ($sa_jasa == 14) {
-                $tempo_jasa        = ($jangka) - 3 / $sistem_jasa;
-            } else if ($sa_jasa == 15) {
-                $tempo_jasa        = ($jangka) - 2 / $sistem_jasa;
-            } else if ($sa_jasa == 20) {
-                $tempo_jasa        = ($jangka) - 12 / $sistem_jasa;
-            } else {
-                $tempo_jasa        = floor($jangka / $sistem_jasa);
-            }
-
-            $ra = [];
-            $alokasi_pokok = $alokasi;
-            if ($jenis_jasa == '1') {
-                for ($j = 1; $j <= $jangka; $j++) {
-                    $sisa = $j % $sistem_jasa;
-                    $ke = $j / $sistem_jasa;
-
-                    $alokasi_jasa = $alokasi_pokok * ($pros_jasa / 100);
-                    $wajib_jasa = $alokasi_jasa / $tempo_jasa;
-                    $wajib_jasa = Keuangan::pembulatan($wajib_jasa, (string) $kec->pembulatan);
-                    $sum_jasa = $wajib_jasa * ($tempo_jasa - 1);
-
-                    if ($sisa == 0 and $ke != $tempo_jasa) {
-                        $angsuran_jasa = $wajib_jasa;
-                    } elseif ($sisa == 0 and $ke == $tempo_jasa) {
-                        $angsuran_jasa = $alokasi_jasa - $sum_jasa;
-                    } else {
-                        $angsuran_jasa = 0;
-                    }
-
-                    if ($jenis_jasa == '2') {
-                        $angsuran_jasa = $wajib_jasa;
-                        $alokasi_pokok -= $ra[$j]['pokok'];
-                    }
-
-                    $ra[$j]['jasa'] = $angsuran_jasa;
-                }
-            }
-
-            for ($i = 1; $i <= $jangka; $i++) {
-                $sisa = $i % $sistem_pokok;
-                $ke = $i / $sistem_pokok;
-
-                $wajib_pokok = Keuangan::pembulatan($alokasi / $tempo_pokok, (string) $kec->pembulatan);
-                $sum_pokok = $wajib_pokok * ($tempo_pokok - 1);
-
-                if ($sisa == 0 and $ke != $tempo_pokok) {
-                    $angsuran_pokok = $wajib_pokok;
-                } elseif ($sisa == 0 and $ke == $tempo_pokok) {
-                    $angsuran_pokok = $alokasi - $sum_pokok;
-                } else {
-                    $angsuran_pokok = 0;
-                }
-
-                $ra[$i]['pokok'] = $angsuran_pokok;
-            }
-
-            if ($jenis_jasa != '1') {
-                for ($j = 1; $j <= $jangka; $j++) {
-                    $sisa = $j % $sistem_jasa;
-                    $ke = $j / $sistem_jasa;
-
-                    $alokasi_jasa = $alokasi_pokok * ($pros_jasa / 100);
-                    $wajib_jasa = $alokasi_jasa / $tempo_jasa;
-                    $wajib_jasa = Keuangan::pembulatan($wajib_jasa, (string) $kec->pembulatan);
-                    $sum_jasa = $wajib_jasa * ($tempo_jasa - 1);
-
-                    if ($sisa == 0 and $ke != $tempo_jasa) {
-                        $angsuran_jasa = $wajib_jasa;
-                    } elseif ($sisa == 0 and $ke == $tempo_jasa) {
-                        $angsuran_jasa = $alokasi_jasa - $sum_jasa;
-                    } else {
-                        $angsuran_jasa = 0;
-                    }
-
-                    if ($jenis_jasa == '2') {
-                        $angsuran_jasa = $wajib_jasa;
-                        $alokasi_pokok -= $ra[$j]['pokok'];
-                    }
-
-                    $ra[$j]['jasa'] = $angsuran_jasa;
-                }
-            }
-
-            $ra['alokasi'] = $alokasi;
-
-            $target_pokok = 0;
-            $target_jasa = 0;
-
-            $data_rencana = [];
-            $data_rencana[strtotime($tgl_cair)] = [
-                'loan_id' => $pinj_i->id,
-                'angsuran_ke' => 0,
-                'jatuh_tempo' => $simpan_tgl,
-                'wajib_pokok' => 0,
-                'wajib_jasa' => 0,
-                'target_pokok' => $target_pokok,
-                'target_jasa' => $target_jasa,
+            $insert[$trx->idtp] = [
+                'id' => $trx->idtp,
+                'loan_id' => $pinkel->id,
+                'tgl_transaksi' => $tgl_transaksi,
+                'realisasi_pokok' => 0,
+                'realisasi_jasa' => 0,
+                'sum_pokok' => $sum_pokok,
+                'sum_jasa' => $sum_jasa,
+                'saldo_pokok' => $alokasi_pokok - $sum_pokok,
+                'saldo_jasa' => $alokasi_jasa - $sum_jasa,
+                'tunggakan_pokok' => 0,
+                'tunggakan_jasa' => 0,
                 'lu' => date('Y-m-d H:i:s'),
-                'id_user' => 1
+                'id_user' => auth()->user()->id,
             ];
-            $rencana[] = $data_rencana[strtotime($tgl_cair)];
 
-            for ($x = 1; $x <= $jangka; $x++) {
-                $bulan  = substr($tgl_cair, 5, 2);
-                $tahun  = substr($tgl_cair, 0, 4);
+            if (count($trx->tr_idtp) > 0) {
+                $ra = RencanaAngsuranI::where([
+                    ['loan_id', $id_pinkel],
+                    ['jatuh_tempo', '<=', $tgl_transaksi],
+                    ['angsuran_ke', '!=', '0']
+                ])->orderBy('jatuh_tempo', 'DESC');
 
-                if ($sa_pokok == 12) {
-                    $tambah = $x * 7;
-                    $penambahan = "+$tambah days";
+                if ($ra->count() > 0) {
+                    $ra = $ra->first();
                 } else {
-                    $penambahan = "+$x month";
-                }
-                $jatuh_tempo = date('Y-m-d', strtotime($penambahan, strtotime($tgl_cair)));
-
-                $pokok = $ra[$x]['pokok'];
-                $jasa = $ra[$x]['jasa'];
-
-                if ($x == 1) {
-                    $target_pokok = $pokok;
-                } elseif ($x >= 2) {
-                    $target_pokok += $pokok;
-                }
-                if ($x == 1) {
-                    $target_jasa = $jasa;
-                } elseif ($x >= 2) {
-                    $target_jasa += $jasa;
+                    $ra->target_pokok = 0;
+                    $ra->target_jasa = 0;
                 }
 
-                $data_rencana[strtotime($jatuh_tempo)] = [
-                    'loan_id' => $pinj_i->id,
-                    'angsuran_ke' => $x,
-                    'jatuh_tempo' => $jatuh_tempo,
-                    'wajib_pokok' => $pokok,
-                    'wajib_jasa' => $jasa,
-                    'target_pokok' => $target_pokok,
-                    'target_jasa' => $target_jasa,
-                    'lu' => date('Y-m-d H:i:s'),
-                    'id_user' => 1
-                ];
-                $rencana[] = $data_rencana[strtotime($jatuh_tempo)];
+                foreach ($trx->tr_idtp as $tr) {
+                    if (Keuangan::startWith($tr->rekening_kredit, $poko_kredit)) {
+                        $sum_pokok += intval($tr->jumlah);
+
+                        $tunggakan_pokok = $ra->target_pokok - $sum_pokok;
+                        if ($tunggakan_pokok <= 0) $tunggakan_pokok = 0;
+
+                        $insert[$trx->idtp]['realisasi_pokok'] = $tr->jumlah;
+                        $insert[$trx->idtp]['sum_pokok'] = $sum_pokok;
+                        $insert[$trx->idtp]['saldo_pokok'] = $alokasi_pokok - $sum_pokok;
+                        $insert[$trx->idtp]['tunggakan_pokok'] = $tunggakan_pokok;
+                    }
+
+                    if (Keuangan::startWith($tr->rekening_kredit, $jasa_kredit)) {
+                        $sum_jasa += intval($tr->jumlah);
+
+                        $tunggakan_jasa = $ra->target_jasa - $sum_jasa;
+                        if ($tunggakan_jasa <= 0) $tunggakan_jasa = 0;
+
+                        $insert[$trx->idtp]['realisasi_jasa'] = $tr->jumlah;
+                        $insert[$trx->idtp]['sum_jasa'] = $sum_jasa;
+                        $insert[$trx->idtp]['saldo_jasa'] = $alokasi_jasa - $sum_jasa;
+                        $insert[$trx->idtp]['tunggakan_jasa'] = $tunggakan_jasa;
+                    }
+                }
             }
+        }
+        RealAngsuranI::insert($insert);
 
-            $alokasi_pokok = $alokasi;
-            $alokasi_jasa = $target_jasa;
-
-            $data_idtp = [];
-            $sum_pokok = 0;
-            $sum_jasa = 0;
-
-            ksort($data_rencana);
-            foreach ($pinj_i->trx as $trx) {
-                $poko_kredit = '1.1.03';
-                $jasa_kredit = '4.1.01';
-                $dend_kredit = '4.1.02';
-
-                if (Keuangan::startWith($trx->rekening_kredit, $dend_kredit)) continue;
-                if (in_array($trx->idtp, $data_idtp)) continue;
-
-                $tgl_transaksi = $trx->tgl_transaksi;
-                $realisasi_pokok = 0;
-                $realisasi_jasa = 0;
-
-                foreach ($trx->tr_idtp as $idtp) {
-                        if ($idtp->id_pinj != $pinj_i->id) continue;
-
-                    if (Keuangan::startWith($idtp->rekening_kredit, $poko_kredit)) {
-                        $realisasi_pokok = intval($idtp->jumlah);
-                        $sum_pokok += $realisasi_pokok;
-                        $alokasi_pokok -= $realisasi_pokok;
-                    }
-
-                    if (Keuangan::startWith($idtp->rekening_kredit, $jasa_kredit)) {
-                        $realisasi_jasa = intval($idtp->jumlah);
-                        $sum_jasa += $realisasi_jasa;
-                        $alokasi_jasa -= $realisasi_jasa;
-                    }
-                }
-
-                $ra = [];
-                $time_transaksi = strtotime($tgl_transaksi);
-
-                foreach ($data_rencana as $key => $value) {
-                    if ($key <= $time_transaksi) {
-                        $ra = $value;
-                    }
-                }
-
-                $target_pokok = 0;
-                $target_jasa = 0;
-                if ($ra) {
-                    $target_pokok = $ra['target_pokok'];
-                    $target_jasa = $ra['target_jasa'];
-                }
-
-                $tunggakan_pokok = $target_pokok - $sum_pokok;
-                $tunggakan_jasa = $target_jasa - $sum_jasa;
-
-                if ($tunggakan_pokok < 0) {
-                    $tunggakan_pokok = 0;
-                }
-
-                if ($tunggakan_jasa < 0) {
-                    $tunggakan_jasa = 0;
-                }
-
-                $real[$trx->idtp] = [
-                    'id' => $trx->idtp,
-                    'loan_id' => $pinj_i->id,
-                    'tgl_transaksi' => $tgl_transaksi,
-                    'realisasi_pokok' => $realisasi_pokok,
-                    'realisasi_jasa' => $realisasi_jasa,
-                    'sum_pokok' => $sum_pokok,
-                    'sum_jasa' => $sum_jasa,
-                    'saldo_pokok' => $alokasi_pokok,
-                    'saldo_jasa' => $alokasi_jasa,
-                    'tunggakan_pokok' => $tunggakan_pokok,
-                    'tunggakan_jasa' => $tunggakan_jasa,
-                    'lu' => date('Y-m-d H:i:s'),
-                    'id_user' => 1,
-                ];
-
-                $data_id_real[] = $trx->idtp;
-                $data_idtp[] = $trx->idtp;
-            }
-        
-            RealAngsuranI::where('loan_id', $pinj_i->id)->delete();
-
-            RealAngsuranI::insert($real);
-            
         return response()->json([
             'success' => true
         ]);
