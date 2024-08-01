@@ -17,7 +17,7 @@
     <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <link id="pagestyle" href="/assets/css/material-dashboard.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/assets/css/style.css" media="screen" title="no title">
+    <link rel="stylesheet" href="/assets/login/style.css" media="screen" title="no title">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 </head>
 
