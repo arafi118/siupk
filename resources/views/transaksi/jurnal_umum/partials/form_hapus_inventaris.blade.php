@@ -1,14 +1,14 @@
 @php
     use App\Utils\Inventaris as Inv;
 @endphp
-<div class="card-body">
+<div>
 <input type="hidden" name="harsat" id="harsat">
 <input type="hidden" name="relasi" id="relasi">
 <div class="row">
     <div class="col-md-8">
         <div class="position-relative mb-3">
             <label class="form-label" for="nama_barang">Nama Barang</label>
-            <select class="form-control" name="nama_barang" id="nama_barang">
+            <select class="js_select2 form-control" name="nama_barang" id="nama_barang">
                 <option value="">-- Pilih Nama Barang --</option>
                 @foreach ($inventaris as $inv)
                     @php
@@ -26,7 +26,7 @@
     <div class="col-md-4">
         <div class="position-relative mb-3">
             <label class="form-label" for="alasan">Alasan</label>
-            <select class="form-control" name="alasan" id="alasan">
+            <select class="js_select2 form-control" name="alasan" id="alasan">
                 <option value="">-- Alasan Penghapusan --</option>
                 <option value="hapus">Hapus</option>
                 <option value="hilang">Hilang</option>
@@ -65,6 +65,9 @@
 </div>
 </div>
 <script>
+    $('.js_select2').select2({
+     theme: 'bootstrap-5'
+    });
     new Choices($('#nama_barang')[0])
     new Choices($('#alasan')[0])
 

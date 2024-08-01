@@ -1,9 +1,9 @@
-<div class="card-body">
+<div>
     <div class="row">
         <div class="col-md-6">
             <div class="position-relative mb-3">
                 <label for="sumber_dana">Sumber Dana</label>
-                <select class="form-control" name="sumber_dana" id="sumber_dana">
+                <select class="js-select2 form-control" name="sumber_dana" id="sumber_dana">
                     <option value="">-- {{ $label1 }} --</option>
                     @foreach ($rek1 as $r1)
                         <option value="{{ $r1->kode_akun }}">
@@ -17,7 +17,7 @@
         <div class="col-md-6">
             <div class="position-relative mb-3">
                 <label for="disimpan_ke">{{ $label2 }}</label>
-                <select class="form-control" name="disimpan_ke" id="disimpan_ke">
+                <select class="js-select2 form-control" name="disimpan_ke" id="disimpan_ke">
                     <option value="">-- {{ $label2 }} --</option>
                     @foreach ($rek2 as $r2)
                         <option value="{{ $r2->kode_akun }}">
@@ -30,3 +30,8 @@
         </div>
     </div>
 </div>
+<script>
+        $('.js-select2').select2({
+        theme: 'bootstrap-5'
+        });
+</script>

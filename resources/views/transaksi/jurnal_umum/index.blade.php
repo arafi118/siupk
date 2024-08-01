@@ -1,7 +1,14 @@
 @extends('layouts.base')
 
 @section('content')
-    <div class="app-main__inner">
+<style>
+    .btn--text {
+        color: white;
+        font-weight: bold;
+
+    }
+</style>
+<div class="app-main__inner">
         <div class="tab-content">
             <br>
             <div class="row">
@@ -23,7 +30,7 @@
                                     <div class="col-md-6">
                                         <div class="position-relative mb-3">
                                             <label for="jenis_transaksi">Jenis Transaksi</label>
-                                            <select class="form-control" name="jenis_transaksi" id="jenis_transaksi">
+                                            <select class="js-example-basic-single form-control" name="jenis_transaksi" id="jenis_transaksi">
                                                 <option value="">-- Pilih Jenis Transaksi --</option>
                                                 @foreach ($jenis_transaksi as $jt)
                                                     <option value="{{ $jt->id }}">
@@ -39,7 +46,7 @@
                                     <div class="col-md-6">
                                         <div class="position-relative mb-3">
                                             <label for="sumber_dana">Sumber Dana</label>
-                                            <select class="form-control" name="sumber_dana" id="sumber_dana">
+                                            <select class="js-example-basic-single form-control" name="sumber_dana" id="sumber_dana">
                                                 <option value="">-- Sumber Dana --</option>
                                             </select>
                                             <small class="text-danger" id="msg_sumber_dana"></small>
@@ -48,7 +55,7 @@
                                     <div class="col-md-6">
                                         <div class="position-relative mb-3">
                                             <label for="disimpan_ke">Disimpan Ke</label>
-                                            <select class="form-control" name="disimpan_ke" id="disimpan_ke">
+                                            <select class="js-example-basic-single form-control" name="disimpan_ke" id="disimpan_ke">
                                                 <option value="">-- Disimpan Ke --</option>
                                             </select>
                                             <small class="text-danger" id="msg_disimpan_ke"></small>
@@ -71,15 +78,8 @@
                                              <small class="text-danger" id="msg_nominal"></small>
                                         </div>
                                     </div>
-                                </div>
+                                </div><br>
                                 <div style="text-align: right;">
-                                    <style>
-                                        .btn--text {
-                                            color: white;
-                                            font-weight: bold;
-
-                                        }
-                                    </style>
                                     <button type="button" id="SimpanTransaksi"  class="mt-2 btn btn-focus btn--text">SIMPAN TRANSAKSI</button>
                                 </div><br>
                             </form>
@@ -105,7 +105,7 @@
                                 <div class="row">
                                     <div class="position-relative mb-3">
                                     <label class="form-label" for="tahun">Tahunan</label>
-                                            <select class="form-control" name="tahun" id="tahun">
+                                <select class="js-example-basic-single form-control" name="tahun" id="tahun">
                                     @php
                                         $tgl_pakai = $kec->tgl_pakai;
                                         $th_pakai = explode('-', $tgl_pakai)[0];
@@ -122,24 +122,24 @@
                                     <div class="col-md-12">
                                         <div class="position-relative mb-3">
                                         <label class="form-label" for="bulan">Bulanan</label>
-                                            <select class="form-control" name="bulan" id="bulan">
-                                    <option value="">--</option>
-                                    <option {{ date('m') == '01' ? 'selected' : '' }} value="01">01. JANUARI</option>
-                                    <option {{ date('m') == '02' ? 'selected' : '' }} value="02">02. FEBRUARI</option>
-                                    <option {{ date('m') == '03' ? 'selected' : '' }} value="03">03. MARET</option>
-                                    <option {{ date('m') == '04' ? 'selected' : '' }} value="04">04. APRIL</option>
-                                    <option {{ date('m') == '05' ? 'selected' : '' }} value="05">05. MEI</option>
-                                    <option {{ date('m') == '06' ? 'selected' : '' }} value="06">06. JUNI</option>
-                                    <option {{ date('m') == '07' ? 'selected' : '' }} value="07">07. JULI</option>
-                                    <option {{ date('m') == '08' ? 'selected' : '' }} value="08">08. AGUSTUS</option>
-                                    <option {{ date('m') == '09' ? 'selected' : '' }} value="09">09. SEPTEMBER
-                                    </option>
-                                    <option {{ date('m') == '10' ? 'selected' : '' }} value="10">10. OKTOBER</option>
-                                    <option {{ date('m') == '11' ? 'selected' : '' }} value="11">11. NOVEMBER
-                                    </option>
-                                    <option {{ date('m') == '12' ? 'selected' : '' }} value="12">12. DESEMBER
-                                    </option>
-                                </select>
+                                            <select class="js-example-basic-single form-control" name="bulan" id="bulan">
+                                                <option value="">--</option>
+                                                <option {{ date('m') == '01' ? 'selected' : '' }} value="01">01. JANUARI</option>
+                                                <option {{ date('m') == '02' ? 'selected' : '' }} value="02">02. FEBRUARI</option>
+                                                <option {{ date('m') == '03' ? 'selected' : '' }} value="03">03. MARET</option>
+                                                <option {{ date('m') == '04' ? 'selected' : '' }} value="04">04. APRIL</option>
+                                                <option {{ date('m') == '05' ? 'selected' : '' }} value="05">05. MEI</option>
+                                                <option {{ date('m') == '06' ? 'selected' : '' }} value="06">06. JUNI</option>
+                                                <option {{ date('m') == '07' ? 'selected' : '' }} value="07">07. JULI</option>
+                                                <option {{ date('m') == '08' ? 'selected' : '' }} value="08">08. AGUSTUS</option>
+                                                <option {{ date('m') == '09' ? 'selected' : '' }} value="09">09. SEPTEMBER
+                                                </option>
+                                                <option {{ date('m') == '10' ? 'selected' : '' }} value="10">10. OKTOBER</option>
+                                                <option {{ date('m') == '11' ? 'selected' : '' }} value="11">11. NOVEMBER
+                                                </option>
+                                                <option {{ date('m') == '12' ? 'selected' : '' }} value="12">12. DESEMBER
+                                                </option>
+                                            </select>
                                             <small class="text-danger" id="msg_bulan"></small>
                                         </div>
                                     </div>
@@ -148,25 +148,18 @@
                                     <div class="col-md-12">
                                         <div class="position-relative mb-3">
                                         <label class="form-label" for="tanggal">Tanggal</label>
-                                <select class="form-control" name="tanggal" id="tanggal">
-                                    <option value="">--</option>
-                                    @for ($j = 1; $j <= 31; $j++)
-                                        @php $no=str_pad($j, 2, "0" , STR_PAD_LEFT) @endphp
-                                        <option value="{{ $no }}">{{ $no }}</option>
-                                    @endfor
-                                </select>
-                                <small class="text-danger" id="msg_tanggal"></small>
+                                        <select class="js-example-basic-single form-control" name="tanggal" id="tanggal">
+                                            <option value="">--</option>
+                                            @for ($j = 1; $j <= 31; $j++)
+                                                @php $no=str_pad($j, 2, "0" , STR_PAD_LEFT) @endphp
+                                                <option value="{{ $no }}">{{ $no }}</option>
+                                            @endfor
+                                        </select>
+                                        <small class="text-danger" id="msg_tanggal"></small>
                                         </div>
                                     </div>
                                 </div>
                                 <div style="text-align: right;">
-                                    <style>
-                                        .btn--text {
-                                            color: rgb(255, 255, 255);
-                                            font-weight: bold;
-
-                                        }
-                                    </style>
                                     <button type="button" id="BtndetailTransaksi" class="mt-2 btn btn-success btn--text">DETAIL TRANSAKSI</button>
                                 </div>
 
@@ -176,9 +169,27 @@
                     </div>
                 </div>
             </div>
+
+            
+        <div id="notifikasi"></div>
         </div>
-    </div>
-    <div id="notifikasi"></div>
+    </div> <br><br><br>
+
+    <form action="/transaksi/reversal" method="post" id="formReversal">
+        @csrf
+    
+        <input type="hidden" name="rev_idt" id="rev_idt">
+        <input type="hidden" name="rev_idtp" id="rev_idtp">
+        <input type="hidden" name="rev_id_pinj" id="rev_id_pinj">
+    </form>
+    
+    <form action="/transaksi/hapus" method="post" id="formHapus">
+        @csrf
+    
+        <input type="hidden" name="del_idt" id="del_idt">
+        <input type="hidden" name="del_idtp" id="del_idtp">
+        <input type="hidden" name="del_id_pinj" id="del_id_pinj">
+    </form>
 @endsection
 
 @section('modal')
@@ -228,29 +239,14 @@
     </div>
 </div>
 @endsection
-@section('content')
-
-<form action="/transaksi/reversal" method="post" id="formReversal">
-    @csrf
-
-    <input type="hidden" name="rev_idt" id="rev_idt">
-    <input type="hidden" name="rev_idtp" id="rev_idtp">
-    <input type="hidden" name="rev_id_pinj" id="rev_id_pinj">
-</form>
-
-<form action="/transaksi/hapus" method="post" id="formHapus">
-    @csrf
-
-    <input type="hidden" name="del_idt" id="del_idt">
-    <input type="hidden" name="del_id_pinj" id="del_id_pinj">
-    <input type="hidden" name="del_idtp" id="del_idtp">
-</form>
-
-@endsection
 
 @section('script')
 
 <script>
+
+    $('.js-example-basic-single').select2({
+        theme: 'bootstrap-5'
+        });
 
     $("#nominal").maskMoney({
             allowNegative: true
@@ -291,10 +287,10 @@
             e.preventDefault()
             var sumber_dana = $(this).val()
 
-            var tgl_transaksi = $('#tgl_transaksi').val().split('-')
-            var tahun = tgl_transaksi[0];
+            var tgl_transaksi = $('#tgl_transaksi').val().split('/')
+            var tahun = tgl_transaksi[2];
             var bulan = tgl_transaksi[1];
-            var hari = tgl_transaksi[2];
+            var hari = tgl_transaksi[0];
 
             $.get('/trasaksi/saldo/' + sumber_dana + '?tahun=' + tahun + '&bulan=' + bulan + '&hari=' + hari,
                 function(result) {
@@ -343,8 +339,6 @@
                 success: function(result) {
                     if (result.success) {
                         Swal.fire('Berhasil', result.msg, 'success').then(() => {
-                            jenis_transaksi.setChoiceByValue('')
-
                             $('#notifikasi').html(result.view)
                             var sumber_dana = $('#sumber_dana').val()
                             var tgl_transaksi = $('#tgl_transaksi').val().split('/')
