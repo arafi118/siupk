@@ -41,13 +41,13 @@ body {
 
   .avatar {
     font-size: 16px ;
-    background: #ffffff;
+    background: #ffffffd4e9;
     width: 100px;
     height: 100px;
     line-height: 100px;
     position: fixed;
     left: 50%;
-    top: 11%;
+    top: 12%;
     transform: translate(-50%, -50%);
     text-align: center;
     border-radius: 50%;
@@ -58,8 +58,8 @@ body {
     font-size: 21px;
     font-family: sans-serif;
     letter-spacing: 1px;
-    padding-top: 25%;
-    margin-top: -20px;
+    padding-top: 27%;
+    margin-top: -15px;
   }
   .login h3 {
     text-align: center;
@@ -68,7 +68,7 @@ body {
     font-family: sans-serif;
     letter-spacing: 1px;
     padding-top: 5%;
-    margin-top: -20px;
+    margin-top: -22px;
   }
   .login p {
     text-align: center;

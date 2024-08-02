@@ -24,8 +24,8 @@
 <body>
     <div class="login">
         <div class="avatar">
-            {{-- <img src="/assets/img/abt_logo.png" style="width: 100px;" alt="Avatar"> --}}
-            <img src="{{ $logo }}" style="width: 100px;" alt="Avatar" />
+            <img src="/assets/img/abt_logo.png" style="width: 100px;" alt="Avatar">
+            {{-- <img src="{{ $logo }}" style="width: 100px;" alt="Avatar" /> --}}
         </div>
 
         <h2><b> {{ $kec->nama_lembaga_sort }}</b></h2>
