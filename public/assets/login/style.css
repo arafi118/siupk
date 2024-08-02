@@ -41,7 +41,7 @@ body {
 
   .avatar {
     font-size: 16px ;
-    background: #ffffffd4e9;
+    background: rgba(255, 255, 255, 0.859);
     width: 100px;
     height: 100px;
     line-height: 100px;

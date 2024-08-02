@@ -22,12 +22,13 @@
             $t_tunggakan_jasa = 0;
         @endphp
 
-        @if ($jpp->nama_jpp != 'SPP' && !$empty)
-            <div class="break"></div>
-            @php
-                $empty = false;
-            @endphp
-        @endif
+       
+        @if ($jpp->nama_jpp != 'Kendaraan' && !$empty)
+        <div class="break"></div>
+        @php
+            $empty = false;
+        @endphp
+    @endif
 
         <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
             <tr>
@@ -48,7 +49,8 @@
         <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
             <tr style="background: rgb(230, 230, 230); font-weight: bold;">
                 <th class="t l b" height="20" width="3%">No</th>
-                <th class="t l b">Kelompok - Loan ID.</th>
+                <th class="t l b" height="20" width="3%">Loan ID.</th>
+                <th class="t l b">Nasabah</th>
                 <th class="t l b" width="8%">Tgl Cair</th>
                 <th class="t l b" width="8%">Tempo</th>
                 <th class="t l b" width="9%">Alokasi</th>
@@ -72,7 +74,7 @@
                             $t_tunggakan_jasa += $j_tunggakan_jasa;
                         @endphp
                         <tr style="font-weight: bold;">
-                            <td class="t l b" colspan="4">Jumlah {{ $nama_desa }}</td>
+                            <td class="t l b" colspan="5">Jumlah {{ $nama_desa }}</td>
                             <td class="t l b" align="right">{{ number_format($j_alokasi) }}</td>
                             <td class="t l b" align="right">{{ number_format($j_saldo) }}</td>
                             <td class="t l b" align="right">{{ number_format($j_tunggakan_pokok) }}
@@ -81,7 +83,7 @@
                     @endif
 
                     <tr style="font-weight: bold;">
-                        <td class="t l b r" colspan="8" align="left">{{ $pinj_i->kode_desa }}. {{ $pinj_i->nama_desa }}
+                        <td class="t l b r" colspan="9" align="left">{{ $pinj_i->kode_desa }}. {{ $pinj_i->nama_desa }}
                         </td>
                     </tr>
 
@@ -128,9 +130,8 @@
                 @endphp
                 <tr>
                     <td class="t l b" align="center">{{ $nomor++ }}</td>
-                    <td class="t l b" align="left">
-                        {{ $pinj_i->namadepan }} - {{ $pinj_i->id }}
-                    </td>
+                    <td class="t l b" align="left"> {{ $pinj_i->id }}</td> 
+                    <td class="t l b" align="left"> {{ $pinj_i->namadepan }}</td>
                     <td class="t l b" align="center">{{ Tanggal::tglIndo($pinj_i->tgl_cair) }}</td>
                     <td class="t l b" align="center">{{ $pinj_i->jangka }}/{{ $pinj_i->sis_pokok->sistem }}</td>
                     <td class="t l b" align="right">{{ number_format($pinj_i->alokasi) }}</td>
@@ -157,7 +158,7 @@
                 @endphp
 
                 <tr style="font-weight: bold;">
-                    <td class="t l b" colspan="4">Jumlah {{ $nama_desa }}</td>
+                    <td class="t l b" colspan="5">Jumlah {{ $nama_desa }}</td>
                     <td class="t l b" align="right">{{ number_format($j_alokasi) }}</td>
                     <td class="t l b" align="right">{{ number_format($j_saldo) }}</td>
                     <td class="t l b" align="right">{{ number_format($j_tunggakan_pokok) }}
@@ -165,7 +166,7 @@
                 </tr>
 
                 <tr>
-                    <td colspan="8" style="padding: 0px !important;">
+                    <td colspan="9" style="padding: 0px !important;">
                         <table class="p" border="0" width="100%" cellspacing="0" cellpadding="0"
                             style="font-size: 11px;">
                             <tr style="background: rgb(74, 74, 74); font-weight: bold; color: #fff;" class="t l b r">

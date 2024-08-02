@@ -171,6 +171,17 @@
     @endphp
 
     <textarea name="msgInvoice" id="msgInvoice" class="d-none">{{ Session::get('msg') }}</textarea>
+
+    <form action="/pelaporan/preview" method="post" id="FormLaporanDashboard" target="_blank">
+        @csrf
+
+        <input type="hidden" name="type" id="type" value="pdf">
+        <input type="hidden" name="tahun" id="tahun" value="{{ date('Y') }}">
+        <input type="hidden" name="bulan" id="bulan" value="{{ date('m') }}">
+        <input type="hidden" name="hari" id="hari" value="{{ date('d') }}">
+        <input type="hidden" name="laporan" id="laporan" value="">
+        <input type="hidden" name="sub_laporan" id="sub_laporan" value="">
+    </form>
 @endsection
 
 
@@ -432,7 +443,7 @@
                                                 <thead>
                                                     <tr>
                                                         <td align="center">No</td>
-                                                        <td align="center">Nik</td>
+                                                        <td align="center">Nik </td>
                                                         <td align="center">Nama Nasabah</td>
                                                         <td align="center">Alamat</td>
                                                         <td align="center">T/S</td>
@@ -497,17 +508,6 @@
             </div>
         </div>
     </div>
-
-    <form action="/pelaporan/preview" method="post" id="FormLaporanDashboard" target="_blank">
-        @csrf
-
-        <input type="hidden" name="type" id="type" value="pdf">
-        <input type="hidden" name="tahun" id="tahun" value="{{ date('Y') }}">
-        <input type="hidden" name="bulan" id="bulan" value="{{ date('m') }}">
-        <input type="hidden" name="hari" id="hari" value="{{ date('d') }}">
-        <input type="hidden" name="laporan" id="laporan" value="">
-        <input type="hidden" name="sub_laporan" id="sub_laporan" value="">
-    </form>
 @endsection
 
 @section('script')
@@ -656,7 +656,7 @@
             $('#jatuhTempo').modal('show')
 
 
-            let tab = $('#jatuhTempo').find('ul li a.active')
+            let tab = $('#jatuhTempo').find('div.nav-wrapper div.d-flex button.active')
             if (tab.length > 0) {
                 if (tab.attr('aria-controls') != 'tagihan') {
                     $('.btn-pelaporan').show()
@@ -673,7 +673,7 @@
             $('#pinjaman').modal('show')
             $('.btn-pelaporan').show()
 
-            let tab = $('#pinjaman').find('ul li a.active')
+            let tab = $('#pinjaman').find('div.nav-wrapper div.d-flex button.active')
             if (tab.length > 0) {
                 setLaporan('5', tab.attr('aria-controls'))
             }
@@ -688,8 +688,8 @@
             setLaporan('5', $('#aktif').attr('aria-controls'))
         })
 
-        $(document).on('click', '.nav.nav-pills .nav-item', function() {
-            var a = $(this).find('a')
+        $(document).on('click', 'div.nav-wrapper div.d-flex button', function() {
+            var a = $(this)
 
             if (a.attr('aria-controls') == 'tagihan') {
                 $('.btn-pelaporan').hide()
