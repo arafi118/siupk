@@ -17,6 +17,7 @@ use App\Models\SimpananAnggota;
 use App\Models\Kecamatan;
 use App\Models\Kelompok;
 use App\Models\Lkm;
+use App\Models\RekeningOjk;
 use App\Models\PinjamanKelompok;
 use App\Models\PinjamanIndividu;
 use App\Models\PinjamanAnggota;
@@ -380,7 +381,7 @@ class PelaporanController extends Controller
         }
 
         $tgl = $thn . '-' . $bln . '-' . $hari;
-        $data['sub_judul'] = 'PER ' . date('t', strtotime($tgl)) . ' ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+        $data['sub_judul'] = 'Per ' . date('t', strtotime($tgl)) . ' ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         $data['tgl'] = Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
 
         $data['debit'] = 0;
@@ -410,17 +411,51 @@ class PelaporanController extends Controller
    
     private function LRL(array $data) 
     {
-        $thn = $data['tahun'];
-        $bln = $data['bulan'];
-        $hari = $data['hari'];
+            $keuangan = new Keuangan;
 
-        $tgl = $thn . '-' . $bln . '-' . $hari;
-        $data['judul'] = 'Laporan Keuangan';
-        $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
-        if ($data['bulanan']) {
-            $data['judul'] = 'Laporan Keuangan';
-            $data['sub_judul'] = 'Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
-        }
+            $thn = $data['tahun'];
+            $bln = $data['bulan'];
+            $hari = $data['hari'];
+            $awal_tahun = $thn . '-01-01';
+    
+            if ($bln == '1' && $hari == '1') {
+                return $this->laba_rugi_tutup_buku($data);
+            }
+    
+            $tgl = $thn . '-' . $bln . '-' . $hari;
+            if ($data['bulanan']) {
+                $data['sub_judul'] = 'Periode ' . Tanggal::tglLatin($thn . '-' . $bln . '-01') . ' S.D ' . Tanggal::tglLatin($data['tgl_kondisi']);
+                $data['tgl'] = Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+                $data['tgl'] = Tanggal::tglLatin($tgl);
+
+                $data['bulan_lalu'] = date('Y-m-t', strtotime('-1 month', strtotime($thn . '-' . $bln . '-10')));
+                $data['header_lalu'] = 'Bulan Lalu';
+                $data['header_sekarang'] = 'Bulan Ini';
+            } else {
+                $data['sub_judul'] = 'Periode ' . Tanggal::tglLatin($awal_tahun) . ' S.D ' . Tanggal::tglLatin($data['tgl_kondisi']);
+                $data['tgl'] = Tanggal::tahun($tgl);
+                $data['bulan_lalu'] = ($thn - 1) . '-12-31';
+                $data['header_lalu'] = 'Tahun Lalu';
+                $data['header_sekarang'] = 'Tahun Ini';
+            }
+    
+            $jenis = 'Tahunan';
+            if ($data['bulanan']) {
+                $jenis = 'Bulanan';
+            }
+    
+            $pph = $keuangan->pph($data['tgl_kondisi'], $jenis);
+            $laba_rugi = $keuangan->laporan_laba_rugi($data['tgl_kondisi'], $jenis);
+    
+            $data['pph'] = [
+                'bulan_lalu' => $pph['bulan_lalu'],
+                'sekarang' => $pph['bulan_ini']
+            ];
+    
+            $data['pendapatan'] = $laba_rugi['pendapatan'];
+            $data['beban'] = $laba_rugi['beban'];
+            $data['pendapatanNOP'] = $laba_rugi['pendapatan_non_ops'];
+            $data['bebanNOP'] = $laba_rugi['beban_non_ops'];
 
         $view = view('pelaporan.view.ojk.labarugi', $data)->render();
 

@@ -19,4 +19,8 @@ class AkunLevel3 extends Model
     {
         return $this->hasMany(Rekening::class, 'parent_id', 'id')->orderBy('kode_akun', 'ASC');
     }
+    public function rek_ojk()
+    {
+        return $this->hasMany(Rekening::class, 'parent_id', 'id')->orderBy('rekening', 'ASC');
+    }
 }

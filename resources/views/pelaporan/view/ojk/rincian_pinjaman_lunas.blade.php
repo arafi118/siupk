@@ -259,6 +259,8 @@
 					$selisih = $selisih_bulan + $selisih_tahun;
 
 							$_kolek = 0;
+							$y12 = date('Y')-1;
+
 
 						if ($wajib_pokok != '0') {
 							$_kolek = $tunggakan_pokok / $wajib_pokok;
@@ -324,8 +326,8 @@
 
 								<tr>
 									<td class="style10 top" colspan="12"><b>Keterangan</b> : Data yang ditampilkan diatas
-										merupakan Individu aktif pada tahun berjalan ----, untuk menampilkan data Individu
-										aktif tahun lalu dapat memilih mode tahun lalu----,</td>
+										merupakan Individu aktif pada tahun berjalan {{$tahun}}, untuk menampilkan data Individu
+										aktif tahun lalu dapat memilih mode tahun lalu {{$y12}},</td>
 								</tr>
 							@endif
 							

@@ -1,137 +1,277 @@
-<title>LABA RUGI</title>
-@php
-    use App\Utils\Keuangan;
-    $keuangan = new Keuangan();
-@endphp
-
+<title>Laba Rugi</title>
 @extends('pelaporan.layout.base')
 
 @section('content')
-<style type="text/css">
-	.style6 {
-		font-family: Verdana, Arial, Helvetica, sans-serif;
-		font-size: 16px;
-	}
+    @php
+        $saldo1 = 0;
+        $saldo_bln_lalu1 = 0;
 
-	.style9 {
-		font-family: Verdana, Arial, Helvetica, sans-serif;
-		font-size: 11px;
-	}
+        $saldo2 = 0;
+        $saldo_bln_lalu2 = 0;
+    @endphp
 
-	.style10 {
-		font-family: Verdana, Arial, Helvetica, sans-serif;
-		font-size: 10px;
-	}
-
-	.top {
-		border-top: 1px solid #000000;
-	}
-
-	.bottom {
-		border-bottom: 1px solid #000000;
-	}
-
-	.left {
-		border-left: 1px solid #000000;
-	}
-
-	.right {
-		border-right: 1px solid #000000;
-	}
-
-	.all {
-		border: 1px solid #000000;
-	}
-
-	.style26 {
-		font-family: Verdana, Arial, Helvetica, sans-serif
-	}
-
-	.style27 {
-		font-family: Verdana, Arial, Helvetica, sans-serif;
-		font-size: 11px;
-		font-weight: bold;
-	}
-
-	.align-justify {
-		text-align: justify;
-	}
-
-	.align-center {
-		text-align: center;
-	}
-
-	.align-right {
-		text-align: right;
-	}
-</style>
-<body onLoad="window.print()">
-    <!-- Header Page -->
-	<table width="96%" border="0" align="center" cellpadding="3" cellspacing="0" class="style9">
+    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
+    <tr>
+        <td align="center" height="30" colspan="4" class="style3 bottom" style="font-size: 15px;">
+            <br>{{$lkm->nama_lkm_long}}
+            <br>SANDI LKM {{$lkm->sandi_lkm}}
+            <br>LAPORAN POSISI KEUANGAN
+            <br>{{ strtoupper($sub_judul) }}</b>
+        </td>
+    </tr>
         <tr>
-            <td height="20" colspan="3" class="bottom"></td>
-            <td height="20"colspan="3"  class="bottom">
-                <div align="right" class="style9">
-                    Dokumen Laporan -----<br>
-                    Kd.Doc. RL----- Lembar-1
-                </div>
+            <td colspan="4" height="5"></td>
+        </tr>
+        <tr>
+            <td align="center" width="55%" height="16">Rekening</td>
+            <td align="center" width="15%">s.d. {{ $header_lalu }}</td>
+            <td align="center" width="15%">{{ $header_sekarang }}</td>
+            <td align="center" width="15%">s.d. {{ $header_sekarang }}</td>
+        </tr>
+        <tr>
+            <td colspan="4" height="14">4. Pendapatan</td>
+        </tr>
+
+        @foreach ($pendapatan as $p)
+            <tr>
+                <td colspan="4" height="14">{{ $p['kode_akun'] }}. {{ $p['nama_akun'] }}</td>
+            </tr>
+
+            @php
+                $jum_bulan_lalu = 0;
+                $jum_saldo = 0;
+            @endphp
+
+            @foreach ($p['rek'] as $rek)
+                @php
+                    $bg = 'rgb(230, 230, 230)';
+                    if ($loop->iteration % 2 == 0) {
+                        $bg = 'rgb(255, 255, 255)';
+                    }
+                @endphp
+
+                <tr>
+                    <td align="left">{{ $rek['kode_akun'] }}. {{ $rek['nama_akun'] }}</td>
+                    <td align="right">{{ number_format($rek['saldo_bln_lalu'], 2) }}</td>
+                    <td align="right">{{ number_format($rek['saldo'] - $rek['saldo_bln_lalu'], 2) }}</td>
+                    <td align="right">{{ number_format($rek['saldo'], 2) }}</td>
+                </tr>
+
+                @php
+                    $saldo_bln_lalu1 += $rek['saldo_bln_lalu'];
+                    $saldo1 += $rek['saldo'];
+
+                    $jum_bulan_lalu += $rek['saldo_bln_lalu'];
+                    $jum_saldo += $rek['saldo'];
+                @endphp
+            @endforeach
+
+            <tr>
+                <td align="left" height="14">Jumlah {{ $p['kode_akun'] }}. {{ $p['nama_akun'] }}</td>
+                <td align="right">{{ number_format($jum_bulan_lalu, 2) }}</td>
+                <td align="right">{{ number_format($jum_saldo - $jum_bulan_lalu, 2) }}</td>
+                <td align="right">{{ number_format($jum_saldo, 2) }}</td>
+            </tr>
+        @endforeach
+
+        <tr>
+            <td colspan="4" height="2"></td>
+        </tr>
+        <tr>
+            <td colspan="4" height="14">5. Beban</td>
+        </tr>
+
+        @foreach ($beban as $b)
+            <tr>
+                <td colspan="4" height="14">{{ $b['kode_akun'] }}. {{ $b['nama_akun'] }}</td>
+            </tr>
+
+            @php
+                $jum_bulan_lalu = 0;
+                $jum_saldo = 0;
+            @endphp
+
+            @foreach ($b['rek'] as $rek)
+                @php
+                    $bg = 'rgb(230, 230, 230)';
+                    if ($loop->iteration % 2 == 0) {
+                        $bg = 'rgb(255, 255, 255)';
+                    }
+                @endphp
+
+                <tr>
+                    <td align="left">{{ $rek['kode_akun'] }}. {{ $rek['nama_akun'] }}</td>
+                    <td align="right">{{ number_format($rek['saldo_bln_lalu'], 2) }}</td>
+                    <td align="right">{{ number_format($rek['saldo'] - $rek['saldo_bln_lalu'], 2) }}</td>
+                    <td align="right">{{ number_format($rek['saldo'], 2) }}</td>
+                </tr>
+
+                @php
+                    $saldo_bln_lalu1 -= $rek['saldo_bln_lalu'];
+                    $saldo1 -= $rek['saldo'];
+
+                    $jum_bulan_lalu += $rek['saldo_bln_lalu'];
+                    $jum_saldo += $rek['saldo'];
+                @endphp
+            @endforeach
+            <tr>
+                <td align="left" height="14">Jumlah {{ $b['kode_akun'] }}. {{ $b['nama_akun'] }}</td>
+                <td align="right">{{ number_format($jum_bulan_lalu, 2) }}</td>
+                <td align="right">{{ number_format($jum_saldo - $jum_bulan_lalu, 2) }}</td>
+                <td align="right">{{ number_format($jum_saldo, 2) }}</td>
+            </tr>
+        @endforeach
+
+        <tr>
+            <td align="left">A. Laba Rugi OPERASIONAL (Kode Akun 4.1 - 5.1 - 5.2) </td>
+            <td align="right">{{ number_format($saldo_bln_lalu1, 2) }}</td>
+            <td align="right">{{ number_format($saldo1 - $saldo_bln_lalu1, 2) }}</td>
+            <td align="right">{{ number_format($saldo1, 2) }}</td>
+        </tr>
+
+        <tr>
+            <td colspan="4" height="2"></td>
+        </tr>
+
+        @foreach ($pendapatanNOP as $pNOP)
+            <tr>
+                <td colspan="4" height="14">{{ $pNOP['kode_akun'] }}. {{ $pNOP['nama_akun'] }}</td>
+            </tr>
+
+            @php
+                $jum_bulan_lalu = 0;
+                $jum_saldo = 0;
+            @endphp
+
+            @foreach ($pNOP['rek'] as $rek)
+                @php
+                    $bg = 'rgb(230, 230, 230)';
+                    if ($loop->iteration % 2 == 0) {
+                        $bg = 'rgb(255, 255, 255)';
+                    }
+                @endphp
+
+                <tr>
+                    <td align="left">{{ $rek['kode_akun'] }}. {{ $rek['nama_akun'] }}</td>
+                    <td align="right">{{ number_format($rek['saldo_bln_lalu'], 2) }}</td>
+                    <td align="right">{{ number_format($rek['saldo'] - $rek['saldo_bln_lalu'], 2) }}</td>
+                    <td align="right">{{ number_format($rek['saldo'], 2) }}</td>
+                </tr>
+
+                @php
+                    $saldo_bln_lalu2 += $rek['saldo_bln_lalu'];
+                    $saldo2 += $rek['saldo'];
+
+                    $jum_bulan_lalu += $rek['saldo_bln_lalu'];
+                    $jum_saldo += $rek['saldo'];
+                @endphp
+            @endforeach
+
+            <tr>
+                <td align="left" height="14">Jumlah {{ $pNOP['kode_akun'] }}. {{ $pNOP['nama_akun'] }}</td>
+                <td align="right">{{ number_format($jum_bulan_lalu, 2) }}</td>
+                <td align="right">{{ number_format($jum_saldo - $jum_bulan_lalu, 2) }}</td>
+                <td align="right">{{ number_format($jum_saldo, 2) }}</td>
+            </tr>
+        @endforeach
+
+        @foreach ($bebanNOP as $bNOP)
+            <tr>
+                <td colspan="4" height="14">{{ $bNOP['kode_akun'] }}. {{ $bNOP['nama_akun'] }}</td>
+            </tr>
+
+            @php
+                $jum_bulan_lalu = 0;
+                $jum_saldo = 0;
+            @endphp
+
+            @foreach ($bNOP['rek'] as $rek)
+                @php
+                    $bg = 'rgb(230, 230, 230)';
+                    if ($loop->iteration % 2 == 0) {
+                        $bg = 'rgb(255, 255, 255)';
+                    }
+                @endphp
+
+                <tr>
+                    <td align="left">{{ $rek['kode_akun'] }}. {{ $rek['nama_akun'] }}</td>
+                    <td align="right">{{ number_format($rek['saldo_bln_lalu'], 2) }}</td>
+                    <td align="right">{{ number_format($rek['saldo'] - $rek['saldo_bln_lalu'], 2) }}</td>
+                    <td align="right">{{ number_format($rek['saldo'], 2) }}</td>
+                </tr>
+
+                @php
+                    $saldo_bln_lalu2 -= $rek['saldo_bln_lalu'];
+                    $saldo2 -= $rek['saldo'];
+
+                    $jum_bulan_lalu += $rek['saldo_bln_lalu'];
+                    $jum_saldo += $rek['saldo'];
+                @endphp
+            @endforeach
+
+            <tr>
+                <td align="left" height="14">Jumlah {{ $bNOP['kode_akun'] }}. {{ $bNOP['nama_akun'] }}</td>
+                <td align="right">{{ number_format($jum_bulan_lalu, 2) }}</td>
+                <td align="right">{{ number_format($jum_saldo - $jum_bulan_lalu, 2) }}</td>
+                <td align="right">{{ number_format($jum_saldo, 2) }}</td>
+            </tr>
+        @endforeach
+
+        <tr>
+            <td align="left">B. Laba Rugi OPERASIONAL (Kode Akun 4.2 - 5.3) </td>
+            <td align="right">{{ number_format($saldo_bln_lalu2, 2) }}</td>
+            <td align="right">{{ number_format($saldo2 - $saldo_bln_lalu2, 2) }}</td>
+            <td align="right">{{ number_format($saldo2, 2) }}</td>
+        </tr>
+
+        <tr>
+            <td colspan="4" height="2"></td>
+        </tr>
+
+        <tr>
+            <td align="left">C. Laba Rugi Sebelum Taksiran Pajak (A + B) </td>
+            <td align="right">{{ number_format($saldo_bln_lalu1 + $saldo_bln_lalu2, 2) }}</td>
+            <td align="right">{{ number_format($saldo1 - $saldo_bln_lalu1 + ($saldo2 - $saldo_bln_lalu2), 2) }}</td>
+            <td align="right">{{ number_format($saldo1 + $saldo2, 2) }}</td>
+        </tr>
+
+        <tr>
+            <td colspan="4" height="2"></td>
+        </tr>
+
+        <tr>
+            <td colspan="4" height="14">5.4 Beban Pajak</td>
+        </tr>
+        <tr>
+            <td align="left">5.4.01.01. Taksiran PPh (0.5%) </td>
+            <td align="right">{{ number_format($pph['bulan_lalu'], 2) }}</td>
+            <td align="right">{{ number_format($pph['sekarang'] - $pph['bulan_lalu'], 2) }}</td>
+            <td align="right">{{ number_format($pph['sekarang'], 2) }}</td>
+        </tr>
+
+        <tr>
+            <td colspan="4" height="2"></td>
+        </tr>
+
+        <tr>
+            <td colspan="4" style="padding: 0px !important;">
+                <table class="p" border="0" width="100%" cellspacing="0" cellpadding="0"
+                    style="font-size: 11px;">
+                    <tr style="background: rgb(200, 200, 200); font-weight: bold;">
+                        <td width="55%" align="left">C. Laba Rugi Setelah Taksiran Pajak (A + B) </td>
+                        <td width="15%" align="right">
+                            {{ number_format($saldo_bln_lalu1 + $saldo_bln_lalu2 - $pph['bulan_lalu'], 2) }}</td>
+                        <td width="15%" align="right">
+                            {{ number_format($saldo1 - $saldo_bln_lalu1 + ($saldo2 - $saldo_bln_lalu2) - ($pph['sekarang'] - $pph['bulan_lalu']), 2) }}
+                        </td>
+                        <td width="15%" align="right">{{ number_format($saldo1 + $saldo2 - $pph['sekarang'], 2) }}
+                        </td>
+                    </tr>
+                </table>
+
+                <div style="margin-top: 16px;"></div>
+                {!! json_decode(str_replace('{tanggal}', $tanggal_kondisi, $kec->ttd->tanda_tangan_pelaporan), true) !!}
             </td>
         </tr>
     </table>
-    
-    <table width="100%" border="0" align="center" cellpadding="3" cellspacing="0" class="style9">
-        <tr>
-            <td colspan="6">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="center" height="30" colspan="6" class="style6 bottom">
-                <br>----
-                <br>SANDI LKM----
-                <br>LAPORAN KINERJA KEUANGAN
-                <br>Untuk Periode Yang Berakhir Pada Tanggal ----</b>
-                <?php
-                // echo $tgl_kondisi; 
-                ?>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="6">&nbsp;</td>
-        </tr>
-        </table>
-
-        <table width="100%" border="1" align="center" cellpadding="3" cellspacing="0" class="style9">
-        <tr height='25' class='style27'>
-            <th width="5%" class="left top right">No</th>
-            <th width="25%" class="top right">Nama Akun</th>
-            <th width="10%" class="top right">Kode Akun</th>
-            <th width="20%" class="top right">SD. Bulan Lalu</th>
-            <th width="20%" class="top right">Bulan Ini</th>
-            <th width="20%" class="top right">SD. Bulan Ini</th>
-        </tr>
-        <!-- Contoh data, ganti dengan data dinamis dari PHP -->
-        <tr height='25'>
-            <td class='left top right align-center'>1</td>
-            <td class='top right'>Contoh Akun 1</td>
-            <td class='top right'>001</td>
-            <td class='top right align-right'>-----</td>
-            <td class='top right align-right'>-----</td>
-            <td class='top right right align-right'>-----</td>
-        </tr>
-        <tr height='25'>
-            <td class='left top right align-center'>2</td>
-            <td class='top right'>Contoh Akun 2</td>
-            <td class='top right'>002</td>
-            <td class='top right align-right'>-----</td>
-            <td class='top right align-right'>-----</td>
-            <td class='top right right align-right'>-----</td>
-        </tr>
-        <!-- Akhir contoh data -->
-        <tr height="50">
-            <th class="left top right align-center" colspan="3">Jumlah ----</th>
-            <th class="top right align-right">----</th>
-            <th class="top right align-right">----</th>
-            <th class="top right align-right">----</th>
-        </tr>
-    </table>
-
 @endsection
