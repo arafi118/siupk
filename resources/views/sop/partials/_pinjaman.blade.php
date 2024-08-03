@@ -97,13 +97,12 @@
     <div class="row">
         <div class="col-md-6">
             <div class="position-relative mb-3">
-                <label class="form-label" for="hit_fee_agent">Rumus Fee Agen</label><br>
-                <input type="radio" id="hit_fee_agent" name="hit_fee_agent" value="1" {{ $kec->hit_fee_agent == 1 ? 'checked' : '' }}>
+                <label class="form-label" for="hit_fee_agen">Rumus Fee Agen</label><br>
+                <input type="radio" id="hit_fee_agen" name="hit_fee_agen" value="1" {{ $kec->hit_fee_agen == 1 ? 'checked' : '' }}>
                 <label> Rumus 1 (Pros % Fee x Harga Barang)</label><br>
-                <input type="radio" id="hit_fee_agent" name="hit_fee_agent" value="2" {{ $kec->hit_fee_agent == 2 ? 'checked' : '' }}>
+                <input type="radio" id="hit_fee_agen" name="hit_fee_agen" value="2" {{ $kec->hit_fee_agen == 2 ? 'checked' : '' }}>
                 <label> Rumus 2 (Pros % Fee x Total Jasa)</label><br><br>
             </div>
-            
         </div>
         <div class="col-md-6">
             <div class="position-relative mb-3">
@@ -119,11 +118,10 @@
         <div class="col-md-12">
             <div class="position-relative mb-3">
                 <label class="form-label"for="hak_kredit">Jumlah Maksimal Kredit (Per Pelanggan)</label><br>
-                    
-                    <input type="radio" id="hak_kredit" name="hak_kredit" value="1" {{ $kec->hak_kredit == 1 ? 'checked' : '' }}>
-                    <label>Hanya satu</label><br>
-                    <input type="radio" id="hak_kredit" name="hak_kredit" value="2" {{ $kec->hak_kredit == 2 ? 'checked' : '' }}>
-                    <label>Lebih dari satu</label><br><br>
+                <input type="radio" id="hak_kredit" name="hak_kredit" value="1" {{ $kec->hak_kredit == 1 ? 'checked' : '' }}>
+                <label>Hanya satu</label><br>
+                <input type="radio" id="hak_kredit" name="hak_kredit" value="2" {{ $kec->hak_kredit == 2 ? 'checked' : '' }}>
+                <label>Lebih dari satu</label><br><br>
             </div>
         </div>
     </div>
