@@ -40,8 +40,7 @@
 </table>
 <table width="97%" border="0" align="center" cellpadding="3" cellspacing="0">
 <tr>
-	    <td class="style6 align-center" colspan="3" ><b>PROFIL LKM</b> 
-	    <br>LKM</br>
+	    <td class="style6 align-center" colspan="3" ><b>PROFIL LKM</b> <br>
 	    <span class="style9 align-center">Untuk Periode Yang Berakhir Pada Tanggal {{ $tgl }}</span>
 	    <p class="style9 align-center"> &nbsp; </p>
 	    </td>
@@ -69,7 +68,7 @@
 	    <tr>
 	        <td width="2%" class="style9"> </td>
             <td width="30%" class="style9">b. Kelurahan/Desa</td>
-            <td width="60%" class="style9">: </td>
+            <td width="60%" class="style9">: {{$lkm->desa}} </td>
 	    </tr>
 	    <tr>
 	        <td width="2%" class="style9"> </td>
@@ -84,12 +83,12 @@
 	    <tr>
 	        <td width="2%" class="style9"> </td>
             <td width="30%" class="style9">e. Provinsi</td>
-            <td width="60%" class="style9">: {{$kab->nama_prov}}</td>
+            <td width="60%" class="style9">: {{$lkm->provinsi}}</td>
 	    </tr>
 	    <tr>
 	        <td width="2%" class="style9"> </td>
             <td width="30%" class="style9">f. Kode Pos</td>
-            <td width="60%" class="style9">: ------</td>
+            <td width="60%" class="style9">: {{$lkm->kode_pos}}</td>
 	    </tr>
 	    <tr>
 	        <td width="2%" class="style9">4.</td>

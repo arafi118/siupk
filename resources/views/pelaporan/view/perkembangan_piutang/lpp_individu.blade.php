@@ -34,7 +34,7 @@
             $t_tunggakan_pokok = 0;
             $t_tunggakan_jasa = 0;
         @endphp
-        @if ($jpp->nama_jpp != 'SPP')
+        @if (strtoupper($jpp->nama_jpp) != 'KENDARAAN')
             <div class="break"></div>
         @endif
         <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">

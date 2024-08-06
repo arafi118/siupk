@@ -63,7 +63,7 @@
         <h1 style="margin: 0px;">{{ strtoupper($judul) }}</h1>
         <div style="margin: 0px; font-size: 24px;">{{ strtoupper($sub_judul) }}</div>
         <main><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <!-- <table width="100%" border="0" align="center"style="font-size: 13px;">
+       <table width="50%" border="0" align="center"style="font-size: 13px;">
         <tr>
             <td align="center"colspan="2">Disusun Oleh</td>
         </tr>
@@ -76,17 +76,13 @@
         </tr>
         <tr>
             <td width="15">Sekretaris</td>
-            <td width="15" colspan="1">:{{$kec->sebutan_level_2}}</td>
+            <td width="30" colspan="1">:{{$kec->sebutan_level_2}}</td>
         </tr>
         <tr>
             <td width="15">Bendahara</td>
             <td width="15" colspan="1">:{{$kec->sebutan_level_3}}</td>
         </tr>
-        <tr>
-            <td width="15">Staff UPK</td>
-            <td width="15" colspan="1">:</td>
-        </tr>
-       </table> -->
+       </table>
 
 </main>
     </header>
