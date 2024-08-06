@@ -8,14 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class JenisSimpanan extends Model
 {
     use HasFactory;
+
     protected $table = 'jenis_simpanan';
     public $timestamps = false;
 
-    protected $guarded = ['id'];
-
-    // ambil data dari simpanan anggota
-    public function sa()
+    public function simpanan()
     {
-        return $this->hasMany(SimpananAnggota::class, 'jenis_simpanan', 'id');
+        return $this->hasMany(Simpanan::class, 'jenis_simpanan');
     }
 }
