@@ -318,6 +318,11 @@ class PelaporanController extends Controller
         $n_saham = $data['lkm']->nama_saham;
         $rp_saham = $data['lkm']->rp_saham;
         $pros_saham = $data['lkm']->pros_saham;
+        $n_direksi = $data['lkm']->nama_direksi;
+        $j_direksi = $data['lkm']->jab_direksi;
+        $n_kom = $data['lkm']->nama_kom;
+        $j_kom = $data['lkm']->jab_kom;
+
 
         $jsaham = substr_count($n_saham, "#") + 1;
         $sahamData = [];
@@ -327,10 +332,20 @@ class PelaporanController extends Controller
         $exps1 = explode("#", $n_saham);
         $exps2 = explode("#", $rp_saham);
         $exps3 = explode("#", $pros_saham);
+        $exps4 = explode("#", $n_direksi);
+        $exps5 = explode("#", $j_direksi);
+        $exps6 = explode("#", $n_kom);
+        $exps7 = explode("#", $j_kom);
+
 
         $n_saham1 = ''; 
         $rp_saham1 = '0';
         $pros_saham1 = '';
+        $n_direksi = '';
+        $j_direksi = '';
+        $n_kom = '';
+        $j_kom = '';
+
 
         // Inisialisasi variabel dalam array $data
         $data['jrp_saham1'] = 0;
@@ -338,14 +353,24 @@ class PelaporanController extends Controller
         $data['sahamData'] = [];
 
         for ($s = 1; $s <= $jsaham; $s++) {
-            $data['n_saham1'] = $exps1[$s - 1];
-            $data['rp_saham1'] = $exps2[$s - 1];
-            $data['pros_saham1'] = $exps3[$s - 1];
+            $data['n_saham1'] = (isset($exps1[$s - 1])) ? $exps1[$s - 1]:'';
+            $data['rp_saham1'] = (isset($exps2[$s - 1])) ? $exps2[$s - 1]:'';
+            $data['pros_saham1'] = (isset($exps3[$s - 1])) ? $exps3[$s - 1]:'';
+            $data['n_direksi1'] = (isset($exps4[$s - 1])) ? $exps4[$s - 1]:'';
+            $data['j_direksi1'] = (isset($exps5[$s - 1])) ? $exps5[$s - 1]:'';
+            $data['n_kom1'] = (isset($exps6[$s - 1])) ? $exps6[$s - 1]:'';
+            $data['j_kom1'] = (isset($exps7[$s - 1])) ? $exps7[$s - 1]:'';
+
 
             $data['sahamData'][] = [
                 'n_saham' => $data['n_saham1'],
                 'rp_saham' => $data['rp_saham1'],
                 'pros_saham' => $data['pros_saham1'],
+                'n_direksi' => $data['n_direksi1'],
+                'j_direksi' => $data['j_direksi1'],
+                'n_kom' => $data['n_kom1'],
+                'j_kom' => $data['j_kom1'],
+
             ];
             $data['jrp_saham1'] += $data['rp_saham1'];
             $data['jpros_saham1'] += $data['pros_saham1'];

@@ -48,7 +48,7 @@
     <tr>
 	        <td width="2%" class="style9">1.</td>
             <td width="30%" class="style9">Nama LKM</td>
-            <td width="60%" class="style9">: {{$lkm->nama_lkm_long}}</td>
+            <td width="60%" class="style9">: {{$kec->nama_lembaga_sort}}</td>
 	    </tr>
 	     <tr>
 	        <td width="2%" class="style9">2.</td>
@@ -167,8 +167,8 @@
                 	                 <th class="style9 bottom top align-center" width="50%">Jabatan</th>
                 	               </tr> 
                                  <tr>
-                	                 <td class="style9 bottom align-center" width="50%">{{$lkm->nama_direksi}}&nbsp;</td>
-                	                 <td class="style9 bottom align-center" width="50%">{{$lkm->jab_direksi}}&nbsp;</td>
+                	                 <td class="style9 bottom align-center" width="50%">{{$n_direksi1}}&nbsp;</td>
+                	                 <td class="style9 bottom align-center" width="50%">{{$j_direksi1}}&nbsp;</td>
                 	                 </tr>
                                    </table>
                                    </td>
@@ -179,8 +179,8 @@
                 	                 <th class="style9 bottom top align-center" width="50%">Jabatan</th>
                 	               </tr>            
                                  <tr>
-                	                 <td class="style9 bottom align-center" width="50%">{{$lkm->nama_kom}}&nbsp;</td>
-                	                 <td class="style9 bottom align-center" width="50%">{{$lkm->jab_kom}}&nbsp;</td>
+                	                 <td class="style9 bottom align-center" width="50%">{{$n_kom1}}&nbsp;</td>
+                	                 <td class="style9 bottom align-center" width="50%">{{$j_kom1}}&nbsp;</td>
                 	                 </tr>
                                    </table>
                                    <table>
