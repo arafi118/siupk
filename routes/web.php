@@ -298,9 +298,6 @@ Route::get('/generate/agent', [GenerateController::class, 'agent']);
 Route::get('/generate/supplier', [GenerateController::class, 'agent']);
 Route::post('/generate/save/{offset?}', [GenerateController::class, 'generate']);
 
-Route::get('/{invoice}', [PelaporanController::class, 'invoice']);
-
-Route::get('/simpanan/register_penduduk', [SimpananController::class, 'register'])->middleware('auth');
 Route::get('/simpanan/cari_nik', [SimpananController::class, 'cariNik'])->middleware('auth');
 
 Route::post('/simpanan/{nik}/blokir', [SimpananController::class, 'blokir'])->middleware('auth');
@@ -312,8 +309,6 @@ Route::get('/register_simpanan/{nia}', [SimpananController::class, 'register'])-
 Route::get('/register_simpanan/jenis_simpanan/{id}', [SimpananController::class, 'jenis_simpanan'])->middleware('auth');
 
 Route::get('/simpanan/kuasa/{id}', [SimpananController::class, 'Kuasa'])->middleware('auth');
-
-Route::post('/simpanan/store', [SimpananController::class, 'store'])->middleware('auth');
 
 Route::get('/cetak_kop/{simpanan}', [SimpananController::class, 'kop'])->middleware('auth');
 

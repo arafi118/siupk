@@ -116,19 +116,19 @@
             </li>
             <li>
                 <a href="#">
-                    <i class="metismenu-icon pe-7s-display2"></i>
+                    <i class="metismenu-icon pe-7s-diskette"></i>
                     Simpanan & Utang
                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                 </a>
                 <ul>
                     <li>
-                        <a href="/simpanan/register_penduduk">
+                        <a href="/register_simpanan">
                             <i class="metismenu-icon">
                             </i>Pendataan Utang
                         </a>
                     </li>
                     <li>
-                        <a href="/database/simpanan ">
+                        <a href="/simpanan">
                             <i class="metismenu-icon">
                             </i>Daftar Simpanan & utang
                         </a>
@@ -170,7 +170,7 @@
             </li>
             <li>
                 <a href="/pelaporan">
-                    <i class="metismenu-icon pe-7s-diskette"></i>
+                    <i class="metismenu-icon pe-7s-print"></i>
                     Laporan
                 </a>
             </li>

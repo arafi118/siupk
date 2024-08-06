@@ -46,18 +46,18 @@ class SimpananController extends Controller
                     return $row->js->nama_js ?? '-';
                 })
                 ->addColumn('status', function ($row) {
-                    $status = '<span class="badge badge-secondary">-</span>';
+                    $status = '<span class="badge bg-secondary">-</span>';
                     if ($row->status) {
                         $badge = $row->status == 'A' ? 'success' : 'danger';
-                        $status = '<span class="badge badge-' . $badge . '">' . ($row->status == 'A' ? 'Aktif' : 'Non-Aktif') . '</span>';
+                        $status = '<span class="badge bg-' . $badge . '">' . ($row->status == 'A' ? 'Aktif' : 'Non-Aktif') . '</span>';
                     }
                     return $status;
                 })
                 ->addColumn('status', function ($row) {
-                    $status = '<span class="badge badge-secondary">-</span>';
+                    $status = '<span class="badge bg-secondary">-</span>';
                     if ($row->status) {
                         $badge = $row->status == 'A' ? 'success' : 'danger';
-                        $status = '<span class="badge badge-' . $badge . '">' . ($row->status == 'A' ? 'Aktif' : 'Non-Aktif') . '</span>';
+                        $status = '<span class="badge bg-' . $badge . '">' . ($row->status == 'A' ? 'Aktif' : 'Non-Aktif') . '</span>';
                     }
                     return $status;
                 })
@@ -159,16 +159,6 @@ class SimpananController extends Controller
             'view' => view('simpanan.partials.lembaga')->with(compact('id'))->render()
         ]);
     }
-
-
-
-
-
-
-
-
-
-
 
     public function show(Simpanan $simpanan)
     {

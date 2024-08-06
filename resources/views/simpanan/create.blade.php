@@ -1,15 +1,15 @@
 @extends('layouts.base')
-
 @section('content')
-
     <div class="app-main__inner">
+        <div class="app-page-title">
             <div class="main-card mb-3 card">
                 <div class="card-body p-3" id="SelectIndividu"></div>
             </div>
-            <div class="main-card mb-3 card">
-                <div class="mt-4 pt-1" id="RegisterProposal"></div>
-            </div>
-    </div>
+        </div>   
+        <div class="main-card mb-3 card">
+            <div class="mt-4 pt-1" id="RegisterSimpanan"></div>
+        </div>
+</div>
 @endsection
 
 @section('script')
@@ -28,11 +28,11 @@
             formRegister(id_angg)
         })
 
-        $(document).on('click', '#SimpanProposal', function(e) {
+        $(document).on('click', '#SimpanUtang', function(e) {
             e.preventDefault()
             $('small').html('')
 
-            var form = $('#FormRegisterProposal')
+            var form = $('#FormRegisterSimpanan')
             $.ajax({
                 type: 'post',
                 url: form.attr('action'),
@@ -57,7 +57,7 @@
 
         function formRegister(nia) {
             $.get('/register_simpanan/' + nia, async (result) => {
-                await $('#RegisterProposal').html(result)
+                await $('#RegisterSimpanan').html(result)
             })
         }
     </script>
