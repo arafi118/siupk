@@ -21,6 +21,7 @@ use App\Http\Controllers\PinjamanKelompokController;
 use App\Http\Controllers\SopController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\SimpananController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
 use App\Models\Kecamatan;
@@ -296,5 +297,31 @@ Route::get('/generate/kelompok', [GenerateController::class, 'kelompok']);
 Route::get('/generate/agent', [GenerateController::class, 'agent']);
 Route::get('/generate/supplier', [GenerateController::class, 'agent']);
 Route::post('/generate/save/{offset?}', [GenerateController::class, 'generate']);
+
+Route::get('/{invoice}', [PelaporanController::class, 'invoice']);
+
+Route::get('/simpanan/register_penduduk', [SimpananController::class, 'register'])->middleware('auth');
+Route::get('/simpanan/cari_nik', [SimpananController::class, 'cariNik'])->middleware('auth');
+
+Route::post('/simpanan/{nik}/blokir', [SimpananController::class, 'blokir'])->middleware('auth');
+
+Route::get('/simpanan/detail_simpanan/{id}', [SimpananController::class, 'detailAnggota'])->middleware('auth'); //her
+
+Route::get('/register_simpanan', [SimpananController::class, 'create'])->middleware('auth');
+Route::get('/register_simpanan/{nia}', [SimpananController::class, 'register'])->middleware('auth');
+Route::get('/register_simpanan/jenis_simpanan/{id}', [SimpananController::class, 'jenis_simpanan'])->middleware('auth');
+
+Route::get('/simpanan/kuasa/{id}', [SimpananController::class, 'Kuasa'])->middleware('auth');
+
+Route::post('/simpanan/store', [SimpananController::class, 'store'])->middleware('auth');
+
+Route::get('/cetak_kop/{simpanan}', [SimpananController::class, 'kop'])->middleware('auth');
+
+Route::get('/cetak_koran/{simpanan}', [SimpananController::class, 'koran'])->middleware('auth');
+
+Route::get('/simpanan/get-transaksi', [SimpananController::class, 'getTransaksi'])->middleware('auth');
+
+Route::post('/simpanan/simpan-transaksi', [SimpananController::class, 'simpanTransaksi']);
+Route::resource('/simpanan', SimpananController::class)->middleware('auth');
 
 Route::get('/{invoice}', [PelaporanController::class, 'invoice']);

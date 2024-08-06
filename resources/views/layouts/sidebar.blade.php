@@ -116,6 +116,27 @@
             </li>
             <li>
                 <a href="#">
+                    <i class="metismenu-icon pe-7s-display2"></i>
+                    Simpanan & Utang
+                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                </a>
+                <ul>
+                    <li>
+                        <a href="/simpanan/register_penduduk">
+                            <i class="metismenu-icon">
+                            </i>Pendataan Utang
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/database/simpanan ">
+                            <i class="metismenu-icon">
+                            </i>Daftar Simpanan & utang
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
                     <i class="metismenu-icon pe-7s-graph3"></i>
                     Transaksi
                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
