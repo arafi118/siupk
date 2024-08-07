@@ -6,8 +6,8 @@
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
     <tr>
         <td align="center" height="30" colspan="4" class="style3 bottom" style="font-size: 15px;">
-            <br>{{$lkm->nama_lkm_long}}
-            <br>SANDI LKM {{$lkm->sandi_lkm}}
+            <br>{{$kec->nama_lembaga_long}}
+            <br>SANDI LKM {{$kec->sandi_lkm}}
             <br>LAPORAN POSISI KEUANGAN
             <br>{{ strtoupper($sub_judul) }}</b>
         </td>

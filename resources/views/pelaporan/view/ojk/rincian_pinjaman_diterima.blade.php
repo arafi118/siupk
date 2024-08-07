@@ -100,11 +100,11 @@ $empty = false;
     </tr>
     <tr>
         <td colspan="2" width="30%" class="style9">NAMA LKM</td>
-        <td colspan="6" width="60%" class="style9">:{{$lkm->nama_lkm_long}}</td>
+        <td colspan="6" width="60%" class="style9">:{{$kec->nama_lembaga_long}}</td>
     </tr>
     <tr>
         <td colspan="2" width="30%" class="style9">SANDI LKM</td>
-        <td colspan="6" width="60%" class="style9">:{{$lkm->sandi_lkm}}</td>
+        <td colspan="6" width="60%" class="style9">:{{$kec->sandi_lkm}}</td>
     </tr>
     <tr>
         <td colspan="2" width="30%" class="style9 bottom">PERIODE LAPORAN</td>

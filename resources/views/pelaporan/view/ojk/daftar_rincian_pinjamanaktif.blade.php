@@ -112,16 +112,16 @@
                     (Aktif) <br><br></td>
             </tr>
             <tr>
-                <td colspan="3" width="30%" class="style9">NAMA LKM</td>
-                <td colspan="9" width="70%" class="style9">: {{$lkm->nama_lkm_long}}</td>
+                <td colspan="1" width="30%" class="style9">NAMA LKM</td>
+                <td colspan="11" width="70%" class="style9">: {{$kec->nama_lembaga_long}}</td>
             </tr>
             <tr>
-                <td colspan="3" width="30%" class="style9">SANDI LKM</td>
-                <td colspan="9" width="70%" class="style9">: {{$lkm->sandi_lkm}}</td>
+                <td colspan="1" width="30%" class="style9">SANDI LKM</td>
+                <td colspan="11" width="70%" class="style9">: {{$kec->sandi_lkm}}</td>
             </tr>
             <tr>
-                <td colspan="3" width="30%" class="style9 bottom">PERIODE LAPORAN</td>
-                <td colspan="9" width="70%" class="style9 bottom">: {{ $tgl }}</td>
+                <td colspan="1" width="30%" class="style9 bottom">PERIODE LAPORAN</td>
+                <td colspan="11" width="70%" class="style9 bottom">: {{ $tgl }}</td>
             </tr>
 
             <tr align="center" height="30px" class="style9">

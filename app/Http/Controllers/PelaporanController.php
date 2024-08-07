@@ -14,6 +14,7 @@ use App\Models\JenisLaporanPinjaman;
 use App\Models\JenisProdukPinjaman;
 use App\Models\JenisSimpanan;
 use App\Models\SimpananAnggota;
+use App\Models\Simpanan;
 use App\Models\Kecamatan;
 use App\Models\Kelompok;
 use App\Models\Lkm;
@@ -315,13 +316,13 @@ class PelaporanController extends Controller
         $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
         $data['tgl'] = Tanggal::tglLatin($tgl);
         
-        $n_saham = $data['lkm']->nama_saham;
-        $rp_saham = $data['lkm']->rp_saham;
-        $pros_saham = $data['lkm']->pros_saham;
-        $n_direksi = $data['lkm']->nama_direksi;
-        $j_direksi = $data['lkm']->jab_direksi;
-        $n_kom = $data['lkm']->nama_kom;
-        $j_kom = $data['lkm']->jab_kom;
+        $n_saham = $data['kec']->nama_saham;
+        $rp_saham = $data['kec']->rp_saham;
+        $pros_saham = $data['kec']->pros_saham;
+        $n_direksi = $data['kec']->nama_direksi;
+        $j_direksi = $data['kec']->jab_direksi;
+        $n_kom = $data['kec']->nama_kom;
+        $j_kom = $data['kec']->jab_kom;
 
 
         $jsaham = substr_count($n_saham, "#") + 1;
@@ -716,6 +717,102 @@ class PelaporanController extends Controller
             
             
         $view = view('pelaporan.view.ojk.daftar_rincian_tabungan', $data)->render();
+
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view)->setPaper('A4', 'landscape');
+            return $pdf->stream();
+        } else {
+            return $view;
+        }
+
+    }
+    private function SMPN(array $data) 
+    {  
+        $thn = $data['tahun'];
+        $bln = $data['bulan'];
+        $hari = $data['hari'];
+
+        $tgl = $thn . '-' . $bln . '-' . $hari;
+        $data['judul'] = 'Laporan Keuangan';
+        $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
+        $data['tgl'] = Tanggal::tglLatin($tgl);
+
+        if ($data['bulanan']) {
+            $data['judul'] = 'Laporan Keuangan';
+            $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl); 
+        }
+
+        $data['jenis_pp'] = JenisProdukPinjaman::where('lokasi', '0')->with([
+            'pinjaman_individu' => function ($query) use ($data) {
+                $tb_pinj_i = 'pinjaman_anggota_' . $data['kec']->id;
+                $tb_angg = 'anggota_' . $data['kec']->id;
+                $data['tb_pinj_i'] = $tb_pinj_i;
+
+                $query->select($tb_pinj_i . '.*', $tb_angg . '.namadepan',$tb_angg . '.nik', 'desa.nama_desa', 'desa.kd_desa', 'desa.kode_desa', 'sebutan_desa.sebutan_desa')
+                    ->join($tb_angg, $tb_angg . '.id', '=', $tb_pinj_i . '.nia')
+                    ->join('desa', $tb_angg . '.desa', '=', 'desa.kd_desa')
+                    ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
+                    ->withSum(['real_i' => function ($query) use ($data) {
+                        $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
+                    }], 'realisasi_pokok')
+                    ->withSum(['real_i' => function ($query) use ($data) {
+                        $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
+                    }], 'realisasi_jasa')
+                    ->where($tb_pinj_i . '.sistem_angsuran', '!=', '12')->where(function ($query) use ($data) {
+                        $query->where([
+                            [$data['tb_pinj_i'] . '.status', 'A'],
+                            [$data['tb_pinj_i'] . '.jenis_pinjaman', 'I'],
+                            [$data['tb_pinj_i'] . '.tgl_cair', '<=', $data['tgl_kondisi']]
+                        ])->orwhere([
+                            [$data['tb_pinj_i'] . '.status', 'L'],  
+                            [$data['tb_pinj_i'] . '.jenis_pinjaman', 'I'],
+                            [$data['tb_pinj_i'] . '.tgl_lunas', '>=', $data['tgl_kondisi']]
+                        ])->orwhere([
+                            [$data['tb_pinj_i'] . '.status', 'R'],
+                            [$data['tb_pinj_i'] . '.jenis_pinjaman', 'I'],
+                            [$data['tb_pinj_i'] . '.tgl_lunas', '>=', $data['tgl_kondisi']]
+                        ])->orwhere([
+                            [$data['tb_pinj_i'] . '.status', 'H'],
+                            [$data['tb_pinj_i'] . '.jenis_pinjaman', 'I'],
+                            [$data['tb_pinj_i'] . '.tgl_lunas', '>=', $data['tgl_kondisi']]
+                        ]);
+                    })
+                    ->orderBy($tb_angg . '.desa', 'ASC')
+                    ->orderBy($tb_pinj_i . '.tgl_cair', 'ASC');
+            },
+            'pinjaman_individu.saldo' => function ($query) use ($data) {
+                $query->where('tgl_transaksi', '<=', $data['tgl_kondisi']);
+            },
+            'pinjaman_individu.target' => function ($query) use ($data) {
+                $query->where('jatuh_tempo', '<=', $data['tgl_kondisi']);
+            },
+            'pinjaman_individu.angsuran_pokok',
+            'pinjaman_individu.angsuran_jasa'
+            ])->get();
+
+
+            $data['simpanan_anggota'] = Simpanan::where('lokasi', $kec->id)->first();
+
+            $data['simpanan_anggota'] = Simpanan::where('lokasi', $data['kec']->id)->with([
+                'js',
+                'trx_tarik' => function ($query) use ($data) {
+                    $tgl = $data['tahun'] . '-' . $data['bulan'] . '-01';
+                    $tgl = date('Y-m-t', strtotime($tgl));
+            
+                    $query->where('tgl_transaksi', '<=', $tgl)
+                          ->whereIn('rekening_debit', ['simpanan', 'kas']);
+                },
+                'trx_setor' => function ($query) use ($data) {
+                    $tgl = $data['tahun'] . '-' . $data['bulan'] . '-01';
+                    $tgl = date('Y-m-t', strtotime($tgl));
+            
+                    $query->where('tgl_transaksi', '<=', $tgl)
+                          ->whereIn('rekening_debit', ['1.1.01.01', '','']);
+                },
+            ])->get();
+            
+            
+        $view = view('pelaporan.view.ojk.simpanan', $data)->render();
 
         if ($data['type'] == 'pdf') {
             $pdf = PDF::loadHTML($view)->setPaper('A4', 'landscape');

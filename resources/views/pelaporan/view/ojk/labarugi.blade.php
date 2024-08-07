@@ -13,8 +13,8 @@
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
         <tr>
             <td style="border: 1px solid;" align="center" height="30" colspan="5" class="style3 bottom" style="font-size: 15px;">
-                <br>{{$lkm->nama_lkm_long}}
-                <br>SANDI LKM {{$lkm->sandi_lkm}}
+                <br>{{$kec->nama_lembaga_long}}
+                <br>SANDI LKM {{$kec->sandi_lkm}}
                 <br>Untuk Periode Yang Berakhir Pada Tanggal
                 <br>LAPORAN KINERJA KEUANGAN</b>
             </td>
