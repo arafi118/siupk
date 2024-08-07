@@ -791,26 +791,8 @@ class PelaporanController extends Controller
             ])->get();
 
 
-            $data['simpanan_anggota'] = Simpanan::where('lokasi', $kec->id)->first();
+            $data['simpanan_anggota'] = Simpanan::where('id', $data['kec']->id)->first();
 
-            $data['simpanan_anggota'] = Simpanan::where('lokasi', $data['kec']->id)->with([
-                'js',
-                'trx_tarik' => function ($query) use ($data) {
-                    $tgl = $data['tahun'] . '-' . $data['bulan'] . '-01';
-                    $tgl = date('Y-m-t', strtotime($tgl));
-            
-                    $query->where('tgl_transaksi', '<=', $tgl)
-                          ->whereIn('rekening_debit', ['simpanan', 'kas']);
-                },
-                'trx_setor' => function ($query) use ($data) {
-                    $tgl = $data['tahun'] . '-' . $data['bulan'] . '-01';
-                    $tgl = date('Y-m-t', strtotime($tgl));
-            
-                    $query->where('tgl_transaksi', '<=', $tgl)
-                          ->whereIn('rekening_debit', ['1.1.01.01', '','']);
-                },
-            ])->get();
-            
             
         $view = view('pelaporan.view.ojk.simpanan', $data)->render();
 

@@ -98,7 +98,7 @@
 	@endif
 	<table width="96%" border="0" align="center" cellpadding="3" cellspacing="0">
 	<tr>
-		<td height="20" colspan="10" class="bottom"></td>
+		<td height="20" colspan="8" class="bottom"></td>
 		<td height="20" colspan="2" class="bottom">
 			<div align="right" class="style9">Dokumen Laporan ----<br>
 				Kd.Doc. L2 Lembar-1 
@@ -106,7 +106,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td height="20" colspan="12" class="style6 bottom align-center"><br>DAFTAR RINCIAN PINJAMAN YANG DIBERIKAN (Lunas) <br><br></td>
+		<td height="20" colspan="8" class="style6 bottom align-center"><br>DAFTAR RINCIAN PINJAMAN YANG DIBERIKAN (Lunas) <br><br></td>
 	</tr>
 	<tr>
 		<td colspan="1" width="30%" class="style9">NAMA LKM</td>
@@ -194,48 +194,25 @@
 		$selisih = $selisih_bulan + $selisih_tahun;
 		$_kolek = 0;
 		$y12 = date('Y') - 1;
-		if ($wajib_pokok != '0') {
-			$_kolek = $tunggakan_pokok / $wajib_pokok;
-		}
-		$kolek = ceil($_kolek + ($selisih - $angsuran_ke));
-		if ($kolek <= 3) {
-			$keterangan = "Lancar"; 
-		} elseif ($kolek <= 5) { 
-			$keterangan = "Diragukan"; 
-		} else {
-			$keterangan = "Macet"; 
-		}
+		
 	@endphp
-	@if($saldopinjaman==0) 
-		@php 
-			$jum_nunggak=0; 
-		@endphp
-	@else
-		@php 
-			$jum_nunggak=date($tgl_kondisi . "-" . $kidp);
-		@endphp
-		@if($jum_nunggak <=0)
-			@php
-				$jum_nunggak=0; 
-			@endphp
-		@endif
-	@endif 
+	
 	<tr align="right" height="15px" class="style9">
-		<td class="left top" align="center">{{ $nomor++ }}</td>
+		<td class="left top" align="center"></td>
 		<td class="left top" align="left">{{ $pinj_i->namadepan }}{{$pinj_i->id}}</td>
 		<td class="left top" align="left">Pinjaman Modal Kerja</td>
 		<td class="left top" align="center">{{$pinj_i->angsuran_pokok->nama_sistem}}</td>
-		<td class="left top" align="center">{{ Tanggal::tglIndo($pinj_i->tgl_cair) }}</td>
-		<td class="left top" align="center">{{ Tanggal::tglIndo($atgl2)}}</td>
-		<td class="left top">{{$apros_jasa}}%</td>
+		<td class="left top" align="center"></td>
+		<td class="left top" align="center"></td>
+		<td class="left top"></td>
 		<td class="left top" align="center">per bulan</td>
 	</tr>
 	@endforeach
 	@if (count($kd_desa) > 0)
 	<tr class="style9">
 		<th colspan="6" class="left top" align="center" style="background:rgba(0,0,0, 0.3);">TOTAL({{$jumlah_lunas}} Anggota)</th>
-		<th class="left top" align="right">{{number_format($k_alokasi)}}</th>
-		<th class="left top" align="right">{{number_format($k_saldo)}}</th>
+		<th class="left top" align="right"></th>
+		<th class="left top" align="right"></th>
 		<th colspan="2" class="left right top" align="right"></th>
 	</tr>
 	<tr>
