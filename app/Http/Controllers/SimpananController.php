@@ -37,7 +37,6 @@ class SimpananController extends Controller
         if (request()->ajax()) {
             $simpanan = Simpanan::with(['anggota', 'js'])
                 ->orderBy('id', 'DESC');
-
             return DataTables::of($simpanan)
                 ->addColumn('nama_anggota', function ($row) {
                     return $row->anggota->namadepan ?? '-';
@@ -218,12 +217,6 @@ class SimpananController extends Controller
         }
     }
 
-
-
-
-
-
-
     public function store(Request $request)
     {
         $rules = [
@@ -270,22 +263,22 @@ class SimpananController extends Controller
         }
 
         $simpanan = new Simpanan();
-        $simpanan->nomor_rekening = $request->nomor_rekening;
-        $simpanan->jenis_simpanan = $request->jenis_simpanan;
-        $simpanan->nia = $request->nia;
-        $simpanan->jumlah = $request->setoran_awal;
-        $simpanan->tgl_buka = Tanggal::tglNasional($request->tgl_buka_rekening);
-        $simpanan->tgl_tutup = Tanggal::tglNasional($request->tgl_minimal_tutup_rekening);
-        $simpanan->bunga = $request->bunga;
-        $simpanan->pajak = $request->pajak_bunga;
-        $simpanan->admin = $request->admin;
-        $simpanan->status = 'A';
-        $simpanan->sp = $request->kuasa;
-        $simpanan->pengampu = $request->ahli_waris;
-        $simpanan->hubungan = $request->hubungan;
-        $simpanan->user_id = auth()->id();
-        $simpanan->lu = date('Y-m-d H:i:s');
-        $simpanan->save();
+        $simpanan ->nomor_rekening = $request->nomor_rekening;
+        $simpanan ->jenis_simpanan = $request->jenis_simpanan;
+        $simpanan ->nia = $request->nia;
+        $simpanan ->jumlah = $request->setoran_awal;
+        $simpanan ->tgl_buka = Tanggal::tglNasional($request->tgl_buka_rekening);
+        $simpanan ->tgl_tutup = Tanggal::tglNasional($request->tgl_minimal_tutup_rekening);
+        $simpanan ->bunga = $request->bunga;
+        $simpanan ->pajak = $request->pajak_bunga;
+        $simpanan ->admin = $request->admin;
+        $simpanan ->status = 'A';
+        $simpanan ->sp = $request->kuasa;
+        $simpanan ->pengampu = $request->ahli_waris;
+        $simpanan ->hubungan = $request->hubungan;
+        $simpanan ->user_id = auth()->id();
+        $simpanan ->lu = date('Y-m-d H:i:s');
+        $simpanan ->save();
 
         $maxId = Simpanan::max('id');
 

@@ -211,8 +211,6 @@
                         <button type="submit" id="SimpanProposal" class="btn btn-dark btn-sm custom-button">Simpan Proposal</button>
                         <br><br><br>
                     </div>
-            
-
 <script>
 
 $('.date').datepicker({

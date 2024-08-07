@@ -1,7 +1,7 @@
 @extends('layouts.base')
 @section('content')
 <div class="app-main__inner">       
-    <div class="">
+    <div class="tab-pane fade show active" id="ProfilDebitur" role="tabpanel" aria-labelledby="ProfilDebitur">
         <div class="main-card mb-3 card">
             <div class="g-0 row">
                 <div class="col-md-6">
