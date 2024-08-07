@@ -29,7 +29,7 @@
     <tr align="center">
     <td colspan="3" width="10%" class="style6 bottom">
     <br>
-    <span><b>{{ strtoupper($nama_lembaga) }}</b></span><br>
+	<span><b>{{$kec->nama_lembaga_long}}</b></span><br>
     {{ strtoupper($nama_kecamatan) }}<br>
 	<span class="style9">{{ $info }}<br>
 	
@@ -48,12 +48,12 @@
     <tr>
 	        <td width="2%" class="style9">1.</td>
             <td width="30%" class="style9">Nama LKM</td>
-            <td width="60%" class="style9">: {{$kec->nama_lembaga_sort}}</td>
+            <td width="60%" class="style9">: {{$kec->nama_lembaga_long}}</td>
 	    </tr>
 	     <tr>
 	        <td width="2%" class="style9">2.</td>
             <td width="30%" class="style9">Nomor Sandi LKM</td>
-            <td width="60%" class="style9">: {{$lkm->sandi_lkm}}</td>
+            <td width="60%" class="style9">: {{$kec->sandi_lkm}}</td>
 	    </tr>
 	     <tr>
 	        <td width="2%" class="style9">3.</td>
@@ -63,12 +63,12 @@
 	    <tr>
 	        <td width="2%" class="style9"> </td>
             <td width="30%" class="style9">a. Alamat</td>
-            <td width="60%" class="style9">: {{$lkm->alamat}} </td>
+            <td width="60%" class="style9">: {{$kec->alamat_kec}} </td>
 	    </tr>
 	    <tr>
 	        <td width="2%" class="style9"> </td>
             <td width="30%" class="style9">b. Kelurahan/Desa</td>
-            <td width="60%" class="style9">: {{$lkm->desa}} </td>
+            <td width="60%" class="style9">: {{$kec->desa}} </td>
 	    </tr>
 	    <tr>
 	        <td width="2%" class="style9"> </td>
@@ -83,12 +83,12 @@
 	    <tr>
 	        <td width="2%" class="style9"> </td>
             <td width="30%" class="style9">e. Provinsi</td>
-            <td width="60%" class="style9">: {{$lkm->provinsi}}</td>
+            <td width="60%" class="style9">: {{$kec->provinsi}}</td>
 	    </tr>
 	    <tr>
 	        <td width="2%" class="style9"> </td>
             <td width="30%" class="style9">f. Kode Pos</td>
-            <td width="60%" class="style9">: {{$lkm->kode_pos}}</td>
+            <td width="60%" class="style9">: {{$kec->kode_pos}}</td>
 	    </tr>
 	    <tr>
 	        <td width="2%" class="style9">4.</td>
@@ -103,17 +103,17 @@
 	    <tr>
 	        <td width="2%" class="style9">6.</td>
             <td width="30%" class="style9">No. dan Tanggal Izin Usaha</td>
-            <td width="50%" class="style9">:  {{$lkm->ijin_usaha}}</td>
+            <td width="50%" class="style9">:  {{$kec->ijin_usaha}}</td>
 	    </tr>
 	    <tr>
 	        <td width="2%" class="style9">7.</td>
             <td width="30%" class="style9">Dasar Pencatatan</td>
-            <td width="60%" class="style9">: {{$lkm->dasar_catat}}</td>
+            <td width="60%" class="style9">: {{$kec->dasar_catat}}</td>
 	    </tr>
 	    <tr>
 	        <td width="2%" class="style9">8.</td>
             <td width="30%" class="style9">Pemegang Saham</td>
-            <td width="60%" class="style9">: </td>
+            <td width="60%" class="style9">: {{ $n_saham1 }}</td>
 	    </tr>
 	    <tr>
 	        <td width="2%" class="style9"></td>
