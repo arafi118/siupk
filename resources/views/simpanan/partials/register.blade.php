@@ -52,39 +52,36 @@
                                         </div>
                                     </div>
                                 </div>
-                            <form action="/simpanan/store" method="post" id="FormRegisterSimpanan">
-                                @csrf
-                                
-                                <input type="hidden" name="nia" id="nia" value="{{ $anggota->id }}">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="position-relative mb-3">
-                                            <label for="jenis_simpanan" class="form-label">Jenis Produk</label>
-                                            <select class="js-example-basic-single form-control" name="jenis_simpanan" id="jenis_simpanan">
-                                                @foreach ($js as $jps)
-                                                    <option {{ $js_dipilih == $jps->id ? 'selected' : '' }} value="{{ $jps->id }}">
-                                                        {{ $jps->nama_js }} ({{ $jps->deskripsi_js }})
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            <small class="text-danger" id="msg_jenis_simpanan"></small>
+                                    <form action="/simpanan" method="post" id="FormRegisterSimpanan">
+                                        @csrf
+                                        
+                                        <input type="hidden" name="nia" id="nia" value="{{ $anggota->id }}">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="position-relative mb-3">
+                                                    <label for="jenis_simpanan" class="form-label">Jenis Produk</label>
+                                                    <select class="select2T form-control" name="jenis_simpanan" id="jenis_simpanan">
+                                                        @foreach ($js as $jps)
+                                                            <option {{ $js_dipilih == $jps->id ? 'selected' : '' }} value="{{ $jps->id }}">
+                                                                {{ $jps->nama_js }} ({{ $jps->deskripsi_js }})
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    <small class="text-danger" id="msg_jenis_simpanan"></small>
+                                                </div>
+                                            </div>    
                                         </div>
-                                    </div>    
-                                </div>
-                                <div class="row" id="FormSimpanan">mohon menunggu . . . </div>
-                            </form>
-
-                            <button type="submit" id="SimpanUtang" class="btn btn-dark btn-sm custom-button">Simpan Utang</button>
+                                        <div class="row" id="FormSimpanan">
+                                            <i class="fa fa-refresh fa-w-16 fa-spin fa-2x"></i>
+                                        </div>
+                                    </form>
+                            <button type="submit" id="SimpanUtang" class="btn btn-dark custom-button">Simpan Utang</button>
                         </div><br><br><br>
     <script>  
-            $('.js-example-basic-single').select2({
+            $('.select2T').select2({
             theme: 'bootstrap-5'
             });  
-      $(document).ready(function() {
-            $(".date").flatpickr({
-                dateFormat: "d/m/Y"
-            });
-
+            $(document).ready(function() {
              // Atur nilai awal jenis_simpanan ke 1
             $('#jenis_simpanan').val('1');
     
