@@ -37,7 +37,6 @@ class SimpananController extends Controller
         if (request()->ajax()) {
             $simpanan = Simpanan::with(['anggota', 'js'])
                 ->orderBy('id', 'DESC');
-
             return DataTables::of($simpanan)
                 ->addColumn('nama_anggota', function ($row) {
                     return $row->anggota->namadepan ?? '-';
