@@ -98,7 +98,7 @@
 	@endif
 	<table width="96%" border="0" align="center" cellpadding="3" cellspacing="0">
 	<tr>
-		<td height="20" colspan="8" class="bottom"></td>
+		<td height="20" colspan="5" class="bottom"></td>
 		<td height="20" colspan="2" class="bottom">
 			<div align="right" class="style9">Dokumen Laporan ----<br>
 				Kd.Doc. L2 Lembar-1 
@@ -106,36 +106,35 @@
 		</td>
 	</tr>
 	<tr>
-		<td height="20" colspan="8" class="style6 bottom align-center"><br>DAFTAR RINCIAN PINJAMAN YANG DIBERIKAN (Lunas) <br><br></td>
+		<td height="20" colspan="7" class="style6 bottom align-center"><br>DAFTAR RINCIAN PINJAMAN YANG DIBERIKAN (Lunas) <br><br></td>
 	</tr>
 	<tr>
 		<td colspan="1" width="30%" class="style9">NAMA LKM</td>
-		<td colspan="11" width="40%" class="style9">:{{$lkm->nama_lkm_long}}</td>
+		<td colspan="6" width="40%" class="style9">:{{$lkm->nama_lkm_long}}</td>
 	</tr>
 	<tr>
 		<td colspan="1" width="30%" class="style9">SANDI LKM</td>
-		<td colspan="11" width="40%" class="style9">:{{$lkm->sandi_lkm}}</td>
+		<td colspan="6" width="40%" class="style9">:{{$lkm->sandi_lkm}}</td>
 	</tr>
 	<tr>
 		<td colspan="1" width="30%" class="style9 bottom">PERIODE LAPORAN</td>
-		<td colspan="11" width="40%" class="style9 bottom">:{{$tgl}}</td>
+		<td colspan="6" width="40%" class="style9 bottom">:{{$tgl}}</td>
 	</tr>
 	<tr align="center" height="30px" class="style9">
 		<th width="2%" rowspan="2" class="left bottom">No</th>
 		<th width="20%" rowspan="2" class="left bottom">Peminjam - Loan ID</th>
 		<th width="10%" rowspan="2" class="left bottom">Jenis Penggunaan</th>
-		<th width="7%" rowspan="2" class="left bottom">Periode Pembayaran</th>
 		<th colspan="2" class="left bottom">Jangka Waktu</th>
-		<th colspan="2" class="left bottom">Suku Bunga</th>
+		<th colspan="2" class="left right top bottom">Suku Bunga</th>
 	</tr>
 	<tr align="center" height="30px" class="style9">
 		<th width="5%" class="left bottom">Mulai </th>
 		<th width="5%" class="left bottom">Jatuh Tempo</th>
 		<th width="5%" class="left bottom">%</th>
-		<th width="5%" class="left bottom">Keterangan</th>
+		<th width="5%" class="left right top bottom">Keterangan</th>
 	</tr>
 	<tr>
-		<th colspan="12" class="style27 top left right align-left">INDIVIDU</th>
+		<th colspan="7" class="style27 top left right align-left">INDIVIDU</th>
 	</tr>
 	@php
 		$sumalokasi = 0;
@@ -156,7 +155,7 @@
 	@endif
 	<tr>
 		<td class="t l b" align="center">{{ $pinj_i->kode_desa }}</td>
-		<td class="style27 left top right" colspan="11">{{$pinj_i->nama_desa}}</td>
+		<td class="style27 left top right" colspan="6">{{$pinj_i->nama_desa}}</td>
 	</tr>
 	@php
 		$kidp = $pinj_i['id'];
@@ -201,22 +200,19 @@
 		<td class="left top" align="center"></td>
 		<td class="left top" align="left">{{ $pinj_i->namadepan }}{{$pinj_i->id}}</td>
 		<td class="left top" align="left">Pinjaman Modal Kerja</td>
-		<td class="left top" align="center">{{$pinj_i->angsuran_pokok->nama_sistem}}</td>
+		{{-- <td class="left top" align="center">{{$pinj_i->angsuran_pokok->nama_sistem}}</td> --}}
 		<td class="left top" align="center"></td>
 		<td class="left top" align="center"></td>
 		<td class="left top"></td>
-		<td class="left top" align="center">per bulan</td>
+		<td class="left right top" align="center">per bulan</td>
 	</tr>
 	@endforeach
 	@if (count($kd_desa) > 0)
 	<tr class="style9">
-		<th colspan="6" class="left top" align="center" style="background:rgba(0,0,0, 0.3);">TOTAL({{$jumlah_lunas}} Anggota)</th>
-		<th class="left top" align="right"></th>
-		<th class="left top" align="right"></th>
-		<th colspan="2" class="left right top" align="right"></th>
+		<th colspan="7" class="left right top" align="center" style="background:rgba(0,0,0, 0.3);">TOTAL({{$jumlah_lunas}} Anggota)</th>
 	</tr>
 	<tr>
-		<td class="style10 top" colspan="8"><b>Keterangan</b> : Data yang ditampilkan diatas merupakan Individu aktif pada tahun berjalan {{$tahun}}, untuk menampilkan data Individu aktif tahun lalu dapat memilih mode tahun lalu {{$y12}},</td>
+		<td class="style10 top" colspan="7"><b>Keterangan</b> : Data yang ditampilkan diatas merupakan Individu aktif pada tahun berjalan {{$tahun}}, untuk menampilkan data Individu aktif tahun lalu dapat memilih mode tahun lalu {{$y12}},</td>
 	</tr>
 	@endif
 </table>
