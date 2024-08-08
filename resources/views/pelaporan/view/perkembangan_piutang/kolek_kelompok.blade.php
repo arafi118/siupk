@@ -186,7 +186,7 @@
                     if ($wajib_pokok != '0') {
                         $_kolek = $tunggakan_pokok / $wajib_pokok;
                     }
-                    $kolek = ceil($_kolek + ($selisih - $angsuran_ke));
+                    $kolek = round($_kolek + ($selisih - $angsuran_ke));
 
                     if ($kolek < 1) {
                         $kolek1 = $saldo_pokok;
