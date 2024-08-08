@@ -32,7 +32,7 @@
     </div>   
     <div class="card-body">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-">
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <div class="table-responsive">
