@@ -41,7 +41,7 @@
                 </div>
             </div>
         </div>
-        <div class="tab-content">
+        <div class="tab-content">  
             <div class="row">
                 <div class="col-md-4">
                     <div class="main-card mb-3 card">
@@ -149,7 +149,7 @@
                         </div>
                     </div>
                 </div>
-            </div>  
+            </div> 
         </div>
     </div>
 </div>
@@ -181,7 +181,7 @@ $(document).ready(function() {
 
     function tableTransaksi(bulan, tahun) {
         $.get('/simpanan/get-transaksi', {
-            nia: '{{ $nia->nia }}',
+            cif: '{{ $nia->id }}',
             bulan: bulan,
             tahun: tahun
         }, function(result) {

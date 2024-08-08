@@ -77,16 +77,16 @@ class SimpananController extends Controller
     {
         $bulan = request()->input('bulan');
         $tahun = request()->input('tahun');
-        $nia_id = request()->input('nia');
+        $cif = request()->input('cif');
 
-        $transaksi = Transaksi::where('id_simp', 'LIKE', "%-$nia_id")
+        $transaksi = Transaksi::where('id_simp', 'LIKE', "%-$cif")
             ->whereMonth('tgl_transaksi', $bulan)
             ->whereYear('tgl_transaksi', $tahun)
             ->orderBy('tgl_transaksi', 'asc')
             ->get();
-
         return view('simpanan.partials.detail-transaksi', compact('transaksi'));
     }
+
 
     public function detailAnggota($id)
     {
