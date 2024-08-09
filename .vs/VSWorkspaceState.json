@@ -1,15 +1,14 @@
 {
   "ExpandedNodes": [
     "",
-    "\\app\\Http\\Controllers",
+    "\\app",
+    "\\app\\Models",
     "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\layouts",
-    "\\resources\\views\\pelaporan",
-    "\\resources\\views\\pelaporan\\view",
-    "\\resources\\views\\pelaporan\\view\\perkembangan_piutang",
-    "\\resources\\views\\simpanan"
+    "\\resources\\views\\simpanan",
+    "\\resources\\views\\simpanan\\partials",
+    "\\routes"
   ],
-  "SelectedNode": "\\resources\\views\\layouts\\base.blade.php",
+  "SelectedNode": "\\app\\Models\\Simpanan.php",
   "PreviewInSolutionExplorer": false
 }
