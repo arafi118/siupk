@@ -22,6 +22,7 @@ use App\Models\User;
 use App\Utils\Keuangan;
 use App\Utils\Pinjaman;
 use App\Utils\Tanggal;
+use DB;
 use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -228,11 +229,12 @@ class SimpananController extends Controller
         }
     }
 
-    public function generateSimpanan(Request $request)
+    public function generateSimpanan()
     {
         $lokasi = 1;
         $kd_kab = 1;
-    
+
+        $request = request();
         if ($request->filled('id')) {
             $id = $request->input('id');
             $idArray = explode(',', $id);
@@ -249,7 +251,7 @@ class SimpananController extends Controller
             ->get();
 
         $total = $simpanan->count();
-    
+
         $start = $request->input('start', 0);
         $per_page = 25;
 
@@ -269,7 +271,7 @@ class SimpananController extends Controller
             foreach ($transaksi as $trx) {
                 $cif = $simp->id;
                 $tgl_transaksi = $trx->tgl_transaksi;
-            
+
                 if (substr($trx->rekening_kredit, 0, 2) == '22') {
                     $real_d = $trx->jumlah;
                     $real_k = 0;
@@ -282,10 +284,10 @@ class SimpananController extends Controller
                     $real_d = $trx->jumlah;
                     $real_k = $trx->jumlah;
                 }
-            
+
                 $lu = now();
                 $id_user = $trx->id_user;
-            
+
                 DB::table("real_simpanan_$lokasi")->insert([
                     'cif' => $cif,
                     'tgl_transaksi' => $tgl_transaksi,
@@ -397,5 +399,4 @@ class SimpananController extends Controller
             'id' => $simpanan->id
         ]);
     }
-
 }
