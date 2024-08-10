@@ -17,43 +17,43 @@ use Session;
 
 class AuthController extends Controller
 {
-public function index()
-{
-    $keuangan = new Keuangan;
+    public function index()
+    {
+        $keuangan = new Keuangan;
 
-    if ($keuangan->startWith(request()->getHost(), 'master.sidbm')) {
-        return redirect('/master');
-    }
-
-    // Handle URL lokal
- if (request()->server('SERVER_NAME') === '127.0.0.1' || request()->server('SERVER_NAME') === 'localhost') {
-        $kec = Kecamatan::where('id', '1')
-                           ->with('kabupaten')
-                           ->first();
-    } else {
-        $kec = Kecamatan::where('web_kec', explode('//', request()->url(''))[1])
-            ->orWhere('web_alternatif', explode('//', request()->url(''))[1])
-            ->first();
-    }
-
-    if (!$kec) {
-        $kab = Kabupaten::where('web_kab', explode('//', request()->url(''))[1])
-            ->orWhere('web_kab_alternatif', explode('//', request()->url(''))[1])
-            ->first();
-        if (!$kab) {
-            abort(404);
+        if ($keuangan->startWith(request()->getHost(), 'master.sidbm')) {
+            return redirect('/master');
         }
 
-        return redirect('/kab');
-    }
+        // Handle URL lokal
+        if (request()->server('SERVER_NAME') === '127.0.0.1' || request()->server('SERVER_NAME') === 'localhost') {
+            $kec = Kecamatan::where('id', '1')
+                ->with('kabupaten')
+                ->first();
+        } else {
+            $kec = Kecamatan::where('web_kec', explode('//', request()->url(''))[1])
+                ->orWhere('web_alternatif', explode('//', request()->url(''))[1])
+                ->first();
+        }
 
-    $logo = '/assets/img/icon/favicon.png';
-    if ($kec->logo) {
-        $logo = '/storage/logo/' . $kec->logo;
-    }
+        if (!$kec) {
+            $kab = Kabupaten::where('web_kab', explode('//', request()->url(''))[1])
+                ->orWhere('web_kab_alternatif', explode('//', request()->url(''))[1])
+                ->first();
+            if (!$kab) {
+                abort(404);
+            }
 
-    return view('auth.login')->with(compact('kec', 'logo'));
-}
+            return redirect('/kab');
+        }
+
+        $logo = '/assets/img/icon/favicon.png';
+        if ($kec->logo) {
+            $logo = '/storage/logo/' . $kec->logo;
+        }
+
+        return view('auth.login')->with(compact('kec', 'logo'));
+    }
 
     public function login(Request $request)
     {
@@ -71,16 +71,16 @@ public function index()
             ]);
         }
 
- if (request()->server('SERVER_NAME') === '127.0.0.1' || request()->server('SERVER_NAME') === 'localhost') {
-    $kec = Kecamatan::where('id', '1')
-                   ->with('kabupaten')
-                   ->first();
-} else {
-    $kec = Kecamatan::where('web_kec', $url)
-                   ->orWhere('web_alternatif', $url)
-                   ->with('kabupaten')
-                   ->first();
-}
+        if (request()->server('SERVER_NAME') === '127.0.0.1' || request()->server('SERVER_NAME') === 'localhost') {
+            $kec = Kecamatan::where('id', '1')
+                ->with('kabupaten')
+                ->first();
+        } else {
+            $kec = Kecamatan::where('web_kec', $url)
+                ->orWhere('web_alternatif', $url)
+                ->with('kabupaten')
+                ->first();
+        }
 
         $lokasi = $kec->id;
 
@@ -108,22 +108,22 @@ public function index()
                         ->where('aktif', 'Y')
                         ->where(function ($query) use ($lokasi) {
                             $query->where('lokasi', 0)
-                                  ->orWhere('lokasi', $lokasi);
+                                ->orWhere('lokasi', $lokasi);
                         })
                         ->with([
                             'child' => function ($query) use ($hak_akses, $lokasi) {
                                 $query->whereNotIn('id', $hak_akses)
-                                      ->where(function ($query) use ($lokasi) {
-                                          $query->where('lokasi', 0)
-                                                ->orWhere('lokasi', $lokasi);
-                                      });
+                                    ->where(function ($query) use ($lokasi) {
+                                        $query->where('lokasi', 0)
+                                            ->orWhere('lokasi', $lokasi);
+                                    });
                             },
                             'child.child'  => function ($query) use ($hak_akses, $lokasi) {
                                 $query->whereNotIn('id', $hak_akses)
-                                      ->where(function ($query) use ($lokasi) {
-                                          $query->where('lokasi', 0)
-                                                ->orWhere('lokasi', $lokasi);
-                                      });
+                                    ->where(function ($query) use ($lokasi) {
+                                        $query->where('lokasi', 0)
+                                            ->orWhere('lokasi', $lokasi);
+                                    });
                             }
                         ])
                         ->orderBy('sort', 'ASC')
@@ -174,11 +174,11 @@ public function index()
 
         if (request()->server('SERVER_NAME') === '127.0.0.1' || request()->server('SERVER_NAME') === 'localhost') {
             $kec = Kecamatan::where('id', '1')
-                           ->first();
+                ->first();
         } else {
             $kec = Kecamatan::where('web_kec', $url)
-                           ->orWhere('web_alternatif', $url)
-                           ->first();
+                ->orWhere('web_alternatif', $url)
+                ->first();
         }
 
         $lokasi = $kec->id;
@@ -205,22 +205,22 @@ public function index()
                         ->where('aktif', 'Y')
                         ->where(function ($query) use ($lokasi) {
                             $query->where('lokasi', 0)
-                                  ->orWhere('lokasi', $lokasi);
+                                ->orWhere('lokasi', $lokasi);
                         })
                         ->with([
                             'child' => function ($query) use ($hak_akses, $lokasi) {
                                 $query->whereNotIn('id', $hak_akses)
-                                      ->where(function ($query) use ($lokasi) {
-                                          $query->where('lokasi', 0)
-                                                ->orWhere('lokasi', $lokasi);
-                                      });
+                                    ->where(function ($query) use ($lokasi) {
+                                        $query->where('lokasi', 0)
+                                            ->orWhere('lokasi', $lokasi);
+                                    });
                             },
                             'child.child'  => function ($query) use ($hak_akses, $lokasi) {
                                 $query->whereNotIn('id', $hak_akses)
-                                      ->where(function ($query) use ($lokasi) {
-                                          $query->where('lokasi', 0)
-                                                ->orWhere('lokasi', $lokasi);
-                                      });
+                                    ->where(function ($query) use ($lokasi) {
+                                        $query->where('lokasi', 0)
+                                            ->orWhere('lokasi', $lokasi);
+                                    });
                             }
                         ])
                         ->orderBy('sort', 'ASC')
@@ -324,5 +324,13 @@ public function index()
         }
 
         return $return;
+    }
+
+    public function app()
+    {
+        return response()->json([
+            'success' => true,
+            'time' => date('Y-m-d H:i:s')
+        ]);
     }
 }
