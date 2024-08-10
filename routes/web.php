@@ -99,6 +99,7 @@ Route::group(['prefix' => 'kab', 'as' => 'kab.', 'middleware' => 'kab'], functio
 
 Route::get('/', [AuthController::class, 'index'])->middleware('guest')->name('/');
 Route::post('/login', [AuthController::class, 'login'])->middleware('guest');
+Route::get('/app', [AuthController::class, 'app']);
 
 // Route::get('/force/{uname}', [AuthController::class, 'force'])->middleware('guest');
 
