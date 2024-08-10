@@ -362,6 +362,11 @@ Route::get('/cetak_koran/{simpanan}', [SimpananController::class, 'koran'])->mid
 Route::get('/simpanan/get-transaksi', [SimpananController::class, 'getTransaksi'])->middleware('auth');
 
 Route::post('/simpanan/simpan-transaksi', [SimpananController::class, 'simpanTransaksi']);
+
 Route::resource('/simpanan', SimpananController::class)->middleware('auth');
+
+Route::get('/simpanan/generate', [SimpananController::class, 'generateSimpanan'])->middleware('auth')->name('simpanan.generate');
+
+Route::get('/simpanan/generate-bunga', [SimpananController::class, 'generateBunga'])->name('simpanan.generate-bunga');
 
 Route::get('/{invoice}', [PelaporanController::class, 'invoice']);

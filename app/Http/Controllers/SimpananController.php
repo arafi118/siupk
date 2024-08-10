@@ -228,7 +228,82 @@ class SimpananController extends Controller
         }
     }
 
+    public function generateSimpanan(Request $request)
+    {
+        $lokasi = 1;
+        $kd_kab = 1;
+    
+        if ($request->filled('id')) {
+            $id = $request->input('id');
+            $idArray = explode(',', $id);
+            $idArray = array_map('trim', $idArray);
+            $idArray = array_filter($idArray, 'is_numeric');
+            $where = "id IN (" . implode(',', $idArray) . ")";
+        } else {
+            $where = 1;
+        }
 
+        $simpanan = DB::table("simpanan_anggota_$kd_kab")
+            ->whereRaw($where)
+            ->orderBy('id', 'ASC')
+            ->get();
+
+        $total = $simpanan->count();
+    
+        $start = $request->input('start', 0);
+        $per_page = 25;
+
+        $simpananChunk = $simpanan->slice($start, $per_page);
+
+        foreach ($simpananChunk as $simp) {
+            DB::table("real_simpanan_$lokasi")->where('cif', $simp->id)->delete();
+
+            $transaksi = DB::table("transaksi_$lokasi")
+                ->where('id_simp_i', $simp->id)
+                ->orderBy('tgl_transaksi', 'ASC')
+                ->orderBy('urutan', 'ASC')
+                ->orderBy('idt', 'ASC')
+                ->get();
+
+            $sum = 0;
+            foreach ($transaksi as $trx) {
+                $cif = $simp->id;
+                $tgl_transaksi = $trx->tgl_transaksi;
+            
+                if (substr($trx->rekening_kredit, 0, 2) == '22') {
+                    $real_d = $trx->jumlah;
+                    $real_k = 0;
+                    $sum += $real_d;
+                } elseif (substr($trx->rekening_debit, 0, 2) == '22') {
+                    $real_d = 0;
+                    $real_k = $trx->jumlah;
+                    $sum -= $real_k;
+                } else {
+                    $real_d = $trx->jumlah;
+                    $real_k = $trx->jumlah;
+                }
+            
+                $lu = now();
+                $id_user = $trx->id_user;
+            
+                DB::table("real_simpanan_$lokasi")->insert([
+                    'cif' => $cif,
+                    'tgl_transaksi' => $tgl_transaksi,
+                    'real_d' => $real_d,
+                    'real_k' => $real_k,
+                    'sum' => $sum,
+                    'lu' => $lu,
+                    'id_user' => $id_user
+                ]);
+            }
+        }
+
+        if ($start >= $total) {
+            return redirect()->route('simpanan.index')->with('success', 'Proses generate simpanan telah selesai');
+        }
+
+        return view('simpanan.generate', compact('total', 'start', 'per_page'));
+    }
 
 
 
@@ -322,4 +397,5 @@ class SimpananController extends Controller
             'id' => $simpanan->id
         ]);
     }
+
 }

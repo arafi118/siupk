@@ -2,6 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\app",
+    "\\app\\Http",
+    "\\app\\Http\\Controllers",
     "\\app\\Models",
     "\\resources",
     "\\resources\\views",
@@ -9,6 +11,6 @@
     "\\resources\\views\\simpanan\\partials",
     "\\routes"
   ],
-  "SelectedNode": "\\app\\Models\\Simpanan.php",
+  "SelectedNode": "\\resources\\views\\simpanan\\partials\\simpanan.blade.php",
   "PreviewInSolutionExplorer": false
 }

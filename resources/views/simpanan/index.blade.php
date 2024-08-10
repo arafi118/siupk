@@ -4,6 +4,10 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Daftar Simpanan</h3>
+            <div class="float-right">
+                <a href="{{ route('simpanan.generate') }}" class="btn btn-primary">Generate Simpanan</a>
+                <a href="{{ route('simpanan.generate-bunga') }}" class="btn btn-success">Generate Bunga</a>
+            </div>
         </div>
         <div class="card-body">
             <div class="table-responsive">
