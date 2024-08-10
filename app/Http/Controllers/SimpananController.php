@@ -261,7 +261,7 @@ class SimpananController extends Controller
             DB::table("real_simpanan_$lokasi")->where('cif', $simp->id)->delete();
 
             $transaksi = DB::table("transaksi_$lokasi")
-                ->where('id_simp_i', $simp->id)
+                ->where('id_simp', $simp->id)
                 ->orderBy('tgl_transaksi', 'ASC')
                 ->orderBy('urutan', 'ASC')
                 ->orderBy('idt', 'ASC')
