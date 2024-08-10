@@ -6,6 +6,7 @@ use App\Models\AdminInvoice;
 use App\Models\AkunLevel1;
 use App\Models\AkunLevel2;
 use App\Models\AkunLevel3;
+use App\Models\Anggota;
 use App\Models\ArusKas;
 use App\Models\Calk;
 use App\Models\Desa;
@@ -741,8 +742,8 @@ class PelaporanController extends Controller
             $data['judul'] = 'Laporan Keuangan';
             $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl); 
         }
-            $data['simpanan_anggota'] = SimpananAnggota::all();
-            $data['pinjaman_anggota'] = PinjamanAnggota::all();
+            $data['anggota'] = Anggota::all();
+            
 
             
 

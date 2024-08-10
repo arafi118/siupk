@@ -18,6 +18,7 @@ class PinjamanAnggota extends Model
     {
         $this->table = 'pinjaman_anggota_' . Session::get('lokasi');
     }
+ 
 
     public function sts()
     {

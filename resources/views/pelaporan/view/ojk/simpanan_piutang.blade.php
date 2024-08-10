@@ -77,7 +77,7 @@
 
 	</style>
 	
-	<table width="96%" border="0" align="center" cellpadding="3" cellspacing="0">
+<table width="96%" border="0" align="center" cellpadding="3" cellspacing="0">
 		<tr>
 			<td height="20" colspan="5" class="bottom"></td>
 			<td height="20" colspan="2" class="bottom">
@@ -87,7 +87,7 @@
 			</td>
 		</tr>
 		<tr>
-		<td height="20" colspan="7" class="style6 bottom align-center">FORM PENDATA UTANG & REGISTER SIMPAN</td>
+		<td height="20" colspan="7" class="style6 bottom align-center">PENDATA UTANG & REGISTER SIMPAN</td>
 		</tr>
 		<tr>
 			<td colspan="2" width="30%" class="style9">NAMA LKM</td>
@@ -101,8 +101,17 @@
 			<td colspan="2" width="30%" class="style9 bottom">PERIODE LAPORAN</td>
 			<td colspan="5" width="40%" class="style9 bottom">:{{$tgl}}</td>
 		</tr>
-		@foreach (pinjaman_individu as $pa)
+		@foreach($anggota as $anng)
+		@php
+			$nomor = 1;
+		@endphp
+		@php
+			$tgl_buka = explode('-', $sa->tgl_buka);
+			$tgl1 = new DateTime($sa['tgl_tutup']);
+			$tgl2 = new DateTime($sa['tgl_buka']);
+			$selisih = $tgl2->diff($tgl1);
 
+		@endphp
 		<tr align="center" height="30px" class="style9">
 			<th width="5"rowspan="2" class="left bottom">No</th>
 			<th rowspan="2" class="left bottom">Pengutang - Loan ID</th>
@@ -110,28 +119,29 @@
 			<th colspan="2" class="left bottom">Jangka Waktu</th>
 			<th colspan="2"class="left right top bottom">Bunga</th>
 		</tr>
+		@foreach($anng->simpanan as $ag)
+
 		<tr align="center" height="30px" class="style9">
 			<th class="left bottom">Tgl Utang </th>
 			<th class="left bottom">Tenor</th>
 			<th class="left bottom">%</th>
 			<th class="left right top bottom">Keterangan</th>
 		</tr>
-	@foreach (pinjaman_individu as $pa)
-		<tr style="border: 1px solid;" align="right" height="15px" class="style9">
-			<td class="left top" align="center">--</td>
-			<td class="left top" align="left">{{$}}</td>
-			<td class="left top" align="left">--</td>
-			{{-- <td class="left top" align="center">--</td> --}}
-			<td class="left top" align="center"></td>
-			<td class="left top" align="center"></td>
-			<td class="left top"></td>
-			<td class="left right top" align="center">p</td>
-		</tr>
 		@endforeach
-		@foreach (pinjaman_individu as $pa)
+		@foreach ($anggota->pinjaman as $pa)
+			<tr style="border: 1px solid;" align="right" height="15px" class="style9">
+				<td class="left top" align="center">{{ $nomor++ }}</td>
+				<td class="left top" align="left">{{ $pa->anggota->namadepan }} -{{$pa->id}}</td>
+				<td class="left top" align="left">--</td>
+				<td class="left top" align="center">{{ Tanggal::tglIndo($sa->tgl_buka) }}</td>
+				<td class="left top" align="center">{{$selisih->m}}</td>
+				<td class="left top">{{$sa->bunga}}</td>
+				<td class="left right top" align="center">p</td>
+			</tr>
+		@endforeach
+		@endforeach
+
+		      
 
 </table>
-
-
-
-	@endsection
+@endsection

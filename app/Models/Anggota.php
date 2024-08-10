@@ -22,11 +22,15 @@ class Anggota extends Model
     public function pinjaman_anggota()
     {
         return $this->hasMany(PinjamanAnggota::class, 'nia');
+
+    }public function simpanan()
+    {
+        return $this->hasMany(PinjamanAnggota::class, 'nia');
     }
 
     public function pinjaman()
     {
-        return $this->hasOne(PinjamanAnggota::class, 'nia');
+        return $this->hasOne(SimpananAnggota::class, 'nia');
     }
 
     public function d()

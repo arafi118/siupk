@@ -63,7 +63,7 @@
                 @php
                     $kd_desa[] = $pinj_i->kd_desa;
                     $desa = $pinj_i->kd_desa;
-                @endphp
+                @endphp 
                 @if (array_count_values($kd_desa)[$pinj_i->kd_desa] <= '1')
                     @if ($section != $desa && count($kd_desa) > 1)
                         @php
