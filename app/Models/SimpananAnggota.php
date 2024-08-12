@@ -24,6 +24,11 @@ class SimpananAnggota extends Model
     {
         return $this->belongsTo(JenisSimpanan::class, 'jenis_simpanan', 'id');
     }
+    public function anggota()
+    {
+        return $this->belongsTo(Anggota::class, 'nia', 'id');
+    }
+
 
     // ambil data dari transaksi
     public function trx_tarik()
