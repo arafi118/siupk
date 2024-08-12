@@ -6,7 +6,7 @@ use App\Models\AdminInvoice;
 use App\Models\AkunLevel1;
 use App\Models\AkunLevel2;
 use App\Models\AkunLevel3;
- use App\Models\Anggota;
+use App\Models\Anggota;
 use App\Models\ArusKas;
 use App\Models\Calk;
 use App\Models\Desa;
@@ -232,7 +232,7 @@ class PelaporanController extends Controller
 
         $file = $request->laporan;
         if ($file == 3) {
-            $laporan = explode('_', $request->sub_laporan); 
+            $laporan = explode('_', $request->sub_laporan);
             $file = $laporan[0];
 
             $data['kode_akun'] = $laporan[1];
@@ -316,7 +316,7 @@ class PelaporanController extends Controller
         $data['judul'] = 'Laporan Keuangan';
         $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
         $data['tgl'] = Tanggal::tglLatin($tgl);
-        
+
         $n_saham = $data['kec']->nama_saham;
         $rp_saham = $data['kec']->rp_saham;
         $pros_saham = $data['kec']->pros_saham;
@@ -340,7 +340,7 @@ class PelaporanController extends Controller
         $exps7 = explode("#", $j_kom);
 
 
-        $n_saham1 = ''; 
+        $n_saham1 = '';
         $rp_saham1 = '0';
         $pros_saham1 = '';
         $n_direksi = '';
@@ -355,13 +355,13 @@ class PelaporanController extends Controller
         $data['sahamData'] = [];
 
         for ($s = 1; $s <= $jsaham; $s++) {
-            $data['n_saham1'] = (isset($exps1[$s - 1])) ? $exps1[$s - 1]:'';
-            $data['rp_saham1'] = (isset($exps2[$s - 1])) ? $exps2[$s - 1]:'';
-            $data['pros_saham1'] = (isset($exps3[$s - 1])) ? $exps3[$s - 1]:'';
-            $data['n_direksi1'] = (isset($exps4[$s - 1])) ? $exps4[$s - 1]:'';
-            $data['j_direksi1'] = (isset($exps5[$s - 1])) ? $exps5[$s - 1]:'';
-            $data['n_kom1'] = (isset($exps6[$s - 1])) ? $exps6[$s - 1]:'';
-            $data['j_kom1'] = (isset($exps7[$s - 1])) ? $exps7[$s - 1]:'';
+            $data['n_saham1'] = (isset($exps1[$s - 1])) ? $exps1[$s - 1] : '';
+            $data['rp_saham1'] = (isset($exps2[$s - 1])) ? $exps2[$s - 1] : '';
+            $data['pros_saham1'] = (isset($exps3[$s - 1])) ? $exps3[$s - 1] : '';
+            $data['n_direksi1'] = (isset($exps4[$s - 1])) ? $exps4[$s - 1] : '';
+            $data['j_direksi1'] = (isset($exps5[$s - 1])) ? $exps5[$s - 1] : '';
+            $data['n_kom1'] = (isset($exps6[$s - 1])) ? $exps6[$s - 1] : '';
+            $data['j_kom1'] = (isset($exps7[$s - 1])) ? $exps7[$s - 1] : '';
 
 
             $data['sahamData'][] = [
@@ -376,26 +376,26 @@ class PelaporanController extends Controller
             ];
             $data['jrp_saham1'] += $data['rp_saham1'];
             $data['jpros_saham1'] += $data['pros_saham1'];
-            }
+        }
 
 
-        
-            if ($data['bulanan']) {
-                $data['judul'] = 'Laporan Keuangan';
-                $data['sub_judul'] =  date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl) ; 
-            }
 
-            $view = view('pelaporan.view.ojk.profil_o', $data)->render();
+        if ($data['bulanan']) {
+            $data['judul'] = 'Laporan Keuangan';
+            $data['sub_judul'] =  date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+        }
 
-            if ($data['type'] == 'pdf') {
-                $pdf = PDF::loadHTML($view);
-                return $pdf->stream();
-            } else {
-                return $view;
-            }
+        $view = view('pelaporan.view.ojk.profil_o', $data)->render();
+
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view);
+            return $pdf->stream();
+        } else {
+            return $view;
+        }
     }
 
-    private function OJKP(array $data) 
+    private function OJKP(array $data)
     {
         $data['keuangan'] = new Keuangan;
 
@@ -433,56 +433,55 @@ class PelaporanController extends Controller
         } else {
             return $view;
         }
-
     }
-   
-    private function LRL(array $data) 
+
+    private function LRL(array $data)
     {
-            $keuangan = new Keuangan;
+        $keuangan = new Keuangan;
 
-            $thn = $data['tahun'];
-            $bln = $data['bulan'];
-            $hari = $data['hari'];
-            $awal_tahun = $thn . '-01-01';
-    
-            if ($bln == '1' && $hari == '1') {
-                return $this->laba_rugi_tutup_buku($data);
-            }
-    
-            $tgl = $thn . '-' . $bln . '-' . $hari;
-            if ($data['bulanan']) {
-                $data['sub_judul'] = 'Periode ' . Tanggal::tglLatin($thn . '-' . $bln . '-01') . ' S.D ' . Tanggal::tglLatin($data['tgl_kondisi']);
-                $data['tgl'] = Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
-                $data['tgl'] = Tanggal::tglLatin($tgl);
+        $thn = $data['tahun'];
+        $bln = $data['bulan'];
+        $hari = $data['hari'];
+        $awal_tahun = $thn . '-01-01';
 
-                $data['bulan_lalu'] = date('Y-m-t', strtotime('-1 month', strtotime($thn . '-' . $bln . '-10')));
-                $data['header_lalu'] = 'Bulan Lalu';
-                $data['header_sekarang'] = 'Bulan Ini';
-            } else {
-                $data['sub_judul'] = 'Periode ' . Tanggal::tglLatin($awal_tahun) . ' S.D ' . Tanggal::tglLatin($data['tgl_kondisi']);
-                $data['tgl'] = Tanggal::tahun($tgl);
-                $data['bulan_lalu'] = ($thn - 1) . '-12-31';
-                $data['header_lalu'] = 'Tahun Lalu';
-                $data['header_sekarang'] = 'Tahun Ini';
-            }
-    
-            $jenis = 'Tahunan';
-            if ($data['bulanan']) {
-                $jenis = 'Bulanan';
-            }
-    
-            $pph = $keuangan->pph($data['tgl_kondisi'], $jenis);
-            $laba_rugi = $keuangan->laporan_laba_rugi($data['tgl_kondisi'], $jenis);
-    
-            $data['pph'] = [
-                'bulan_lalu' => $pph['bulan_lalu'],
-                'sekarang' => $pph['bulan_ini']
-            ];
-    
-            $data['pendapatan'] = $laba_rugi['pendapatan'];
-            $data['beban'] = $laba_rugi['beban'];
-            $data['pendapatanNOP'] = $laba_rugi['pendapatan_non_ops'];
-            $data['bebanNOP'] = $laba_rugi['beban_non_ops'];
+        if ($bln == '1' && $hari == '1') {
+            return $this->laba_rugi_tutup_buku($data);
+        }
+
+        $tgl = $thn . '-' . $bln . '-' . $hari;
+        if ($data['bulanan']) {
+            $data['sub_judul'] = 'Periode ' . Tanggal::tglLatin($thn . '-' . $bln . '-01') . ' S.D ' . Tanggal::tglLatin($data['tgl_kondisi']);
+            $data['tgl'] = Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+            $data['tgl'] = Tanggal::tglLatin($tgl);
+
+            $data['bulan_lalu'] = date('Y-m-t', strtotime('-1 month', strtotime($thn . '-' . $bln . '-10')));
+            $data['header_lalu'] = 'Bulan Lalu';
+            $data['header_sekarang'] = 'Bulan Ini';
+        } else {
+            $data['sub_judul'] = 'Periode ' . Tanggal::tglLatin($awal_tahun) . ' S.D ' . Tanggal::tglLatin($data['tgl_kondisi']);
+            $data['tgl'] = Tanggal::tahun($tgl);
+            $data['bulan_lalu'] = ($thn - 1) . '-12-31';
+            $data['header_lalu'] = 'Tahun Lalu';
+            $data['header_sekarang'] = 'Tahun Ini';
+        }
+
+        $jenis = 'Tahunan';
+        if ($data['bulanan']) {
+            $jenis = 'Bulanan';
+        }
+
+        $pph = $keuangan->pph($data['tgl_kondisi'], $jenis);
+        $laba_rugi = $keuangan->laporan_laba_rugi($data['tgl_kondisi'], $jenis);
+
+        $data['pph'] = [
+            'bulan_lalu' => $pph['bulan_lalu'],
+            'sekarang' => $pph['bulan_ini']
+        ];
+
+        $data['pendapatan'] = $laba_rugi['pendapatan'];
+        $data['beban'] = $laba_rugi['beban'];
+        $data['pendapatanNOP'] = $laba_rugi['pendapatan_non_ops'];
+        $data['bebanNOP'] = $laba_rugi['beban_non_ops'];
 
         $view = view('pelaporan.view.ojk.labarugi', $data)->render();
 
@@ -492,9 +491,8 @@ class PelaporanController extends Controller
         } else {
             return $view;
         }
-
     }
-    private function DRP(array $data) 
+    private function DRP(array $data)
     {
         $thn = $data['tahun'];
         $bln = $data['bulan'];
@@ -511,7 +509,7 @@ class PelaporanController extends Controller
 
         if ($data['bulanan']) {
             $data['judul'] = 'Laporan Keuangan';
-            $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl); 
+            $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         }
 
         $data['jenis_pp'] = JenisProdukPinjaman::where('lokasi', '0')->with([
@@ -520,7 +518,7 @@ class PelaporanController extends Controller
                 $tb_angg = 'anggota_' . $data['kec']->id;
                 $data['tb_pinj_i'] = $tb_pinj_i;
 
-                $query->select($tb_pinj_i . '.*', $tb_angg . '.namadepan',$tb_angg . '.nik', 'desa.nama_desa', 'desa.kd_desa', 'desa.kode_desa', 'sebutan_desa.sebutan_desa')
+                $query->select($tb_pinj_i . '.*', $tb_angg . '.namadepan', $tb_angg . '.nik', 'desa.nama_desa', 'desa.kd_desa', 'desa.kode_desa', 'sebutan_desa.sebutan_desa')
                     ->join($tb_angg, $tb_angg . '.id', '=', $tb_pinj_i . '.nia')
                     ->join('desa', $tb_angg . '.desa', '=', 'desa.kd_desa')
                     ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
@@ -560,7 +558,7 @@ class PelaporanController extends Controller
             },
             'pinjaman_individu.angsuran_pokok',
             'pinjaman_individu.angsuran_jasa'
-            ])->get();
+        ])->get();
 
         $view = view('pelaporan.view.ojk.daftar_rincian_pinjamanaktif', $data)->render();
 
@@ -570,9 +568,8 @@ class PelaporanController extends Controller
         } else {
             return $view;
         }
-
     }
-    private function DRPL(array $data) 
+    private function DRPL(array $data)
     {
         $thn = $data['tahun'];
         $bln = $data['bulan'];
@@ -585,7 +582,7 @@ class PelaporanController extends Controller
 
         if ($data['bulanan']) {
             $data['judul'] = 'Laporan Keuangan';
-            $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl); 
+            $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         }
 
         $data['jenis_pp'] = JenisProdukPinjaman::where('lokasi', '0')->with([
@@ -594,7 +591,7 @@ class PelaporanController extends Controller
                 $tb_angg = 'anggota_' . $data['kec']->id;
                 $data['tb_pinj_i'] = $tb_pinj_i;
 
-                $query->select($tb_pinj_i . '.*', $tb_angg . '.namadepan',$tb_angg . '.nik', 'desa.nama_desa', 'desa.kd_desa', 'desa.kode_desa', 'sebutan_desa.sebutan_desa')
+                $query->select($tb_pinj_i . '.*', $tb_angg . '.namadepan', $tb_angg . '.nik', 'desa.nama_desa', 'desa.kd_desa', 'desa.kode_desa', 'sebutan_desa.sebutan_desa')
                     ->join($tb_angg, $tb_angg . '.id', '=', $tb_pinj_i . '.nia')
                     ->join('desa', $tb_angg . '.desa', '=', 'desa.kd_desa')
                     ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
@@ -622,7 +619,7 @@ class PelaporanController extends Controller
             },
             'pinjaman_individu.angsuran_pokok',
             'pinjaman_individu.angsuran_jasa'
-            ])->get();
+        ])->get();
 
         $view = view('pelaporan.view.ojk.rincian_pinjaman_lunas', $data)->render();
 
@@ -632,10 +629,9 @@ class PelaporanController extends Controller
         } else {
             return $view;
         }
-
     }
-    private function DRT(array $data) 
-    {  
+    private function DRT(array $data)
+    {
         $thn = $data['tahun'];
         $bln = $data['bulan'];
         $hari = $data['hari'];
@@ -647,7 +643,7 @@ class PelaporanController extends Controller
 
         if ($data['bulanan']) {
             $data['judul'] = 'Laporan Keuangan';
-            $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl); 
+            $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         }
 
         $data['jenis_pp'] = JenisProdukPinjaman::where('lokasi', '0')->with([
@@ -656,7 +652,7 @@ class PelaporanController extends Controller
                 $tb_angg = 'anggota_' . $data['kec']->id;
                 $data['tb_pinj_i'] = $tb_pinj_i;
 
-                $query->select($tb_pinj_i . '.*', $tb_angg . '.namadepan',$tb_angg . '.nik', 'desa.nama_desa', 'desa.kd_desa', 'desa.kode_desa', 'sebutan_desa.sebutan_desa')
+                $query->select($tb_pinj_i . '.*', $tb_angg . '.namadepan', $tb_angg . '.nik', 'desa.nama_desa', 'desa.kd_desa', 'desa.kode_desa', 'sebutan_desa.sebutan_desa')
                     ->join($tb_angg, $tb_angg . '.id', '=', $tb_pinj_i . '.nia')
                     ->join('desa', $tb_angg . '.desa', '=', 'desa.kd_desa')
                     ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
@@ -672,7 +668,7 @@ class PelaporanController extends Controller
                             [$data['tb_pinj_i'] . '.jenis_pinjaman', 'I'],
                             [$data['tb_pinj_i'] . '.tgl_cair', '<=', $data['tgl_kondisi']]
                         ])->orwhere([
-                            [$data['tb_pinj_i'] . '.status', 'L'],  
+                            [$data['tb_pinj_i'] . '.status', 'L'],
                             [$data['tb_pinj_i'] . '.jenis_pinjaman', 'I'],
                             [$data['tb_pinj_i'] . '.tgl_lunas', '>=', $data['tgl_kondisi']]
                         ])->orwhere([
@@ -696,27 +692,27 @@ class PelaporanController extends Controller
             },
             'pinjaman_individu.angsuran_pokok',
             'pinjaman_individu.angsuran_jasa'
-            ])->get();
+        ])->get();
 
-            $data['simpanan_anggota'] = SimpananAnggota::where('lokasi', $data['kec']->id)->with([
-                'js',
-                'trx_tarik' => function ($query) use ($data) {
-                    $tgl = $data['tahun'] . '-' . $data['bulan'] . '-01';
-                    $tgl = date('Y-m-t', strtotime($tgl));
-            
-                    $query->where('tgl_transaksi', '<=', $tgl)
-                          ->whereIn('rekening_debit', ['simpanan', 'kas']);
-                },
-                'trx_setor' => function ($query) use ($data) {
-                    $tgl = $data['tahun'] . '-' . $data['bulan'] . '-01';
-                    $tgl = date('Y-m-t', strtotime($tgl));
-            
-                    $query->where('tgl_transaksi', '<=', $tgl)
-                          ->whereIn('rekening_debit', ['1.1.01.01', '','']);
-                },
-            ])->get();
-            
-            
+        $data['simpanan_anggota'] = SimpananAnggota::where('lokasi', $data['kec']->id)->with([
+            'js',
+            'trx_tarik' => function ($query) use ($data) {
+                $tgl = $data['tahun'] . '-' . $data['bulan'] . '-01';
+                $tgl = date('Y-m-t', strtotime($tgl));
+
+                $query->where('tgl_transaksi', '<=', $tgl)
+                    ->whereIn('rekening_debit', ['simpanan', 'kas']);
+            },
+            'trx_setor' => function ($query) use ($data) {
+                $tgl = $data['tahun'] . '-' . $data['bulan'] . '-01';
+                $tgl = date('Y-m-t', strtotime($tgl));
+
+                $query->where('tgl_transaksi', '<=', $tgl)
+                    ->whereIn('rekening_debit', ['1.1.01.01', '', '']);
+            },
+        ])->get();
+
+
         $view = view('pelaporan.view.ojk.daftar_rincian_tabungan', $data)->render();
 
         if ($data['type'] == 'pdf') {
@@ -725,45 +721,8 @@ class PelaporanController extends Controller
         } else {
             return $view;
         }
-
     }
-    private function SMPN(array $data) 
-    {  
-        $thn = $data['tahun'];
-        $bln = $data['bulan'];
-        $hari = $data['hari'];
-
-        $tgl = $thn . '-' . $bln . '-' . $hari;
-        $data['judul'] = 'Laporan Keuangan';
-        $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
-        $data['tgl'] = Tanggal::tglLatin($tgl);
-
-        if ($data['bulanan']) {
-            $data['judul'] = 'Laporan Keuangan';
-            $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl); 
-        }
-            $data['anggota'] = Anggota::with([
-                'pinjaman' => function ($query) {
-                    $query->where('status','A');
-                },
-                'simpanan'
-            ])->get();
-            
-
-            
-
-
-        $view = view('pelaporan.view.ojk.simpanan_piutang', $data)->render();
-
-        if ($data['type'] == 'pdf') {
-            $pdf = PDF::loadHTML($view);
-            return $pdf->stream();
-        } else {
-            return $view;
-        }
-
-    }
-    private function DRPY(array $data) 
+    private function SMPN(array $data)
     {
         $thn = $data['tahun'];
         $bln = $data['bulan'];
@@ -776,15 +735,51 @@ class PelaporanController extends Controller
 
         if ($data['bulanan']) {
             $data['judul'] = 'Laporan Keuangan';
-            $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl); 
+            $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+        }
 
+        $data['jenis_simpanan'] = JenisSimpanan::with([
+            'simpanan' => function ($query) use ($data) {
+                $tb_anggota = 'anggota_' . Session::get('lokasi');
+                $tb_simpanan = 'simpanan_anggota_' . Session::get('lokasi');
+
+                $query->select($tb_simpanan . '.*', $tb_anggota . '.namadepan', $tb_anggota . '.nik')
+                    ->join($tb_anggota, $tb_simpanan . '.nia', $tb_anggota . '.id')
+                    ->where('tgl_buka', '<=', $data['tgl_kondisi'],)->where(function ($query) use ($data) {
+                        $query->whereRaw('tgl_buka = tgl_tutup')->orwhere('tgl_tutup', '>', $data['tgl_kondisi']);
+                    });
+            }
+        ])->where('kecuali', 'NOT LIKE', Session::get('lokasi') . '#%')->orwhere('kecuali', 'NOT LIKE', '%#' . Session::get('lokasi'))->get();
+
+        $view = view('pelaporan.view.ojk.simpanan_piutang', $data)->render();
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view);
+            return $pdf->stream();
+        } else {
+            return $view;
+        }
+    }
+    private function DRPY(array $data)
+    {
+        $thn = $data['tahun'];
+        $bln = $data['bulan'];
+        $hari = $data['hari'];
+
+        $tgl = $thn . '-' . $bln . '-' . $hari;
+        $data['judul'] = 'Laporan Keuangan';
+        $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
+        $data['tgl'] = Tanggal::tglLatin($tgl);
+
+        if ($data['bulanan']) {
+            $data['judul'] = 'Laporan Keuangan';
+            $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         }
         $data['jenis_pp'] = JenisProdukPinjaman::where('lokasi', '0')->with([
             'pinjaman_individu' => function ($query) use ($data) {
                 $tb_pinj_i = 'pinjaman_anggota_' . $data['kec']->id;
                 $tb_angg = 'anggota_' . $data['kec']->id;
                 $data['tb_pinj_i'] = $tb_pinj_i;
-        
+
                 $query->select(
                     $tb_pinj_i . '.*',
                     $tb_angg . '.namadepan',
@@ -794,18 +789,18 @@ class PelaporanController extends Controller
                     'desa.kode_desa',
                     'sebutan_desa.sebutan_desa'
                 )
-                ->join($tb_angg, $tb_angg . '.id', '=', $tb_pinj_i . '.nia')
-                ->join('desa', $tb_angg . '.desa', '=', 'desa.kd_desa')
-                ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
-                ->withSum(['real_i' => function ($query) use ($data) {
-                    $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
-                }], 'realisasi_pokok')
-                ->withSum(['real_i' => function ($query) use ($data) {
-                    $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
-                }], 'realisasi_jasa'); // Add closing parenthesis and square bracket here
+                    ->join($tb_angg, $tb_angg . '.id', '=', $tb_pinj_i . '.nia')
+                    ->join('desa', $tb_angg . '.desa', '=', 'desa.kd_desa')
+                    ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
+                    ->withSum(['real_i' => function ($query) use ($data) {
+                        $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
+                    }], 'realisasi_pokok')
+                    ->withSum(['real_i' => function ($query) use ($data) {
+                        $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
+                    }], 'realisasi_jasa'); // Add closing parenthesis and square bracket here
             }
         ])->get();
-        
+
 
         $view = view('pelaporan.view.ojk.rincian_pinjaman_diterima', $data)->render();
 
@@ -815,9 +810,8 @@ class PelaporanController extends Controller
         } else {
             return $view;
         }
-
     }
-    private function KBP(array $data) 
+    private function KBP(array $data)
     {
         $thn = $data['tahun'];
         $bln = $data['bulan'];
@@ -830,7 +824,7 @@ class PelaporanController extends Controller
 
         if ($data['bulanan']) {
             $data['judul'] = 'Laporan Keuangan';
-            $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl); 
+            $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         }
 
         $data['jenis_pp'] = JenisProdukPinjaman::where('lokasi', '0')->with([
@@ -839,7 +833,7 @@ class PelaporanController extends Controller
                 $tb_angg = 'anggota_' . $data['kec']->id;
                 $data['tb_pinj_i'] = $tb_pinj_i;
 
-                $query->select($tb_pinj_i . '.*', $tb_angg . '.namadepan',$tb_angg . '.nik', 'desa.nama_desa', 'desa.kd_desa', 'desa.kode_desa', 'sebutan_desa.sebutan_desa')
+                $query->select($tb_pinj_i . '.*', $tb_angg . '.namadepan', $tb_angg . '.nik', 'desa.nama_desa', 'desa.kd_desa', 'desa.kode_desa', 'sebutan_desa.sebutan_desa')
                     ->join($tb_angg, $tb_angg . '.id', '=', $tb_pinj_i . '.nia')
                     ->join('desa', $tb_angg . '.desa', '=', 'desa.kd_desa')
                     ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
@@ -879,7 +873,7 @@ class PelaporanController extends Controller
             },
             'pinjaman_individu.angsuran_pokok',
             'pinjaman_individu.angsuran_jasa'
-            ])->get();
+        ])->get();
         $view = view('pelaporan.view.ojk.kolekbilitas_pinjaman', $data)->render();
 
         if ($data['type'] == 'pdf') {
@@ -888,9 +882,8 @@ class PelaporanController extends Controller
         } else {
             return $view;
         }
-
     }
-    private function pcpp(array $data) 
+    private function pcpp(array $data)
     {
         $thn = $data['tahun'];
         $bln = $data['bulan'];
@@ -903,7 +896,7 @@ class PelaporanController extends Controller
 
         if ($data['bulanan']) {
             $data['judul'] = 'Laporan Keuangan';
-            $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl); 
+            $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         }
 
         $data['jenis_pp'] = JenisProdukPinjaman::where('lokasi', '0')->with([
@@ -912,7 +905,7 @@ class PelaporanController extends Controller
                 $tb_angg = 'anggota_' . $data['kec']->id;
                 $data['tb_pinj_i'] = $tb_pinj_i;
 
-                $query->select($tb_pinj_i . '.*', $tb_angg . '.namadepan',$tb_angg . '.nik', 'desa.nama_desa', 'desa.kd_desa', 'desa.kode_desa', 'sebutan_desa.sebutan_desa')
+                $query->select($tb_pinj_i . '.*', $tb_angg . '.namadepan', $tb_angg . '.nik', 'desa.nama_desa', 'desa.kd_desa', 'desa.kode_desa', 'sebutan_desa.sebutan_desa')
                     ->join($tb_angg, $tb_angg . '.id', '=', $tb_pinj_i . '.nia')
                     ->join('desa', $tb_angg . '.desa', '=', 'desa.kd_desa')
                     ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
@@ -952,7 +945,7 @@ class PelaporanController extends Controller
             },
             'pinjaman_individu.angsuran_pokok',
             'pinjaman_individu.angsuran_jasa'
-            ])->get();
+        ])->get();
         $view = view('pelaporan.view.ojk.penyisihan_cadangan', $data)->render();
 
         if ($data['type'] == 'pdf') {
@@ -961,7 +954,6 @@ class PelaporanController extends Controller
         } else {
             return $view;
         }
-
     }
     private function surat_pengantar(array $data)
     {
@@ -1456,7 +1448,7 @@ class PelaporanController extends Controller
             return $view;
         }
     }
-    
+
     private function individu_aktif(array $data)
     {
         $thn = $data['tahun'];
@@ -1608,15 +1600,15 @@ class PelaporanController extends Controller
             $data['sub_judul'] = 'Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
             $data['tgl'] = Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         }
-        
+
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $data['jenis_pp'] = JenisProdukPinjaman::where(function ($query) use ($kec) {
             $query->where('lokasi', '0')
                 ->orWhere(function ($query) use ($kec) {
                     $query->where('kecuali', 'NOT LIKE', "%-{$kec['id']}-%")
                         ->where('lokasi', 'LIKE', "%-{$kec['id']}-%");
-                    });
-                })->with([
+                });
+        })->with([
             'pinjaman_anggota' => function ($query) use ($data) {
                 $tb_pinj = 'pinjaman_anggota_' . $data['kec']->id;
                 $tb_ang = 'anggota_' . $data['kec']->id;
@@ -1667,7 +1659,7 @@ class PelaporanController extends Controller
                     ->join($tb_ang, $tb_ang . '.id', '=', $tb_pinj . '.nia')
                     ->join('desa', $tb_ang . '.desa', '=', 'desa.kd_desa')
                     ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
-                    ->where($tb_pinj . '.sistem_angsuran', '!=', '12')->where($tb_pinj .'.status', 'V')
+                    ->where($tb_pinj . '.sistem_angsuran', '!=', '12')->where($tb_pinj . '.status', 'V')
                     ->orderBy($tb_ang . '.desa', 'ASC')
                     ->orderBy($tb_pinj . '.tgl_verifikasi', 'ASC');
             },
@@ -1815,7 +1807,7 @@ class PelaporanController extends Controller
             return $view;
         }
     }
-    
+
     private function pinjaman_individu(array $data)
     {
         $thn = $data['tahun'];
