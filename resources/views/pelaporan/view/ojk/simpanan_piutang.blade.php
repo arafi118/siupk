@@ -87,15 +87,15 @@
 
         <table width="96%" border="0" align="center" cellpadding="3" cellspacing="0">
             <tr>
-                <td height="20" colspan="5" class="bottom"></td>
-                <td height="20" colspan="2" class="bottom">
+                <td height="20" class="bottom"></td>
+                <td height="20" class="bottom">
                     <div align="right" class="style9">Dokumen Laporan<br>
                         Kd.Doc. L2 Lembar-1
                     </div>
                 </td>
             </tr>
             <tr>
-                <td height="20" colspan="7" class="style6 bottom align-center">
+                <td height="20" colspan="2" class="style6 bottom align-center">
                     PENDATA UTANG & REGISTER {{ strtoupper($js->nama_js) }}
                 </td>
             </tr>
@@ -103,16 +103,16 @@
 
         <table width="96%" border="0" align="center" cellpadding="3" cellspacing="0">
             <tr>
-                <td colspan="2" width="30%" class="style9">NAMA LKM</td>
-                <td colspan="5" width="40%" class="style9">:{{ $kec->nama_lembaga_long }}</td>
+                <td width="30%" class="style9">NAMA LKM</td>
+                <td width="40%" class="style9">:{{ $kec->nama_lembaga_long }}</td>
             </tr>
             <tr>
-                <td colspan="2" width="30%" class="style9">SANDI LKM</td>
-                <td colspan="5" width="40%" class="style9">:{{ $kec->sandi_lkm }}</td>
+                <td width="30%" class="style9">SANDI LKM</td>
+                <td width="40%" class="style9">:{{ $kec->sandi_lkm }}</td>
             </tr>
             <tr>
-                <td colspan="2" width="30%" class="style9 bottom">PERIODE LAPORAN</td>
-                <td colspan="5" width="40%" class="style9 bottom">:{{ $tgl }}</td>
+                <td width="30%" class="style9 bottom">PERIODE LAPORAN</td>
+                <td width="40%" class="style9 bottom">:{{ $tgl }}</td>
             </tr>
         </table>
 
