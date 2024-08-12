@@ -122,13 +122,13 @@ $empty = false;
 
     <tr style="border: 1px solid;" align="right" height="15px" class="style9">
         <td class="left top" align="center">{{ $nomor++ }}</td>
-        <td class="left top" align="left">{{ $pa->anggota->namadepan }} -{{$pa->id}}</td>
+        <td class="left top" align="left">{{$anng->anggota->namadepan}} -{{$anng->pinjaman->id}}</td>
         <td class="left top" align="left">--</td>
-        <td class="left top" align="center">{{ Tanggal::tglIndo($sa->tgl_buka) }}</td>
+        <td class="left top" align="center">{{ Tanggal::tglIndo($anng->simpanan->tgl_buka) }}</td>
         <td class="left top" align="center">{{$selisih->m}}</td>
-        <td class="left top">{{$ann->bunga}}</td>
+        <td class="left top">{{$anng->simpanan->bunga}}</td>
         <td class="left right top" align="center">p</td>
     </tr>
 </table>
-    @endforeach
+@endforeach
 @endsection
