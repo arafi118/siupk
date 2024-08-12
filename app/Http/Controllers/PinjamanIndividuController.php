@@ -331,7 +331,6 @@ class PinjamanIndividuController extends Controller
             'nama_barang'
         ]);
 
-
         $validate = Validator::make($request->all(), [
             'tgl_proposal' => 'required',
             'pengajuan' => 'required',
@@ -650,9 +649,9 @@ class PinjamanIndividuController extends Controller
             ]);
 
             $validate = Validator::make($data, [
-                $tgl => 'required',
+                $tgl   => 'required',
                 $alokasi => 'required',
-                'jangka' => 'required',
+                'jangka'  => 'required',
                 'pros_jasa' => 'required',
                 'jenis_jasa' => 'required',
                 'sistem_angsuran_pokok' => 'required',
