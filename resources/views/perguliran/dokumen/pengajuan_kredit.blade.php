@@ -185,8 +185,7 @@
                     mengajukan kredit;</li>
                 <li>Surat Rekomendasi dari Kepala Desa/Lurah;</li>
                 <li>Pernyataan kesediaan tanggung renteng dari seluruh anggota;</li>
-                <li>Fotokopi bukti tabungan kelompok di bank;</li>
-                <li>Rencana pengembalian kredit.</li>
+                <li>Rencana angsuran pinjaman.</li>
             </ol>
             <div>Demikian permohonan kami, atas perhatiannya kami ucapkan terima kasih.</div>
         </td>
