@@ -143,22 +143,29 @@ class SimpananController extends Controller
         } else {
             $nomor_rekening = 'Data tidak valid';
         }
-
+        $fromkuasa = [
+            [
+                'id' => '1',
+                'nama' => 'Pribadi',
+            ],
+            [
+                'id' => '2',
+                'nama' => 'Lembaga',
+            ],
+        ];
         return response()->json([
             'success' => true,
-            'view' => view('simpanan.partials.simpanan', compact('id', 'kec', 'anggota', 'nomor_rekening'))->render()
+            'view' => view('simpanan.partials.simpanan', compact('id', 'kec', 'anggota', 'nomor_rekening', 'fromkuasa'))->render()
         ]);
     }
-
 
     public function Kuasa($id)
     {
         return response()->json([
             'success' => true,
-            'view' => view('simpanan.partials.lembaga')->with(compact('id'))->render()
+            'view' => view('simpanan.partials.fromkuasa')->with(compact('id'))->render()
         ]);
     }
-
     public function show(Simpanan $simpanan)
     {
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
@@ -191,6 +198,9 @@ class SimpananController extends Controller
         $tglTransaksi = $request->tgl_transaksi;
         $jumlah = $request->jumlah;
         $nomorRekening = $request->nomor_rekening;
+        $lembaga = $request->lembaga;
+        $jabatan = $request->jabatan;
+        $catatan_simpanan = $request->catatan_simpanan;
         $namaDebitur = $request->nama_debitur;
         $nia = $request->nia;
 
@@ -231,6 +241,9 @@ class SimpananController extends Controller
             'admin' => 'required|numeric',
             'kuasa' => 'required',
             'ahli_waris' => 'required',
+            'lembaga' => 'required',
+            'jabatan' => 'required',
+            'catatan_simpanan' => 'required',
             'hubungan' => 'required',
         ];
 
@@ -255,6 +268,9 @@ class SimpananController extends Controller
             'admin' => 'required|numeric',
             'kuasa' => 'required',
             'ahli_waris' => 'required',
+            'lembaga' => 'required',
+            'jabatan' => 'required',
+            'catatan_simpanan' => 'required',
             'hubungan' => 'required',
         ]);
 
@@ -264,6 +280,9 @@ class SimpananController extends Controller
 
         $simpanan = new Simpanan();
         $simpanan ->nomor_rekening = $request->nomor_rekening;
+        $simpanan ->lembaga = $request->lembaga;
+        $simpanan ->jabatan = $request->jabatan;
+        $simpanan ->catatan_simpanan = $request->catatan_simpanan;
         $simpanan ->jenis_simpanan = $request->jenis_simpanan;
         $simpanan ->nia = $request->nia;
         $simpanan ->jumlah = $request->setoran_awal;

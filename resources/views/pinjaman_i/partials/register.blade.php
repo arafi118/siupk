@@ -205,9 +205,8 @@
                                 </div>
                             </div>
                             <div class="row" id="formJaminan"></div>
-
+                            
                         </form>
-
                         <button type="submit" id="SimpanProposal" class="btn btn-dark btn-sm custom-button">Simpan Proposal</button>
                         <br><br><br>
                     </div>
@@ -235,7 +234,6 @@ $('.date').datepicker({
             $('#formJaminan').html(result.view)
         })
     }
-
     jaminan()
   
 </script>

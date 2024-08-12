@@ -18,9 +18,8 @@ $sum =0;
         </thead>
         <tbody>
             @forelse($transaksi as $index => $trx)
-
             @php
-                $id_simp = $trx->id_simp; //ini nanti di ganti ambil dari real_simpanan_$lokasi
+                $id_simp = $trx->id_simp; 
                     if (strpos($id_simp, '-') !== false) {
                         // Jika ada tanda "-", pisahkan menjadi dua bagian
                         list($kd_trx, $cif) = explode("-", $id_simp);
