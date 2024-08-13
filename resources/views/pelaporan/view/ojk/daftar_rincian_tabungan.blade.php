@@ -2,37 +2,82 @@
 @php
     use App\Utils\Keuangan;
     $keuangan = new Keuangan();
-	$section = 0;
+    $section = 0;
     $empty = false;
 @endphp
 
 @extends('pelaporan.layout.base')
 
 @section('content')
-<style type="text/css">
+    <style type="text/css">
+        .style6 {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            -webkit-print-color-adjust: exact;
+        }
 
-.style6 {font-family: Arial, Helvetica, sans-serif; font-size: 16px;font-weight: bold;  -webkit-print-color-adjust: exact;}
-.style9 {font-family: Arial, Helvetica, sans-serif; font-size: 11px; -webkit-print-color-adjust: exact;}
-.style10 {font-family: Arial, Helvetica, sans-serif; font-size: 10px; -webkit-print-color-adjust: exact;}
-.top	{border-top: 1px solid #000000; }
-.bottom	{border-bottom: 1px solid #000000; }
-.left	{border-left: 1px solid #000000; }
-.right	{border-right: 1px solid #000000; }
-.all	{border: 1px solid #000000; }
-.style26 {font-family: Arial, Helvetica, sans-serif}
-.style27 {font-family: Arial, Helvetica, sans-serif; font-size: 11px; font-weight: bold; }
-.align-justify {text-align:justify; }
-.align-center {text-align:center; }
-.align-right {text-align:right; }
+        .style9 {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
+            -webkit-print-color-adjust: exact;
+        }
 
-</style>
-@foreach ($jenis_pp as $jpp)
+        .style10 {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 10px;
+            -webkit-print-color-adjust: exact;
+        }
+
+        .top {
+            border-top: 1px solid #000000;
+        }
+
+        .bottom {
+            border-bottom: 1px solid #000000;
+        }
+
+        .left {
+            border-left: 1px solid #000000;
+        }
+
+        .right {
+            border-right: 1px solid #000000;
+        }
+
+        .all {
+            border: 1px solid #000000;
+        }
+
+        .style26 {
+            font-family: Arial, Helvetica, sans-serif
+        }
+
+        .style27 {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .align-justify {
+            text-align: justify;
+        }
+
+        .align-center {
+            text-align: center;
+        }
+
+        .align-right {
+            text-align: right;
+        }
+    </style>
+    @foreach ($jenis_pp as $jpp)
         @php
             if ($jpp->pinjaman_individu->isEmpty()) {
                 $empty = true;
                 continue;
             }
-            
+
             $jumlah_aktif = 0;
             $j_alokasi = 0;
             $j_saldo = 0;
@@ -46,84 +91,82 @@
                 $empty = false;
             @endphp
         @endif
-		
-<table width="96%" border="0" align="center" cellpadding="3" cellspacing="0">
 
-	<tr>
-		<td height="20" colspan="3" class="bottom">
-			
-		</td>
-		<td height="20" colspan="3" class="bottom">
-			<div align="right" class="style9">Dokumen Laporan<br>
-			Kd.Doc. 2T Tab Lembar-1 </div>
-		</td>
-	</tr> 
-	
-    <tr>
-        <td height="20" colspan="6" class="style6 bottom align-center"><br>DAFTAR RINCIAN TABUNGAN <br><br></td>
-    </tr>
-    <tr>
-            <td colspan="2" width="30%" class="style9">NAMA LKM</td>
-            <td colspan="4"  width="60%" class="style9">:{{$kec->nama_lembaga_long}}</td>
-	    </tr>
-	     <tr>
-            <td colspan="2" width="30%" class="style9">SANDI LKM</td>
-            <td colspan="4"  width="60%" class="style9">:{{$kec->sandi_lkm}}</td>
-	     </tr>
-	     <tr>
-            <td colspan="2" width="30%" class="style9 bottom">PERIODE LAPORAN</td>
-            <td colspan="4" width="60%" class="style9 bottom">:{{$tgl}}</td>
-	        </tr>
-			<tr align="center" height="30px" class="style9 ">
-              <th width="2%" rowspan="2" class="left bottom">No</th>
-              <th width="15%" rowspan="2" colspan="2" class="left bottom">Nama Penyimpan - CIF</a></th>
-			  <th colspan="2" class="left bottom">Suku Bunga</a></th>
-			  <th width="8%" rowspan="2" class="left bottom right">Jumlah </a></th>
-			  
+        <table width="96%" border="0" align="center" cellpadding="3" cellspacing="0">
+
+            <tr>
+                <td height="20" colspan="3" class="bottom">
+
+                </td>
+                <td height="20" colspan="3" class="bottom">
+                    <div align="right" class="style9">Dokumen Laporan<br>
+                        Kd.Doc. 2T Tab Lembar-1 </div>
+                </td>
             </tr>
-            
-            <tr align="center"  height="30px" class="style9">
-			  <th width="5%" class="left bottom">%</th>
-              <th width="10%" class="left bottom">Keterangan</th>
-			  
+
+            <tr>
+                <td height="20" colspan="6" class="style6 bottom align-center"><br>DAFTAR RINCIAN TABUNGAN <br><br>
+                </td>
             </tr>
-			
-			
+            <tr>
+                <td colspan="2" width="30%" class="style9">NAMA LKM</td>
+                <td colspan="4" width="60%" class="style9">:{{ $kec->nama_lembaga_long }}</td>
+            </tr>
+            <tr>
+                <td colspan="2" width="30%" class="style9">SANDI LKM</td>
+                <td colspan="4" width="60%" class="style9">:{{ $kec->sandi_lkm }}</td>
+            </tr>
+            <tr>
+                <td colspan="2" width="30%" class="style9 bottom">PERIODE LAPORAN</td>
+                <td colspan="4" width="60%" class="style9 bottom">:{{ $tgl }}</td>
+            </tr>
+            <tr align="center" height="30px" class="style9 ">
+                <th width="2%" rowspan="2" class="left bottom">No</th>
+                <th width="15%" rowspan="2" colspan="2" class="left bottom">Nama Penyimpan - CIF</a></th>
+                <th colspan="2" class="left bottom">Suku Bunga</a></th>
+                <th width="8%" rowspan="2" class="left bottom right">Jumlah </a></th>
+
+            </tr>
+
+            <tr align="center" height="30px" class="style9">
+                <th width="5%" class="left bottom">%</th>
+                <th width="10%" class="left bottom">Keterangan</th>
+
+            </tr>
+
+
             @foreach ($jpp->pinjaman_individu as $pinj_i)
                 @php
                     $j_alokasi += floatval((string) $pinj_i->alokasi);
-                    $j_saldo += isset($pinj_i->saldo->saldo_pokok) ? floatval((string) $pinj_i->saldo->saldo_pokok) : 0;                @endphp
+                $j_saldo += isset($pinj_i->saldo->saldo_pokok) ? floatval((string) $pinj_i->saldo->saldo_pokok) : 0; @endphp
 
                 @php
                     $kd_desa[] = $pinj_i->kd_desa;
                     $desa = $pinj_i->kd_desa;
                 @endphp
-                @if (array_count_values($kd_desa)[$pinj_i->kd_desa] <= '1' ) 
-                    @if ($section !=$desa && count($kd_desa)> 1)
-
-            
+                @if (array_count_values($kd_desa)[$pinj_i->kd_desa] <= '1')
+                    @if ($section != $desa && count($kd_desa) > 1)
                     @endif
                 @endif
-           
-		<tr>
-			<td class="style27 left top right" colspan="6">{{$pinj_i->nama_desa}}</td>
-		</tr>
 
-		@php
-                    $kidp =$pinj_i['id'];
+                <tr>
+                    <td class="style27 left top right" colspan="6">{{ $pinj_i->nama_desa }}</td>
+                </tr>
+
+                @php
+                    $kidp = $pinj_i['id'];
 
                     $nomor = 1;
                     $section = $pinj_i->kd_desa;
                     $nama_desa = $pinj_i->sebutan_desa . ' ' . $pinj_i->nama_desa;
-                    $kpros_jasa =number_format($pinj_i['pros_jasa'] - $pinj_i['jangka'],2);
+                    $kpros_jasa = number_format($pinj_i['pros_jasa'] - $pinj_i['jangka'], 2);
 
                     $ktgl1 = $pinj_i['tgl_cair'];
-                    $kpenambahan ="+".$pinj_i['jangka']." month";
+                    $kpenambahan = '+' . $pinj_i['jangka'] . ' month';
                     $ktgl2 = date('Y-m-d', strtotime($kpenambahan, strtotime($ktgl1)));
-                    $kpros_jasa =number_format($pinj_i['pros_jasa']/$pinj_i['jangka'],2);
-                    $saldopinjaman =date($tgl."-".$kidp);
+                    $kpros_jasa = number_format($pinj_i['pros_jasa'] / $pinj_i['jangka'], 2);
+                    $saldopinjaman = date($tgl . '-' . $kidp);
 
-                
                 @endphp
 
                 @php
@@ -133,12 +176,12 @@
                     $sum_jasa = 0;
                     $saldo_pokok = $pinj_i->alokasi;
                     $saldo = $pinj_i->alokasi;
-                    
+
                     if ($pinj_i->saldo) {
-                            $saldo = $pinj_i->alokasi - $pinj_i->saldo->sum_pokok;
-                            $sum_pokok = $pinj_i->saldo->sum_pokok;
-                            $sum_jasa = $pinj_i->saldo->sum_jasa;
-                        }
+                        $saldo = $pinj_i->alokasi - $pinj_i->saldo->sum_pokok;
+                        $sum_pokok = $pinj_i->saldo->sum_pokok;
+                        $sum_jasa = $pinj_i->saldo->sum_jasa;
+                    }
                     $saldo_jasa = $pinj_i->pros_jasa == 0 ? 0 : $pinj_i->alokasi * ($pinj_i->pros_jasa / 100);
                     if ($pinj_i->saldo) {
                         $sum_pokok = $pinj_i->saldo->sum_pokok;
@@ -158,14 +201,14 @@
                     }
                     $tunggakan_pokok = $target_pokok - $sum_pokok;
                     if ($tunggakan_pokok < 0) {
-                        $tunggakan_pokok=0; 
-                    } 
-                    
-                    $tunggakan_jasa=$target_jasa - $sum_jasa;
-                    if ($tunggakan_jasa < 0) { 
-                        $tunggakan_jasa=0; 
-                    } 
-                    $pross=$saldo_pokok==0 ? 0 : $saldo_pokok / $pinj_i->alokasi;
+                        $tunggakan_pokok = 0;
+                    }
+
+                    $tunggakan_jasa = $target_jasa - $sum_jasa;
+                    if ($tunggakan_jasa < 0) {
+                        $tunggakan_jasa = 0;
+                    }
+                    $pross = $saldo_pokok == 0 ? 0 : $saldo_pokok / $pinj_i->alokasi;
                     if ($pinj_i->tgl_lunas <= $tgl_kondisi && $pinj_i->status == 'L') {
                         $tunggakan_pokok = 0;
                         $tunggakan_jasa = 0;
@@ -192,8 +235,7 @@
                     $selisih_bulan = $bulan - $bl_cair;
 
                     $selisih = $selisih_bulan + $selisih_tahun;
-                    $y12 = date('Y')-1;
-
+                    $y12 = date('Y') - 1;
 
                     $_kolek = 0;
 
@@ -202,60 +244,63 @@
                     }
                     $kolek = ceil($_kolek + ($selisih - $angsuran_ke));
 
-                    if($kolek<=3){
-                        $keterangan="Lancar" ; 
-                    } elseif($kolek<=5){ 
-                        $keterangan="Diragukan" ; 
-                    }else{
-                        $keterangan="Macet" ; 
-                    } 
-                    
-                @endphp 
-                @if($saldopinjaman == 0)
+                    if ($kolek <= 3) {
+                        $keterangan = 'Lancar';
+                    } elseif ($kolek <= 5) {
+                        $keterangan = 'Diragukan';
+                    } else {
+                        $keterangan = 'Macet';
+                    }
+
+                @endphp
+                @if ($saldopinjaman == 0)
                     @php
                         $jum_nunggak = 0;
                     @endphp
                 @else
                     @php
-                        $jum_nunggak = date($tgl_kondisi . "-" . $kidp);
+                        $jum_nunggak = date($tgl_kondisi . '-' . $kidp);
                     @endphp
 
-                @if($jum_nunggak <= 0)
+                    @if ($jum_nunggak <= 0)
                         @php
                             $jum_nunggak = 0;
                         @endphp
+                    @endif
                 @endif
-                @endif
-                @foreach($simpanan_anggota as $sa)
+                @foreach ($simpanan_anggota as $sa)
                     <tr align="right" height="15px" class="style9">
-                    <td class="left top" align="center">{{$nomor++}}</td>
-                    <td colspan="2" class="left top" align="left">{{$pinj_i->nik}}{{ $pinj_i->namadepan }} -{{$pinj_i->id}}</td>
-                    <td class="left top" align="center">{{$sa->bunga}}</td>
-                    <td class="left top" align="left">{{$sa->js->nama_js}}- Per Bulan</td>
-                    <td class="left top right">{{ number_format(intval($saldopinjaman)) }}</td>
+                        <td class="left top" align="center">{{ $nomor++ }}</td>
+                        <td colspan="2" class="left top" align="left">{{ $pinj_i->nik }}{{ $pinj_i->namadepan }}
+                            -{{ $pinj_i->id }}</td>
+                        <td class="left top" align="center">{{ $sa->bunga }}</td>
+                        <td class="left top" align="left">{{ $sa->js->nama_js }}- Per Bulan</td>
+                        <td class="left top right">{{ number_format(intval($saldopinjaman)) }}</td>
                     </tr>
-                @endforeach      
-	@endforeach
+                @endforeach
+            @endforeach
 
-@if (count($kd_desa) > 0)
+            @if (count($kd_desa) > 0)
+                <tr class="style9">
+                    <th colspan="5" class="left bottom top" align="center">JUMLAH SALDO</th>
+                    <th class="left right bottom top" align="right">--</th>
+                </tr>
 
-		<tr class="style9">
-		    <th colspan="5" class="left bottom top" align="center">JUMLAH SALDO</th>
-		    <th class="left right bottom top" align="right">--</th>
-		</tr>
-		
-		<tr class="style9">
-		    <th colspan="5" class="bottom" align="center">&nbsp;</th>
-		    <th class="bottom" align="right">&nbsp;</th>
-		</tr>
-		<tr class="style9">
-		    <th colspan="5" class="left bottom top" align="center" style="background:rgba(0,0,0, 0.3);">JUMLAH SALDO KESELURUHAN (--- Nasabah)</th>
-		    <th class="left right bottom top" align="right" style="background:rgba(192,192,192,0.3);" >---</th>
-		</tr>
-		<tr>
-		<td class="style10 top" colspan="6"><b>Keterangan</b> : Data yang ditampilkan diatas merupakan Tabungan pada tahun berjalan {{ $tahun }}, untuk menampilkan data Individu aktif tahun lalu dapat memilih mode tahun lalu {{$y12}}.</td>
-		</tr>
-		@endif
-</table>
-@endforeach
+                <tr class="style9">
+                    <th colspan="5" class="bottom" align="center">&nbsp;</th>
+                    <th class="bottom" align="right">&nbsp;</th>
+                </tr>
+                <tr class="style9">
+                    <th colspan="5" class="left bottom top" align="center" style="background:rgba(0,0,0, 0.3);">JUMLAH
+                        SALDO KESELURUHAN (--- Nasabah)</th>
+                    <th class="left right bottom top" align="right" style="background:rgba(192,192,192,0.3);">---</th>
+                </tr>
+                <tr>
+                    <td class="style10 top" colspan="6"><b>Keterangan</b> : Data yang ditampilkan diatas merupakan
+                        Tabungan pada tahun berjalan {{ $tahun }}, untuk menampilkan data Individu aktif tahun lalu
+                        dapat memilih mode tahun lalu {{ $y12 }}.</td>
+                </tr>
+            @endif
+        </table>
+    @endforeach
 @endsection
