@@ -27,10 +27,14 @@ class Anggota extends Model
     {
         return $this->hasOne(Simpanan::class, 'nia');
     }
+    public function pinjaman_()
+    {
+        return $this->hasOne(SimpananAnggota::class, 'nia');
+    }
 
     public function pinjaman()
     {
-        return $this->hasOne(SimpananAnggota::class, 'nia');
+        return $this->hasOne(PinjamanAnggota::class, 'nia');
     }
 
     public function d()
