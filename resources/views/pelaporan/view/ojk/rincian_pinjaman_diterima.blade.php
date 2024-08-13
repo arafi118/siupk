@@ -98,21 +98,26 @@ $empty = false;
         <td height="20" colspan="8" class="style6 bottom align-center"><br>DAFTAR RINCIAN PINJAMAN YANG DITERIMA
             <br><br></td>
     </tr>
-    <tr>
-        <td colspan="2" width="30%" class="style9">NAMA LKM</td>
-        <td colspan="6" width="60%" class="style9">:{{$kec->nama_lembaga_long}}</td>
-    </tr>
-    <tr>
-        <td colspan="2" width="30%" class="style9">SANDI LKM</td>
-        <td colspan="6" width="60%" class="style9">:{{$kec->sandi_lkm}}</td>
-    </tr>
-    <tr>
-        <td colspan="2" width="30%" class="style9 bottom">PERIODE LAPORAN</td>
-        <td colspan="6" width="60%" class="style9 bottom">:{{$tgl}}</td>
-    </tr>
+</table>
+<table width="96%" border="0" align="center" cellpadding="3" cellspacing="0">
+	<tr>
+		<td width="20%" class="style9">NAMA LKM</td>
+		<td width="70%" class="style9">:{{ $kec->nama_lembaga_long }}</td>
+	</tr>
+	<tr>
+		<td width="20%" class="style9">SANDI LKM</td>
+		<td width="70%" class="style9">:{{ $kec->sandi_lkm }}</td>
+	</tr>
+	<tr>
+		<td width="20%" class="style9 bottom">PERIODE LAPORAN</td>
+		<td width="70%" class="style9 bottom">:{{ $tgl }}</td>
+	</tr>
+</table>
+<table width="96%" border="0" align="center" cellpadding="3" cellspacing="0">
+
     <tr align="center" height="30px" class="style9 ">
         <th width="2%" rowspan="2" class="left bottom">No</th>
-        <th width="15%" rowspan="2" colspan="2" class="left bottom">Nama Pemberi Pinjaman - Loan ID</a></th>
+        <th width="10%" rowspan="2" colspan="2" class="left bottom">Nama Pemberi Pinjaman - Loan ID</a></th>
         <th colspan="2" class="left bottom">Jangka Waktu</a></th>
         <th colspan="2" class="left bottom">Suku Bunga</a></th>
         <th width="8%" rowspan="2" class="left bottom right">Jumlah </a></th>

@@ -110,20 +110,22 @@
 			<td height="20" colspan="12" class="style6 bottom align-center"><br>DAFTAR RINCIAN PINJAMAN YANG DIBERIKAN
 				(Lunas) <br><br></td>
 		</tr>
+	</table>
+	<table width="96%" border="0" align="center" cellpadding="3" cellspacing="0">
 		<tr>
-			<td colspan="1" width="30%" class="style9">NAMA LKM</td>
-			<td colspan="11" width="40%" class="style9">:{{$lkm->nama_lkm_long}}</td>
+			<td width="20%" class="style9">NAMA LKM</td>
+			<td width="70%" class="style9">:{{ $kec->nama_lembaga_long }}</td>
 		</tr>
 		<tr>
-			<td colspan="1" width="30%" class="style9">SANDI LKM</td>
-			<td colspan="11" width="40%" class="style9">:{{$lkm->sandi_lkm}}</td>
+			<td width="20%" class="style9">SANDI LKM</td>
+			<td width="70%" class="style9">:{{ $kec->sandi_lkm }}</td>
 		</tr>
 		<tr>
-			<td colspan="1" width="30%" class="style9 bottom">PERIODE LAPORAN</td>
-			<td colspan="11" width="40%" class="style9 bottom">:{{$tgl}}</td>
+			<td width="20%" class="style9 bottom">PERIODE LAPORAN</td>
+			<td width="70%" class="style9 bottom">:{{ $tgl }}</td>
 		</tr>
-
-
+	</table>
+	<table width="96%" border="0" align="center" cellpadding="3" cellspacing="0">
 		<tr align="center" height="30px" class="style9 ">
 			<th width="2%" rowspan="2" class="left bottom">No</th>
 			<th width="20%" rowspan="2" class="left bottom">Peminjam - Loan ID</a></th>

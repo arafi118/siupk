@@ -52,7 +52,7 @@ $empty = false;
         <tr>
             <td height="20" colspan="2" class="bottom"></td>
             <td height="20" colspan="2" class="bottom">
-                <div align="right" class="style9">Dok. Laporan ----<br>Kd.Doc. CRK-----</div>
+                <div align="right" class="style9">Dok. Laporan<br>Kd.Doc. CRK</div>
             </td>
         </tr> 
         <tr>
