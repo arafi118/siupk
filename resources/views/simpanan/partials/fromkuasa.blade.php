@@ -20,4 +20,8 @@
         <small class="text-danger" id="msg_catatan_simpanan"></small>
     </div>
 </div>
+@else
+<input autocomplete="off" type="hidden" name="lembaga" id="lembaga" class="form-control" value="-">
+<input autocomplete="off" type="hidden" name="jabatan" id="jabatan" class="form-control" value="-">
+<input autocomplete="off" type="hidden" name="catatan_simpanan" id="catatan_simpanan" class="form-control" value="-">
 @endif

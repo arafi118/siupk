@@ -84,8 +84,13 @@
             <div class="col-md-6">
                 <div class="position-relative mb-3">
                     <label for="hubungan">Hubungan</label>
-                    <input autocomplete="off" type="text" name="hubungan" id="hubungan" class="form-control"
-                        value="">
+                    <select class="js-example-basic-single form-control" name="hubungan" id="hubungan">
+                        @foreach ($hubungan as $hb)
+                            <option {{ $hubungan_dipilih == $hb->id ? 'selected' : '' }} value="{{ $hb->id }}">
+                                {{ $hb->kekeluargaan }}
+                            </option>
+                        @endforeach
+                    </select>
                     <small class="text-danger" id="msg_hubungan"></small>
                 </div>
             </div>
@@ -177,8 +182,13 @@
             <div class="col-md-6">
                 <div class="position-relative mb-3">
                     <label for="hubungan">Hubungan</label>
-                    <input autocomplete="off" type="text" name="hubungan" id="hubungan" class="form-control"
-                        value="">
+                    <select class="js-example-basic-single form-control" name="hubungan" id="hubungan">
+                        @foreach ($hubungan as $hb)
+                            <option {{ $hubungan_dipilih == $hb->id ? 'selected' : '' }} value="{{ $hb->id }}">
+                                {{ $hb->kekeluargaan }}
+                            </option>
+                        @endforeach
+                    </select>
                     <small class="text-danger" id="msg_hubungan"></small>
                 </div>
             </div>
@@ -270,8 +280,13 @@
             <div class="col-md-6">
                 <div class="position-relative mb-3">
                     <label for="hubungan">Hubungan</label>
-                    <input autocomplete="off" type="text" name="hubungan" id="hubungan" class="form-control"
-                        value="">
+                    <select class="js-example-basic-single form-control" name="hubungan" id="hubungan">
+                        @foreach ($hubungan as $hb)
+                            <option {{ $hubungan_dipilih == $hb->id ? 'selected' : '' }} value="{{ $hb->id }}">
+                                {{ $hb->kekeluargaan }}
+                            </option>
+                        @endforeach
+                    </select>
                     <small class="text-danger" id="msg_hubungan"></small>
                 </div>
             </div>
@@ -363,8 +378,13 @@
             <div class="col-md-6">
                 <div class="position-relative mb-3">
                     <label for="hubungan">Hubungan</label>
-                    <input autocomplete="off" type="text" name="hubungan" id="hubungan" class="form-control"
-                        value="">
+                    <select class="js-example-basic-single form-control" name="hubungan" id="hubungan">
+                        @foreach ($hubungan as $hb)
+                            <option {{ $hubungan_dipilih == $hb->id ? 'selected' : '' }} value="{{ $hb->id }}">
+                                {{ $hb->kekeluargaan }}
+                            </option>
+                        @endforeach
+                    </select>
                     <small class="text-danger" id="msg_hubungan"></small>
                 </div>
             </div>

@@ -133,8 +133,13 @@ class SimpananController extends Controller
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $urutan = Simpanan::where('nia', $nia)->count();
         $anggota = Anggota::where('id', $nia)->first();
+        $hubungan = Keluarga::orderBy('kekeluargaan', 'ASC')->get();
+
+        $hubungan_dipilih = 0;
 
         if ($kec && $anggota) {
+            
+            $hubungan_dipilih = $kec->hubungan;
             $kec_id = str_pad($kec->id, 3, '0', STR_PAD_LEFT);
             $anggota_id = str_pad($anggota->id, 3, '0', STR_PAD_LEFT);
             $urutan = 1 + $urutan;
@@ -155,7 +160,7 @@ class SimpananController extends Controller
         ];
         return response()->json([
             'success' => true,
-            'view' => view('simpanan.partials.simpanan', compact('id', 'kec', 'anggota', 'nomor_rekening', 'fromkuasa'))->render()
+            'view' => view('simpanan.partials.simpanan', compact('id', 'kec', 'anggota', 'nomor_rekening', 'fromkuasa', 'hubungan', 'hubungan_dipilih'))->render()
         ]);
     }
 
@@ -174,7 +179,7 @@ class SimpananController extends Controller
 
         $nia = $simpanan->where('id', $simpanan->id)->with(['anggota', 'js'])->first();
         $title = ucwords($simpanan->anggota->namadepan);
-        return view('simpanan.partials.detail')->with(compact('nia', 'title'));
+        return view('simpanan.partials.detail')->with(compact('nia', 'title', 'hubungan'));
     }
 
 
@@ -229,48 +234,18 @@ class SimpananController extends Controller
 
     public function store(Request $request)
     {
-        $rules = [
-            'nomor_rekening' => 'required|string|max:255',
-            'jenis_simpanan' => 'required',
-            'nia' => 'required',
-            'setoran_awal' => 'required|numeric',
-            'tgl_buka_rekening' => 'required|date_format:d/m/Y',
-            'tgl_minimal_tutup_rekening' => 'required|date_format:d/m/Y',
-            'bunga' => 'required|numeric',
-            'pajak_bunga' => 'required|numeric',
-            'admin' => 'required|numeric',
-            'kuasa' => 'required',
-            'ahli_waris' => 'required',
-            'lembaga' => 'required',
-            'jabatan' => 'required',
-            'catatan_simpanan' => 'required',
-            'hubungan' => 'required',
-        ];
-
-        \Log::info('Validation Rules:', $rules);
-        \Log::info('Received Data:', $request->all());
-
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->fails()) {
-            \Log::info('Validation Errors:', $validator->errors()->toArray());
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
         $validator = Validator::make($request->all(), [
-            'nomor_rekening' => 'required',
+            'nomor_rekening' => 'required', 
             'jenis_simpanan' => 'required',
             'nia' => 'required',
             'setoran_awal' => 'required|numeric',
-            'tgl_buka_rekening' => 'required|date_format:d/m/Y',
-            'tgl_minimal_tutup_rekening' => 'required|date_format:d/m/Y',
+            'tgl_buka_rekening' => 'required',
+            'tgl_minimal_tutup_rekening' => 'required',
             'bunga' => 'required|numeric',
             'pajak_bunga' => 'required|numeric',
             'admin' => 'required|numeric',
             'kuasa' => 'required',
             'ahli_waris' => 'required',
-            'lembaga' => 'required',
-            'jabatan' => 'required',
-            'catatan_simpanan' => 'required',
             'hubungan' => 'required',
         ]);
 
