@@ -3,7 +3,6 @@
     use App\Utils\Keuangan;
 
     $keuangan = new Keuangan();
-    dd($pinkel);
 @endphp
 
 <style>
