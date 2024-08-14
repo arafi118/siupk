@@ -129,7 +129,6 @@
     <tr align="center" height="30px" class="style9">
         <th width="5" class="left bottom" rowspan="2">No</th>
         <th class="left bottom" rowspan="2">Simpanan -ID</th>
-        <th class="left bottom" rowspan="2">--</th>
         <th colspan="2" class="left bottom">Jangka Waktu</th>
         <th colspan="2" class="left right bottom">Bunga</th>
     </tr>
@@ -158,7 +157,6 @@
             <td class="left top" align="left">
                 {{ $simp->namadepan }} - {{ $simp->id }}
             </td>
-            <td class="left top" align="center">--</td>
             <td class="left top" align="center">{{ $tgl2 }}</td>
             <td class="left top" align="center">{{ $simp ? $selisih->m : $selisih }}</td>
             <td class="left top" align="center">{{ $simp ? $simp->bunga : '0' }}</td>
@@ -167,10 +165,11 @@
     @endforeach
 
     <tr style="border: 1px solid;">
-        <th colspan="7" class="left top" align="center" style="background:rgba(0,0,0, 0.3);">
+        <th colspan="6" class="left top" align="center" style="background:rgba(0,0,0, 0.3);">
             TOTAL ({{$jumlah_aktif_per_jenis}} Anggota)
         </th>
     </tr>
 </table>
+
 @endforeach
 @endsection
