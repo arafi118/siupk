@@ -1,6 +1,7 @@
 @php
-$sum =0;
+$sum = 0;
 @endphp
+
 <div class="table-responsive">
     <table class="table table-striped align-items-center mb-0" width="100%">
         <thead>
@@ -20,31 +21,27 @@ $sum =0;
             @forelse($transaksi as $index => $trx)
             @php
                 $id_simp = $trx->id_simp; 
-                    if (strpos($id_simp, '-') !== false) {
-                        // Jika ada tanda "-", pisahkan menjadi dua bagian
-                        list($kd_trx, $cif) = explode("-", $id_simp);
-                    } else {
-                        // Jika tidak ada tanda "-", atur kd_trx = 0 dan cif = id_simp
-                        $kd_trx = 0;
-                        $cif = $id_simp;
-                    }
+                if (strpos($id_simp, '-') !== false) {
+                    list($kd_trx, $cif) = explode("-", $id_simp);
+                } else {
+                    $kd_trx = 0;
+                    $cif = $id_simp;
+                }
 
+                $jumlah = floatval($trx->jumlah); // Ensure $trx->jumlah is numeric
                 
-                    if (substr($trx->rekening_kredit, 0, 3) == '2.1') {
-                        $real_d         = $trx->jumlah;
-                        $real_k         = 0;
-                        $sum            = $sum + $real_d;
-                    } elseif (substr($trx->rekening_debit, 0, 3) == '2.1') {
-                        $real_d         = 0;
-                        $real_k         = $trx->jumlah;
-                        $sum            = $sum - $real_k;
-                    } else {
-                        // Jika tidak memenuhi kedua kondisi di atas, gunakan nilai default
-                        $real_d         =  $trx->jumlah;
-                        $real_k         =  $trx->jumlah;
-                        // $sum tidak berubah dalam kasus ini
-                    }
-                        
+                if (substr($trx->rekening_kredit, 0, 3) == '2.1') {
+                    $real_d = $jumlah;
+                    $real_k = 0;
+                    $sum += $real_d;
+                } elseif (substr($trx->rekening_debit, 0, 3) == '2.1') {
+                    $real_d = 0;
+                    $real_k = $jumlah;
+                    $sum -= $real_k;
+                } else {
+                    $real_d = $jumlah;
+                    $real_k = $jumlah;
+                }
             @endphp
                 <tr>
                     <td>{{ $index + 1 }}</td>
