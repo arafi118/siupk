@@ -11,6 +11,6 @@
     "\\resources\\views\\simpanan\\partials",
     "\\routes"
   ],
-  "SelectedNode": "\\resources\\views\\simpanan\\partials\\simpanan.blade.php",
+  "SelectedNode": "\\resources\\views\\simpanan\\generate.blade.php",
   "PreviewInSolutionExplorer": false
 }

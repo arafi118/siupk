@@ -263,7 +263,7 @@ class SimpananController extends Controller
             $transaksi = DB::table("transaksi_$lokasi")
                 ->where('id_simp', $simp->id)
                 ->orderBy('tgl_transaksi', 'ASC')
-                ->orderBy('urutan', 'ASC')
+                ->orderBy('urutan', 'ASC') 
                 ->orderBy('idt', 'ASC')
                 ->get();
 
@@ -303,8 +303,9 @@ class SimpananController extends Controller
         if ($start >= $total) {
             return redirect()->route('simpanan.index')->with('success', 'Proses generate simpanan telah selesai');
         }
-
-        return view('simpanan.generate', compact('total', 'start', 'per_page'));
+        
+        $title = 'generate Simpanan';
+        return view('simpanan.generate', compact('title', 'total', 'start', 'per_page'));
     }
 
 
