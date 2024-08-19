@@ -35,7 +35,7 @@ class GenerateController extends Controller
 
     public function individu()
     {
-        $database = env('DB_DATABASE', 'siupk_dbm');
+        $database = env('DB_DATABASE', 'siupk_lkm');
         $table = 'pinjaman_anggota_' . Session::get('lokasi');
 
         $strukturTabel = \DB::select("
@@ -56,7 +56,7 @@ class GenerateController extends Controller
 
     public function kelompok()
     {
-        $database = env('DB_DATABASE', 'siupk_dbm');
+        $database = env('DB_DATABASE', 'siupk_lkm');
         $table = 'pinjaman_kelompok_' . Session::get('lokasi');
 
         $strukturTabel = \DB::select("
