@@ -1797,7 +1797,14 @@ class PelaporanController extends Controller
 
         $data['tgl_lalu'] = $data['tahun'] . '-' . $data['bulan'] . '-01';
 
-        $data['jenis_pp'] = JenisProdukPinjaman::where('lokasi', '0')->with([
+        $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
+        $data['jenis_pp'] = JenisProdukPinjaman::where(function ($query) use ($kec) {
+            $query->where('lokasi', '0')
+                ->orWhere(function ($query) use ($kec) {
+                    $query->where('kecuali', 'NOT LIKE', "%-{$kec['id']}-%")
+                        ->where('lokasi', 'LIKE', "%-{$kec['id']}-%");
+                });
+        })->with([
             'pinjaman_individu' => function ($query) use ($data) {
                 $tb_pinj_i = 'pinjaman_anggota_' . $data['kec']->id;
                 $tb_angg = 'anggota_' . $data['kec']->id;
@@ -1861,7 +1868,7 @@ class PelaporanController extends Controller
             }
         ])->get();
 
-        $data['lunas'] = PinjamanAnggota::where([
+        $data['lunas'] = PinjamanKelompok::where([
             ['tgl_lunas', '<', $thn . '-01-01'],
             ['status', 'L']
         ])->with('saldo', 'target')->get();
