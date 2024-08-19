@@ -8,6 +8,7 @@ use App\Models\AkunLevel2;
 use App\Models\AkunLevel3;
 use App\Models\Anggota;
 use App\Models\ArusKas;
+use App\Models\MasterArusKas;
 use App\Models\Calk;
 use App\Models\Desa;
 use App\Models\JenisLaporan;
