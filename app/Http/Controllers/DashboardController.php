@@ -562,7 +562,7 @@ class DashboardController extends Controller
     {
         $tahun = date('Y');
         $bulan = date('m');
-        $kec = Kecamatan::where('id', Session::get('lokasi'))->with('desa')->first();
+        $kec = Kecamatan::where('id', Session::get('lokasi'))->with('d')->first();
 
         if (Saldo::where([['kode_akun', 'LIKE', '%' . $kec->kd_kec . '%']])->count() <= 0) {
             $saldo_desa = [];
@@ -813,7 +813,7 @@ class DashboardController extends Controller
         $tahun = request()->get('tahun') ?: date('Y');
         $bulan = request()->get('bulan') ?: date('m');
 
-        $kec = Kecamatan::where('id', Session::get('lokasi'))->with('desa')->first();
+        $kec = Kecamatan::where('id', Session::get('lokasi'))->with('d')->first();
 
         $data_id = [];
         $saldo = [];
