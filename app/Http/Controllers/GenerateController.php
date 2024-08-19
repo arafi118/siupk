@@ -190,7 +190,7 @@ class GenerateController extends Controller
                     $tgl_cair = $pinkel->tgl_tunggu;
                 }
             }
-
+            $simpan_tgl =$tgl_cair;
             if ($is_pinkel) {
                 $desa = $pinkel->kelompok->d;
             } else {
@@ -200,11 +200,20 @@ class GenerateController extends Controller
             $tgl_angsur = $tgl_cair;
             $tanggal_cair = date('d', strtotime($tgl_cair));
 
-            if ($desa->jadwal_angsuran_desa > 0) {
-                $angsuran_desa = $desa->jadwal_angsuran_desa;
-                if ($angsuran_desa > 0) {
-                    $tgl_pinjaman = date('Y-m', strtotime($tgl_cair));
-                    $tgl_cair = $tgl_pinjaman . '-' . $angsuran_desa;
+            if ($desa) {
+                if ($desa->jadwal_angsuran_desa > 0) {
+                    $angsuran_desa = $desa->jadwal_angsuran_desa;
+                    if ($angsuran_desa > 0) {
+                        $tgl_pinjaman = date('Y-m', strtotime($tgl_cair));
+                        $tgl_cair = $tgl_pinjaman . '-' . $angsuran_desa;
+                    }
+                }
+            }
+
+            if ($kec->batas_angsuran > 0) {
+                $batas_tgl_angsuran = $kec->batas_angsuran;
+                if ($tanggal_cair >= $batas_tgl_angsuran) {
+                    $tgl_cair = date('Y-m-d', strtotime('+1 month', strtotime($tgl_cair)));
                 }
             }
 
@@ -213,10 +222,6 @@ class GenerateController extends Controller
             $sa_pokok = $pinkel->sistem_angsuran;
             $sa_jasa = $pinkel->sa_jasa;
             $pros_jasa = $pinkel->pros_jasa;
-
-            $poko_kredit = '1.1.03.';
-            $jasa_kredit = '4.1.01.';
-            $dend_kredit = '4.1.02.';
 
             $sistem_pokok = ($pinkel->sis_pokok) ? $pinkel->sis_pokok->sistem : '1';
             $sistem_jasa = ($pinkel->sis_jasa) ? $pinkel->sis_jasa->sistem : '1';
@@ -328,7 +333,7 @@ class GenerateController extends Controller
             $data_rencana[strtotime($tgl_cair)] = [
                 'loan_id' => $pinkel->id,
                 'angsuran_ke' => 0,
-                'jatuh_tempo' => $tgl_cair,
+                'jatuh_tempo' => $simpan_tgl,
                 'wajib_pokok' => 0,
                 'wajib_jasa' => 0,
                 'target_pokok' => $target_pokok,
@@ -387,21 +392,32 @@ class GenerateController extends Controller
 
             ksort($data_rencana);
             foreach ($pinkel->trx as $trx) {
-                if (Keuangan::startWith($trx['rekening_kredit'], $dend_kredit)) continue;
+                $poko_kredit = '1.1.03';
+                $jasa_kredit = '4.1.01';
+                $dend_kredit = '4.1.02';
+
+                if (Keuangan::startWith($trx->rekening_kredit, $dend_kredit)) continue;
                 if (in_array($trx->idtp, $data_idtp)) continue;
 
                 $tgl_transaksi = $trx->tgl_transaksi;
                 $realisasi_pokok = 0;
                 $realisasi_jasa = 0;
+
                 foreach ($trx->tr_idtp as $idtp) {
-                    if (Keuangan::startWith($trx['rekening_kredit'], $poko_kredit)) {
-                        $realisasi_pokok = $idtp->jumlah;
+                    if ($is_pinkel) {
+                        if ($idtp->id_pinj != $pinkel->id) continue;
+                    } else {
+                        if ($idtp->id_pinj_i != $pinkel->id) continue;
+                    }
+
+                    if (Keuangan::startWith($idtp->rekening_kredit, $poko_kredit)) {
+                        $realisasi_pokok = intval($idtp->jumlah);
                         $sum_pokok += $realisasi_pokok;
                         $alokasi_pokok -= $realisasi_pokok;
                     }
 
-                    if (Keuangan::startWith($trx['rekening_kredit'], $jasa_kredit)) {
-                        $realisasi_jasa = $idtp->jumlah;
+                    if (Keuangan::startWith($idtp->rekening_kredit, $jasa_kredit)) {
+                        $realisasi_jasa = intval($idtp->jumlah);
                         $sum_jasa += $realisasi_jasa;
                         $alokasi_jasa -= $realisasi_jasa;
                     }
@@ -457,13 +473,13 @@ class GenerateController extends Controller
 
         if ($is_pinkel) {
             RencanaAngsuran::whereIn('loan_id', $data_id_pinj)->delete();
-            RealAngsuran::whereIn('id', $data_id_real)->delete();
+            RealAngsuran::whereIn('loan_id', $data_id_pinj)->delete();
 
             RencanaAngsuran::insert($rencana);
             RealAngsuran::insert($real);
         } else {
             RencanaAngsuranI::whereIn('loan_id', $data_id_pinj)->delete();
-            RealAngsuranI::whereIn('id', $data_id_real)->delete();
+            RealAngsuranI::whereIn('loan_id', $data_id_pinj)->delete();
 
             RencanaAngsuranI::insert($rencana);
             RealAngsuranI::insert($real);
