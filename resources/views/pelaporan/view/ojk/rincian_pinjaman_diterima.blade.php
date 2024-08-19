@@ -113,177 +113,68 @@ $empty = false;
 		<td width="70%" class="style9 bottom">:{{ $tgl }}</td>
 	</tr>
 </table>
-<table width="96%" border="0" align="center" cellpadding="3" cellspacing="0">
+<table width="96%" border="1" align="center" cellpadding="3" cellspacing="0">
 
-    <tr align="center" height="30px" class="style9 ">
-        <th width="2%" rowspan="2" class="left bottom">No</th>
-        <th width="10%" rowspan="2" colspan="2" class="left bottom">Nama Pemberi Pinjaman - Loan ID</a></th>
-        <th colspan="2" class="left bottom">Jangka Waktu</a></th>
-        <th colspan="2" class="left bottom">Suku Bunga</a></th>
-        <th width="8%" rowspan="2" class="left bottom right">Jumlah </a></th>
-    </tr>
     <tr align="center" height="30px" class="style9">
-        <th width="5%" class="left bottom">Mulai </th>
+        <th width="2%" rowspan="2" class="left bottom">No</th>
+        <th width="10%" rowspan="2" colspan="2" class="left bottom">Nama Pemberi Pinjaman - Loan ID</th>
+        <th colspan="2" class="left bottom">Jangka Waktu</th>
+        <th colspan="2" class="left bottom">Suku Bunga</th>
+    </tr>
+    <tr style="border: 1px solid;"align="center" height="30px" class="style9">
+        <th width="5%" class="left bottom">Mulai</th>
         <th width="5%" class="left bottom">Jatuh Tempo</th>
         <th width="5%" class="left bottom">%</th>
         <th width="5%" class="left bottom">Keterangan</th>
     </tr>
     @foreach ($jpp->pinjaman_individu as $pinj_i)
-		@php 
-			$k_alokasi += floatval((string) $pinj_i->alokasi);
-			$k_saldo += isset($pinj_i->saldo->saldo_pokok) ? floatval((string) $pinj_i->saldo->saldo_pokok) : 0; 
-
-		@endphp
-		@php
-        $nomor = 1;
-			$kd_desa[] = $pinj_i->kd_desa;
-			$desa = $pinj_i->kd_desa;
-		@endphp
-		@if (array_count_values($kd_desa)[$pinj_i->kd_desa] <= '1' ) 
-			@if ($section !=$desa && count($kd_desa)> 1)
-
-
-			@endif
-		@endif
-        @endforeach
-    	<tr>
-			<td class="style27 left top right" colspan="8">{{$pinj_i->nama_desa}}</td>
-		</tr>
-
+        @php 
+            $k_alokasi += floatval((string) $pinj_i->alokasi);
+            $k_saldo += isset($pinj_i->saldo->saldo_pokok) ? floatval((string) $pinj_i->saldo->saldo_pokok) : 0; 
+        @endphp
         @php
-				$kidp =$pinj_i['id'];
-
-				$nomor = 1;
-				$section = $pinj_i->kd_desa;
-				$nama_desa = $pinj_i->sebutan_desa . ' ' . $pinj_i->nama_desa;
-				$apros_jasa =number_format($pinj_i['pros_jasa'] - $pinj_i['jangka'],2);
-
-				$ktgl1 = $pinj_i['tgl_cair'];
-				$kpenambahan ="+".$pinj_i['jangka']." month";
-				$atgl2 = date('Y-m-d', strtotime($kpenambahan, strtotime($ktgl1)));
-				$apros_jasa =number_format($pinj_i['pros_jasa']/$pinj_i['jangka'],2);
-				$saldopinjaman =date($tgl."-".$kidp);
-
-
-			@endphp
-
-			@php
-				$jumlah_lunas += 1;
-
-				$sum_pokok = 0;
-				$sum_jasa = 0;
-				$saldo_pokok = $pinj_i->alokasi;
-				$saldo = $pinj_i->alokasi;
-
-			if ($pinj_i->saldo) {
-				$saldo = $pinj_i->alokasi - $pinj_i->saldo->sum_pokok;
-				$sum_pokok = $pinj_i->saldo->sum_pokok;
-				$sum_jasa = $pinj_i->saldo->sum_jasa;
-			}
-			$saldo_jasa = $pinj_i->pros_jasa == 0 ? 0 : $pinj_i->alokasi * ($pinj_i->pros_jasa / 100);
-			if ($pinj_i->saldo) {
-				$sum_pokok = $pinj_i->saldo->sum_pokok;
-			}
-
-			$target_pokok = 0;
-			$target_jasa = 0;
-			$wajib_pokok = 0;
-			$wajib_jasa = 0;
-			$angsuran_ke = 0;
-			if ($pinj_i->target) {
-				$target_pokok = $pinj_i->target->target_pokok;
-				$target_jasa = $pinj_i->target->target_jasa;
-				$wajib_pokok = $pinj_i->target->wajib_pokok;
-				$wajib_jasa = $pinj_i->target->wajib_jasa;
-				$angsuran_ke = $pinj_i->target->angsuran_ke;
-			}
-			$tunggakan_pokok = $target_pokok - $sum_pokok;
-			if ($tunggakan_pokok < 0) { 
-				$tunggakan_pokok=0; 
-			}
-				$tunggakan_jasa=$target_jasa - $sum_jasa; 
-			if ($tunggakan_jasa < 0) {
-				 $tunggakan_jasa=0;
-
-				 }
-
-				 $pross=$saldo_pokok==0 ? 0 : $saldo_pokok / $pinj_i->alokasi;
-			if ($pinj_i->tgl_lunas <= $tgl_kondisi && $pinj_i->status == 'L') {
-					$tunggakan_pokok = 0;
-					$tunggakan_jasa = 0;
-					$saldo_pokok = 0;
-					$saldo_jasa = 0;
-			} elseif ($pinj_i->tgl_lunas <= $tgl_kondisi && $pinj_i->status == 'R') {
-					$tunggakan_pokok = 0;
-					$tunggakan_jasa = 0;
-					$saldo_pokok = 0;
-					$saldo_jasa = 0;
-			} elseif ($pinj_i->tgl_lunas <= $tgl_kondisi && $pinj_i->status == 'H') {
-					$tunggakan_pokok = 0;
-					$tunggakan_jasa = 0;
-					$saldo_pokok = 0;
-					$saldo_jasa = 0;
-			}
-
-					$tgl_cair = explode('-', $pinj_i->tgl_cair);
-					$th_cair = $tgl_cair[0];
-					$bl_cair = $tgl_cair[1];
-					$tg_cair = $tgl_cair[2];
-
-					$selisih_tahun = ($tahun - $th_cair) * 12;
-					$selisih_bulan = $bulan - $bl_cair;
-
-					$selisih = $selisih_bulan + $selisih_tahun;
-
-							$_kolek = 0;
-							$y12 = date('Y')-1;
-
-						if ($wajib_pokok != '0') {
-							$_kolek = $tunggakan_pokok / $wajib_pokok;
-						}
-							$kolek = ceil($_kolek + ($selisih - $angsuran_ke));
-
-							if($kolek<=3){
-								 $keterangan="Lancar" ; 
-							} elseif($kolek<=5){ 
-								$keterangan="Diragukan" ; 
-							}else{
-								$keterangan="Macet" ; 
-							}
-
-							@endphp
-						@if($saldopinjaman==0) 
-							@php 
-								$jum_nunggak=0; 
-							@endphp
-						@else
-							@php 
-							$jum_nunggak=date($tgl_kondisi . "-" . $kidp);
-							@endphp
-						@if($jum_nunggak <=0)
-							@php
-								$jum_nunggak=0; 
-							@endphp
-						@endif
-						@endif 
-							
-
-    <tr align="right" height="15px" class="style9">
-        <td class="left top" align="center">{{ $nomor++ }}</td>
-        <td colspan="2" class="left top" align="left">{{ $pinj_i->namadepan }} -{{$pinj_i->id}}</td>
-        <td class="left top" align="center">{{ Tanggal::tglIndo($pinj_i->tgl_cair) }}</td>
-        <td class="left top">{{ Tanggal::tglIndo($atgl2)}}</td>
-        <td class="left top" align="center">{{$apros_jasa}}%</td>
-        <td class="left top">per bulan</td>
-        <td class="left top  right"></td>
-    </tr>
- 
+            $nomor = 1;
+            $kd_desa[] = $pinj_i->kd_desa;
+            $desa = $pinj_i->kd_desa;
+        @endphp
+        @if (array_count_values($kd_desa)[$pinj_i->kd_desa] <= '1' ) 
+            @if ($section !=$desa && count($kd_desa)> 1)
+            @endif
+        @endif
+    @endforeach
     <tr>
-        <td class="style10 top" colspan="8"><b>Keterangan</b> : Data yang ditampilkan diatas merupakan Tabungan pada
-            tahun berjalan {{$tahun}}, untuk menampilkan data Individu aktif tahun lalu dapat memilih mode tahun lalu {{$y12}}.
+        <td class="style27 left top right" colspan="7">{{$pinj_i->nama_desa}}</td>
+    </tr>
+
+    @php
+        $kidp = $pinj_i['id'];
+        $nomor = 1;
+        $section = $pinj_i->kd_desa;
+        $nama_desa = $pinj_i->sebutan_desa . ' ' . $pinj_i->nama_desa;
+        $apros_jasa = number_format($pinj_i['pros_jasa'] - $pinj_i['jangka'], 2);
+        $ktgl1 = $pinj_i['tgl_cair'];
+        $kpenambahan = "+" . $pinj_i['jangka'] . " month";
+        $atgl2 = date('Y-m-d', strtotime($kpenambahan, strtotime($ktgl1)));
+        $apros_jasa = number_format($pinj_i['pros_jasa'] / $pinj_i['jangka'], 2);
+        $saldopinjaman = date($tgl . "-" . $kidp);
+        $y12 = date('Y') - 1;
+    @endphp
+
+    <tr style="border: 1px solid;"align="right" height="15px" class="style9">
+        <td class="left top" align="center">{{ $nomor++ }}</td>
+        <td colspan="2" class="left top" align="left">{{ $pinj_i->namadepan }} - {{$pinj_i->id}}</td>
+        <td class="left top" align="center">{{ Tanggal::tglIndo($pinj_i->tgl_cair) }}</td>
+        <td class="left top">{{ Tanggal::tglIndo($atgl2) }}</td>
+        <td class="left top" align="center">{{ $apros_jasa }}%</td>
+        <td class="left top" align="center">per bulan</td>
+    </tr>
+
+    <tr>
+        <td class="style10 top" colspan="7"><b>Keterangan</b>: Data yang ditampilkan di atas merupakan Tabungan pada tahun berjalan {{ $tahun }}, untuk menampilkan data Individu aktif tahun lalu dapat memilih mode tahun lalu {{ $y12 }}.
         </td>
     </tr>
 </table>
+
 @endforeach
 
 @endsection
