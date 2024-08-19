@@ -1,8 +1,7 @@
 @php
     use App\Models\Kecamatan;
 
-    $user = auth()->user();
-    $kecamatan = Kecamatan::find($user->id);
+    $kecamatan = Kecamatan::find(auth()->user()->id); // Fetch the kecamatan directly using the kec_id
 @endphp
 <div class="scrollbar-sidebar">
     <div class="app-sidebar__inner"><br><br>
@@ -122,7 +121,7 @@
                     </li>
                 </ul>
             </li>
-            @if($kecamatan && $kecamatan->id == 318 && $user->location == 1)
+            @if($kecamatan && $kecamatan->id == 318)
             <li>
                     <a href="#">
                         <i class="metismenu-icon pe-7s-diskette"></i>
