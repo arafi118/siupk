@@ -1,3 +1,9 @@
+@php
+    use App\Models\Kecamatan;
+
+    $user = auth()->user();
+    $kecamatan = Kecamatan::find($user->id);
+@endphp
 <div class="scrollbar-sidebar">
     <div class="app-sidebar__inner"><br><br>
         <ul class="vertical-nav-menu">
@@ -53,13 +59,27 @@
                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                 </a>
                 <ul>
-                    <li>
+                    {{-- <li>
                         <a href="/pengaturan/users">
                             <i class="metismenu-icon">
                                 <i class="metismenu-icon pe-7s-note"></i>
                             </i>Data User
                         </a>
+                    </li> --}}
+                    
+                    <li>
+                        <a href="/database/penduduk/register_penduduk">
+                            <i class="metismenu-icon">
+                            </i>Register Nasabah
+                        </a>
                     </li>
+                    <li>
+                        <a href="/database/penduduk">
+                            <i class="metismenu-icon">
+                            </i>Data Nasabah
+                        </a>
+                    </li>
+
                     <li>
                         <a href="/database/desa">
                             <i class="metismenu-icon">
@@ -77,18 +97,6 @@
                         <a href="/database/supplier">
                             <i class="metismenu-icon">
                             </i>Data Supplier
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/database/penduduk/register_penduduk">
-                            <i class="metismenu-icon">
-                            </i>Register Nasabah
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/database/penduduk">
-                            <i class="metismenu-icon">
-                            </i>Data Nasabah
                         </a>
                     </li>
                 </ul>
@@ -114,27 +122,27 @@
                     </li>
                 </ul>
             </li>
+            @if($kecamatan && $kecamatan->id == 318 && $user->location == 1)
             <li>
-                <a href="#">
-                    <i class="metismenu-icon pe-7s-diskette"></i>
-                    Simpanan & Utang
-                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-                </a>
-                <ul>
-                    <li>
-                        <a href="/register_simpanan">
-                            <i class="metismenu-icon">
-                            </i>Pendataan Utang
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/simpanan">
-                            <i class="metismenu-icon">
-                            </i>Daftar Simpanan & utang
-                        </a>
-                    </li>
-                </ul>
-            </li>
+                    <a href="#">
+                        <i class="metismenu-icon pe-7s-diskette"></i>
+                        Simpanan & Utang
+                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="/register_simpanan">
+                                <i class="metismenu-icon"></i>Pendataan Utang
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/simpanan">
+                                <i class="metismenu-icon"></i>Daftar Simpanan & Utang
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
             <li>
                 <a href="#">
                     <i class="metismenu-icon pe-7s-graph3"></i>
