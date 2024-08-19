@@ -1,8 +1,9 @@
 @php
     use App\Models\Kecamatan;
 
-    $kecamatan = Kecamatan::find(auth()->user()->id); // Fetch the kecamatan directly using the kec_id
-@endphp
+    $kecamatan = Kecamatan::where('web_kec', explode('//', URL::to('/'))[1])
+            ->orWhere('web_alternatif', explode('//', URL::to('/'))[1])
+            ->first();@endphp
 <div class="scrollbar-sidebar">
     <div class="app-sidebar__inner"><br><br>
         <ul class="vertical-nav-menu">
@@ -121,7 +122,7 @@
                     </li>
                 </ul>
             </li>
-            @if($kecamatan && $kecamatan->id == 318)
+            @if($kecamatan && ($kecamatan->id == 318 || $kecamatan->id == 1))
             <li>
                     <a href="#">
                         <i class="metismenu-icon pe-7s-diskette"></i>
