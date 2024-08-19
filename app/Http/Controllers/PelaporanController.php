@@ -1861,7 +1861,7 @@ class PelaporanController extends Controller
             }
         ])->get();
 
-        $data['lunas'] = PinjamanKelompok::where([
+        $data['lunas'] = PinjamanIndividu::where([
             ['tgl_lunas', '<', $thn . '-01-01'],
             ['status', 'L']
         ])->with('saldo', 'target')->get();
