@@ -271,9 +271,8 @@ class PinjamanIndividuController extends Controller
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $jenis_jasa = JenisJasa::all();
         $sistem_angsuran = SistemAngsuran::all();
-        $agent = Agent::all();
+        $agent = Agent::where('lokasi', Session::get('lokasi'))->get();
         $jenis_pp = JenisProdukPinjaman::where('lokasi', '0')->get();
-
         $jenis_pp_dipilih = $anggota->jenis_produk_pinjaman;
 
         if ($anggota->pinjaman) {
