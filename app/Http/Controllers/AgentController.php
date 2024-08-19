@@ -191,7 +191,7 @@ class AgentController extends Controller
         ], Response::HTTP_OK);
     }
 
-    /**
+    /**z
      * Remove the specified resource from storage.
      */
     public function destroy(Agent $agent)

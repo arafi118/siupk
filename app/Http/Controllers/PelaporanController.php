@@ -1065,9 +1065,29 @@ class PelaporanController extends Controller
         }
 
         $data['keuangan'] = $keuangan;
-        $data['arus_kas'] = ArusKas::where('sub', '0')->with('child')->orderBy('id', 'ASC')->get();
+
+        $tanggal = explode('-', $data['tgl_kondisi']);
+        $thn = $tanggal[0];
+        $bln = $tanggal[1];
+        $tgl = $tanggal[2];
+
+        $data['tgl_awal'] = $thn . '-' . $bln . '-01';
+        $data['arus_kas'] = MasterArusKas::with([
+            'child',
+            'child.rek_debit.rek.trx_debit' => function ($query) use ($data) {
+                $query->whereBetween('tgl_transaksi', [$data['tgl_awal'], $data['tgl_kondisi']])->where(function ($query) use ($data) {
+                    $query->where('rekening_kredit', 'LIKE', '1.1.01%')->orwhere('rekening_kredit', 'LIKE', '1.1.02%');
+                });
+            },
+            'child.rek_kredit.rek.trx_kredit' => function ($query) use ($data) {
+                $query->whereBetween('tgl_transaksi', [$data['tgl_awal'], $data['tgl_kondisi']])->where(function ($query) use ($data) {
+                    $query->where('rekening_debit', 'LIKE', '1.1.01%')->orwhere('rekening_debit', 'LIKE', '1.1.02%');
+                });
+            }
+        ])->where('parent_id', '0')->get();
 
         $data['saldo_bulan_lalu'] = $keuangan->saldoKas($tgl_lalu);
+        // $data['arus_kas'] = ArusKas::where('sub', '0')->with('child')->orderBy('id', 'ASC')->get();
 
         $view = view('pelaporan.view.arus_kas', $data)->render();
 
