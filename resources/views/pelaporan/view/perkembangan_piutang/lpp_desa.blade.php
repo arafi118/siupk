@@ -14,7 +14,7 @@
     </style>
     @foreach ($jenis_pp as $jpp)
         @php
-            if ($jpp->pinjaman_kelompok->isEmpty()) {
+            if ($jpp->pinjaman_individu->isEmpty()) {
                 break;
             }
         @endphp
@@ -56,7 +56,7 @@
         </table>
         <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 8px; table-layout: fixed;">
             <tr style="background: rgb(230, 230, 230); font-weight: bold;">
-                <th class="t l b" rowspan="2" width="17%">Kelompok - Loan ID</th>
+                <th class="t l b" rowspan="2" width="17%">Nasabah - Loan ID</th>
                 <th class="t l b" rowspan="2" width="2%">Kel</th>
                 <th class="t l b" rowspan="2" width="7%">Alokasi</th>
                 <th class="t l b" colspan="2" width="12%">Target</th>
@@ -82,7 +82,7 @@
                 <th class="t l b r" width="6%">Jasa</th>
             </tr>
 
-            @foreach ($jpp->pinjaman_kelompok as $pinkel)
+            @foreach ($jpp->pinjaman_individu as $pinkel)
                 @php
                     $kd_desa[] = $pinkel->kd_desa;
                     $desa = $pinkel->kd_desa;
