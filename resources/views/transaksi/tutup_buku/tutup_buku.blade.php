@@ -3,9 +3,9 @@
 
     $title_form = [
         1 => 'Utang Dividen 1',
-        2 => 'Utang Deviden 2',
+        2 => 'Utang Dividen 2',
         3 => 'Alokasi Bantuan Sosial',
-        4 => 'Lain-lain',
+        4 => 'Alokasi Lainya',
     ];
 @endphp
 
