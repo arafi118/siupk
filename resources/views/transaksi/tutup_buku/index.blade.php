@@ -10,6 +10,7 @@
                 @if ($success)
                 <div class="alert alert-success alert-dismissible text-bl fade show" role="alert">
                     <span class="alert-icon align-middle">
+                        &nbsp;
                     </span>
                     <span class="alert-text">
                         <i class="fa-brands fa-signal-messenger"></i>
