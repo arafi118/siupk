@@ -1,16 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\app",
-    "\\app\\Http",
-    "\\app\\Http\\Controllers",
-    "\\app\\Models",
-    "\\resources",
-    "\\resources\\views",
-    "\\resources\\views\\simpanan",
-    "\\resources\\views\\simpanan\\partials",
-    "\\routes"
+    "\\public"
   ],
-  "SelectedNode": "\\resources\\views\\simpanan\\generate.blade.php",
+  "SelectedNode": "\\public\\index.php",
   "PreviewInSolutionExplorer": false
 }
