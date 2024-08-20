@@ -49,7 +49,7 @@
                             Individu
                         </a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#Kelompok" role="tab"
                             aria-controls="Kelompok" aria-selected="false">
                             <span class="material-icons align-middle mb-1">
@@ -57,7 +57,7 @@
                             </span>
                             Kelompok
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
 
                 <div class="tab-content mt-2">

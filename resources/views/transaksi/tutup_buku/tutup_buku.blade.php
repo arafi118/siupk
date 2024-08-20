@@ -2,9 +2,9 @@
     use App\Utils\Tanggal;
 
     $title_form = [
-        1 => 'Kelembagaan',
-        2 => 'Dana Sosial',
-        3 => 'Bonus UPK',
+        1 => 'Utang Dividen',
+        2 => 'Utang Deviden 1',
+        3 => 'Utang Deviden 2',
         4 => 'Lain-lain',
     ];
 @endphp
@@ -17,7 +17,7 @@
         <div class="card">
             <div class="card-body">
                 @if ($success)
-                    <div class="alert alert-success alert-dismissible text-white fade show" role="alert">
+                    <div class="alert alert-success alert-dismissible text-black fade show" role="alert">
                         <span class="alert-icon align-middle">
                             <span class="material-icons text-md">
                                 thumb_up_off_alt
@@ -26,7 +26,7 @@
                         <span class="alert-text">
                             <strong>Tutup Buku Tahun {{ $tahun }}</strong> berhasil.
                             Anda dapat melanjutkan proses pembagian laba di lain hari,
-                            klik <a href="/transaksi/tutup_buku" class="fw-bold text-white">Disini</a>
+                            klik <a href="/transaksi/tutup_buku" class="fw-bold text-black">Disini</a>
                             untuk kembali.
                         </span>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
