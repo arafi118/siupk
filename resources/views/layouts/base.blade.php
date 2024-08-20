@@ -9,6 +9,7 @@
     if ($invoice->count() > 0) {
         $jumlah = $invoice->count();
     }
+    
 @endphp
 
 <!DOCTYPE html>
