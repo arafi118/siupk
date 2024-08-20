@@ -279,8 +279,8 @@ class TransaksiController extends Controller
             Saldo::whereIn('id', $data_id)->delete();
             Saldo::insert($saldo_tutup_buku);
 
-            $success = true;
-        }
+            return redirect('transaksi/tutup_buku');
+             }
 
         $surplus = $keuangan->laba_rugi($tahun . '-13-00');
 
@@ -357,7 +357,7 @@ class TransaksiController extends Controller
             $alokasi_laba['3.2.01.01'] += floatval($value);
         }
 
-        $cadangan_resiko = $data['cadangan_resiko'];
+        // $cadangan_resiko = $data['cadangan_resiko'];
         $surplus_bersih = $data['surplus_bersih'];
         $laba_ditahan = $data['laba_ditahan'];
 

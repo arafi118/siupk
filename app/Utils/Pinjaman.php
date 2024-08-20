@@ -68,6 +68,14 @@ class Pinjaman
                     'key' => '{sebutan_kades}',
                     'des' => 'Menampilkan Sebutan Kepala Desa/Lurah',
                 ],
+                [
+                    'key' => '{penjamin}',
+                    'des' => 'Menampilkan Nama penjamin',
+                ],
+                [
+                    'key' => '{peminjam}',
+                    'des' => 'Menampilkan Nama Peminjam',
+                ],
             ];
         } else {
             $kec = $data['kec'];

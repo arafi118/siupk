@@ -1,6 +1,18 @@
 @extends('layouts.base')
 
 @section('content')
+<style>
+    .tox .tox-promotion {
+    background: repeating-linear-gradient(transparent 0 1px, transparent 1px 39px) center top 39px / 100% calc(100% - 39px) no-repeat;
+    background-color: #fff;
+    grid-column: 2;
+    grid-row: 1;
+    padding-inline-end: 8px;
+    padding-inline-start: 4px;
+    padding-top: 5px;
+    display: none;
+    }
+</style>
     <div class="app-main__inner">
         <div class="tab-content">
             <div class="tab-pane fade show active" id="" role="tabpanel">

@@ -1,6 +1,18 @@
 @extends('layouts.base')
 
 @section('content')
+<style>
+    .tox .tox-promotion {
+    background: repeating-linear-gradient(transparent 0 1px, transparent 1px 39px) center top 39px / 100% calc(100% - 39px) no-repeat;
+    background-color: #fff;
+    grid-column: 2;
+    grid-row: 1;
+    padding-inline-end: 8px;
+    padding-inline-start: 4px;
+    padding-top: 5px;
+    display: none;
+    }
+</style>
     <div class="app-main__inner">
         <div class="tab-content">
             <div class="tab-pane fade show active" id="" role="tabpanel">
@@ -13,21 +25,21 @@
                     
                                     <input type="hidden" name="field" id="field" value="tanda_tangan_spk">
                                     <textarea class="tiny-mce-editor" name="tanda_tangan" id="tanda_tangan" rows="20">
-                    @if ($kec->ttd)
-                    {!! json_decode($kec->ttd->tanda_tangan_spk, true) !!}
-                    @else
-                    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
-                        <tr>
-                            <td align="center">Pihak Pertama</td>
-                            <td>&nbsp;</td>
-                            <td align="center">Pihak Kedua</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                        </tr>
-                    </table>
-                    @endif
-                    </textarea>
+                                        @if ($kec->ttd)
+                                        {!! json_decode($kec->ttd->tanda_tangan_spk, true) !!}
+                                        @else
+                                        <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
+                                            <tr>
+                                                <td align="center">Pihak Pertama</td>
+                                                <td>&nbsp;</td>
+                                                <td align="center">Pihak Kedua</td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                            </tr>
+                                        </table>
+                                        @endif
+                                        </textarea>
                                 </form>
                                 <div class="d-flex justify-content-end mt-3">
                                     <button type="button" data-bs-toggle="modal" data-bs-target="#kataKunci" class="btn btn-info btn-sm">
