@@ -6,7 +6,7 @@
 
 <div class="alert alert-warning text-black">
     <b>Saldo Tutup Buku</b> tidak sama dengan <b>Saldo Neraca?</b> Klik
-    <a href="#" id="SimpanSaldo" class="alert-link text-white">Disini</a>.
+    <a href="#" id="SimpanSaldo" class="alert-link text-primary">Disini</a>.
 </div>
 
 @foreach ($akun1 as $lev1)
@@ -117,3 +117,37 @@
         </div>
     </div>
 </form>
+<script>
+function handleSuccess(response) {
+    if (response.success) {
+        Swal.fire({
+            title: 'Berhasil!',
+            text: response.msg,
+            icon: 'success',
+            confirmButtonText: 'Oke'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = response.redirect;
+            }
+        });
+    }
+}
+
+$.ajax({
+    url: 'transaksi/tutup_buku',
+    method: 'POST',
+    data: $('#SimpanTutupBuku').serialize(),
+    dataType: 'json',
+    success: handleSuccess,
+    error: function() {
+        Swal.fire({
+            title: 'Error!',
+            text: 'Terjadi kesalahan saat menyimpan data.',
+            icon: 'error',
+            confirmButtonText: 'Oke'
+        });
+    }
+});
+
+$('#SimpanTutupBuku').on('submit', handleSubmit);
+</script>

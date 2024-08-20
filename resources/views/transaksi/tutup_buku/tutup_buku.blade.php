@@ -26,7 +26,7 @@
                         <span class="alert-text">
                             <strong>Tutup Buku Tahun {{ $tahun }}</strong> berhasil.
                             Anda dapat melanjutkan proses pembagian laba di lain hari,
-                            klik <a href="/transaksi/tutup_buku" class="fw-bold text-black">Disini</a>
+                            klik<a href="/transaksi/tutup_buku" class="fw-bold text-primary">Disini</a>
                             untuk kembali.
                         </span>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
@@ -183,7 +183,6 @@
     </div>
 </div>
 @endsection
-
 @section('script')
     <script>
         $(".nominal").maskMoney({
@@ -278,5 +277,5 @@
                 }
             })
         })
-    </script>
+
 @endsection
