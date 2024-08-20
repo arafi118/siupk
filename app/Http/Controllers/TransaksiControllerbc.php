@@ -93,10 +93,9 @@ class TransaksiController extends Controller
     public function jurnalTutupBuku()
     {
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
-        
-        $success = false;
+
         $title = 'Tutup Buku';
-        return view('transaksi.tutup_buku.index')->with(compact('title', 'kec', 'success'));
+        return view('transaksi.tutup_buku.index')->with(compact('title', 'kec'));
     }
 
     // Inactive
@@ -280,12 +279,9 @@ class TransaksiController extends Controller
             Saldo::whereIn('id', $data_id)->delete();
             Saldo::insert($saldo_tutup_buku);
 
-        $success = true;
-        
-        $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
-        $title = 'Tutup Buku';
-        return view('transaksi.tutup_buku.index')->with(compact('title', 'kec', 'success'));
-             }
+            return redirect('transaksi/tutup_buku');
+            
+           }
 
         $surplus = $keuangan->laba_rugi($tahun . '-13-00');
 
