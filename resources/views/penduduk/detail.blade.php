@@ -1,5 +1,4 @@
 @extends('layouts.base')
-
 @section('content')
 <style>
     .select2-container .select2-selection--single .select2-selection__rendered {
@@ -25,7 +24,6 @@
                     </a>
                 </li>
             </ul>
-
             <div class="tab-content mt-2">
                 <div class="tab-pane fade show active" id="ProfilPenduduk" role="tabpanel" aria-labelledby="ProfilPenduduk">
                     <div class="card">
@@ -33,7 +31,6 @@
                             <form action="/database/penduduk/{{ $penduduk->nik }}" method="post" id="Penduduk">
                                 @csrf
                                 @method('PUT')
-
                                 <input type="hidden" name="_nik" id="_nik" value="{{ $penduduk->nik }}">
                                 <div class="row">
                                     <div class="col-md-4">
@@ -146,7 +143,6 @@
                                             <small class="text-danger" id="msg_agama"></small>
                                         </div>
                                     </div>
-                                    
                                     <div class="col-md-2">
                                         <div class="position-relative mb-3">
                                             <label for="pendidikan">Pendidikan</label>
@@ -165,7 +161,6 @@
                                             <small class="text-danger" id="msg_pendidikan"></small>
                                         </div>
                                     </div>
-                                    
                                     <div class="col-md-2">
                                         <div class="position-relative mb-3">
                                             <label for="status_pernikahan">Status Pernikahan</label>
@@ -177,7 +172,6 @@
                                             <small class="text-danger" id="msg_status_pernikahan"></small>
                                         </div>
                                     </div>
-                                    
                                     <div class="col-md-4">
                                         <div class="position-relative mb-3">
                                             <label for="no_telp">No. Telp</label>
@@ -245,7 +239,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <button type="submit" class="btn btn-github btn-sm float-end btn btn-sm btn-dark mb-0" id="SimpanPenduduk">
                                     Simpan Penduduk
                                 </button>
@@ -256,7 +249,6 @@
                                             $status = '1';
                                         }
                                     @endphp
-
                                     @if ($status == '0')
                                         Blokir Penduduk
                                     @else
@@ -273,7 +265,6 @@
                             <h5 class="font-weight-normal text-info text-gradient">
                                 Riwayat Piutang {{ ucwords($penduduk->namadepan) }}
                             </h5>
-
                             <ul class="list-group list-group-flush mt-2">
                                 @foreach ($penduduk->pinjaman_anggota as $pinj)
                                     @php
@@ -284,7 +275,7 @@
                                             $pinkel = $pinj->pinkel;
                                         }
                                     @endphp
-                                    <li class="list-group-item">
+                                     <li class="list-group-item">
                                         @php
                                             if ($pinkel->status == 'P') {
                                                 $tgl = $pinkel->tgl_proposal;
@@ -307,7 +298,7 @@
                                                     Loan ID. {{ $pinkel->id }}
                                                     {{ $pinj->pinkel ? $pinj->kelompok->nama_kelompok : $penduduk->namadepan }}
                                                 </span>
-                                                |
+                                               |
                                                 <span>
                                                     {{ Tanggal::tglIndo($tgl) }}
                                                 </span>
@@ -325,6 +316,7 @@
                                                 <span>
                                                     {{ $pinkel->sts->nama_status }}
                                                 </span>
+                                               
                                             </p>
                                         </blockquote>
                                     </li>
@@ -334,7 +326,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="card mt-3">
                 <div class="card-body p-2">
                     <a href="/database/penduduk" class="btn btn-info btn-sm float-end mb-0">Kembali</a>
@@ -346,7 +337,6 @@
 <br><br><br><br>
     <form action="/database/penduduk/{{ $penduduk->nik }}/blokir" method="post" id="Blokir">
         @csrf
-
         @php
             $status = '0';
             if ($penduduk->status == '0') {
@@ -359,24 +349,19 @@
 
 @section('script')
     <script>
-    
     $('.js-select-2').select2({
             theme: 'bootstrap-5'
         });
-
         // Function to set font size
         function setFontSize(size) {
             $('.select2-container .select2-selection--single .select2-selection__rendered').css('font-size', size + 'px');
         }
-
         $('.date').datepicker({
             dateFormat: 'dd/mm/yy'
         });
-
         $(document).on('click', '#SimpanPenduduk', function(e) {
             e.preventDefault()
             $('small').html('')
-
             var form = $('#Penduduk')
             $.ajax({
                 type: 'post',
@@ -397,7 +382,6 @@
                 }
             })
         })
-
         $(document).on('click', '#BlokirPenduduk', function(e) {
             e.preventDefault()
             let blokir = $('#Blokir #status').val()
@@ -407,7 +391,6 @@
                 title = 'Lepaskan Blokiran?'
                 text = 'Dengan klik Ya maka penduduk ini akan dilepas dari blokirannya. Yakin lepaskan?'
             }
-
             Swal.fire({
                 title: title,
                 text: text,
@@ -437,10 +420,8 @@
                 }
             })
         })
-
         $(document).on('click', '.blockquote', function(e) {
             e.preventDefault()
-
             var link = $(this).attr('data-link')
             window.location.href = link
         })

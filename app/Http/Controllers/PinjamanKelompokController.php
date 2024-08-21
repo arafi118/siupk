@@ -10,6 +10,7 @@ use App\Models\Kecamatan;
 use App\Models\Kelompok;
 use App\Models\PinjamanAnggota;
 use App\Models\PinjamanKelompok;
+use App\Models\PinjamanIndividu;
 use App\Models\RealAngsuran;
 use App\Models\Rekening;
 use App\Models\RencanaAngsuran;
@@ -1889,7 +1890,7 @@ class PinjamanKelompokController extends Controller
         $data['idtp'] = $idtp;
         $data['nia'] = $nia;
         $data['kec'] = Kecamatan::where('id', Session::get('lokasi'))->with('kabupaten')->first();
-        $data['pinkel'] = PinjamanKelompok::where('id', $id)->with([
+        $data['pinkel'] = PinjamanAnggota::where('id', $id)->with([
             'kelompok',
             'jpp',
             'sis_pokok',

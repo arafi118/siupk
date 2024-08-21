@@ -2051,22 +2051,20 @@ class TransaksiController extends Controller
 
     public function struk($id)
     {
-        $data['real'] = RealAngsuran::where('id', $id)->with('trx', 'trx.user')->firstOrFail();
+        $data['real'] = RealAngsuranI::where('id', $id)->with('trx', 'trx.user')->firstOrFail();
         // $data['ra'] = RencanaAngsuran::where([
         //     ['loan_id', $data['real']->loan_id],
         //     ['target_pokok', '>=', $data['real']->sum_pokok]
         // ])->orderBy('jatuh_tempo', 'ASC')->first();
-        $data['ra'] = RencanaAngsuran::where([
+        $data['ra'] = RencanaAngsuranI::where([
             ['loan_id', $data['real']->loan_id]
         ])->orderBy('jatuh_tempo', 'DESC')->first();
-        $data['ra_bulan_ini'] = RencanaAngsuran::where([
+        $data['ra_bulan_ini'] = RencanaAngsuranI::where([
             ['loan_id', $data['real']->loan_id],
             ['jatuh_tempo', '<=', date('Y-m-t', strtotime($data['real']->tgl_transaksi))],
         ])->orderBy('jatuh_tempo', 'DESC')->first();
-        $data['pinkel'] = PinjamanKelompok::where('id', $data['real']->loan_id)->with([
-            'kelompok',
-            'kelompok.d',
-            'kelompok.d.sebutan_desa',
+        $data['pinkel'] = PinjamanIndividu::where('id', $data['real']->loan_id)->with([
+            'anggota',
             'jpp',
             'sis_pokok'
         ])->first();
@@ -2103,22 +2101,22 @@ class TransaksiController extends Controller
 
     public function strukMatrix($id)
     {
-        $data['real'] = RealAngsuran::where('id', $id)->with('trx', 'trx.user')->firstOrFail();
+        $data['real'] = RealAngsuranI::where('id', $id)->with('trx', 'trx.user')->firstOrFail();
         // $data['ra'] = RencanaAngsuran::where([
         //     ['loan_id', $data['real']->loan_id],
         //     ['target_pokok', '>=', $data['real']->sum_pokok]
         // ])->orderBy('jatuh_tempo', 'ASC')->first();
-        $data['ra'] = RencanaAngsuran::where([
+        $data['ra'] = RencanaAngsuranI::where([
             ['loan_id', $data['real']->loan_id]
         ])->orderBy('jatuh_tempo', 'DESC')->first();
-        $data['ra_bulan_ini'] = RencanaAngsuran::where([
+        $data['ra_bulan_ini'] = RencanaAngsuranI::where([
             ['loan_id', $data['real']->loan_id],
             ['jatuh_tempo', '<=', date('Y-m-t', strtotime($data['real']->tgl_transaksi))]
         ])->orderBy('jatuh_tempo', 'DESC')->first();
-        $data['pinkel'] = PinjamanKelompok::where('id', $data['real']->loan_id)->with([
-            'kelompok',
-            'kelompok.d',
-            'kelompok.d.sebutan_desa',
+        $data['pinkel'] = PinjamanIndividu::where('id', $data['real']->loan_id)->with([
+            'anggota',
+            'anggota.d',
+            'anggota.d.sebutan_desa',
             'jpp',
             'sis_pokok'
         ])->first();
@@ -2161,18 +2159,18 @@ class TransaksiController extends Controller
             $data['kertas'] = request()->get('kertas');
         }
 
-        $data['real'] = RealAngsuran::where('id', $id)->with('trx', 'trx.user')->firstOrFail();
-        $data['ra'] = RencanaAngsuran::where([
+        $data['real'] = RealAngsuranI::where('id', $id)->with('trx', 'trx.user')->firstOrFail();
+        $data['ra'] = RencanaAngsuranI::where([
             ['loan_id', $data['real']->loan_id]
         ])->orderBy('jatuh_tempo', 'DESC')->first();
-        $data['ra_bulan_ini'] = RencanaAngsuran::where([
+        $data['ra_bulan_ini'] = RencanaAngsuranI::where([
             ['loan_id', $data['real']->loan_id],
             ['jatuh_tempo', '<=', date('Y-m-t', strtotime($data['real']->tgl_transaksi))]
         ])->orderBy('jatuh_tempo', 'DESC')->first();
-        $data['pinkel'] = PinjamanKelompok::where('id', $data['real']->loan_id)->with([
-            'kelompok',
-            'kelompok.d',
-            'kelompok.d.sebutan_desa',
+        $data['pinkel'] = PinjamanIndividu::where('id', $data['real']->loan_id)->with([
+            'anggota',
+            'anggota.d',
+            'anggota.d.sebutan_desa',
             'jpp',
             'sis_pokok'
         ])->first();
