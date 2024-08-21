@@ -94,8 +94,7 @@ $empty = false;
 
         </td>
         <td height="20" colspan="3" class="bottom">
-            <div align="right" class="style9">Dokumen Laporan<br>
-                Kd.Doc. 2T Tab Lembar-1 </div>
+         
         </td>
     </tr>
 

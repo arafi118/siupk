@@ -102,8 +102,7 @@
 
 			</td>
 			<td height="20" colspan="2" class="bottom">
-				<div align="right" class="style9">Dokumen Laporan ----<br>
-					Kd.Doc. L2 Lembar-1 </div>
+				<
 			</td>
 		</tr>
 		<tr>

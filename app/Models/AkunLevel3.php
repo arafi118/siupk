@@ -21,6 +21,6 @@ class AkunLevel3 extends Model
     }
     public function rek_ojk()
     {
-        return $this->hasMany(Rekening::class, 'parent_id', 'id')->orderBy('rekening', 'ASC');
+        return $this->hasMany(RekeningOjk::class, 'parent_id', 'id')->orderBy('rekening', 'ASC');
     }
 }

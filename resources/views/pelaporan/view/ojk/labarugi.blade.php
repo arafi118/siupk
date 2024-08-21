@@ -29,7 +29,7 @@
                 <td style="border: 1px solid;" align="center" width="15%">s.d. {{ $header_sekarang }}</td>
             </tr>
             <tr style="font-weight: bold;">
-                <td style="border: 1px solid;" colspan="5" height="14">4. Pendapatan</td>
+                <td style="border: 1px solid;" colspan="5" height="14">1. Pendapatan Operasional</td>
             </tr>
 
             @foreach ($pendapatan as $p)
@@ -77,7 +77,7 @@
 
             @endforeach
             <tr style="font-weight: bold;">
-                <td style="border: 1px solid;" colspan="5" height="14">5. Beban</td>
+                <td style="border: 1px solid;" colspan="5" height="14">5. Beban Operasional</td>
             </tr>
 
             @foreach ($beban as $b)
