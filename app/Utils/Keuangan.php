@@ -4,7 +4,7 @@ namespace App\Utils;
 
 use App\Models\AkunLevel2;
 use App\Models\Kecamatan;
-use App\Models\PinjamanKelompok;
+use App\Models\PinjamanIndividu;
 use App\Models\Rekening;
 use App\Models\Saldo;
 use App\Models\Transaksi;
@@ -432,7 +432,7 @@ class Keuangan
         $sum_kolek2 = 0;
         $sum_kolek3 = 0;
 
-        $pinjaman_kelompok = PinjamanKelompok::where('sistem_angsuran', '!=', '12')
+        $pinjaman_anggota = PinjamanIndividu::where('sistem_angsuran', '!=', '12')
             ->where(function ($query) use ($data) {
                 $query->where([
                     ['status', 'A'],
@@ -471,7 +471,7 @@ class Keuangan
                 }
             ])->get();
 
-        foreach ($pinjaman_kelompok as $pinkel) {
+        foreach ($pinjaman_anggota as $pinkel) {
             $real_pokok = 0;
             $real_jasa = 0;
             $sum_pokok = 0;
