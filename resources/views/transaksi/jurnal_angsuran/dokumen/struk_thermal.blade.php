@@ -161,14 +161,14 @@
             <td colspan="3">{{ $pinkel->id }} - {{ $pinkel->jpp->nama_jpp }}</td>
         </tr>
         <tr>
-            <td>Nama Kelompok</td>
+            <td>Nama Nasabah</td>
             <td align="center">:</td>
-            <td colspan="3">{{ $pinkel->kelompok->nama_kelompok }} - {{ $pinkel->kelompok->ketua }}</td>
+            <td colspan="3">{{ $pinkel->anggota->namadepan }}</td>
         </tr>
         <tr>
             <td>Alamat</td>
             <td align="center">:</td>
-            <td colspan="3">{{ $pinkel->kelompok->d->nama_desa }}</td>
+            <td colspan="3">{{ $pinkel->anggota->d->nama_desa }}</td>
         </tr>
         <tr>
             <td colspan="5">&nbsp;</td>
@@ -246,5 +246,5 @@
         </tr>
     </table>
 
-    <title>Struk Angsuran Kelompok {{ $pinkel->kelompok->nama_kelompok }} &mdash; {{ $pinkel->id }}</title>
+    <title>Struk Angsuran Kelompok {{ $pinkel->anggota->nama_anggota }} &mdash; {{ $pinkel->id }}</title>
 </body>

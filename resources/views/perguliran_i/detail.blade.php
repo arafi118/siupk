@@ -186,7 +186,7 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
             @if ($perguliran_i->status == 'L' || $perguliran_i->status == 'H')
             @if ($perguliran_i->status != 'H')
             <button type="button" data-bs-toggle="tooltip"
-                onclick="window.open('/cetak_keterangan_lunas/{{ $perguliran_i->id }}')" type="button"
+                onclick="window.open('/cetak_keterangan_lunas_i/{{ $perguliran_i->id }}')" type="button"
                 class="btn-shadow me-3 btn btn-danger">
                 <i class="fa fa-print"></i>&nbsp; Cetak Keterangan Pelunasan
             </button>

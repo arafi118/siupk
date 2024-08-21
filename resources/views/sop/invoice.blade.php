@@ -7,7 +7,7 @@
                 <div class="col-lg-12">
                     <div class="main-card mb-3 card">
                         <div class="card-body">
-                            <h5 class="card-title">Simple table</h5>
+                            <h5 class="card-title">Table Invoice</h5>
                             <div class="table-responsive">
                                 <table class="table table-flush table-hover table-click" width="100%" id="TbInvoice">
                                     <thead>

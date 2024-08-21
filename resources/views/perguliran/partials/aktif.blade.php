@@ -322,7 +322,7 @@
                                         </li>
                                         <li>
                                             <a class="dropdown-item border-radius-md" target="_blank"
-                                                href="/perguliran/dokumen/cetak_kartu_angsuran_anggota/{{ $real->loan_id }}/{{ $real->id }}">
+                                                href="/perguliran_i/dokumen/cetak_kartu_angsuran_anggota/{{ $real->loan_id }}/{{ $real->id }}">
                                                 Anggota
                                             </a>
                                         </li>

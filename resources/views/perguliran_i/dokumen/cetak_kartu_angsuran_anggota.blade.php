@@ -107,9 +107,9 @@
                         </div>
                         <div style="margin-top: 8px;">
                             <img width="150" src="data:image/png;base64,{{ $barcode }}"
-                                alt="{{ $pinkel->kelompok->kd_kelompok }}">
+                                alt="{{ $pinkel->anggota->id }}">
                         </div>
-                        <div style="font-size: 14px;">{{ $pinkel->kelompok->kd_kelompok }}</div>
+                        <div style="font-size: 14px;">{{ $pinkel->anggota->id }}</div>
                     </td>
                     <td width="150">Jenis Pinjaman</td>
                     <td width="5" align="center">:</td>
@@ -119,14 +119,14 @@
                     <td width="200">{{ $pinkel->id }}</td>
                 </tr>
                 <tr>
-                    <td>Nama Kelompok</td>
+                    <td>Nama Nasabah</td>
                     <td align="center">:</td>
-                    <td style="font-weight: bold;" colspan="4">{{ $pinkel->kelompok->nama_kelompok }}</td>
+                    <td style="font-weight: bold;" colspan="4">{{ $pinkel->anggota->namadepan }}</td>
                 </tr>
                 <tr>
                     <td>Alamat</td>
                     <td align="center">:</td>
-                    <td colspan="4">{{ $pinkel->kelompok->alamat_kelompok }}</td>
+                    <td colspan="4">{{ $pinkel->anggota->alamat}}</td>
                 </tr>
                 <tr>
                     <td>Telpon/SMS</td>
@@ -438,7 +438,7 @@
                 </tr>
                 <tr style="font-weight: bold; font-size: 12px; text-transform: uppercase;">
                     <td width="350" align="center">
-                        {{ $pinkel->kelompok->ketua }}
+                        {{ $pinkel->anggota->namadepan }}
                     </td>
                     <td width="350" align="center">
                         <div>{{ $pinj->anggota->namadepan }}</div>

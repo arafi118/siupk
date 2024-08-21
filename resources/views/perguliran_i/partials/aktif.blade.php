@@ -210,7 +210,7 @@
                                             </li>
                                         </ul>
                                         <button type="button"
-                                            data-action="/perguliran/dokumen/cetak_kartu_angsuran_anggota/{{ $real->loan_id }}/{{ $real->id }}"
+                                            data-action="/perguliran_i/dokumen/kartu_angsuran/{{ $real->loan_id }}/{{ $real->id }}"
                                             class="btn btn-github btn-icon-only btn-tooltip btn-link"
                                             data-bs-toggle="tooltip" data-bs-placement="top" title="BKM"
                                             data-container="body" data-animation="true">
