@@ -126,7 +126,7 @@ $jumlah=$jumlah+$pa->alokasi;
 
                         <tr>
                             <th class="t l b" align="center" colspan="3">JUMLAH</th>
-                            <th class="t l b r" align="right">{{ $jumlah}}</th>
+                            <th class="t l b r" align="right">{{ number_format($jumlah)}}</th>
                         </tr>
                 </table>
             </td>
