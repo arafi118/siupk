@@ -40,9 +40,11 @@ $empty = false;
         $lancar = 0;
         $diragukan = 0;
         $macet = 0;
+        $j_saldo = 0;
+
 			$kd_desa = [];
 	@endphp
-    @if ($jpp->nama_jpp != 'Kendaraan' && !$empty)
+    @if ($jpp->nama_jpp != 'Kendaraan' || !$empty)
 		<div class="break"></div>
 		@php
 		$empty = false;
@@ -52,7 +54,6 @@ $empty = false;
     <tr>
         <td height="20" colspan="3" class="bottom"></td>
         <td height="20" colspan="3" class="bottom">
-            <div align="right" class="style9">Dok. Laporan ---<br>Kd.Doc. CRK----</div>
         </td>
     </tr>
     <tr>
@@ -87,6 +88,12 @@ $empty = false;
         <td class="left bottom right">f=(2+3)/Saldo</td>
     </tr>
     @foreach ($jpp->pinjaman_individu as $pinj_i)
+            @php 
+            $saldo_pokok = isset($pinj_i->saldo->saldo_pokok) ? floatval($pinj_i->saldo->saldo_pokok) : 0;
+            $k_alokasi += floatval($pinj_i->alokasi);
+            $k_saldo += $saldo_pokok; 
+
+        @endphp
             @php
             $nomor = 1;
             $kd_desa[] = $pinj_i->kd_desa;
@@ -108,7 +115,7 @@ $empty = false;
             $kpenambahan = "+" . $pinj_i['jangka'] . " month";
             $atgl2 = date('Y-m-d', strtotime($kpenambahan, strtotime($ktgl1)));
             $apros_jasa = number_format($pinj_i['pros_jasa'] / $pinj_i['jangka'], 2);
-            $saldopinjaman = date($tgl . "-" . $kidp);
+            $j_saldo += $saldo_pokok;
 
             $jumlah_lunas += 1;
             $sum_pokok = 0;
@@ -168,17 +175,17 @@ $empty = false;
             if ($wajib_pokok != '0') {
                 $_kolek = $tunggakan_pokok / $wajib_pokok;
             }
+          
             $kolek = ceil($_kolek + ($selisih - $angsuran_ke));
-
-            if (is_numeric($kolek) && is_numeric($saldopinjaman)) {
-                if ($kolek <= 3) {
-                    $lancar += $saldopinjaman;
-                } elseif ($kolek <= 5) {
-                    $diragukan += $saldopinjaman;
-                } else {
-                    $macet += $saldopinjaman;
+                if ($kolek && $j_saldo) {
+                    if ($kolek <= 3) {
+                        $lancar += $j_saldo;
+                    } elseif ($kolek <= 5) {
+                        $diragukan += $j_saldo;
+                    } else {
+                        $macet += $j_saldo;
+                    }
                 }
-            }
             
             $totals = $lancar + $diragukan + $macet;
 
@@ -187,16 +194,6 @@ $empty = false;
             } else {
                 $npl = 0; 
             }
-
-
-
-
-            $jum_nunggak = $saldopinjaman == 0 ? 0 : date($tgl_kondisi . "-" . $kidp);
-            if ($jum_nunggak <= 0) {
-                $jum_nunggak = 0;
-            }
-
-          
             @endphp
         @endforeach
 

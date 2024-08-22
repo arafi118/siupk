@@ -12,11 +12,16 @@
             margin-right: 40px;
         }
     </style>
+    @php
+        $nomor = 0;
+    @endphp
     @foreach ($jenis_pp as $jpp)
         @php
             if ($jpp->pinjaman_individu->isEmpty()) {
-                break;
+                continue;
             }
+
+            $nomor++;
         @endphp
         @php
             $kd_desa = [];
@@ -34,7 +39,7 @@
             $t_tunggakan_pokok = 0;
             $t_tunggakan_jasa = 0;
         @endphp
-        @if (strtoupper($jpp->nama_jpp) != 'KENDARAAN')
+        @if ($nomor > 1)
             <div class="break"></div>
         @endif
         <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">

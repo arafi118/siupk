@@ -1,4 +1,3 @@
-<title>PINJAMAN DITERIMA</title>
 @php
 use App\Utils\Keuangan;
 $keuangan = new Keuangan();

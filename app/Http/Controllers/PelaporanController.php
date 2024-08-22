@@ -445,10 +445,6 @@ class PelaporanController extends Controller
         $hari = $data['hari'];
         $awal_tahun = $thn . '-01-01';
 
-        if ($bln == '1' && $hari == '1') {
-            return $this->laba_rugi_tutup_buku($data);
-        }
-
         $tgl = $thn . '-' . $bln . '-' . $hari;
         if ($data['bulanan']) {
             $data['sub_judul'] = 'Periode ' . Tanggal::tglLatin($thn . '-' . $bln . '-01') . ' S.D ' . Tanggal::tglLatin($data['tgl_kondisi']);
@@ -471,18 +467,20 @@ class PelaporanController extends Controller
             $jenis = 'Bulanan';
         }
 
-        $pph = $keuangan->pph($data['tgl_kondisi'], $jenis);
-        $laba_rugi = $keuangan->laporan_laba_rugi($data['tgl_kondisi'], $jenis);
-
-        $data['pph'] = [
-            'bulan_lalu' => $pph['bulan_lalu'],
-            'sekarang' => $pph['bulan_ini']
-        ];
-
-        $data['pendapatan'] = $laba_rugi['pendapatan'];
-        $data['beban'] = $laba_rugi['beban'];
-        $data['pendapatanNOP'] = $laba_rugi['pendapatan_non_ops'];
-        $data['bebanNOP'] = $laba_rugi['beban_non_ops'];
+        $laba_rugi = RekeningOjk::where(function($query) {
+            $query->where('rekening','LIKE','4.%')->orwhere('rekening','5.%');
+        })->with([
+            'sub' => function ($query) {
+                $query->where('sub','!=','0');
+            },
+            'sub.akun3',
+            'sub.akun3.rek',
+            'sub.akun3.rek.kom_saldo' => function ($query) use ($data) {
+                $query->where('tahun', $data['tahun'])->where(function ($query) use ($data) {
+                    $query->where('bulan', '0')->orwhere('bulan', $data['bulan']);
+                });
+            },
+        ])->get();
 
         $view = view('pelaporan.view.ojk.labarugi', $data)->render();
 
@@ -1766,7 +1764,7 @@ class PelaporanController extends Controller
             'pinjaman_kelompok.angsuran_jasa',
         ])->get();
 
-        $data['lunas'] = PinjamanKelompok::where([
+        $data['lunas'] = PinjamanIndividu::where([
             ['tgl_lunas', '<', $thn . '-01-01'],
             ['status', 'L']
         ])->with('saldo', 'target')->get();
@@ -1954,7 +1952,7 @@ class PelaporanController extends Controller
             }
         ])->get();
 
-        $data['lunas'] = PinjamanKelompok::where([
+        $data['lunas'] = PinjamanIndividu::where([
             ['tgl_lunas', '<', $thn . '-01-01'],
             ['status', 'L']
         ])->with('saldo', 'target')->get();
@@ -2213,8 +2211,7 @@ class PelaporanController extends Controller
     }
 
     private function rencana_realisasi(array $data)
-    {
-        $keuangan = new Keuangan;
+    {  $keuangan = new Keuangan;
         $thn = $data['tahun'];
         $bln = $data['bulan'];
         $hari = $data['hari'];
@@ -2229,37 +2226,49 @@ class PelaporanController extends Controller
             $data['tgl_cair'] = $thn . '-' . $bln . '-';
         }
 
-        $data['jenis_pp'] = JenisProdukPinjaman::where('lokasi', '0')->with([
-            'pinjaman_kelompok' => function ($query) use ($data) {
-                $tb_pinkel = 'pinjaman_kelompok_' . $data['kec']->id;
-                $tb_pinj = 'pinjaman_anggota_' . $data['kec']->id;
-                $tb_kel = 'kelompok_' . $data['kec']->id;
-                $data['tb_pinkel'] = $tb_pinkel;
+        $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
+        $data['jenis_pp'] = JenisProdukPinjaman::where(function ($query) use ($kec, $data) {
+            $query->where('lokasi', '0')
+                ->orWhere(function ($query) use ($kec) {
+                    $query->where('kecuali', 'NOT LIKE', "%-{$kec['id']}-%")
+                        ->where('lokasi', 'LIKE', "%-{$kec['id']}-%");
+                });
+        })->with([
+            'pinjaman_individu' => function ($query) use ($data) {
+                $tb_pinj_i = 'pinjaman_anggota_' . $data['kec']->id;
+                $tb_angg = 'anggota_' . $data['kec']->id;
+                $data['tb_pinj_i'] = $tb_pinj_i;
 
                 $query->select(
-                    $tb_pinkel . '.*',
-                    $tb_kel . '.nama_kelompok',
-                    $tb_kel . '.ketua',
+                    $tb_pinj_i . '.*',
+                    $tb_angg . '.namadepan',
                     'desa.nama_desa',
                     'desa.kd_desa',
                     'desa.kode_desa',
-                    'sebutan_desa.sebutan_desa',
-                    DB::raw("(SELECT count(*) as jumlah FROM $tb_pinj WHERE $tb_pinj.id_pinkel=$tb_pinkel.id) as pinjaman_anggota_count")
+                    'sebutan_desa.sebutan_desa'
                 )
-                    ->join($tb_kel, $tb_kel . '.id', '=', $tb_pinkel . '.id_kel')
-                    ->join('desa', $tb_kel . '.desa', '=', 'desa.kd_desa')
+                    ->join($tb_angg, $tb_angg . '.id', '=', $tb_pinj_i . '.nia')
+                    ->join('desa', $tb_angg . '.desa', '=', 'desa.kd_desa')
                     ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
-                    ->where($tb_pinkel . '.sistem_angsuran', '!=', '12')->where(function ($query) use ($data) {
-                        $query->where($data['tb_pinkel'] . '.tgl_cair', 'LIKE', $data['tgl_cair'] . '%')
+                    ->where($tb_pinj_i . '.sistem_angsuran', '!=', '12')
+                    ->where(function ($query) use ($data) {
+                        $query->where($data['tb_pinj_i'] . '.tgl_cair', 'LIKE', $data['tgl_cair'] . '%')
                             ->where(function ($query) use ($data) {
-                                $query->where($data['tb_pinkel'] . '.status', 'A')
-                                    ->orwhere($data['tb_pinkel'] . '.status', 'L')
-                                    ->orwhere($data['tb_pinkel'] . '.status', 'H')
-                                    ->orwhere($data['tb_pinkel'] . '.status', 'R');
+                                $query->where([
+                                    [$data['tb_pinj_i'] . '.status', 'A'],
+                                    [$data['tb_pinj_i'] . '.jenis_pinjaman', 'I']
+                                ])->orwhere([
+                                    [$data['tb_pinj_i'] . '.status', 'L'],
+                                    [$data['tb_pinj_i'] . '.jenis_pinjaman', 'I']
+                                ])->orwhere([
+                                    [$data['tb_pinj_i'] . '.status', 'R'],
+                                    [$data['tb_pinj_i'] . '.jenis_pinjaman', 'I']
+                                ])->orwhere([
+                                    [$data['tb_pinj_i'] . '.status', 'H'],
+                                    [$data['tb_pinj_i'] . '.jenis_pinjaman', 'I']
+                                ]);
                             });
-                    })
-                    ->orderBy($tb_kel . '.desa', 'ASC')
-                    ->orderBy($tb_pinkel . '.id', 'ASC');
+                    });
             },
             'pinjaman_kelompok.sis_pokok'
         ])->get();
