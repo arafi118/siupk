@@ -1,8 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\public"
+    "\\resources",
+    "\\resources\\views",
+    "\\resources\\views\\perguliran",
+    "\\resources\\views\\perguliran\\dokumen"
   ],
-  "SelectedNode": "\\public\\index.php",
+  "SelectedNode": "\\resources\\views\\perguliran\\dokumen\\pemberitahuan_desa.blade.php",
   "PreviewInSolutionExplorer": false
 }

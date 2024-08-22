@@ -185,20 +185,21 @@
     </tr>
 </table>
 <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px; margin-top: 40px;">
-
     <tr>
         <td width="30%" class="style9 align-justify">&nbsp;</td>
-        <td width="20%" align="center" class="style9 align-justify">Mengetahui,</td>
+        <td align="center"></td>
         <td width="30%" class="style9 align-justify">
             <div align="center">{{ $kec->nama_kec }}, {{ Tanggal::tglLatin($pinkel->tgl_proposal) }}<br>
             </div>
         </td>
-        <td align="center">Penjamin</td>
-        <td align="center"></td>
-        <td align="center">Pemohon</td>
     </tr>
     <tr>
-        <td colspan="3" height="30">&nbsp;</td>
+        <td align="center">&nbsp;<br>&nbsp;<br>Penjamin</td>
+        <td width="20%" align="center" class="style9 align-justify">Mengetahui,</td>
+        <td align="center">&nbsp;<br>&nbsp;<br>Pemohon</td>
+    </tr>
+    <tr>
+        <td colspan="3" height="40">&nbsp;</td>
     </tr>
     <tr>
         <td align="center">
@@ -212,7 +213,6 @@
         </td>
     </tr>
     <tr>
-        <td colspan="2" height="30"></td>
+        <td colspan="3" height="30"></td>
     </tr>
-
 </table>
