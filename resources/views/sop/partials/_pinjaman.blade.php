@@ -20,7 +20,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="position-relative mb-3">
-                <label for="default_jasa" class="form-label">Default Jasa (%)</label>
+                <label for="default_jasa" class="form-label">Default Jasa</label>
                 <input autocomplete="off" type="number" name="default_jasa" id="default_jasa" class="form-control"
                     value="{{ $kec->def_jasa }}">
                 <small class="text-danger" id="msg_default_jasa"></small>
@@ -28,7 +28,7 @@
         </div>
         <div class="col-md-6">
             <div class="position-relative mb-3">
-                <label for="default_jangka" class="form-label">Default Jangka (%)</label>
+                <label for="default_jangka" class="form-label">Default Jangka</label>
                 <input autocomplete="off" type="number" name="default_jangka" id="default_jangka" class="form-control"
                     value="{{ $kec->def_jangka }}">
                 <small class="text-danger" id="msg_default_jangka"></small>
