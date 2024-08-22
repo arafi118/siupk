@@ -302,7 +302,7 @@ Route::get('/simpanan/cari_nik', [SimpananController::class, 'cariNik'])->middle
 
 Route::post('/simpanan/{nik}/blokir', [SimpananController::class, 'blokir'])->middleware('auth');
 
-Route::get('/simpanan/detail_simpanan/{id}', [SimpananController::class, 'detailAnggota'])->middleware('auth'); //her
+Route::get('/simpanan/detail_simpanan/{id}', [SimpananController::class, 'detailAnggota'])->middleware('auth'); 
 
 Route::get('/register_simpanan', [SimpananController::class, 'create'])->middleware('auth');
 Route::get('/register_simpanan/{nia}', [SimpananController::class, 'register'])->middleware('auth');

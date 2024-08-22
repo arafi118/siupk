@@ -233,9 +233,10 @@
                         <td width='30%' class='bottom'></td>
                     </tr>
                     <tr>
-                        <td align="center" width='60%'>{{ $user->namadepan }}
-                            {{ $user->namabelakang }}<br>
-                            {{ $user->j->nama_jabatan }}
+                        <td align="center" width='60%'>
+                            {{ $pinkel->user->namadepan }}
+                            {{ $pinkel->user->namabelakang }}<br>
+                            {{ $pinkel->user->j->nama_jabatan }}
                         </td>
                         <td width='30%' class='bottom'></td>
                     </tr>
