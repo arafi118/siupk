@@ -204,6 +204,9 @@
             <td colspan="3" height="40">&nbsp;</td>
         </tr>
         <tr>
+            <td colspan="3" height="40">&nbsp;</td>
+        </tr>
+        <tr>
             <td align="center" style="font-weight: bold;">
                 {{ $dir->namadepan }} {{ $dir->namabelakang }}
             </td>

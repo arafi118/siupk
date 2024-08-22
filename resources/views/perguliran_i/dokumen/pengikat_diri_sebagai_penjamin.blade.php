@@ -145,14 +145,14 @@
             <td align="center" width="50%">{{ $kec->nama_kec }}, {{ Tanggal::tglLatin($pinkel->tgl_cair) }}</td>
         </tr>
         <tr>
-            <td align="center">Mengetahui Kepala {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }}</td>
+            <td align="center">{{ $kec->sebutan_level_1 }} {{ $kec->nama_lembaga_sort }}</td>
             <td align="center">Nama Penjamin</td>
         </tr>
         <tr>
             <td align="center" colspan="2" height="30">&nbsp;</td>
         </tr>
         <tr style="font-weight: bold;">
-            <td align="center">{{ $pinkel->anggota->d->kades }}</td>
+            <td align="center"> {{ $dir->namadepan }} {{ $dir->namabelakang }}</td>
             <td align="center">{{ $pinkel->anggota->penjamin }}</td>
         </tr>
     </table>
