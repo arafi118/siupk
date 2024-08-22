@@ -105,7 +105,7 @@ $keuangan = new Keuangan();
     <tr>
         <td width="2%" class="style9"> </td>
         <td width="30%" class="style9">b. Kelurahan/Desa</td>
-        <td width="60%" class="style9">: {{$kec->desa}} </td>
+        <td width="60%" class="style9">: {{$kec->desa_kec}} </td>
     </tr>
     <tr>
         <td width="2%" class="style9"> </td>
