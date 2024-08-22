@@ -113,7 +113,6 @@ class PinjamanIndividu extends Model
     {
         return $this->hasOne(PinjamanAnggota::class, 'nia', 'nia')->orderBy('tgl_cair', 'DESC');
     }
-
     public function agent()
     {
         return $this->belongsTo(Agent::class, 'id_agent');

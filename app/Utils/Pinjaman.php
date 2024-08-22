@@ -103,6 +103,7 @@ class Pinjaman
                 '{ked}' => $desa->ked,
                 '{desa}' => $desa->nama_desa,
                 '{sebutan_kades}' => $desa->sebutan_desa->sebutan_kades,
+                '{penjamin}' => $kel->penjamin,
                 '1' => '1',
                 '0' => '0'
             ]);
