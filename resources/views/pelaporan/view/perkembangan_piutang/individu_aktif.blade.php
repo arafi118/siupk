@@ -7,13 +7,16 @@
 @extends('pelaporan.layout.base')
 
 @section('content')
+@php
+    $nomor =0;
+@endphp
     @foreach ($jenis_pp as $jpp)
         @php
             if ($jpp->pinjaman_individu->isEmpty()) {
                 $empty = true;
                 continue;
             }
-
+            $nomor++;
             $kd_desa = [];
             $t_angg = 0;
             $t_alokasi = 0;
@@ -23,7 +26,7 @@
         @endphp
 
        
-        @if ($jpp->nama_jpp != 'Kendaraan' && !$empty)
+    @if ($nomor > 1)
         <div class="break"></div>
         @php
             $empty = false;

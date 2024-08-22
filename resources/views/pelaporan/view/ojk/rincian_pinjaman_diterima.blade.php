@@ -67,21 +67,29 @@ $empty = false;
         text-align: right;
     }
 </style>
+@php
+    $nomor =0;    
+@endphp
+
 @foreach ($jenis_pp as $jpp)
 		@php
-		if ($jpp->pinjaman_individu->isEmpty()) {
-			$empty = true;
-			continue;
-		}
+		
         $jumlah_lunas = 0;
         $k_alokasi = 0;
         $k_saldo = 0;
 			$kd_desa = [];
+        
+            if ($jpp->pinjaman_individu->isEmpty()) {
+			$empty = true;
+			continue;
+		}
+        $nomor++;
 	@endphp
-    @if ($jpp->nama_jpp != 'Kendaraan' && !$empty)
-		<div class="break"></div>
+    @if ($nomor > 1)
+     <div class="break"></div>
+
 		@php
-		$empty = false;
+            $empty = false;
 		@endphp
 	@endif
 <table width="96%" border="0" align="center" cellpadding="3" cellspacing="0">
@@ -112,9 +120,9 @@ $empty = false;
 		<td width="70%" class="style9 bottom">:{{ $tgl }}</td>
 	</tr>
 </table>
-<table width="96%" border="1" align="center" cellpadding="3" cellspacing="0">
+<table  width="96%" border="0" align="center" cellpadding="3" cellspacing="0">
 
-    <tr align="center" height="30px" class="style9">
+    <tr style="border: 1px solid;"align="center" height="30px" class="style9">
         <th width="2%" rowspan="2" class="left bottom">No</th>
         <th width="10%" rowspan="2" colspan="2" class="left bottom">Nama Pemberi Pinjaman - Loan ID</th>
         <th colspan="2" class="left bottom">Jangka Waktu</th>
