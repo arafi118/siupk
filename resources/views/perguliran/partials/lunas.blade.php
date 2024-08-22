@@ -71,6 +71,34 @@
                     <td>Sistem</td>
                     <td>{{ $perguliran->jangka }} bulan / {{ $perguliran->sis_pokok->nama_sistem }}</td>
                 </tr>
+
+                @if ($perguliran->kelompok->ketua !== null && $perguliran->kelompok->ketua !== '')
+                        <tr>
+                            <td> &nbsp; Ketua Kelompok</td>
+                            <td>: {{ $perguliran->kelompok->ketua }}</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        
+                    @if ($perguliran->kelompok->sekretaris !== null && $perguliran->kelompok->sekretaris !== '')
+                        <tr>
+                            <td> &nbsp; Sekretaris Kelompok</td>
+                            <td>: {{ $perguliran->kelompok->sekretaris }}</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                   @endif
+                    @if ($perguliran->kelompok->bendahara !== null && $perguliran->kelompok->bendahara !== '')
+                        <tr>
+                            <td> &nbsp; Bendahara Kelompok</td>
+                            <td>: {{ $perguliran->kelompok->bendahara }}</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                   @endif
+               @endif
+
+                
             </table>
 
             REKAPITULASI ANGSURAN
