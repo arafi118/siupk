@@ -76,14 +76,17 @@
     }
 
 </style>
-
+@php
+    $nomor = 0;
+@endphp
 @foreach ($jenis_pp as $jpp)
     @php
         if ($jpp->pinjaman_individu->isEmpty()) {
             $empty = true;
             continue;
         }
-        
+        $nomor++;
+
         $jumlah_aktif = 0;
         $j_alokasi = 0;
         $j_saldo = 0;
@@ -91,8 +94,8 @@
         $kd_desa = [];
     @endphp
 
-    @if ($jpp->nama_jpp != 'Kendaraan' && !$empty)
-        <div class="break"></div>
+    @if ($nomor > 1)
+    <div class="break"></div>
         @php
             $empty = false;
         @endphp

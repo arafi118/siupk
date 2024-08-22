@@ -25,6 +25,9 @@ $empty = false;
     .align-center {text-align:center; }
     .align-right {text-align:right; }
 </style>
+@php
+    $nomor =0;    
+@endphp
 
 @foreach ($jenis_pp as $jpp)
     @php
@@ -41,9 +44,11 @@ $empty = false;
             $empty = true;
             continue;
         }
+        $nomor++;
+
     @endphp
 
-    @if ($jpp->nama_jpp != 'Kendaraan' || !$empty)
+    @if ($nomor > 1)
         <div class="break"></div>
         
             @php

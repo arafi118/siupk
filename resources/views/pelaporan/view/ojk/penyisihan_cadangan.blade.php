@@ -28,12 +28,17 @@ $empty = false;
 .align-center {text-align:center; }
 .align-right {text-align:right; }
 </style>
+@php
+    $nomor =0;
+@endphp
 @foreach ($jenis_pp as $jpp)
 		@php
 		if ($jpp->pinjaman_individu->isEmpty()) {
 			$empty = true;
 			continue;
 		}
+        $nomor++;
+
         $jumlah_lunas = 0;
         $k_alokasi = 0;
         $k_saldo = 0;
@@ -44,8 +49,8 @@ $empty = false;
 
 			$kd_desa = [];
 	@endphp
-    @if ($jpp->nama_jpp != 'Kendaraan' || !$empty)
-		<div class="break"></div>
+  @if ($nomor > 1)
+  <div class="break"></div>
 		@php
 		$empty = false;
 		@endphp
