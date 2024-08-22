@@ -167,9 +167,7 @@
 
 
 			@endif
-		@endif
-
-
+			
 			<tr>
 				<td class="t l b" align="center">{{ $pinj_i->kode_desa }}</td>
 				<td class="style27 left top right" colspan="11">{{$pinj_i->nama_desa}}</td>
@@ -190,6 +188,9 @@
 
 
 			@endphp
+		@endif
+
+
 
 			@php
 				$jumlah_lunas += 1;
