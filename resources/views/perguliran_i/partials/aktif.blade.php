@@ -163,7 +163,7 @@
     <div class="col-lg-12">
         <div class="main-card mb-3 card">
             <div class="card-body">
-                <h5 class="card-title">Table striped</h5>
+                <h5 class="card-title">Riwayat Transaksi</h5>
                 <table class="table table-striped align-items-center mb-0" width="100%">
                     <thead>
                         <tr class="bg-dark text-white">
