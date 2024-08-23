@@ -262,7 +262,7 @@ $keuangan = new Keuangan();
         <td width="10" align="center">&nbsp;</td>
         <td width="70" align="center"></td>
         <td width="50" align="center"></td>
-        <td style="border: 1px solid;" width="70" align="center">
+        <td width="60" align="center">
             <strong><u>{{ $dir->namadepan }} {{$dir->namabelakang}}</u></strong>
         </td>        
     </tr> 
