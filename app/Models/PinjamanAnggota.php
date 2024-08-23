@@ -95,12 +95,12 @@ class PinjamanAnggota extends Model
     }
     public function saldo()
     {
-        return $this->hasOne(RealAngsuran::class, 'loan_id')->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC');
+        return $this->hasOne(RealAngsuranI::class, 'loan_id')->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC');
     }
 
     public function saldo2()
     {
-        return $this->hasOne(RealAngsuran::class, 'loan_id')->orderBy('tgl_transaksi', 'ASC')->orderBy('id', 'ASC');
+        return $this->hasOne(RealAngsuranI::class, 'loan_id')->orderBy('tgl_transaksi', 'ASC')->orderBy('id', 'ASC');
     }
     public function saldo_pinjaman()
     {
@@ -113,5 +113,9 @@ class PinjamanAnggota extends Model
     public function real()
     {
         return $this->hasMany(RealAngsuran::class, 'loan_id')->orderBy('tgl_transaksi', 'ASC')->orderBy('id', 'ASC');
+    }
+    public function real_i()
+    {
+        return $this->hasMany(RealAngsuranI::class, 'loan_id')->orderBy('tgl_transaksi', 'ASC')->orderBy('id', 'ASC');
     }
 }

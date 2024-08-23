@@ -18,7 +18,7 @@
 
     @foreach ($jenis_pp as $jpp)
         @php
-            if ($jpp->pinjaman_individu->isEmpty()) {
+            if ($jpp->pinjaman_anggota->isEmpty()) {
                 continue;
             }
         @endphp
@@ -44,7 +44,7 @@
             <tr>
                 <td colspan="3" align="center">
                     <div style="font-size: 18px;">
-                        <b>LAPORAN REALISASI PENCAIRAN INDIVIDU {{ $jpp->nama_jpp }}</b>
+                        <b>LAPORAN REALISASI PENCAIRAN {{ $jpp->nama_jpp }}</b>
                     </div>
                     <div style="font-size: 16px;">
                         <b style="text-transform: uppercase;">
@@ -61,7 +61,7 @@
         <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
             <tr>
                 <th class="t l b" rowspan="2" width="5%">No</th>
-                <th class="t l b" rowspan="2" width="33%">Nama Pemanfaat - Load ID</th>
+                <th class="t l b" rowspan="2" width="33%">Nama Nasabah - Load ID</th>
                 <th class="t l b" rowspan="2" width="27%">Nomor SPK</th>
                 <th class="t l b" rowspan="2" width="8%">Tgl Cair</th>
                 <th class="t l b" rowspan="2" width="5%">T/S</th>
@@ -72,7 +72,7 @@
                 <th class="t l b r" width="11%">Pencairan</th>
             </tr>
 
-            @foreach ($jpp->pinjaman_individu as $pinj_i)
+            @foreach ($jpp->pinjaman_anggota as $pinj_i)
                 @php
                     $kd_desa[] = $pinj_i->kd_desa;
                     $desa = $pinj_i->kd_desa;

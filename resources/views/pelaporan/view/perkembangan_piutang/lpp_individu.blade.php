@@ -46,7 +46,7 @@
             <tr>
                 <td colspan="3" align="center">
                     <div style="font-size: 18px;">
-                        <b>DAFTAR PERKEMBANGAN PINJAMAN PER KELOMPOK {{ strtoupper($jpp->nama_jpp) }}</b>
+                        <b>DAFTAR PERKEMBANGAN PINJAMAN {{ strtoupper($jpp->nama_jpp) }}</b>
                     </div>
                     <div style="font-size: 16px;">
                         <b>{{ strtoupper($sub_judul) }}</b>
@@ -60,7 +60,7 @@
         <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 8px; table-layout: fixed;">
             <tr style="background: rgb(230, 230, 230); font-weight: bold;">
                 <th class="t l b" rowspan="2" width="2%">No</th>
-                <th class="t l b" rowspan="2">Kelompok - Loan ID</th>
+                <th class="t l b" rowspan="2">Nasabah - Loan ID</th>
                 <th class="t l b" rowspan="2" width="4%">
                     <div>Tgl Cair</div>
                     <div>

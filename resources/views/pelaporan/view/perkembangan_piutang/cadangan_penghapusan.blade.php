@@ -11,7 +11,7 @@
     @endphp
     @foreach ($jenis_pp as $jpp)
         @php
-            if ($jpp->pinjaman_kelompok->isEmpty()) {
+            if ($jpp->pinjaman_anggota->isEmpty()) {
                 break;
             }
             $nomor++;
@@ -52,7 +52,7 @@
 
         </table>
 
-        @foreach ($jpp->pinjaman_kelompok as $pinkel)
+        @foreach ($jpp->pinjaman_anggota as $pinkel)
             @php
                 $kd_desa[] = $pinkel->kd_desa;
                 $desa = $pinkel->kd_desa;
