@@ -256,7 +256,7 @@ $keuangan = new Keuangan();
         </td>
     </tr>
     <tr>
-        <td colspan="4" height="40">&nbsp;</td>
+        <td colspan="4" height="30">&nbsp;</td>
     </tr>
     <tr>
         <td width="10" align="center">&nbsp;</td>
@@ -270,7 +270,7 @@ $keuangan = new Keuangan();
         <td width="10" align="center">&nbsp;</td>
         <td width="70" align="center"></td>
         <td width="50" align="center"></td>
-        <td width="75" align="center">
+        <td width="60" align="center">
             <strong>{{ $kec->ttd_mengetahui_lap == '2' ? 'Direktur' : $kec->sebutan_level_1 }}</strong>
         </td>
         
