@@ -158,7 +158,6 @@ $keuangan = new Keuangan();
             <br>
                 
             <table border="0" width="100%">
-                @foreach ($kec->saham as $sa)
                 <tr>
                     <td class="style9" width="33%">&nbsp; </td>
                     <td colspan="2" class="style9 align-center">Kepemilikan Saham **)</td>
@@ -168,11 +167,22 @@ $keuangan = new Keuangan();
                     <th class="style9 bottom top align-center" width="33%">Rupiah</th>
                     <th class="style9 bottom top align-center" width="33%">Persentase(%)</th>
                 </tr>
+
+                @php
+                    $jrp_saham1 = 0;
+                    $pros_saham1 = 0;
+                @endphp
+                @foreach ($kec->saham as $sa)
+                @php
+                    $jrp_saham1 += $sa->rp_saham;
+                    $pros_saham1 += $sa->pros_saham;
+                @endphp
                 <tr>
                     <td class="style9 bottom align-center">{{ $sa->nama_saham }}&nbsp;</td>
-                    <td class="style9 bottom align-center" width="33%">{{ number_format($rp_saham1) }}&nbsp;</td>
-                    <td class="style9 bottom align-center" width="33%">{{ $pros_saham1 }}&nbsp;</td>
+                    <td class="style9 bottom align-center" width="33%">{{ number_format($sa->rp_saham) }}&nbsp;</td>
+                    <td class="style9 bottom align-center" width="33%">{{ $sa->pros_saham }}&nbsp;</td>
                 </tr>
+                @endforeach
                 <tr>
                     <td class="style9 bottom align-center">&nbsp;</td>
                     <td class="style9 bottom align-center" width="33%">&nbsp;</td>
@@ -183,7 +193,6 @@ $keuangan = new Keuangan();
                     <td class="style9 bottom align-center" width="33%">{{ number_format($jrp_saham1) }}&nbsp;</td>
                     <td class="style9 bottom align- center" width="33%">{{ number_format($pros_saham1) }}&nbsp;</td>
                 </tr>
-                @endforeach
             </table>
         </td>
     </tr>
@@ -199,38 +208,25 @@ $keuangan = new Keuangan();
         <td width="2%" class="style9"></td>
         <td colspan="2">
             
-            @foreach ($kec->saham as $sa)
             <table border="0" width="100%">
                 <tr>
-                    <td class="style9" width="50%">
-                        <!-------DIREKSI---------->
-                        <table border="0" width="100%">
-                            <tr>
-                                <th class="style9 bottom top align-center" width="50%">Nama Direksi</th>
-                                <th class="style9 bottom top align-center" width="50%">Jabatan</th>
-                            </tr>
-                            <tr>
-                                <td class="style9 bottom align-center" width="50%">{{$n_direksi1}}&nbsp;</td>
-                                <td class="style9 bottom align-center" width="50%">{{$j_direksi1}}&nbsp;</td>
-                            </tr>
-                        </table>
-                    </td>
-                    <td class="style9" width="50%">
-                        <!-------Komisaris---------->
-                        <table border="0" width="100%">
-                            <tr>
-                                <th class="style9 bottom top align-center" width="50%">Nama Komisaris</th>
-                                <th class="style9 bottom top align-center" width="50%">Jabatan</th>
-                            </tr>
-                            <tr>
-                                <td class="style9 bottom align-center" width="50%">{{$n_kom1}}&nbsp;</td>
-                                <td class="style9 bottom align-center" width="50%">{{$j_kom1}}&nbsp;</td>
-                            </tr>
-                        </table>
-                        <table>
-                    </td>
-                    @endforeach
+                    <th class="style9 bottom top align-center" width="50%">Nama Direksi</th>
+                    <th class="style9 bottom top align-center" width="50%">Jabatan</th>
+                    <th>&nbsp;</th>
+                    <th class="style9 bottom top align-center" width="50%">Nama Komisaris</th>
+                    <th class="style9 bottom top align-center" width="50%">Jabatan</th>
                 </tr>
+
+                @foreach ($kec->saham as $sa)
+                <tr>
+                    <td class="style9 bottom align-center" width="50%">{{$sa->nama_direksi}}&nbsp;</td>
+                    <td class="style9 bottom align-center" width="50%">{{$sa->jab_direksi}}&nbsp;</td>
+                    <th>&nbsp;</th>
+                    <td class="style9 bottom align-center" width="50%">{{$sa->nama_kom}}&nbsp;</td>
+                    <td class="style9 bottom align-center" width="50%">{{$sa->jab_kom}}&nbsp;</td>
+                </tr>
+                @endforeach
+
                 <tr>
                     <td class="style9 " width="50%">&nbsp;</td>
                     <td class="style9 " width="50%">&nbsp;</td>
