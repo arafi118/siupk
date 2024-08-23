@@ -191,7 +191,7 @@ $keuangan = new Keuangan();
                 <tr>
                     <td class="style9 bottom align-center">Total</td>
                     <td class="style9 bottom align-center" width="33%">{{ number_format($jrp_saham1) }}&nbsp;</td>
-                    <td class="style9 bottom align- center" width="33%">{{ number_format($pros_saham1) }}&nbsp;</td>
+                    <td align="center"class="style9 bottom align- center" width="33%">{{ number_format($pros_saham1) }}&nbsp;</td>
                 </tr>
             </table>
         </td>
