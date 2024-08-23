@@ -135,7 +135,7 @@
 @section('modal')
     <div class="modal fade" id="DetailAngsuran" tabindex="-1" aria-labelledby="DetailAngsuranLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+        <div class="modal-dialog modal-fullscreen">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="DetailAngsuranLabel">
@@ -158,7 +158,7 @@
 
     <div class="modal fade" id="DetailIndividu" tabindex="-1" aria-labelledby="DetailIndividuLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="DetailIndividuLabel">
@@ -177,7 +177,7 @@
     </div>
 
     <div class="modal fade" id="BuktiAngsuran" tabindex="-1" aria-labelledby="BuktiAngsuranLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+        <div class="modal-dialog modal-fullscreen">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="BuktiAngsuranLabel">
@@ -200,7 +200,7 @@
 
     <div class="modal fade" id="AngsuranAnggota" tabindex="-1" aria-labelledby="AngsuranAnggotaLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="AngsuranAnggotaLabel">
