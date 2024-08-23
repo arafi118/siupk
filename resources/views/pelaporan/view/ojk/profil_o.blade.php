@@ -156,7 +156,9 @@ $keuangan = new Keuangan();
         <td width="2%" class="style9"></td>
         <td colspan="2">
             <br>
+                
             <table border="0" width="100%">
+                @foreach ($saham->kec as $sa)
                 <tr>
                     <td class="style9" width="33%">&nbsp; </td>
                     <td colspan="2" class="style9 align-center">Kepemilikan Saham **)</td>
@@ -167,7 +169,7 @@ $keuangan = new Keuangan();
                     <th class="style9 bottom top align-center" width="33%">Persentase(%)</th>
                 </tr>
                 <tr>
-                    <td class="style9 bottom align-center">{{ $n_saham1 }}&nbsp;</td>
+                    <td class="style9 bottom align-center">{{ $sa->nama_saham }}&nbsp;</td>
                     <td class="style9 bottom align-center" width="33%">{{ number_format($rp_saham1) }}&nbsp;</td>
                     <td class="style9 bottom align-center" width="33%">{{ $pros_saham1 }}&nbsp;</td>
                 </tr>
@@ -181,6 +183,7 @@ $keuangan = new Keuangan();
                     <td class="style9 bottom align-center" width="33%">{{ number_format($jrp_saham1) }}&nbsp;</td>
                     <td class="style9 bottom align-center" width="33%">{{ number_format($pros_saham1) }}&nbsp;</td>
                 </tr>
+                @endforeach
             </table>
         </td>
     </tr>
@@ -195,6 +198,8 @@ $keuangan = new Keuangan();
     <tr>
         <td width="2%" class="style9"></td>
         <td colspan="2">
+            
+            @foreach ($saham->kec as $sa)
             <table border="0" width="100%">
                 <tr>
                     <td class="style9" width="50%">
@@ -224,6 +229,7 @@ $keuangan = new Keuangan();
                         </table>
                         <table>
                     </td>
+                    @endforeach
                 </tr>
                 <tr>
                     <td class="style9 " width="50%">&nbsp;</td>

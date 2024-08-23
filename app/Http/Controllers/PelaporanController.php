@@ -169,6 +169,7 @@ class PelaporanController extends Controller
         $kec = Kecamatan::where('id', Session::get('lokasi'))->with([
             'kabupaten',
             'desa',
+            'saham',
             'desa.saldo' => function ($query) use ($data) {
                 $query->where([
                     ['tahun', $data['tahun']]
