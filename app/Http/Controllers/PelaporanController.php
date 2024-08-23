@@ -172,7 +172,7 @@ class PelaporanController extends Controller
             'saham',
             'desa.saldo' => function ($query) use ($data) {
                 $query->where([
-                    ['tahun', $data['tahun']]
+                        ['tahun', $data['tahun']]
                 ]);
             },
             'ttd'

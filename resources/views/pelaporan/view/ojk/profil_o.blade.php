@@ -158,7 +158,7 @@ $keuangan = new Keuangan();
             <br>
                 
             <table border="0" width="100%">
-                @foreach ($saham->kec as $sa)
+                @foreach ($kec->saham as $sa)
                 <tr>
                     <td class="style9" width="33%">&nbsp; </td>
                     <td colspan="2" class="style9 align-center">Kepemilikan Saham **)</td>
@@ -181,7 +181,7 @@ $keuangan = new Keuangan();
                 <tr>
                     <td class="style9 bottom align-center">Total</td>
                     <td class="style9 bottom align-center" width="33%">{{ number_format($jrp_saham1) }}&nbsp;</td>
-                    <td class="style9 bottom align-center" width="33%">{{ number_format($pros_saham1) }}&nbsp;</td>
+                    <td class="style9 bottom align- center" width="33%">{{ number_format($pros_saham1) }}&nbsp;</td>
                 </tr>
                 @endforeach
             </table>
@@ -199,7 +199,7 @@ $keuangan = new Keuangan();
         <td width="2%" class="style9"></td>
         <td colspan="2">
             
-            @foreach ($saham->kec as $sa)
+            @foreach ($kec->saham as $sa)
             <table border="0" width="100%">
                 <tr>
                     <td class="style9" width="50%">
