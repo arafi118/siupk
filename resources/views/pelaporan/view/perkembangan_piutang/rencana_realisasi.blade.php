@@ -15,12 +15,15 @@
             margin-right: 40px;
         }
     </style>
-
+    @php
+        $nomor =0;
+    @endphp
     @foreach ($jenis_pp as $jpp)
         @php
             if ($jpp->pinjaman_anggota->isEmpty()) {
                 continue;
             }
+            $nomor++;
         @endphp
 
         @php
@@ -32,9 +35,8 @@
             $t_pencairan = 0;
         @endphp
 
-        @if ($jpp->nama_jpp != 'Umum' || !$empty)
-        <div class="break"></div>
-        
+        @if ($nomor > 1)
+            <div class="break"></div>        
             @php
             $empty = false;
             @endphp

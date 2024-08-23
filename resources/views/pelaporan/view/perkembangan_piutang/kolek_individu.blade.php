@@ -6,6 +6,9 @@
 @extends('pelaporan.layout.base')
 
 @section('content')
+@php
+    $nomor =0;
+@endphp
     <style>
         html {
             margin-left: 40px;
@@ -17,6 +20,7 @@
             if ($jpp->pinjaman_individu->isEmpty()) {
                 continue;
             }
+            $nomor++;
         @endphp
         @php
             $kd_desa = [];
@@ -32,7 +36,7 @@
 
           
         @endphp
-        @if ($jpp->nama_jpp != 'SPP')
+        @if ($nomor > 1)
             <div class="break"></div>
         @endif
         <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
