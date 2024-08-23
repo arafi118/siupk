@@ -1,6 +1,5 @@
-<title>PROFIL</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 @php
+use App\Utils\Tanggal;
 use App\Utils\Keuangan;
 $keuangan = new Keuangan();
 @endphp
@@ -150,7 +149,7 @@ $keuangan = new Keuangan();
     <tr>
         <td width="2%" class="style9">8.</td>
         <td width="30%" class="style9">Pemegang Saham</td>
-        <td width="60%" class="style9">: {{ $n_saham1 }}</td>
+        <td width="60%" class="style9">: </td>
     </tr>
     <tr>
         <td width="2%" class="style9"></td>
@@ -241,25 +240,41 @@ $keuangan = new Keuangan();
             <br> **) hanya diisi untuk LKM berbentuk PT
         </td>
 </table>
-<!-- <table width="97%" border="0" align="center" cellpadding="3" cellspacing="0">
-               <tr>
-              <td width="49%" height="36" colspan="1" class="style26"><div align="center" class="style9">
-                <p>&nbsp;</p>
-              </div></td>
-              <td class="style26"><div align="center" class="style9">
-          <p>&nbsp;</p>
-                <p>----------</p>
-            -----------
-              </div></td>
-            </tr>	
-        <tr>
-            <th height="24" colspan="-1" class="style9"><p align="center">&nbsp;</p>
-              <p align="center">&nbsp;</p>
-              <p>&nbsp;</p></th>
-              <th class="style9"><p align="center">&nbsp;</p>
-              <p align="center">&nbsp;</p>
-              <p>--------</p></th>
-        </tr>
-        </tr>
-	</table> -->
+<table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
+    <tr>
+        <td colspan="3">&nbsp;</td>
+        <td align="center">
+            {{ $kec->nama_kec }}, {{ Tanggal::tglLatin($tgl_kondisi) }}
+        </td>
+    </tr>
+    <tr>
+        <td width="10" align="center"> &nbsp; </td>
+        <td width="70" align="center"></td>
+        <td width="60" align="center"> &nbsp; </td>
+        <td width="50" align="center"> 
+            {{ $nama_lembaga }}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" height="40">&nbsp;</td>
+    </tr>
+    <tr>
+        <td width="10" align="center">&nbsp;</td>
+        <td width="70" align="center"></td>
+        <td width="50" align="center"></td>
+        <td style="border: 1px solid;" width="70" align="center">
+            <strong><u>{{ $dir->namadepan }} {{$dir->namabelakang}}</u></strong>
+        </td>        
+    </tr> 
+    <tr>
+        <td width="10" align="center">&nbsp;</td>
+        <td width="70" align="center"></td>
+        <td width="50" align="center"></td>
+        <td width="75" align="center">
+            <strong>{{ $kec->ttd_mengetahui_lap == '2' ? 'Direktur' : $kec->sebutan_level_1 }}</strong>
+        </td>
+        
+    </tr> 
+</table>
+                        
 @endsection
