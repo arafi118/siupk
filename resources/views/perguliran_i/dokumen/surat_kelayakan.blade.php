@@ -20,8 +20,7 @@
         <tr>
             <td width="50">Nomor</td>
             <td width="10" align="center">:</td>
-            <td colspan="2">
-                ______ /______/{{ Tanggal::tglRomawi($pinkel->tgl_dana) }} </td>
+            <td colspan="2">______ /______/{{ Tanggal::tglRomawi($pinkel->tgl_dana) }} </td>
         </tr>
         <tr>
             <td>Tanggal</td>
@@ -80,7 +79,7 @@
                         <td width="5">:</td>
                         <td>{{ $pinkel->anggota->namadepan }}</td>
                     </tr>
-                    <tr>
+                    <tr> 
                         <td>2.</td>
                         <td>Alamat</td>
                         <td>:</td>
