@@ -172,7 +172,7 @@ class PelaporanController extends Controller
             'saham',
             'desa.saldo' => function ($query) use ($data) {
                 $query->where([
-                        ['tahun', $data['tahun']]
+                    ['tahun', $data['tahun']]
                 ]);
             },
             'ttd'
@@ -468,20 +468,18 @@ class PelaporanController extends Controller
             $jenis = 'Bulanan';
         }
 
-        $laba_rugi = RekeningOjk::where(function($query) {
-            $query->where('rekening','LIKE','4.%')->orwhere('rekening','5.%');
-        })->with([
-            'sub' => function ($query) {
-                $query->where('sub','!=','0');
-            },
-            'sub.akun3',
-            'sub.akun3.rek',
-            'sub.akun3.rek.kom_saldo' => function ($query) use ($data) {
-                $query->where('tahun', $data['tahun'])->where(function ($query) use ($data) {
-                    $query->where('bulan', '0')->orwhere('bulan', $data['bulan']);
-                });
-            },
-        ])->get();
+        $pph = $keuangan->pph($data['tgl_kondisi'], $jenis);
+        $laba_rugi = $keuangan->laporan_laba_rugi($data['tgl_kondisi'], $jenis, true);
+
+        $data['pph'] = [
+            'bulan_lalu' => $pph['bulan_lalu'],
+            'sekarang' => $pph['bulan_ini']
+        ];
+
+        $data['pendapatan'] = $laba_rugi['pendapatan'];
+        $data['beban'] = $laba_rugi['beban'];
+        $data['pendapatanNOP'] = $laba_rugi['pendapatan_non_ops'];
+        $data['bebanNOP'] = $laba_rugi['beban_non_ops'];
 
         $view = view('pelaporan.view.ojk.labarugi', $data)->render();
 
@@ -2167,8 +2165,8 @@ class PelaporanController extends Controller
                 $data['tb_pinj_i'] = $tb_pinj_i;
 
                 $query->select($tb_pinj_i . '.*', $tb_ang . '.namadepan', 'desa.nama_desa', 'desa.kd_desa', 'desa.kode_desa', 'sebutan_desa.sebutan_desa')
-                ->join($tb_ang, $tb_ang . '.id', '=', $tb_pinj_i . '.nia')
-                ->join('desa', $tb_ang . '.desa', '=', 'desa.kd_desa')
+                    ->join($tb_ang, $tb_ang . '.id', '=', $tb_pinj_i . '.nia')
+                    ->join('desa', $tb_ang . '.desa', '=', 'desa.kd_desa')
                     ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
                     ->withSum(['real_i' => function ($query) use ($data) {
                         $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
@@ -2309,7 +2307,8 @@ class PelaporanController extends Controller
     }
 
     private function rencana_realisasi(array $data)
-    {  $keuangan = new Keuangan;
+    {
+        $keuangan = new Keuangan;
         $thn = $data['tahun'];
         $bln = $data['bulan'];
         $hari = $data['hari'];
