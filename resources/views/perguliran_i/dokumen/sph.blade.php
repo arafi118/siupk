@@ -1,9 +1,11 @@
 @php
     use App\Utils\Tanggal;
+    $jaminan  = json_decode($pinkel->jaminan, true);
+    
     use Carbon\Carbon;
     Carbon::setLocale('id');
     $waktu = date('H:i');
-    $tempat = 'Kantor UPK';
+    $tempat = 'Kantor lkm';
     $wt_cair = explode('_', $pinkel->wt_cair);
     if (count($wt_cair) == 1) {
         $waktu = $wt_cair[0];
@@ -130,33 +132,35 @@
                 </li>
                 <li>
                     Pihak Pertama berjanji akan mengangsur kepada Pihak Kedua selama {{ $pinkel->jangka }} bulan,
-                     dengan masing-masing angsuran pokok sebesar Rp.Rp._____________________________- dan bunga sebesar Rp._____________________________.
+                    @php
+                    $wajib_pokok = $pinkel->alokasi / $pinkel->jangka;
+                    $wajib_jasa = ($pinkel->pros_jasa * $pinkel->alokasi) / $pinkel->jangka;
+                    @endphp
+                     dengan masing-masing angsuran pokok sebesar Rp. {{ number_format($wajib_pokok) }}- dan bunga sebesar Rp. {{ number_format($wajib_jasa) }}  .
                      Serta selambat-lambatnya akan dibayar lunas pada tanggal {{ Tanggal::tglLatin($pinkel->tgl_proposal) }}.
                 </li>
                 <li>
                     Pihak Pertama bersedia memberikan jaminan berupa 
-                    @php if (substr($pinkel['jaminan'], 0, 1) == '1') {
-                        echo "TANAH ";
-                        echo substr($pinkel['jaminan'], 3); @endphp
-                        
-                    @php } else if (substr($pinkel['jaminan'], 0, 1) == '2') {
-                        echo "TANAH DAN BANGUNAN ";
-                        echo substr($pinkel['jaminan'], 3); @endphp
-
-                    @php } else if (substr($pinkel['jaminan'], 0, 1) == '3') {
-                        echo "SEPEDA MOTOR ";
-                        echo substr($pinkel['jaminan'], 3); @endphp
-
-                    @php } else if (substr($pinkel['jaminan'], 0, 1) == '4') {
-                        echo "MOBIL ";
-                        echo substr($pinkel['jaminan'], 3); @endphp
-
-                    @php } else if (substr($pinkel['jaminan'], 0, 1) == '5') {
-                        echo "SKP PEGAWAI ";
-                        echo substr($pinkel['jaminan'], 3); @endphp
-                    @php }else{
-                        echo "___________________________";
-                    } @endphp atas Nama {{ $pinkel->anggota->namadepan }} (MASALAH) Yang nilainya dianggap sama dengan uang pinjaman dari Pihak Kedua.
+                    @if ($jaminan['jenis_jaminan'] == '1')
+                                Nomor Sertifikat: {{($jaminan['nomor_sertifikat'])}},
+                                Nama jaminan: {{$jaminan['nama_pemilik']}},
+                                Alamat : {{$jaminan['alamat']}} Luas: {{ $jaminan['luas']}} (m²),
+                                Nilai Jual Tanah: {{$jaminan['nilai_jual_tanah']}},
+                    @elseif ($jaminan['jenis_jaminan'] == '2')
+                                Nomor: {{($jaminan['nomor'])}},
+                                Nama jaminan: {{$jaminan['jenis_kendaraan']}},
+                                Nopol: {{$jaminan['nopol']}},
+                                Nilai Jual Kendaraan: {{ $jaminan['nilai_jual_kendaraan']}},
+                    @elseif ($jaminan['jenis_jaminan'] == '3')
+                                Nomor: {{($jaminan['nomor'])}},
+                                Nama Pegawai: {{$jaminan['nama_pegawai']}},
+                                Nama Instansi Penerbit: {{$jaminan['nama_kuitansi_penerbit']}},
+                    @else
+                                Nomor Jaminan: {{($jaminan['nama_jaminan'])}},
+                                Keterangan: {{$jaminan['keterangan']}},
+                                Nilai Jaminan: {{$jaminan['nilai_jaminan']}},
+                    @endif
+                    atas Nama {{ $pinkel->anggota->namadepan }} (MASALAH) Yang nilainya dianggap sama dengan uang pinjaman dari Pihak Kedua.
                      Apabila kemudian hari ternyata {{ $pinkel->anggota->namadepan }} (MASALAH) tidak dapat membayar hutang tersebut sesuai dengan perjanjian ini,
                      maka Pihak Kedua memiliki hak penuh 
                     atas barang jaminan baik untuk dimiliki {{ $kec->nama_lembaga_sort }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }} maupun dijual/dipindahtangankan kepada orang lain.

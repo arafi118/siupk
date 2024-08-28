@@ -1709,6 +1709,7 @@ class PinjamanIndividuController extends Controller
         $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
             'jpp',
             'jasa',
+            'ra_i',
             'sis_pokok',
             'sis_jasa',
             'anggota',

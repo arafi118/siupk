@@ -46,7 +46,6 @@
         <td class="style27">: {{ $pinkel->anggota->hp }}</td>
         
       </tr>
-      
       @if ($jaminan['jenis_jaminan'] == '1')
             <tr>
               <td  height="10" colspan="3" class="style9">Menyatakan sanggup mengadakan barang jaminan berupa: </td>
