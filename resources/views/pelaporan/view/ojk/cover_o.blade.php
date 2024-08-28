@@ -1,6 +1,3 @@
-<title>COVER</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
 <style>
     * {
         font-family: Arial, Helvetica, sans-serif;

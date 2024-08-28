@@ -7,7 +7,6 @@ $keuangan = new Keuangan();
 @extends('pelaporan.layout.base')
 
 @section('content')
-<title>pop</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <style type="text/css">
     .style3 {

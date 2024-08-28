@@ -1,5 +1,3 @@
-
-<title>NERACA</title>
 @extends('pelaporan.layout.base')
 
 @section('content')

@@ -1,4 +1,3 @@
-<title>PENYISIHAN CADANGAN</title>
 @php
     use App\Utils\Keuangan;
     $keuangan = new Keuangan();
