@@ -275,7 +275,6 @@ class PelaporanController extends Controller
             $data['judul'] = 'Laporan Keuangan';
             $data['sub_judul'] = 'Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         }
-
         $view = view('pelaporan.view.cover', $data)->render();
 
         if ($data['type'] == 'pdf') {
@@ -298,7 +297,7 @@ class PelaporanController extends Controller
             $data['judul'] = 'Laporan Keuangan';
             $data['sub_judul'] = 'Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         }
-
+        $data['laporan'] = 'Cover';
         $view = view('pelaporan.view.ojk.cover_o', $data)->render();
 
         if ($data['type'] == 'pdf') {
@@ -319,74 +318,12 @@ class PelaporanController extends Controller
         $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
         $data['tgl'] = Tanggal::tglLatin($tgl);
 
-        $n_saham = $data['kec']->nama_saham;
-        $rp_saham = $data['kec']->rp_saham;
-        $pros_saham = $data['kec']->pros_saham;
-        $n_direksi = $data['kec']->nama_direksi;
-        $j_direksi = $data['kec']->jab_direksi;
-        $n_kom = $data['kec']->nama_kom;
-        $j_kom = $data['kec']->jab_kom;
-
-
-        $jsaham = substr_count($n_saham, "#") + 1;
-        $sahamData = [];
-        $jrp_saham1 = 0;
-        $jpros_saham1 = 0;
-
-        $exps1 = explode("#", $n_saham);
-        $exps2 = explode("#", $rp_saham);
-        $exps3 = explode("#", $pros_saham);
-        $exps4 = explode("#", $n_direksi);
-        $exps5 = explode("#", $j_direksi);
-        $exps6 = explode("#", $n_kom);
-        $exps7 = explode("#", $j_kom);
-
-
-        $n_saham1 = '';
-        $rp_saham1 = '0';
-        $pros_saham1 = '';
-        $n_direksi = '';
-        $j_direksi = '';
-        $n_kom = '';
-        $j_kom = '';
-
-
-        // Inisialisasi variabel dalam array $data
-        $data['jrp_saham1'] = 0;
-        $data['jpros_saham1'] = 0;
-        $data['sahamData'] = [];
-
-        for ($s = 1; $s <= $jsaham; $s++) {
-            $data['n_saham1'] = (isset($exps1[$s - 1])) ? $exps1[$s - 1] : '';
-            $data['rp_saham1'] = (isset($exps2[$s - 1])) ? $exps2[$s - 1] : '';
-            $data['pros_saham1'] = (isset($exps3[$s - 1])) ? $exps3[$s - 1] : '';
-            $data['n_direksi1'] = (isset($exps4[$s - 1])) ? $exps4[$s - 1] : '';
-            $data['j_direksi1'] = (isset($exps5[$s - 1])) ? $exps5[$s - 1] : '';
-            $data['n_kom1'] = (isset($exps6[$s - 1])) ? $exps6[$s - 1] : '';
-            $data['j_kom1'] = (isset($exps7[$s - 1])) ? $exps7[$s - 1] : '';
-
-
-            $data['sahamData'][] = [
-                'n_saham' => $data['n_saham1'],
-                'rp_saham' => $data['rp_saham1'],
-                'pros_saham' => $data['pros_saham1'],
-                'n_direksi' => $data['n_direksi1'],
-                'j_direksi' => $data['j_direksi1'],
-                'n_kom' => $data['n_kom1'],
-                'j_kom' => $data['j_kom1'],
-
-            ];
-            $data['jrp_saham1'] += $data['rp_saham1'];
-            $data['jpros_saham1'] += $data['pros_saham1'];
-        }
-
-
-
         if ($data['bulanan']) {
             $data['judul'] = 'Laporan Keuangan';
             $data['sub_judul'] =  date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         }
 
+        $data['laporan'] = 'Profil';
         $view = view('pelaporan.view.ojk.profil_o', $data)->render();
 
         if ($data['type'] == 'pdf') {
@@ -427,6 +364,7 @@ class PelaporanController extends Controller
             },
         ])->orderBy('kode_akun', 'ASC')->get();
 
+        $data['laporan'] = 'Neraca';
         $view = view('pelaporan.view.ojk.neraca_ojk', $data)->render();
 
         if ($data['type'] == 'pdf') {
@@ -481,6 +419,7 @@ class PelaporanController extends Controller
         $data['pendapatanNOP'] = $laba_rugi['pendapatan_non_ops'];
         $data['bebanNOP'] = $laba_rugi['beban_non_ops'];
 
+        $data['laporan'] = 'Laba Rugi';
         $view = view('pelaporan.view.ojk.labarugi', $data)->render();
 
         if ($data['type'] == 'pdf') {
@@ -557,7 +496,7 @@ class PelaporanController extends Controller
             'pinjaman_individu.angsuran_pokok',
             'pinjaman_individu.angsuran_jasa'
         ])->get();
-
+        $data['laporan'] = 'Pinjaman Aktif';
         $view = view('pelaporan.view.ojk.daftar_rincian_pinjamanaktif', $data)->render();
 
         if ($data['type'] == 'pdf') {
@@ -618,7 +557,7 @@ class PelaporanController extends Controller
             'pinjaman_individu.angsuran_pokok',
             'pinjaman_individu.angsuran_jasa'
         ])->get();
-
+        $data['laporan'] = 'Pinjaman Lunas';
         $view = view('pelaporan.view.ojk.rincian_pinjaman_lunas', $data)->render();
 
         if ($data['type'] == 'pdf') {
@@ -662,7 +601,7 @@ class PelaporanController extends Controller
                 });
             }
         ])->where('kecuali', 'NOT LIKE', Session::get('lokasi') . '#%')->orwhere('kecuali', 'NOT LIKE', '%#' . Session::get('lokasi'))->get();
-
+        $data['laporan'] = 'Rincian Tabungan';
         $view = view('pelaporan.view.ojk.daftar_rincian_tabungan', $data)->render();
 
         if ($data['type'] == 'pdf') {
@@ -700,7 +639,7 @@ class PelaporanController extends Controller
                     });
             }
         ])->where('kecuali', 'NOT LIKE', Session::get('lokasi') . '#%')->orwhere('kecuali', 'NOT LIKE', '%#' . Session::get('lokasi'))->get();
-
+        $data['laporan'] = 'Simpanan';
         $view = view('pelaporan.view.ojk.simpanan_piutang', $data)->render();
         if ($data['type'] == 'pdf') {
             $pdf = PDF::loadHTML($view);
@@ -751,7 +690,7 @@ class PelaporanController extends Controller
             }
         ])->get();
 
-
+        $data['laporan'] = 'Rincian pinjaman Diterima';
         $view = view('pelaporan.view.ojk.rincian_pinjaman_diterima', $data)->render();
 
         if ($data['type'] == 'pdf') {
@@ -824,6 +763,8 @@ class PelaporanController extends Controller
             'pinjaman_individu.angsuran_pokok',
             'pinjaman_individu.angsuran_jasa'
         ])->get();
+
+        $data['laporan'] = 'Kolekbilitas Pinjaman';
         $view = view('pelaporan.view.ojk.kolekbilitas_pinjaman', $data)->render();
 
         if ($data['type'] == 'pdf') {
@@ -896,6 +837,8 @@ class PelaporanController extends Controller
             'pinjaman_individu.angsuran_pokok',
             'pinjaman_individu.angsuran_jasa'
         ])->get();
+
+        $data['laporan'] = 'Penyisihan Cadangan';
         $view = view('pelaporan.view.ojk.penyisihan_cadangan', $data)->render();
 
         if ($data['type'] == 'pdf') {

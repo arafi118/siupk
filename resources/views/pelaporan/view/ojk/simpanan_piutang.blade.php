@@ -1,4 +1,3 @@
-<title>Simpanan</title>
 @php
     use App\Utils\Keuangan;
     $keuangan = new Keuangan();

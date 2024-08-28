@@ -1,4 +1,3 @@
-<title>Laba Rugi</title>
 @extends('pelaporan.layout.base')
 
 @section('content')
