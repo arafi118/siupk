@@ -747,7 +747,9 @@ class TransaksiController extends Controller
                 }
 
                 $relasi = '';
-                if ($request->relasi) $relasi = $request->relasi;
+                if ($request->relasi) {
+                    $relasi = $request->relasi;
+                }
                 $insert = [
                     'tgl_transaksi' => (string) Tanggal::tglNasional($request->tgl_transaksi),
                     'rekening_debit' => (string) $request->disimpan_ke,
