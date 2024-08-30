@@ -1149,7 +1149,7 @@ class TransaksiController extends Controller
                 ]);
             }
 
-            $kas_umum = '1.1.01.' . str_pad($pinj_a->jenis_pp + 1, 2, '0', STR_PAD_LEFT);
+            $kas_umum = '1.1.01.01';
             $poko_kredit = '1.1.03.' . str_pad($pinj_a->jenis_pp, 2, '0', STR_PAD_LEFT);
             $jasa_kredit = '4.1.01.' . str_pad($pinj_a->jenis_pp, 2, '0', STR_PAD_LEFT);
             $dend_kredit = '4.1.02.' . str_pad($pinj_a->jenis_pp, 2, '0', STR_PAD_LEFT);
