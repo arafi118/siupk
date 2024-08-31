@@ -73,19 +73,49 @@
         <li>
             <div style="text-transform: uppercase;">Gambaran Umum</div>
             <div style="text-align: justify">
-                {{ $kec->nama_lembaga_sort }} adalah Lembaga yang berdiri sejak adanya PNPM-MPd untuk memberikan layanan
-                perguliran bagi masyarakat se-kecamatan {{ $kec->nama_kec }} melalui produk layanan pinjaman bagi
-                kelompok SPP dan UEP.
+                Lembaga Keuangan Mikro ( {{ $kec->nama_lembaga_sort }} ) adalah lembaga keuangan yang khusus didirikan untuk memberikan jasa 
+                pengembangan usaha dan pemberdayaan masyarakat, baik melalui pinjaman atau pembiayaan dalam usaha
+                 skala mikro kepada masyarakat, pengelolaan simpanan, maupun
+                  pengembangan usaha yang tidak semata-mata mencari keuntungan.
+            </div> <br>
+            <div style="text-align: justify">
+                Dalam rangka memenuhi amanat regulasi tentang pendirian dan operasional lembaga kuangan mikro (LKM) sebagai berikut:
             </div>
+            <ol>
+                <li>
+                    Undang-Undang Nomor 1 Tahun 2013 Tentang Lembaga Keuangan Mikro (Undang-Undang LKM).
+                </li>
+                <li>
+                    Peraturan Pemerintah Nomor 89 Tahun 2014 tentang Suku Bunga Pinjaman Atau Imbal Hasil Pembiayaan dan Luas Cakupan Wilayah Usaha Lembaga Keuangan Mikro.
+                </li>
+                <li>
+                    Surat Edaran Otoritas Jasa Keuangan (SEOJK), SEOJK Nomor 29/SEOJK.05/2015 tentang Laporan Keuangan Lembaga Keuangan Mikro.
+                </li>
+                <li>
+                    Peraturan Otoritas Jasa Keuangan (POJK):
+                    <ol style="list-style: lower-alpha">
+                        <li>
+                            POJK Nomor 12/POJK.05/2014 tentang Perizinan Usaha dan Kelembagaan Lembaga Keuangan Mikro.
+                        </li>
+                        <li>
+                            POJK Nomor 13/POJK.05/2014 tentang Penyelenggaraan Usaha Lembaga Keuangan Mikro.
+                        </li>
+                        <li>
+                            POJK Nomor 14/POJK.05/2014 tentang Pembinaan dan Pengawasan Lembaga Keuangan Mikro.
+                        </li>
+                        <li>
+                            POJK Nomor 61/POJK.05/2015 tentang Perubahan atas Peraturan Otoritas Jasa Keuangan Nomor 12/POJK.05/2014 tentang Perizinan Usaha dan Kelembagaan Lembaga Keuangan Mikro.
+                        </li>
+                        <li>
+                            POJK Nomor 62/POJK.05/2015 tentang Perubahan atas Peraturan Otoritas Jasa Keuangan Nomor 13/POJK.05/2014 tentang Penyelenggaraan Usaha Lembaga Keuangan Mikro.
+                        </li>
+                    </ol>
+                </li>
+            </ol>
             <p style="text-align: justify">
-                Berdasarkan Keputusan MAD {{ $kec->nama_lembaga_sort }} bersepakat membentuk sebuah badan hukum dan telah
-                mencatatkan
-                mendapatkan legalisasi sesuai {{ $kec->nomor_bh }}. {{ $kec->nama_lembaga_sort }}. Dalam rangka menjalankan
-                amanat pemberdayaan
-                ekonomi masyarakat {{ $kec->nama_lembaga_sort }} menjalankan kegiatan Perguliran bagi Masyarakat sehingga
-                masuk dalam
-                kategori kegiatan mikrofinance dan berdomisili di {{ $kec->nama_kec }} dengan susunan pengurus sebagai
-                berikut :
+                Selanjutnya {{ $kec->nama_lembaga_sort }} Sebagai anak usaha BUM Desa Bersama lkd {{ $kec->sebutan_kec }} {{ $kec->nama_kec }} 
+                telah resmi mendaftar sebagai lembaga keuangan yang selanjutnya mendapat legalitas dari Kementerian Hukum dan HAM 
+                Nomor: {{ $kec->nomor_bh }}. Adapun susunan pengurusnya adalah sebagai berikut :
 
             <table style="margin-top: -10px; margin-left: 15px;">
                 <tr>
@@ -135,8 +165,8 @@
                         <li>
                             Laporan keuangan disusun menggunakan Standar Akuntansi Keuangan Usaha Jasa Keuangan Mikro.
                         </li>
-                        <li>Dasar Penyusunan laporan keuangan Keputusan MAD cq. Program kerja penatausahaan dan penyedialan
-                            laporan keuanagn UPK.</li>
+                        <li>Dasar Penyusunan laporan keuangan Keputusan MAD cq. Program kerja penatausahaan dan penerbitan
+                            laporan Keuangan.</li>
                         <li>
                             Dasar penyusunan laporan keuangan adalah biaya historis dan menggunakan asumsi dasar kas basis.
                             Mata uang penyajian yang digunakan untuk menyusun laporan keuangan ini adalah Rupiah.
@@ -156,10 +186,10 @@
                     <ol style="list-style: lower-alpha">
                         <li>
                             Aset tetap dan Inventaris beserta Aset tak berwujud dicatat sebesar biaya perolehannya pada saat
-                            aset tersebut secara hukum mulai dimiliki oleh UPK.
+                            aset tersebut secara hukum mulai dimiliki oleh {{ $kec->nama_lembaga_sort }} .
                         </li>
                         <li>
-                            Aset tetap beserta Inventaris disusutkan menggunakan metode garis lurus tanpa nilai.
+                            Aset tetap beserta Inventaris disusutkan menggunakan metode garis lurus tanpa nilai residu.
                         </li>
                     </ol>
                 </li>
@@ -167,10 +197,13 @@
                     Pengakuan Pendapatan dan Beban
                     <ol style="list-style: lower-alpha;">
                         <li>
-                            Jasa piutang kelompok dan masyarakat yang sudah dilakukan pembayaran/transaksi resceduling
-                            diakui sebagai pendapatan meskipun dan wajib diterbitkan kuitansi sebagai bukti pembayaran jasa
-                            piutang. demikian juga penerimaan atas denda keterlambatan pembayaran/pinalti diakui sebagai
-                            pendapatan pada saat diterbitkan kuitansi pembayaran.
+                            Jasa piutang masyarakat yang sudah dilakukan pembayaran 
+                            diakui sebagai pendapatan dan diterbitkan kuitansi pembayaran,
+                            sedangkan jasa yang seharusnya sudah memasuki kewajiban bayar/target bayar
+                            akan tetapi tidak dipenuhi oleh nasabah (menunggak) tetap diakui sebagai pendapatan 
+                            meskipun tidak diterbitkan kuitansi, sehinga sekaligus dicatatkan sebagai
+                            piutang jasa. Adapun berkaitan dengan penerimaan denda atas keterlambatan
+                            pembayaran/pinalti diakui sebagai pendapatan pada saat diterbitkan kuitansi pembayaran.
                         </li>
                         <li>
                             Adapun kewajiban bayar atas kebutuhan operasional, pemasaran maupun non operasional pada suatu
@@ -308,25 +341,19 @@
                 Ketentuan Pembagian Surplus :
             </div>
             <div>
-                Pembagian atas surplus yang diperoleh dalam satu tahun buku setelah dikurangi cadangan resiko dialokasikan
+                Pembagian laba yang diperoleh dalam satu tahun buku dialokasikan
                 untuk
                 :
             </div>
             <ol>
                 <li>
-                    Kelembagaan maksimal maksimal 30%
+                    Penambahan modal {{ $kec->nama_lembaga_sort }}/ laba ditahan
                 </li>
                 <li>
-                    Dana Sosial minimal 15%
+                    Dividen
                 </li>
                 <li>
-                    Bonus UPK 5%
-                </li>
-                <li>
-                    Penambahan modal 50%
-                </li>
-                <li>
-                    Lain-lain.
+                    Alokasi lain yang diputuskan dalam rapat pertangung jawaban dan/atau rapat umum pemegang saham (RUPS).
                 </li>
             </ol>
         </li>
