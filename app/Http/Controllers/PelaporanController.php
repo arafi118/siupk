@@ -2014,7 +2014,7 @@ class PelaporanController extends Controller
                         ->where('lokasi', 'LIKE', "%-{$kec['id']}-%");
                 });
         })->with([
-            'pinjaman_individu' => function ($query) use ($data) {
+            'pinjaman_anggota' => function ($query) use ($data) {
                 $tb_pinj_i = 'pinjaman_anggota_' . $data['kec']->id;
                 $tb_angg = 'anggota_' . $data['kec']->id;
                 $data['tb_pinj_i'] = $tb_pinj_i;
@@ -2069,10 +2069,10 @@ class PelaporanController extends Controller
                     ->orderBy($tb_angg . '.desa', 'ASC')
                     ->orderBy($tb_pinj_i . '.tgl_cair', 'ASC');
             },
-            'pinjaman_individu.saldo' => function ($query) use ($data) {
+            'pinjaman_anggota.saldo' => function ($query) use ($data) {
                 $query->where('tgl_transaksi', '<=', $data['tgl_kondisi']);
             },
-            'pinjaman_individu.target' => function ($query) use ($data) {
+            'pinjaman_anggota.target' => function ($query) use ($data) {
                 $query->where('jatuh_tempo', '<=', $data['tgl_kondisi']);
             }
         ])->get();
