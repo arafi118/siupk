@@ -256,7 +256,7 @@
                             <tr align="center" height="100%">
                                 <th width="3%" class="left bottom top">NO</th>
                                 <th width="40%" class="left bottom top">TINGKAT KOLEKTIBILITAS</th>
-                                <th width="40%" class="left bottom top">%</th>
+                                <th width="10%" class="left bottom top" align="center">%</th>
                                 <th width="40%" class="left right bottom top">SALDO PINJAMAN</th>
                                 <th width="40%" class="left right bottom top">BEBAN PENYISIHAN PENGHAPUSAN PINJAMAN</th>
                                 <th width="40%" class="left right bottom top">NPL</th>
@@ -273,7 +273,7 @@
                             <tr>
                                 <td width="3%"  class="left bottom" align="center">1</td>
                                 <td class="left bottom"> &nbsp; Lancar</td>
-                                <td class="left bottom"> 0 %</td>
+                                <td class="left bottom" align="center"> 0 %</td>
                                 <td class="left bottom right" align="right">{{ number_format($t_kolek1) }}</td>
                                 <td class="left bottom" align="right">{{number_format($lancar)}}</td>
                                 <th class="left bottom right" align="center" rowspan="4">{{number_format($npl,2)}}%</th>
@@ -283,7 +283,7 @@
                             <tr>
                                 <td width="3%"  class="left bottom" align="center">2</td>
                                 <td class="left bottom"> &nbsp; Diragukan</td>
-                                <td class="left bottom"> 50 %</td>
+                                <td class="left bottom" align="center"> 50 %</td>
                                 <td class="left bottom right" align="right">{{ number_format($t_kolek2) }}</td>
                                 <td class="left bottom" align="right">{{number_format($diragukan/2)}}</td>
 
@@ -291,7 +291,7 @@
                             <tr>
                                 <td width="3%"  class="left bottom" align="center">3</td>
                                 <td class="left bottom"> &nbsp; Macet</td>
-                                <td class="left bottom"> 100 %</td>
+                                <td width="3%" class="left bottom" align="center"> 100 %</td>
                                 <td class="left bottom right" align="right">{{ number_format($t_kolek3) }}</td>
                                 <td class="left bottom" align="right">{{number_format($macet)}}</td>
 
