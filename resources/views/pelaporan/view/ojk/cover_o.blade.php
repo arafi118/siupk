@@ -61,54 +61,60 @@
         <div style="margin: 0px; font-size: 24px;">{{ strtoupper($sub_judul) }}</div>
         <main><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
             @if($kec->id == 362)
-            <table width="50%" border="1" align="center" style="font-size: 13px;">
+            <table width="55%" border="0" align="center" style="font-size: 12px;">
                 <tr>
-                    <td align="center" colspan="2">Disusun Oleh</td>
+                    <td align="center" colspan="3">Disusun Oleh</td>
                 </tr>
                 <tr>
-                    <td colspan="2">&nbsp;</td>
+                    <td colspan="3">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td width="15">Direktur utama </td>
-                    <td width="15" colspan="1">: Cicik Yuni Khustiyah</td>
+                    <td width="15%">&nbsp;</td>
+                    <td width="30%">Direktur utama </td>
+                    <td>: Cicik Yuni Khustiyah</td>
                 </tr>
                 <tr>
-                    <td width="15">Direktur</td>
-                    <td width="30" colspan="1">: Fufut Widianita, ST</td>
+                    <td width="15%">&nbsp;</td>
+                    <td width="30%">Direktur</td>
+                    <td>: Fufut Widianita, ST</td>
                 </tr>
                 <tr>
-                    <td width="15">Kabag Administrasi </td>
-                    <td width="30" colspan="1">: Lailiyatus Sofiyah, SH</td>
+                    <td width="15%">&nbsp;</td>
+                    <td width="30%">Kabag Administrasi </td>
+                    <td>: Lailiyatus Sofiyah, SH</td>
                 </tr>
                 <tr>
-                    <td width="15">Kabag Keuangan </td>
-                    <td width="15" colspan="1">: Yernada Desi Kurnia Sari</td>
+                    <td width="15%">&nbsp;</td>
+                    <td width="30%">Kabag Keuangan </td>
+                    <td>: Yernada Desi Kurnia Sari</td>
                 </tr><i class="g fa-github-alt    "></i>
             </table>
         @else
-        <table width="50%" border="0" align="center" style="font-size: 13px;">
+        <table width="55%" border="0" align="center" style="font-size: 13px;">
             <tr>
-                <td align="center" colspan="2">Disusun Oleh</td>
+                <td align="center" colspan="3">Disusun Oleh</td>
             </tr>
             <tr>
-                <td colspan="2">&nbsp;</td>
+                <td colspan="3">&nbsp;</td>
             </tr>
             <tr>
-                <td width="15">Ketua</td>
-                <td width="15" colspan="1">:{{$kec->sebutan_level_1}}</td>
+                <td width="15%">&nbsp;</td>
+                <td width="30%">Ketua</td>
+                <td>:{{$kec->sebutan_level_1}}</td>
             </tr>
             <tr>
-                <td width="15">Sekretaris</td>
-                <td width="30" colspan="1">:{{$kec->sebutan_level_2}}</td>
+                <td width="15%">&nbsp;</td>
+                <td width="30%">Sekretaris</td>
+                <td>:{{$kec->sebutan_level_2}}</td>
             </tr>
             <tr>
-                <td width="15">Bendahara</td>
-                <td width="15" colspan="1">:{{$kec->sebutan_level_3}}</td>
+                <td width="15%">&nbsp;</td>
+                <td width="30%">Bendahara</td>
+                <td>:{{$kec->sebutan_level_3}}</td>
             </tr>
         </table>
         @endif
-        
-
+        <br><br>
 </main>
     </header>
 
