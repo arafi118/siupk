@@ -250,24 +250,18 @@
                     $saldo_jasa = 0;
                 }
 
-                $tgl_cair = explode('-', $pinj_i->tgl_cair);
-                $th_cair = $tgl_cair[0];
-                $bl_cair = $tgl_cair[1];
-                $tg_cair = $tgl_cair[2];
+                $tgl_akhir = new DateTime($tgl_kondisi);
+                $tgl_awal = new DateTime($pinkel->tgl_cair);
+                $selisih = $tgl_akhir->diff($tgl_awal);
 
-                
-
-                $selisih_tahun = ($tahun - $th_cair) * 12; // 1 * 12 = 12 bulan
-                $selisih_bulan = $bulan - $bl_cair; // 0
-
-                $selisih = $selisih_bulan + $selisih_tahun; // 12 bulan 
+                $selisih = $selisih->y * 12 + $selisih->m;
                 $y12 = date('Y')-1;
 
                 $_kolek = 0;
                 if ($wajib_pokok != '0') {
-                    $_kolek = $tunggakan_pokok / $wajib_pokok;
+                    $_kolek = $tunggakan_pokok / $wajib_pokok; // 0 / 418500
                 }
-                $kolek = ceil($_kolek + ($selisih - $angsuran_ke));
+                $kolek = round($_kolek + ($selisih - $angsuran_ke)); // (0 / 418500) + (5)
 
                 if($kolek<=3){
                     $keterangan="Lancar" ; 
@@ -292,7 +286,7 @@
                             $jum_nunggak = 0;
                         @endphp
                 @endif
-            @endif    
+            @endif  
 
             <tr align="right" height="15px" class="style9">
                 <td class="left top" align="center">{{ $nomor++ }}</td>
