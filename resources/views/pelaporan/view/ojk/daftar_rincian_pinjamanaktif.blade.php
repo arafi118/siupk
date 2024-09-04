@@ -199,16 +199,20 @@
                 $sum_pokok = 0;
                 $sum_jasa = 0;
                 $saldo_pokok = $pinj_i->alokasi;
-                $saldo = $pinj_i->alokasi;
-                
-                if ($pinj_i->saldo) {
-                        $saldo = $pinj_i->alokasi - $pinj_i->saldo->sum_pokok;
-                        $sum_pokok = $pinj_i->saldo->sum_pokok;
-                        $sum_jasa = $pinj_i->saldo->sum_jasa;
-                    }
                 $saldo_jasa = $pinj_i->pros_jasa == 0 ? 0 : $pinj_i->alokasi * ($pinj_i->pros_jasa / 100);
                 if ($pinj_i->saldo) {
                     $sum_pokok = $pinj_i->saldo->sum_pokok;
+                    $sum_jasa = $pinj_i->saldo->sum_jasa;
+                    $saldo_pokok = $pinj_i->saldo->saldo_pokok;
+                    $saldo_jasa = $pinj_i->saldo->saldo_jasa;
+                }
+
+                if ($saldo_jasa < 0) {
+                    $saldo_jasa = 0;
+                }
+
+                if ($pinj_i->tgl_lunas <= $tgl_kondisi && $pinj_i->status == 'L') {
+                    $saldo_jasa = 0;
                 }
 
                 $target_pokok = 0;
@@ -220,19 +224,21 @@
                     $target_pokok = $pinj_i->target->target_pokok;
                     $target_jasa = $pinj_i->target->target_jasa;
                     $wajib_pokok = $pinj_i->target->wajib_pokok;
+                    $wajib_jasa = $pinj_i->target->wajib_jasa;
                     $angsuran_ke = $pinj_i->target->angsuran_ke;
-                    
                 }
+
                 $tunggakan_pokok = $target_pokok - $sum_pokok;
                 if ($tunggakan_pokok < 0) {
-                    $tunggakan_pokok=0; 
-                } 
-                
-                $tunggakan_jasa=$target_jasa - $sum_jasa;
-                if ($tunggakan_jasa < 0) { 
-                    $tunggakan_jasa=0; 
-                } 
-                $pross=$saldo_pokok==0 ? 0 : $saldo_pokok / $pinj_i->alokasi;
+                    $tunggakan_pokok = 0;
+                }
+                $tunggakan_jasa = $target_jasa - $sum_jasa;
+                if ($tunggakan_jasa < 0) {
+                    $tunggakan_jasa = 0;
+                }
+
+                $pross = $saldo_pokok == 0 ? 0 : $saldo_pokok / $pinj_i->alokasi;
+
                 if ($pinj_i->tgl_lunas <= $tgl_kondisi && $pinj_i->status == 'L') {
                     $tunggakan_pokok = 0;
                     $tunggakan_jasa = 0;
@@ -254,14 +260,18 @@
                 $tgl_awal = new DateTime($pinj_i->tgl_cair);
                 $selisih = $tgl_akhir->diff($tgl_awal);
 
-                $selisih = $selisih->y * 12 + $selisih->m;
-                $y12 = date('Y')-1;
+                if ($lpp == 'Minggu') {
+                    $selisih_hari = $selisih->days;
+                    $selisih = floor($selisih_hari / 7);
+                } else {
+                    $selisih = $selisih->y * 12 + $selisih->m;
+                }
 
                 $_kolek = 0;
                 if ($wajib_pokok != '0') {
-                    $_kolek = $tunggakan_pokok / $wajib_pokok; // 0 / 418500
+                    $_kolek = $tunggakan_pokok / $wajib_pokok;
                 }
-                $kolek = round($_kolek + ($selisih - $angsuran_ke)); // (0 / 418500) + (5)
+                $kolek = round($_kolek + ($selisih - $angsuran_ke));
 
                 if($kolek<=3){
                     $keterangan="Lancar" ; 
