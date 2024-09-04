@@ -307,11 +307,7 @@
                 <td class="left top">{{$kpros_jasa}}%</td>
                 <td class="left top" align="center">per bulan</td>
                 <td class="left top">{{number_format($pinj_i->alokasi)}}</td>
-                @if ($pinj_i->saldo)
-                    <td class="left top">{{number_format($pinj_i->saldo->saldo_pokok)}}</td>
-                @else
-                    <td class="left top">0</td>
-                @endif
+                <td class="left top">{{ number_format($saldo_pokok) }}</td>
                 <td class="left top">{{$kolek}}</td>
                 <td class="left top right" align="left">{{$keterangan}}</td>
             </tr>
