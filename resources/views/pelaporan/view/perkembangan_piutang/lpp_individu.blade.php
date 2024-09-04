@@ -324,7 +324,7 @@
                     <td class="t l b" align="right">{{ number_format($j_real_bi_jasa) }}</td>
                     <td class="t l b" align="right">{{ number_format($j_saldo_pokok) }}</td>
                     <!-- <td class="t l b" align="right">{{ number_format($j_saldo_jasa) }}</td> -->
-                    <td class="t l b" align="center">{{ number_format(floor($j_pross * 100)) }}</td>
+                    <td class="t l b" align="center">{{ number_format(ceil($j_pross * 100)) }}</td>
                     <td class="t l b" align="right">{{ number_format($j_tunggakan_pokok) }}</td>
                     <td class="t l b r" align="right">{{ number_format($j_tunggakan_jasa) }}</td>
                 </tr>
