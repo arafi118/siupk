@@ -251,7 +251,7 @@
                 }
 
                 $tgl_akhir = new DateTime($tgl_kondisi);
-                $tgl_awal = new DateTime($pinkel->tgl_cair);
+                $tgl_awal = new DateTime($pinj_i->tgl_cair);
                 $selisih = $tgl_akhir->diff($tgl_awal);
 
                 $selisih = $selisih->y * 12 + $selisih->m;
