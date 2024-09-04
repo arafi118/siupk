@@ -220,6 +220,7 @@
                     $target_pokok = $pinj_i->target->target_pokok;
                     $target_jasa = $pinj_i->target->target_jasa;
                     $wajib_pokok = $pinj_i->target->wajib_pokok;
+                    $angsuran_ke = $pinj_i->target->angsuran_ke;
                     
                 }
                 $tunggakan_pokok = $target_pokok - $sum_pokok;
@@ -256,14 +257,13 @@
 
                 
 
-                $selisih_tahun = ($tahun - $th_cair) * 12;
-                $selisih_bulan = $bulan - $bl_cair;
+                $selisih_tahun = ($tahun - $th_cair) * 12; // 1 * 12 = 12 bulan
+                $selisih_bulan = $bulan - $bl_cair; // 0
 
-                $selisih = $selisih_bulan + $selisih_tahun;
+                $selisih = $selisih_bulan + $selisih_tahun; // 12 bulan 
                 $y12 = date('Y')-1;
 
                 $_kolek = 0;
-
                 if ($wajib_pokok != '0') {
                     $_kolek = $tunggakan_pokok / $wajib_pokok;
                 }
