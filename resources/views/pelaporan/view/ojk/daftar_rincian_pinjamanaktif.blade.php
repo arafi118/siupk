@@ -277,23 +277,22 @@
                     $keterangan="Macet" ; 
                 } 
                 
-            @endphp 
-            @if($saldopinjaman == 0)
-                @php
-                    $jum_nunggak = 0;
-                @endphp
-            @else
-                @php
-                    $jum_nunggak = date($tgl_kondisi . "-" . $kidp);
-                @endphp
-
-            @if($jum_nunggak <= 0)
+                @endphp 
+                @if($saldopinjaman == 0)
                     @php
                         $jum_nunggak = 0;
                     @endphp
-            @endif
-            @endif
-            
+                @else
+                    @php
+                        $jum_nunggak = date($tgl_kondisi . "-" . $kidp);
+                    @endphp
+
+                @if($jum_nunggak <= 0)
+                        @php
+                            $jum_nunggak = 0;
+                        @endphp
+                @endif
+            @endif    
 
             <tr align="right" height="15px" class="style9">
                 <td class="left top" align="center">{{ $nomor++ }}</td>

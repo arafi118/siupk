@@ -35,7 +35,6 @@
         transform: translate(-50%, -50%);
     }
 </style>
-
 <body>
 <table width="100%" border="0"style="font-size: 10px;">
             <tr>
@@ -48,20 +47,16 @@
                         <i>{{ $info }}</i>
                     </div>
                     <hr style="border: none; border-top: 1px solid grey; margin: 10px 0;">
-
-                  
-                    
                 </td>
             </tr>
         </table>
-
     <header>
 
         <h1 style="margin: 0px;">{{ strtoupper($judul) }}</h1>
         <div style="margin: 0px; font-size: 24px;">{{ strtoupper($sub_judul) }}</div>
         <main><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
             @if($kec->id == 362)
-            <table width="60%" border="1" align="center" style="font-size: 12px;">
+            <table width="60%" border="0" align="center" style="font-size: 12px;">
                 <tr>
                     <td align="center" colspan="3">Disusun Oleh</td>
                 </tr>
