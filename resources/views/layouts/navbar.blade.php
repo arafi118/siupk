@@ -8,9 +8,6 @@
             $tanggal = true;
         }
     }
-    if (!$tanggal) {
-        $jumlah += 1;
-    }
     $id_search = 'cariAnggota';
     $label = 'Individu (NIK/Nama Peminjam)';
 @endphp
