@@ -260,12 +260,7 @@
                 $tgl_awal = new DateTime($pinj_i->tgl_cair);
                 $selisih = $tgl_akhir->diff($tgl_awal);
 
-                if ($lpp == 'Minggu') {
-                    $selisih_hari = $selisih->days;
-                    $selisih = floor($selisih_hari / 7);
-                } else {
-                    $selisih = $selisih->y * 12 + $selisih->m;
-                }
+                $selisih = $selisih->y * 12 + $selisih->m;
 
                 $_kolek = 0;
                 if ($wajib_pokok != '0') {
