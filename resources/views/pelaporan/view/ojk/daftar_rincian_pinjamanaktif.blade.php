@@ -330,7 +330,7 @@
                     merupakan Individu aktif
                     pada tahun berjalan {{$tahun}}, untuk menampilkan data Individu aktif tahun lalu dapat
                     memilih mode tahun lalu
-                    {{$y12}}.</td>
+                    {{ $tahun - 1 }}.</td>
             </tr>
         @endif
     </table>
