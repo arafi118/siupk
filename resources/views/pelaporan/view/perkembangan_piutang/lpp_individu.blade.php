@@ -242,12 +242,12 @@
                     <td class="t l b" align="right">{{ number_format($pinj_i->alokasi) }}</td>
                     <td class="t l b" align="right">{{ number_format($target_pokok) }}</td>
                     <td class="t l b" align="right">{{ number_format($target_jasa) }}</td>
-                    <td class="t l b" align="right">{{ number_format($sum_pokok - $pinj_i->real_sum_realisasi_pokok) }}
+                    <td class="t l b" align="right">{{ number_format($sum_pokok - $pinj_i->real_i_sum_realisasi_pokok) }}
                     </td>
-                    <td class="t l b" align="right">{{ number_format($sum_jasa - $pinj_i->real_sum_realisasi_jasa) }}
+                    <td class="t l b" align="right">{{ number_format($sum_jasa - $pinj_i->real_i_sum_realisasi_jasa) }}
                     </td>
-                    <td class="t l b" align="right">{{ number_format($pinj_i->real_sum_realisasi_pokok) }}</td>
-                    <td class="t l b" align="right">{{ number_format($pinj_i->real_sum_realisasi_jasa) }}</td>
+                    <td class="t l b" align="right">{{ number_format($pinj_i->real_i_sum_realisasi_pokok) }}</td>
+                    <td class="t l b" align="right">{{ number_format($pinj_i->real_i_sum_realisasi_jasa) }}</td>
                     <td class="t l b" align="right">{{ number_format($sum_pokok) }}</td>
                     <td class="t l b" align="right">{{ number_format($sum_jasa) }}</td>
                     <td class="t l b" align="right">{{ number_format($saldo_pokok) }}</td>
@@ -276,10 +276,10 @@
                     $j_alokasi += $pinj_i->alokasi;
                     $j_target_pokok += $target_pokok;
                     $j_target_jasa += $target_jasa;
-                    $j_real_bl_pokok += $sum_pokok - $pinj_i->real_sum_realisasi_pokok;
-                    $j_real_bl_jasa += $sum_jasa - $pinj_i->real_sum_realisasi_jasa;
-                    $j_real_pokok += $pinj_i->real_sum_realisasi_pokok;
-                    $j_real_jasa += $pinj_i->real_sum_realisasi_jasa;
+                    $j_real_bl_pokok += $sum_pokok - $pinj_i->real_i_sum_realisasi_pokok;
+                    $j_real_bl_jasa += $sum_jasa - $pinj_i->real_i_sum_realisasi_jasa;
+                    $j_real_pokok += $pinj_i->real_i_sum_realisasi_pokok;
+                    $j_real_jasa += $pinj_i->real_i_sum_realisasi_jasa;
                     $j_real_bi_pokok += $sum_pokok;
                     $j_real_bi_jasa += $sum_jasa;
                     $j_saldo_pokok += $saldo_pokok;
@@ -311,7 +311,7 @@
             @if (count($kd_desa) > 0)
                 <tr style="font-weight: bold;">
                     <td class="t l b" colspan="4" align="left" height="15">
-                        Jumlah {{ $nama_desa }}
+                        Jumlah x {{ $nama_desa }}
                     </td>
                     <td class="t l b" align="right">{{ number_format($j_alokasi) }}</td>
                     <td class="t l b" align="right">{{ number_format($j_target_pokok) }}</td>
