@@ -61,7 +61,7 @@
         <div style="margin: 0px; font-size: 24px;">{{ strtoupper($sub_judul) }}</div>
         <main><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
             @if($kec->id == 362)
-            <table width="55%" border="0" align="center" style="font-size: 12px;">
+            <table width="60%" border="1" align="center" style="font-size: 12px;">
                 <tr>
                     <td align="center" colspan="3">Disusun Oleh</td>
                 </tr>
