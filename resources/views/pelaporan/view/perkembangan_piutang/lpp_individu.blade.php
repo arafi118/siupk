@@ -311,7 +311,7 @@
             @if (count($kd_desa) > 0)
                 <tr style="font-weight: bold;">
                     <td class="t l b" colspan="4" align="left" height="15">
-                        Jumlah x {{ $nama_desa }}
+                        Jumlah {{ $nama_desa }}
                     </td>
                     <td class="t l b" align="right">{{ number_format($j_alokasi) }}</td>
                     <td class="t l b" align="right">{{ number_format($j_target_pokok) }}</td>
@@ -324,7 +324,7 @@
                     <td class="t l b" align="right">{{ number_format($j_real_bi_jasa) }}</td>
                     <td class="t l b" align="right">{{ number_format($j_saldo_pokok) }}</td>
                     <!-- <td class="t l b" align="right">{{ number_format($j_saldo_jasa) }}</td> -->
-                    <td class="t l b" align="center">{{ number_format(ceil($j_pross * 100)) }}</td>
+                    <td class="t l b" align="center">{{ number_format(floor($j_pross * 100)) }}</td>
                     <td class="t l b" align="right">{{ number_format($j_tunggakan_pokok) }}</td>
                     <td class="t l b r" align="right">{{ number_format($j_tunggakan_jasa) }}</td>
                 </tr>
