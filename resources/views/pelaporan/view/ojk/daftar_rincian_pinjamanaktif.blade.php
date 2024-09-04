@@ -266,7 +266,11 @@
                 if ($wajib_pokok != '0') {
                     $_kolek = $tunggakan_pokok / $wajib_pokok;
                 }
+                
                 $kolek = round($_kolek + ($selisih - $angsuran_ke));
+                if ($pinj_i->tgl_lunas <= $tgl_kondisi && ($pinj_i->status == 'L' || $pinj_i->status == 'H' || $pinj_i->status == 'R')) {
+                    $kolek = 0;
+                }
 
                 if($kolek<=3){
                     $keterangan="Lancar" ; 
