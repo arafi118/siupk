@@ -4,7 +4,7 @@ $sum =0;
 <div class="table-responsive">
     <table class="table table-striped align-items-center mb-0" width="100%">
         <thead>
-            <tr class="bg-dark text-white">
+            <tr  style="background-color: #404040;color: #ffffff;">
                 <th>#</th>
                 <th>Tgl transaksi</th>
                 <th>Keterangan</th>

@@ -12,13 +12,15 @@ use App\Models\Desa;
 use App\Models\JenisLaporan;
 use App\Models\JenisLaporanPinjaman;
 use App\Models\JenisProdukPinjaman;
+use App\Models\JenisSimpanan;
 use App\Models\Kecamatan;
 use App\Models\Kelompok;
 use App\Models\MasterArusKas;
-use App\Models\PinjamanKelompok;
 use App\Models\PinjamanIndividu;
+use App\Models\PinjamanKelompok;
 use App\Models\Rekening;
 use App\Models\Saldo;
+use App\Models\Simpanan;
 use App\Models\Transaksi;
 use App\Models\User;
 use App\Utils\Keuangan;
@@ -741,10 +743,10 @@ class PelaporanController extends Controller
                     ->join('desa', $tb_kel . '.desa', '=', 'desa.kd_desa')
                     ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
                     ->withCount('pinjaman_anggota')
-                    ->withSum(['real' => function ($query) use ($data) {
+                    ->withSum(['real_i' => function ($query) use ($data) {
                         $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
                     }], 'realisasi_pokok')
-                    ->withSum(['real' => function ($query) use ($data) {
+                    ->withSum(['real_i' => function ($query) use ($data) {
                         $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
                     }], 'realisasi_jasa')
                     ->where($tb_pinkel . '.sistem_angsuran', '!=', '12')->where(function ($query) use ($data) {
@@ -1116,10 +1118,10 @@ class PelaporanController extends Controller
                     ->join($tb_kel, $tb_kel . '.id', '=', $tb_pinkel . '.id_kel')
                     ->join('desa', $tb_kel . '.desa', '=', 'desa.kd_desa')
                     ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
-                    ->withSum(['real' => function ($query) use ($data) {
+                    ->withSum(['real_i' => function ($query) use ($data) {
                         $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
                     }], 'realisasi_pokok')
-                    ->withSum(['real' => function ($query) use ($data) {
+                    ->withSum(['real_i' => function ($query) use ($data) {
                         $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
                     }], 'realisasi_jasa')
                     ->where($tb_pinkel . '.sistem_angsuran', '!=', '12')->where(function ($query) use ($data) {
@@ -1311,10 +1313,10 @@ class PelaporanController extends Controller
                     ->join($tb_kel, $tb_kel . '.id', '=', $tb_pinkel . '.id_kel')
                     ->join('desa', $tb_kel . '.desa', '=', 'desa.kd_desa')
                     ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
-                    ->withSum(['real' => function ($query) use ($data) {
+                    ->withSum(['real_i' => function ($query) use ($data) {
                         $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
                     }], 'realisasi_pokok')
-                    ->withSum(['real' => function ($query) use ($data) {
+                    ->withSum(['real_i' => function ($query) use ($data) {
                         $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
                     }], 'realisasi_jasa')
                     ->where($tb_pinkel . '.sistem_angsuran', '!=', '12')->where(function ($query) use ($data) {
@@ -1404,10 +1406,10 @@ class PelaporanController extends Controller
                     ->join($tb_kel, $tb_kel . '.id', '=', $tb_pinkel . '.id_kel')
                     ->join('desa', $tb_kel . '.desa', '=', 'desa.kd_desa')
                     ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
-                    ->withSum(['real' => function ($query) use ($data) {
+                    ->withSum(['real_i' => function ($query) use ($data) {
                         $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
                     }], 'realisasi_pokok')
-                    ->withSum(['real' => function ($query) use ($data) {
+                    ->withSum(['real_i' => function ($query) use ($data) {
                         $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
                     }], 'realisasi_jasa')
                     ->where($tb_pinkel . '.sistem_angsuran', '!=', '12')->where(function ($query) use ($data) {
@@ -1589,10 +1591,10 @@ class PelaporanController extends Controller
                     ->join($tb_kel, $tb_kel . '.id', '=', $tb_pinkel . '.id_kel')
                     ->join('desa', $tb_kel . '.desa', '=', 'desa.kd_desa')
                     ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
-                    ->withSum(['real' => function ($query) use ($data) {
+                    ->withSum(['real_i' => function ($query) use ($data) {
                         $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
                     }], 'realisasi_pokok')
-                    ->withSum(['real' => function ($query) use ($data) {
+                    ->withSum(['real_i' => function ($query) use ($data) {
                         $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
                     }], 'realisasi_jasa')
                     ->where($tb_pinkel . '.sistem_angsuran', '!=', '12')->where(function ($query) use ($data) {
@@ -1677,10 +1679,10 @@ class PelaporanController extends Controller
                     ->join($tb_kel, $tb_kel . '.id', '=', $tb_pinkel . '.id_kel')
                     ->join('desa', $tb_kel . '.desa', '=', 'desa.kd_desa')
                     ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
-                    ->withSum(['real' => function ($query) use ($data) {
+                    ->withSum(['real_i' => function ($query) use ($data) {
                         $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
                     }], 'realisasi_pokok')
-                    ->withSum(['real' => function ($query) use ($data) {
+                    ->withSum(['real_i' => function ($query) use ($data) {
                         $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
                     }], 'realisasi_jasa')
                     ->where($tb_pinkel . '.sistem_angsuran', '!=', '12')->where(function ($query) use ($data) {
@@ -2037,10 +2039,10 @@ class PelaporanController extends Controller
                     ->join('desa', $tb_kel . '.desa', '=', 'desa.kd_desa')
                     ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
                     ->withCount('pinjaman_anggota')
-                    ->withSum(['real' => function ($query) use ($data) {
+                    ->withSum(['real_i' => function ($query) use ($data) {
                         $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
                     }], 'realisasi_pokok')
-                    ->withSum(['real' => function ($query) use ($data) {
+                    ->withSum(['real_i' => function ($query) use ($data) {
                         $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
                     }], 'realisasi_jasa')
                     ->where($tb_pinkel . '.sistem_angsuran', '!=', '12')->where(function ($query) use ($data) {
@@ -2280,10 +2282,10 @@ class PelaporanController extends Controller
         ])->join($tb_kel, $tb_kel . '.id', '=', $tb_pinkel . '.id_kel')
             ->join('desa', $tb_kel . '.desa', '=', 'desa.kd_desa')
             ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
-            ->withSum(['real' => function ($query) use ($data) {
+            ->withSum(['real_i' => function ($query) use ($data) {
                 $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
             }], 'realisasi_pokok')
-            ->withSum(['real' => function ($query) use ($data) {
+            ->withSum(['real_i' => function ($query) use ($data) {
                 $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
             }], 'realisasi_jasa')
             ->where([
@@ -2574,6 +2576,75 @@ class PelaporanController extends Controller
         $view = view('pelaporan.view.ts', $data)->render();
         $pdf = PDF::loadHTML($view)->setPaper([0, 0, 595.28, 352], 'potrait');
         return $pdf->stream();
+    }
+
+    private function simpanan(array $data)
+    {
+        $thn = $data['tahun'];
+        $bln = $data['bulan'];
+        $hari = $data['hari'];
+
+        $tgl = $thn . '-' . $bln . '-' . $hari;
+        $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
+        $data['tgl'] = Tanggal::tahun($tgl);
+        if ($data['bulanan']) {
+            $data['sub_judul'] = 'Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+            $data['tgl'] = Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+        }
+
+        $data['tgl_lalu'] = $data['tahun'] . '-' . $data['bulan'] . '-01';
+
+        $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
+        $data['jenis_ps'] = JenisSimpanan::where(function ($query) use ($kec) {
+            $query->where('lokasi', '0')
+                ->orWhere(function ($query) use ($kec) {
+                    $query->where('kecuali', 'NOT LIKE', "%-{$kec['id']}-%")
+                        ->where('lokasi', 'LIKE', "%-{$kec['id']}-%");
+                });
+        })->with([
+            'simpanan' => function ($query) use ($data) {
+                $tb_simp = 'simpanan_anggota_' . $data['kec']->id;
+                $tb_angg = 'anggota_' . $data['kec']->id;
+                $data['tb_simp'] = $tb_simp;
+
+                $query->select($tb_simp . '.*', $tb_angg . '.namadepan', 'desa.nama_desa', 'desa.kd_desa', 'desa.kode_desa', 'sebutan_desa.sebutan_desa')
+                    ->join($tb_angg, $tb_angg . '.id', '=', $tb_simp . '.nia')
+                    ->join('desa', $tb_angg . '.desa', '=', 'desa.kd_desa')
+                    ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
+                    ->withSum(['real_i' => function ($query) use ($data) {
+                        $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
+                    }], 'realisasi_pokok')
+                    ->withSum(['real_i' => function ($query) use ($data) {
+                        $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
+                    }], 'realisasi_jasa')
+                    ->where(function ($query) use ($data) {
+                        $query->where([
+                            [$data['tb_simp'] . '.status', 'A'],
+                            [$data['tb_simp'] . '.tgl_buka', '<=', $data['tgl_kondisi']]
+                        ])->orwhere([
+                            [$data['tb_simp'] . '.status', 'L'],
+                            [$data['tb_simp'] . '.tgl_buka', '<=', $data['tgl_kondisi']],
+                            [$data['tb_simp'] . '.tgl_tutup', '>=', $data['tgl_kondisi']]
+                        ]);
+                    })
+                    ->orderBy($tb_angg . '.desa', 'ASC')
+                    ->orderBy($tb_simp . '.tgl_buka', 'ASC');
+            },
+        ])->get();
+
+        $data['lunas'] = Simpanan::where([
+            ['tgl_tutup', '<', $thn . '-01-01'],
+            ['status', 'L']
+        ])->get();
+
+        $view = view('pelaporan.view.simpanan', $data)->render();
+
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view)->setPaper('A4', 'landscape');
+            return $pdf->stream();
+        } else {
+            return $view;
+        }
     }
 
     public function invoice(AdminInvoice $invoice)

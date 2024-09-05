@@ -127,7 +127,8 @@
               "ViewState": "AgIAAE4AAAAAAAAAAAAhwGkAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
               "WhenOpened": "2024-06-03T03:41:34.399Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -140,7 +141,8 @@
               "ViewState": "AgIAACsAAAAAAAAAAAAhwD8AAABQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
               "WhenOpened": "2024-07-18T19:21:10.088Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -153,7 +155,21 @@
               "ViewState": "AgIAADwAAAAAAAAAAAAhwEMAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
               "WhenOpened": "2024-07-22T02:15:44.942Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "JenisSimpanan.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\JenisSimpanan.php",
+              "RelativeDocumentMoniker": "app\\Models\\JenisSimpanan.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\JenisSimpanan.php",
+              "RelativeToolTip": "app\\Models\\JenisSimpanan.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-09-03T01:55:24.036Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -182,18 +198,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "JenisSimpanan.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Models\\JenisSimpanan.php",
-              "RelativeDocumentMoniker": "app\\Models\\JenisSimpanan.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\app\\Models\\JenisSimpanan.php",
-              "RelativeToolTip": "app\\Models\\JenisSimpanan.php",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-09-03T01:55:24.036Z"
             },
             {
               "$type": "Document",
@@ -349,7 +353,8 @@
               "RelativeToolTip": "resources\\views\\simpanan\\partials\\simpanan.blade.php",
               "ViewState": "AgIAAAsAAAAAAAAAAAAAABEAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-08-08T01:45:29.898Z"
+              "WhenOpened": "2024-08-08T01:45:29.898Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -361,7 +366,8 @@
               "RelativeToolTip": "resources\\views\\simpanan\\index.blade.php",
               "ViewState": "AgIAACIAAAAAAAAAAAAAAAkAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-08-06T02:24:43.117Z"
+              "WhenOpened": "2024-08-06T02:24:43.117Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -397,7 +403,8 @@
               "RelativeToolTip": "app\\Models\\Transaksi.php",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADAAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-07-24T01:35:01.805Z"
+              "WhenOpened": "2024-07-24T01:35:01.805Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -445,7 +452,8 @@
               "RelativeToolTip": "resources\\views\\simpanan\\partials\\detail-transaksi.blade.php",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-07-22T02:15:17.179Z"
+              "WhenOpened": "2024-07-22T02:15:17.179Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -455,7 +463,7 @@
               "RelativeDocumentMoniker": "app\\Http\\Controllers\\PelaporanController.php",
               "ToolTip": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PelaporanController.php",
               "RelativeToolTip": "app\\Http\\Controllers\\PelaporanController.php",
-              "ViewState": "AgIAAIgEAAAAAAAAAAAAALkEAACWAAAAAAAAAA==",
+              "ViewState": "AgIAAP0JAAAAAAAAAAAAABUKAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
               "WhenOpened": "2024-07-22T03:27:58.903Z",
               "EditorCaption": ""
