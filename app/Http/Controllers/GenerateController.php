@@ -35,6 +35,7 @@ class GenerateController extends Controller
 
     public function individu()
     {
+        $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $database = env('DB_DATABASE', 'siupk_lkm');
         $table = 'pinjaman_anggota_' . Session::get('lokasi');
 
@@ -50,7 +51,7 @@ class GenerateController extends Controller
         }, $strukturTabel);
 
         return response()->json([
-            'view' => view('generate.partials.individu')->with(compact('struktur'))->render()
+            'view' => view('generate.partials.individu')->with(compact('struktur', 'kec'))->render()
         ]);
     }
 
