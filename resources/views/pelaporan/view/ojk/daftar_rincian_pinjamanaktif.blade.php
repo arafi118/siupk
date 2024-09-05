@@ -327,7 +327,7 @@
             <td colspan="2"class="t l b" align="right"></td>
         </tr>
             <tr class="style9">
-                <th colspan="8" class="left top" align="center"style="background:rgba(0,0,0, 0.3);">TOTAL ({{$jumlah_aktif}} Anggota)</th>
+                <th colspan="8" class="left top" align="center"style="background:rgba(0,0,0, 0.3);">TOTAL KESELURUHAN({{$jumlah_aktif}} Anggota)</th>
                 <th class="left top" align="right">{{number_format($t_alokasi)}}</th>
                 <th class="left top" align="right">{{number_format($t_saldo_pokok)}}</th>
                 <th colspan="2" class="left right top" align="right"></th>
