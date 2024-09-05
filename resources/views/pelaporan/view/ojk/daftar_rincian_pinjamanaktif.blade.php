@@ -88,8 +88,11 @@
         $nomor++;
 
         $jumlah_aktif = 0;
-        $j_alokasi = 0;
-        $j_saldo = 0;
+        $j_saldo_pokok =0;
+        $t_saldo_pokok = 0;
+        $t_alokasi = 0;
+
+
 
         $kd_desa = [];
     @endphp
@@ -152,31 +155,39 @@
         </tr>
 
         @php
-        $sumalokasi = 0;
-        $alokasi = 0;
+            $sumalokasi = 0;
+            $alokasi = 0;
+            $j_alokasi = 0;
+            $j_saldo = 0;
         @endphp
-        @foreach ($jpp->pinjaman_individu as $pinj_i)
-            @php
-                $j_alokasi += floatval((string) $pinj_i->alokasi);
-                $j_saldo += isset($pinj_i->saldo->saldo_pokok) ? floatval((string) $pinj_i->saldo->saldo_pokok) : 0;
-            @endphp
 
+        @foreach ($jpp->pinjaman_individu as $pinj_i)
             @php
                 $kd_desa[] = $pinj_i->kd_desa;
                 $desa = $pinj_i->kd_desa;
             @endphp
 
             @if (array_count_values($kd_desa)[$pinj_i->kd_desa] <= '1' ) 
-                @if ($section !=$desa && count($kd_desa)> 1)
-
-        
+                @if ($section != $desa && count($kd_desa)> 1)
+                    <tr style="font-weight: bold; border: 1px solid;">
+                        <td class="t l b" colspan="8" align="left" height="15">
+                            Jumlah {{ $nama_desa }}
+                        </td>
+                        <td class="t l b" align="right">{{number_format($j_alokasi)}}</td>
+                        <td class="t l b" align="right">{{number_format($j_saldo)}}</td>
+                        <td colspan="2"class="t l b" align="right"></td>
+                    </tr>
                 @endif
+
                 <tr>
                     <td class="t l b" align="center"></td>
-                    <td class="style27 left top right" colspan="11">{{$pinj_i->nama_desa}}</td>
+                    <td class="style27 left top right" colspan="11">
+                        {{ $pinj_i->kode_desa }}. {{$pinj_i->nama_desa}}
+                    </td>
                 </tr>
+
                 @php
-                    $kidp =$pinj_i['id'];
+                    $kidp = $pinj_i['id'];
 
                     $nomor = 1;
                     $section = $pinj_i->kd_desa;
@@ -187,11 +198,11 @@
                     $kpenambahan ="+".$pinj_i['jangka']." month";
                     $ktgl2 = date('Y-m-d', strtotime($kpenambahan, strtotime($ktgl1)));
                     $kpros_jasa =number_format($pinj_i['pros_jasa']/$pinj_i['jangka'],2);
-                    $saldopinjaman =date($tgl."-".$kidp);
+
+                    $j_alokasi = 0;
+                    $j_saldo = 0;
                 @endphp
             @endif
-
-
 
             @php
                 $jumlah_aktif += 1;
@@ -279,23 +290,7 @@
                 }else{
                     $keterangan="Macet" ; 
                 } 
-                
-                @endphp 
-                @if($saldopinjaman == 0)
-                    @php
-                        $jum_nunggak = 0;
-                    @endphp
-                @else
-                    @php
-                        $jum_nunggak = date($tgl_kondisi . "-" . $kidp);
-                    @endphp
-
-                @if($jum_nunggak <= 0)
-                        @php
-                            $jum_nunggak = 0;
-                        @endphp
-                @endif
-            @endif  
+            @endphp
 
             <tr align="right" height="15px" class="style9">
                 <td class="left top" align="center">{{ $nomor++ }}</td>
@@ -307,23 +302,34 @@
                 <td class="left top">{{$kpros_jasa}}%</td>
                 <td class="left top" align="center">per bulan</td>
                 <td class="left top">{{number_format($pinj_i->alokasi)}}</td>
-                @if ($pinj_i->saldo)
-                    <td class="left top">{{number_format($pinj_i->saldo->saldo_pokok)}}</td>
-                @else
-                    <td class="left top">0</td>
-                @endif
+                <td class="left top">{{ number_format($saldo_pokok) }}</td>
                 <td class="left top">{{$kolek}}</td>
                 <td class="left top right" align="left">{{$keterangan}}</td>
             </tr>
-        
-        @endforeach
 
+            @php
+                $j_alokasi += $pinj_i->alokasi;
+                $j_saldo += $saldo_pokok;
+            @endphp
+              @php
+              $t_alokasi += $j_alokasi;
+              $t_saldo_pokok += $j_saldo;
+  
+          @endphp
+        @endforeach
         @if (count($kd_desa) > 0)
-    
+        <tr style="font-weight: bold; border: 1px solid;">
+            <td class="t l b" colspan="8" align="left" height="15">
+                Jumlah {{ $nama_desa }}
+            </td>
+            <td class="t l b" align="right">{{number_format($j_alokasi)}}</td>
+            <td class="t l b" align="right">{{number_format($j_saldo)}}</td>
+            <td colspan="2"class="t l b" align="right"></td>
+        </tr>
             <tr class="style9">
-                <th colspan="8" class="left top" align="center"style="background:rgba(0,0,0, 0.3);">TOTAL ({{$jumlah_aktif}} Anggota)</th>
-                <th class="left top" align="right">{{number_format($j_alokasi)}}</th>
-                <th class="left top" align="right">{{number_format($j_saldo)}}</th>
+                <th colspan="8" class="left top" align="center"style="background:rgba(0,0,0, 0.3);">TOTAL KESELURUHAN({{$jumlah_aktif}} Anggota)</th>
+                <th class="left top" align="right">{{number_format($t_alokasi)}}</th>
+                <th class="left top" align="right">{{number_format($t_saldo_pokok)}}</th>
                 <th colspan="2" class="left right top" align="right"></th>
                 </tr>
             <tr class="style9">
@@ -337,6 +343,15 @@
                     {{ $tahun - 1 }}.</td>
             </tr>
         @endif
+    </table>
+    <table class="p" border="0" align="center" width="96%" cellspacing="0" cellpadding="0"
+    style="font-size: 12px;"> 
+        <tr>
+            <td colspan="14">
+                <div style="margin-top: 14px;"></div>
+                {!! json_decode(str_replace('{tanggal}', $tanggal_kondisi, $kec->ttd->tanda_tangan_pelaporan), true) !!}
+            </td>
+        </tr>
     </table>
 @endforeach
 
