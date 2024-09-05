@@ -344,8 +344,8 @@
             </tr>
         @endif
     </table>
-    <table class="p" border="1" width="80%" cellspacing="0" cellpadding="0"
-    style="font-size: 12px;">
+    <table class="p" border="0" align="center" width="80%" cellspacing="0" cellpadding="0"
+    style="font-size: 12px;"> 
         <tr>
             <td colspan="14">
                 <div style="margin-top: 14px;"></div>
