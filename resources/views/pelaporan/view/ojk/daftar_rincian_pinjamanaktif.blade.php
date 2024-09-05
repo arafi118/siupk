@@ -163,6 +163,11 @@
 
         @foreach ($jpp->pinjaman_individu as $pinj_i)
             @php
+                $j_alokasi += floatval((string) $pinj_i->alokasi);
+                $j_saldo += isset($pinj_i->saldo->saldo_pokok) ? floatval((string) $pinj_i->saldo->saldo_pokok) : 0;
+            @endphp
+
+            @php
                 $kd_desa[] = $pinj_i->kd_desa;
                 $desa = $pinj_i->kd_desa;
             @endphp
@@ -302,7 +307,11 @@
                 <td class="left top">{{$kpros_jasa}}%</td>
                 <td class="left top" align="center">per bulan</td>
                 <td class="left top">{{number_format($pinj_i->alokasi)}}</td>
-                <td class="left top">{{ number_format($saldo_pokok) }}</td>
+                @if ($pinj_i->saldo)
+                    <td class="left top">{{number_format($pinj_i->saldo->saldo_pokok)}}</td>
+                @else
+                    <td class="left top">0</td>
+                @endif
                 <td class="left top">{{$kolek}}</td>
                 <td class="left top right" align="left">{{$keterangan}}</td>
             </tr>
