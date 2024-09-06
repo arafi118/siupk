@@ -45,6 +45,11 @@ class PinjamanAnggota extends Model
         return $this->hasOne(RencanaAngsuranI::class, 'loan_id')->orderBy('jatuh_tempo', 'DESC');
     }
 
+    public function jasa()
+    {
+        return $this->belongsTo(JenisJasa::class, 'jenis_jasa');
+    }
+
     public function kelompok()
     {
         return $this->belongsTo(Kelompok::class, 'id_kel');

@@ -54,9 +54,6 @@
 .custom-button:hover {
     background-color: #495057; /* Warna latar belakang saat dihover */
 }
-
-
-
 </style>
 
                     <div class="card-body">

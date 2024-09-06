@@ -1,21 +1,17 @@
 @php
     use App\Utils\Tanggal;
     $section = 0;
+    $nomor_jenis_pp =0;
 @endphp
 
 @extends('pelaporan.layout.base')
 
 @section('content')
-@php
-        $nomor = 0;
-    @endphp
     @foreach ($jenis_pp as $jpp)
         @php
             if ($jpp->pinjaman_anggota->isEmpty()) {
-                break;
+                continue;
             }
-            $nomor++;
-
         @endphp
 
         @php
@@ -28,13 +24,10 @@
             $t_kolek1 = 0;
             $t_kolek2 = 0;
             $t_kolek3 = 0;
-            $t_kolek4 = 0;
-            $t_kolek5 = 0;
-
         @endphp
-        @if ($nomor > 1)
-        <div class="break"></div>
-    @endif
+        @if ($jpp->$nomor_jenis_pp != 0)
+            <div class="break"></div>
+        @endif
         <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
             <tr>
                 <td colspan="3" align="center">
@@ -69,8 +62,6 @@
                         $t_kolek1 += $j_kolek1;
                         $t_kolek2 += $j_kolek2;
                         $t_kolek3 += $j_kolek3;
-                        $t_kolek4 += $j_kolek4;
-                        $t_kolek5 += $j_kolek5;
                     @endphp
                 @endif
 
@@ -82,8 +73,6 @@
                     $j_kolek1 = 0;
                     $j_kolek2 = 0;
                     $j_kolek3 = 0;
-                    $j_kolek4 = 0;
-                    $j_kolek5 = 0;
                     $section = $pinkel->kd_desa;
                     $nama_desa = $pinkel->sebutan_desa . ' ' . $pinkel->nama_desa;
                 @endphp
@@ -142,52 +131,34 @@
                     $saldo_jasa = 0;
                 }
 
-                $tgl_cair = explode('-', $pinkel->tgl_cair);
-                $th_cair = $tgl_cair[0];
-                $bl_cair = $tgl_cair[1];
-                $tg_cair = $tgl_cair[2];
+                $tgl_akhir = new DateTime($tgl_kondisi);
+                $tgl_awal = new DateTime($pinkel->tgl_cair);
+                $selisih = $tgl_akhir->diff($tgl_awal);
 
-                $selisih_tahun = ($tahun - $th_cair) * 12;
-                $selisih_bulan = $bulan - $bl_cair;
-
-                $selisih = $selisih_bulan + $selisih_tahun;
+                // if ($lpp == 'Minggu') {
+                //     $selisih_hari = $selisih->days;
+                //     $selisih = floor($selisih_hari / 7);
+                // } else {
+                // }
+                $selisih = $selisih->y * 12 + $selisih->m;
 
                 $_kolek = 0;
                 if ($wajib_pokok != '0') {
-                        $_kolek = $tunggakan_pokok / $wajib_pokok;
-                    }
-                    $kolek = ceil($_kolek + ($selisih - $angsuran_ke));
-                    
-                    if ($kolek <= 0) {
+                    $_kolek = $tunggakan_pokok / $wajib_pokok;
+                }
+                $kolek = round($_kolek + ($selisih - $angsuran_ke));
+                if ($kolek <= 3) {
                     $kolek1 = $saldo_pokok;
                     $kolek2 = 0;
                     $kolek3 = 0;
-                    $kolek4 = 0;
-                    $kolek5 = 0;
-                } elseif ($kolek > 0 && $kolek <= 2) {
+                } elseif ($kolek <= 5) {
                     $kolek1 = 0;
                     $kolek2 = $saldo_pokok;
                     $kolek3 = 0;
-                    $kolek4 = 0;
-                    $kolek5 = 0;
-                } elseif ($kolek > 2 && $kolek <= 4) {
+                } else {
                     $kolek1 = 0;
                     $kolek2 = 0;
                     $kolek3 = $saldo_pokok;
-                    $kolek4 = 0;
-                    $kolek5 = 0;
-                } elseif ($kolek > 4 && $kolek <= 6) {
-                    $kolek1 = 0;
-                    $kolek2 = 0;
-                    $kolek3 = 0;
-                    $kolek4 = $saldo_pokok;
-                    $kolek5 = 0;
-                } elseif ($kolek > 6) {
-                    $kolek1 = 0;
-                    $kolek2 = 0;
-                    $kolek3 = 0;
-                    $kolek4 = 0;
-                    $kolek5 = $saldo_pokok;
                 }
 
                 $j_alokasi += $pinkel->alokasi;
@@ -197,8 +168,6 @@
                 $j_kolek1 += $kolek1;
                 $j_kolek2 += $kolek2;
                 $j_kolek3 += $kolek3;
-                $j_kolek4 += $kolek4;
-                $j_kolek5 += $kolek5;
             @endphp
         @endforeach
 
@@ -212,8 +181,6 @@
                 $t_kolek1 += $j_kolek1;
                 $t_kolek2 += $j_kolek2;
                 $t_kolek3 += $j_kolek3;
-                $t_kolek4 += $j_kolek4;
-                $t_kolek5 += $j_kolek5;
 
                 $t_pros = 0;
                 if ($t_saldo) {
@@ -240,51 +207,40 @@
                 </tr>
                 <tr>
                     <td align="center">1</td>
-                    <td>Kolek I</td>
-                    <td align="center">1%</td>
+                    <td>Lancar</td>
+                    <td align="center">0%</td>
                     <td align="right">{{ number_format($t_kolek1) }}</td>
-                    <td align="right">{{ number_format(($t_kolek1 * 1) / 100) }}</td>
-                    <td align="center" rowspan="7">
-                        {{ round($t_kolek1 + $t_kolek2 + $t_kolek3 + $t_kolek4 + $t_kolek5> 0 ? (($t_kolek2 + $t_kolek3) / ($t_kolek1 + $t_kolek2 + $t_kolek3 + $t_kolek4 + $t_kolek5)) * 100 : 0, 2) }}%
+                    <td align="right">{{ number_format(($t_kolek1 * 0) / 100) }}</td>
+                    <td align="center" rowspan="4">
+                        {{ round($t_kolek1 + $t_kolek2 + $t_kolek3 > 0 ? (($t_kolek2 + $t_kolek3) / ($t_kolek1 + $t_kolek2 + $t_kolek3)) * 100 : 0, 2) }}%
                     </td>
                 </tr>
                 <tr>
                     <td align="center">2</td>
-                    <td>Kolek II</td>
-                    <td align="center">10%</td>
-                    <td align="right">{{ number_format($t_kolek2) }}</td>
-                    <td align="right">{{ number_format(($t_kolek2 * 10) / 100) }}</td>
-                </tr>
-                <tr>
-                    <td align="center">3</td>
-                    <td>Kolek III</td>
-                    <td align="center">25%</td>
-                    <td align="right">{{ number_format($t_kolek3) }}</td>
-                    <td align="right">{{ number_format(($t_kolek3 * 25) / 100) }}</td>
-                </tr>
-                <tr>
-                    <td align="center">4</td>
-                    <td>Kolek IV</td>
+                    <td>Diragukan</td>
                     <td align="center">50%</td>
-                    <td align="right">{{ number_format($t_kolek4) }}</td>
+                    <td align="right">{{ number_format($t_kolek2) }}</td>
                     <td align="right">{{ number_format(($t_kolek2 * 50) / 100) }}</td>
                 </tr>
                 <tr>
-                    <td align="center">5</td>
-                    <td>Kolek V</td>
+                    <td align="center">3</td>
+                    <td>Macet</td>
                     <td align="center">100%</td>
-                    <td align="right">{{ number_format($t_kolek5) }}</td>
-                    <td align="right">{{ number_format(($t_kolek5 * 100) / 100) }}</td>
+                    <td align="right">{{ number_format($t_kolek3) }}</td>
+                    <td align="right">{{ number_format(($t_kolek3 * 100) / 100) }}</td>
                 </tr>
                 <tr>
                     <th colspan="3" height="15">Total</th>
-                    <th>{{ number_format($t_kolek1 + $t_kolek2 + $t_kolek3 + $t_kolek4 + $t_kolek5) }}</th>
-                    <th>{{ number_format(($t_kolek1 * 1) / 100 + ($t_kolek2 * 10) / 100 + ($t_kolek3 * 25) / 100 + ($t_kolek4 * 50) / 100 + ($t_kolek5 * 100) / 100 ) }}</th>
+                    <th>{{ number_format($t_kolek1 + $t_kolek2 + $t_kolek3) }}</th>
+                    <th>{{ number_format(($t_kolek1 * 0) / 100 + ($t_kolek2 * 50) / 100 + ($t_kolek3 * 100) / 100) }}</th>
                 </tr>
             </table>
 
             <div style="margin-top: 16px;"></div>
             {!! json_decode(str_replace('{tanggal}', $tanggal_kondisi, $kec->ttd->tanda_tangan_pelaporan), true) !!}
         @endif
+        @php
+            $nomor_jenis_pp++;
+        @endphp
     @endforeach
 @endsection

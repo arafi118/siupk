@@ -25,7 +25,6 @@
                                 <input type="file" name="logo" id="logo" class="d-none">
                             </form>
                         </div>
-    
                         <div class="col-md-10 mb-3">
                             <div class="h-30">
                                 <h5 class="mb-1 font-weight-bolder nama_user">
@@ -37,7 +36,6 @@
                             </div>
                         </div>
                         <div class="col-sm-auto ms-sm-auto mt-sm-0 mt-3 d-flex">
-    
                         </div>
                     </div>
                 </div>
