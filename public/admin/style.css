@@ -59,11 +59,11 @@ body {
     background: none;
     border: none;
     outline: none;
-    color: rgb(239, 15, 15);
+    color: rgb(255, 0, 0);
     font-size: 14px;
   }
   .box-login input::placeholder {
-    color: rgb(38, 38, 38);
+    color: rgba(38, 38, 38, 0.694);
   }
   .btn-login
   .box-login input:hover{
