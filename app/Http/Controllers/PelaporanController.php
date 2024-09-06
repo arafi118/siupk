@@ -401,24 +401,51 @@ class PelaporanController extends Controller
             $data['header_sekarang'] = 'Tahun Ini';
         }
 
-        $jenis = 'Tahunan';
-        if ($data['bulanan']) {
-            $jenis = 'Bulanan';
-        }
+        $data['rekening_ojk'] = RekeningOjk::where([
+            ['parent_id', '0'],
+            ['id', '>=', '78']
+        ])->with([
+            'child',
+            'child.akun3.rek.kom_saldo' => function ($query) use ($data) {
+                $query->where('tahun', $data['tahun'])->where(function ($query) use ($data) {
+                    $query->where('bulan', '0')->orwhere('bulan', $data['bulan'])->orwhere('bulan', ($data['bulan'] - 1));
+                });
+            },
+            'child.rek.kom_saldo' => function ($query) use ($data) {
+                $query->where('tahun', $data['tahun'])->where(function ($query) use ($data) {
+                    $query->where('bulan', '0')->orwhere('bulan', $data['bulan'])->orwhere('bulan', ($data['bulan'] - 1));
+                });
+            },
+            'child.child' => function ($query) {
+                $query->where('parent_id', '!=', '0');
+            },
+            'child.child.rek.kom_saldo' => function ($query) use ($data) {
+                $query->where('tahun', $data['tahun'])->where(function ($query) use ($data) {
+                    $query->where('bulan', '0')->orwhere('bulan', $data['bulan'])->orwhere('bulan', ($data['bulan'] - 1));
+                });
+            },
+            'child.child.akun3.rek.kom_saldo' => function ($query) use ($data) {
+                $query->where('tahun', $data['tahun'])->where(function ($query) use ($data) {
+                    $query->where('bulan', '0')->orwhere('bulan', $data['bulan'])->orwhere('bulan', ($data['bulan'] - 1));
+                });
+            },
+        ])->get();
 
-        $pph = $keuangan->pph($data['tgl_kondisi'], $jenis);
-        $laba_rugi = $keuangan->laporan_laba_rugi($data['tgl_kondisi'], $jenis, true);
+        // foreach ($rekening_ojk as $ojk) {
+        //     if ($ojk->child) {
+        //         foreach ($ojk->child as $child) {
+        //             if (strlen($child->rekening) >= 7) {
+        //                 dd($ojk);
+        //             } else {
+        //                 foreach ($child->child as $sub_child) {
+        //                     dd($ojk);
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
-        $data['pph'] = [
-            'bulan_lalu' => $pph['bulan_lalu'],
-            'sekarang' => $pph['bulan_ini']
-        ];
-
-        $data['pendapatan'] = $laba_rugi['pendapatan'];
-        $data['beban'] = $laba_rugi['beban'];
-        $data['pendapatanNOP'] = $laba_rugi['pendapatan_non_ops'];
-        $data['bebanNOP'] = $laba_rugi['beban_non_ops'];
-
+        $data['keuangan'] = $keuangan;
         $data['laporan'] = 'Laba Rugi';
         $view = view('pelaporan.view.ojk.labarugi', $data)->render();
 
@@ -798,7 +825,7 @@ class PelaporanController extends Controller
             return $view;
         }
     }
- 
+
     private function pcpp(array $data)
     {
         $thn = $data['tahun'];

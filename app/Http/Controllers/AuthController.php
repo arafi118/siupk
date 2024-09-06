@@ -11,49 +11,50 @@ use App\Models\User;
 use App\Utils\Keuangan;
 use App\Utils\Tanggal;
 use Auth;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Session;
 
 class AuthController extends Controller
 {
-public function index()
-{
-    $keuangan = new Keuangan;
+    public function index()
+    {
+        $keuangan = new Keuangan;
 
-    if ($keuangan->startWith(request()->getHost(), 'master.sidbm')) {
-        return redirect('/master');
-    }
-
-    // Handle URL lokal
- if (request()->server('SERVER_NAME') === '127.0.0.1' || request()->server('SERVER_NAME') === 'localhost') {
-        $kec = Kecamatan::where('id', '1')
-                           ->with('kabupaten')
-                           ->first();
-    } else {
-        $kec = Kecamatan::where('web_kec', explode('//', request()->url(''))[1])
-            ->orWhere('web_alternatif', explode('//', request()->url(''))[1])
-            ->first();
-    }
-
-    if (!$kec) {
-        $kab = Kabupaten::where('web_kab', explode('//', request()->url(''))[1])
-            ->orWhere('web_kab_alternatif', explode('//', request()->url(''))[1])
-            ->first();
-        if (!$kab) {
-            abort(404);
+        if ($keuangan->startWith(request()->getHost(), 'master.sidbm')) {
+            return redirect('/master');
         }
 
-        return redirect('/kab');
-    }
+        // Handle URL lokal
+        if (request()->server('SERVER_NAME') === '127.0.0.1' || request()->server('SERVER_NAME') === 'localhost') {
+            $kec = Kecamatan::where('id', '1')
+                ->with('kabupaten')
+                ->first();
+        } else {
+            $kec = Kecamatan::where('web_kec', explode('//', request()->url(''))[1])
+                ->orWhere('web_alternatif', explode('//', request()->url(''))[1])
+                ->first();
+        }
 
-    $logo = '/assets/img/icon/favicon.png';
-    if ($kec->logo) {
-        $logo = '/storage/logo/' . $kec->logo;
-    }
+        if (!$kec) {
+            $kab = Kabupaten::where('web_kab', explode('//', request()->url(''))[1])
+                ->orWhere('web_kab_alternatif', explode('//', request()->url(''))[1])
+                ->first();
+            if (!$kab) {
+                abort(404);
+            }
 
-    return view('auth.login')->with(compact('kec', 'logo'));
-}
+            return redirect('/kab');
+        }
+
+        $logo = '/assets/img/icon/favicon.png';
+        if ($kec->logo) {
+            $logo = '/storage/logo/' . $kec->logo;
+        }
+
+        return view('auth.login')->with(compact('kec', 'logo'));
+    }
 
     public function login(Request $request)
     {
@@ -71,16 +72,16 @@ public function index()
             ]);
         }
 
- if (request()->server('SERVER_NAME') === '127.0.0.1' || request()->server('SERVER_NAME') === 'localhost') {
-    $kec = Kecamatan::where('id', '1')
-                   ->with('kabupaten')
-                   ->first();
-} else {
-    $kec = Kecamatan::where('web_kec', $url)
-                   ->orWhere('web_alternatif', $url)
-                   ->with('kabupaten')
-                   ->first();
-}
+        if (request()->server('SERVER_NAME') === '127.0.0.1' || request()->server('SERVER_NAME') === 'localhost') {
+            $kec = Kecamatan::where('id', '1')
+                ->with('kabupaten')
+                ->first();
+        } else {
+            $kec = Kecamatan::where('web_kec', $url)
+                ->orWhere('web_alternatif', $url)
+                ->with('kabupaten')
+                ->first();
+        }
 
         $lokasi = $kec->id;
 
@@ -155,11 +156,11 @@ public function index()
 
         if (request()->server('SERVER_NAME') === '127.0.0.1' || request()->server('SERVER_NAME') === 'localhost') {
             $kec = Kecamatan::where('id', '1')
-                           ->first();
+                ->first();
         } else {
             $kec = Kecamatan::where('web_kec', $url)
-                           ->orWhere('web_alternatif', $url)
-                           ->first();
+                ->orWhere('web_alternatif', $url)
+                ->first();
         }
 
         $lokasi = $kec->id;
@@ -286,5 +287,72 @@ public function index()
         }
 
         return $return;
+    }
+
+    public function app()
+    {
+        $no = 1;
+        $rekening = [];
+        $rekening_ojk = DB::table('rekening_ojk_php')->where('sub', '0')->get();
+        foreach ($rekening_ojk as $ojk) {
+            $rekening[$no] = [
+                'id' => $no,
+                'nama_akun' => $ojk->nama_akun,
+                'kode' => $ojk->kode,
+                'rekening' => '',
+                'parent_id' => 0
+            ];
+
+            $parent_id = $no;
+            $kode_rek = explode('#', $ojk->rekening);
+            foreach ($kode_rek as $rek) {
+                if ($rek != '0') {
+                    $no++;
+
+                    $rekening[$no] = [
+                        'id' => $no,
+                        'nama_akun' => '',
+                        'kode' => '',
+                        'rekening' => $rek,
+                        'parent_id' => $parent_id
+                    ];
+                }
+            }
+
+            $rekening_child = [];
+            $child = DB::table('rekening_ojk_php')->where('sub', $ojk->id)->get();
+            foreach ($child as $ch) {
+
+                $no++;
+                $rekening[$no] = [
+                    'id' => $no,
+                    'nama_akun' => $ch->nama_akun,
+                    'kode' => $ch->kode,
+                    'rekening' => 0,
+                    'parent_id' => $parent_id
+                ];
+
+                $child_parent_id = $no;
+                $kode_rek = explode('#', $ch->rekening);
+                foreach ($kode_rek as $rek) {
+                    if ($rek != '0') {
+                        $no++;
+
+                        $rekening[$no] = [
+                            'id' => $no,
+                            'nama_akun' => '',
+                            'kode' => '',
+                            'rekening' => $rek,
+                            'parent_id' => $child_parent_id
+                        ];
+                    }
+                }
+            }
+
+            $no++;
+        }
+
+        // DB::table('rekening_ojk_test')->insert($rekening);
+        dd($rekening);
     }
 }
