@@ -3,6 +3,7 @@
 @section('content')
     @php
         $data_total = [];
+        $data_rek_beban_ops = [];
     @endphp
 
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
@@ -43,6 +44,7 @@
                     $saldo_sd_bulan_ini = 0;
                 @endphp
 
+                {{-- NON OPERASIONAL --}}
                 @foreach ($rek_ojk->child as $rek_child)
                     @php
                         if (strlen($rek_child->kode) != '0') {
@@ -59,6 +61,8 @@
                                 $bulan_lalu += $data_saldo['bulan_lalu'];
                                 $bulan_ini += $data_saldo['sd_bulan_ini'] - $data_saldo['bulan_lalu'];
                                 $sd_bulan_ini += $data_saldo['sd_bulan_ini'];
+
+                                $data_rek_beban_ops[] = $rek->kode_akun;
                             }
                         } else {
                             foreach ($rek_child->akun3 as $akun3) {
@@ -68,6 +72,8 @@
                                     $bulan_lalu += $data_saldo['bulan_lalu'];
                                     $bulan_ini += $data_saldo['sd_bulan_ini'] - $data_saldo['bulan_lalu'];
                                     $sd_bulan_ini += $data_saldo['sd_bulan_ini'];
+
+                                    $data_rek_beban_ops[] = $rek->kode_akun;
                                 }
                             }
                         }
@@ -128,6 +134,8 @@
                 @php
                     $point_number = 1;
                 @endphp
+
+                {{-- OPERASIONAL --}}
                 @foreach ($rek_ojk->child as $rek_child)
                     @php
                         if (strlen($rek_child->kode) < 1) {
@@ -138,23 +146,35 @@
                         $bulan_ini = 0;
                         $sd_bulan_ini = 0;
 
-                        foreach ($rek_child->child as $child) {
-                            if (substr($child->rekening, -2) != '00') {
-                                foreach ($child->rek as $rek) {
-                                    $data_saldo = $keuangan->komSaldoLR($rek, $tgl_kondisi);
+                        if ($rek_child->kode == '550') {
+                            $data_saldo = $keuangan->komBebanOps('5.1.%', $tgl_kondisi, $data_rek_beban_ops);
 
-                                    $bulan_lalu += $data_saldo['bulan_lalu'];
-                                    $bulan_ini += $data_saldo['sd_bulan_ini'] - $data_saldo['bulan_lalu'];
-                                    $sd_bulan_ini += $data_saldo['sd_bulan_ini'];
-                                }
-                            } else {
-                                foreach ($child->akun3 as $akun3) {
-                                    foreach ($akun3->rek as $rek) {
+                            $bulan_lalu = $data_saldo['bulan_lalu'];
+                            $bulan_ini = $data_saldo['sd_bulan_ini'] - $data_saldo['bulan_lalu'];
+                            $sd_bulan_ini = $data_saldo['sd_bulan_ini'];
+                        } else {
+                            foreach ($rek_child->child as $child) {
+                                if (substr($child->rekening, -2) != '00') {
+                                    foreach ($child->rek as $rek) {
                                         $data_saldo = $keuangan->komSaldoLR($rek, $tgl_kondisi);
 
                                         $bulan_lalu += $data_saldo['bulan_lalu'];
                                         $bulan_ini += $data_saldo['sd_bulan_ini'] - $data_saldo['bulan_lalu'];
                                         $sd_bulan_ini += $data_saldo['sd_bulan_ini'];
+
+                                        $data_rek_beban_ops[] = $rek->kode_akun;
+                                    }
+                                } else {
+                                    foreach ($child->akun3 as $akun3) {
+                                        foreach ($akun3->rek as $rek) {
+                                            $data_saldo = $keuangan->komSaldoLR($rek, $tgl_kondisi);
+
+                                            $bulan_lalu += $data_saldo['bulan_lalu'];
+                                            $bulan_ini += $data_saldo['sd_bulan_ini'] - $data_saldo['bulan_lalu'];
+                                            $sd_bulan_ini += $data_saldo['sd_bulan_ini'];
+
+                                            $data_rek_beban_ops[] = $rek->kode_akun;
+                                        }
                                     }
                                 }
                             }

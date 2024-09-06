@@ -261,6 +261,39 @@ class Keuangan
         ];
     }
 
+    public function komBebanOps($kode_akun, $tanggal, $rek)
+    {
+        $tgl = explode('-', $tanggal);
+        $data['tahun'] = $tgl[0];
+        $data['bulan'] = $tgl[1];
+        $data['hari'] = $tgl[2];
+
+        $rekening = Rekening::where('kode_akun', 'LIKE', $kode_akun)->whereNotIn('kode_akun', $rek)->with([
+            'kom_saldo' => function ($query) use ($data) {
+                $query->where('tahun', $data['tahun'])->where(function ($query) use ($data) {
+                    $query->where('bulan', '0')->orwhere('bulan', $data['bulan'])->orwhere('bulan', ($data['bulan'] - 1));
+                });
+            }
+        ])->get();
+
+        $bulan_lalu = 0;
+        $bulan_ini = 0;
+        $sd_bulan_ini = 0;
+        foreach ($rekening as $rek) {
+            $data_saldo = $this->komSaldoLR($rek, $tanggal);
+
+            $bulan_lalu += $data_saldo['bulan_lalu'];
+            $bulan_ini += $data_saldo['sd_bulan_ini'] - $data_saldo['bulan_lalu'];
+            $sd_bulan_ini += $data_saldo['sd_bulan_ini'];
+        }
+
+        return [
+            'bulan_lalu' => $bulan_lalu,
+            'bulan_ini' => $bulan_ini,
+            'sd_bulan_ini' => $sd_bulan_ini
+        ];
+    }
+
     public function saldoKas($tgl_kondisi)
     {
         $tanggal = explode('-', $tgl_kondisi);
