@@ -40,16 +40,69 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/master', [AdminAuthController::class, 'index'])->middleware('guest');
+Route::post('/master/login', [AdminAuthController::class, 'login'])->middleware('guest');
+Route::group(['prefix' => 'master', 'as' => 'master.', 'middleware' => 'master'], function () {
+    Route::get('/dashboard', [AdminController::class, 'index']);
+    Route::get('/simpan_saldo', [DashboardController::class, 'simpanSaldo']);
+
+    Route::get('/kecamatan/{kd_prov}/{kd_kab}/{kd_kec}', [KecamatanController::class, 'index']);
+
+    Route::get('/kabupaten/{kd_prov}/{kd_kab}/', [AdminKabupatenController::class, 'index']);
+    Route::get('/kabupaten/laporan/sub_laporan/{laporan}/', [AdminKabupatenController::class, 'subLaporan']);
+    Route::get('/kabupaten/laporan/data/{lokasi}/', [AdminKabupatenController::class, 'data']);
+    Route::post('/kabupaten/laporan/preview/{kd_kab}', [AdminKabupatenController::class, 'preview']);
+
+    Route::resource('/users', AdminUserController::class);
+
+    Route::get('/laporan', [AdminController::class, 'laporan']);
+
+    Route::get('/buat_invoice', [InvoiceController::class, 'index']);
+    Route::get('/nomor_invoice', [InvoiceController::class, 'InvoiceNo']);
+    Route::get('/jumlah_tagihan', [InvoiceController::class, 'Tagihan']);
+
+    Route::get('/unpaid', [InvoiceController::class, 'Unpaid']);
+    Route::get('/{invoice}/unpaid', [InvoiceController::class, 'DetailUnpaid']);
+
+    Route::get('/paid', [InvoiceController::class, 'Paid']);
+    Route::get('/{invoice}/paid', [InvoiceController::class, 'DetailPaid']);
+
+    Route::post('/buat_invoice', [InvoiceController::class, 'store']);
+    Route::put('/{invoice}/simpan', [InvoiceController::class, 'simpan']);
+
+    Route::resource('/menu', MenuController::class);
+
+    Route::get('/migrasi_upk/server/{server}', [UpkController::class, 'Server']);
+    Route::get('/migrasi_upk/{id}/rekening', [UpkController::class, 'Rekening']);
+    Route::get('/migrasi_upk/{id}/rekening/insert', [UpkController::class, 'InsertRekening']);
+    Route::get('/migrasi_upk/{id}/transaksi', [UpkController::class, 'Transaksi']);
+    Route::get('/migrasi_upk/{id}/desa', [UpkController::class, 'Desa']);
+
+    Route::resource('/migrasi_upk', UpkController::class);
+
+    Route::post('/logout', [AdminAuthController::class, 'logout']);
+});
+
+
 Route::get('/kab', [KabupatenAuthController::class, 'index'])->middleware('guest');
 Route::post('/kab/login', [KabupatenAuthController::class, 'login'])->middleware('guest');
 
 Route::group(['prefix' => 'kab', 'as' => 'kab.', 'middleware' => 'kab'], function () {
     Route::get('/dashboard', [KabupatenController::class, 'index']);
+    Route::get('/tanda_tangan', [KabupatenController::class, 'tandaTangan']);
+    Route::post('/tanda_tangan/simpan', [KabupatenController::class, 'simpanTandaTangan']);
+
     Route::get('/simpan_saldo', [DashboardController::class, 'simpanSaldo']);
     Route::get('/kecamatan/{kd_kec}', [KabupatenController::class, 'kecamatan']);
 
+    Route::get('/laporan', [LaporanController::class, 'index']);
+    Route::get('/laporan/sub_laporan/{laporan}/', [LaporanController::class, 'subLaporan']);
+    Route::get('/laporan/data/{lokasi}/', [LaporanController::class, 'data']);
+    Route::post('/laporan/preview/{kd_kab}', [LaporanController::class, 'preview']);
+
     Route::post('/logout', [KabupatenAuthController::class, 'logout']);
 });
+
 
 Route::get('/', [AuthController::class, 'index'])->middleware('guest')->name('/');
 Route::post('/login', [AuthController::class, 'login'])->middleware('guest');
