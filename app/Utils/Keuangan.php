@@ -210,6 +210,57 @@ class Keuangan
         return $saldo;
     }
 
+    public function komSaldoLR($rek, $tanggal)
+    {
+        $tgl = explode('-', $tanggal);
+        $tahun = $tgl[0];
+        $bulan = $tgl[1];
+        $hari = $tgl[2];
+
+        $awal_debit = 0;
+        $awal_kredit = 0;
+
+        $bulan_lalu_debit = 0;
+        $bulan_lalu_kredit = 0;
+
+        $sd_bulan_ini_debit = 0;
+        $sd_bulan_ini_kredit = 0;
+
+        foreach ($rek->kom_saldo as $kom_saldo) {
+            if ($kom_saldo->bulan == 0) {
+                $awal_debit += floatval($kom_saldo->debit);
+                $awal_kredit += floatval($kom_saldo->kredit);
+            }
+
+            if ($kom_saldo->bulan > 0 && $kom_saldo->bulan < $bulan && $kom_saldo->tahun == $tahun) {
+                $bulan_lalu_debit += floatval($kom_saldo->debit);
+                $bulan_lalu_kredit += floatval($kom_saldo->kredit);
+            }
+
+            if ($kom_saldo->bulan > 0 && $kom_saldo->bulan == $bulan && $kom_saldo->tahun == $tahun) {
+                $sd_bulan_ini_debit += floatval($kom_saldo->debit);
+                $sd_bulan_ini_kredit += floatval($kom_saldo->kredit);
+            }
+        }
+
+        if ($rek->lev1 == 1 || $rek->lev1 == '5') {
+            $saldo_awal = $awal_debit - $awal_kredit;
+
+            $bulan_lalu = $saldo_awal + ($bulan_lalu_debit - $bulan_lalu_kredit);
+            $sd_bulan_ini = $saldo_awal + ($sd_bulan_ini_debit - $sd_bulan_ini_kredit);
+        } else {
+            $saldo_awal = $awal_kredit - $awal_debit;
+
+            $bulan_lalu = $saldo_awal + ($bulan_lalu_kredit - $bulan_lalu_debit);
+            $sd_bulan_ini = $saldo_awal + ($sd_bulan_ini_kredit - $sd_bulan_ini_debit);
+        }
+
+        return [
+            'bulan_lalu' => $bulan_lalu,
+            'sd_bulan_ini' => $sd_bulan_ini
+        ];
+    }
+
     public function saldoKas($tgl_kondisi)
     {
         $tanggal = explode('-', $tgl_kondisi);

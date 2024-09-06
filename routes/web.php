@@ -53,6 +53,7 @@ Route::group(['prefix' => 'kab', 'as' => 'kab.', 'middleware' => 'kab'], functio
 
 Route::get('/', [AuthController::class, 'index'])->middleware('guest')->name('/');
 Route::post('/login', [AuthController::class, 'login'])->middleware('guest');
+Route::get('/app', [AuthController::class, 'app']);
 
 // Route::get('/force/{uname}', [AuthController::class, 'force'])->middleware('guest');
 
@@ -302,7 +303,7 @@ Route::get('/simpanan/cari_nik', [SimpananController::class, 'cariNik'])->middle
 
 Route::post('/simpanan/{nik}/blokir', [SimpananController::class, 'blokir'])->middleware('auth');
 
-Route::get('/simpanan/detail_simpanan/{id}', [SimpananController::class, 'detailAnggota'])->middleware('auth'); 
+Route::get('/simpanan/detail_simpanan/{id}', [SimpananController::class, 'detailAnggota'])->middleware('auth');
 
 Route::get('/register_simpanan', [SimpananController::class, 'create'])->middleware('auth');
 Route::get('/register_simpanan/{nia}', [SimpananController::class, 'register'])->middleware('auth');

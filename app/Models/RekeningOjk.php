@@ -19,13 +19,18 @@ class RekeningOjk extends Model
 
     protected $guarded = ['id'];
 
-    public function sub()
+    public function child()
     {
-        return $this->hasMany(RekeningOjk::class, 'sub','id');
+        return $this->hasMany(RekeningOjk::class, 'parent_id', 'id');
     }
-    
+
+    public function rek()
+    {
+        return $this->hasMany(Rekening::class, 'kode_akun', 'rekening');
+    }
+
     public function akun3()
     {
-        return $this->belongsTo(AkunLevel3::class, 'kode_akun','rekening');
+        return $this->hasMany(AkunLevel3::class, 'kode_akun', 'rekening');
     }
 }
