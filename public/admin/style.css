@@ -1,0 +1,89 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: url(img/home.jpg) ;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: sans-serif;
+  }
+  .login {
+    position: fixed;
+    top: 43%;
+    left: 45%;
+    transform: translate(-30%, -50%);
+    background: rgba(255, 255, 255, 0.97);
+    padding: 50px;
+    width: 260px;
+    box-shadow: 0px 0px 25px 10px rgba(0, 0, 0, 0);
+    border-radius: 10px;
+  }
+  .avatar {
+    font-size: 10px ;
+    background: #ffffff08;
+    width: 120px;
+    height: 120px;
+    line-height: 120px;
+    position: fixed;
+    left: 50%;
+    top: 14%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    border-radius: 50%;
+  }
+  .login h2 {
+    text-align: center;
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+    font-family: 'Times New Roman', serif;
+    letter-spacing: 1px;
+    padding-top: 20%;
+    margin-top: -5px;
+  }
+  .box-login {
+    display: flex;
+    justify-content:space-between;
+    margin: 10px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.893);
+    padding: 5px;
+  }
+  .box-login i {
+    font-size: 23px;
+    color: rgb(0, 0, 0);
+    padding: 5px;
+  }
+  .box-login input {
+    width: 85%;
+    padding: 5px;
+    background: none;
+    border: none;
+    outline: none;
+    color: rgb(239, 15, 15);
+    font-size: 14px;
+  }
+  .box-login input::placeholder {
+    color: rgb(38, 38, 38);
+  }
+  .btn-login
+  .box-login input:hover{
+    background: rgba(10, 10, 10,s 0.5);
+  }
+  .btn-login {
+    margin-left: 10px;
+    margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.881); 
+    border: 1px solid rgb(255, 255, 255);
+    width: 92.5%;
+    padding: 15px;
+    color: rgb(251, 251, 251);
+    font-size: 18px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-radius: 10px;  
+    font-size: 12px;
+    font-weight: bold;
+  }
+  .btn-login:hover{
+    background: rgb(0, 0, 0);
+  }

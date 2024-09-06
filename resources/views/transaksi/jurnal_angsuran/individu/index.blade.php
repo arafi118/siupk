@@ -64,8 +64,13 @@
                             </form>
 
                             <div class="d-flex justify-content-end">
+                                <button type="button"class="btn btn-warning btn-sm me-3" style="color: white;">
+                                    Loan id 
+                                    <span class="badge badge-info" id="loan-id" style="font-size: 16px;">
+                                    </span>
+                                </button>
                                 <button type="button" id="btnDetailIndividu" class="btn btn-info btn-sm me-3">
-                                    Detail Pemanfaat <span class="badge badge-info" id="loan-id"></span>
+                                    Detail Pemanfaat 
                                 </button>
                                 <button type="button" id="SimpanAngsuran"
                                     class="btn btn-github btn-sm btn btn-sm btn-dark mb-0">Posting</button>

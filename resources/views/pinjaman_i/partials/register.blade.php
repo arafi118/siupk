@@ -1,7 +1,7 @@
 <style>
 /* CSS untuk .app-wrapper-title */
 .app-title {
-    background-color: #c0c4c5b3; /* Warna latar belakang untuk app-page-title */
+    background-color: #c0c4c5; /* Warna latar belakang untuk app-page-title */
     padding: 20px; /* Padding untuk ruang di sekitar konten */
     border-radius: 8px; /* Membuat sudut melengkung */
     margin-bottom: 10px; /* Jarak bawah dari elemen lain */
