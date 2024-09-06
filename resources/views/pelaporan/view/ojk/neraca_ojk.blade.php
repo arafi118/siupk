@@ -82,19 +82,20 @@
                 </td>
                 <td style="border: 1px solid;" align="right">{{ number_format($sum_akun1, 2) }}</td>
             </tr>
-           
         @endforeach
+        <tr>
+            <td style="border: 1px solid;" height="15" width="80%" align="left">
+                <b>Jumlah Liabilitas + Ekuitas </b>
+            </td>
+            <td>&nbsp;</td>
+            <td style="border: 1px solid;" align="right" width="20%">{{ number_format($kredit, 2) }}</td>
 
+        </tr>
         <tr>
             <td style="border: 1px solid;" colspan="3" style="padding: 0px !important;">
                 <table class="p" border="0" width="100%" cellspacing="0" cellpadding="0"
                     style="font-size: 11px;">
-                    <tr>
-                        <td style="border: 1px solid;" height="15" width="80%" align="left">
-                            <b>Jumlah Liabilitas + Ekuitas </b>
-                        </td>
-                        <td style="border: 1px solid;" align="right" width="20%">{{ number_format($kredit, 2) }}</td>
-                    </tr>
+                  
                 </table>
                 </table>
                 <table class="p" border="0" width="100%" cellspacing="0" cellpadding="0"
