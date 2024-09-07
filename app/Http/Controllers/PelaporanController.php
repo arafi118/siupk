@@ -353,16 +353,34 @@ class PelaporanController extends Controller
         $data['debit'] = 0;
         $data['kredit'] = 0;
 
-        $data['akun1'] = AkunLevel1::where('lev1', '<=', '3')->with([
-            'akun2',
-            'akun2.akun3',
-            'akun2.akun3.rek',
-            'akun2.akun3.rek.kom_saldo' => function ($query) use ($data) {
+        $data['rekening_ojk'] = RekeningOjk::where([
+            ['parent_id','0'],
+            ['id','<=', '73']
+        ])->with([
+            'child',
+            'child.rek.kom_saldo' => function ($query) use ($data) {
                 $query->where('tahun', $data['tahun'])->where(function ($query) use ($data) {
-                    $query->where('bulan', '0')->orwhere('bulan', $data['bulan']);
+                    $query->where('bulan', '0')->orwhere('bulan', $data['bulan'])->orwhere('bulan', ($data['bulan'] - 1));
                 });
             },
-        ])->orderBy('kode_akun', 'ASC')->get();
+            'child.akun3.rek.kom_saldo' => function ($query) use ($data) {
+                $query->where('tahun', $data['tahun'])->where(function ($query) use ($data) {
+                    $query->where('bulan', '0')->orwhere('bulan', $data['bulan'])->orwhere('bulan', ($data['bulan'] - 1));
+                });
+            },
+            'child.child',
+            'child.child.rek.kom_saldo' => function ($query) use ($data) {
+                $query->where('tahun', $data['tahun'])->where(function ($query) use ($data) {
+                    $query->where('bulan', '0')->orwhere('bulan', $data['bulan'])->orwhere('bulan', ($data['bulan'] - 1));
+                });
+            },
+            'child.child.akun3.rek.kom_saldo' => function ($query) use ($data) {
+                $query->where('tahun', $data['tahun'])->where(function ($query) use ($data) {
+                    $query->where('bulan', '0')->orwhere('bulan', $data['bulan'])->orwhere('bulan', ($data['bulan'] - 1));
+                });
+            },
+        ])->get();
+
 
         $data['laporan'] = 'Neraca';
         $view = view('pelaporan.view.ojk.neraca_ojk', $data)->render();
