@@ -183,7 +183,7 @@
                     <tr>
                         <td align="center">{{ $core_number }}.{{ $point_number }}</td>
                         <td>{{ $rek_child->nama_akun }}</td>
-                        <td>{{ $rek_child->kode }}</td>
+                        <td align="center">{{ $rek_child->kode }}</td>
                         <td align="right">{{ number_format($bulan_lalu, 2) }}</td>
                         <td align="right">{{ number_format($bulan_ini, 2) }}</td>
                         <td align="right">{{ number_format($sd_bulan_ini, 2) }}</td>
