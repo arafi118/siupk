@@ -221,4 +221,13 @@
             @endforeach
         </tbody>
     </table>
+    <table class="p" border="0" align="center" width="96%" cellspacing="0" cellpadding="0"
+    style="font-size: 12px;"> 
+        <tr>
+            <td colspan="14">
+                <div style="margin-top: 14px;"></div>
+                {!! json_decode(str_replace('{tanggal}', $tanggal_kondisi, $kec->ttd->tanda_tangan_pelaporan), true) !!}
+            </td>
+        </tr>
+    </table>
 @endsection
