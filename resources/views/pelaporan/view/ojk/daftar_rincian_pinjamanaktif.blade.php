@@ -312,9 +312,8 @@
                 $j_saldo += $saldo_pokok;
             @endphp
               @php
-              $t_alokasi += $j_alokasi;
-              $t_saldo_pokok += $j_saldo;
-  
+              $t_alokasi += $pinj_i->alokasi;
+              $t_saldo_pokok += $saldo_pokok;
           @endphp
         @endforeach
         @if (count($kd_desa) > 0)
