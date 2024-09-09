@@ -132,10 +132,18 @@
 
 <body>
     <?php
-    include 'inc/inc.koneksi.php';
-    include 'inc/fungsi_keuangan.php';
-    $lokasi = 2;
-    $kd_kab = 4;
+
+$host = "localhost"; 
+$user = "siupk_global"; 
+$pass = "siupk_global"; 
+$db = "siupk_dbm"; 
+
+// Membuat koneksi
+$koneksi = mysqli_connect($host, $user, $pass, $db);
+
+
+
+
     if (isset($_GET['bulan']) && isset($_GET['tahun'])) {
     $bulan = $_GET['bulan'];
     $tahun = $_GET['tahun']; 
@@ -161,9 +169,15 @@
         $where = "id IN (" . implode(',', $id_array) . ")";
     }
     
-    
-    // Data yang dibutuhkan
-    $kec = mysql_fetch_array(mysql_query("SELECT * FROM kecamatan where id = '$lokasi'")); 
+            // Ambil URL saat ini
+        $url = $_SERVER['HTTP_REFERER']; // atau bisa gunakan $_SERVER['REQUEST_URI'] untuk URL yang diminta saat ini.
+
+        // Ambil hanya bagian host dari URL
+        $web = parse_url($url, PHP_URL_HOST);
+
+        // Query ke database
+        $kec = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM kecamatan WHERE web_kec='$web' OR web_alternatif='$web'"));
+    $lokasi         = $kec['id'];
     $hitung_bunga   = $kec['hitung_bunga'];
     $min_bunga      = $kec['min_bunga'];
     $min_pajak      = $kec['min_pajak'];
@@ -205,8 +219,8 @@ $bulan_nama = $nama_bulan[$bulan];
 
         
     
-    $q = mysql_query("SELECT * FROM simpanan_anggota_$kd_kab WHERE lokasi=$lokasi AND ($where) AND tgl_buka>=$tgl_awal ORDER BY id ASC");
-    $total = mysql_num_rows($q);
+    $q = mysqli_query($koneksi,"SELECT * FROM simpanan_anggota_$kd_kab WHERE lokasi=$lokasi AND ($where) AND tgl_buka>=$tgl_awal ORDER BY id ASC");
+    $total = mysqli_num_rows($q);
     
         echo "<div class='result-container'>";
         echo "<div class='result-text2'>Total Simpanan yang akan di proses adalah " . $total . " data.</div>";
@@ -230,12 +244,12 @@ $bulan_nama = $nama_bulan[$bulan];
         <button type="submit" name="migrate" id="runButton" <?php echo $start> $total ? 'disabled' : 'readonly'; ?>>Run</button>
     </form>
     <?php
-    $q2 = mysql_query("SELECT * FROM simpanan_anggota_$kd_kab WHERE lokasi=$lokasi AND ($where) AND tgl_buka>=$tgl_awal ORDER BY id ASC  LIMIT $start, $per_page");
+    $q2 = mysqli_query($koneksi,"SELECT * FROM simpanan_anggota_$kd_kab WHERE lokasi=$lokasi AND ($where) AND tgl_buka>=$tgl_awal ORDER BY id ASC  LIMIT $start, $per_page");
     $jbunga = 0;
     $jpajak = 0;
     $jadmin = 0;
-        while ($simp = mysql_fetch_array($q2)) {
-            $a = mysql_fetch_array(mysql_query("SELECT * FROM anggota_$kd_kab where id = '$simp[nia]'")); 
+        while ($simp = mysqli_fetch_array($q2)) {
+            $a = mysqli_fetch_array(mysqli_query($koneksi,"SELECT * FROM anggota_$kd_kab where id = '$simp[nia]'")); 
             $no_rek = $simp['nomor_rekening'];
             $nama_depan = $a['namadepan'];
             //data yang dibutuhkan
@@ -286,19 +300,19 @@ $bulan_nama = $nama_bulan[$bulan];
             
             //hitung saldo
             if($hitung_bunga==1){ //saldo_terakhir
-                $real = mysql_fetch_array(mysql_query("SELECT * FROM real_simpanan_$lokasi WHERE cif=$simp[id] AND  tgl_transaksi BETWEEN '$tgl_awal' AND '$tgl_akhir' ORDER BY tgl_transaksi DESC, id DESC LIMIT 1")); 
+                $real = mysqli_fetch_array(mysqli_query($koneksi,"SELECT * FROM real_simpanan_$lokasi WHERE cif=$simp[id] AND  tgl_transaksi BETWEEN '$tgl_awal' AND '$tgl_akhir' ORDER BY tgl_transaksi DESC, id DESC LIMIT 1")); 
                 $saldo = $real['sum'];
             }elseif($hitung_bunga==2){ //saldo_terendah
-                $real = mysql_fetch_array(mysql_query("SELECT * FROM real_simpanan_$lokasi WHERE cif=$simp[id] AND  tgl_transaksi BETWEEN '$tgl_awal' AND '$tgl_akhir' ORDER BY sum ASC LIMIT 1")); 
+                $real = mysqli_fetch_array(mysqli_query($koneksi,"SELECT * FROM real_simpanan_$lokasi WHERE cif=$simp[id] AND  tgl_transaksi BETWEEN '$tgl_awal' AND '$tgl_akhir' ORDER BY sum ASC LIMIT 1")); 
                 $saldo = $real['sum'];
             }else{ //saldo_rata2
-                $re = mysql_fetch_array(mysql_query("SELECT * FROM real_simpanan_$lokasi WHERE cif=$simp[id] AND  tgl_transaksi < '$tgl_awal' ORDER BY tgl_transaksi DESC, id DESC LIMIT 1")); 
+                $re = mysqli_fetch_array(mysqli_query($koneksi,"SELECT * FROM real_simpanan_$lokasi WHERE cif=$simp[id] AND  tgl_transaksi < '$tgl_awal' ORDER BY tgl_transaksi DESC, id DESC LIMIT 1")); 
                 $saldo_terakhir = $re['sum'];
                 
-                $r = (mysql_query("SELECT * FROM real_simpanan_$lokasi WHERE cif=$simp[id] AND tgl_transaksi BETWEEN '$tgl_awal' AND '$tgl_akhir'")); 
+                $r = (mysqli_query($koneksi,"SELECT * FROM real_simpanan_$lokasi WHERE cif=$simp[id] AND tgl_transaksi BETWEEN '$tgl_awal' AND '$tgl_akhir'")); 
                 $jumdeb = 0;
                 $jumkre = 0;
-                    while($real = mysql_fetch_array($r)){
+                    while($real = mysqli_fetch_array($r)){
                     $hari_ke = (strtotime($real['tgl_transaksi']) - strtotime($tgl_awal)) / (60 * 60 * 24) + 1;
                     $jumdeb  = $jumdeb+($real['real_d']*($jumlah_hari-($hari_ke+1)));
                     $jumkre  = $jumkre+($real['real_k']*($jumlah_hari-($hari_ke+1)));
@@ -313,11 +327,11 @@ $bulan_nama = $nama_bulan[$bulan];
                 $pajak  = $bunga * $pros_bunga;
             }
             
-            $jum_bunga = mysql_num_rows(mysql_query("SELECT * FROM transaksi_$lokasi WHERE tgl_transaksi='$tgl_trans' AND rekening_kredit LIKE '22_.02' AND id_simp_i=$simp[id]"));
-            $jum_pajak = mysql_num_rows(mysql_query("SELECT * FROM transaksi_$lokasi WHERE tgl_transaksi='$tgl_trans' AND rekening_debit LIKE '22_.05' AND id_simp_i=$simp[id]"));
-            $jum_admin = mysql_num_rows(mysql_query("SELECT * FROM transaksi_$lokasi WHERE tgl_transaksi='$tgl_trans' AND rekening_debit LIKE '22_.03' AND id_simp_i=$simp[id]"));
+            $jum_bunga = mysqli_num_rows(mysqli_query($koneksi,"SELECT * FROM transaksi_$lokasi WHERE tgl_transaksi='$tgl_trans' AND rekening_kredit LIKE '22_.02' AND id_simp_i=$simp[id]"));
+            $jum_pajak = mysqli_num_rows(mysqli_query($koneksi,"SELECT * FROM transaksi_$lokasi WHERE tgl_transaksi='$tgl_trans' AND rekening_debit LIKE '22_.05' AND id_simp_i=$simp[id]"));
+            $jum_admin = mysqli_num_rows(mysqli_query($koneksi,"SELECT * FROM transaksi_$lokasi WHERE tgl_transaksi='$tgl_trans' AND rekening_debit LIKE '22_.03' AND id_simp_i=$simp[id]"));
             if($bunga>0 and $jum_bunga<1){
-                $insert_bunga = mysql_query("INSERT INTO `transaksi_$lokasi` 
+                $insert_bunga = mysqli_query($koneksi,"INSERT INTO `transaksi_$lokasi` 
                 (`idt`, `tgl_transaksi`, `rekening_debit`, `rekening_kredit`, `idtp`, `id_pinj`, `id_pinj_i`, `id_simp_i`, `keterangan_transaksi`, `jumlah`, `urutan`, `id_user`) VALUES 
                 (NULL, '$tgl_trans', '$pas_bunga', '$rek_bunga', '0', '0', '0', '$simp[id]', 'Bunga $js $no_rek $nama_depan $bulan_nama', '$bunga', '0', '1')");
                 $jbunga = $jbunga +1;
@@ -325,23 +339,23 @@ $bulan_nama = $nama_bulan[$bulan];
             echo "$bunga>0 and $jum_bunga<1";
             
             if($pajak>0 and $jum_pajak<1){
-                $insert_bunga = mysql_query("INSERT INTO `transaksi_$lokasi` 
+                $insert_bunga = mysqli_query($koneksi,"INSERT INTO `transaksi_$lokasi` 
                 (`idt`, `tgl_transaksi`, `rekening_debit`, `rekening_kredit`, `idtp`, `id_pinj`, `id_pinj_i`, `id_simp_i`, `keterangan_transaksi`, `jumlah`, `urutan`, `id_user`) VALUES 
                 (NULL, '$tgl_trans', '$rek_pajak', '$pas_pajak', '0', '0', '0', '$simp[id]', 'Pajak $js $no_rek $nama_depan $bulan_nama', '$pajak', '0', '1')");
                 $jpajak = $jpajak +1;
             }
             
             if($admin>0 and $jum_admin<1){
-                $insert_bunga = mysql_query("INSERT INTO `transaksi_$lokasi` 
+                $insert_bunga = mysqli_query($koneksi,"INSERT INTO `transaksi_$lokasi` 
                 (`idt`, `tgl_transaksi`, `rekening_debit`, `rekening_kredit`, `idtp`, `id_pinj`, `id_pinj_i`, `id_simp_i`, `keterangan_transaksi`, `jumlah`, `urutan`, `id_user`) VALUES 
                 (NULL, '$tgl_trans', '$rek_admin', '$pas_admin', '0', '0', '0', '$simp[id]', 'Admin $js $no_rek $nama_depan $bulan_nama', '$admin', '0', '1')");
                 $jadmin = $jadmin +1;
             }
             
-            $del_re = mysql_query("DELETE FROM real_simpanan_$lokasi WHERE cif=$simp[id] AND tgl_transaksi>=$tgl_awal");
-            $query  = mysql_query("SELECT * FROM transaksi_$lokasi WHERE id_simp_i=$simp[id] AND tgl_transaksi>=$tgl_awal ORDER BY idt ASC");
+            $del_re = mysqli_query($koneksi,"DELETE FROM real_simpanan_$lokasi WHERE cif=$simp[id] AND tgl_transaksi>=$tgl_awal");
+            $query  = mysqli_query($koneksi,"SELECT * FROM transaksi_$lokasi WHERE id_simp_i=$simp[id] AND tgl_transaksi>=$tgl_awal ORDER BY idt ASC");
                     $sum = 0;
-                    while ($trx = mysql_fetch_array($query)) {
+                    while ($trx = mysqli_fetch_array($query)) {
                         $cif            = $simp['id'];
                         $tgl_transaksi  = $trx['tgl_transaksi'];
                         
@@ -363,7 +377,7 @@ $bulan_nama = $nama_bulan[$bulan];
                         $lu             = date('Y-m-d H:i:s');
                         $id_user        = $trx['id_user'];
                         
-                        $insert_t = mysql_query("INSERT INTO `real_simpanan_$lokasi`(`cif`, `tgl_transaksi`, `real_d`, `real_k`, `sum`, `lu`, `id_user`) 
+                        $insert_t = mysqli_query($koneksi,"INSERT INTO `real_simpanan_$lokasi`(`cif`, `tgl_transaksi`, `real_d`, `real_k`, `sum`, `lu`, `id_user`) 
                                      VALUES ('$cif','$tgl_transaksi','$real_d','$real_k','$sum','$lu','$id_user')");
                     }
         }
