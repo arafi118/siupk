@@ -63,9 +63,9 @@
             <tr>
                 <th class="t l b" width="10%">Pokok</th>
                 <th class="t l b" width="10%">Jasa</th>
-                <th class="t l b">(Menunggak 0-3)</th>
-                <th class="t l b">(Menunggak 4-5)</th>
-                <th class="t l b r">(Menunggak 6+)</th>
+                <th class="t l b">(Menunggak 0-6)</th>
+                <th class="t l b">(Menunggak 6-12)</th>
+                <th class="t l b r">(Menunggak 12+)</th>
             </tr>
 
             @foreach ($jpp->pinjaman_anggota as $pinj_ang)
@@ -195,11 +195,11 @@
                         $_kolek = $tunggakan_pokok / $wajib_pokok;
                     }
                     $kolek = round($_kolek + ($selisih - $angsuran_ke));
-                    if ($kolek <= 3) {
+                    if ($kolek < 6) {
                         $kolek1 = $saldo_pokok;
                         $kolek2 = 0;
                         $kolek3 = 0;
-                    } elseif ($kolek <= 5) {
+                    } elseif ($kolek >= 6 && $kolek <= 12) {
                         $kolek1 = 0;
                         $kolek2 = $saldo_pokok;
                         $kolek3 = 0;

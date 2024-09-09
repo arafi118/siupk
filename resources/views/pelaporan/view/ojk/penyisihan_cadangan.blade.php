@@ -32,7 +32,7 @@
             <tr>
                 <td colspan="3" align="center">
                     <div style="font-size: 18px;">
-                        <b>Cadangan Penyisihan Penghapusan {{ $jpp->nama_jpp }}</b>
+                        <b>Cadangan Kerugian Piutang {{ $jpp->nama_jpp }}</b>
                     </div>
                     <div style="font-size: 16px;">
                         <b>{{ strtoupper($sub_judul) }}</b>
@@ -147,11 +147,11 @@
                     $_kolek = $tunggakan_pokok / $wajib_pokok;
                 }
                 $kolek = round($_kolek + ($selisih - $angsuran_ke));
-                if ($kolek <= 3) {
+                if ($kolek < 6) {
                     $kolek1 = $saldo_pokok;
                     $kolek2 = 0;
                     $kolek3 = 0;
-                } elseif ($kolek <= 5) {
+                } elseif ($kolek >= 6 && $kolek <= 12) {
                     $kolek1 = 0;
                     $kolek2 = $saldo_pokok;
                     $kolek3 = 0;

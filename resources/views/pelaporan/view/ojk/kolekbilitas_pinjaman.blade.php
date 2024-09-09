@@ -176,11 +176,11 @@
                         $_kolek = $tunggakan_pokok / $wajib_pokok;
                     }
                     $kolek = round($_kolek + ($selisih - $angsuran_ke));
-                    if ($kolek <= 3) {
-                        $kolek1 = $saldo_pokok;
-                        $kolek2 = 0;
-                        $kolek3 = 0;
-                    } elseif ($kolek <= 5) {
+                    if ($kolek < 6) {
+                    $kolek1 = $saldo_pokok;
+                    $kolek2 = 0;
+                    $kolek3 = 0;
+                    } elseif ($kolek >= 6 && $kolek <= 12) {
                         $kolek1 = 0;
                         $kolek2 = $saldo_pokok;
                         $kolek3 = 0;
