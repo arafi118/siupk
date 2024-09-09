@@ -193,8 +193,8 @@
                     <th height="20" width="10">No</th>
                     <th width="200">Tingkat Kolektibilitas</th>
                     <th width="30">%</th>
-                    <th width="150">Saldo Pinjaman</th>
-                    <th>Beban Penyisihan Penghapusan Pinjaman</th>
+                    <th width="150">Saldo Piutang</th>
+                    <th>Beban Penyisihan Penghapusan Piutang</th>
                     <th width="150">NPL</th>
                 </tr>
                 <tr>
