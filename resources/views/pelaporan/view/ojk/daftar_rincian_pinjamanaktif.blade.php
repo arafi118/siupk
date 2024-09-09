@@ -283,9 +283,9 @@
                     $kolek = 0;
                 }
 
-                if($kolek<=3){
+                if($kolek<=6){
                     $keterangan="Lancar" ; 
-                } elseif($kolek<=5){ 
+                } elseif ($kolek >= 6 && $kolek <= 12) {
                     $keterangan="Diragukan" ; 
                 }else{
                     $keterangan="Macet" ; 
