@@ -64,7 +64,7 @@
                 <th class="t l b" width="10%">Pokok</th>
                 <th class="t l b" width="10%">Jasa</th>
                 <th class="t l b">(Menunggak 0-6)</th>
-                <th class="t l b">(Menunggak 6-12)</th>
+                <th class="t l b">(Menunggak 6+ s/d 12)</th>
                 <th class="t l b r">(Menunggak 12+)</th>
             </tr>
 
