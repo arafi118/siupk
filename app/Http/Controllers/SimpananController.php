@@ -308,7 +308,16 @@ class SimpananController extends Controller
         return view('simpanan.generate', compact('title', 'total', 'start', 'per_page'));
     }
 
+    
+    public function generateBunga()
+    {
 
+        $title = 'generate Bunga';
+        $total = '123';
+        $start = '0';
+        $per_page = '25';
+        return view('simpanan.generate_bunga', compact('title', 'total', 'start', 'per_page'));
+    }
 
 
 

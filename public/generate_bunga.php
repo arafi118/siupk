@@ -132,8 +132,8 @@
 
 <body>
     <?php
-    include './inc/inc.koneksi.php';
-    include './inc/fungsi_keuangan.php';
+    include 'inc/inc.koneksi.php';
+    include 'inc/fungsi_keuangan.php';
     $lokasi = 2;
     $kd_kab = 4;
     if (isset($_GET['bulan']) && isset($_GET['tahun'])) {

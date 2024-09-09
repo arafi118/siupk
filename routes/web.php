@@ -368,4 +368,6 @@ Route::get('/simpanan/generate', [SimpananController::class, 'generateSimpanan']
 Route::get('/simpanan/generate-bunga', [SimpananController::class, 'generateBunga'])->name('simpanan.generate-bunga');
 Route::resource('/simpanan', SimpananController::class)->middleware('auth');
 
+Route::post('/simpanan/generate-bunga2/{offset?}', [SimpananController::class, 'generate']);
+
 Route::get('/{invoice}', [PelaporanController::class, 'invoice']);

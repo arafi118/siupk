@@ -6,8 +6,8 @@
     "\\resources",
     "\\resources\\views",
     "\\resources\\views\\pelaporan",
-    "\\resources\\views\\pelaporan\\view"
+    "\\resources\\views\\pelaporan\\view",
+    "\\resources\\views\\pelaporan\\view\\perkembangan_piutang"
   ],
-  "SelectedNode": "\\app\\Models\\JenisKegiatan.php",
   "PreviewInSolutionExplorer": false
 }
