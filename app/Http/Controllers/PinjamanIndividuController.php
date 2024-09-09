@@ -631,7 +631,7 @@ class PinjamanIndividuController extends Controller
                 'sumber_pembayaran' => 'required',
                 'debet' => 'required',
                 'sumber_pembayaran' => 'required',
-                'depe' => 'required',
+                'depe' => '',
             ]);
         } else {
             $data = $request->only([
