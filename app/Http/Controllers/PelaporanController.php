@@ -368,6 +368,7 @@ class PelaporanController extends Controller
                     $query->where('bulan', '0')->orwhere('bulan', $data['bulan'])->orwhere('bulan', ($data['bulan'] - 1));
                 });
             },
+            
             'child.child',
             'child.child.rek.kom_saldo' => function ($query) use ($data) {
                 $query->where('tahun', $data['tahun'])->where(function ($query) use ($data) {

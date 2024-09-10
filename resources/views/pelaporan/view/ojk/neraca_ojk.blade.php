@@ -83,6 +83,7 @@
                             }
                         } else {
                             foreach ($rek_child->akun3 as $akun3) {
+                                $sum_saldo = 0;
                                 foreach ($akun3->rek as $rek) {
                                     $data_saldo = $keuangan->komSaldoLR($rek, $tgl_kondisi);
 
@@ -100,6 +101,7 @@
                 @endforeach
 
                 @php
+      
                     $data_total[$core_number] = [
                         'bulan_lalu' => $saldo_bulan_lalu,
                         'bulan_ini' => $saldo_bulan_ini,
@@ -111,9 +113,8 @@
                     <td align="center">{{ $core_number }}</td>
                     <td>{{ $rek_ojk->nama_akun }}</td>
                     <td>&nbsp;</td>
-                    <td align="right">{{ $saldo_sd_bulan_ini }}</td>
+                    <td align="right">{{ number_format($saldo_sd_bulan_ini )}}</td>
                 </tr>
-
                 @php
                     $point_number = 1;
                 @endphp
@@ -132,6 +133,10 @@
                             if (substr($child->rekening, -2) != '00') {
                                 foreach ($child->rek as $rek) {
                                     $data_saldo = $keuangan->komSaldoLR($rek, $tgl_kondisi);
+                                    if ($rek_child->kode == '342') {
+                                        $data_saldo['bulan_lalu'] = 0;
+                                        $data_saldo['sd_bulan_ini'] = $keuangan->laba_rugi($tgl_kondisi);
+                                    }
 
                                     $bulan_lalu += $data_saldo['bulan_lalu'];
                                     $bulan_ini += $data_saldo['sd_bulan_ini'] - $data_saldo['bulan_lalu'];
@@ -154,7 +159,7 @@
                         <td align="center">{{ $core_number }}.{{ $point_number }}</td>
                         <td>{{ $rek_child->nama_akun }}</td>
                         <td align="center">{{ $rek_child->kode }}</td>
-                        <td align="right">{{ $sd_bulan_ini }}</td>
+                        <td align="right">{{ number_format($sd_bulan_ini, 2) }}</td>
                     </tr>
 
                     @php
@@ -186,7 +191,7 @@
 
                     <tr>
                         <th colspan="3">Jumlah {{ $header }}</th>
-                        <th align="right">{{ $total_saldo }}</th>
+                        <th align="right">{{ number_format($total_saldo, 2) }}</th>
                     </tr>
                 @endif
 
