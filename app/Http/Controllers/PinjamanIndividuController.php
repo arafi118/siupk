@@ -631,7 +631,6 @@ class PinjamanIndividuController extends Controller
                 'sumber_pembayaran' => 'required',
                 'debet' => 'required',
                 'sumber_pembayaran' => 'required',
-                'depe' => '',
             ]);
         } else {
             $data = $request->only([
@@ -702,7 +701,7 @@ class PinjamanIndividuController extends Controller
             Transaksi::create([
                 'tgl_transaksi' => (string) Tanggal::tglNasional($data[$tgl]),
                 'rekening_debit' => (string) $request->debet,
-                'rekening_kredit' => (string) $request->sumber_pembayaran,
+                'rekening_kredit' => ($request->sumber_pembayaran) ? $request->sumber_pembayaran:'0',
                 'idtp' => '0',
                 'id_pinj' => '0',
                 'id_pinj_i' => $perguliran_i->id,
