@@ -88,7 +88,7 @@
         </li>
         <li style="text-align: justify;">
             Jika permasalahan berkaitan dengan transaksi, sertakan ID Transaksi yang dimaksud. Dan jika berkaitan dengan
-            pinjaman, sertakan ID Pinjamannya (Loan ID).
+            Piutang, sertakan ID Piutangnya (Loan ID).
         </li>
     </ul>
 
