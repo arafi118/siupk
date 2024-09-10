@@ -16,7 +16,7 @@
         $keterangan = 'Masa Aktif Tanggal ' . Tanggal::tglIndo($dari) . ' - ' . Tanggal::tglIndo($sampai);
     }
     
-    $sampai = date('Y-m-d', strtotime('+1 month', strtotime($tanggal)));
+    $batas_waktu = date('Y-m-d', strtotime('+1 month', strtotime($tanggal)));
     $total = 0;
 
     $kecamatan = $inv->kec->sebutan_kec . ' ' . $inv->kec->nama_kec;
