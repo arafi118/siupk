@@ -132,7 +132,7 @@
 
 <body>
     <?php
-
+ini_set('display_errors', 1);//Atauerror_reporting(E_ALL && ~E_NOTICE);
 $host = "localhost"; 
 $user = "siupk_global"; 
 $pass = "siupk_global"; 
@@ -155,7 +155,7 @@ $koneksi = mysqli_connect($host, $user, $pass, $db);
             $bulan_lalu = 12;
             $tahun--;
         }
-    $limit = $_GET['where'];
+    $limit = $_GET['where'] ?? 0;
     $id = $_GET['id'];
     if($id == NULL or $id == ""){
         $where = 1;
@@ -219,7 +219,7 @@ $bulan_nama = $nama_bulan[$bulan];
 
         
     
-    $q = mysqli_query($koneksi,"SELECT * FROM simpanan_anggota_$kd_kab WHERE lokasi=$lokasi AND ($where) AND tgl_buka>=$tgl_awal ORDER BY id ASC");
+    $q = mysqli_query($koneksi,"SELECT * FROM simpanan_anggota_$lokasi WHERE lokasi=$lokasi AND ($where) AND tgl_buka>=$tgl_awal ORDER BY id ASC");
     $total = mysqli_num_rows($q);
     
         echo "<div class='result-container'>";
@@ -244,12 +244,12 @@ $bulan_nama = $nama_bulan[$bulan];
         <button type="submit" name="migrate" id="runButton" <?php echo $start> $total ? 'disabled' : 'readonly'; ?>>Run</button>
     </form>
     <?php
-    $q2 = mysqli_query($koneksi,"SELECT * FROM simpanan_anggota_$kd_kab WHERE lokasi=$lokasi AND ($where) AND tgl_buka>=$tgl_awal ORDER BY id ASC  LIMIT $start, $per_page");
+    $q2 = mysqli_query($koneksi,"SELECT * FROM simpanan_anggota_$lokasi WHERE lokasi=$lokasi AND ($where) AND tgl_buka>=$tgl_awal ORDER BY id ASC  LIMIT $start, $per_page");
     $jbunga = 0;
     $jpajak = 0;
     $jadmin = 0;
         while ($simp = mysqli_fetch_array($q2)) {
-            $a = mysqli_fetch_array(mysqli_query($koneksi,"SELECT * FROM anggota_$kd_kab where id = '$simp[nia]'")); 
+            $a = mysqli_fetch_array(mysqli_query($koneksi,"SELECT * FROM anggota_$lokasi where id = '$simp[nia]'")); 
             $no_rek = $simp['nomor_rekening'];
             $nama_depan = $a['namadepan'];
             //data yang dibutuhkan

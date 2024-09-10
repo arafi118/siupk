@@ -3,11 +3,11 @@
     "",
     "\\app",
     "\\app\\Models",
+    "\\public",
     "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\pelaporan",
-    "\\resources\\views\\pelaporan\\view",
     "\\resources\\views\\pelaporan\\view\\perkembangan_piutang"
   ],
+  "SelectedNode": "\\public\\generate_bunga.php",
   "PreviewInSolutionExplorer": false
 }
