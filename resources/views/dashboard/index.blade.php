@@ -8,7 +8,7 @@
     </form>
     
 <!-- Trigger Button (Hidden) -->
-@if ($jumlah_unpaid == 0)
+@if ($jumlah_unpaid > 0)
     <button type="button" id="triggerPopup" class="d-none" data-bs-toggle="modal" data-bs-target="#notificationPopup"></button>
 @endif
 
