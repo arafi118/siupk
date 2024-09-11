@@ -20,12 +20,15 @@
                 <div>Untuk Periode Yang Berakhir Pada Tanggal {{ Tanggal::tglLatin($tgl_kondisi) }}</div>
             </td>
         </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
     </table>
 
-    <table border="1" width="96%" cellspacing="0" cellpadding="0" style="font-size: 11px; border-color: black;">
+    <table border="0" width="96%" cellspacing="0" cellpadding="0" style="font-size: 11px; border-color: black;">
         <thead>
-            <tr>
-                <th>No</th>
+            <tr style="background: rgb(232, 232, 232); font-weight: bold; font-size: 12px;">
+                <th height="20">No</th>
                 <th>Nama Akun</th>
                 <th>Kode Akun</th>
                 <th>SD. Bulan Lalu</th>
@@ -117,9 +120,23 @@
                         'bulan_ini' => $saldo_bulan_ini,
                         'sd_bulan_ini' => $saldo_sd_bulan_ini,
                     ];
+
+                    $this_bg = 'rgb(200, 200, 200)';
+                    if ($core_number == 4 || $core_number == 7) {
+                        $this_bg = 'rgb(230, 230, 230)';
+                    }
+
+                    if ($core_number == 5) {
+                        $this_bg = 'rgb(255, 255, 255)';
+                    }
+
+                    $style = 'style="background: ' . $this_bg . ';"';
+                    if (!in_array($core_number, ['4', '5', '7'])) {
+                        $style = 'style="font-weight: bold; background: ' . $this_bg . '; text-transform: uppercase;"';
+                    }
                 @endphp
 
-                <tr {!! in_array($core_number, ['4', '5', '7']) ? '' : 'style="font-weight: bold;"' !!}>
+                <tr {!! $style !!}>
                     <td align="center">{{ $core_number }}</td>
                     <td>{{ $rek_ojk->nama_akun }}</td>
                     @if ($core_number <= 2)
@@ -176,7 +193,13 @@
                             }
                         }
                     @endphp
-                    <tr>
+                    @php
+                        $bg = 'rgb(230, 230, 230)';
+                        if ($point_number % 2 == 0) {
+                            $bg = 'rgb(255, 255, 255)';
+                        }
+                    @endphp
+                    <tr style="background: {{ $bg }}">
                         <td align="center">{{ $core_number }}.{{ $point_number }}</td>
                         <td>{{ $rek_child->nama_akun }}</td>
                         <td align="center">{{ $rek_child->kode }}</td>
@@ -195,8 +218,8 @@
                 @endforeach
 
                 @if ($core_number < 3)
-                    <tr>
-                        <th colspan="3">Jumlah {{ $rek_ojk->nama_akun }}</th>
+                    <tr style="background: rgb(150, 150, 150); font-weight: bold;">
+                        <th height="14" colspan="3">Jumlah {{ $rek_ojk->nama_akun }}</th>
                         <th align="right">{{ number_format($total_bulan_lalu, 2) }}</th>
                         <th align="right">{{ number_format($total_bulan_ini, 2) }}</th>
                         <th align="right">{{ number_format($total_sd_bulan_ini, 2) }}</th>
