@@ -192,7 +192,7 @@ class GenerateController extends Controller
                 }
             }
 
-            $tgl_cair = date('Y-m-d', strtotime('-1 month', strtotime($tgl_cair)));
+            // $tgl_cair = date('Y-m-d', strtotime('-1 month', strtotime($tgl_cair)));
             $simpan_tgl =$tgl_cair;
             if ($is_pinkel) {
                 $desa = $pinkel->kelompok->d;
