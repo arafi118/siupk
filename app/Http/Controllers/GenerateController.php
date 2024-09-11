@@ -191,6 +191,8 @@ class GenerateController extends Controller
                     $tgl_cair = $pinkel->tgl_tunggu;
                 }
             }
+
+            $tgl_cair = date('Y-m-d', strtotime('-1 month', strtotime($tgl_cair)));
             $simpan_tgl =$tgl_cair;
             if ($is_pinkel) {
                 $desa = $pinkel->kelompok->d;
@@ -254,7 +256,7 @@ class GenerateController extends Controller
             $ra = [];
             $alokasi_pokok = $alokasi;
             if ($jenis_jasa == '1') {
-                for ($j = 1; $j <= $jangka; $j++) {
+                for ($j = 0; $j < $jangka; $j++) {
                     $sisa = $j % $sistem_jasa;
                     $ke = $j / $sistem_jasa;
 
@@ -280,7 +282,7 @@ class GenerateController extends Controller
                 }
             }
 
-            for ($i = 1; $i <= $jangka; $i++) {
+            for ($i = 0; $i < $jangka; $i++) {
                 $sisa = $i % $sistem_pokok;
                 $ke = $i / $sistem_pokok;
 
@@ -299,7 +301,7 @@ class GenerateController extends Controller
             }
 
             if ($jenis_jasa != '1') {
-                for ($j = 1; $j <= $jangka; $j++) {
+                for ($j = 0; $j < $jangka; $j++) {
                     $sisa = $j % $sistem_jasa;
                     $ke = $j / $sistem_jasa;
 
@@ -331,20 +333,7 @@ class GenerateController extends Controller
             $target_jasa = 0;
 
             $data_rencana = [];
-            $data_rencana[strtotime($tgl_cair)] = [
-                'loan_id' => $pinkel->id,
-                'angsuran_ke' => 0,
-                'jatuh_tempo' => $simpan_tgl,
-                'wajib_pokok' => 0,
-                'wajib_jasa' => 0,
-                'target_pokok' => $target_pokok,
-                'target_jasa' => $target_jasa,
-                'lu' => date('Y-m-d H:i:s'),
-                'id_user' => 1
-            ];
-            $rencana[] = $data_rencana[strtotime($tgl_cair)];
-
-            for ($x = 1; $x <= $jangka; $x++) {
+            for ($x = 0; $x < $jangka; $x++) {
                 $bulan  = substr($tgl_cair, 5, 2);
                 $tahun  = substr($tgl_cair, 0, 4);
 
@@ -359,14 +348,14 @@ class GenerateController extends Controller
                 $pokok = $ra[$x]['pokok'];
                 $jasa = $ra[$x]['jasa'];
 
-                if ($x == 1) {
+                if ($x == 0) {
                     $target_pokok = $pokok;
-                } elseif ($x >= 2) {
+                } elseif ($x >= 1) {
                     $target_pokok += $pokok;
                 }
-                if ($x == 1) {
+                if ($x == 0) {
                     $target_jasa = $jasa;
-                } elseif ($x >= 2) {
+                } elseif ($x >= 1) {
                     $target_jasa += $jasa;
                 }
 
