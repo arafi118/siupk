@@ -1,3 +1,7 @@
+@php
+    use App\Utils\Tanggal;
+@endphp
+
 @extends('pelaporan.layout.base')
 
 @section('content')
@@ -10,10 +14,9 @@
         <tr>
             <td style="border: 1px solid;" align="center" height="30" colspan="5" class="style3 bottom"
                 style="font-size: 15px;">
-                <br>{{ $kec->nama_lembaga_long }}
-                <br>SANDI LKM {{ $kec->sandi_lkm }}
-                <br>Untuk Periode Yang Berakhir Pada Tanggal
-                <br>LAPORAN KINERJA KEUANGAN</b>
+                <div>{{ $kec->nama_lembaga_long }}</div>
+                <div>LAPORAN KINERJA KEUANGAN</div>
+                <div>Untuk Periode Yang Berakhir Pada Tanggal {{ Tanggal::tglLatin($tgl_kondisi) }}</div>
             </td>
         </tr>
     </table>
@@ -124,7 +127,7 @@
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                     @else
-                        <td>&nbsp;</td>
+                        <td align="center">{{ $rek_ojk->kode }}</td>
                         <td align="right">{{ number_format($saldo_bulan_lalu, 2) }}</td>
                         <td align="right">{{ number_format($saldo_bulan_ini, 2) }}</td>
                         <td align="right">{{ number_format($saldo_sd_bulan_ini, 2) }}</td>
