@@ -3,6 +3,7 @@
 @section('content')
     @php
         $data_total = [];
+        $data_total_saldo = [];
         $data_rek_beban_ops = [];
     @endphp
 
@@ -112,9 +113,15 @@
                 <tr>
                     <td align="center">{{ $core_number }}</td>
                     <td>{{ $rek_ojk->nama_akun }}</td>
-                    <td>&nbsp;</td>
-                    <td align="right">{{ number_format($saldo_sd_bulan_ini )}}</td>
-                </tr>
+                    <td align="center">{{ $rek_ojk->kode }}</td>
+                    <td align="right">
+                        @if($saldo_sd_bulan_ini < 0)
+                            ({{ number_format(abs($saldo_sd_bulan_ini * -1)) }})
+                        @else
+                            {{ number_format($saldo_sd_bulan_ini) }}
+                        @endif
+                    </td>
+                                    </tr>
                 @php
                     $point_number = 1;
                 @endphp
@@ -159,8 +166,14 @@
                         <td align="center">{{ $core_number }}.{{ $point_number }}</td>
                         <td>{{ $rek_child->nama_akun }}</td>
                         <td align="center">{{ $rek_child->kode }}</td>
-                        <td align="right">{{ number_format($sd_bulan_ini, 2) }}</td>
-                    </tr>
+                        <td align="right">
+                            @if($sd_bulan_ini < 0)
+                                ({{ number_format(abs($sd_bulan_ini * -1), 2) }})
+                            @else
+                                {{ number_format($sd_bulan_ini, 2) }}
+                            @endif
+                        </td>
+                                            </tr>
 
                     @php
                         $point_number++;
@@ -187,18 +200,96 @@
                         foreach ($data_total as $dt) {
                             $total_saldo += $dt['sd_bulan_ini'];
                         }
+
+                        $data_total_saldo[$header] = $data_total;
                     @endphp
 
                     <tr>
                         <th colspan="3">Jumlah {{ $header }}</th>
-                        <th align="right">{{ number_format($total_saldo, 2) }}</th>
+                        <th align="right">
+                            @if($total_saldo < 0)
+                                ({{ number_format(abs($total_saldo * -1), 2) }})
+                            @else
+                                {{ number_format($total_saldo, 2) }}
+                            @endif
+                        </th>                 
                     </tr>
                 @endif
-
+                
                 @php
                     $core_number++;
                 @endphp
             @endforeach
+           
+            <tr>
+                <th colspan="3">Jumlah Liabilitas Dan Ekuitas </th>
+                <th> </th>
+            </tr>
+            @php
+            $aset = $data_total_saldo['Aset'];
+            $liabilitas = $data_total_saldo['Liabilitas'];
+            $ekuitas = $data_total_saldo['Ekuitas'];
+
+            $saldo_aset = 0;
+            $saldo_a = 0;
+
+            foreach ($aset as $a) {
+                $saldo_aset += $a['sd_bulan_ini'];
+            }
+            foreach ($liabilitas as $l) {
+                $saldo_a += $l['sd_bulan_ini'];
+            }
+        @endphp
+            @php
+            $k = $aset[1]['sd_bulan_ini'] + $aset[2]['sd_bulan_ini']; // Menjumlahkan kas
+            $l = $liabilitas[6]['sd_bulan_ini'] + $liabilitas[7]['sd_bulan_ini'] + $liabilitas[8]['sd_bulan_ini'] + $liabilitas[9]['sd_bulan_ini']; // Menjumlahkan Liabilitas
+            $persentase = ($k / $l) * 100; // Menghitung persentase
+            @endphp
+
+            <tr>
+                <th class="left top bottom " align="center"></th>
+                <th class="top left bottom" align="left"> &nbsp; Rasio Likuiditas</th>
+                <th class="top left bottom" align="right">&nbsp;</th>
+                <th class="top left bottom right" align="right">{{ number_format($persentase, 2) }}%</th>
+            </tr>
+            @php
+                $s = $saldo_aset; // saldo aset
+                $sl = $saldo_a; 
+                $press = ($s / $sl) * 100; // Menghitung persentase
+            @endphp
+
+            <tr>
+                <td class="left bottom" align="center">&nbsp; 1.</td>
+                <td class="left bottom" align="left"> &nbsp; Kas dan Setara Kas</td>
+                <td class="left bottom" align="right">&nbsp;</td>
+                <td class="left bottom right" align="right">{{ number_format($aset[1]['sd_bulan_ini'] + $aset[2]['sd_bulan_ini'], 2) }}</td>
+            </tr>
+            <tr>
+                <td class="left bottom" align="center">&nbsp; 2.</td>
+                <td class="left bottom" align="left"> &nbsp; Liabilitas Lancar</td>
+                <td class="left bottom" align="right">&nbsp;</td>
+                <td class="left bottom right" align="right">{{ number_format($liabilitas[6]['sd_bulan_ini'] + $liabilitas[7]['sd_bulan_ini'] + $liabilitas[8]['sd_bulan_ini'] + $liabilitas[9]['sd_bulan_ini'], 2) }}</td>
+            </tr>
+            <tr>
+                <th class="left top bottom" align="center"></td>
+                <th class="top left bottom" align="left"> &nbsp; Rasio Solvabilitas</td>
+                <th class="top left bottom" align="right">&nbsp;</td>
+                <th class="top left bottom right" align="right">{{ number_format($press, 2) }}%</td>
+            </tr>
+            <tr>
+                <td class="left bottom" align="center">&nbsp; 1.</td>
+                <td class="left bottom" align="left"> &nbsp; Total Aset</td>
+                <td class="left bottom" align="right">&nbsp;</td>
+                <td class="left bottom right" align="right">{{ number_format($saldo_aset, 2) }}</td>
+            </tr>
+            <tr>
+                <td class="left bottom" align="center">&nbsp; 2.</td>
+                <td class="left bottom" align="left"> &nbsp; Total Liabilitas</td>
+         <td class="left bottom" align="right">&nbsp;</td>
+            <td class="left bottom right" align="right">{{ number_format($saldo_a, 2)}}</td>
+        
+        </tr>
+
         </tbody>
     </table>
      <table class="p" border="0" align="center" width="96%" cellspacing="0" cellpadding="0"
