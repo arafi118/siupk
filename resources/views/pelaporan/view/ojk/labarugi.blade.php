@@ -15,6 +15,7 @@
             <td style="border: 1px solid;" align="center" height="30" colspan="5" class="style3 bottom"
                 style="font-size: 15px;">
                 <div>{{ $kec->nama_lembaga_long }}</div>
+                <div>SANDI LKM {{ $kec->sandi_lkm }}</div>
                 <div>LAPORAN KINERJA KEUANGAN</div>
                 <div>Untuk Periode Yang Berakhir Pada Tanggal {{ Tanggal::tglLatin($tgl_kondisi) }}</div>
             </td>
