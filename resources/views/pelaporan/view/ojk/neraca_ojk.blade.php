@@ -16,14 +16,14 @@
             <br>{{ strtoupper($sub_judul) }}</b>
         </td>
     </tr>
-    
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
 </table>
-
-
-    <table border="1" width="96%" cellspacing="0" cellpadding="0" style="font-size: 11px; border-color: black;">
+    <table border="0" width="96%" cellspacing="0" cellpadding="0" style="font-size: 11px; border-color: black;">
         <thead>
-            <tr>
-                <th>No</th>
+            <tr style="background: rgb(232, 232, 232); font-weight: bold; font-size: 12px;">
+                <th height="20">No</th>
                 <th>Nama Akun</th>
                 <th>Kode Akun</th>
                 <th>Jumlah</th>
@@ -56,10 +56,23 @@
                         }
 
                         $data_total = [];
+                        $this_bg = 'rgb(200, 200, 200)';
+                    if ($core_number == 1 || $core_number == 10) {
+                        $this_bg = 'rgb(230, 230, 230)';
+                    }
+
+                    if ($core_number == 6) {
+                        $this_bg = 'rgb(255, 255, 255)';
+                    }
+
+                    $style = 'style="background: ' . $this_bg . ';"';
+                    if (!in_array($core_number, ['1', '6', '10'])) {
+                        $style = 'style="font-weight: bold; background: ' . $this_bg . '; text-transform: uppercase;"';
+                    }
                     @endphp
-                    <tr>
-                        <td></td>
-                        <td><strong>{{ $header }}</strong></td>
+                <tr style="background: rgb(170, 170, 170); font-weight: bold;">
+                    <td></td>
+                        <td><strong>{{ $header }}</strong></td> 
                         <td></td>
                         <td></td>
                     </tr>
@@ -108,15 +121,17 @@
                         'bulan_ini' => $saldo_bulan_ini,
                         'sd_bulan_ini' => $saldo_sd_bulan_ini,
                     ];
+                    
+                @endphp
                 @endphp
 
-                <tr>
-                    <td align="center">{{ $core_number }}</td>
+                <tr style="background: rgb(209, 208, 208); font-weight: bold;">
+                    <td height="4"align="center">{{ $core_number }}</td>
                     <td>{{ $rek_ojk->nama_akun }}</td>
                     <td align="center">{{ $rek_ojk->kode }}</td>
                     <td align="right">
                         @if($saldo_sd_bulan_ini < 0)
-                            ({{ number_format(abs($saldo_sd_bulan_ini * -1)) }})
+                            ({{ number_format(abs($saldo_sd_bulan_ini * -1))}})
                         @else
                             {{ number_format($saldo_sd_bulan_ini) }}
                         @endif
@@ -161,9 +176,15 @@
                                 }
                             }
                         }
-                    @endphp
-                    <tr>
-                        <td align="center">{{ $core_number }}.{{ $point_number }}</td>
+                        @endphp
+                        @php
+                            $bg = 'rgb(230, 230, 230)';
+                            if ($point_number % 2 == 0) {
+                                $bg = 'rgb(255, 255, 255)';
+                            }
+                        @endphp
+                        <tr style="background: {{ $bg }}">
+                            <td align="center">{{ $core_number }}.{{ $point_number }}</td>
                         <td>{{ $rek_child->nama_akun }}</td>
                         <td align="center">{{ $rek_child->kode }}</td>
                         <td align="right">
@@ -204,7 +225,7 @@
                         $data_total_saldo[$header] = $data_total;
                     @endphp
 
-                    <tr>
+                    <tr style="background: rgb(141, 139, 139); font-weight: bold;">
                         <th colspan="3">Jumlah {{ $header }}</th>
                         <th align="right">
                             @if($total_saldo < 0)
@@ -250,11 +271,11 @@
                 $l = $liabilitas[6]['sd_bulan_ini'] + $liabilitas[7]['sd_bulan_ini'] + $liabilitas[8]['sd_bulan_ini'] + $liabilitas[9]['sd_bulan_ini']; // Menjumlahkan Liabilitas
                 $persentase = ($k / $l) * 100; // Menghitung persentase
             @endphp
-            <tr>
-                <th colspan="3">Jumlah Liabilitas Dan Ekuitas </th>
+                <tr style="background: rgb(150, 150, 150); font-weight: bold;">
+                    <th colspan="3">Jumlah Liabilitas Dan Ekuitas </th>
                 <th class="top left bottom" align="right">{{ number_format($saldo_a + $saldo_ekuitas, 2) }}</th>
             </tr>
-            <tr>
+            <tr style="background: rgb(193, 193, 193); font-weight: bold;">
                 <th class="left top bottom " align="center"></th>
                 <th class="top left bottom" align="left"> &nbsp; Rasio Likuiditas</th>
                 <th class="top left bottom" align="right">&nbsp;</th>
@@ -265,8 +286,13 @@
                 $sl = $saldo_a; 
                 $press = ($s / $sl) * 100; // Menghitung persentase
             @endphp
-
-            <tr>
+@php
+$bg = 'rgb(230, 230, 230)';
+if ($point_number % 2 == 0) {
+    $bg = 'rgb(255, 255, 255)';
+}
+@endphp
+            <tr style="background: {{ $bg }}">
                 <td class="left bottom" align="center">&nbsp; 1.</td>
                 <td class="left bottom" align="left"> &nbsp; Kas dan Setara Kas</td>
                 <td class="left bottom" align="right">&nbsp;</td>
@@ -278,19 +304,25 @@
                 <td class="left bottom" align="right">&nbsp;</td>
                 <td class="left bottom right" align="right">{{ number_format($liabilitas[6]['sd_bulan_ini'] + $liabilitas[7]['sd_bulan_ini'] + $liabilitas[8]['sd_bulan_ini'] + $liabilitas[9]['sd_bulan_ini'], 2) }}</td>
             </tr>
-            <tr>
+            <tr style="background: rgb(193, 193, 193); font-weight: bold;">
                 <th class="left top bottom" align="center"></td>
                 <th class="top left bottom" align="left"> &nbsp; Rasio Solvabilitas</td>
                 <th class="top left bottom" align="right">&nbsp;</td>
                 <th class="top left bottom right" align="right">{{ number_format($press, 2) }}%</td>
             </tr>
-            <tr>
-                <td class="left bottom" align="center">&nbsp; 1.</td>
+            @php
+
+            $bg = 'rgb(230, 230, 230)';
+            if ($point_number % 2 == 0) {
+                $bg = 'rgb(255, 255, 255)';
+            }
+            @endphp
+                        <tr style="background: {{ $bg }}">                <td class="left bottom" align="center">&nbsp; 1.</td>
                 <td class="left bottom" align="left"> &nbsp; Total Aset</td>
                 <td class="left bottom" align="right">&nbsp;</td>
                 <td class="left bottom right" align="right">{{ number_format($saldo_aset, 2) }}</td>
             </tr>
-            <tr>
+            <tr style="background: rgb(185, 184, 184); font-weight: bold;">
                 <td class="left bottom" align="center">&nbsp; 2.</td>
                 <td class="left bottom" align="left"> &nbsp; Total Liabilitas</td>
          <td class="left bottom" align="right">&nbsp;</td>
