@@ -283,9 +283,9 @@
                     $kolek = 0;
                 }
 
-                if($kolek<=3){
+                if($kolek<=6){
                     $keterangan="Lancar" ; 
-                } elseif($kolek<=5){ 
+                } elseif ($kolek >= 6 && $kolek <= 12) {
                     $keterangan="Diragukan" ; 
                 }else{
                     $keterangan="Macet" ; 
@@ -312,9 +312,8 @@
                 $j_saldo += $saldo_pokok;
             @endphp
               @php
-              $t_alokasi += $j_alokasi;
-              $t_saldo_pokok += $j_saldo;
-  
+              $t_alokasi += $pinj_i->alokasi;
+              $t_saldo_pokok += $saldo_pokok;
           @endphp
         @endforeach
         @if (count($kd_desa) > 0)

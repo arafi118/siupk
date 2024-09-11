@@ -61,12 +61,7 @@
             <tr style="background: rgb(230, 230, 230); font-weight: bold;">
                 <th class="t l b" rowspan="2" width="2%">No</th>
                 <th class="t l b" rowspan="2">Nasabah - Loan ID</th>
-                <th class="t l b" rowspan="2" width="4%">
-                    <div>Tgl Cair</div>
-                    <div>
-                        <small>(dd/mm/yy)</small>
-                    </div>
-                </th>
+                <th class="t l b" rowspan="2" width="4%">Tgl Cair</th>
                 <th class="t l b" rowspan="2" width="3%">Bln</th>
                 <th class="t l b" rowspan="2" width="6%">Alokasi</th>
                 <th class="t l b" colspan="2">Target</th>
