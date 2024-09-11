@@ -220,32 +220,40 @@
                     $core_number++;
                 @endphp
             @endforeach
-           
+            @php
+                // TOTAL
+                // aset
+                // liabilitas
+                // ekuitas
+                $aset = $data_total_saldo['Aset'];
+                $liabilitas = $data_total_saldo['Liabilitas'];
+                $ekuitas = $data_total_saldo['Ekuitas'];
+
+                $saldo_aset = 0;
+                $saldo_a = 0;
+                $saldo_ekuitas = 0;
+
+                foreach ($aset as $a) {
+                    $saldo_aset += $a['sd_bulan_ini'];
+                }
+                
+                foreach ($liabilitas as $l) {
+                    $saldo_a += $l['sd_bulan_ini'];
+                }
+
+                foreach ($ekuitas as $a) {
+                    $saldo_ekuitas += $a['sd_bulan_ini'];
+                }
+            @endphp
+            @php
+                $k = $aset[1]['sd_bulan_ini'] + $aset[2]['sd_bulan_ini']; // Menjumlahkan kas
+                $l = $liabilitas[6]['sd_bulan_ini'] + $liabilitas[7]['sd_bulan_ini'] + $liabilitas[8]['sd_bulan_ini'] + $liabilitas[9]['sd_bulan_ini']; // Menjumlahkan Liabilitas
+                $persentase = ($k / $l) * 100; // Menghitung persentase
+            @endphp
             <tr>
                 <th colspan="3">Jumlah Liabilitas Dan Ekuitas </th>
-                <th> </th>
+                <th class="top left bottom" align="right">{{ number_format($saldo_a + $saldo_ekuitas, 2) }}</th>
             </tr>
-            @php
-            $aset = $data_total_saldo['Aset'];
-            $liabilitas = $data_total_saldo['Liabilitas'];
-            $ekuitas = $data_total_saldo['Ekuitas'];
-
-            $saldo_aset = 0;
-            $saldo_a = 0;
-
-            foreach ($aset as $a) {
-                $saldo_aset += $a['sd_bulan_ini'];
-            }
-            foreach ($liabilitas as $l) {
-                $saldo_a += $l['sd_bulan_ini'];
-            }
-        @endphp
-            @php
-            $k = $aset[1]['sd_bulan_ini'] + $aset[2]['sd_bulan_ini']; // Menjumlahkan kas
-            $l = $liabilitas[6]['sd_bulan_ini'] + $liabilitas[7]['sd_bulan_ini'] + $liabilitas[8]['sd_bulan_ini'] + $liabilitas[9]['sd_bulan_ini']; // Menjumlahkan Liabilitas
-            $persentase = ($k / $l) * 100; // Menghitung persentase
-            @endphp
-
             <tr>
                 <th class="left top bottom " align="center"></th>
                 <th class="top left bottom" align="left"> &nbsp; Rasio Likuiditas</th>
