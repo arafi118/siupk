@@ -22,16 +22,16 @@
     <style>
         /* styles.css */
         .centered-text {
-            font-size: 10px;
+            font-size: 11px;
             text-align: center;
             text-align: justify;
         }
     </style>
-    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 12px;">
+    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 14px;">
         <tr>
             <td colspan="3" align="center">
-                <div style="font-size: 14px;">
-                    <b> SURAT PERJANJIAN HUTANG </b>
+                <div style="font-size: 16px;">
+                    <b> SURAT PERJANJIAN UTANG PIUTANG </b>
                 </div>
                 <div style="font-size: 12px;">
                     Nomor: {{ $pinkel->spk_no }}
@@ -48,7 +48,7 @@
         kami yang bertandatangan di bawah ini setuju membuat Surat Perjanjian Utang Piutang, yaitu :
     </div>
     
-    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 10px;">
+    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
         <tr>
             <td width="5"> &nbsp; </td>
             <td width="90"> Nama Lengkap </td>
@@ -86,7 +86,7 @@
         Untuk selanjutnya disebut sebagai <b>PIHAK PERTAMA</b>, dan :
     </div>
     
-    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 10px;">
+    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
         <tr>
             <td width="5"> &nbsp; </td>
             <td width="90"> Nama Lengkap </td>
@@ -142,12 +142,12 @@
                                 Nomor Sertifikat: {{($jaminan['nomor_sertifikat'])}},
                                 Nama jaminan: {{$jaminan['nama_pemilik']}},
                                 Alamat : {{$jaminan['alamat']}} Luas: {{ $jaminan['luas']}} (m²),
-                                Nilai Jual Tanah: {{$jaminan['nilai_jual_tanah']}},
+                                Nilai Jual Tanah: {{ number_format($jaminan['nilai_jual_tanah']) }},
                     @elseif ($jaminan['jenis_jaminan'] == '2')
                                 Nomor: {{($jaminan['nomor'])}},
                                 Nama jaminan: {{$jaminan['jenis_kendaraan']}},
                                 Nopol: {{$jaminan['nopol']}},
-                                Nilai Jual Kendaraan: {{ $jaminan['nilai_jual_kendaraan']}},
+                                Nilai Jual Kendaraan: {{ number_format($jaminan['nilai_jual_kendaraan']) }},
                     @elseif ($jaminan['jenis_jaminan'] == '3')
                                 Nomor: {{($jaminan['nomor'])}},
                                 Nama Pegawai: {{$jaminan['nama_pegawai']}},
@@ -155,7 +155,7 @@
                     @else
                                 Nomor Jaminan: {{($jaminan['nama_jaminan'])}},
                                 Keterangan: {{$jaminan['keterangan']}},
-                                Nilai Jaminan: {{$jaminan['nilai_jaminan']}},
+                                Nilai Jaminan: {{ number_format($jaminan['nilai_jaminan']) }},
                     @endif
                     atas Nama {{ $pinkel->anggota->namadepan }} (MASALAH) Yang nilainya dianggap sama dengan uang pinjaman dari Pihak Kedua.
                      Apabila kemudian hari ternyata {{ $pinkel->anggota->namadepan }} (MASALAH) tidak dapat membayar hutang tersebut sesuai dengan perjanjian ini,
@@ -179,12 +179,12 @@
 
         </div>
     </div>
-    <div style="text-align: center;" style="font-size: 10px;">
-        <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 10px;" class="p0">
+    <div style="text-align: center;" style="font-size: 11px;">
+        <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;" class="p0">
             <tr>
                 <td style="padding: 0px !important;">
                     <table class="p0" border="0" width="100%" cellspacing="0" cellpadding="0"
-                        style="font-size: 10px;">
+                        style="font-size: 11px;">
                         <br>
                         <tr>
                             <td style="padding: 0px !important;">
@@ -197,30 +197,30 @@
                     </table> <br>
                     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;" align="center">
                         <tr>
-                            <td width="60" align="center"> &nbsp; </td>
-                            <td width="50" align="center"> Pihak Kedua </td>
+                            <td width="10" align="center"> &nbsp; </td>
+                            <td width="20" align="center"> Pihak Kedua </td>
                             <td width="10" align="center"> &nbsp; </td>
                             <td width="70" align="center"> Pihak Pertama </td>
                         </tr> <br> <br> <br> <br> <br><br><br><br>
                         <tr>
-                            <td width="50" align="center"> &nbsp; </td>
-                            <td width="60" align="center">{{ $dir->namadepan }} {{ $dir->namabelakang }}<br> Direktur Utama LKM
+                            <td width="10" align="center"> &nbsp; </td>
+                            <td width="20" align="center">{{ $dir->namadepan }} {{ $dir->namabelakang }}<br> Direktur Utama LKM
                             </td>
                             <td width="10" align="center"> &nbsp; </td>
                             <td width="70" align="center">{{ $pinkel->anggota->namadepan }} <br>
                                 Debitur </td>
                         </tr> <br>
                         <tr>
-                            <td width="60" align="center"> &nbsp; </td>
-                            <td width="50" align="center"> SAKSI PIHAK KEDUA, </td>
+                            <td width="10" align="center"> &nbsp; </td>
+                            <td width="20" align="center"> SAKSI PIHAK KEDUA, </td>
                             <td width="10" align="center"> &nbsp; </td>
                             <td width="70" align="center"> SAKSI PIHAK PERTAMA, </td>
                         </tr> <br> <br> <br> <br> <br><br>
                         <tr>
                             <td width="10" align="center"> &nbsp; </td>
-                            <td width="70" align="center">________________________________</td>
-                            <td width="50" align="center"> &nbsp; </td>
-                            <td width="60" align="center"> __________________________________ </td>
+                            <td width="20" align="center">________________________________</td>
+                            <td width="10" align="center"> &nbsp; </td>
+                            <td width="70" align="center"> __________________________________ </td>
                         </tr>
                     </table>
                     {{-- <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;" class="p">
