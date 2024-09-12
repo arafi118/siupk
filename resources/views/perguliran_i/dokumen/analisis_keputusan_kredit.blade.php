@@ -133,7 +133,7 @@
         </tr>
     </table>
 
-    <h3><b>II. PERMOHONAN PINJAMAN</b></h3>
+    <h3><b>II. PERMOHONAN PIUTANG</b></h3>
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
         <tr>
             <td align="center"width="5%">1.</td>
@@ -205,7 +205,7 @@
         </tr>
         <tr>
             <td align="center"width="5%">3.</td>
-            <td width="45%">Maks Pemberian Pinjaman Sesuai Dinas</td>
+            <td width="45%">Maks Pemberian Piutang Sesuai Dinas</td>
             <td align="center"width="5%">:</td>
             <td>
                 {{-- <b>{{ $pinkel->anggota->jk }}</b> --}}

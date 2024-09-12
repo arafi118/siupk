@@ -80,7 +80,7 @@
                 {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }} {{ $pinkel->anggota->d->nama_desa }}
             </div> <br> <br> <br> <br> <br>
             <div style="margin: 0px; font-size: 16px;">
-                {{ strtoupper('Jenis Pinjaman : ' . $pinkel->jpp->nama_jpp) }}
+                {{ strtoupper('Jenis Piutang : ' . $pinkel->jpp->nama_jpp) }}
             </div>
             <div style="margin: 0px;">
                 Nomor SPK : <br>{{ $pinkel->spk_no }}

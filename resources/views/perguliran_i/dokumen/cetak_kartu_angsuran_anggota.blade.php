@@ -111,7 +111,7 @@
                         </div>
                         <div style="font-size: 14px;">{{ $pinkel->anggota->id }}</div>
                     </td>
-                    <td width="150">Jenis Pinjaman</td>
+                    <td width="150">Jenis Piutang</td>
                     <td width="5" align="center">:</td>
                     <td width="200">{{ $pinkel->jpp->nama_jpp }}</td>
                     <td width="150">Loan Id.</td>
@@ -132,7 +132,7 @@
                     <td>Telpon/SMS</td>
                     <td align="center">:</td>
                     <td>{{ $pinj->anggota->hp }}</td>
-                    <td>Pemanfaat</td>
+                    <td>Nasabah</td>
                     <td align="center">:</td>
                     <td style="font-weight: bold;">{{ $pinj->anggota->namadepan }}</td>
                 </tr>
@@ -428,9 +428,9 @@
                         <div>Lembar 1 : Untuk Kelompok</div>
                         <div>Lembar 2 : Arsip Lembaga</div>
                     </td>
-                    <td style="font-weight: bold; font-size: 12px;" width="350" align="center">Ketua Kelompok</td>
+                    {{-- <td style="font-weight: bold; font-size: 12px;" width="350" align="center">Ketua Kelompok</td> --}}
                     <td style="font-weight: bold; font-size: 12px;" width="350" align="center">
-                        <div>Anggota Pemanfaat</div>
+                        <div>Anggota Nasabah</div>
                     </td>
                 </tr>
                 <tr>

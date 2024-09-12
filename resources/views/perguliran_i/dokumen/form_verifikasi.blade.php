@@ -142,7 +142,7 @@
             <td colspan="3" class="style9 align-justify">: Rp. </td>
         </tr>
         <tr>
-            <td colspan="2" class="style9 align-justify">Angsuran pinjaman di bank/koperasi/perorangan</td>
+            <td colspan="2" class="style9 align-justify">Angsuran Piutang di bank/koperasi/perorangan</td>
             <td colspan="3" class="style9 align-justify">: Rp. </td>
         </tr>
         <tr>

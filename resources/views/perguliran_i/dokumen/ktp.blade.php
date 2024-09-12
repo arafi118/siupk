@@ -8,7 +8,7 @@
                     <b>FC KTP PEMANFAAT DAN PENJAMIN</b>
                 </div>
                 <div style="font-size: 16px;">
-                    <b>KELOMPOK {{ strtoupper($pinkel->kelompok->nama_kelompok) }}</b>
+                    <b>NASABAH {{ strtoupper($pinkel->anggota->namadepan) }}</b>
                 </div>
             </td>
         </tr>

@@ -68,7 +68,7 @@
                 <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 12px;">
                     <tr>
                         <td width="10">1.</td>
-                        <td width="120">Nama Pemanfaat</td>
+                        <td width="120">Nama Nasabah</td>
                         <td width="5">:</td>
                         <td>{{ $pinkel->anggota->namadepan }}</td>
                     </tr>

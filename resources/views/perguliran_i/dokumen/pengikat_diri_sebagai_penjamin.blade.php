@@ -54,7 +54,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2">Hubungan dengan Peminjam</td>
+            <td colspan="2">Hubungan dengan Piutang</td>
             <td align="center">:</td>
             <td>
                 @if ($pinkel->anggota->keluarga)
@@ -127,7 +127,7 @@
             <td colspan="3">
                 Apabila orang tersebut diatas tidak memenuhi kewajibannya (membayar angsuran dan kewajiban lainnya)
                 sesuai ketentuan dalam surat perjanjian kredit (SPK) maka dengan ini saya mengikatkan diri dan mejamin untuk
-                membayar seluruh tagihan yang menjadi kewajiban peminjam tersebut diatas sesuai hasil perhitungan saldo
+                membayar seluruh tagihan yang menjadi kewajiban Piutang tersebut diatas sesuai hasil perhitungan saldo
                 utang dan tagihan jasa serta kewajiban lainnya di {{ $kec->nama_lembaga_sort }}.
             </td>
         </tr>

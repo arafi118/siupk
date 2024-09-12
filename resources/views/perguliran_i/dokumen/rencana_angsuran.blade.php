@@ -43,12 +43,6 @@
                 <div style="font-size: 18px;">
                     <b>RENCANA ANGSURAN</b>
                 </div>
-                <div style="font-size: 16px;">
-                    <b>
-                       &nbsp;
-                    
-                    </b>
-                </div>
             </td>
         </tr>
         <tr>
@@ -57,19 +51,19 @@
     </table>
     <table border="0" width="100%" align="center"cellspacing="0" cellpadding="0" style="font-size: 11px;">
         <tr>
-            <td width="90">Nama calon Nasabah</td>
+            <td width="90">Nama Calon Nasabah</td>
             <td width="5" align="center">:</td>
             <td>
                 <b>{{ $pinkel->anggota->namadepan }} </b>
             </td>
-            <td width="90">Jangka waktu</td>
+            <td width="90">Jangka Waktu</td>
             <td width="5" align="center">:</td>
             <td>
                 <b>{{ $pinkel->jangka }} Bulan</b>
             </td>
         </tr>
         <tr>
-            <td>No register</td>
+            <td>No Register</td>
             <td align="center">:</td>
             <td>
                 <b>{{ $pinkel->id }}</b>
@@ -163,7 +157,7 @@
                         <td class="l t b r" width="13%" align="right">{{ number_format($saldo_jasa) }}</td>
                     </tr>
                 </table>
-<br>
+                    <br><br>
                 <table class="p" border="0" width="100%" cellspacing="0" cellpadding="0"
                     style="font-size: 11px;">
                    
@@ -177,7 +171,7 @@
                     <tr>
                         <td width="55%">&nbsp;</td>
                         <td align="center">
-                            Pemanfaat
+                            Nasabah
                         </td>
                         
                     </tr>

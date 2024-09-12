@@ -53,7 +53,7 @@
             </td>
         </tr>
         <tr>
-            <td>Hubungan dengan Peminjam</td>
+            <td>Hubungan dengan Piutang</td>
             <td align="center">:</td>
             <td>
                 @if ($pinkel->anggota->keluarga)

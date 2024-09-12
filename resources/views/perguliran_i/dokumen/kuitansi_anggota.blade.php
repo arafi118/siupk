@@ -59,7 +59,7 @@
                     <td>Untuk Pembayaran</td>
                     <td align="center">:</td>
                     <td class="b">
-                        Pencairan Pemanfaat Kelompok {{ $pinj->pinkel->kelompok->nama_kelompok }}
+                        Pencairan Nasabah Kelompok {{ $pinj->pinkel->kelompok->nama_kelompok }}
                     </td>
                 </tr>
                 <tr>
@@ -132,7 +132,7 @@
                         &nbsp;
                     </td>
                     <td align="center" colspan="3">
-                        Anggota Pemanfaat
+                        Anggota Nasabah
                     </td>
                 </tr>
                 <tr>

@@ -103,7 +103,7 @@
                 <td width="200">{{ $nia->id }}</td>
             </tr>
             <tr>
-                <td>Nama Peminjam</td>
+                <td>Nama Piutang</td>
                 <td align="center">:</td>
                 <td style="font-weight: bold;" colspan="4">{{ $nia->anggota->namadepan }}</td>
             </tr>

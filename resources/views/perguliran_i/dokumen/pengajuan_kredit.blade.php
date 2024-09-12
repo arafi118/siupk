@@ -172,7 +172,7 @@
                 <li>Fotokopi KTP dan KK;</li>
                 <li>Surat Rekomendasi dari Kepala Desa/Lurah;</li>
                 <li>Surat Kesanggupan Penyerahan Jaminan;</li>
-                <li>Surat Pernyataan Peminjam;</li>
+                <li>Surat Pernyataan Piutang;</li>
                 <li>Tabel Rencana Angsuran;</li>
                 <!-- <li>Surat Keterangan Gaji/Surat Keterangan Usaha.</li> -->
             </ol>

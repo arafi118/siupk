@@ -13,7 +13,7 @@
                     <b>DAFTAR ANGGOTA</b>
                 </div>
                 <div style="font-size: 16px;">
-                    <b>KELOMPOK {{ strtoupper($pinkel->kelompok->nama_kelompok) }}</b>
+                    <b>Nasabah {{ strtoupper($pinkel->anggota->namadepan) }}</b>
                 </div>
             </td>
         </tr>

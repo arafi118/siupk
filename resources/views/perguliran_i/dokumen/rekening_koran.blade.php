@@ -19,7 +19,7 @@
                     <b>REKENING KORAN</b>
                 </div>
                 <div style="font-size: 16px;">
-                    <b>PINJAMAN {{ strtoupper($pinkel->anggota->namadepan) }}</b>
+                    <b>PIUTANG {{ strtoupper($pinkel->anggota->namadepan) }}</b>
                 </div>
             </td>
         </tr>

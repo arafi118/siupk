@@ -46,14 +46,14 @@
         </table>
     </div>
     <div style="text-align: justify;">
-        Selaku anggota pemanfaat dari Nama Kelompok {{ $pinkel->anggota->nama_kelompok }} yang beralamatkan di
+        Selaku anggota Nasabah dari Nama Kelompok {{ $pinkel->anggota->nama_kelompok }} yang beralamatkan di
         {{ $pinkel->anggota->alamat_kelompok }} {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }}
         {{ $pinkel->anggota->d->nama_desa }}.
     </div>
     <div style="text-align: justify;">
         Dengan ini menyatakan, apabila terjadi tunggakan angsuran pinjaman {{ $pinkel->jpp->nama_jpp }}
-        {{ $kec->nama_lembaga_sort }} yang disebabkan adanya anggota pemanfaat yang belum mampu melunasi kewajibannya
-        sesuai jadwal angsuran yang ditetapkan, maka masing-masing pemanfaat dalam kedudukan sebagai pribadi anggota
+        {{ $kec->nama_lembaga_sort }} yang disebabkan adanya anggota Nasabah yang belum mampu melunasi kewajibannya
+        sesuai jadwal angsuran yang ditetapkan, maka masing-masing Nasabah dalam kedudukan sebagai pribadi anggota
         kelompok, secara sadar dan penuh tanggung jawab menyatakan :
 
         <ol>

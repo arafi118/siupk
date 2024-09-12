@@ -198,7 +198,7 @@
             <td align="center">
                 Direktur
             </td>
-            <td colspan="2" align="center">Peminjam</td>
+            <td colspan="2" align="center">Piutang</td>
         </tr>
         <tr>
             <td colspan="3" height="40">&nbsp;</td>
