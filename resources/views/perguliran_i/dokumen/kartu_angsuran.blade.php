@@ -163,8 +163,14 @@
                 </td>
             </tr>
         </table>
+        
         @php
-            $baris_angsuran = ceil($nia->rencana_count / 2);
+            $index = 1;
+            $baris_angsuran = ceil($nia->rencana_count / 2) + 1;
+            if ($kec->jdwl_angsuran == '1') {
+                $index = 0;
+                $baris_angsuran = ceil($nia->rencana_count / 2);
+            }
         @endphp
 
         <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
@@ -189,50 +195,58 @@
                 <th class="l t b r" align="center">Jasa</th>
                 <th rowspan="{{ $baris_angsuran + 1 }}">&nbsp;</th>
             </tr>
-            @for ($j = 1; $j <= $baris_angsuran; $j++)
+
+            @for ($j = $index; $j < $baris_angsuran; $j++)
                 @php
-                    $i = $j - 1;
+                    $i = $j + 1;
+
+                    $z = $j - 1;
+                    $baris = $baris_angsuran - 1;
+                    if ($index == 0) {
+                        $z = $j;
+                        $baris = $baris_angsuran;
+                    }
                 @endphp
                 <tr>
-                    <td class="l {{ $j == $baris_angsuran ? 'b' : '' }}" align="center">
-                        {{ $nia->rencana[$i]->angsuran_ke }}
+                    <td class="l {{ $i == $baris_angsuran ? 'b' : '' }}" align="center">
+                        {{ $nia->rencana[$z]->angsuran_ke }}
                     </td>
-                    <td class="l {{ $j == $baris_angsuran ? 'b' : '' }}" align="center">
-                        {{ Tanggal::tglIndo($nia->rencana[$i]->jatuh_tempo) }}
+                    <td class="l {{ $i == $baris_angsuran ? 'b' : '' }}" align="center">
+                        {{ Tanggal::tglIndo($nia->rencana[$z]->jatuh_tempo) }}
                     </td>
-                    <td class="l {{ $j == $baris_angsuran ? 'b' : '' }}" align="right">
-                        {{ number_format($nia->rencana[$i]->wajib_pokok) }}
+                    <td class="l {{ $i == $baris_angsuran ? 'b' : '' }}" align="right">
+                        {{ number_format($nia->rencana[$z]->wajib_pokok) }}
                     </td>
-                    <td class="l {{ $j == $baris_angsuran ? 'b' : '' }} r" align="right">
-                        {{ number_format($nia->rencana[$i]->wajib_jasa) }}
+                    <td class="l {{ $i == $baris_angsuran ? 'b' : '' }} r" align="right">
+                        {{ number_format($nia->rencana[$z]->wajib_jasa) }}
                     </td>
 
                     <td>&nbsp;</td>
 
-                    @if (isset($nia->rencana[$i + $baris_angsuran]))
-                        <td class="l {{ $j == $baris_angsuran ? 'b' : '' }}" align="center">
-                            {{ $nia->rencana[$i + $baris_angsuran]->angsuran_ke }}
+                    @if (isset($nia->rencana[$z + $baris]))
+                        <td class="l {{ $i == $baris_angsuran ? 'b' : '' }}" align="center">
+                            {{ $nia->rencana[$z + $baris]->angsuran_ke }}
                         </td>
-                        <td class="l {{ $j == $baris_angsuran ? 'b' : '' }}" align="center">
-                            {{ Tanggal::tglIndo($nia->rencana[$i + $baris_angsuran]->jatuh_tempo) }}
+                        <td class="l {{ $i == $baris_angsuran ? 'b' : '' }}" align="center">
+                            {{ Tanggal::tglIndo($nia->rencana[$z + $baris]->jatuh_tempo) }}
                         </td>
-                        <td class="l {{ $j == $baris_angsuran ? 'b' : '' }}" align="right">
-                            {{ number_format($nia->rencana[$i + $baris_angsuran]->wajib_pokok) }}
+                        <td class="l {{ $i == $baris_angsuran ? 'b' : '' }}" align="right">
+                            {{ number_format($nia->rencana[$z + $baris]->wajib_pokok) }}
                         </td>
-                        <td class="l {{ $j == $baris_angsuran ? 'b' : '' }} r" align="right">
-                            {{ number_format($nia->rencana[$i + $baris_angsuran]->wajib_jasa) }}
+                        <td class="l {{ $i == $baris_angsuran ? 'b' : '' }} r" align="right">
+                            {{ number_format($nia->rencana[$z + $baris]->wajib_jasa) }}
                         </td>
                     @else
-                        <td class="l {{ $j == $baris_angsuran ? 'b' : '' }}" align="center">
+                        <td class="l {{ $i == $baris_angsuran ? 'b' : '' }}" align="center">
 
                         </td>
-                        <td class="l {{ $j == $baris_angsuran ? 'b' : '' }}" align="center">
+                        <td class="l {{ $i == $baris_angsuran ? 'b' : '' }}" align="center">
 
                         </td>
-                        <td class="l {{ $j == $baris_angsuran ? 'b' : '' }}" align="right">
+                        <td class="l {{ $i == $baris_angsuran ? 'b' : '' }}" align="right">
 
                         </td>
-                        <td class="l {{ $j == $baris_angsuran ? 'b' : '' }} r" align="right">
+                        <td class="l {{ $i == $baris_angsuran ? 'b' : '' }} r" align="right">
 
                         </td>
                     @endif

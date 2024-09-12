@@ -1539,6 +1539,7 @@ class PinjamanIndividuController extends Controller
             $data['rencana'] = RencanaAngsuranI::where([
                 ['loan_id', $id],
                 ['angsuran_ke', '!=', '0']
+                
             ])->orderBy('jatuh_tempo', 'ASC')->get();
         } else {
             $data['rencana'] = $this->generate($id)->getData()->rencana;
@@ -2007,8 +2008,12 @@ class PinjamanIndividuController extends Controller
             'jpp',
             'sis_pokok',
             'real_i',
-            'rencana' => function ($query) {
-                $query->where('angsuran_ke', '!=', '0');
+            'rencana' => function ($query) use ($data) {
+                $operator = '!=';
+                if ($data['kec']->jdwl_angsuran == '1') {
+                    $operator = '>=';
+                }
+                $query->where('angsuran_ke', $operator, '0');
             },
             'target' => function ($query) {
                 $query->where('angsuran_ke', '1');
@@ -2369,6 +2374,14 @@ class PinjamanIndividuController extends Controller
         $tgl_angsur = $tgl;
         $tanggal_cair = date('d', strtotime($tgl));
 
+        $index = 1;
+        $jumlah_angsuran = $jangka + 1;
+        if ($kec->jdwl_angsuran == '1') {
+            $index = 0;
+            $jumlah_angsuran = $jangka;
+            $tgl_cair = date('Y-m-d', strtotime(' 0 month', strtotime($tgl_cair)));
+        }
+
         if ($pinj_i->anggota->d) {
             $angsuran_desa = $pinj_i->anggota->d->jadwal_angsuran_desa;
             if ($angsuran_desa > 0) {
@@ -2413,7 +2426,7 @@ class PinjamanIndividuController extends Controller
 
         $ra = [];
         $alokasi_pokok = $alokasi;
-        for ($j = 1; $j <= $jangka; $j++) {
+        for ($j = $index; $j < $jumlah_angsuran; $j++) {
             $sisa = $j % $sistem_jasa;
             $ke = $j / $sistem_jasa;
             $alokasi_jasa = $alokasi_pokok * ($pros_jasa / 100);
@@ -2436,7 +2449,7 @@ class PinjamanIndividuController extends Controller
             $ra[$j]['jasa'] = $angsuran_jasa;
         }
 
-        for ($i = 1; $i <= $jangka; $i++) {
+        for ($i = $index; $i < $jumlah_angsuran; $i++) {
             $sisa = $i % $sistem_pokok;
             $ke = $i / $sistem_pokok;
 
@@ -2452,6 +2465,33 @@ class PinjamanIndividuController extends Controller
             }
 
             $ra[$i]['pokok'] = $angsuran_pokok;
+        }
+
+        if ($jenis_jasa != '1') {
+            for ($j = $index; $j < $jumlah_angsuran; $j++) {
+                $sisa = $j % $sistem_jasa;
+                $ke = $j / $sistem_jasa;
+
+                $alokasi_jasa = $alokasi_pokok * ($pros_jasa / 100);
+                $wajib_jasa = $alokasi_jasa / $tempo_jasa;
+                $wajib_jasa = Keuangan::pembulatan($wajib_jasa, (string) $kec->pembulatan);
+                $sum_jasa = $wajib_jasa * ($tempo_jasa - 1);
+
+                if ($sisa == 0 and $ke != $tempo_jasa) {
+                    $angsuran_jasa = $wajib_jasa;
+                } elseif ($sisa == 0 and $ke == $tempo_jasa) {
+                    $angsuran_jasa = $alokasi_jasa - $sum_jasa;
+                } else {
+                    $angsuran_jasa = 0;
+                }
+
+                if ($jenis_jasa == '2') {
+                    $angsuran_jasa = $wajib_jasa;
+                    $alokasi_pokok -= $ra[$j]['pokok'];
+                }
+
+                $ra[$j]['jasa'] = $angsuran_jasa;
+            }
         }
 
         $ra['alokasi'] = $alokasi;
@@ -2489,14 +2529,14 @@ class PinjamanIndividuController extends Controller
                 $pokok = $ra[$x]['pokok'];
                 $jasa = $ra[$x]['jasa'];
 
-                if ($x == 1) {
+                if ($x == $index) {
                     $target_pokok = $pokok;
-                } elseif ($x >= 2) {
+                } elseif ($x > $index) {
                     $target_pokok += $pokok;
                 }
-                if ($x == 1) {
+                if ($x == $index) {
                     $target_jasa = $jasa;
-                } elseif ($x >= 2) {
+                } elseif ($x > $index) {
                     $target_jasa += $jasa;
                 }
 
@@ -2517,7 +2557,7 @@ class PinjamanIndividuController extends Controller
         } else {
             $target_pokok = 0;
             $target_jasa = 0;
-            for ($x = 1; $x <= $jangka; $x++) {
+            for ($x = $index; $x < $jumlah_angsuran; $x++) {
                 $bulan  = substr($tgl, 5, 2);
                 $tahun  = substr($tgl, 0, 4);
 
@@ -2532,14 +2572,14 @@ class PinjamanIndividuController extends Controller
                 $pokok = $ra[$x]['pokok'];
                 $jasa = $ra[$x]['jasa'];
 
-                if ($x == 1) {
+                if ($x == $index) {
                     $target_pokok = $pokok;
-                } elseif ($x >= 2) {
+                } elseif ($x >= $index) {
                     $target_pokok += $pokok;
                 }
-                if ($x == 1) {
+                if ($x == $index) {
                     $target_jasa = $jasa;
-                } elseif ($x >= 2) {
+                } elseif ($x > $index) {
                     $target_jasa += $jasa;
                 }
 

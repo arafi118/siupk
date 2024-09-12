@@ -192,7 +192,20 @@ class GenerateController extends Controller
                 }
             }
 
-            // $tgl_cair = date('Y-m-d', strtotime('-1 month', strtotime($tgl_cair)));
+            $jenis_jasa = $pinkel->jenis_jasa;
+            $jangka = $pinkel->jangka;
+            $sa_pokok = $pinkel->sistem_angsuran;
+            $sa_jasa = $pinkel->sa_jasa;
+            $pros_jasa = $pinkel->pros_jasa;
+
+            $index = 1;
+            $jumlah_angsuran = $jangka + 1;
+            if ($kec->jdwl_angsuran == '1') {
+                $index = 0;
+                $jumlah_angsuran = $jangka;
+                $tgl_cair = date('Y-m-d', strtotime('0 month', strtotime($tgl_cair)));
+            }
+
             $simpan_tgl =$tgl_cair;
             if ($is_pinkel) {
                 $desa = $pinkel->kelompok->d;
@@ -219,12 +232,6 @@ class GenerateController extends Controller
                     $tgl_cair = date('Y-m-d', strtotime('+1 month', strtotime($tgl_cair)));
                 }
             }
-
-            $jenis_jasa = $pinkel->jenis_jasa;
-            $jangka = $pinkel->jangka;
-            $sa_pokok = $pinkel->sistem_angsuran;
-            $sa_jasa = $pinkel->sa_jasa;
-            $pros_jasa = $pinkel->pros_jasa;
 
             $sistem_pokok = ($pinkel->sis_pokok) ? $pinkel->sis_pokok->sistem : '1';
             $sistem_jasa = ($pinkel->sis_jasa) ? $pinkel->sis_jasa->sistem : '1';
@@ -256,7 +263,7 @@ class GenerateController extends Controller
             $ra = [];
             $alokasi_pokok = $alokasi;
             if ($jenis_jasa == '1') {
-                for ($j = 0; $j < $jangka; $j++) {
+                for ($j = $index; $j < $jumlah_angsuran; $j++) {
                     $sisa = $j % $sistem_jasa;
                     $ke = $j / $sistem_jasa;
 
@@ -282,7 +289,7 @@ class GenerateController extends Controller
                 }
             }
 
-            for ($i = 0; $i < $jangka; $i++) {
+            for ($i = $index; $i < $jumlah_angsuran; $i++) {
                 $sisa = $i % $sistem_pokok;
                 $ke = $i / $sistem_pokok;
 
@@ -301,7 +308,7 @@ class GenerateController extends Controller
             }
 
             if ($jenis_jasa != '1') {
-                for ($j = 0; $j < $jangka; $j++) {
+                for ($j = $index; $j < $jumlah_angsuran; $j++) {
                     $sisa = $j % $sistem_jasa;
                     $ke = $j / $sistem_jasa;
 
@@ -333,7 +340,22 @@ class GenerateController extends Controller
             $target_jasa = 0;
 
             $data_rencana = [];
-            for ($x = 0; $x < $jangka; $x++) {
+            if ($index == 1) {
+                $data_rencana[strtotime($tgl_cair)] = [
+                    'loan_id' => $pinkel->id,
+                    'angsuran_ke' => 0,
+                    'jatuh_tempo' => $simpan_tgl,
+                    'wajib_pokok' => 0,
+                    'wajib_jasa' => 0,
+                    'target_pokok' => $target_pokok,
+                    'target_jasa' => $target_jasa,
+                    'lu' => date('Y-m-d H:i:s'),
+                    'id_user' => 1
+                ];
+                $rencana[] = $data_rencana[strtotime($tgl_cair)];
+            }
+
+            for ($x = $index; $x < $jumlah_angsuran; $x++) {
                 $bulan  = substr($tgl_cair, 5, 2);
                 $tahun  = substr($tgl_cair, 0, 4);
 
@@ -348,14 +370,14 @@ class GenerateController extends Controller
                 $pokok = $ra[$x]['pokok'];
                 $jasa = $ra[$x]['jasa'];
 
-                if ($x == 0) {
+                if ($x == $index) {
                     $target_pokok = $pokok;
-                } elseif ($x >= 1) {
+                } elseif ($x > $index) {
                     $target_pokok += $pokok;
                 }
-                if ($x == 0) {
+                if ($x == $index) {
                     $target_jasa = $jasa;
-                } elseif ($x >= 1) {
+                } elseif ($x > $index) {
                     $target_jasa += $jasa;
                 }
 
