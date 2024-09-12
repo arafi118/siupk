@@ -2385,7 +2385,7 @@ class PinjamanIndividuController extends Controller
         if ($kec->jdwl_angsuran == '1') {
             $index = 0;
             $jumlah_angsuran = $jangka;
-            $tgl_cair = date('Y-m-d', strtotime(' 0 month', strtotime($tgl_cair)));
+            $tgl = date('Y-m-d', strtotime(' 0 month', strtotime($tgl)));
         }
 
         if ($pinj_i->anggota->d) {
@@ -2520,7 +2520,7 @@ class PinjamanIndividuController extends Controller
 
             $target_pokok = 0;
             $target_jasa = 0;
-            for ($x = 1; $x <= $jangka; $x++) {
+            for ($x = $index; $x < $jumlah_angsuran; $x++) {
                 $bulan  = substr($tgl, 5, 2);
                 $tahun  = substr($tgl, 0, 4);
 
