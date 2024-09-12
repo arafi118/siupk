@@ -127,11 +127,14 @@
                 <li>
                     Pihak Pertama berjanji akan mengangsur kepada Pihak Kedua selama {{ $pinkel->jangka }} bulan,
                     @php
-                    $wajib_pokok = $pinkel->alokasi / $pinkel->jangka;
-                    $wajib_jasa = ($pinkel->pros_jasa * $pinkel->alokasi) / $pinkel->jangka;
-                    @endphp
-                     dengan masing-masing angsuran pokok sebesar Rp. {{ number_format($wajib_pokok) }}- dan bunga sebesar Rp. {{ number_format($wajib_jasa) }}  .
-                     Serta selambat-lambatnya akan dibayar lunas pada tanggal {{ Tanggal::tglLatin($pinkel->tgl_proposal) }}.
+                    $wajib_pokok = ($pinkel->alokasi / $pinkel->jangka);
+                    $wajib_jasa = (($pinkel->pros_jasa * $pinkel->alokasi) / $pinkel->jangka) / 100;
+                @endphp
+                
+                     dengan masing-masing angsuran pokok sebesar Rp. {{ number_format($wajib_pokok) }}- dan bunga 
+                     sebesar Rp. {{ number_format($wajib_jasa) }}  .
+
+                     Serta selambat-lambatnya akan dibayar lunas pada tanggal {{ Tanggal::tglLatin( $pinkel->ra_i->last()->jatuh_tempo) }}.
                 </li>
                 <li>
                     Pihak Pertama bersedia memberikan jaminan berupa 
@@ -192,26 +195,26 @@
                             </td>
                         </tr>
                     </table> <br>
-                    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
+                    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;" align="center">
                         <tr>
-                            <td width="10" align="center"> &nbsp; </td>
-                            <td width="70" align="center"> Pihak Pertama </td>
                             <td width="60" align="center"> &nbsp; </td>
                             <td width="50" align="center"> Pihak Kedua </td>
+                            <td width="10" align="center"> &nbsp; </td>
+                            <td width="70" align="center"> Pihak Pertama </td>
                         </tr> <br> <br> <br> <br> <br><br><br><br>
                         <tr>
-                            <td width="10" align="center"> &nbsp; </td>
-                            <td width="70" align="center">{{ $pinkel->anggota->namadepan }} <br>
-                                Debitur </td>
                             <td width="50" align="center"> &nbsp; </td>
                             <td width="60" align="center">{{ $dir->namadepan }} {{ $dir->namabelakang }}<br> Direktur Utama LKM
                             </td>
+                            <td width="10" align="center"> &nbsp; </td>
+                            <td width="70" align="center">{{ $pinkel->anggota->namadepan }} <br>
+                                Debitur </td>
                         </tr> <br>
                         <tr>
-                            <td width="10" align="center"> &nbsp; </td>
-                            <td width="70" align="center"> SAKSI PIHAK PERTAMA, </td>
                             <td width="60" align="center"> &nbsp; </td>
                             <td width="50" align="center"> SAKSI PIHAK KEDUA, </td>
+                            <td width="10" align="center"> &nbsp; </td>
+                            <td width="70" align="center"> SAKSI PIHAK PERTAMA, </td>
                         </tr> <br> <br> <br> <br> <br><br>
                         <tr>
                             <td width="10" align="center"> &nbsp; </td>
