@@ -181,6 +181,14 @@
                     </tr>
                     <tr>
                         <td width="55%">&nbsp;</td>
+                        <td align="center">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td width="55%">&nbsp;</td>
+                        <td align="center">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td width="55%">&nbsp;</td>
                         <td align="center">
                             <b>{{ $pinkel->anggota->namadepan }}</b>
                         </td>
