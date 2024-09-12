@@ -77,12 +77,6 @@
         </tr>
         <tr>
             <td width="5"> &nbsp; </td>
-            <td> Pekerjaan </td>
-            <td align="center"> : </td>
-            <td> {{ $pinkel->anggota->u->nama_usaha }} </td>
-        </tr>
-        <tr>
-            <td width="5"> &nbsp; </td>
             <td> Berkedudukan di </td>
             <td align="center"> : </td>
             <td> {{ $pinkel->anggota->alamat }} </td>
