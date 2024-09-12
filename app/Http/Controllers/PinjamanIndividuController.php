@@ -1530,48 +1530,6 @@ class PinjamanIndividuController extends Controller
         }
     }
 
-    public function RencanaAngsuran($id, $data)
-    {
-
-        $keuangan = new Keuangan;
-
-        if (request()->get('status') == 'A') {
-            $data['rencana'] = RencanaAngsuranI::where([
-                ['loan_id', $id],
-                ['angsuran_ke', '!=', '0']
-                
-            ])->orderBy('jatuh_tempo', 'ASC')->get();
-        } else {
-            $data['rencana'] = $this->generate($id)->getData()->rencana;
-        }
-        $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
-            'jpp',
-            'anggota',
-            'anggota.d',
-            'anggota.d.sebutan_desa',
-            'sis_pokok',
-            'jasa',
-            'saldo_pinjaman'
-        ])->first();
-
-        $data['dir'] = User::where([
-            ['level', '1'],
-            ['jabatan', '1'],
-            ['lokasi', Session::get('lokasi')]
-        ])->first();
-
-        $data['keuangan'] = $keuangan;
-        $data['judul'] = 'Rencana Angsuran (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
-        $view = view('perguliran_i.dokumen.rencana_angsuran', $data)->render();
-
-        if ($data['type'] == 'pdf') {
-            $pdf = PDF::loadHTML($view);
-            return $pdf->stream();
-        } else {
-            return $view;
-        }
-    }
-
     public function rekeningKoran($id, $data)
     {
         $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
@@ -1991,6 +1949,54 @@ class PinjamanIndividuController extends Controller
 
         $data['judul'] = 'Tanda Terima (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
         $view = view('perguliran_i.dokumen.tanda_terima', $data)->render();
+
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view);
+            return $pdf->stream();
+        } else {
+            return $view;
+        }
+    }
+
+    public function RencanaAngsuran($id, $data)
+    {
+
+        $keuangan = new Keuangan;
+
+        if (request()->get('status') == 'A') {
+            $data['rencana'] = RencanaAngsuranI::where([
+                ['loan_id', $id],
+                ['angsuran_ke' => function ($query) use ($data) {
+                    $operator = '!=';
+                    if ($data['kec']->jdwl_angsuran == '1') {
+                        $operator = '>=';
+                    }
+                    $query->where('angsuran_ke', $operator, '0');
+                }],
+                
+            ])->orderBy('jatuh_tempo', 'ASC')->get();
+        } else {
+            $data['rencana'] = $this->generate($id)->getData()->rencana;
+        }
+        $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
+            'jpp',
+            'anggota',
+            'anggota.d',
+            'anggota.d.sebutan_desa',
+            'sis_pokok',
+            'jasa',
+            'saldo_pinjaman'
+        ])->first();
+
+        $data['dir'] = User::where([
+            ['level', '1'],
+            ['jabatan', '1'],
+            ['lokasi', Session::get('lokasi')]
+        ])->first();
+
+        $data['keuangan'] = $keuangan;
+        $data['judul'] = 'Rencana Angsuran (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
+        $view = view('perguliran_i.dokumen.rencana_angsuran', $data)->render();
 
         if ($data['type'] == 'pdf') {
             $pdf = PDF::loadHTML($view);
