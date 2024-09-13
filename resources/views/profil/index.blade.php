@@ -5,38 +5,58 @@
 @extends('layouts.base')
 
 @section('content')
+<style>
+    .row.align-items-center {
+    margin-bottom: 15px; /* Mengatur jarak antara gambar dan tulisan */
+}
 
+.avatar {
+    margin-right: 15px; /* Jarak antara gambar dan teks */
+}
+
+.nama_user1 {
+    font-size: 1.25rem; /* Ukuran font nama */
+}
+
+.text-sm {
+    font-size: 0.875rem; /* Ukuran font jabatan */
+}
+
+</style>
 
         <div class="app-main__inner">
             <div class="main-card mb-3 card" id="profile">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-sm-auto col-4">
-                            <div class="avatar avatar-xl position-relative pointer" id="fileUpload" style="width: 100px; height: 100px; margin-top: 30px;">
-                                <img src="{{ asset('/storage/profil/' . $user->foto) }}" alt="bruce"
-                                     class="w-100 rounded-circle shadow-sm" id="preview">
+                        <div class="row align-items-center">
+                            <div class="col-sm-auto col-4">
+                                <div class="avatar avatar-xl position-relative pointer" id="fileUpload">
+                                    <img src="{{ asset('/storage/profil/' . $user->foto) }}" alt="profile"
+                                         class="w-100 rounded-circle shadow-sm" id="preview"
+                                         style="width: 150px; height: 100px; margin-top: 2px;">
+                                </div>
+                        
+                                <form action="/profil/{{ $user->id }}" method="post" enctype="multipart/form-data"
+                                      id="formUpload">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="file" name="logo" id="logo" class="d-none">
+                                </form>
                             </div>
-    
-                            <form action="/profil/{{ $user->id }}" method="post" enctype="multipart/form-data"
-                                id="formUpload">
-                                @csrf
-                                @method('PUT')
-    
-                                <input type="file" name="logo" id="logo" class="d-none">
-                            </form>
-                        </div>
-                        <div class="col-md-10 mb-3">
-                            <div class="h-30">
-                                <h5 class="mb-1 font-weight-bolder nama_user">
-                                    <b> {{ Session::get('nama') }}</b>
+                        
+                            <!-- Kontainer untuk nama dan jabatan -->
+                            <div class="col-md-10 d-flex flex-column justify-content-center">
+                                <h5 class="mb-1 font-weight-bolder nama_user1">
+                                    <b>{{ Session::get('nama') }}</b>
                                 </h5>
                                 <p class="mb-0 font-weight-normal text-sm">
-                                    {{ $user->j ? $user->j->nama_jabatan : '' }}
+                                    ( {{ $user->j ? $user->j->nama_jabatan : '' }} )
                                 </p>
                             </div>
-                        </div>
-                        <div class="col-sm-auto ms-sm-auto mt-sm-0 mt-3 d-flex">
-                        </div>
+                        
+                            <div class="col-sm-auto ms-sm-auto mt-sm-0 mt-3 d-flex">
+                            </div>
+                        </div>                        
                     </div>
                 </div>
             </div>      

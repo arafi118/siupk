@@ -31827,10 +31827,24 @@ button,
   width: 330px;
 }
 .search-wrapper.active .input-holder {
-  width: 290px;
+  width: 790px;
   border-radius: 50px;
   background: rgba(0, 0, 0, 0.05);
   transition: all 0.5s cubic-bezier(0, 0.105, 0.035, 1.57);
+}
+
+/* Untuk tablet (layar dengan lebar maksimal 768px) */
+@media (max-width: 768px) {
+  .search-wrapper.active .input-holder {
+    width: 110%; /* Sesuaikan dengan kebutuhan */
+  }
+}
+
+/* Untuk ponsel (layar dengan lebar maksimal 480px) */
+@media (max-width: 480px) {
+  .search-wrapper.active .input-holder {
+    width: 110%; /* Sesuaikan dengan kebutuhan */
+  }
 }
 .search-wrapper.active .input-holder .search-input {
   opacity: 1;
@@ -31846,10 +31860,23 @@ button,
   transform: rotate(-45deg);
 }
 .search-wrapper.active .btn-close {
-  left: 300px;
+  left: 793px;
   opacity: 0.6 !important;
   transition: all 0.6s cubic-bezier(0, 0.105, 0.035, 1.57);
   transition-delay: 0.5s;
+}
+  /* Untuk tablet (layar dengan lebar maksimal 768px) */
+@media (max-width: 768px) {
+  .search-wrapper.active .btn-close  {
+    width: 50%; /* Sesuaikan dengan kebutuhan */
+  }
+}
+
+/* Untuk ponsel (layar dengan lebar maksimal 480px) */
+@media (max-width: 480px) {
+  .search-wrapper.active .btn-close  {
+    width: 50%; /* Sesuaikan dengan kebutuhan */
+  }
 }
 .search-wrapper.active .btn-close:hover {
   opacity: 1 !important;

@@ -13313,7 +13313,7 @@ button,
   width: 330px;
 }
 .search-wrapper.active .input-holder {
-  width: 290px;
+  width: 2 90px;
   border-radius: 50px;
   background: rgba(0, 0, 0, 0.05);
   transition: all 0.5s cubic-bezier(0, 0.105, 0.035, 1.57);
