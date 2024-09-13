@@ -31827,7 +31827,7 @@ button,
   width: 330px;
 }
 .search-wrapper.active .input-holder {
-  width: 740px;
+  width: 640px;
   border-radius: 50px;
   background: rgba(0, 0, 0, 0.05);
   transition: all 0.5s cubic-bezier(0, 0.105, 0.035, 1.57);
@@ -31860,7 +31860,7 @@ button,
   transform: rotate(-45deg);
 }
 .search-wrapper.active .btn-close {
-  left: 750px;
+  left: 650px;
   opacity: 0.6 !important;
   transition: all 0.6s cubic-bezier(0, 0.105, 0.035, 1.57);
   transition-delay: 0.5s;
