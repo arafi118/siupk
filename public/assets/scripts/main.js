@@ -30714,7 +30714,7 @@ button,
 }
 .app-header .app-header__content .app-header-left {
   display: flex;
-  align-items: center;
+  width: 300px;
 }
 .app-header .app-header__content .app-header-right {
   align-items: center;
@@ -31836,14 +31836,14 @@ button,
 /* Untuk tablet (layar dengan lebar maksimal 768px) */
 @media (max-width: 768px) {
   .search-wrapper.active .input-holder {
-    width: 110%; /* Sesuaikan dengan kebutuhan */
+    width: 90%; /* Sesuaikan dengan kebutuhan */
   }
 }
 
 /* Untuk ponsel (layar dengan lebar maksimal 480px) */
 @media (max-width: 480px) {
   .search-wrapper.active .input-holder {
-    width: 110%; /* Sesuaikan dengan kebutuhan */
+    width: 90%; /* Sesuaikan dengan kebutuhan */
   }
 }
 .search-wrapper.active .input-holder .search-input {
@@ -31868,14 +31868,14 @@ button,
   /* Untuk tablet (layar dengan lebar maksimal 768px) */
 @media (max-width: 768px) {
   .search-wrapper.active .btn-close  {
-    width: 50%; /* Sesuaikan dengan kebutuhan */
+    width: 30%; /* Sesuaikan dengan kebutuhan */
   }
 }
 
 /* Untuk ponsel (layar dengan lebar maksimal 480px) */
 @media (max-width: 480px) {
   .search-wrapper.active .btn-close  {
-    width: 50%; /* Sesuaikan dengan kebutuhan */
+    width: 30%; /* Sesuaikan dengan kebutuhan */
   }
 }
 .search-wrapper.active .btn-close:hover {
