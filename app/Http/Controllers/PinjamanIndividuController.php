@@ -833,20 +833,23 @@ class PinjamanIndividuController extends Controller
                 'jangka' => $data['jangka'],
                 'pros_jasa' => $data['pros_jasa'],
                 'jenis_jasa' => $data['jenis_jasa'],
-                'nama_barang' => $data['nama_barang'],
-                'id_agent' => $data['id_agent'],
                 'sistem_angsuran' => $data['sistem_angsuran_pokok'],
                 'sa_jasa' => $data['sistem_angsuran_jasa'],
-                'jaminan' => json_encode($jaminan),
                 'status' => $data['status']
             ];
 
             if ($request->status == 'P') {
                 $update['jenis_pp'] = $request->jenis_produk_pinjaman;
+                $update['jaminan'] = json_encode($jaminan);
+                $update['nama_barang'] = $request->nama_barang;
+                $update['id_agent'] = $request->id_agent;
             }
 
             if ($request->status == 'V') {
                 $update['catatan_verifikasi'] = $data['catatan_verifikasi'];
+                $update['jaminan'] = $request->jaminan;
+                $update['nama_barang'] = $request->nama_barang;
+                $update['id_agent'] = $request->id_agent;
             }
         }
 
