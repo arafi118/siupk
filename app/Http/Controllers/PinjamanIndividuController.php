@@ -847,9 +847,6 @@ class PinjamanIndividuController extends Controller
 
             if ($request->status == 'V') {
                 $update['catatan_verifikasi'] = $data['catatan_verifikasi'];
-                $update['jaminan'] = $request->jaminan;
-                $update['nama_barang'] = $request->nama_barang;
-                $update['id_agent'] = $request->id_agent;
             }
         }
 
