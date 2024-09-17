@@ -218,6 +218,7 @@ Route::get('/daftar_individu', [PinjamanIndividuController::class, 'DaftarAnggot
 
 Route::get('/detail_i/{perguliran_i}', [PinjamanIndividuController::class, 'detail'])->middleware('auth');
 Route::get('/perguliran_i/proposal', [PinjamanIndividuController::class, 'proposal'])->middleware('auth');
+Route::get('/perguliran_i/jaminan/{id}', [PinjamanIndividuController::class, 'EditJaminan'])->middleware('auth');
 Route::get('/perguliran_i/verified', [PinjamanIndividuController::class, 'verified'])->middleware('auth');
 Route::get('/perguliran_i/waiting', [PinjamanIndividuController::class, 'waiting'])->middleware('auth');
 Route::get('/perguliran_i/aktif', [PinjamanIndividuController::class, 'aktif'])->middleware('auth');

@@ -51,6 +51,12 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
     'file' => 'tandaTerimaJaminan',
     'withExcel' => false,
     ],
+
+    [
+    'title' => 'Permohonan Kredit Barang',
+    'file' => 'PermohonanKreditBarang',
+    'withExcel' => false,
+    ],
     ];
 
     $dokumen_pencairan = [
@@ -169,11 +175,11 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
                 </div>
                 @if ($perguliran_i->status == 'P')
                 <div class="page-title-actions">
-                    <button type="button" data-bs-toggle="tooltip" title="EDIT PROPOSAL" data-bs-placement="bottom"
+                    <button type="button" data-bs-toggle="tooltip" data-bs-placement="bottom"
                         class="btn-shadow me-3 btn btn-success" id="BtnEditProposal">
                         <i class="fa fa-edit"></i>&nbsp; EDIT PROPOSAL
                     </button>
-                    <button type="button" data-bs-toggle="tooltip" title="HAPUS PROPOSAL" data-bs-placement="bottom"
+                    <button type="button" data-bs-toggle="tooltip" data-bs-placement="bottom"
                         class="btn-shadow me-3 btn btn-danger" id="HapusProposal">
                         <i class="fa fa-trash"></i>&nbsp; HAPUS PROPOSAL
                     </button>
@@ -214,7 +220,7 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
     @section('modal')
     {{-- Modal Edit Proposal --}}
     <div class="modal fade" id="EditProposal" tabindex="-1" aria-labelledby="EditProposalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="EditProposalLabel">

@@ -38,6 +38,29 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-md-4">
+            <div class="position-relative mb-3">
+                <label for="id_agent" class="form-label">Nama Agen</label>
+                <select class="js-example-basic-single form-control" name="id_agent" id="id_agent" style="width: 100%;">
+                 
+                    @foreach ($agent as $ag)
+                        <option {{ $ag->id == $perguliran_i->id_agent ? 'selected' : '' }} value="{{ $ag->id }}">
+                            ( {{ $ag->nomorid}} )  {{ $ag->agent}}
+                        </option>
+                    @endforeach
+                </select>
+                <small class="text-danger" id="msg_id_agent"></small>            
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="position-relative mb-3">
+                <label for="nama_barang" class="form-label">Nama Barang</label>
+                <input autocomplete="off" type="text" name="nama_barang" id="nama_barang" value="{{ $perguliran_i->nama_barang }}" class="form-control">
+                <small class="text-danger" id="msg_nama_barang"></small>
+            </div>
+        </div>                               
+    </div>    
+    <div class="row">
         <div class="col-md-6">
             <div class="position-relative mb-3">
                     <label for="jenis_jasa_proposal" class="form-label">Jenis Jasa</label>
@@ -67,7 +90,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="position-relative mb-3">
                     <label for="sistem_angsuran_pokok_proposal" class="form-label">Sistem Angs. Pokok</label>
                     <select class="form-control" name="sistem_angsuran_pokok_proposal" id="sistem_angsuran_pokok_proposal">
@@ -81,7 +104,7 @@
                     <small class="text-danger" id="msg_sistem_angsuran_pokok_proposal"></small>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="position-relative mb-3">
                 <label for="sistem_angsuran_jasa_proposal" class="form-label">Sistem Angs. Jasa</label>
                 <select class="form-control" name="sistem_angsuran_jasa_proposal" id="sistem_angsuran_jasa_proposal">
@@ -94,9 +117,22 @@
                 <small class="text-danger" id="msg_sistem_angsuran_jasa_proposal"></small>
             </div>
         </div>
+        <div class="col-md-4">
+            <div class="position-relative mb-3">
+                <label for="jaminan" class="form-label">Jaminan</label>
+                <select class="js-example-basic-single form-control" name="jaminan" id="jaminan" style="width: 100%;">
+                    @foreach ($editjaminan as $j)
+                        <option {{ ($jaminan['jenis_jaminan'] == $j['id']) ? 'selected':'' }} value="{{ $j['id'] }}">
+                            {{ $j['nama'] }}
+                        </option>
+                    @endforeach
+                </select>
+                <small class="text-danger" id="msg_jaminan"></small>                                                                                                                                             
+            </div>
+        </div>
+        
+        <div class="row" id="formJaminan"></div>
     </div>
-
-
 
     <div class="card">
         <div class="card-body p-2">
@@ -112,4 +148,15 @@
         dateFormat: 'dd/mm/yy'
     });
 
+    $(document).on('change', '#jaminan', function () {
+        jaminan()
+    })
+
+    function jaminan() {
+        let jaminan = $('#jaminan').val();
+        $.get('/perguliran_i/jaminan/' + jaminan, function(result) {
+            $('#formJaminan').html(result.view)
+        })
+    }
+    jaminan()
 </script>

@@ -310,7 +310,7 @@ class PinjamanIndividuController extends Controller
             'success' => true,
             'view' => view('pinjaman_i.partials.jaminan')->with(compact('id'))->render()
         ]);
-    }
+    }   
 
     /**
      * Store a newly created resource in storage.
@@ -327,7 +327,8 @@ class PinjamanIndividuController extends Controller
             'sistem_angsuran_pokok',
             'sistem_angsuran_jasa',
             'jenis_produk_pinjaman',
-            'nama_barang'
+            'nama_barang',
+            'nomor_sertifikat'
         ]);
 
         $validate = Validator::make($request->all(), [
@@ -502,13 +503,46 @@ class PinjamanIndividuController extends Controller
         $jenis_jasa = JenisJasa::all();
         $sistem_angsuran = SistemAngsuran::all();
         $jenis_pp = JenisProdukPinjaman::where('lokasi', '0')->get();
+        $agent = Agent::where('lokasi', Session::get('lokasi'))->get();
+
 
         $jenis_jasa_dipilih = $perguliran_i->jenis_jasa;
         $sistem_angsuran_pokok = $perguliran_i->sistem_angsuran;
         $sistem_angsuran_jasa = $perguliran_i->sa_jasa;
         $jenis_pp_dipilih = $perguliran_i->jenis_pp;
 
-        return view('perguliran_i.partials.edit_proposal')->with(compact('perguliran_i', 'jenis_jasa', 'sistem_angsuran', 'jenis_pp', 'jenis_jasa_dipilih', 'sistem_angsuran_pokok', 'sistem_angsuran_jasa', 'jenis_pp_dipilih'));
+        $editjaminan = [
+            [
+                'id' => '1',
+                'nama' => 'Surat Tanah',
+            ],
+            [
+                'id' => '2',
+                'nama' => 'BPKB',
+            ],
+            [
+                'id' => '3',
+                'nama' => 'SK. Pegawai',
+            ],
+            [
+                'id' => '4',
+                'nama' => 'Lain Lain',
+            ],
+        ];
+
+        $jaminan = json_decode($perguliran_i->jaminan, true);
+        Session::put('jaminan', $jaminan);
+
+        return view('perguliran_i.partials.edit_proposal')->with(compact('perguliran_i','jaminan','editjaminan', 'agent', 'jenis_jasa', 'sistem_angsuran', 'jenis_pp', 'jenis_jasa_dipilih', 'sistem_angsuran_pokok', 'sistem_angsuran_jasa', 'jenis_pp_dipilih'));
+    }
+
+         public function EditJaminan($id)
+    {
+        $jaminan = Session::get('jaminan');
+        return response()->json([
+            'success' => true,
+            'view' => view('perguliran_i.partials.jaminan')->with(compact('id','jaminan'))->render()
+        ]);
     }
 
     /**
@@ -557,6 +591,11 @@ class PinjamanIndividuController extends Controller
                 'pros_jasa_proposal',
                 'jenis_jasa_proposal',
                 'sistem_angsuran_pokok_proposal',
+                'nama_barang',
+                'id_agent',
+                'jaminan',
+                'nomor_sertifikat',
+                'nomor',
                 'sistem_angsuran_jasa_proposal'
             ]);
 
@@ -567,12 +606,26 @@ class PinjamanIndividuController extends Controller
                 'pros_jasa_proposal' => 'required',
                 'jenis_jasa_proposal' => 'required',
                 'sistem_angsuran_pokok_proposal' => 'required',
+                'nama_barang' => 'required',
+                'id_agent' => 'required',
+                'jaminan'     => 'required',
                 'sistem_angsuran_jasa_proposal' => 'required'
             ]);
+
+            // $jaminan = [];
+            // foreach ($request->data_jaminan as $key => $val) {
+            //     $val = (Keuangan::startWith($key, 'nilai')) ? str_replace(',', '', str_replace('.00', '', $val)) : $val;
+    
+            //     $jaminan[$key] = $val;
+            // }
+            // $jaminan['jenis_jaminan'] = $request->jaminan;
 
             $data['jangka'] = $data['jangka_proposal'];
             $data['pros_jasa'] = $data['pros_jasa_proposal'];
             $data['jenis_jasa'] = $data['jenis_jasa_proposal'];
+            $data['nama_barang'] = $data['nama_barang'];
+            $data['id_agent'] = $data['id_agent'];
+            $data['jaminan'] = $data['jaminan'];
             $data['sistem_angsuran_pokok'] = $data['sistem_angsuran_pokok_proposal'];
             $data['sistem_angsuran_jasa'] = $data['sistem_angsuran_jasa_proposal'];
         } elseif ($request->status == 'W') {
@@ -782,8 +835,12 @@ class PinjamanIndividuController extends Controller
                 'jangka' => $data['jangka'],
                 'pros_jasa' => $data['pros_jasa'],
                 'jenis_jasa' => $data['jenis_jasa'],
+                'nama_barang' => $data['nama_barang'],
+                'id_agent' => $data['id_agent'],
+                'jaminan' => $data['jaminan'],
                 'sistem_angsuran' => $data['sistem_angsuran_pokok'],
                 'sa_jasa' => $data['sistem_angsuran_jasa'],
+                // 'jaminan' => json_encode($jaminan),
                 'status' => $data['status']
             ];
 
@@ -1385,6 +1442,31 @@ class PinjamanIndividuController extends Controller
         }
     }
 
+    public function PermohonanKreditBarang($id, $data)
+    {
+        $keuangan = new Keuangan;
+
+        $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
+            'jpp',
+            'jasa',
+            'anggota',
+            'anggota.d',
+            'anggota.d.sebutan_desa',
+        ])->first();
+
+        $data['keuangan'] = $keuangan;
+
+        $data['judul'] = 'Permohonan Kredit Barang (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
+        $view = view('perguliran_i.dokumen.permohonan_kredit_barang', $data)->render();
+
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view);
+            return $pdf->stream();
+        } else {
+            return $view;
+        }
+    }
+
     public function baMusyawarahDesa($id, $data)
     {
         $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
@@ -1660,7 +1742,7 @@ class PinjamanIndividuController extends Controller
             return $view;
         }
     }
-
+    
     public function sph($id, $data)
     {
         $keuangan = new Keuangan;

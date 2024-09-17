@@ -31836,14 +31836,14 @@ button,
 /* Untuk tablet (layar dengan lebar maksimal 768px) */
 @media (max-width: 768px) {
   .search-wrapper.active .input-holder {
-    width: 90%; /* Sesuaikan dengan kebutuhan */
+    width: 100%; /* Sesuaikan dengan kebutuhan */
   }
 }
 
 /* Untuk ponsel (layar dengan lebar maksimal 480px) */
 @media (max-width: 480px) {
   .search-wrapper.active .input-holder {
-    width: 90%; /* Sesuaikan dengan kebutuhan */
+    width: 100%; /* Sesuaikan dengan kebutuhan */
   }
 }
 .search-wrapper.active .input-holder .search-input {
