@@ -328,6 +328,7 @@ class PinjamanIndividuController extends Controller
             'sistem_angsuran_jasa',
             'jenis_produk_pinjaman',
             'nama_barang',
+            'id_agent',
             'nomor_sertifikat'
         ]);
 
@@ -341,6 +342,7 @@ class PinjamanIndividuController extends Controller
             'sistem_angsuran_jasa' => 'required',
             'jenis_produk_pinjaman' => 'required',
             'nama_barang' => 'required',
+            'id_agent'  => 'required',
             'data_jaminan' => 'required|array',
             'data_jaminan.*' => 'required',
         ]);
@@ -363,6 +365,7 @@ class PinjamanIndividuController extends Controller
             'id_pinkel' => '0',
             'jenis_pp' => $request->jenis_produk_pinjaman,
             'nama_barang' => $request->nama_barang,
+            'id_agent' => $request->id_agent,
             'fee_supplier' => '0',
             'fee_agent' => '0',
             'depe' => '0',
