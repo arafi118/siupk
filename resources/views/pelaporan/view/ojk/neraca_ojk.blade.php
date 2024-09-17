@@ -317,7 +317,8 @@ if ($point_number % 2 == 0) {
                 $bg = 'rgb(255, 255, 255)';
             }
             @endphp
-                        <tr style="background: {{ $bg }}">                <td class="left bottom" align="center">&nbsp; 1.</td>
+                <tr style="background: {{ $bg }}">   
+                <td class="left bottom" align="center">&nbsp; 1.</td>
                 <td class="left bottom" align="left"> &nbsp; Total Aset</td>
                 <td class="left bottom" align="right">&nbsp;</td>
                 <td class="left bottom right" align="right">{{ number_format($saldo_aset, 2) }}</td>
