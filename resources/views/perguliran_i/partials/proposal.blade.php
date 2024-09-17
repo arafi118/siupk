@@ -73,9 +73,6 @@
                     <h5 class="card-title">Input Rekom Verifikator</h5>
                     <input type="hidden" name="_id" id="_id" value="{{ $perguliran_i->id }}">
                     <input type="hidden" name="status" id="status" value="V">
-                    <input type="hidden" name="jaminan" id="jaminan" value="{{$perguliran_i->jaminan}}">
-                    <input type="hidden" name="nama_barang" id="nama_barang" value="{{$perguliran_i->nama_barang}}">
-                    <input type="hidden" name="id_agent" id="id_agent" value="{{$perguliran_i->id_agent}}">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="DOMContentLoaded position-relative mb-3">
