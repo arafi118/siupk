@@ -593,9 +593,6 @@ class PinjamanIndividuController extends Controller
                 'sistem_angsuran_pokok_proposal',
                 'nama_barang',
                 'id_agent',
-                'jaminan',
-                'nomor_sertifikat',
-                'nomor',
                 'sistem_angsuran_jasa_proposal'
             ]);
 
@@ -608,7 +605,6 @@ class PinjamanIndividuController extends Controller
                 'sistem_angsuran_pokok_proposal' => 'required',
                 'nama_barang' => 'required',
                 'id_agent' => 'required',
-                'jaminan'     => 'required',
                 'sistem_angsuran_jasa_proposal' => 'required'
             ]);
 
@@ -625,7 +621,6 @@ class PinjamanIndividuController extends Controller
             $data['jenis_jasa'] = $data['jenis_jasa_proposal'];
             $data['nama_barang'] = $data['nama_barang'];
             $data['id_agent'] = $data['id_agent'];
-            $data['jaminan'] = $data['jaminan'];
             $data['sistem_angsuran_pokok'] = $data['sistem_angsuran_pokok_proposal'];
             $data['sistem_angsuran_jasa'] = $data['sistem_angsuran_jasa_proposal'];
         } elseif ($request->status == 'W') {
@@ -837,7 +832,6 @@ class PinjamanIndividuController extends Controller
                 'jenis_jasa' => $data['jenis_jasa'],
                 'nama_barang' => $data['nama_barang'],
                 'id_agent' => $data['id_agent'],
-                'jaminan' => $data['jaminan'],
                 'sistem_angsuran' => $data['sistem_angsuran_pokok'],
                 'sa_jasa' => $data['sistem_angsuran_jasa'],
                 'jaminan' => json_encode($jaminan),
