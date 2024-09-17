@@ -612,13 +612,13 @@ class PinjamanIndividuController extends Controller
                 'sistem_angsuran_jasa_proposal' => 'required'
             ]);
 
-            // $jaminan = [];
-            // foreach ($request->data_jaminan as $key => $val) {
-            //     $val = (Keuangan::startWith($key, 'nilai')) ? str_replace(',', '', str_replace('.00', '', $val)) : $val;
-    
-            //     $jaminan[$key] = $val;
-            // }
-            // $jaminan['jenis_jaminan'] = $request->jaminan;
+                $jaminan = [];
+                foreach ($request->data_jaminan as $key => $val) {
+                    $val = (Keuangan::startWith($key, 'nilai')) ? str_replace(',', '', str_replace('.00', '', $val)) : $val;
+        
+                    $jaminan[$key] = $val;
+                }
+                $jaminan['jenis_jaminan'] = $request->jaminan;
 
             $data['jangka'] = $data['jangka_proposal'];
             $data['pros_jasa'] = $data['pros_jasa_proposal'];
@@ -840,7 +840,7 @@ class PinjamanIndividuController extends Controller
                 'jaminan' => $data['jaminan'],
                 'sistem_angsuran' => $data['sistem_angsuran_pokok'],
                 'sa_jasa' => $data['sistem_angsuran_jasa'],
-                // 'jaminan' => json_encode($jaminan),
+                'jaminan' => json_encode($jaminan),
                 'status' => $data['status']
             ];
 

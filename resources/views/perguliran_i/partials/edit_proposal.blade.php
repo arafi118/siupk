@@ -122,9 +122,10 @@
                 <label for="jaminan" class="form-label">Jaminan</label>
                 <select class="js-example-basic-single form-control" name="jaminan" id="jaminan" style="width: 100%;">
                     @foreach ($editjaminan as $j)
-                        <option {{ ($jaminan['jenis_jaminan'] == $j['id']) ? 'selected':'' }} value="{{ $j['id'] }}">
+                        <option {{ (is_array($jaminan) && isset($jaminan['jenis_jaminan']) && $jaminan['jenis_jaminan'] == $j['id']) ? 'selected' : '' }} value="{{ $j['id'] }}">
                             {{ $j['nama'] }}
                         </option>
+
                     @endforeach
                 </select>
                 <small class="text-danger" id="msg_jaminan"></small>                                                                                                                                             
