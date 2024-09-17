@@ -205,6 +205,11 @@
                             <div class="row" id="formJaminan"></div>
                             
                         </form>
+                        <div class="col-md-12">
+                            <div class="font-icon-wrapper">
+                                <p><p><b>Catatan : </b> ( Jika Ada data atau inputan yang kosong bisa di isi ( 0 ) atau ( - ) )</p></p>
+                            </div>
+                        </div>
                         <button type="submit" id="SimpanProposal" class="btn btn-dark btn-sm custom-button">Simpan Proposal</button>
                         <br><br><br>
                     </div>

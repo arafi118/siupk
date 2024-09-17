@@ -86,14 +86,14 @@
         <div class="col-md-4">
             <div class="position-relative mb-3">
                 <label for="alamat">Alamat KTP</label>
-                <input autocomplete="off" maxlength="16" type="text" name="alamat" id="alamat" class="form-control"
+                <input autocomplete="off" type="text" name="alamat" id="alamat" class="form-control"
                     value="">
                 <small class="text-danger" id="msg_alamat"></small>
             </div>
         </div>
         <div class="col-md-4">
             <div class="position-relative mb-3">
-                <label for="domisi">Domisi saat ini</label>
+                <label for="domisi">Domisili saat ini</label>
                 <input autocomplete="off" type="text" name="domisi" id="domisi" class="form-control">
                 <small class="text-danger" id="msg_domisi"></small>
             </div>
@@ -118,7 +118,7 @@
             <div class="position-relative mb-3">
                 <label for="no_telp">No. Telp</label>
                 <input autocomplete="off" type="text" name="no_telp" id="no_telp" class="form-control"
-                    value="+62">
+                    value="08">
                 <small class="text-danger" id="msg_no_telp"></small>
             </div>
         </div>
@@ -220,7 +220,11 @@
             </div>
         </div>
     </div>
-
+    <div class="col-md-12">
+        <div class="font-icon-wrapper">
+            <p><p><b>Catatan : </b> ( Jika Ada data atau inputan yang kosong bisa di isi ( 0 ) atau ( - ) )</p></p>
+        </div>
+    </div>
     <button type="submit" class="btn btn-github btn-sm float-end btn-dark mb-0" id="SimpanPenduduk">Simpan Penduduk</button>
 </form>
 
