@@ -12,6 +12,13 @@
     padding-top: 5px;
     display: none;
     }
+    .tox .tox-statusbar__branding svg {
+    fill: rgba(34, 47, 62, .8);
+    height: 1.14em;
+    vertical-align: -.28em;
+    width: 3.6em;
+    display: none;
+}
 </style>
     <div class="app-main__inner">
         <div class="tab-content">

@@ -86,74 +86,74 @@
                 <div align="right">1.</div>
             </td>
             <td width="60%" colspan="2" class="style9 align-justify">Pendapatan Keluarga 1 (satu) bulan</td>
-            <td colspan="3" class="style9 align-justify">: Rp. </td>
+            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
         </tr>
         <tr>
             <td colspan="2" class="style9 align-justify">Pendapatan dari usaha suami</td>
-            <td colspan="3" class="style9 align-justify">: Rp. </td>
+            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
         </tr>
         <tr>
             <td colspan="2" class="style9 align-justify">Pendapatan dari usaha istri</td>
-            <td colspan="3" class="style9 align-justify">: Rp. </td>
+            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
         </tr>
         <tr>
             <td colspan="2" class="style9 align-justify">Pendapatan dari hasil kebun, sawah, ladang</td>
-            <td colspan="3" class="style9 align-justify">: Rp. </td>
+            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
         </tr>
         <tr>
             <td colspan="2" class="style9 align-justify">Pendapatan lain-lain</td>
-            <td colspan="3" class="style9 align-justify">: Rp. </td>
+            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
         </tr>
         <tr>
             <th colspan="2" class="style9 align-justify">
                 <div align="center" class="style28">Jumlah pendapatan </div>
             </th>
-            <td colspan="3"><strong>: Rp. </strong></td>
+            <td colspan="3"><strong>: Rp. _____________________ </strong></td>
         </tr>
         <tr>
             <td rowspan="10" valign="top" class="style9 align-justify">
                 <div align="right">2.</div>
             </td>
             <td colspan="2" class="style9 align-justify">Pengeluaran keluarga</td>
-            <td colspan="3" class="style9 align-justify">: Rp. </td>
+            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
         </tr>
         <tr>
             <td colspan="2" class="style9 align-justify">Pembelian alat/barang dagangan</td>
-            <td colspan="3" class="style9 align-justify">: Rp. </td>
+            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
         </tr>
         <tr>
             <td colspan="2" class="style9 align-justify">Pengeluaran Kebutuhan Makan/minum</td>
-            <td colspan="3" class="style9 align-justify">: Rp. </td>
+            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
         </tr>
         <tr>
             <td colspan="2" class="style9 align-justify">Pengeluaran Sabun-Cuci-mandi</td>
-            <td colspan="3" class="style9 align-justify">: Rp. </td>
+            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
         </tr>
         <tr>
             <td colspan="2" class="style9 align-justify">Pengeluaran untuk Sekolah</td>
-            <td colspan="3" class="style9 align-justify">: Rp. </td>
+            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
         </tr>
         <tr>
             <td colspan="2" class="style9 align-justify">Pengeluaran untuk sosial</td>
-            <td colspan="3" class="style9 align-justify">: Rp. </td>
+            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
         </tr>
         <tr>
             <td colspan="2" class="style9 align-justify">Pengeluaran listrik, air, telphon dll</td>
-            <td colspan="3" class="style9 align-justify">: Rp. </td>
+            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
         </tr>
         <tr>
             <td colspan="2" class="style9 align-justify">Angsuran Piutang di bank/koperasi/perorangan</td>
-            <td colspan="3" class="style9 align-justify">: Rp. </td>
+            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
         </tr>
         <tr>
             <td colspan="2" class="style9 align-justify">Pengeluaran lain-lain</td>
-            <td colspan="3" class="style9 align-justify">: Rp. </td>
+            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
         </tr>
         <tr>
             <td colspan="2" class="style9 align-justify">
                 <div align="center" class="style28"><strong>Jumlah Pengeluaran </strong></div>
             </td>
-            <td colspan="3"><strong>: Rp. </strong></td>
+            <td colspan="3"><strong>: Rp. _____________________ </strong></td>
         </tr>
         <tr>
             <td colspan="6"><strong>C. IDENTITAS JAMINAN</strong></td>
@@ -163,7 +163,7 @@
                 <div align="right">1.</div>
             </td>
             <td colspan="2" class="style9 align-justify">Tabungan di Bank/Koperasi/BMT atas nama pribadi</td>
-            <td colspan="3" class="style9 align-justify">: Rp. </td>
+            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
         </tr>
         <tr>
             <td class="style9 align-justify">
@@ -171,14 +171,14 @@
             </td>
             <td colspan="2" class="style9 align-justify">Nilai harta lain berupa
                 ...............................................</td>
-            <td colspan="3" class="style9 align-justify">: Rp. </td>
+            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
         </tr>
         <tr>
             <td class="style9 align-justify">&nbsp;</td>
             <td colspan="2" class="style9 align-justify">
                 <div align="center" class="style28"><strong>Total Nilai Jaminan</strong></div>
             </td>
-            <td colspan="3" class="style9 align-justify"><strong>: Rp. </strong></td>
+            <td colspan="3" class="style9 align-justify"><strong>: Rp. _____________________ </strong></td>
         </tr>
         <tr>
             <td colspan="6"><strong>D. PENILAIAN</strong></td>

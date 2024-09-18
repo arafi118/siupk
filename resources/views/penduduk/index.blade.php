@@ -36,6 +36,8 @@
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <h5 class="card-title"></h5>
+                        
+                        <div class="table-responsive">
                         <table class="table table-hover" width="100%">
                             <thead>
                                 <tr>
@@ -51,6 +53,7 @@
 
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 </div>
             </div>
