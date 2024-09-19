@@ -231,16 +231,19 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
     @section('modal')
     {{-- Modal Edit Proposal --}}
     <div class="modal fade" id="EditProposal" tabindex="-1" aria-labelledby="EditProposalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-fullscreen">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="EditProposalLabel">
-                        Edit Proposal Nasabah {{ $perguliran_i->anggota->namadepan }} Loan ID. {{ $perguliran_i->id }}
+                       <b>
+                        Edit Proposal Nasabah {{ $perguliran_i->anggota->namadepan }} 
+                        Loan ID.
+                       </b>
+                        <span class="btn btn-primary">{{ $perguliran_i->id }}</span>
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="LayoutEditProposal">
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Tutup</button>

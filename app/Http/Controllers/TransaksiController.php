@@ -79,6 +79,7 @@ class TransaksiController extends Controller
         }
 
         $api = env('APP_API', 'https://api-whatsapp.sidbm.net');
+        
         return view('transaksi.jurnal_angsuran.individu.index')->with(compact('title', 'pinkel', 'kec', 'api'));
     }
 

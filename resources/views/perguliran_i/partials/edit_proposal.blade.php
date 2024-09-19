@@ -38,7 +38,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="position-relative mb-3">
                 <label for="id_agent" class="form-label">Nama Agen</label>
                 <select class="js-example-basic-single form-control" name="id_agent" id="id_agent" style="width: 100%;">
@@ -52,16 +52,14 @@
                 <small class="text-danger" id="msg_id_agent"></small>            
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-3">
             <div class="position-relative mb-3">
                 <label for="nama_barang" class="form-label">Nama Barang</label>
                 <input autocomplete="off" type="text" name="nama_barang" id="nama_barang" value="{{ $perguliran_i->nama_barang }}" class="form-control">
                 <small class="text-danger" id="msg_nama_barang"></small>
             </div>
-        </div>                               
-    </div>    
-    <div class="row">
-        <div class="col-md-6">
+        </div>    
+        <div class="col-md-3">
             <div class="position-relative mb-3">
                     <label for="jenis_jasa_proposal" class="form-label">Jenis Jasa</label>
                     <select class="form-control" name="jenis_jasa_proposal" id="jenis_jasa_proposal">
@@ -75,7 +73,7 @@
                     <small class="text-danger" id="msg_jenis_jasa_proposal"></small>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
             <div class="position-relative mb-3">
                 <label for="jenis_produk_pinjaman" class="form-label">Jenis Produk Pinjaman</label>
                 <select class="form-control" name="jenis_produk_pinjaman" id="jenis_produk_pinjaman">
@@ -87,8 +85,8 @@
                 </select>
                 <small class="text-danger" id="msg_jenis_produk_pinjaman"></small>
             </div>
-        </div>
-    </div>
+        </div>                           
+    </div>    
     <div class="row">
         <div class="col-md-4">
             <div class="position-relative mb-3">
@@ -132,14 +130,14 @@
             </div>
         </div>
         
-        <div class="row" id="formJaminan"></div>
+        <div id="formJaminan"></div>
     </div>
-
-    <div class="card">
-        <div class="card-body p-2">
-            <div class="d-none d-sm-block p-4"></div>
+    <div class="col-md-12">
+        <div class="font-icon-wrapper">
+            <p><p><b>Catatan : </b> ( Jika Ada data atau inputan yang kosong bisa di isi ( 0 ) atau ( - ) )</p></p>
         </div>
     </div>
+
 </form>
 
 <script>
