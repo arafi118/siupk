@@ -168,6 +168,9 @@
                 <li>
                     Akan dikenakan Pinalti apabila ada pelunasan pinjaman sebelum jangka waktu yang telah disepakati.
                 </li>
+                <li>
+                    {{ str_replace('"', '', stripslashes(strip_tags($kec->redaksi_spk))) }}
+                </li>
             </ol>
         </div>
     </div>

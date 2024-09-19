@@ -471,8 +471,74 @@ class PinjamanIndividuController extends Controller
         $title = 'Detail Pinjaman anggota ' . $perguliran_i->anggota->namadepan;
         $real = RealAngsuranI::where('loan_id', $perguliran_i->id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
         $sistem_angsuran = SistemAngsuran::all();
-        return view('perguliran_i.detail')->with(compact('title', 'perguliran_i', 'real', 'sistem_angsuran'));
+
+        $editjaminan = [
+            [
+                'id' => '1',
+                'nama' => 'Surat Tanah',
+            ],
+            [
+                'id' => '2',
+                'nama' => 'BPKB',
+            ],
+            [
+                'id' => '3',
+                'nama' => 'SK. Pegawai',
+            ],
+            [
+                'id' => '4',
+                'nama' => 'Lain Lain',
+            ],
+        ];
+        
+        $jaminan = json_decode($perguliran_i->jaminan, true);
+        Session::put('jaminan', $jaminan);
+
+        return view('perguliran_i.detail')->with(compact('title', 'perguliran_i', 'real', 'sistem_angsuran','editjaminan'));
     }
+
+    public function Waiting_Edit_Jaminan($id)
+    {
+        $jaminan = Session::get('jaminan');
+        return response()->json([
+            'success' => true,
+            'view' => view('perguliran_i.partials.jaminan')->with(compact('id','jaminan'))->render()
+        ]);
+    }
+    
+    public function Waiting_Jaminan(Request $request, PinjamanIndividu $pinjaman)
+    {
+        $data = $request->only([
+            'jenis_jaminan',
+            'data_jaminan'
+        ]);
+    
+        $validate = Validator::make($data, [
+            'jenis_jaminan' => 'required', 
+            'data_jaminan' => 'array',
+        ]);
+        $data['data_jaminan']['jenis_jaminan'] = $data['jenis_jaminan'];
+        Session::put('jaminan',  $data['data_jaminan']);
+
+        if ($data['jenis_jaminan'] == '1') {
+            $data['data_jaminan']['nilai_jual_tanah'] = str_replace(',', '', str_replace('.00', '', $data['data_jaminan']['nilai_jual_tanah']));
+        } elseif ($data['jenis_jaminan'] == '2') {
+            $data['data_jaminan']['nilai_jual_kendaraan'] = str_replace(',', '', str_replace('.00', '', $data['data_jaminan']['nilai_jual_kendaraan']));
+        } elseif ($data['jenis_jaminan'] == '4') {
+            $data['data_jaminan']['nilai_jaminan'] = str_replace(',', '', str_replace('.00', '', $data['data_jaminan']['nilai_jaminan']));
+        }
+
+        PinjamanIndividu::where('id', $pinjaman->id)->update([
+            'jaminan' => json_encode($data['data_jaminan'])
+        ]);
+
+
+        return response()->json([
+            'success' => true
+        ]);
+    
+    }
+    
 
     public function pelunasan(PinjamanIndividu $perguliran_i)
     {
@@ -538,8 +604,8 @@ class PinjamanIndividuController extends Controller
 
         return view('perguliran_i.partials.edit_proposal')->with(compact('perguliran_i','jaminan','editjaminan', 'agent', 'jenis_jasa', 'sistem_angsuran', 'jenis_pp', 'jenis_jasa_dipilih', 'sistem_angsuran_pokok', 'sistem_angsuran_jasa', 'jenis_pp_dipilih'));
     }
-
-         public function EditJaminan($id)
+    
+    public function EditJaminan($id)
     {
         $jaminan = Session::get('jaminan');
         return response()->json([
@@ -547,7 +613,6 @@ class PinjamanIndividuController extends Controller
             'view' => view('perguliran_i.partials.jaminan')->with(compact('id','jaminan'))->render()
         ]);
     }
-
     /**
      * Update the specified resource in storage.
      */

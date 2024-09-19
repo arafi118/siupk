@@ -147,6 +147,8 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
     'withExcel' => false,
     ],
     ];
+
+    $jenis_jaminan = (strlen($perguliran_i->jaminan) > 5) ? json_decode($perguliran_i->jaminan, true)['jenis_jaminan']:'0';
     @endphp
     @extends('layouts.base')
 
@@ -173,18 +175,27 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
                         </div>
                     </div>
                 </div>
+
                 @if ($perguliran_i->status == 'P')
-                <div class="page-title-actions">
-                    <button type="button" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                        class="btn-shadow me-3 btn btn-success" id="BtnEditProposal">
-                        <i class="fa fa-edit"></i>&nbsp; EDIT PROPOSAL
-                    </button>
-                    <button type="button" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                        class="btn-shadow me-3 btn btn-danger" id="HapusProposal">
-                        <i class="fa fa-trash"></i>&nbsp; HAPUS PROPOSAL
-                    </button>
-                </div>
+                    <div class="page-title-actions">
+                        <button type="button" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                            class="btn-shadow me-3 btn btn-success" id="BtnEditProposal">
+                            <i class="fa fa-edit"></i>&nbsp; EDIT PROPOSAL
+                        </button>
+                        <button type="button" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                            class="btn-shadow me-3 btn btn-danger" id="HapusProposal">
+                            <i class="fa fa-trash"></i>&nbsp; HAPUS PROPOSAL
+                        </button>
+                    </div>
+                @elseif ($perguliran_i->status == 'W')
+                    <div class="page-title-actions">
+                        <button type="button" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                            class="btn-shadow me-3 btn btn-success" id="BtnEditWaitingList">
+                            <i class="fa fa-edit"></i>&nbsp; EDIT JAMINAN NASABAH
+                        </button>
+                    </div>
                 @endif
+
         </div>
     </div>
 
@@ -224,7 +235,7 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="EditProposalLabel">
-                        Edit Proposal Individu {{ $perguliran_i->anggota->namadepan }} Loan ID. {{ $perguliran_i->id }}
+                        Edit Proposal Nasabah {{ $perguliran_i->anggota->namadepan }} Loan ID. {{ $perguliran_i->id }}
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -238,6 +249,47 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
             </div>
         </div>
     </div>
+
+        {{-- Modal Edit Waiting List Jaminan --}}
+        <div class="modal fade" id="EditWaitingList" tabindex="-1" aria-labelledby="EditWaitingList" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="EditWaitingListLabel">
+                            Edit Jaminan Nasabah {{ $perguliran_i->anggota->namadepan }} Loan ID. {{ $perguliran_i->id }}
+                        </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/perguliran_i/waiting_edit_jaminan/{{ $perguliran_i->id }}" method="POST" id="FormEditJaminan">
+                            @csrf
+
+                            @if ($jenis_jaminan == '0')
+                                <div class="position-relative mb-3 kolom_jenis_jaminan">
+                                    <label for="jenis_jaminan" class="form-label">Pilih Jaminan</label>
+                                    <select class="js-example-basic-single form-control" name="jenis_jaminan" id="jenis_jaminan" style="width: 100%;">
+                                        @foreach ($editjaminan as $j)
+                                            <option value="{{ $j['id'] }}">
+                                                {{ $j['nama'] }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <small class="text-danger" id="msg_jaminan"></small>                                                                                                                                               
+                                </div>
+                            @else
+                                <input type="hidden" class="kolom_jenis_jaminan" name="jenis_jaminan" id="jenis_jaminan" value="{{ $jenis_jaminan }}">
+                            @endif
+                                
+                            <div id="formJaminan"></div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Tutup</button>
+                        <button type="button" id="SimpanEditJaminan" class="btn btn-dark btn-sm">Simpan Perubahan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     {{-- Modal Cetak Dokumen Proposal --}}
     <div class="modal fade" id="CetakDokumenProposal" tabindex="-1" aria-labelledby="CetakDokumenProposalLabel"
@@ -609,6 +661,63 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
     @endsection
 
     @section('script')
+    
+
+    <script>
+        
+        $(document).on('change', '#jenis_jaminan', function () {
+        jaminan()
+        })
+
+        function jaminan() {
+            let jaminan = $('#jenis_jaminan').val();
+            $.get('/perguliran_i/waitingjaminan/' + jaminan, function(result) {
+                $('#formJaminan').html(result.view)
+            })
+        }
+        jaminan()
+
+        $('#BtnEditWaitingList').click(function (e) {
+            e.preventDefault()
+            
+            var id = $('#jenis_jaminan').val()
+            $.get('/perguliran_i/jaminan/' + id, function (result) {
+                if (result.success) {
+                    $('#formJaminan').html(result.view)
+                    $('#EditWaitingList').modal('show')
+                }
+            })
+        })
+
+        $(document).on('click', '#SimpanEditJaminan', function (e) {
+            e.preventDefault();
+            $('small').html('');
+
+            var form = $('#FormEditJaminan');
+            $.ajax({
+                type: 'POST',
+                url: form.attr('action'),
+                data: form.serialize(),
+                success: function (result) {
+                    if (result.success) {
+                        Swal.fire('Berhasil', 'Edit Jaminan Nasabah Berhasil.', 'success').then(() => {
+                            $('#EditWaitingList').modal('hide');
+                            $('.kolom_jenis_jaminan').hide()
+                        });
+                    }
+                },
+                error: function (result) {
+                    const response = result.responseJSON;
+                    Swal.fire('Error', 'Cek kembali input yang anda masukkan', 'error');
+                    $.map(response.errors, function (res, key) {
+                        $('#' + key).parent('.input-group.input-group-static').addClass('is-invalid');
+                        $('#FormEditJaminan #msg_' + key).html(res);
+                    });
+                }
+            });
+        });
+
+    </script>
     <script>
          $('.date').datepicker({
         dateFormat: 'dd/mm/yy'
@@ -638,6 +747,7 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
                 $('#EditProposal').modal('show')
             })
         })
+
 
         $('#HapusProposal').click(function (e) {
             e.preventDefault()
@@ -703,6 +813,8 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
                 }
             })
         })
+
+      
 
         $(document).on('change', '.save', function () {
             var form = $('#simpanData')

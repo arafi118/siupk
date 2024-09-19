@@ -210,6 +210,7 @@ Route::get('/perguliran/dokumen/cetak_kartu_angsuran_anggota/{id}/{idtp}/{nia?}'
 Route::post('/perguliran/dokumen', [PinjamanKelompokController::class, 'dokumen'])->middleware('auth');
 
 Route::post('/perguliran/kembali_proposal/{id}', [PinjamanKelompokController::class, 'kembaliProposal'])->middleware('auth');
+Route::post('/perguliran_i/waiting_edit_jaminan/{pinjaman}', [PinjamanIndividuController::class, 'Waiting_Jaminan'])->middleware('auth');
 
 Route::get('/register_proposal_i', [PinjamanIndividuController::class, 'create'])->middleware('auth');
 Route::get('/register_proposal_i/{nia}', [PinjamanIndividuController::class, 'register'])->middleware('auth');
@@ -219,6 +220,7 @@ Route::get('/daftar_individu', [PinjamanIndividuController::class, 'DaftarAnggot
 Route::get('/detail_i/{perguliran_i}', [PinjamanIndividuController::class, 'detail'])->middleware('auth');
 Route::get('/perguliran_i/proposal', [PinjamanIndividuController::class, 'proposal'])->middleware('auth');
 Route::get('/perguliran_i/jaminan/{id}', [PinjamanIndividuController::class, 'EditJaminan'])->middleware('auth');
+Route::get('/perguliran_i/waitingjaminan/{id}', [PinjamanIndividuController::class, 'Waiting_Edit_Jaminan'])->middleware('auth');
 Route::get('/perguliran_i/verified', [PinjamanIndividuController::class, 'verified'])->middleware('auth');
 Route::get('/perguliran_i/waiting', [PinjamanIndividuController::class, 'waiting'])->middleware('auth');
 Route::get('/perguliran_i/aktif', [PinjamanIndividuController::class, 'aktif'])->middleware('auth');
