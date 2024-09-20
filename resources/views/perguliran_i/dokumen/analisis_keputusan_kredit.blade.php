@@ -28,7 +28,7 @@
                     <b>Pengajuan Perorangan {{ $kec->nama_lembaga_sort }}</b>
                 </div>
                 <div style="font-size: 13px;">
-                    <b>Nomor : 53 /VIII/2018</b>
+                    <b>Nomor :_________________</b>
                 </div>
                 <div style="font-size: 13px;">
                     <b>KREDIT BARU</b>
@@ -55,7 +55,8 @@
             <td width="45%">Tempat & tgl lahir</td>
             <td align="center"width="5%">:</td>
             <td>
-                <b>{{ $pinkel->anggota->tempat_lahir }} {{ $pinkel->anggota->tgl_lahir }}</b>
+                <b>{{ $pinkel->anggota->tempat_lahir }} 
+                    {{ \Carbon\Carbon::parse($pinkel->anggota->tgl_lahir)->translatedFormat('d F Y') }}</b>
             </td>
         </tr>
         <tr>

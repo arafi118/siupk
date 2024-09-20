@@ -57,6 +57,12 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
     'file' => 'PermohonanKreditBarang',
     'withExcel' => false,
     ],
+    
+    [
+    'title' => 'surat pernyataan suami',
+    'file' => 'suratpernyataansuami',
+    'withExcel' => false,
+    ],
     ];
 
     $dokumen_pencairan = [
@@ -108,11 +114,6 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
     [
     'title' => 'pengikat diri sebagai penjamin',
     'file' => 'pengikatdirisebagaipenjamin',
-    'withExcel' => false,
-    ],
-    [
-    'title' => 'surat pernyataan suami',
-    'file' => 'suratpernyataansuami',
     'withExcel' => false,
     ],
     [
