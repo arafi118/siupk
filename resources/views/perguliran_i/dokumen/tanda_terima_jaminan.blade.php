@@ -188,7 +188,7 @@
             <p>&nbsp;</p>
             <p>&nbsp;</p>
             <p>
-            {{$pinkel->anggota->namadepan }}
+              {{$pinkel->user->namadepan }}
                 
                 <br>
                 

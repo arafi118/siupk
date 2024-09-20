@@ -1611,7 +1611,8 @@ class PinjamanIndividuController extends Controller
     public function tandaTerimaJaminan($id, $data)
     {
         $data['pinkel'] = PinjamanIndividu::where('id', $id)->with([
-            'anggota'
+            'anggota',
+            'user'
         ])->first();
 
         $data['kec'] = Kecamatan::where('id', Session::get('lokasi'))->first();
