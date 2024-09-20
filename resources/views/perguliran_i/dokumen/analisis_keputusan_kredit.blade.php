@@ -56,7 +56,7 @@
             <td align="center"width="5%">:</td>
             <td>
                 <b>{{ $pinkel->anggota->tempat_lahir }} 
-                    {{ \Carbon\Carbon::parse($pinkel->anggota->tgl_lahir)->translatedFormat('d F Y') }}</b>
+                  {{ \Carbon\Carbon::parse($pinkel->anggota->tgl_lahir)->translatedFormat('d F Y') }}</b>
             </td>
         </tr>
         <tr>
@@ -316,7 +316,7 @@
             <td>
                 {{-- <b>{{ $pinkel->anggota->u->nama_usaha }}</b> --}}
             </td>
-        </tr>
+        </tr><br><br>
         <tr>
             <td align="center"width="5%">8.</td>
             <td colspan="2"width="45%">Lain-lainya :</td>
