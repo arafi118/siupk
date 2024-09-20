@@ -157,8 +157,8 @@
                                 Keterangan: {{$jaminan['keterangan']}},
                                 Nilai Jaminan: {{ number_format($jaminan['nilai_jaminan']) }},
                     @endif
-                    atas Nama {{ $pinkel->anggota->namadepan }} (MASALAH) Yang nilainya dianggap sama dengan uang pinjaman dari Pihak Kedua.
-                     Apabila kemudian hari ternyata {{ $pinkel->anggota->namadepan }} (MASALAH) tidak dapat membayar hutang tersebut sesuai dengan perjanjian ini,
+                    atas Nama {{ $pinkel->anggota->namadepan }} Yang nilainya dianggap sama dengan uang pinjaman dari Pihak Kedua.
+                     Apabila kemudian hari ternyata {{ $pinkel->anggota->namadepan }} tidak dapat membayar hutang tersebut sesuai dengan perjanjian ini,
                      maka Pihak Kedua memiliki hak penuh 
                     atas barang jaminan baik untuk dimiliki {{ $kec->nama_lembaga_sort }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }} maupun dijual/dipindahtangankan kepada orang lain.
                 </li>
