@@ -318,7 +318,7 @@
             </td>
         </tr><br><br>
         <tr>
-            <td align="center"width="5%">8.</td>
+            <td align="center"width="5%">9.</td>
             <td colspan="2"width="45%">Lain-lainya :</td>
             <td align="center"width="5%"></td>
             <td></td>
