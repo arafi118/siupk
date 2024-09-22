@@ -30,9 +30,6 @@
                                 <button class="btn btn-warning btn-sm float-end ms-2" onclick="window.open('/cetak_kop/{{ $nia->id }}')" type="button">
                                     <i class="fa fa-print"></i> Cetak KOP Buku
                                 </button>
-                                <button class="btn btn-warning btn-sm float-end ms-2" onclick="window.open('/cetak_koran/{{ $nia->id }}')" type="button">
-                                    <i class="fa fa-print"></i> Cetak Rekening Koran
-                                </button>
                             </div>
                         </div>
                     </div>
@@ -102,9 +99,13 @@
                                         <div class="col-md-6">&nbsp;</div>
                                         <div class="col-md-3">
                                             <div style="position: relative;">
-                                                <select id="bulan" name="bulan" class="form-control select2" style="padding-left: 10px; padding-right: 30px; appearance: none; -webkit-appearance: none; -moz-appearance: none; border: 1px solid #ccc;">
+                                                <select id="bulants" name="bulants" class="form-control select2" style="padding-left: 10px; padding-right: 30px; appearance: none; -webkit-appearance: none; -moz-appearance: none; border: 1px solid #ccc;">
+                                                
+                                                    <option value="0">
+                                                        Semua Bulan
+                                                    </option>
                                                     @foreach(range(1, 12) as $bulan)
-                                                    <option value="{{ $bulan }}" {{ date('n') == $bulan ? 'selected' : '' }}>
+                                                    <option value="{{$bulan}}" {{ date('n') == $bulan ? 'selected' : '' }}>
                                                         {{ date('F', mktime(0, 0, 0, $bulan, 1)) }}
                                                     </option>
                                                     @endforeach
@@ -116,7 +117,7 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div style="position: relative;">
-                                                <select id="tahun" name="tahun" class="form-control select2" style="padding-left: 10px; padding-right: 30px; appearance: none; -webkit-appearance: none; -moz-appearance: none; border: 1px solid #ccc;">
+                                                <select id="tahunts" name="tahunts" class="form-control select2" style="padding-left: 10px; padding-right: 30px; appearance: none; -webkit-appearance: none; -moz-appearance: none; border: 1px solid #ccc;">
                                                     @foreach(range(date('Y')-5, date('Y')+5) as $tahun)
                                                     <option value="{{ $tahun }}" {{ date('Y') == $tahun ? 'selected' : '' }}>
                                                         {{ $tahun }}
@@ -157,9 +158,6 @@ $(document).ready(function() {
     var currentMonth = currentDate.getMonth() + 1;
     var currentYear = currentDate.getFullYear();
 
-    $('#bulan').val(currentMonth);
-    $('#tahun').val(currentYear);
-
     tableTransaksi(currentMonth, currentYear);
 
     function tableTransaksi(bulan, tahun) {
@@ -175,9 +173,10 @@ $(document).ready(function() {
         });
     }
 
-    $('#bulan, #tahun').change(function() {
-        var bulan = $('#bulan').val();
-        var tahun = $('#tahun').val();
+    $('#bulants, #tahunts').change(function() {
+        var bulan = $('#bulants').val();
+        var tahun = $('#tahunts').val();
+        console.log('Bulan:', bulan, 'Tahun:', tahun); // Tambahkan log ini
         tableTransaksi(bulan, tahun);
     });
 
@@ -252,11 +251,6 @@ $(document).ready(function() {
         });
     });
 
-    function refreshTransaksiContainer() {
-        var bulan = $('#bulan').val();
-        var tahun = $('#tahun').val();
-        tableTransaksi(bulan, tahun);
-    }
 
     function resetForm() {
         $('input[name="jenis_mutasi"]').prop('checked', false);

@@ -358,7 +358,7 @@ Route::post('/simpanan/store', [SimpananController::class, 'store'])->middleware
 
 Route::get('/cetak_kop/{simpanan}', [SimpananController::class, 'kop'])->middleware('auth');
 
-Route::get('/cetak_koran/{simpanan}', [SimpananController::class, 'koran'])->middleware('auth');
+Route::get('/cetak_koran/{cif}/{bulankop}/{tahunkop}', [SimpananController::class, 'koran'])->middleware('auth');
 
 Route::get('/simpanan/get-transaksi', [SimpananController::class, 'getTransaksi'])->middleware('auth');
 

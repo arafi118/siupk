@@ -1,3 +1,23 @@
+@php
+    // Array bulan dalam bahasa Indonesia
+    $bulanIndo = [
+        1 => 'Januari',
+        2 => 'Februari',
+        3 => 'Maret',
+        4 => 'April',
+        5 => 'Mei',
+        6 => 'Juni',
+        7 => 'Juli',
+        8 => 'Agustus',
+        9 => 'September',
+        10 => 'Oktober',
+        11 => 'November',
+        12 => 'Desember'
+    ];
+
+    // Cek apakah bulan 0 atau nilai bulan lainnya
+    $bulanTeks = $bulankop == 0 ? "Sepanjang Tahun $tahunkop" : $bulanIndo[$bulankop] . " $tahunkop";
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,7 +66,7 @@
     </tr>
     <tr>
         <td height="50" colspan="4" class="">
-            <p align="center" class="style6">REKENING KORAN {{ strtoupper($simpanan->js->nama_js) }}</p>
+            <p align="center" class="style6">REKENING KORAN {{ strtoupper($simpanan->js->nama_js) }} <br> {{$bulanTeks}}</p>
         </td>
     </tr>
     <tr>
@@ -91,31 +111,53 @@
         <th width="10%" class="style9">SALDO</th>
         <th width="2%" class="style9">P</th>
     </tr>
-    @php /* $no = 0; $saldosamping = 0; @endphp
-    @foreach($transaksi as $row2)
-    @php
-    $no++;
-    $rek = \App\Models\Rekening::where(['kd_jb' => $kd_jb, 'kd_rekening' => $row2->rekening_kredit])->count();
-    $file = jenisrek("2-{$simpanan->jenis_simpanan}") ? "c_bkm" : "c_bkk";
-    $debit = $rek > 0 ? 0 : $row2->jumlah;
-    $kredit = $rek > 0 ? $row2->jumlah : 0;
-    $prasaldo = $kredit - $debit;
-    $saldosamping += $prasaldo;
-    $user = \App\Models\User::find($row2->id_user);
-    @endphp
+    @php  $no = 0; $sum = 0;  @endphp
+
+                @forelse($transaksi as $index => $trx)
+
+            @php
+                $id_simp = $trx->id_simp; //ini nanti di ganti ambil dari real_simpanan_$lokasi
+                    if (strpos($id_simp, '-') !== false) {
+                        // Jika ada tanda "-", pisahkan menjadi dua bagian
+                        list($kd_trx, $cif) = explode("-", $id_simp);
+                    } else {
+                        // Jika tidak ada tanda "-", atur kd_trx = 0 dan cif = id_simp
+                        $kd_trx = 0;
+                        $cif = $id_simp;
+                    }
+
+                
+                    $jumlah = floatval($trx->jumlah); // Ensure $trx->jumlah is numeric
+                    
+                    if (substr($trx->rekening_kredit, 0, 3) == '2.1') {
+                        $real_d = $jumlah;
+                        $real_k = 0;
+                        $sum += $real_d;
+                    } elseif (substr($trx->rekening_debit, 0, 3) == '2.1') {
+                        $real_d = 0;
+                        $real_k = $jumlah;
+                        $sum -= $real_k;
+                    } else {
+                        $real_d = $jumlah;
+                        $real_k = $jumlah;
+                    }
+                        
+            @endphp
     <tr>
-        <td width="4%" height="30" class="style9">{{ $no }}</td>
-        <td width="10%" class="style9 align-center">{{ $row2->tgl_transaksi }}</td>
-        <td width="6%" class="style9 align-center">{{ $row2->idt }}</td>
-        <td width="40%" class="style9">{{ $row2->keterangan_transaksi }}</td>
-        <td width="10%" class="style9 align-right">{{ number_format($debit) }}</td>
-        <td width="10%" class="style9 align-right">{{ number_format($kredit) }}</td>
-        <td width="10%" class="style9 align-right">{{ number_format($saldosamping) }}</td>
-        <td width="2%" class="style9 align-center">{{ $user->ins }}</td>
+        <td width="4%" height="30" class="style9">{{ $index + 1 }}</td>
+        <td width="10%" class="style9 align-center">{{ $trx->tgl_transaksi }}</td>
+        <td width="6%" class="style9 align-center">{{ $trx->idt }}</td>
+        <td width="40%" class="style9">{{ $trx->keterangan_transaksi }}</td>
+        <td width="10%" class="style9 align-right">{{ number_format($real_d) }}</td>
+        <td width="10%" class="style9 align-right">{{ number_format($real_k) }}</td>
+        <td width="10%" class="style9 align-right">{{ number_format($sum) }}</td>
+        <td width="2%" class="style9 align-center">{{ $trx->id_user }}</td>
     </tr>
-    @endforeach
-    
-    @endphp
+            @empty
+                <tr>
+                    <td colspan="9" class="text-center">Tidak ada transaksi di periode ini</td>
+                </tr>
+            @endforelse
 </table>
 </body>
 

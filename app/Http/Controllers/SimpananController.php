@@ -81,14 +81,19 @@ class SimpananController extends Controller
         $tahun = request()->input('tahun');
         $cif = request()->input('cif');
 
-        $transaksi = Transaksi::where('id_simp', 'LIKE', "%-$cif")
-            ->whereMonth('tgl_transaksi', $bulan)
-            ->whereYear('tgl_transaksi', $tahun)
-            ->orderBy('tgl_transaksi', 'asc')
-            ->get();
+        $transaksiQuery = Transaksi::where('id_simp', 'LIKE', "%-$cif")
+            ->whereYear('tgl_transaksi', $tahun);
 
-        return view('simpanan.partials.detail-transaksi', compact('transaksi'));
+        // Jika bulan tidak 0, tambahkan filter bulan
+        if ($bulan != 0) {
+            $transaksiQuery->whereMonth('tgl_transaksi', $bulan);
+        }
+        $transaksi  = $transaksiQuery->orderBy('tgl_transaksi', 'asc')->get();
+        $bulankop   = $bulan;
+        $tahunkop   = $tahun;
+        return view('simpanan.partials.detail-transaksi', compact('transaksi','bulankop','tahunkop','cif'));
     }
+
 
     public function detailAnggota($id)
     {
@@ -152,7 +157,6 @@ class SimpananController extends Controller
         ]);
     }
 
-
     public function Kuasa($id)
     {
         return response()->json([
@@ -160,16 +164,6 @@ class SimpananController extends Controller
             'view' => view('simpanan.partials.lembaga')->with(compact('id'))->render()
         ]);
     }
-
-
-
-
-
-
-
-
-
-
 
     public function show(Simpanan $simpanan)
     {
@@ -189,12 +183,24 @@ class SimpananController extends Controller
         $title = 'Cetak KOP buku ' . $simpanan->anggota->namadepan;
         return view('simpanan.partials.cetak_kop')->with(compact('title', 'simpanan'));
     }
-    public function koran(Simpanan $simpanan)
+
+    public function koran($cif, $bulankop, $tahunkop)
     {
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
-        $simpanan = $simpanan->where('id', $simpanan->id)->with(['anggota', 'js'])->first();
-        $title = 'Cetak Rekening Koran' . $simpanan->anggota->namadepan;
-        return view('simpanan.partials.cetak_koran')->with(compact('title', 'simpanan', 'kec'));
+        $simpanan = Simpanan::where('id', $cif)->with(['anggota', 'js'])->first();
+        
+        $transaksiQuery = Transaksi::where('id_simp', 'LIKE', "%-$cif")
+            ->whereYear('tgl_transaksi', $tahunkop);
+
+        // Jika bulan tidak 0, tambahkan filter bulan
+        if ($bulankop != 0) {
+            $transaksiQuery->whereMonth('tgl_transaksi', $bulankop);
+        }
+        $transaksi  = $transaksiQuery->orderBy('tgl_transaksi', 'asc')->get();
+
+        $title = 'Cetak Rekening Koran ' . $simpanan->anggota->namadepan;
+
+        return view('simpanan.partials.cetak_koran')->with(compact('title', 'transaksi', 'simpanan', 'kec', 'bulankop', 'tahunkop'));
     }
 
     public function simpanTransaksi(Request $request)

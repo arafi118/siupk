@@ -2,12 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\app",
+    "\\app\\Http",
+    "\\app\\Http\\Controllers",
     "\\app\\Models",
-    "\\public",
     "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\pelaporan\\view\\perkembangan_piutang"
+    "\\resources\\views\\pelaporan\\view",
+    "\\resources\\views\\simpanan",
+    "\\resources\\views\\simpanan\\partials"
   ],
-  "SelectedNode": "\\public\\generate_bunga.php",
+  "SelectedNode": "\\resources\\views\\simpanan\\partials\\cetak_koran.blade.php",
   "PreviewInSolutionExplorer": false
 }

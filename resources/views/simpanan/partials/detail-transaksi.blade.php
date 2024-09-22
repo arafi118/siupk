@@ -31,19 +31,19 @@ $sum =0;
                     }
 
                 
+                    $jumlah = floatval($trx->jumlah); // Ensure $trx->jumlah is numeric
+                    
                     if (substr($trx->rekening_kredit, 0, 3) == '2.1') {
-                        $real_d         = $trx->jumlah;
-                        $real_k         = 0;
-                        $sum            = $sum + $real_d;
+                        $real_d = $jumlah;
+                        $real_k = 0;
+                        $sum += $real_d;
                     } elseif (substr($trx->rekening_debit, 0, 3) == '2.1') {
-                        $real_d         = 0;
-                        $real_k         = $trx->jumlah;
-                        $sum            = $sum - $real_k;
+                        $real_d = 0;
+                        $real_k = $jumlah;
+                        $sum -= $real_k;
                     } else {
-                        // Jika tidak memenuhi kedua kondisi di atas, gunakan nilai default
-                        $real_d         =  $trx->jumlah;
-                        $real_k         =  $trx->jumlah;
-                        // $sum tidak berubah dalam kasus ini
+                        $real_d = $jumlah;
+                        $real_k = $jumlah;
                     }
                         
             @endphp
@@ -67,4 +67,7 @@ $sum =0;
             @endforelse
         </tbody>
     </table>
+    <button class="btn btn-secondary btn-sm float-end ms-2" onclick="window.open('/cetak_koran/{{ $cif }}/{{$bulankop}}/{{$tahunkop}}')" type="button">
+        <i class="fa fa-print"></i> Cetak Rekening Koran
+    </button>
 </div>
