@@ -68,7 +68,7 @@
                 <br>
                 <br>
                 <div>
-                    {{-- <b>{{ $dir->namadepan . ' ' . $dir->namabelakang }}</b> --}}
+                    <b>{{ $dir->namadepan . ' ' . $dir->namabelakang }}</b>
                 </div>
             </td>
         </tr>
