@@ -133,6 +133,7 @@
                 $warna = '';
                 $real_pokok = 0;
                 $real_jasa = 0;
+                $nunggak_pokok  =0;
                 $bulan_ini = date('Y-m-t', strtotime($ra->jatuh_tempo));
                 if ($bulan_ini <= $bulan) {
                     $target_pokok = $ra->target_pokok;
