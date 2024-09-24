@@ -10,12 +10,13 @@
 <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
     <tr>
         <td align="center" height="30" colspan="4" class="style3 bottom" style="font-size: 15px;">
-            <br>{{$kec->nama_lembaga_long}}
-            <br>SANDI LKM {{$kec->sandi_lkm}}
-            <br>LAPORAN POSISI KEUANGAN
-            <br>{{ strtoupper($sub_judul) }}</b>
+            <br><b>{{$kec->nama_lembaga_long}}</b>
+            <br><b>SANDI LKM {{$kec->sandi_lkm}}</b>
+            <br><b>LAPORAN POSISI KEUANGAN</b>
+            <br><b>{{ strtoupper($sub_judul) }}</b>
         </td>
     </tr>
+    
     <tr>
         <td>&nbsp;</td>
     </tr>
@@ -287,7 +288,10 @@
             @php
                 $s = $saldo_aset; // saldo aset
                 $sl = $saldo_a; 
-                $press = ($s / $sl) * 100; // Menghitung persentase
+                $press = 0; // Menghitung persentase
+                if ($sl > 0){
+                    $press = ($s / $sl) * 100;
+                }
             @endphp
 @php
 $bg = 'rgb(230, 230, 230)';
