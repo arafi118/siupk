@@ -343,8 +343,8 @@ class PinjamanIndividuController extends Controller
             'jenis_produk_pinjaman' => 'required',
             'nama_barang' => 'required',
             'id_agent'  => 'required',
-            'data_jaminan' => 'required|array',
-            'data_jaminan.*' => 'required',
+            'data_jaminan' => 'required|array'
+            // 'data_jaminan.*' => 'required',
         ]);
 
         if ($validate->fails()) {
