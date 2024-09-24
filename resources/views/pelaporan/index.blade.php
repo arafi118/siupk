@@ -177,7 +177,7 @@
         $(document).on('click', '#Preview', async function(e) {
             e.preventDefault()
 
-            $(this).parent('div').parent('div').find('form').find('#type').val('pdf')
+            $(this).parent('form').find('#type').val('pdf')
             var file = $('select#laporan').val()
             if (file == 'calk') {
                 await $('textarea#sub_laporan').val(quill.container.firstChild.innerHTML)
