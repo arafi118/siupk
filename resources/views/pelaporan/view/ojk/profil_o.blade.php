@@ -60,7 +60,7 @@ $keuangan = new Keuangan();
     }
 
 </style>
-<table width="97%" border="0" align="center" cellpadding="3" cellspacing="0">
+{{-- <table width="97%" border="0" align="center" cellpadding="3" cellspacing="0">
     <tr align="center">
         <td colspan="3" width="10%" class="style6 bottom">
             <br>
@@ -72,7 +72,7 @@ $keuangan = new Keuangan();
             </span>
         </td>
     </tr>
-</table>
+</table> --}}
 <table width="97%" border="0" align="center" cellpadding="3" cellspacing="0">
     <tr>
         <td class="style6 align-center" colspan="3"><b>PROFIL LKM</b> <br>
@@ -199,8 +199,8 @@ $keuangan = new Keuangan();
     </tr>
     <tr>
         <td width="2%" class="style9">9.</td>
-        <td width="30%" class="style9">Direksi dan Komisaris</td>
-        <td width="60%" class="style9">: </td>
+        <td width="30%" class="style9">Direksi dan Komisaris :</td>
+        <td width="60%" class="style9"> </td>
     </tr>
     <tr>
         <td width="2%" class="style9"></td>
@@ -216,14 +216,49 @@ $keuangan = new Keuangan();
                 </tr>
 
                 @foreach ($kec->saham as $sa)
+                @php
+                    // Count the number of non-empty entries for direksi and komisaris
+                    $direksiCount = ($sa->nama_direksi ? 1 : 0) + ($sa->jab_direksi ? 1 : 0);
+                    $komCount = ($sa->nama_kom ? 1 : 0) + ($sa->jab_kom ? 1 : 0);
+            
+                    // Determine the maximum count
+                    $maxCount = max($direksiCount, $komCount);
+                @endphp
+            
                 <tr>
-                    <td class="style9 bottom align-center" width="50%">{{$sa->nama_direksi}}&nbsp;</td>
-                    <td class="style9 bottom align-center" width="50%">{{$sa->jab_direksi}}&nbsp;</td>
-                    <th>&nbsp;</th>
-                    <td class="style9 bottom align-center" width="50%">{{$sa->nama_kom}}&nbsp;</td>
-                    <td class="style9 bottom align-center" width="50%">{{$sa->jab_kom}}&nbsp;</td>
+                    @for ($i = 0; $i < $maxCount; $i++)
+                        @if ($i == 0)
+                            @if ($sa->nama_direksi)
+                                <td class="style9 bottom align-center" width="50%">{{$sa->nama_direksi}}&nbsp;</td>
+                            @else
+                                <td class="style9 bottom align-center" width="50%">&nbsp;</td>
+                            @endif
+            
+                            @if ($sa->jab_direksi)
+                                <td class="style9 bottom align-center" width="50%">{{$sa->jab_direksi}}&nbsp;</td>
+                            @else
+                                <td class="style9 bottom align-center" width="50%">&nbsp;</td>
+                            @endif
+                        @endif
+                        <th>&nbsp;</th>
+
+                        @if ($i == 0)
+                            @if ($sa->nama_kom)
+                                <td class="style9 bottom align-center" width="50%">{{$sa->nama_kom}}&nbsp;</td>
+                            @else
+                                <td class="style9 bottom align-center" width="50%">&nbsp;</td>
+                            @endif
+            
+                            @if ($sa->jab_kom)
+                                <td class="style9 bottom align-center" width="50%">{{$sa->jab_kom}}&nbsp;</td>
+                            @else
+                                <td class="style9 bottom align-center" width="50%">&nbsp;</td>
+                            @endif
+                        @endif
+                    @endfor
                 </tr>
-                @endforeach
+            @endforeach
+            
 
                 <tr>
                     <td class="style9 " width="50%">&nbsp;</td>
