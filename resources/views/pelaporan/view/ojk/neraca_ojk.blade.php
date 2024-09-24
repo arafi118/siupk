@@ -10,12 +10,13 @@
 <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
     <tr>
         <td align="center" height="30" colspan="4" class="style3 bottom" style="font-size: 15px;">
-            <br>{{$kec->nama_lembaga_long}}
-            <br>SANDI LKM {{$kec->sandi_lkm}}
-            <br>LAPORAN POSISI KEUANGAN
-            <br>{{ strtoupper($sub_judul) }}</b>
+            <br><b>{{$kec->nama_lembaga_long}}</b>
+            <br><b>SANDI LKM {{$kec->sandi_lkm}}</b>
+            <br><b>LAPORAN POSISI KEUANGAN</b>
+            <br><b>{{ strtoupper($sub_judul) }}</b>
         </td>
     </tr>
+    
     <tr>
         <td>&nbsp;</td>
     </tr>
@@ -269,7 +270,10 @@
             @php
                 $k = $aset[1]['sd_bulan_ini'] + $aset[2]['sd_bulan_ini']; // Menjumlahkan kas
                 $l = $liabilitas[6]['sd_bulan_ini'] + $liabilitas[7]['sd_bulan_ini'] + $liabilitas[8]['sd_bulan_ini'] + $liabilitas[9]['sd_bulan_ini']; // Menjumlahkan Liabilitas
-                $persentase = ($k / $l) * 100; // Menghitung persentase
+                $persentase = 0; // Menghitung persentase
+                if ($l > 0) {
+                    $persentase = ($k / $l) * 100;
+                }
             @endphp
                 <tr style="background: rgb(150, 150, 150); font-weight: bold;">
                     <th colspan="3">Jumlah Liabilitas Dan Ekuitas </th>
@@ -284,7 +288,10 @@
             @php
                 $s = $saldo_aset; // saldo aset
                 $sl = $saldo_a; 
-                $press = ($s / $sl) * 100; // Menghitung persentase
+                $press = 0; // Menghitung persentase
+                if ($sl > 0){
+                    $press = ($s / $sl) * 100;
+                }
             @endphp
 @php
 $bg = 'rgb(230, 230, 230)';
