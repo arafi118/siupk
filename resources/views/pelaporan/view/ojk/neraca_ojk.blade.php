@@ -269,7 +269,10 @@
             @php
                 $k = $aset[1]['sd_bulan_ini'] + $aset[2]['sd_bulan_ini']; // Menjumlahkan kas
                 $l = $liabilitas[6]['sd_bulan_ini'] + $liabilitas[7]['sd_bulan_ini'] + $liabilitas[8]['sd_bulan_ini'] + $liabilitas[9]['sd_bulan_ini']; // Menjumlahkan Liabilitas
-                $persentase = ($k / $l) * 100; // Menghitung persentase
+                $persentase = 0; // Menghitung persentase
+                if ($l > 0) {
+                    $persentase = ($k / $l) * 100;
+                }
             @endphp
                 <tr style="background: rgb(150, 150, 150); font-weight: bold;">
                     <th colspan="3">Jumlah Liabilitas Dan Ekuitas </th>
