@@ -630,7 +630,8 @@
                         states.push({
                             "id": item.id,
                             "name": item.namadepan +
-                                ' [' + item.nama_desa + ']' +
+                            ' [' + item.nama_desa + ']' +
+                                ' - ' + item.id + 
                                 ' [' + item.nik + ']',
                             "value": item.id
                         });
