@@ -5,15 +5,18 @@
             ->orWhere('web_alternatif', explode('//', URL::to('/'))[1])
             ->first();@endphp
 @if ($pinj_aktif)
-    <div class="alert alert-danger text-black" role="alert">
-        <span class="text-sm">
-            <b>{{ ucwords(strtolower($pinj_aktif->anggota->namadepan)) }}</b> masih memiliki kewajiban
-            angsuran pinjaman dengan
-            <a href="/detail_i/{{ $pinj_aktif->id }}" target="_blank" class="alert-link text-black">
-                Loan ID. {{ $pinj_aktif->id }}
-            </a>
-        </span>
-    </div>
+
+                                    @foreach ($pinj_aktif as $pa)
+                                            <div class="alert alert-danger text-black" role="alert">
+                                                <span class="text-sm">
+                                                    <b>{{ ucwords(strtolower($pa->anggota->namadepan)) }}</b> masih memiliki kewajiban
+                                                    angsuran pinjaman dengan
+                                                    <a href="/detail_i/{{ $pa->id }}" target="_blank" class="alert-link text-black">
+                                                        Loan ID. {{ $pa->id }}
+                                                    </a>
+                                                </span>
+                                            </div>
+                                    @endforeach
 @endif
 
 <div class="row">
