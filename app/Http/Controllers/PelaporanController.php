@@ -1790,7 +1790,7 @@ class PelaporanController extends Controller
                             });
                     })
                     ->orderBy($tb_kel . '.desa', 'ASC')
-                    ->orderBy($tb_pinkel . '.id', 'ASC');
+                    ->orderBy($tb_pinkel . '.tgl_cair', 'ASC');
             },
             'pinjaman_kelompok.sis_pokok'
         ])->get();
@@ -1880,7 +1880,7 @@ class PelaporanController extends Controller
                         ]);
                     })
                     ->orderBy($tb_kel . '.desa', 'ASC')
-                    ->orderBy($tb_pinkel . '.id', 'ASC');
+                    ->orderBy($tb_pinkel . '.tgl_cair', 'ASC');
             },
             'pinjaman_kelompok.real' => function ($query) use ($tgl_awal, $tgl_akhir) {
                 $query->whereBetween('tgl_transaksi', [$tgl_awal, $tgl_akhir]);
@@ -2299,7 +2299,7 @@ class PelaporanController extends Controller
                 }
             ])
             ->orderBy($tb_kel . '.desa', 'ASC')
-            ->orderBy($tb_pinkel . '.id', 'ASC')->get();
+            ->orderBy($tb_pinkel . '.tgl_cair', 'ASC')->get();
 
         $view = view('pelaporan.view.perkembangan_piutang.pelunasan', $data)->render();
         $pdf = PDF::loadHTML($view)->setPaper('A4', 'landscape');
