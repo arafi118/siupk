@@ -95,11 +95,11 @@
                             <span class="btn-inner--icon"><i class="fas fa-file-circle-exclamation"></i></span>
                         </button>
                         <button type="button" data-idt="{{ $idt }}"
-                        class="btn btn-github btn-icon-only btn-tooltip btn-delete"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus"
-                                    data-container="body" data-animation="true">
-                                    <span class="btn-inner--icon"><i class="fas fa-trash-can"></i></span>
-                                </button>
+                            class="btn btn-github btn-icon-only btn-tooltip btn-delete"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus"
+                            data-container="body" data-animation="true">
+                            <span class="btn-inner--icon"><i class="fas fa-trash-can"></i></span>
+                        </button>
                     </div>
                 </td>
             </tr>

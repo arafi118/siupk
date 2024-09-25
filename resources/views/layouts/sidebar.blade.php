@@ -45,6 +45,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="/database/saham">
+                            <i class="metismenu-icon">
+                            </i>Direksi dan Komisaris
+                        </a>
+                    </li>
+                    <li>
                         <a href="/pengaturan/invoice">
                             <i class="metismenu-icon">
                             </i>Invoice

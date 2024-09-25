@@ -1,3 +1,9 @@
+@php
+    use App\Models\Kecamatan;
+
+    $kecamatan = Kecamatan::where('web_kec', explode('//', URL::to('/'))[1])
+            ->orWhere('web_alternatif', explode('//', URL::to('/'))[1])
+            ->first();@endphp
 @if ($pinj_aktif)
     <div class="alert alert-danger text-black" role="alert">
         <span class="text-sm">
@@ -278,7 +284,7 @@
                             style="background-color: rgb(240, 148, 0);">
                             <b><i class="fa fa-refresh"></i> &nbsp; KEMBALI KE PROPOSAL</b>
                         </button>
-                        <button type="button" id="Simpan" {{ $pinj_aktif ? 'disabled' : '' }}
+                        <button type="button" id="Simpan" {{ $pinj_aktif && $kecamatan->id != 280 ? 'disabled' : '' }}
                             class="btn btn-secondary flex-grow-1 ms-2" style="background-color: rgb(112, 109, 109);">
                             <b><i class="fa fa-search-plus"></i> Cairkan</b>
                         </button>

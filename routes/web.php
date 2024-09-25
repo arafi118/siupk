@@ -21,6 +21,7 @@ use App\Http\Controllers\PinjamanKelompokController;
 use App\Http\Controllers\SopController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\SahamController;
 use App\Http\Controllers\SimpananController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
@@ -166,10 +167,12 @@ Route::get('/database/anggota/detail_anggota/{id}', [AnggotaController::class, '
 
 Route::get('/database/supplier/', [SupplierController::class, 'register'])->middleware('auth');
 Route::get('/database/agent/', [AgentController::class, 'register'])->middleware('auth');
+Route::get('/database/saham/', [SahamController::class, 'register'])->middleware('auth');
 
 Route::resource('/database/desa', DesaController::class)->middleware('auth');
 Route::resource('/database/supplier', SupplierController::class)->middleware('auth');
 Route::resource('/database/agent', AgentController::class)->middleware('auth');
+Route::resource('/database/saham', SahamController::class)->middleware('auth');
 Route::resource('/database/kelompok', KelompokController::class)->middleware('auth');
 Route::resource('/database/penduduk', AnggotaController::class)->middleware('auth');
 
@@ -279,6 +282,7 @@ Route::post('/transaksi/tutup_buku', [TransaksiController::class, 'simpanTutupBu
 Route::post('/transaksi/simpan_laba', [TransaksiController::class, 'simpanAlokasiLaba'])->middleware('auth');
 Route::post('/transaksi/reversal', [TransaksiController::class, 'reversal'])->middleware('auth');
 Route::post('/transaksi/hapus', [TransaksiController::class, 'hapus'])->middleware('auth');
+Route::post('/Saham/hapus', [SahamController::class, 'hapus'])->middleware('auth');
 
 Route::get('/transaksi/angsuran/lpp/{id}', [TransaksiController::class, 'lpp'])->middleware('auth');
 Route::get('/transaksi/angsuran_i/lpp/{id}', [TransaksiController::class, 'lppIndividu'])->middleware('auth');
