@@ -4,13 +4,12 @@
     "\\app",
     "\\app\\Http",
     "\\app\\Http\\Controllers",
-    "\\app\\Models",
     "\\resources",
     "\\resources\\views",
+    "\\resources\\views\\pelaporan",
     "\\resources\\views\\pelaporan\\view",
-    "\\resources\\views\\simpanan",
-    "\\resources\\views\\simpanan\\partials"
+    "\\resources\\views\\pelaporan\\view\\perkembangan_piutang"
   ],
-  "SelectedNode": "\\resources\\views\\simpanan\\partials\\cetak_koran.blade.php",
+  "SelectedNode": "\\app\\Http\\Controllers\\PelaporanController.php",
   "PreviewInSolutionExplorer": false
 }
