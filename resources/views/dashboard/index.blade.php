@@ -921,8 +921,8 @@
         });
 
         // Pie chart
-        var myChart = new Chart(ctx2, {
-            type: 'bar',
+            var myChart = new Chart(ctx2, {
+            type: 'pie', 
             data: {
                 labels: [
                     'SPP Pokok',
@@ -930,14 +930,10 @@
                     'UEP Pokok', 
                     'UEP Jasa', 
                     'PL Jasa', 
-                    'PL Pokok'],
+                    'PL Pokok'
+                ],
                 datasets: [{
                     label: 'Projects',
-                    weight: 9,
-                    cutout: 0,
-                    tension: 0.9,
-                    pointRadius: 2,
-                    borderWidth: 1,
                     backgroundColor: [
                         '#1a73e8',
                         '#4caf50',
@@ -946,6 +942,7 @@
                         '#f44335',
                         '#fb8c00',
                     ],
+                    borderWidth: 1,
                     data: [
                         "{{ $pokok_spp }}",
                         "{{ $jasa_spp }}",
@@ -962,38 +959,16 @@
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        display: false,
+                        display: true,
+                        position: 'right',
+                        labels: {
+                            usePointStyle: true,
+                        }
                     }
                 },
                 interaction: {
                     intersect: false,
                     mode: 'index',
-                },
-                scales: {
-                    y: {
-                        grid: {
-                            drawBorder: true,
-                            display: true,
-                            drawOnChartArea: true,
-                            drawTicks: true,
-                            color: '#c1c4ce5c'
-                        },
-                        ticks: {
-                            display: true
-                        }
-                    },
-                    x: {
-                        grid: {
-                            drawBorder: true,
-                            display: true,
-                            drawOnChartArea: true,
-                            drawTicks: true,
-                            color: '#c1c4ce5c'
-                        },
-                        ticks: {
-                            display: true
-                        }
-                    },
                 }
             }
         });
