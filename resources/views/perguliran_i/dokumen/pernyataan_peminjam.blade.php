@@ -54,7 +54,7 @@
         <tr>
             <td>Jenis Usaha</td>
             <td align="right">:</td>
-            <td>{{$pinkel->anggota->u->nama_usaha}}</td>
+            <td>{{$pinkel->anggota->usaha}}</td>
         </tr>
         <tr>
             <td width="100" colspan="3">
