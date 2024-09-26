@@ -294,7 +294,7 @@
                 </div>
             </th>
             <th valign="top">
-                <div align="center" class="bottom">&nbsp;</div>
+                <div align="center" class="bottom"> {{ $pinkel->anggota->namadepan }}</div>
             </th>
         </tr>
         <tr>
