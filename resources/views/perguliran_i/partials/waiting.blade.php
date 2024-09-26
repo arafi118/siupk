@@ -1,20 +1,24 @@
 @php
     use App\Models\Kecamatan;
-
     $kecamatan = Kecamatan::where('web_kec', explode('//', URL::to('/'))[1])
             ->orWhere('web_alternatif', explode('//', URL::to('/'))[1])
-            ->first();@endphp
-@if ($pinj_aktif)
- <div class="alert alert-danger text-black" role="alert">
-     <span class="text-sm">
-         <b>{{ ucwords(strtolower($pinj_aktif->anggota->namadepan)) }}</b> masih memiliki kewajiban
-         angsuran pinjaman dengan
-         <a href="/detail_i/{{ $pinj_aktif->id }}" target="_blank" class="alert-link text-black">
-             Loan ID. {{ $pinj_aktif->id }}
-         </a>
-     </span>
- </div>
+            ->first();
+@endphp
+
+@if ($pinj_aktif && count($pinj_aktif) > 0)
+    @foreach ($pinj_aktif as $pa)
+    <div class="alert alert-danger text-black" role="alert">
+        <span class="text-sm">
+            <b>{{ ucwords(strtolower($pa->anggota->namadepan)) }}</b> masih memiliki kewajiban
+            angsuran pinjaman dengan
+            <a href="/detail_i/{{ $pa->id }}" target="_blank" class="alert-link text-black">
+                Loan ID. {{ $pa->id }}
+            </a>
+        </span>
+    </div>
+    @endforeach
 @endif
+
 
 <div class="row">
     <div class="col-md-12">
@@ -284,7 +288,7 @@
                             style="background-color: rgb(240, 148, 0);">
                             <b><i class="fa fa-refresh"></i> &nbsp; KEMBALI KE PROPOSAL</b>
                         </button>
-                        <button type="button" id="Simpan" {{ $pinj_aktif && $kecamatan->id != 280 ? 'disabled' : '' }}
+                        <button type="button" id="Simpan" {{ count($pinj_aktif) > 0 && $kecamatan->id != 280 ? 'disabled' : '' }}
                             class="btn btn-secondary flex-grow-1 ms-2" style="background-color: rgb(112, 109, 109);">
                             <b><i class="fa fa-search-plus"></i> Cairkan</b>
                         </button>
