@@ -104,6 +104,7 @@ class Pinjaman
                 '{desa}' => $desa->nama_desa,
                 '{sebutan_kades}' => $desa->sebutan_desa->sebutan_kades,
                 '{penjamin}' => $kel->penjamin,
+                '{peminjam}' => $kel->namadepan,
                 '1' => '1',
                 '0' => '0'
             ]);
