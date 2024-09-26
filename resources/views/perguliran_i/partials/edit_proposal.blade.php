@@ -62,7 +62,7 @@
         <div class="col-md-3">
             <div class="position-relative mb-3">
                     <label for="jenis_jasa_proposal" class="form-label">Jenis Jasa</label>
-                    <select class="form-control" name="jenis_jasa_proposal" id="jenis_jasa_proposal">
+                    <select class="js-example-basic-single form-control" name="jenis_jasa_proposal" id="jenis_jasa_proposal">
                         @foreach ($jenis_jasa as $jj)
                             <option {{ $jj->id == $perguliran_i->jenis_jasa ? 'selected' : '' }}
                                 value="{{ $jj->id }}">
@@ -76,7 +76,7 @@
         <div class="col-md-3">
             <div class="position-relative mb-3">
                 <label for="jenis_produk_pinjaman" class="form-label">Jenis Produk Pinjaman</label>
-                <select class="form-control" name="jenis_produk_pinjaman" id="jenis_produk_pinjaman">
+                <select class="js-example-basic-single form-control" name="jenis_produk_pinjaman" id="jenis_produk_pinjaman">
                     @foreach ($jenis_pp as $jpp)
                         <option {{ $jenis_pp_dipilih == $jpp->id ? 'selected' : '' }} value="{{ $jpp->id }}">
                             {{ $jpp->nama_jpp }} ({{ $jpp->deskripsi_jpp }})
@@ -91,7 +91,7 @@
         <div class="col-md-4">
             <div class="position-relative mb-3">
                     <label for="sistem_angsuran_pokok_proposal" class="form-label">Sistem Angs. Pokok</label>
-                    <select class="form-control" name="sistem_angsuran_pokok_proposal" id="sistem_angsuran_pokok_proposal">
+                    <select class="js-example-basic-single form-control" name="sistem_angsuran_pokok_proposal" id="sistem_angsuran_pokok_proposal">
                         @foreach ($sistem_angsuran as $sa)
                             <option {{ $sa->id == $perguliran_i->sistem_angsuran ? 'selected' : '' }}
                                 value="{{ $sa->id }}">
@@ -105,7 +105,7 @@
         <div class="col-md-4">
             <div class="position-relative mb-3">
                 <label for="sistem_angsuran_jasa_proposal" class="form-label">Sistem Angs. Jasa</label>
-                <select class="form-control" name="sistem_angsuran_jasa_proposal" id="sistem_angsuran_jasa_proposal">
+                <select class="js-example-basic-single form-control" name="sistem_angsuran_jasa_proposal" id="sistem_angsuran_jasa_proposal">
                     @foreach ($sistem_angsuran as $sa)
                         <option {{ $sa->id == $perguliran_i->sa_jasa ? 'selected' : '' }} value="{{ $sa->id }}">
                             {{ $sa->nama_sistem }} ({{ $sa->deskripsi_sistem }})
@@ -141,11 +141,16 @@
 </form>
 
 <script>
+
     $(".money").maskMoney();
 
     $('.date').datepicker({
         dateFormat: 'dd/mm/yy'
     });
+
+    $('.js-example-basic-single').select2({
+            theme: 'bootstrap-5'
+        });
 
     $(document).on('change', '#jaminan', function () {
         jaminan()

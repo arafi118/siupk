@@ -153,7 +153,7 @@
                         <div class="col-md-4">
                             <div class="position-relative mb-3">
                                 <label for="jenis_jasa" class="form-label">Jenis Jasa</label>
-                                <select class="js-example-basic-single form-control" name="jenis_jasa" id="jenis_jasa">
+                                <select class="selectverived form-control" name="jenis_jasa" id="jenis_jasa">
                                     @foreach ($jenis_jasa as $jj)
                                         <option {{ $jj->id == $perguliran_i->jenis_jasa ? 'selected' : '' }}
                                             value="{{ $jj->id }}">
@@ -167,7 +167,7 @@
                         <div class="col-md-4">
                             <div class="position-relative mb-3">
                                 <label for="sistem_angsuran_pokok" class="form-label">Sistem Ang. Pokok</label>
-                                <select class="form-control" name="sistem_angsuran_pokok" id="sistem_angsuran_pokok">
+                                <select class="selectverived form-control" name="sistem_angsuran_pokok" id="sistem_angsuran_pokok">
                                     @foreach ($sistem_angsuran as $sa)
                                         <option {{ $sa->id == $perguliran_i->sistem_angsuran ? 'selected' : '' }}
                                             value="{{ $sa->id }}">
@@ -181,7 +181,7 @@
                         <div class="col-md-4">
                             <div class="position-relative mb-3">
                                 <label for="sistem_angsuran_jasa" class="form-label">Sistem Ang. Jasa</label>
-                                <select class="js-example-basic-single form-control" name="sistem_angsuran_jasa" id="sistem_angsuran_jasa">
+                                <select class="selectverived form-control" name="sistem_angsuran_jasa" id="sistem_angsuran_jasa">
                                     @foreach ($sistem_angsuran as $sa)
                                         <option {{ $sa->id == $perguliran_i->sa_jasa ? 'selected' : '' }}
                                             value="{{ $sa->id }}">
@@ -239,7 +239,7 @@
         maximumFractionDigits: 2,
     })
 
-    $('.js-example-basic-single').select2({
+    $('.selectverived').select2({
         theme: 'bootstrap-5'
     });
 

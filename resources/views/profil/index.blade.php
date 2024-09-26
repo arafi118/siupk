@@ -191,70 +191,80 @@
                         </div>
                     </div>
                 </div>
-                {{-- Modal Edit User --}}
-                <div class="modal fade" id="EditUser" tabindex="-1" aria-labelledby="EditUserLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-dialog-scrollable">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="EditUserLabel">
-                                    Edit User Login
-                                </h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body pt-0">
-                                <form action="/profil/{{ $user->id }}" method="post" id="FormEditUser">
-                                    @csrf
-                                    @method('PUT')
-
-                                    <input type="hidden" name="type" id="type" value="data_user">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="input-group input-group-static my-3">
-                                                <label>Username</label>
-                                                <input type="text" class="form-control" name="username" id="username"
-                                                    value="{{ $user->uname }}">
-                                                <small class="text-danger" id="msg_username"></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="input-group input-group-static my-3">
-                                                <label>Password</label>
-                                                <input type="password" class="form-control" name="password" id="password"
-                                                    disabled value="{{ $pass }}">
-                                                <small class="text-danger" id="msg_password"></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="input-group input-group-static my-3">
-                                                <label>Password Baru</label>
-                                                <input type="password" class="form-control" name="password_baru"
-                                                    id="password_baru">
-                                                <small class="text-danger" id="msg_password_baru"></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="input-group input-group-static my-3">
-                                                <label>Konfirmasi Password</label>
-                                                <input type="password" class="form-control" name="konfirmasi_password"
-                                                    id="konfirmasi_password">
-                                                <small class="text-danger" id="msg_konfirmasi_password"></small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger btn-sm mb-0" data-bs-dismiss="modal">Tutup</button>
-                                <button type="button" id="SimpanEditUser"
-                                    class="btn bg-gradient-dark btn-sm float-end mb-0">Simpan Perubahan</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
             </div><br><br><br>
         </div>
 @endsection
 
+@section('modal')
+{{-- Modal Edit User --}}
+<div class="modal fade" id="EditUser" tabindex="-1" aria-labelledby="EditUserLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="EditUserLabel">
+                    Edit User Login
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body pt-0">
+                <form action="/profil/{{ $user->id }}" method="post" id="FormEditUser">
+                    @csrf
+                    @method('PUT')
+
+                    <input type="hidden" name="type" id="type" value="data_user">
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Username</label>
+                            <input type="text" class="form-control" name="username" id="username"
+                                    value="{{ $user->uname }}">
+                                <small class="text-danger" id="msg_username"></small>
+                            <div class="valid-feedback">
+                                success!!
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" id="password"
+                                    disabled value="{{ $pass }}">
+                                <small class="text-danger" id="msg_password"></small>
+                            <div class="valid-feedback">
+                                success!!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Password Baru</label>
+                            <input type="password" class="form-control" name="password_baru"
+                            id="password_baru">
+                        <small class="text-danger" id="msg_password_baru"></small>
+                            <div class="valid-feedback">
+                                success!!
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Konfirmasi Password</label>
+                            <input type="password" class="form-control" name="konfirmasi_password"
+                                    id="konfirmasi_password">
+                                <small class="text-danger" id="msg_konfirmasi_password"></small>
+                            <div class="valid-feedback">
+                                success!!
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-sm mb-0" data-bs-dismiss="modal">Tutup</button>
+                <button type="button" id="SimpanEditUser"
+                    class="btn btn-dark btn-sm float-end mb-0">Simpan Perubahan</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
 @section('script')
     <script>
         $('.date').datepicker({
