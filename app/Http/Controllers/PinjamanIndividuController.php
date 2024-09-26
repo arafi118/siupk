@@ -458,7 +458,7 @@ class PinjamanIndividuController extends Controller
                 ['nia', $perguliran_i->nia],
                 ['status', 'A'],
                 ['jenis_pinjaman', 'I']
-            ])->with('anggota')->orderBy('tgl_cair', 'DESC')->get();
+            ])->with('anggota')->orderBy('tgl_cair', 'DESC')->first();
 
             $pinj_aktif = $pinj_i_aktif;
         }

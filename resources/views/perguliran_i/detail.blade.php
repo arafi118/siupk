@@ -1,4 +1,8 @@
 @php
+use App\Models\Kecamatan;
+$kecamatan = Kecamatan::where('web_kec', explode('//', URL::to('/'))[1])
+            ->orWhere('web_alternatif', explode('//', URL::to('/'))[1])
+            ->first();
 use App\Utils\Tanggal;
 $waktu = date('H:i');
 $tempat = '';
@@ -7,7 +11,6 @@ $sum_pokok = 0;
 if ($real) {
 $sum_pokok = $real->sum_pokok;
 }
-
 $saldo_pokok = $perguliran_i->alokasi - $sum_pokok;
 if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover',
     'file' => 'coverProposal',
@@ -148,6 +151,14 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
     'withExcel' => false,
     ],
     ];
+
+    if ($kecamatan && $kecamatan->id == 1) {
+    // Jika ID kecamatan adalah 1
+    $dokumen_pencairan[] = [
+        'title' => 'SPK DudukSampean',
+        'file' => 'SPKDudukSampean',
+        'withExcel' => false,
+    ];}
 
     $jenis_jaminan = (strlen($perguliran_i->jaminan) > 5) ? json_decode($perguliran_i->jaminan, true)['jenis_jaminan']:'0';
     @endphp
