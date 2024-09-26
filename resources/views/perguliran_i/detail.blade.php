@@ -75,8 +75,13 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
     'withExcel' => false,
     ],
     [
-    'title' => 'Surat Perjanjian Kredit',
+    'title' => 'Surat Perjanjian Kredit (Umum)',
     'file' => 'spk',
+    'withExcel' => false,
+    ],
+    [
+    'title' => 'Surat Perjanjian Kredit (Barang)',
+    'file' => 'spkkreditbarang',
     'withExcel' => false,
     ],
     [
