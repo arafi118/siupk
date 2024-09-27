@@ -121,16 +121,7 @@ class AnggotaController extends Controller
                 $tgl = $tanggal;
                 $jk_dipilih = 'L';
             }
-            if ($tgl < 10) {
-                $tgl = "$tgl";
-            }
-            if ($tahun < 20) {
-                $thn = "20$tahun";
-            } else {
-                $thn = "19$tahun";
-            }
-
-            $value_tanggal = Tanggal::tglIndo("$thn-$bulan-$tgl");
+           
         }
 
         return view('penduduk.create')->with(compact('desa_dipilih', 'desa', 'jenis_usaha', 'jenis_usaha_dipilih', 'hubungan', 'hubungan_dipilih', 'nik', 'jk_dipilih', 'value_tanggal'));
@@ -141,6 +132,8 @@ class AnggotaController extends Controller
      */
     public function store(Request $request)
     {
+        $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
+
         $data = $request->only([
             'nik',
             'nama_lengkap',
@@ -190,8 +183,11 @@ class AnggotaController extends Controller
         ];
 
         if (strlen($request->no_kk) >= 16) {
-            $rules['no_kk'] = 'required|unique:anggota_' . Session::get('lokasi') . ',kk';
+            if ($kec->hak_kredit == 1) {
+                $rules['no_kk'] = 'required|unique:anggota_' . Session::get('lokasi') . ',kk';
+            }
         }
+        
 
         $validate = Validator::make($data, $rules);
 
