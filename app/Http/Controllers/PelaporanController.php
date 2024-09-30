@@ -387,7 +387,7 @@ class PelaporanController extends Controller
         $view = view('pelaporan.view.ojk.neraca_ojk', $data)->render();
 
         if ($data['type'] == 'pdf') {
-            $pdf = PDF::loadHTML($view)->setPaper('A4', 'landscape');
+            $pdf = PDF::loadHTML($view);
             return $pdf->stream();
         } else {
             return $view;
@@ -469,7 +469,7 @@ class PelaporanController extends Controller
         $view = view('pelaporan.view.ojk.labarugi', $data)->render();
 
         if ($data['type'] == 'pdf') {
-            $pdf = PDF::loadHTML($view)->setPaper('A4', 'landscape');
+            $pdf = PDF::loadHTML($view)->setPaper('A4', 'portrait ');
             return $pdf->stream();
         } else {
             return $view;
