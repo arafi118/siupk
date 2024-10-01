@@ -38,7 +38,7 @@
     </table>
 
     <div style="width: 100%; text-align: right;">Kode Akun : {{ $rek->kode_akun }}</div>
-    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
+    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 10px;">
         <tr style="background: rgb(74, 74, 74); font-weight: bold; color: #fff;">
             <td height="15" align="center" width="4%">No</td>
             <td align="center" width="10%">Tanggal</td>
@@ -140,9 +140,52 @@
             </tr>
         @endforeach
 
+        <tr style="background: rgb(230, 230, 230);">
+            <td colspan="4"><b>Total Transaksi {{ ucwords($sub_judul) }}</b></td>
+            <td align="right">
+                <b>{{ number_format($total_debit, 2) }}</b>
+            </td>
+            <td align="right">
+                <b>{{ number_format($total_kredit, 2) }}</b>
+            </td>
+            <td align="center" rowspan="3" colspan="2">
+                @if ($total_saldo < 0)
+                    <b>({{ number_format($total_saldo * -1, 2) }})</b>
+                @else
+                    <b>{{ number_format($total_saldo, 2) }}</b>
+                @endif
+            </td>
+        </tr>
+        <tr style="background: rgb(230, 230, 230);">
+            <td colspan="4">
+                <b>Total Transaksi sampai dengan {{ ucwords($sub_judul) }}</b>
+            </td>
+            <td align="right">
+                <b>{{ number_format($d_bulan_lalu + $total_debit, 2) }}</b>
+            </td>
+            <td align="right">
+                <b>{{ number_format($k_bulan_lalu + $total_kredit, 2) }}</b>
+            </td>
+        </tr>
+        <tr style="background: rgb(230, 230, 230);">
+            <td colspan="4">
+                <b>Total Transaksi Komulatif sampai dengan Tahun {{ $tahun }}</b>
+            </td>
+            <td align="right">
+                <b>{{ number_format($saldo['debit'] + $d_bulan_lalu + $total_debit, 2) }}</b>
+            </td>
+            <td align="right">
+                <b>{{ number_format($saldo['kredit'] + $k_bulan_lalu + $total_kredit, 2) }}</b>
+            </td>
+        </tr>
         <tr>
+            <td colspan="8">
+                {!! json_decode(str_replace('{tanggal}', $tanggal_kondisi, $kec->ttd->tanda_tangan_pelaporan), true) !!}
+            </td>
+        </tr>
+        {{-- <tr>
             <td colspan="8" style="padding: 0px !important;">
-                <table class="p" border="0" width="100%" cellspacing="0" cellpadding="0"
+                <table class="p" border="1" width="100%" cellspacing="0" cellpadding="0"
                     style="font-size: 11px;">
                     <tr style="background: rgb(233,233,233)">
                         <td height="12">
@@ -191,7 +234,7 @@
                 <div style="margin-top: 16px;"></div>
                 {!! json_decode(str_replace('{tanggal}', $tanggal_kondisi, $kec->ttd->tanda_tangan_pelaporan), true) !!}
             </td>
-        </tr>
+        </tr> --}}
 
     </table>
 @endsection
