@@ -150,9 +150,9 @@
                 <td>{{ $nia->pros_jasa / $nia->jangka . '%' }}</td>
             </tr>
             <tr>
-                <td>&nbsp</td>
-                <td align="center">&nbsp</td>
-                <td>&nbsp</td>
+                <td>Nama Barang</td>
+                <td align="center">:</td>
+                <td>{{$nia->nama_barang }}</td>
                 <td>&nbsp</td>
                 <td align="center">&nbsp</td>
                 <td>&nbsp</td>
