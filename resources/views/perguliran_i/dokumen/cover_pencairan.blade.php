@@ -62,7 +62,7 @@
 
 <body>
     <header>
-        <h1 style="margin: 0px;">DOKUMEN <br> PERMOHONAN KREDIT</h1>
+        <h1 style="margin: 0px;">DOKUMEN <br> PENCAIRAN KREDIT</h1>
         
     </header>
 
