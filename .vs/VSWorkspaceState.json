@@ -6,10 +6,9 @@
     "\\app\\Http\\Controllers",
     "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\pelaporan",
-    "\\resources\\views\\pelaporan\\view",
-    "\\resources\\views\\pelaporan\\view\\perkembangan_piutang"
+    "\\resources\\views\\transaksi",
+    "\\resources\\views\\transaksi\\jurnal_umum"
   ],
-  "SelectedNode": "\\app\\Http\\Controllers\\PelaporanController.php",
+  "SelectedNode": "\\resources\\views\\transaksi\\jurnal_umum\\index.blade.php",
   "PreviewInSolutionExplorer": false
 }

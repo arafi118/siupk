@@ -70,7 +70,10 @@
                         @else
                             <li>Penewu {{ $kec->nama_kec }}</li>
                         @endif
-                        <li>Kades/Lurah</li>
+                        
+                        @if (session('lokasi') != 36)
+                            <li>Kades/Lurah</li>
+                        @endif
                         <li>Arsip</li>
                     </ol>
                 </div>
