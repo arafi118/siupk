@@ -170,7 +170,7 @@
                 </div>
             </div>
 
-            
+            <br>
         <div id="notifikasi"></div>
         </div>
     </div> <br><br><br>
@@ -185,7 +185,7 @@
     
     <form action="/transaksi/hapus" method="post" id="formHapus">
         @csrf
-    
+
         <input type="hidden" name="del_idt" id="del_idt">
         <input type="hidden" name="del_idtp" id="del_idtp">
         <input type="hidden" name="del_id_pinj" id="del_id_pinj">
@@ -195,7 +195,7 @@
 @section('modal')
 <div class="modal fade" id="detailTransaksi" tabindex="-1" aria-labelledby="detailTransaksiLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen modal-dialog-scrollable"">
+    <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="detailTransaksiLabel">
@@ -218,7 +218,7 @@
 
 <div class="modal fade" id="CetakBuktiTransaksi" tabindex="-1" aria-labelledby="CetakBuktiTransaksiLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen modal-dialog-scrollable"">
+    <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="CetakBuktiTransaksiLabel">
@@ -386,6 +386,18 @@
             $('#harga_jual').val(formatter.format(nilai_buku))
         })
 
+        $(document).on('change', '#relasi', function(e) {
+            var value = $(this).val().split('#')
+
+            var nik = value[0] 
+            var namadepan = value[1] 
+            var id_pinjaman = parseInt(value[2])  //parseInt untuk nilai (int)
+            var fee_agen = parseInt(value[3])
+            
+            $('#fee_agen').val(fee_agen)
+            $('#keterangan').val("Fee ke Agen A.N " + namadepan + " (" + id_pinjaman + ")")
+        })
+        
         $(document).on('change', '#unit', function() {
             var max = parseInt($(this).attr('max'))
             var unit = parseInt($(this).val())

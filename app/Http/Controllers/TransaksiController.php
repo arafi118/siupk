@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AkunLevel1;
+use App\Models\Anggota;
 use App\Models\Desa;
 use App\Models\Ebudgeting;
 use App\Models\Inventaris;
@@ -724,7 +725,62 @@ class TransaksiController extends Controller
                 $inv = Inventaris::create($inventaris);
 
                 $msg = 'Transaksi ' .  $rek_simpan->nama_akun . ' (' . $insert['keterangan_transaksi'] . ') berhasil disimpan';
-            } else {
+            } elseif(Keuangan::startWith($request->sumber_dana, '1.1.01') && Keuangan::startWith($request->disimpan_ke, '5.1.08.02') && $request->jenis_transaksi == '2'){
+                $data = $request->only([
+                    'tgl_transaksi',
+                    'jenis_transaksi',
+                    'sumber_dana',
+                    'disimpan_ke',
+                    'relasi',
+                    'keterangan',
+                    'nominal'
+                ]);
+
+                $validate = Validator::make($data, [
+                    'tgl_transaksi' => 'required',
+                    'jenis_transaksi' => 'required',
+                    'sumber_dana' => 'required',
+                    'disimpan_ke' => 'required',
+                    'nominal' => 'required'
+                ]);
+
+                if ($validate->fails()) {
+                    return response()->json($validate->errors(), Response::HTTP_MOVED_PERMANENTLY);
+                }
+
+                $id_pinj_i = 0;
+                $relasi = '';
+                if ($request->relasi) {
+                    // 3206286504800001#Esah#140698#45000000
+                    $data_relasi = explode('#', $request->relasi); 
+                    // $data_relasi = [
+                        //     0 => '3206286504800001',
+                        //     1 => 'Esah',
+                        //     2 => '140698',
+                        //     3 => '45000000'
+                        // ];
+                        $relasi = $data_relasi[1];
+                        $id_pinj_i = $data_relasi[2];
+                }
+
+                $insert = [
+                    'tgl_transaksi' => (string) Tanggal::tglNasional($request->tgl_transaksi),
+                    'rekening_debit' => (string) $request->disimpan_ke,
+                    'rekening_kredit' => (string) $request->sumber_dana,
+                    'idtp' => 0,
+                    'id_pinj' => 0,
+                    'id_pinj_i' => $id_pinj_i,
+                    'keterangan_transaksi' => (string) $request->keterangan,
+                    'relasi' => (string) $relasi,
+                    'jumlah' => str_replace(',', '', str_replace('.00', '', $request->nominal)),
+                    'urutan' => 0,
+                    'id_user' => auth()->user()->id,
+                ];
+
+                $transaksi = Transaksi::create($insert);
+                $msg = 'Transaksi ' . $insert['keterangan_transaksi'] . ' berhasil disimpan';            }
+            
+            else {
                 $data = $request->only([
                     'tgl_transaksi',
                     'jenis_transaksi',
@@ -1510,6 +1566,19 @@ class TransaksiController extends Controller
                 }
 
                 return view('transaksi.jurnal_umum.partials.form_inventaris')->with(compact('relasi'));
+
+            } elseif (Keuangan::startWith($sumber_dana, '1.1.01') && Keuangan::startWith($disimpan_ke, '5.1.08.02') && $jenis_transaksi == 2) {
+                // $Anggota = Anggota::with([
+                //     'pinjaman' => function ($query) {
+                //     $query->where('status', 'A');
+                // }])->get();
+                $Pinjaman = PinjamanIndividu::with([
+                    'anggota'
+                ])->where('status', 'A')->get();
+                
+
+                return view('transaksi.jurnal_umum.partials.form_agen')->with(compact('Pinjaman'));
+            
             } else {
                 $rek_sumber = Rekening::where('kode_akun', $sumber_dana)->first();
                 $rek_simpan = Rekening::where('kode_akun', $disimpan_ke)->first();
