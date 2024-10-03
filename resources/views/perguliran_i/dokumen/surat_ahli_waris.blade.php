@@ -96,7 +96,7 @@
         <tr style="font-weight: bold;">
             <td align="center">
                 <u>
-                    <b>Pembina Tingkat  I{{ $pinkel->anggota->d->pangkat }}</b>
+                    <b>Pembina Tingkat  I {{ $pinkel->anggota->d->pangkat }}</b>
                 </u>
                 @if ($pinkel->anggota->d->nip)
                     <div><small>NIP. {{ $pinkel->anggota->d->nip }}</small></div>
