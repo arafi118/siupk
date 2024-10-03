@@ -40,14 +40,13 @@
                     <div class="tab-pane fade show active" id="" role="tabpanel" aria-labelledby="">
                         <div class="card">
                             <div class="card-body" id="">
-                                <div>Kecamatan {{ $kec->nama_kec }} [{{ $kec->id }}], {{ $kec->kabupaten->nama_kab }}</div>
+                                <div><b>Kecamatan {{ $kec->nama_kec }} [{{ $kec->id }}], {{ $kec->kabupaten->nama_kab }}</b></div>
                                 <form action="" method="post" target="_blank">
                                     @csrf
                                 
                                     <input type="hidden" name="" id="" value="">
-                                    <input type="hidden" name="" id="" value="">
                                     <div class="table-responsive">
-                                        <table class="table table-striped">
+                                        <table class="mb-0 table table-striped">
                                             <thead class="bg-dark text-white">
                                                 <tr>
                                                     <th>Nama</th>
@@ -59,41 +58,20 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($users as $u)
-                                                    <tr>
-                                                        <td>
-                                                            <div class="input-group input-group-static">
-                                                                <input type="text" value="{{ $u->namadepan . ' ' . $u->namabelakang }}" class="form-control">
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="input-group input-group-static">
-                                                                <input type="text" value="{{ $u->l->nama_level }}" class="form-control">
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="input-group input-group-static">
-                                                                <input type="text" value="{{ $u->j->nama_jabatan }}" class="form-control">
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="input-group input-group-static">
-                                                                <input type="text" value="{{ $u->uname }}" class="form-control">
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="input-group input-group-static">
-                                                                <input type="text" value="{{ $u->pass }}" class="form-control">
-                                                            </div>
-                                                        </td>
+                                                    <tr class="login" data-uname="{{ $u->uname }}" data-pass="{{ $u->pass }}">
+                                                        <td><input type="text" value="{{ $u->namadepan . ' ' . $u->namabelakang }}" class="form-control"></td>
+                                                        <td><input type="text" value="{{ $u->l->nama_level }}" class="form-control"></td>
+                                                        <td><input type="text" value="{{ $u->j->nama_jabatan }}" class="form-control"></td>
+                                                        <td><input type="text" value="{{ $u->uname }}" class="form-control"></td>
+                                                        <td><input type="text" value="{{ $u->pass }}" class="form-control"></td>
                                                     </tr>
-                                                    
-                                            @endforeach
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
-                                
+                                    <br>
                                     <div class="d-flex justify-content-end">
-                                        <a href="/" target="_blank" class="btn btn-info btn-sm">{{ $kec->web_kec }}</a>
+                                         <a href="/" target="_blank" class="btn btn-info btn-sm"><i class="fa fa-television" ></i> {{ $kec->web_kec }}</a>
                                     </div>
                                 </form>
                             </div>
@@ -103,14 +81,40 @@
             </div>
         </section>
     </main>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="/assets/js/core/popper.min.js"></script>
-    <script src="/assets/js/core/bootstrap.min.js"></script>
-    <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="/assets/js/material-dashboard.min.js"></script>
-    <script src="/assets/js/plugins/sweetalert.min.js"></script>
 </body>
+<form style="display: none;" role="form" method="POST" action="/login" id="formLogin">
+    @csrf
 
+    <input type="hidden" name="username" id="username" class="form-control">
+    <input type="hidden" name="password" id="password" class="form-control">
+</form>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="/assets/js/core/popper.min.js"></script>
+<script src="/assets/js/core/bootstrap.min.js"></script>
+<script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
+<script src="/assets/js/material-dashboard.min.js"></script>
+<script src="/assets/js/plugins/sweetalert.min.js"></script>
+<script>
+    $(document).on('dblclick', 'tr.login', function(e) {
+        e.preventDefault();
+
+        var uname = $(this).attr('data-uname');
+        var pass = $(this).attr('data-pass');
+
+        $('#username').val(uname)
+        $('#password').val(pass)
+
+        setTimeout(() => {
+            $('#formLogin').submit()
+        }, 500);
+    })
+
+    function openUserPage() {
+        history.replaceState({}, '', '{{ $http }}://{{ $host }}');
+    }
+
+    openUserPage();
+</script>
 </html>
