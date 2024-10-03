@@ -77,20 +77,31 @@
         </tr>
     </table>
 
-    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
+    <table border="0" width="90%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
         <tr>
             <td align="center" width="50%">&nbsp;</td>
             <td align="center" width="50%">{{ $kec->nama_kec }}, {{ Tanggal::tglLatin($pinkel->tgl_cair) }}</td>
         </tr>
         <tr>
-            <td align="center">Mengetahui Kepala {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }}</td>
-            <td align="center">Nama Penjamin</td>
+            <td align="right" >Mengetahui,</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td align="center">Kepala {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }} {{ $pinkel->anggota->d->nama_desa }}</td>
+            <td align="center">Penjamin</td>
         </tr>
         <tr>
             <td align="center" colspan="2" height="30">&nbsp;</td>
         </tr>
         <tr style="font-weight: bold;">
-            <td align="center">{{ $pinkel->anggota->d->kades }}</td>
+            <td align="center">
+                <u>
+                    <b>Pembina Tingkat  I{{ $pinkel->anggota->d->pangkat }}</b>
+                </u>
+                @if ($pinkel->anggota->d->nip)
+                    <div><small>NIP. {{ $pinkel->anggota->d->nip }}</small></div>
+                @endif
+            </td>
             <td align="center">{{ $pinkel->anggota->penjamin }}</td>
         </tr>
     </table>
