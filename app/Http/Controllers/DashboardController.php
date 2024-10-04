@@ -88,13 +88,18 @@ class DashboardController extends Controller
             $data['jasa_uep'] = $trx->jasa_uep;
             $data['jasa_pl'] = $trx->jasa_pl;
         }
-
+        $unpaidInvoice = AdminInvoice::where([
+            ['lokasi', Session::get('lokasi')],
+            ['status', 'UNPAID']
+        ])->count();
+        $data['jumlah_unpaid'] = $unpaidInvoice;
         $data['user'] = auth()->user();
         $data['saldo'] = $this->_saldo($tgl);
         $data['jumlah_saldo'] = Saldo::where('kode_akun', 'NOT LIKE', $kec->kd_kec . '%')->count();
 
         $data['api'] = env('APP_API', 'https://api-whatsapp.siupk.net');
         $data['title'] = "Dashboard";
+        $data['nama_lkm'] = $kec->nama_kec;
         return view('dashboard.index')->with($data);
     }
 

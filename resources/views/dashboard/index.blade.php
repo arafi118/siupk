@@ -6,7 +6,16 @@
 
         <input type="hidden" name="tgl" id="tgl" value="{{ date('d/m/Y') }}">
     </form>
+<!-- Trigger Button (Hidden) -->
+@if ($jumlah_unpaid > 0)
+    <button type="button" id="triggerPopup" class="d-none" data-bs-toggle="modal" data-bs-target="#notificationPopup"></button>
+@endif
 
+<style>
+    .text-justify {
+        text-align: justify;
+    }
+</style>
     <div class="app-main__inner">
         
         <div class="app-page-title">
@@ -184,8 +193,24 @@
     </form>
 @endsection
 
-
 @section('modal')
+    <!-- Popup Modal -->
+    <div class="modal fade" id="notificationPopup" tabindex="-1" aria-labelledby="notificationPopupLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notificationPopupLabel">Notification</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-justify">
+                    LKM <strong>{{$nama_lkm}} </strong> saat ini memiliki tagihan invoice untuk perpanjangan lisensi. Mohon segera lakukan pembayaran untuk menghindari kemungkinan pemblokiran dari sistem. Cek info selengkapnya pada menu  <strong> Biaya Perpanjangan </strong> di pojok kanan atas.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     {{-- Modal Jatuh Dempo --}}
     <div class="modal fade" id="jatuhTempo" aria-labelledby="jatuhTempoLabel" aria-hidden="true">
@@ -511,6 +536,24 @@
 @endsection
 
 @section('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const triggerButton = document.getElementById('triggerPopup');
+            if (triggerButton) {
+                triggerButton.click();
+            }
+            // Ensure modal can be interacted with correctly
+            const modalElement = document.getElementById('notificationPopup');
+            modalElement.addEventListener('hidden.bs.modal', function () {
+                // Ensure the backdrop is removed when modal is closed
+                const backdrop = document.querySelector('.modal-backdrop');
+                if (backdrop) {
+                    backdrop.remove();
+                }
+            });
+        });
+    </script>
+
     <script>
         $.ajax({
             type: 'post',
