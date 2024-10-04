@@ -21,7 +21,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-justify">
-                UPK <strong>{{$nama_upk}} </strong> saat ini memiliki tagihan invoice untuk perpanjangan lisensi. Mohon segera lakukan pembayaran untuk menghindari kemungkinan pemblokiran dari sistem. Cek info selengkapnya pada menu  <strong> Biaya Perpanjangan </strong> di pojok kanan atas.
+                UPK <strong>{{$nama_upk}} </strong> saat ini memiliki tagihan invoice untuk perpanjangan lisensi. Mohon segera lakukan pembayaran untuk menghindari kemungkinan pemblokiran dari sistem. Cek info selengkapnya pada menu  <strong> Biaya Perpanjangan </strong> menu pengaturan ->invoice.
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
