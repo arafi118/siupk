@@ -14,7 +14,8 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Jenis Pembayaran</th>
-                                            <th>tgl Invoice</th>
+                                            <th>Tgl Invoice</th>
+                                            <th>Tgl Lunas</th>
                                             <th>Tagihan</th>
                                             <th>Saldo</th>
                                             <th>Status</th>
@@ -55,7 +56,10 @@
             }, {
                 data: 'tgl_invoice',
                 name: 'tgl_invoice'
-            }, {
+            },{
+                data: 'tgl_lunas',
+                name: 'tgl_lunas'
+            },{
                 data: 'jumlah',
                 name: 'jumlah'
             }, {
