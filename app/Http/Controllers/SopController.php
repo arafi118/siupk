@@ -24,7 +24,7 @@ class SopController extends Controller
         $api = env('APP_API', 'https://api-whatsapp.siupk.net');
 
         $kec = Kecamatan::where('id', Session::get('lokasi'))->with('ttd')->first();
-        $token = "SIUPK-" . str_replace('.', '', $kec->kd_kec) . '-' . str_pad($kec->id, 4, '0', STR_PAD_LEFT);
+        $token = "LKM-" . str_replace('.', '', $kec->kd_kec) . '-' . str_pad($kec->id, 4, '0', STR_PAD_LEFT);
 
         $title = "Personalisasi SOP";
         return view('sop.index')->with(compact('title', 'kec', 'api', 'token'));
@@ -417,6 +417,9 @@ class SopController extends Controller
             return DataTables::of($invoice)
                 ->editColumn('tgl_invoice', function ($row) {
                     return Tanggal::tglIndo($row->tgl_invoice);
+                })
+                ->editColumn('tgl_lunas', function ($row) {
+                    return Tanggal::tglIndo($row->tgl_lunas);
                 })
                 ->editColumn('jumlah', function ($row) {
                     return number_format($row->jumlah);

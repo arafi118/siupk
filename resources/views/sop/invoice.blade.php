@@ -56,10 +56,10 @@
             }, {
                 data: 'tgl_invoice',
                 name: 'tgl_invoice'
-            },{
+            }, {
                 data: 'tgl_lunas',
                 name: 'tgl_lunas'
-            },{
+            }, {
                 data: 'jumlah',
                 name: 'jumlah'
             }, {
