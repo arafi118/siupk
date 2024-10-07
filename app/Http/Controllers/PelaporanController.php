@@ -719,13 +719,13 @@ class PelaporanController extends Controller
     ->orderBy('kode_akun', 'ASC')
     ->with([
             'kom_saldo' => function ($query) use ($data) {
-                $query->selectRaw('rekening_id, SUM(CAST(saldo AS DECIMAL)) as total_saldo')
+                $query->selectRaw('lev1, lev2, lev3, lev4, SUM(CAST(saldo AS DECIMAL)) as total_saldo')
                     ->where('tahun', $data['tahun'])
                     ->where(function ($query) use ($data) {
                         $query->where('bulan', '0')
                               ->orWhere('bulan', $data['bulan']);
                     })
-                    ->groupBy('rekening_id');
+                    ->groupBy('lev1', 'lev2', 'lev3', 'lev4');
             }
         ])
         ->orderBy('kode_akun', 'ASC')
