@@ -24,7 +24,7 @@
         <tr>
             <td>&nbsp;</td>
             <td colspan="2" style="padding-left: 8px; text-align: justify;">
-                <div>Dengan Hormat,</div>
+                <div>Dengan Hormat, </div>
                 <div>
                     Bersama ini kami sampaikan Laporan Keuangan {{ $nama_lembaga }} {{ $kec->sebutan_kec }}
                     {{ $kec->nama_kec }} sampai dengan

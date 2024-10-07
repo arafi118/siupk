@@ -204,6 +204,11 @@
                         <td colspan="3" height="2"></td>
                     </tr>
 
+
+
+
+
+
                     @foreach ($akun1 as $lev1)
                         @php
                             $sum_akun1 = 0;
@@ -221,7 +226,7 @@
 
                             @foreach ($lev2->akun3 as $lev3)
                                 @php
-                                    $sum_saldo = 0;
+                                    $sum_saldo_lev3 = 0;
                                     $akun_lev4 = [];
                                 @endphp
 
@@ -232,8 +237,9 @@
                                             $saldo = $keuangan->laba_rugi($tgl_kondisi);
                                         }
 
-                                        $sum_saldo += $saldo;
+                                        $sum_saldo_lev3 += $saldo;
 
+                                        // Menambah detail akun level 4 untuk ditampilkan nanti
                                         $akun_lev4[] = [
                                             'kode_akun' => $rek->kode_akun,
                                             'nama_akun' => $rek->nama_akun,
@@ -243,25 +249,28 @@
                                 @endforeach
 
                                 @php
+                                    // Periksa level akun dan tambahkan ke debet/kredit sesuai kebutuhan
                                     if ($lev1->lev1 == '1') {
-                                        $debit += $sum_saldo;
+                                        $debit += $sum_saldo_lev3;
                                     } else {
-                                        $kredit += $sum_saldo;
+                                        $kredit += $sum_saldo_lev3;
                                     }
 
-                                    $sum_akun1 += $sum_saldo;
+                                    // Jumlahkan saldo level 3 ke level 1
+                                    $sum_akun1 += $sum_saldo_lev3;
                                 @endphp
 
                                 <tr style="background: rgb(200,200,200);">
                                     <td>{{ $lev3->kode_akun }}.</td>
                                     <td>{{ $lev3->nama_akun }}</td>
-                                    @if ($sum_saldo < 0)
-                                        <td align="right">({{ number_format($sum_saldo * -1, 2) }})</td>
+                                    @if ($sum_saldo_lev3 < 0)
+                                        <td align="right">({{ number_format($sum_saldo_lev3 * -1, 2) }})</td>
                                     @else
-                                        <td align="right">{{ number_format($sum_saldo, 2) }}</td>
+                                        <td align="right">{{ number_format($sum_saldo_lev3, 2) }}</td>
                                     @endif
                                 </tr>
 
+                                {{-- Menampilkan akun level 4 --}}
                                 @foreach ($akun_lev4 as $lev4)
                                     @php
                                         $bg = 'rgb(230, 230, 230)';
@@ -292,6 +301,27 @@
                             <td colspan="3" height="2"></td>
                         </tr>
                     @endforeach
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     <tr style="background: rgb(167, 167, 167); font-weight: bold;">
                         <td height="20" colspan="2" align="left">
                             <b>Jumlah Liabilitas + Ekuitas </b>
