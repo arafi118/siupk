@@ -718,14 +718,18 @@ class PelaporanController extends Controller
     ->groupBy('parent_id', 'lev1', 'lev2', 'lev3', 'lev4', 'kode_akun', 'nama_akun', 'jenis_mutasi')
     ->orderBy('kode_akun', 'ASC')
     ->with([
-        'kom_saldo' => function ($query) use ($data) {
-            $query->where('tahun', $data['tahun'])
-                  ->where(function ($query) use ($data) {
-                      $query->where('bulan', '0')->orWhere('bulan', $data['bulan']);
-                  });
-        }
-    ])
-    ->get();
+            'kom_saldo' => function ($query) use ($data) {
+                $query->selectRaw('rekening_id, SUM(CAST(saldo AS DECIMAL)) as total_saldo')
+                    ->where('tahun', $data['tahun'])
+                    ->where(function ($query) use ($data) {
+                        $query->where('bulan', '0')
+                              ->orWhere('bulan', $data['bulan']);
+                    })
+                    ->groupBy('rekening_id');
+            }
+        ])
+        ->orderBy('kode_akun', 'ASC')
+        ->get();
 
 
         $view = view('pelaporan.view.neraca_saldo', $data)->render();
