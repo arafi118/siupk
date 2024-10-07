@@ -693,13 +693,40 @@ class PelaporanController extends Controller
         }
 
         $data['keuangan'] = $keuangan;
-        $data['rekening'] = Rekening::orderBy('kode_akun', 'ASC')->with([
-            'kom_saldo' => function ($query) use ($data) {
-                $query->where('tahun', $data['tahun'])->where(function ($query) use ($data) {
-                    $query->where('bulan', '0')->orwhere('bulan', $data['bulan']);
-                });
-            }
-        ])->get();
+        $data['rekening'] = Rekening::selectRaw('
+        parent_id, lev1, lev2, lev3, lev4, kode_akun, nama_akun, jenis_mutasi, 
+        SUM(saldo_awal) as saldo_awal, 
+        SUM(tb2023) as tb2023, 
+        SUM(tbk2023) as tbk2023, 
+        SUM(tb2022) as tb2022, 
+        SUM(tbk2022) as tbk2022, 
+        SUM(tb2021) as tb2021, 
+        SUM(tbk2021) as tbk2021, 
+        SUM(tb2020) as tb2020, 
+        SUM(tbk2020) as tbk2020, 
+        SUM(tb2019) as tb2019, 
+        SUM(tbk2019) as tbk2019,
+        SUM(tb2018) as tb2018, 
+        SUM(tbk2018) as tbk2018,
+        SUM(tb2017) as tb2017, 
+        SUM(tbk2017) as tbk2017,
+        SUM(tb2016) as tb2016, 
+        SUM(tbk2016) as tbk2016,
+        SUM(tb2015) as tb2015, 
+        SUM(tbk2015) as tbk2015
+    ')
+    ->groupBy('parent_id', 'lev1', 'lev2', 'lev3', 'lev4', 'kode_akun', 'nama_akun', 'jenis_mutasi')
+    ->orderBy('kode_akun', 'ASC')
+    ->with([
+        'kom_saldo' => function ($query) use ($data) {
+            $query->where('tahun', $data['tahun'])
+                  ->where(function ($query) use ($data) {
+                      $query->where('bulan', '0')->orWhere('bulan', $data['bulan']);
+                  });
+        }
+    ])
+    ->get();
+
 
         $view = view('pelaporan.view.neraca_saldo', $data)->render();
 
