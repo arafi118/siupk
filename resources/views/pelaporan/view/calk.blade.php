@@ -204,11 +204,6 @@
                         <td colspan="3" height="2"></td>
                     </tr>
 
-
-
-
-
-
                     @foreach ($akun1 as $lev1)
                         @php
                             $sum_akun1 = 0;
@@ -226,7 +221,7 @@
 
                             @foreach ($lev2->akun3 as $lev3)
                                 @php
-                                    $sum_saldo_lev3 = 0;
+                                    $sum_saldo = 0;
                                     $akun_lev4 = [];
                                 @endphp
 
@@ -237,10 +232,10 @@
                                             $saldo = $keuangan->laba_rugi($tgl_kondisi);
                                         }
 
-                                        $sum_saldo_lev3 += $saldo;
+                                        $sum_saldo += $saldo;
 
-                                        // Menambah detail akun level 4 untuk ditampilkan nanti
                                         $akun_lev4[] = [
+                                            'lev4' => $rek->lev4,
                                             'kode_akun' => $rek->kode_akun,
                                             'nama_akun' => $rek->nama_akun,
                                             'saldo' => $saldo,
@@ -249,45 +244,69 @@
                                 @endforeach
 
                                 @php
-                                    // Periksa level akun dan tambahkan ke debet/kredit sesuai kebutuhan
                                     if ($lev1->lev1 == '1') {
-                                        $debit += $sum_saldo_lev3;
+                                        $debit += $sum_saldo;
                                     } else {
-                                        $kredit += $sum_saldo_lev3;
+                                        $kredit += $sum_saldo;
                                     }
 
-                                    // Jumlahkan saldo level 3 ke level 1
-                                    $sum_akun1 += $sum_saldo_lev3;
+                                    $sum_akun1 += $sum_saldo;
                                 @endphp
 
                                 <tr style="background: rgb(200,200,200);">
                                     <td>{{ $lev3->kode_akun }}.</td>
                                     <td>{{ $lev3->nama_akun }}</td>
-                                    @if ($sum_saldo_lev3 < 0)
-                                        <td align="right">({{ number_format($sum_saldo_lev3 * -1, 2) }})</td>
+                                    @if ($sum_saldo < 0)
+                                        <td align="right">({{ number_format($sum_saldo * -1, 2) }})</td>
                                     @else
-                                        <td align="right">{{ number_format($sum_saldo_lev3, 2) }}</td>
+                                        <td align="right">{{ number_format($sum_saldo, 2) }}</td>
                                     @endif
                                 </tr>
 
-                                {{-- Menampilkan akun level 4 --}}
-                                @foreach ($akun_lev4 as $lev4)
+
+                                @php
+                                    // Konversi array $akun_lev4 menjadi koleksi Laravel
+                                    $grouped_lev4 = collect($akun_lev4)->groupBy(function($item) {
+                                        return $item['lev4'];
+                                    });
+                                @endphp
+
+                                @foreach ($grouped_lev4 as $key => $group)
                                     @php
                                         $bg = 'rgb(230, 230, 230)';
                                         if ($loop->iteration % 2 == 0) {
                                             $bg = 'rgba(255, 255, 255)';
                                         }
+        
+                                        // Menghitung total saldo untuk setiap grup
+                                        $total_saldo = $group->sum('saldo');
                                     @endphp
-                                    <tr style="background: rgb(255,255,255);">
-                                        <td>{{ $lev4['kode_akun'] }}.</td>
-                                        <td>{{ $lev4['nama_akun'] }}</td>
-                                        @if ($lev4['saldo'] < 0)
-                                            <td align="right">({{ number_format($lev4['saldo'] * -1, 2) }})</td>
+                                    <tr style="background: {{ $bg }};">
+                                        <td>{{ $group->first()['kode_akun'] }}.</td>
+                                        <td>{{ $group->first()['nama_akun'] }}</td>
+                                        @if ($total_saldo < 0)
+                                            <td align="right">({{ number_format($total_saldo * -1, 2) }})</td>
                                         @else
-                                            <td align="right">{{ number_format($lev4['saldo'], 2) }}</td>
+                                            <td align="right">{{ number_format($total_saldo, 2) }}</td>
                                         @endif
                                     </tr>
                                 @endforeach
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                             @endforeach
                         @endforeach
 
@@ -301,27 +320,6 @@
                             <td colspan="3" height="2"></td>
                         </tr>
                     @endforeach
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     <tr style="background: rgb(167, 167, 167); font-weight: bold;">
                         <td height="20" colspan="2" align="left">
                             <b>Jumlah Liabilitas + Ekuitas </b>
