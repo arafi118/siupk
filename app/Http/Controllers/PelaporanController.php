@@ -17,7 +17,7 @@ use App\Models\JenisSimpanan;
 use App\Models\Kecamatan;
 use App\Models\Kelompok;
 use App\Models\MasterArusKas;
-use App\Models\PinjamanIndividu;
+use App\Models\PinjamanIndividu; 
 use App\Models\PinjamanKelompok;
 use App\Models\Rekening;
 use App\Models\Saldo;
