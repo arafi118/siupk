@@ -29,6 +29,7 @@ $sum =0;
                         $kd_trx = 0;
                         $cif = $id_simp;
                     }
+                    $idt=$trx->idt;
 
                 
                     $jumlah = floatval($trx->jumlah); // Ensure $trx->jumlah is numeric
@@ -50,8 +51,8 @@ $sum =0;
                 <tr>
                     <td>{{ $index + 1 }}</td>
                     <td>{{ \Carbon\Carbon::parse($trx->tgl_transaksi)->format('d/m/Y') }}</td>
-                    <td>{{ $trx->keterangan_transaksi ?? '-' }}</td>
-                    <td>{{ $kd_trx ?? '-' }}</td>
+                    <td>{{$kd_trx}} | {{ $trx->keterangan_transaksi ?? '-' }}</td>
+                    <td>{{ $idt ?? '-' }}</td>
                     <td>{{ number_format($real_d, 0, ',', '.') }}</td>
                     <td>{{ number_format($real_k, 0, ',', '.') }}</td>
                     <td>{{ number_format($sum, 0, ',', '.') }}</td>
