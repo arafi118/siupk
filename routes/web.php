@@ -120,6 +120,7 @@ Route::post('/dashboard/jatuh_tempo', [DashboardController::class, 'jatuhTempo']
 Route::post('/dashboard/nunggak', [DashboardController::class, 'nunggak'])->middleware('auth');
 Route::post('/dashboard/tagihan', [DashboardController::class, 'tagihan'])->middleware('auth');
 Route::get('/dashboard/pinjaman', [DashboardController::class, 'pinjaman'])->middleware('auth');
+Route::get('/dashboard/pinjamanI', [DashboardController::class, 'pinjamanI'])->middleware('auth');
 Route::get('/dashboard/pemanfaat', [DashboardController::class, 'pemanfaat'])->middleware('auth');
 
 Route::get('/pengaturan/sop', [SopController::class, 'index'])->middleware('auth');

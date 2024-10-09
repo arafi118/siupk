@@ -229,7 +229,7 @@ $(document).ready(function() {
                         confirmButtonText: 'Oke'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            refreshTransaksiContainer();
+                            tableTransaksi(currentMonth, currentYear);
                             resetForm();
                         }
                     });

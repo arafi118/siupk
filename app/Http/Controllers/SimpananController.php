@@ -212,7 +212,19 @@ class SimpananController extends Controller
         $namaDebitur = $request->nama_debitur;
         $nia = $request->nia;
 
-        $jenisSimpanan = JenisSimpanan::where('id', substr($nomorRekening, 0, 1))->first();
+        // Mengambil jenis_simpanan dari tabel tb_simpanan berdasarkan id ($nia)
+        $simpanan = Simpanan::where('id', $nia)->first();
+    
+        if (!$simpanan) {
+            return response()->json(['success' => false, 'message' => 'Data simpanan tidak ditemukan']);
+        }
+
+        // Mengambil jenisSimpanan berdasarkan nilai jenis_simpanan dari tabel simpanan
+        $jenisSimpanan = JenisSimpanan::where('id', $simpanan->jenis_simpanan)->first();
+
+        if (!$jenisSimpanan) {
+            return response()->json(['success' => false, 'message' => 'Jenis simpanan tidak ditemukan']);
+        }
 
         $transaksi = new Transaksi();
         $transaksi->tgl_transaksi = Tanggal::tglNasional($tglTransaksi);
@@ -234,6 +246,7 @@ class SimpananController extends Controller
             return response()->json(['success' => false, 'message' => 'Gagal menyimpan transaksi']);
         }
     }
+
 
     public function generateSimpanan()
     {

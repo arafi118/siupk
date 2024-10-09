@@ -6,9 +6,8 @@
     "\\app\\Http\\Controllers",
     "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\transaksi",
-    "\\resources\\views\\transaksi\\jurnal_umum"
+    "\\resources\\views\\dashboard"
   ],
-  "SelectedNode": "\\resources\\views\\transaksi\\jurnal_umum\\index.blade.php",
+  "SelectedNode": "\\resources\\views\\dashboard\\index.blade.php",
   "PreviewInSolutionExplorer": false
 }

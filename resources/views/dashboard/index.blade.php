@@ -715,6 +715,11 @@
                 $('#tbKelompok').html(result.table)
             }
         })
+        $.get('/dashboard/pinjamanI?status=A', function(result) {
+            if (result.success) {
+                $('#tbAnggota').html(result.table)
+            }
+        })
 
         $.get('/dashboard/pemanfaat?status=A', function(result) {
             if (result.success) {
