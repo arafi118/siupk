@@ -133,7 +133,7 @@
         <b class="centered-text"> PASAL 1 </b>
         <ol class="centered-text">
             <li> <b> Pihak Pertama </b> dengan ini setuju memberikan kredit kepada <b> Pihak Kedua </b> uang sebesar Rp.
-                {{ number_format($pinkel->harga) }} ({{ $keuangan->terbilang($pinkel->harga) }} Rupiah) Yaitu
+                {{ number_format($pinkel->alokasi) }} ({{ $keuangan->terbilang($pinkel->alokasi) }} Rupiah) Yaitu
                 jumlah
                 yang telah diputuskan dalam Rekomendasi rapat <b> Tim Pendanaan </b> mendasar pada surat Rekomendasi dari
                 <b> Team Verifikasi </b> dan {{ $kec->nama_lembaga_sort }}, berdasarkan permohonan dari Pihak Kedua yang
@@ -154,7 +154,7 @@
         <h3 class="fa fa-align-center" aria-hidden="true" style="font-size: 10px;"> Penyerahan Pinjaman </i> </h3>
         <div class="centered-text">
             <b> Pihak Pertama </b> telah menyerahkan uang kepada Pihak Kedua sebagai pinjaman sebesar
-            <b> {{ number_format($pinkel->harga) }} ({{ $keuangan->terbilang($pinkel->harga) }} Rupiah) </b>
+            <b> {{ number_format($pinkel->alokasi) }} ({{ $keuangan->terbilang($pinkel->alokasi) }} Rupiah) </b>
             tersebut secara tunai dan sekaligus kepada <b> Pihak Kedua </b> pada saat perjanjian ini dibuat dan ditanda
             tangani. <b> Pihak Kedua </b> menyatakan telah menerimanya dengan menandatangani bukti penerimaan (kwitansi)
             yang
@@ -168,7 +168,7 @@
             </i> </h3>
         <div class="centered-text">
             <b> Pihak Pertama </b> telah menyerahkan uang kepada Pihak Kedua sebagai pinjaman sebesar
-            <b> {{ number_format($pinkel->harga) }} ({{ $keuangan->terbilang($pinkel->harga) }} Rupiah) </b>
+            <b> {{ number_format($pinkel->alokasi) }} ({{ $keuangan->terbilang($pinkel->alokasi) }} Rupiah) </b>
             tersebut secara tunai dan sekaligus kepada <b> Pihak Kedua </b> pada saat perjanjian ini dibuat dan ditanda
             tangani. <b> Pihak Kedua </b> menyatakan telah menerimanya dengan menandatangani bukti penerimaan (kwitansi)
             yang
@@ -176,11 +176,11 @@
             <b> Pihak Kedua </b> wajib membayar hutang tersebut kepada <b> Pihak Pertama </b> dengan cara pembayaran
             angsuran
             sebesar
-            <b> {{ number_format($pinkel->harga) }} ({{ $keuangan->terbilang($pinkel->harga) }} Rupiah) </b>
+            <b> {{ number_format($pinkel->alokasi) }} ({{ $keuangan->terbilang($pinkel->alokasi) }} Rupiah) </b>
             ditambah
             jasa <b> {{ $pinkel->pros_jasa / $pinkel->jangka }} % Flat </b> sebesar
-            <b> {{ number_format($pinkel->harga * ($pinkel->pros_jasa / $pinkel->jangka / 100)) }}
-                ({{ $keuangan->terbilang($pinkel->harga * ($pinkel->pros_jasa / $pinkel->jangka / 100)) }} Rupiah)
+            <b> {{ number_format($pinkel->alokasi * ($pinkel->pros_jasa / $pinkel->jangka / 100)) }}
+                ({{ $keuangan->terbilang($pinkel->alokasi * ($pinkel->pros_jasa / $pinkel->jangka / 100)) }} Rupiah)
             </b>
             setiap bulan, selama {{ $pinkel->jangka }} bulan,
             yang dimulai pada {{ Tanggal::namaHari($pinkel->tgl_cair) }},
