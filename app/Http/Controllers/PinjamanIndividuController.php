@@ -806,6 +806,7 @@ class PinjamanIndividuController extends Controller
                 'provisi' => intval($provisi),
                 'fee_agent' => intval($fee_agent),
                 'fee_supplier' => intval($fee_supplier),
+                'depe' => intval($depe),
                 'harga' => (intval($alokasi_pinjaman) + intval($admin) + intval($provisi)) - intval($depe),
                 'id_supplier' => $data['supplier'],
                 'status' => 'A'
