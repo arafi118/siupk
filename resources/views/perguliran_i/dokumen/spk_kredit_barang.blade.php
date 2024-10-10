@@ -119,183 +119,101 @@
     </table>
     <div class="centered-text">
         Dalam hubungan ini bertindak untuk dan atas nama diri sendiri yang menjadi bagian tidak terpisahkan dari dokumen
-        perjanjian kredit ini, selanjutnya disebut PIHAK KEDUA.
+        perjanjian kredit ini, selanjutnya disebut <b>Pihak kedua</b>.
     </div>
     <p class="centered-text">
         Pihak Pertama dan Pihak Kedua dalam kedudukan masing-masing seperti telah diterangkan diatas, Pada hari
-        {{ \Carbon\Carbon::parse($pinkel->anggota->tgl_cair)->format('d F Y') }},
+        {{ \Carbon\Carbon::parse($pinkel->anggota->tgl_cair)->locale('id')->translatedFormat('d F Y') }}
         bertempat di {{ $kec->nama_lembaga_sort }} {{ $kec->sebutan_kec }}
         {{ $kec->nama_kec }} dengan sadar dan
-        sukarela menyatakan telah membuat perjanjian utang piutang dengan ketentuan-ketentuan yang telah disepakati bersama
-        sebagai berikut :
+        sukarela menyatakan telah membuat perjanjian kredit barang kepada <b>Pihak Kedua berupa {{ $pinkel->nama_barang }}. </b>Kedua belah pihak sepakat untuk mengikatkan diri dalam perjanjian ini dengan syarat-syarat sebagai berikut:
     </p>
     <div style="text-align: center;">
-        <b class="centered-text"> PASAL 1 </b>
+        <b class="centered-text"> PASAL 1 </b><br>
+        <b class="centered-text">Perjanjian</b>
         <ol class="centered-text">
-            <li> <b> Pihak Pertama </b> dengan ini setuju memberikan kredit kepada <b> Pihak Kedua </b> uang sebesar Rp.
-                {{ number_format($pinkel->alokasi) }} ({{ $keuangan->terbilang($pinkel->alokasi) }} Rupiah) Yaitu
-                jumlah
-                yang telah diputuskan dalam Rekomendasi rapat <b> Tim Pendanaan </b> mendasar pada surat Rekomendasi dari
-                <b> Team Verifikasi </b> dan {{ $kec->nama_lembaga_sort }}, berdasarkan permohonan dari Pihak Kedua yang
-                dilakukan secara perorangan sesuai Surat Permohonan kredit tanggal
-                {{ Tanggal::tglLatin($pinkel->tgl_proposal) }}.
+            <li>Perjanjian ini dibuat untuk menyepakati ketentuan yang disetujui oleh kedua belah pihak.
             </li>
             <li>
-                <b> Pihak Kedua </b> dan Pemberi kuasa, mengaku telah menerima uang dalam jumlah sebagaimana yang
-                diterangkan
-                pada
-                ayat 1 diatas, uang telah dibayarkan sesuai jumlah kelayakan pinjamannya masing-masing dan dibuktikan secara
-                sah dengan daftar tanda terima uang terlampir, yang berlaku sebagai Surat Pengakuan Utang secara perorangan.
+                Perjanjian kredit ini berlaku setelah ditandatanganinya perjanjian ini.
             </li>
         </ol>
     </div>
     <div style="text-align: center;">
-        <b class="centered-text"> PASAL 2 </b>
-        <h3 class="fa fa-align-center" aria-hidden="true" style="font-size: 10px;"> Penyerahan Pinjaman </i> </h3>
-        <div class="centered-text">
-            <b> Pihak Pertama </b> telah menyerahkan uang kepada Pihak Kedua sebagai pinjaman sebesar
-            <b> {{ number_format($pinkel->alokasi) }} ({{ $keuangan->terbilang($pinkel->alokasi) }} Rupiah) </b>
-            tersebut secara tunai dan sekaligus kepada <b> Pihak Kedua </b> pada saat perjanjian ini dibuat dan ditanda
-            tangani. <b> Pihak Kedua </b> menyatakan telah menerimanya dengan menandatangani bukti penerimaan (kwitansi)
-            yang
-            sah.
-        </div>
+        <b class="centered-text"> PASAL 2 </b><br>
+        <b class="centered-text">Nilai dan Barang</b>
+        <ol class="centered-text">
+            <li>Barang yang dikreditkan adalah berupa {{ $pinkel->nama_barang }} .</li>
+            <li>Nilai barang tersebut diatas sebesar  <b> {{ number_format($pinkel->alokasi) }} ({{ $keuangan->terbilang($pinkel->alokasi) }} Rupiah). </b></li>
+            <li>Status kepemilikan barang sampai dengan sebelum perjanjian ini dinyatakan berakhir adalah <b>Fidusia atau Sewa Beli.</b></li>
+            <li>Perjanjian ini berakhir ketika <b>Pihak Pertama</b> telah selesai melakukan pembayaran sesuai dengan kesepakatan.</li>
+        </ol>
     </div>
     <br>
     <div style="text-align: center;">
-        <b class="centered-text"> PASAL 3 </b>
-        <h3 class="fa fa-align-center" aria-hidden="true" style="font-size: 10px;"> Sistem Pengembalian
+        <b class="centered-text"> PASAL 3 </b><br>
+        <b class="centered-text">Sistem Pengembalian</b>
+        <b>&nbsp;</b>
             </i> </h3>
-        <div class="centered-text">
-            <b> Pihak Pertama </b> telah menyerahkan uang kepada Pihak Kedua sebagai pinjaman sebesar
-            <b> {{ number_format($pinkel->alokasi) }} ({{ $keuangan->terbilang($pinkel->alokasi) }} Rupiah) </b>
-            tersebut secara tunai dan sekaligus kepada <b> Pihak Kedua </b> pada saat perjanjian ini dibuat dan ditanda
-            tangani. <b> Pihak Kedua </b> menyatakan telah menerimanya dengan menandatangani bukti penerimaan (kwitansi)
-            yang
-            sah.
-            <b> Pihak Kedua </b> wajib membayar hutang tersebut kepada <b> Pihak Pertama </b> dengan cara pembayaran
-            angsuran
-            sebesar
-            <b> {{ number_format($pinkel->alokasi) }} ({{ $keuangan->terbilang($pinkel->alokasi) }} Rupiah) </b>
-            ditambah
-            jasa <b> {{ $pinkel->pros_jasa / $pinkel->jangka }} % Flat </b> sebesar
-            <b> {{ number_format($pinkel->alokasi * ($pinkel->pros_jasa / $pinkel->jangka / 100)) }}
-                ({{ $keuangan->terbilang($pinkel->alokasi * ($pinkel->pros_jasa / $pinkel->jangka / 100)) }} Rupiah)
-            </b>
-            setiap bulan, selama {{ $pinkel->jangka }} bulan,
-            yang dimulai pada {{ Tanggal::namaHari($pinkel->tgl_cair) }},
-            {{ \Carbon\Carbon::parse($pinkel->anggota->tgl_cair)->translatedFormat('d F Y') }} dan
-            sampai target pelunasan, sebagaimana jadwal angsuran terlampir.
-        </div>
+        <ol class="centered-text">
+            <li><b> Pihak Kedua </b> wajib membayar hutang tersebut kepada <b> Pihak Pertama </b> dengan cara pembayaran
+                angsuran
+                sebesar
+                <b> {{ number_format($pinkel->alokasi) }} ({{ $keuangan->terbilang($pinkel->alokasi) }} Rupiah) </b>
+                ditambah
+                jasa <b> {{ $pinkel->pros_jasa / $pinkel->jangka }} % Flat </b> sebesar
+                <b> {{ number_format($pinkel->alokasi * ($pinkel->pros_jasa / $pinkel->jangka / 100)) }}
+                    ({{ $keuangan->terbilang($pinkel->alokasi * ($pinkel->pros_jasa / $pinkel->jangka / 100)) }} Rupiah)
+                </b>
+                setiap bulan, selama {{ $pinkel->jangka }} bulan,
+                yang dimulai pada {{ Tanggal::namaHari($pinkel->tgl_cair) }},
+                {{ \Carbon\Carbon::parse($pinkel->anggota->tgl_cair)->translatedFormat('d F Y') }} dan
+                sampai target pelunasan, sebagaimana jadwal angsuran terlampir.</li>
+            <li>Jika Kredit dapat diselesaikan sebelum jangka waktu pengembalian, maka <b>Pihak Kedua</b> diwajibkan membayar <b>sisa pokok + penalty 1x angsuran dan 5% dari sisa jasa.</b>  </li>
+
+        </ol>
     </div>
     <br>
     <div style="text-align: center;">
-        <b class="centered-text"> PASAL 4 </b>
-        <h3 class="fa fa-align-center" aria-hidden="true" style="font-size: 10px;"> Agunan </i> </h3>
-        <div class="centered-text">
-            Untuk menjamin pembayaran kembali yang tertib dan sebagaimana mestinya atas segala sesuatu yang berdasarkan
-            perjanjian ini masih terutang oleh <b> Pihak Kedua </b> kepada <b> Pihak Pertama </b> , ditambah biaya yang
-            timbul
-            akibat
-            eksekusi
-            Agunan, maka akan dibuat sebuah perjanjian dimana :
-            <ol class="centered-text">
-                <li>
-                    <b> Pihak Kedua </b> akan menyerahkan Agunan kepada Pihak Pertama berupa.
-                    berikut dengan segala hak dan kepentingan yang sekarang atau dikemudian hari akan diperoleh <b> Pihak
-                        Pertama </b> atas tersebut diatas.
-                </li>
-                <li>
-                    <b> Agunan </b> diikat sesuai dengan ketentuan peraturan perundang-undangan yang berlaku sesuai dengan
-                    jenis <b> Agunan </b> yang diberikan.
-                </li>
-                <li>
-                    Bukti pemilikan, izin-izin atau dokumen-dokumen yang berkaitan dengan Agunan serta akta-akta berkenaan
-                    dengan pengikatan barang agunan yang diagunkan sebagaimana tersebut dalam ayat 2 pasal ini, dikuasai
-                    oleh <b> {{ $kec->nama_lembaga_sort }} </b> sampai kredit dinyatakan lunas. Jika karena sebab apapun,
-                    Agunan diserahkan menjadi tidak sah atau berkurang nilainya, maka Pihak Kedua wajib menyerahkan Agunan
-                    Pengganti yang bentuk dan nilainya sama dan dapat disetujui oleh <b> {{ $kec->nama_lembaga_sort }}
-                    </b> .
-                </li>
-                <li>
-                    Barang jaminan tersebut <b> Sah </b> milik <b> Pihak Kedua </b> dan sedang tidak dalam keadaan sengketa.
-                </li>
-            </ol>
-        </div>
+        <b class="centered-text"> PASAL 4 </b><br>
+        <b class="centered-text">Sanksi Keterlambatan Pembayaran</b>
+        <ol class="centered-text">
+            <li>Keterlambatan angsuran <b>Pihak Kedua</b> telah melampaui masa toleransi dan mengakibatkan <b>Pihak Pertama</b> melakukan jemput angsuran maka <b>Pihak Kedua</b> di bebani biaya transportasi penjemputan sebesar Rp. 15.000,-  </li>
+			<li>Pembayaran angsuran yang mengalami keterlambatan 2(dua) hari setelah jatuh tempo atau lebih, maka dikenakan denda sebesar 1 (satu) Persen (per hari) kali nilai angsuran yang tartunggak.</li>
+			<li>Keterlambatan angsuran <b>Pihak Kedua</b> mencapai 2 (dua) bulan atau lebih, maka <b>Pihak Pertama</b> berhak melakukan pengambilan barang.</li>
+        </ol>
     </div>
     <br> <br> <br>
     <div style="text-align: center;">
-        <b class="centered-text"> PASAL 5 </b>
-        <h3 class="fa fa-align-center" aria-hidden="true" style="font-size: 10px;"> Pengalihan Kuasa Khusus atas Agunan </i>
+        <b class="centered-text"> PASAL 5 </b><br>
+        <b class="centered-text">Penyelesaian Perselisihan</b>
         </h3>
         <ol class="centered-text">
-            <li> <b> Pihak Kedua </b> dengan ini memberikan kuasa kepada <b> Pihak Pertama </b> untuk mengambil dan
-                menguasai
-                obyek yang disebutkan sebagai Barang jaminan atau agunan dimaksud dalam pasal 5 secara sah dan memiliki hak
-                sepenuhnya untuk menjual atau melakukan lelang atau memiliki sendiri atas barang jaminan/agunan tersebut
-                dalam rangka melunasi hutang <b> Pihak Kedua </b> .
-            </li>
-            <li> Kuasa yang diberikan oleh <b> Pihak Kedua </b> kepada <b> Pihak Pertama </b> didalam atau berdasarkan
-                perjanjian
-                ini, merupakan bagian yang terpenting dan tidak terpisahkan dari perjanjian ini, kuasa mana tidak dapat
-                ditarik kembali dan juga tidak akan berakhir karena meninggal dunianya Pihak Kedua atau karena sebab apapun
-                juga.
-            </li>
-            <li> Dalam rangka menjalankan Kuasa Khusus Penjualan dan/atau melakukan pelelangan barang jaminan/agunan
-                sebagaimana disebut dalam Pasal 6 Ayat 1 juncto Pasal 5, maka nilai penjualan dan/atau pelelangan setelah
-                dikurangi biaya eksekusi barangjaminan/agunan beserta biaya yang timbul dari proses penjualan/pelelangan
-                barang jaminan/agunan akan diperhitungkan sebagai kelebihan atau kekurangan bayar yang tetap menjadi
-                hak/kewajiban <b> Pihak Kedua </b> .
-            </li>
+          <li>Penggunaan kembali barang oleh <b>Pihak Kedua</b> setelah diterapkannya sanksi sebagaimana pada <b>Pasal 4 Ayat 3</b> dapat dilakukan apabila seluruh kewajiban angsuran dan denda dibayar lunas sesuai target angsuran berjalan.</li>
+            <li>Hal-hal yang tidak diatur dan/atau belum diatur dalam perjanjian ini dan/atau terjadi perbedaan penafsiran atas seluruh atau sebagian dari perjanjian ini maka kedua belah pihak sepakat untuk menyelesaikannya secara musyawarah untuk mufakat.</li>
+            <li>Apabila tidak tercapai kata mufakat dalam proses penyelesaian perselisihan sebagaimana dimaksud dalam <b>Pasal 5 Ayat 1</b> maka  akan diselesaikan secara hukum sesuai hukum yang berlaku di Indonesia melalui Pengadilan Negeri {{$kab->nama_kab}}</li>
+
         </ol>
     </div>
     <div style="text-align: center;">
-        <b class="centered-text"> PASAL 6 </b>
-        <h3 class="fa fa-align-center" aria-hidden="true" style="font-size: 10px;"> Penyelesaian Perselisihan </i> </h3>
-        <ol class="centered-text">
-            <li> Apabila ada hal-hal yang tidak atau belum diatur dalam perjanjian ini dan juga jika terjadi perbedaan
-                penafsiran atas seluruh atau sebagian dari perjanjian ini maka kedua belah pihak sepakat untuk
-                menyelesaikannya secara musyawarah untuk mufakat. </li>
-            <li> Jika penyelesaian secara musyawarah untuk mufakat juga ternyata tidak menyelesaikan perselisihan tersebut
-                maka perselisihan tersebut akan diselesaikan secara hukum yang berlaku di Indonesia dan oleh karena itu
-                kedua belah pihak setuju menunjuk Pengadilan Negeri {{ $nama_kab }} sebagai upaya hukum dalam
-                menyelesaikan persengketaan tersebut. </li>
-        </ol>
-    </div>
-    <div style="text-align: center;">
-        <b class="centered-text"> PASAL 7 </b>
-        <h3 class="fa fa-align-center" aria-hidden="true" style="font-size: 10px;"> Lain - Lain
+        <b class="centered-text"> PASAL 6 </b><br>
+        <b class="centered-text">Lain lain</b>
             </i> </h3>
-        <div class="centered-text">
-            Hal-hal yang belum atau belum cukup diatur dalam perjanjian ini akan diatur lebih lanjut dalam bentuk surat
-            menyurat dan atau addendum perjanjian yang ditandatangani oleh para pihak yang merupakan satu kesatuan dan
-            bagian yang tidak terpisahkan dari perjanjian ini.
-        </div>
+            <div class="centered-text">
+                Hal-hal yang belum atau belum cukup diatur dalam perjanjian ini akan diatur lebih lanjut dalam bentuk surat menyurat dan atau addendum perjanjian yang ditandatangani oleh para pihak yang merupakan satu kesatuan dan bagian yang tidak terpisahkan dari perjanjian ini.
+    
+            </div>
+    </div>
+    <div style="text-align: center;">
+        <b class="centered-text"> PASAL 7 </b><br>
+        <b class="centered-text">Penutup</b>
+            </i> </h3>
+            <div class="centered-text">
+                Perjanjian Kredit barang ini dibuat rangkap 2 (dua) di atas kertas bermaterai cukup untuk masing-masing pihak yang mempunyai kekuatan hukum yang sama dan ditanda tangani oleh kedua belah pihak dalam keadaan sehat jasmani dan rohani, serta tanpa unsur paksaan dari pihak manapun.
+            </div>
     </div>
     <div style="text-align: center;" style="font-size: 10px;">
-        <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 10px;" class="p0">
-            <tr>
-                <td style="padding: 0px !important;">
-                    <table class="p0" border="0" width="100%" cellspacing="0" cellpadding="0"
-                        style="font-size: 10px;">
-                        <br>
-                        <tr>
-                            <td style="padding: 0px !important;">
-                                <div style="text-align: center;">
-                                    <b class="centered-text"> PASAL 8 </b>
-                                    <h3 class="fa fa-align-center" aria-hidden="true" style="font-size: 10px;">
-                                        Penyelesaian
-                                        Perselisihan </i> </h3>
-                                </div>
-                                <div class="centered-text">
-                                    Perjanjian Hutang Piutang uang ini dibuat rangkap 2 (dua) di atas kertas bermaterai
-                                    cukup untuk masing-masing pihak yang mempunyai kekuatan hukum yang sama dan ditanda
-                                    tangani oleh kedua belah pihak dalam keadaan sehat jasmani dan rohani, serta tanpa
-                                    unsur paksaan dari pihak manapun.
-                                </div>
-                            </td>
-                        </tr>
-                    </table> <br>
+       <br>
                     {{-- <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
                         <tr>
                             <td width="10" align="center"> &nbsp; </td>
