@@ -34,7 +34,7 @@ $sum =0;
                 
                     $jumlah = floatval($trx->jumlah); // Ensure $trx->jumlah is numeric
                     
-                    if(in_array(substr($trx->id_simp, 0, 1), ['1', '2', '5'])) {
+                    if(1=1) {
                         $real_d = $jumlah;
                         $real_k = 0;
                         $sum += $real_d;
