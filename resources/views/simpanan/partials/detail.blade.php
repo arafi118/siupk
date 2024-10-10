@@ -119,6 +119,9 @@
                                             <div style="position: relative;">
                                                 <select id="tahunts" name="tahunts" class="form-control select2" style="padding-left: 10px; padding-right: 30px; appearance: none; -webkit-appearance: none; -moz-appearance: none; border: 1px solid #ccc;">
                                                     @foreach(range(date('Y')-5, date('Y')+5) as $tahun)
+                                                    <option value="0">
+                                                        Semua Tahun
+                                                    </option>
                                                     <option value="{{ $tahun }}" {{ date('Y') == $tahun ? 'selected' : '' }}>
                                                         {{ $tahun }}
                                                     </option>
@@ -155,8 +158,8 @@ $(".date").flatpickr({
 
 $(document).ready(function() {
     var currentDate = new Date();
-    var currentMonth = currentDate.getMonth() + 1;
-    var currentYear = currentDate.getFullYear();
+    var currentMonth = 0;
+    var currentYear = 0;
 
     tableTransaksi(currentMonth, currentYear);
 

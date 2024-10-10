@@ -76,23 +76,29 @@ class SimpananController extends Controller
     }
 
     public function getTransaksi()
-    {
-        $bulan = request()->input('bulan');
-        $tahun = request()->input('tahun');
-        $cif = request()->input('cif');
+{
+    $bulan = request()->input('bulan');
+    $tahun = request()->input('tahun');
+    $cif = request()->input('cif');
 
-        $transaksiQuery = Transaksi::where('id_simp', 'LIKE', "%-$cif")
-            ->whereYear('tgl_transaksi', $tahun);
+    $transaksiQuery = Transaksi::where('id_simp', 'LIKE', "%-$cif");
 
-        // Jika bulan tidak 0, tambahkan filter bulan
-        if ($bulan != 0) {
-            $transaksiQuery->whereMonth('tgl_transaksi', $bulan);
-        }
-        $transaksi  = $transaksiQuery->orderBy('tgl_transaksi', 'asc')->get();
-        $bulankop   = $bulan;
-        $tahunkop   = $tahun;
-        return view('simpanan.partials.detail-transaksi', compact('transaksi','bulankop','tahunkop','cif'));
+    // Jika tahun tidak 0, tambahkan filter tahun
+    if ($tahun != 0) {
+        $transaksiQuery->whereYear('tgl_transaksi', $tahun);
     }
+
+    // Jika bulan tidak 0, tambahkan filter bulan
+    if ($bulan != 0) {
+        $transaksiQuery->whereMonth('tgl_transaksi', $bulan);
+    }
+
+    $transaksi = $transaksiQuery->orderBy('tgl_transaksi', 'asc')->get();
+    $bulankop = $bulan;
+    $tahunkop = $tahun;
+
+    return view('simpanan.partials.detail-transaksi', compact('transaksi', 'bulankop', 'tahunkop', 'cif'));
+}
 
 
     public function detailAnggota($id)
