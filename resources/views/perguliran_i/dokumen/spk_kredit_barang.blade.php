@@ -169,7 +169,7 @@
                 yang dimulai pada {{ Tanggal::namaHari($pinkel->tgl_cair) }},
                 {{ \Carbon\Carbon::parse($pinkel->anggota->tgl_cair)->translatedFormat('d F Y') }} dan
                 sampai target pelunasan, sebagaimana jadwal angsuran terlampir.</li>
-            <li>Jika Kredit dapat diselesaikan sebelum jangka waktu pengembalian, maka <b>Pihak Kedua</b> diwajibkan membayar <b>sisa pokok + penalty 1x angsuran dan 5% dari sisa jasa.</b>  </li>
+            <li>Jika Kredit dapat diselesaikan sebelum jangka waktu pengembalian, maka <b>Pihak Kedua</b> diwajibkan membayar <b>sisa pokok + sisa jasa sepenuhnya.</b>  </li>
 
         </ol>
     </div>
@@ -178,12 +178,10 @@
         <b class="centered-text"> PASAL 4 </b><br>
         <b class="centered-text">Sanksi Keterlambatan Pembayaran</b>
         <ol class="centered-text">
-            <li>Keterlambatan angsuran <b>Pihak Kedua</b> telah melampaui masa toleransi dan mengakibatkan <b>Pihak Pertama</b> melakukan jemput angsuran maka <b>Pihak Kedua</b> di bebani biaya transportasi penjemputan sebesar Rp. 15.000,-  </li>
-			<li>Pembayaran angsuran yang mengalami keterlambatan 2(dua) hari setelah jatuh tempo atau lebih, maka dikenakan denda sebesar 1 (satu) Persen (per hari) kali nilai angsuran yang tartunggak.</li>
-			<li>Keterlambatan angsuran <b>Pihak Kedua</b> mencapai 2 (dua) bulan atau lebih, maka <b>Pihak Pertama</b> berhak melakukan pengambilan barang.</li>
+            <li>Keterlambatan angsuran <b>Pihak Kedua</b> telah melampaui masa toleransi 2(dua) hari, maka <b>Pihak kedua</b> di bebani denda sebesar <b>5%,8% dan 10% seiring waktu keterlambatan</b></li>
         </ol>
     </div>
-    <br> <br> <br>
+    <br><br>
     <div style="text-align: center;">
         <b class="centered-text"> PASAL 5 </b><br>
         <b class="centered-text">Penyelesaian Perselisihan</b>
