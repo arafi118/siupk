@@ -128,18 +128,18 @@
 
                 
                     $jumlah = floatval($trx->jumlah); // Ensure $trx->jumlah is numeric
-                    
-                    if (substr($trx->rekening_kredit, 0, 3) == '2.1') {
-                        $real_d = $jumlah;
-                        $real_k = 0;
-                        $sum += $real_d;
-                    } elseif (substr($trx->rekening_debit, 0, 3) == '2.1') {
+
+                    if(in_array(substr($trx->id_simp, 0, 1), ['1', '2', '5'])) {
                         $real_d = 0;
                         $real_k = $jumlah;
+                        $sum += $real_d;
+                    } elseif(in_array(substr($trx->id_simp, 0, 1), ['3', '4', '6', '7'])) {
+                        $real_d = $jumlah;
+                        $real_k = 0;
                         $sum -= $real_k;
                     } else {
-                        $real_d = $jumlah;
-                        $real_k = $jumlah;
+                        $real_d = 0;
+                        $real_k = 0;
                     }
                         
             @endphp
