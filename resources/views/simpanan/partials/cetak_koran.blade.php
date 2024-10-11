@@ -128,15 +128,15 @@
 
                 
                     $jumlah = floatval($trx->jumlah); // Ensure $trx->jumlah is numeric
-
+                    
                     if(in_array(substr($trx->id_simp, 0, 1), ['1', '2', '5'])) {
                         $real_d = 0;
                         $real_k = $jumlah;
-                        $sum += $real_d;
+                        $sum += $jumlah;
                     } elseif(in_array(substr($trx->id_simp, 0, 1), ['3', '4', '6', '7'])) {
                         $real_d = $jumlah;
                         $real_k = 0;
-                        $sum -= $real_k;
+                        $sum -= $jumlah;
                     } else {
                         $real_d = 0;
                         $real_k = 0;
