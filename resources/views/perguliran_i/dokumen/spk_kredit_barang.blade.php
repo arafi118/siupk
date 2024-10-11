@@ -192,7 +192,7 @@
             <li>Apabila tidak tercapai kata mufakat dalam proses penyelesaian perselisihan sebagaimana dimaksud dalam <b>Pasal 5 Ayat 1</b> maka  akan diselesaikan secara hukum sesuai hukum yang berlaku di Indonesia melalui Pengadilan Negeri {{$kab->nama_kab}}</li>
 
         </ol>
-    </div>
+    </div> <br>
     <div style="text-align: center;">
         <b class="centered-text"> PASAL 6 </b><br>
         <b class="centered-text">Lain lain</b>
@@ -201,7 +201,7 @@
                 Hal-hal yang belum atau belum cukup diatur dalam perjanjian ini akan diatur lebih lanjut dalam bentuk surat menyurat dan atau addendum perjanjian yang ditandatangani oleh para pihak yang merupakan satu kesatuan dan bagian yang tidak terpisahkan dari perjanjian ini.
     
             </div>
-    </div>
+    </div> <br>
     <div style="text-align: center;">
         <b class="centered-text"> PASAL 7 </b><br>
         <b class="centered-text">Penutup</b>
