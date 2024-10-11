@@ -195,13 +195,18 @@ class SimpananController extends Controller
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $simpanan = Simpanan::where('id', $cif)->with(['anggota', 'js'])->first();
         
-        $transaksiQuery = Transaksi::where('id_simp', 'LIKE', "%-$cif")
-            ->whereYear('tgl_transaksi', $tahunkop);
+    $transaksiQuery = Transaksi::where('id_simp', 'LIKE', "%-$cif");
+
+        // Jika tahun tidak 0, tambahkan filter tahun
+        if ($tahunkop != 0) {
+            $transaksiQuery->whereYear('tgl_transaksi', $tahun);
+        }
 
         // Jika bulan tidak 0, tambahkan filter bulan
         if ($bulankop != 0) {
-            $transaksiQuery->whereMonth('tgl_transaksi', $bulankop);
+            $transaksiQuery->whereMonth('tgl_transaksi', $bulan);
         }
+
         $transaksi  = $transaksiQuery->orderBy('tgl_transaksi', 'asc')->get();
 
         $title = 'Cetak Rekening Koran ' . $simpanan->anggota->namadepan;
