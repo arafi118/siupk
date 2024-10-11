@@ -97,7 +97,7 @@
                         </ul>
                     </li>
                     <li>
-                        Barang yang saya jaminkan kepada Nasabah tersebut adalah benar-benar milik saya sendiri,
+                        Barang yang saya jaminkan tersebut adalah benar-benar milik saya sendiri,
                     </li>
                     <li>
                         Saya berkewajiban merawat dan melindungi barang jaminan tersebut dan tidak akan menjual,
