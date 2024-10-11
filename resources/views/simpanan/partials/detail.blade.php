@@ -98,40 +98,38 @@
                                     <div class="row mb-3">
                                         <div class="col-md-6">&nbsp;</div>
                                         <div class="col-md-3">
-                                            <div style="position: relative;">
-                                                <select id="bulants" name="bulants" class="form-control select2" style="padding-left: 10px; padding-right: 30px; appearance: none; -webkit-appearance: none; -moz-appearance: none; border: 1px solid #ccc;">
-                                                
-                                                    <option value="0">
-                                                        Semua Bulan
-                                                    </option>
-                                                    @foreach(range(1, 12) as $bulan)
-                                                    <option value="{{$bulan}}" {{ date('n') == $bulan ? 'selected' : '' }}>
-                                                        {{ date('F', mktime(0, 0, 0, $bulan, 1)) }}
-                                                    </option>
-                                                    @endforeach
-                                                </select>
-                                                <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none;">
-                                                    ▼
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div style="position: relative;">
-                                                <select id="tahunts" name="tahunts" class="form-control select2" style="padding-left: 10px; padding-right: 30px; appearance: none; -webkit-appearance: none; -moz-appearance: none; border: 1px solid #ccc;">
-                                                    @foreach(range(date('Y')-5, date('Y')+5) as $tahun)
-                                                    <option value="0">
-                                                        Semua Tahun
-                                                    </option>
-                                                    <option value="{{ $tahun }}" {{ date('Y') == $tahun ? 'selected' : '' }}>
-                                                        {{ $tahun }}
-                                                    </option>
-                                                    @endforeach
-                                                </select>
-                                                <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none;">
-                                                    ▼
-                                                </span>
-                                            </div>
-                                        </div>
+    <div style="position: relative;">
+        <select id="bulants" name="bulants" class="form-control select2" style="padding-left: 10px; padding-right: 30px; appearance: none; -webkit-appearance: none; -moz-appearance: none; border: 1px solid #ccc;">
+            <option value="0" selected> <!-- Default diatur sebagai 'Semua Bulan' -->
+                Semua Bulan
+            </option>
+            @foreach(range(1, 12) as $bulan)
+            <option value="{{$bulan}}">
+                {{ date('F', mktime(0, 0, 0, $bulan, 1)) }}
+            </option>
+            @endforeach
+        </select>
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none;">
+            ▼
+        </span>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div style="position: relative;">
+        <select id="tahunts" name="tahunts" class="form-control select2" style="padding-left: 10px; padding-right: 30px; appearance: none; -webkit-appearance: none; -moz-appearance: none; border: 1px solid #ccc;">
+            <option value="0" selected> <!-- Default diatur sebagai 'Semua Tahun' -->
+                Semua Tahun
+            </option>
+            @foreach(range(date('Y')-5, date('Y')+5) as $tahun)
+            <option value="{{ $tahun }}">
+                {{ $tahun }}
+            </option>
+            @endforeach
+        </select>
+    </div>
+</div>
+
                                     </div>
                                     <div class="card-body pb-2">
                                         <div id="transaksi-container">
