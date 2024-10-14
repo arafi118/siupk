@@ -194,7 +194,7 @@
                                 <label for="alokasi" class="form-label">Alokasi Rp.</label>
                                 <input autocomplete="off" readonly type="text" name="alokasi" id="alokasi"
                                     class="form-control money"
-                                    value="{{ number_format($perguliran_i->alokasi, 2) }}">
+                                    value="{{ number_format($perguliran_i->harga - $perguliran_i->alokasi) }}">
                                 <small class="text-danger" id="msg_alokasi"></small>
                             </div>
                         </div>
@@ -268,8 +268,8 @@
                         <div class="col-md-4">
                             <div class="position-relative mb-3">
                                 <label for="depe" class="form-label">Down Payment</label>
-                                <input autocomplete="off" type="text" name="depe" id="depe"
-                                    class="form-control money">
+                                <input autocomplete="off" readonly type="text" name="depe" id="depe"
+                                    class="form-control money" value="{{ number_format($perguliran_i->alokasi) }}">
                                 <small class="text-danger" id="msg_depe"></small>
                             </div>
                         </div>

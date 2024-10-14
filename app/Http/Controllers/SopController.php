@@ -186,7 +186,8 @@ class SopController extends Controller
             'jdwl_angsuran',
             'hak_kredit',
             'provisi',
-            'def_admin'
+            'def_admin',
+            'def_depe'
         ]);
 
         $validate = Validator::make($data, [
@@ -195,11 +196,12 @@ class SopController extends Controller
             'pembulatan'        => 'required',
             'def_fee_supp'      => 'required',
             'def_fee_agen'      => 'required',
-            'hit_fee_agen'     => 'required',
+            'hit_fee_agen'      => 'required',
             'jdwl_angsuran'     => 'required',
             'hak_kredit'        => 'required',
             'provisi'           => 'required',
-            'def_admin'         => 'required'
+            'def_admin'         => 'required',
+            'def_depe'          => 'required'
         ]);
 
         if ($validate->fails()) {
@@ -219,6 +221,7 @@ class SopController extends Controller
             'hak_kredit'    => $data['hak_kredit'],
             'provisi'       => $data['provisi'],
             'def_admin'     => $data['def_admin'],
+            'def_depe'      => $data['def_depe'],
         ]);
 
         return response()->json([

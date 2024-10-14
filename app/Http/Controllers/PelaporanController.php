@@ -3140,7 +3140,7 @@ class PelaporanController extends Controller
         }
 
         $jabatan = '1';
-        $level = '1';
+        $level = '1 ';
         if (Session::get('lokasi') == '207') {
             $jabatan = '1';
             $level = '2';

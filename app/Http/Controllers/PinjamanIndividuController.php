@@ -378,7 +378,7 @@ class PinjamanIndividuController extends Controller
             'tgl_lunas' => Tanggal::tglNasional($request->tgl_proposal),
             'proposal' => str_replace(',', '', str_replace('.00', '', $request->pengajuan)),
             'verifikasi' => str_replace(',', '', str_replace('.00', '', $request->pengajuan)),
-            'alokasi' => str_replace(',', '', str_replace('.00', '', $request->pengajuan)),
+            'harga' => str_replace(',', '', str_replace('.00', '', $request->pengajuan)),
             'kom_pokok' => '0',
             'kom_jasa' => '0',
             'spk_no' => '0',
@@ -628,7 +628,7 @@ class PinjamanIndividuController extends Controller
             $alokasi = 'verifikasi';
         } elseif ($request->status == 'W') {
             $tgl = 'tgl_tunggu';
-            $alokasi = 'alokasi';
+            $harga = 'harga';
         } else {
             $tgl = 'tgl_cair';
             $alokasi = 'alokasi';
@@ -697,7 +697,7 @@ class PinjamanIndividuController extends Controller
                 '_id',
                 'status',
                 $tgl,
-                $alokasi,
+                $harga,
                 'jangka',
                 'pros_jasa',
                 'jenis_jasa',
@@ -710,7 +710,7 @@ class PinjamanIndividuController extends Controller
             $table = 'pinjaman_anggota_' . Session::get('lokasi');
             $validate = [
                 $tgl => 'required',
-                $alokasi => 'required',
+                $harga => 'required',
                 'jangka' => 'required',
                 'pros_jasa' => 'required',
                 'jenis_jasa' => 'required',
@@ -883,7 +883,7 @@ class PinjamanIndividuController extends Controller
             $update = [
                 'tgl_dana' => Tanggal::tglNasional($data[$tgl]),
                 $tgl => Tanggal::tglNasional($data[$tgl]),
-                $alokasi => str_replace(',', '', str_replace('.00', '', $data[$alokasi])),
+                $harga => str_replace(',', '', str_replace('.00', '', $data[$harga])),
                 'jangka' => $data['jangka'],
                 'pros_jasa' => $data['pros_jasa'],
                 'jenis_jasa' => $data['jenis_jasa'],
@@ -891,6 +891,7 @@ class PinjamanIndividuController extends Controller
                 'sa_jasa' => $data['sistem_angsuran_jasa'],
                 'tgl_cair' => Tanggal::tglNasional($data['tgl_cair']),
                 'spk_no' => $data['nomor_spk'],
+                'alokasi' => str_replace(',', '', str_replace('.00', '', $data[$harga])) * ($request->depe / 100),
                 'status' => $data['status']
             ];
         } else {
@@ -1055,7 +1056,7 @@ class PinjamanIndividuController extends Controller
             'tgl_lunas' => Tanggal::tglNasional($tgl_resceduling),
             'proposal' => $pengajuan,
             'verifikasi' => $pengajuan,
-            'alokasi' => $pengajuan,
+            'harga' => $pengajuan,
             'kom_pokok' => '0',
             'kom_jasa' => '0',
             'spk_no' => $request->get('spk'),

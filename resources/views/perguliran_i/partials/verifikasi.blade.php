@@ -126,10 +126,10 @@
                         </div>
                         <div class="col-md-3">
                             <div class="position-relative mb-3">
-                                <label for="alokasi" class="form-label">Alokasi Rp.</label>
-                                <input autocomplete="off" type="text" name="alokasi" id="alokasi"
+                                <label for="harga" class="form-label">Harga Rp.</label>
+                                <input autocomplete="off" type="text" name="harga" id="harga"
                                 class="form-control money" value="{{ number_format($perguliran_i->verifikasi, 2) }}">
-                            <small class="text-danger" id="msg_alokasi"></small>
+                            <small class="text-danger" id="msg_harga"></small>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -194,7 +194,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="position-relative mb-3">
                                 <label for="tgl_cair" class="form-label">Tgl Cair</label>
                                 <input autocomplete="off" type="text" name="tgl_cair" id="tgl_cair"
@@ -202,7 +202,15 @@
                             <small class="text-danger" id="msg_tgl_cair"></small>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+                            <div class="position-relative mb-3">
+                                <label for="depe" class="form-label">Down Payment (%)</label>
+                                <input autocomplete="off" type="text" name="depe" id="depe"
+                                class="form-control" value="{{ $kec->def_depe }}">
+                            <small class="text-danger" id="msg_depe"></small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <div class="position-relative mb-3">
                                 <label for="nomor_spk" class="form-label">Nomor SPK</label>
                                 <input autocomplete="off" type="text" name="nomor_spk" id="nomor_spk"

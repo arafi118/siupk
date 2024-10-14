@@ -97,6 +97,25 @@
     <div class="row">
         <div class="col-md-6">
             <div class="position-relative mb-3">
+                <label class="form-label" for="def_depe">Down Payment (%)</label>
+                <input autocomplete="off" type="text" name="def_depe" id="def_depe" class="form-control"
+                    value="{{ $kec->def_depe }}">
+                <small class="text-danger" id="msg_def_depe"></small>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="position-relative mb-3">
+                <label class="form-label"for="hak_kredit">Jumlah Maksimal Kredit (Per Pelanggan)</label><br>
+                <input type="radio" id="hak_kredit" name="hak_kredit" value="1" {{ $kec->hak_kredit == 1 ? 'checked' : '' }}>
+                <label>Hanya satu</label><br>
+                <input type="radio" id="hak_kredit" name="hak_kredit" value="2" {{ $kec->hak_kredit == 2 ? 'checked' : '' }}>
+                <label>Lebih dari satu</label><br><br>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="position-relative mb-3">
                 <label class="form-label" for="hit_fee_agen">Rumus Fee Agen</label><br>
                 <input type="radio" id="hit_fee_agen" name="hit_fee_agen" value="1" {{ $kec->hit_fee_agen == 1 ? 'checked' : '' }}>
                 <label> Rumus 1 (Pros % Fee x Harga Barang)</label><br>
@@ -111,17 +130,6 @@
                 <label> Angsuran di Awal</label><br>
                 <input type="radio" id="jdwl_angsuran" name="jdwl_angsuran" value="2" {{ $kec->jdwl_angsuran == 2 ? 'checked' : '' }}>
                 <label> Angsuran di Akhir Periode</label><br><br>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="position-relative mb-3">
-                <label class="form-label"for="hak_kredit">Jumlah Maksimal Kredit (Per Pelanggan)</label><br>
-                <input type="radio" id="hak_kredit" name="hak_kredit" value="1" {{ $kec->hak_kredit == 1 ? 'checked' : '' }}>
-                <label>Hanya satu</label><br>
-                <input type="radio" id="hak_kredit" name="hak_kredit" value="2" {{ $kec->hak_kredit == 2 ? 'checked' : '' }}>
-                <label>Lebih dari satu</label><br><br>
             </div>
         </div>
     </div>
