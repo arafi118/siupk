@@ -168,6 +168,8 @@
                                                 <option value="{{ $penduduk->status_pernikahan}}">{{ $penduduk->status_pernikahan}}</option>
                                                 <option value="lajang">Lajang</option>
                                                 <option value="menikah">Menikah</option>
+                                                <option value="cerai hidup">Cerai Hidup</option>
+                                                <option value="cerai mati">Cerai MAti</option>
                                             </select>
                                             <small class="text-danger" id="msg_status_pernikahan"></small>
                                         </div>
