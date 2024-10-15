@@ -406,15 +406,12 @@ class PinjamanIndividuController extends Controller
         $jenis_jasa = JenisJasa::all();
         $sistem_angsuran = SistemAngsuran::all();
         $sumber_bayar = Rekening::where([
-    ['lev1', '1'],
-    ['lev2', '1'],
-    ['lev3', '1']
-            ])
-            ->where('kode_akun', 'like', '%' . ($perguliran_i->jpp->kode + 1))
-            ->orderBy('kode_akun', 'asc')
-            ->get();
-
-        ])->orderBy('kode_akun', 'asc')->get();
+            ['lev1', '1'],
+            ['lev2', '1'],
+            ['lev3', '1']
+                ])
+        ->where('kode_akun', 'like', '%' . ($perguliran_i->jpp->kode + 1))
+        ->orderBy('kode_akun', 'asc')->get();
         $debet = Rekening::where([
             ['lev1', '1'],
             ['lev2', '1'],
