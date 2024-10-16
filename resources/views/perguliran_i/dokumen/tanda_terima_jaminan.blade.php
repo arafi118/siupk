@@ -100,7 +100,7 @@
               <td height="10" class="style9">Nopol</td>
               <td class="style27">: {{$jaminan['nopol']}}</td>
             </tr>
-            <tr>
+            <tr> 
               <td width="5">&nbsp;</td>
               <td height="10" class="style9">Nilai Jual Kendaraan</td>
               <td class="style27">: {{ $jaminan['nilai_jual_kendaraan']}}</td>

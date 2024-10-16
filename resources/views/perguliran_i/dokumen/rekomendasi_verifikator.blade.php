@@ -89,7 +89,7 @@
                         {{ strtoupper($kec->sebutan_kec) }} {{ strtoupper($kec->nama_kec) }}
                     </div>
                     <div align="center"style="font-size: 12px;">
-                 Alamat:...........................................................................
+                    Alamat: {{ $kec->nama_lembaga_sort }}
 
                       
                     </div>
@@ -145,11 +145,11 @@
                 {{ $pinkel->anggota->d->nama_desa }}</td>
             </tr>
             <tr>
-            <td width="30">&nbsp;</td>
-                <td width="120" style="vertical-align: top;">Tanggal dan Nomor Permohonan Kredit</td>
-                <td align="center">:</td>
-                <td>____________/____________</td>
-            </tr>
+                    <td width="30">&nbsp;</td>
+                        <td width="120" style="vertical-align: top;">Nomor dan Tanggal</td>
+                        <td align="center">:</td>
+                        <td>( {{ $pinkel->jpp->nama_jpp }} - {{ $pinkel->id}} ) / {{ \Carbon\Carbon::parse($pinkel->tgl_proposal)->format('d F Y') }}</td>
+                    </tr>
             <tr>
             <td width="30">&nbsp;</td>
                 <td width="120" style="vertical-align: top;">Nilai Permohonan </td>
