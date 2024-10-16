@@ -93,7 +93,7 @@
             <tr>
               <td width="5">&nbsp;</td>
               <td height="10" class="style9">Nama Pemilik</td>
-              <td class="style27">: {{$jaminan['jenis_kendaraan']}}</td>
+              <td class="style27">: {{$jaminan['nama_pemilik']}}</td>
             </tr>
             <tr>
               <td width="5">&nbsp;</td>
