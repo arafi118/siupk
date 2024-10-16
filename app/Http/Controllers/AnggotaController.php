@@ -64,7 +64,7 @@ class AnggotaController extends Controller
     }
 
     public function register()
-    { 
+    {
         $title = 'Register Penduduk';
         return view('penduduk.register')->with(compact('title'));
     }
@@ -86,7 +86,7 @@ class AnggotaController extends Controller
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $desa = Desa::where('kd_kec', $kec->kd_kec)->with('sebutan_desa')->get();
         $jenis_usaha = Usaha::orderBy('nama_usaha', 'ASC')->get();
-        $hubungan = Keluarga::orderBy('kekeluargaan', 'ASC')->get();
+        $hubungan = Keluarga::orderBy('id', 'ASC')->get();
 
         $desa_dipilih = 0;
         $jenis_usaha_dipilih = 0;
@@ -121,7 +121,6 @@ class AnggotaController extends Controller
                 $tgl = $tanggal;
                 $jk_dipilih = 'L';
             }
-           
         }
 
         return view('penduduk.create')->with(compact('desa_dipilih', 'desa', 'jenis_usaha', 'jenis_usaha_dipilih', 'hubungan', 'hubungan_dipilih', 'nik', 'jk_dipilih', 'value_tanggal'));
@@ -187,7 +186,7 @@ class AnggotaController extends Controller
                 $rules['no_kk'] = 'required|unique:anggota_' . Session::get('lokasi') . ',kk';
             }
         }
-        
+
 
         $validate = Validator::make($data, $rules);
 
@@ -237,7 +236,7 @@ class AnggotaController extends Controller
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $desa = Desa::where('kd_kec', $kec->kd_kec)->with('sebutan_desa')->get();
         $jenis_usaha = Usaha::orderBy('nama_usaha', 'ASC')->get();
-        $hubungan = Keluarga::orderBy('kekeluargaan', 'ASC')->get();
+        $hubungan = Keluarga::orderBy('id', 'ASC')->get();
 
         $penduduk = $penduduk->with([
             'pinjaman_anggota',
