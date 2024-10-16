@@ -221,7 +221,7 @@
             <tr>
             <td width="200"align="center"colspan="1">&nbsp;</td>
                 <td align="center">
-                Verifikatis/Analis Kredit                </td>
+                Verifikator/Analis Kredit                </td>
             </tr>
             <tr>
                 <td colspan="3" height="40">&nbsp;</td>

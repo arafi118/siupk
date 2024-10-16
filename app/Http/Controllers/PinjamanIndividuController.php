@@ -3015,7 +3015,7 @@ class PinjamanIndividuController extends Controller
         $data['user'] = User::where([
             ['lokasi', Session::get('lokasi')],
             ['level', '4'],
-            ['jabatan', '70']
+            ['jabatan', '1']
         ])->with(['j'])->first();
         $data['judul'] = 'Rekomendasi Verifikator (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
         $view = view('perguliran_i.dokumen.rekomendasi_verifikator', $data)->render();
