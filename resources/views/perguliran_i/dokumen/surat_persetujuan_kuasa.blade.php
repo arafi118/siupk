@@ -51,9 +51,18 @@
       </tr>
       <tr>
         <td height="10" class="style9">Jenis Usaha</td>
-        <td class="style27">: {{ $pinkel->anggota->u->nama_usaha }}</td>
+        <td class="style27">
+            :
+            @if (is_numeric($pinkel->anggota->usaha))
+            {{ $pinkel->anggota->u->nama_usaha }}
+            @else
+                {{ $pinkel->anggota->usaha }}
+            @endif
+        
+        </td>
         <td height="10" class="style9">&nbsp;</td>
-      </tr>
+    </tr>
+    
 	  <tr>
         <td height="10" class="style9">Nomor HP</td>
         <td class="style27">: {{ $pinkel->anggota->hp }}</td>
