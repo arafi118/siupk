@@ -206,7 +206,7 @@
         <tr>
             <td width="45%" class="style9 align-justify">
                 <p><span> E. KESIMPULAN</span><br>
-                    Anggota/peminjam ini LAYAK / TIDAK LAYAK untuk diberikan kredit sebesar:<br>
+                    Nasabah/peminjam ini LAYAK / TIDAK LAYAK untuk diberikan kredit sebesar:<br>
                     <br>
                     <strong><u></u>Rp..................... </u></strong>
                 </p>
