@@ -192,9 +192,9 @@
                         <div class="col-md-4">
                             <div class="position-relative mb-3">
                                 <label for="alokasi" class="form-label">Alokasi Rp.</label>
-                                <input autocomplete="off" readonly type="text" name="alokasi" id="alokasi"
+                                <input autocomplete="off" disabled type="text" name="alokasi" id="alokasi"
                                     class="form-control money"
-                                    value="{{ number_format($perguliran_i->harga - $perguliran_i->alokasi) }}">
+                                    value="{{ number_format($perguliran_i->alokasi,2) }}">
                                 <small class="text-danger" id="msg_alokasi"></small>
                             </div>
                         </div>
@@ -268,8 +268,8 @@
                         <div class="col-md-4">
                             <div class="position-relative mb-3">
                                 <label for="depe" class="form-label">Down Payment</label>
-                                <input autocomplete="off" readonly type="text" name="depe" id="depe"
-                                    class="form-control money" value="{{ number_format($perguliran_i->alokasi) }}">
+                                <input autocomplete="off" disabled type="text" name="depe" id="depe"
+                                    class="form-control money" value="{{ number_format($perguliran_i->depe, 2) }}">
                                 <small class="text-danger" id="msg_depe"></small>
                             </div>
                         </div>
@@ -277,7 +277,7 @@
                             <div class="position-relative mb-3">
                                 <label for="provisi" class="form-label">Provisi</label>
                                 <input autocomplete="off" type="text" name="provisi" id="provisi"
-                                    class="form-control"
+                                    class="form-control money"
                                     value="{{ number_format($perguliran_i->alokasi * ($kec->provisi / 100), 2) }}">
                                 <small class="text-danger" id="msg_provisi"></small>
                             </div>
@@ -285,8 +285,12 @@
                     </div>
                     <div class="card-body">
                         <button type="button" id="kembaliProposal" class="btn btn-info flex-grow-1 me-2"
-                            style="background-color: rgb(240, 148, 0);">
+                            style="background-color: rgb(240, 180, 0);">
                             <b><i class="fa fa-refresh"></i> &nbsp; KEMBALI KE PROPOSAL</b>
+                        </button>
+                        <button type="button" id="kembaliVerifikasi" class="btn btn-info flex-grow-1 me-2"
+                            style="background-color: rgb(240, 80, 0);">
+                            <b><i class="fa fa-refresh"></i> &nbsp; KEMBALI KE VERIFIKASI</b>
                         </button>
                         <button type="button" id="Simpan" {{ count($pinj_aktif) > 0 && $kecamatan->id != 280 ? 'disabled' : '' }}
                             class="btn btn-secondary flex-grow-1 ms-2" style="background-color: rgb(112, 109, 109);">
@@ -300,6 +304,9 @@
 </form>
 
 <form action="/perguliran_i/kembali_proposal/{{ $perguliran_i->id }}" method="post" id="formKembaliProposal">
+    @csrf
+</form>
+<form action="/perguliran_i/kembali_verifikasi/{{ $perguliran_i->id }}" method="post" id="formKembaliVerifikasi">
     @csrf
 </form>
 

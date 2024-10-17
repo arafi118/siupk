@@ -880,6 +880,35 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
             })
         })
 
+        $(document).on('click', '#kembaliVerifikasi', function () {
+            Swal.fire({
+                title: 'Peringatan',
+                text: 'Anda yakin ingin mengembalikan pinjaman menjadi V (Verifikasi)?',
+                showCancelButton: true,
+                confirmButtonText: 'Kembalikan',
+                cancelButtonText: 'Batal',
+                icon: 'warning'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var form = $('#formKembaliVerifikasi')
+                    $.ajax({
+                        type: form.attr('method'),
+                        url: form.attr('action'),
+                        data: form.serialize(),
+                        success: function (result) {
+                            if (result.success) {
+                                Swal.fire('Berhasil', result.msg, 'success').then(
+                                    () => {
+                                        window.location.href = '/detail_i/' + result
+                                            .id_pinkel
+                                    })
+                            }
+                        }
+                    })
+                }
+            })
+        })
+
         $(document).on('click', '#SimpanRescedule', async function (e) {
             e.preventDefault()
             $('#Rescedule').modal('hide')

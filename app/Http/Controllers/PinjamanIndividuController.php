@@ -111,10 +111,14 @@ class PinjamanIndividuController extends Controller
                 })
                 ->editColumn('namadepan', function ($row) {
                     $jpp = $row->jpp;
-                    $status = $row->sts->warna_status;
-
-                    $namadepan = $row->anggota->namadepan . '(' . $jpp->nama_jpp . ')';
-                    return '<div>' . $namadepan . ' <small class="float-end badge bg-' . $status . '">Loan ID.' . $row->id . '</small></div>';
+                    if ($row->sts) {
+                        $status = $row->sts->warna_status;
+    
+                        $namadepan = $row->anggota->namadepan . '(' . $jpp->nama_jpp . ')';
+                        return '<div>' . $namadepan . ' <small class="float-end badge bg-' . $status . '">Loan ID.' . $row->id . '</small></div>';
+                    } else {
+                        return '';
+                    }
                 })
                 ->editColumn('tgl_verifikasi', function ($row) {
                     return Tanggal::tglIndo($row->tgl_verifikasi);
@@ -745,7 +749,6 @@ class PinjamanIndividuController extends Controller
                 'status',
                 'supplier',
                 $tgl,
-                $alokasi,
                 'sumber_pembayaran',
                 'debet',
                 'sumber_pembayaran',
@@ -758,7 +761,6 @@ class PinjamanIndividuController extends Controller
 
             $validate = Validator::make($data, [
                 $tgl => 'required',
-                $alokasi => 'required',
                 'sumber_pembayaran' => 'required',
                 'debet' => 'required',
                 'sumber_pembayaran' => 'required',
@@ -810,8 +812,8 @@ class PinjamanIndividuController extends Controller
 
             $admin = str_replace(',', '', str_replace('.00', '', $data['admin']));
             $provisi = str_replace(',', '', str_replace('.00', '', $data['provisi']));
-            $alokasi_pinjaman = str_replace(',', '', str_replace('.00', '', $data[$alokasi]));
-            $depe = str_replace(',', '', str_replace('.00', '', $data['depe']));
+            $alokasi_pinjaman = $perguliran_i->alokasi;
+            $depe = $perguliran_i->depe;
 
             $update = [
                 $tgl => Tanggal::tglNasional($data[$tgl]),
@@ -820,8 +822,7 @@ class PinjamanIndividuController extends Controller
                 'provisi' => intval($provisi),
                 'fee_agent' => intval($fee_agent),
                 'fee_supplier' => intval($fee_supplier),
-                'depe' => intval($depe),
-                'harga' => (intval($alokasi_pinjaman) + intval($admin) + intval($provisi)) - intval($depe),
+                'harga' => (intval($alokasi_pinjaman) + intval($admin) + intval($provisi)),
                 'id_supplier' => $data['supplier'],
                 'status' => 'A'
             ];
@@ -905,7 +906,8 @@ class PinjamanIndividuController extends Controller
                 'sa_jasa' => $data['sistem_angsuran_jasa'],
                 'tgl_cair' => Tanggal::tglNasional($data['tgl_cair']),
                 'spk_no' => $data['nomor_spk'],
-                'alokasi' => str_replace(',', '', str_replace('.00', '', $data[$harga])) * ($request->depe / 100),
+                'alokasi' => str_replace(',', '', str_replace('.00', '', $data[$harga])) - (str_replace(',', '', str_replace('.00', '', $data[$harga])) * ($request->depe / 100)),
+                'depe' => str_replace(',', '', str_replace('.00', '', $data[$harga])) * ($request->depe / 100),
                 'status' => $data['status']
             ];
         } else {
@@ -1007,6 +1009,26 @@ class PinjamanIndividuController extends Controller
         return response()->json([
             'success' => true,
             'msg' => 'Pinjaman atas nama ' . $id->anggota->namadepan . ' Loan ID. ' . $id->id . ' berhasil dikembalikan menjadi status P (Pengajuan/Proposal)',
+            'id_pinkel' => $id->id
+        ]);
+    }
+
+    public function kembaliverifikasi(Request $request, PinjamanIndividu $id)
+    {
+        $pinj_i = PinjamanIndividu::where('id', $id->id)->update([
+            'status' => 'V'
+        ]);
+
+        $pemanfaat = DataPemanfaat::where([
+            ['id_pinkel', $id->id],
+            ['lokasi', Session::get('lokasi')]
+        ])->update([
+            'status' => 'V'
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'msg' => 'Pinjaman atas nama ' . $id->anggota->namadepan . ' Loan ID. ' . $id->id . ' berhasil dikembalikan menjadi status V (Verifikasi)',
             'id_pinkel' => $id->id
         ]);
     }
