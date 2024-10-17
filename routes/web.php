@@ -291,6 +291,7 @@ Route::get('/transaksi/dokumen/kuitansi_thermal/{id}', [TransaksiController::cla
 Route::get('/transaksi/dokumen/bkk/{id}', [TransaksiController::class, 'bkk'])->middleware('auth');
 Route::get('/transaksi/dokumen/bkm/{id}', [TransaksiController::class, 'bkm'])->middleware('auth');
 Route::get('/transaksi/dokumen/bm/{id}', [TransaksiController::class, 'bm'])->middleware('auth');
+Route::get('/transaksi/dokumen/bm_angsuran/{id}', [TransaksiController::class, 'bm'])->middleware('auth');
 
 Route::get('/transaksi/dokumen/struk_individu/{id}', [TransaksiController::class, 'strukIndividu'])->middleware('auth');
 Route::get('/transaksi/dokumen/struk_matrix_individu/{id}', [TransaksiController::class, 'strukMatrixIndividu'])->middleware('auth');

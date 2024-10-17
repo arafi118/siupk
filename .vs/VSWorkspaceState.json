@@ -6,10 +6,12 @@
     "\\app\\Http\\Controllers",
     "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\perguliran\\dokumen",
+    "\\resources\\views\\perguliran",
+    "\\resources\\views\\perguliran\\partials",
     "\\resources\\views\\perguliran_i",
+    "\\resources\\views\\perguliran_i\\dokumen",
     "\\resources\\views\\perguliran_i\\partials"
   ],
-  "SelectedNode": "\\app\\Http\\Controllers\\PinjamanIndividuController.php",
+  "SelectedNode": "\\resources\\views\\perguliran_i\\dokumen\\ba_pencairan.blade.php",
   "PreviewInSolutionExplorer": false
 }
