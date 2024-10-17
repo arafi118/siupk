@@ -139,10 +139,10 @@
                 <li>
                     Pihak Pertama bersedia memberikan jaminan berupa 
                     @if ($jaminan['jenis_jaminan'] == '1')
-                                Nomor Sertifikat: {{($jaminan['nomor_sertifikat'])}},
-                                Nama jaminan: {{$jaminan['nama_pemilik']}},
-                                Alamat : {{$jaminan['alamat']}} Luas: {{ $jaminan['luas']}} (m²),
-                                Nilai Jual Tanah: {{ number_format($jaminan['nilai_jual_tanah']) }},
+                                Nomor Sertifikat: {{($jaminan['nomor_sertifikat']?? 0)}},
+                                Nama jaminan: {{$jaminan['nama_pemilik']?? 0}},
+                                Alamat : {{$jaminan['alamat']?? 0}} Luas: {{ $jaminan['luas']?? 0}} (m²),
+                                Nilai Jual Tanah: {{ number_format($jaminan['nilai_jual_tanah']?? 0) }},
                     @elseif ($jaminan['jenis_jaminan'] == '2')
                                 Nomor: {{($jaminan['nomor'])}},
                                 Nama jaminan: {{$jaminan['jenis_kendaraan']}},
