@@ -8,7 +8,7 @@
             <tr>
                 <td align="center">
                     <div style="font-size: 18px;">
-                        <b>REKOMENDASI HASIL FERIVIKASI/ANALISA KREDIT</b>
+                        <b>REKOMENDASI HASIL VERIFIKASI/ANALISA KREDIT</b>
                     </div>
                     <div style="font-size: 12px;">
                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   Nomor:..................................... &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
@@ -137,8 +137,7 @@
             <td width="200"align="center"colspan="1">&nbsp;</td>
                 <td align="center">
                     <u>
-                        <p> {{$user->namadepan }} {{$user->namabelakang }} <br> __________________________________<br>
-                   </p>
+                        <u> {{$user->namadepan }} {{$user->namabelakang }}</u>
                     </u>
                 </td>
             </tr>
