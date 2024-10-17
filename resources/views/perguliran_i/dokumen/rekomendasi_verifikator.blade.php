@@ -230,7 +230,7 @@
             <td width="200"align="center"colspan="1">&nbsp;</td>
                 <td align="center">
                     <u>
-                        <p>({{$dir->namadepan }} {{$dir->namabelakang }})<br>
+                        <p>( {{$user->namadepan }} {{$user->namabelakang }} )<br>
                     Ketua Tim
                    </p>
                     </u>
