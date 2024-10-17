@@ -167,7 +167,7 @@
         @php
             $index = 1;
             $baris_angsuran = ceil($nia->rencana_count / 2) + 1;
-            if ($kec->jdwl_angsuran == '1') {
+            if ($kec->jdwl_angsuran == '1') { // angsuran diawal
                 $index = 0;
                 $baris_angsuran = ceil($nia->rencana_count / 2);
             }
@@ -202,14 +202,14 @@
 
                     $z = $j - 1;
                     $baris = $baris_angsuran - 1;
-                    if ($index == 0) {
+                    if ($index == 0) { //angsuran diawal
                         $z = $j;
                         $baris = $baris_angsuran;
                     }
                 @endphp
                 <tr>
                     <td class="l {{ $i == $baris_angsuran ? 'b' : '' }}" align="center">
-                        {{ $nia->rencana[$z]->angsuran_ke }}
+                        {{ $z + 1 }}
                     </td>
                     <td class="l {{ $i == $baris_angsuran ? 'b' : '' }}" align="center">
                         {{ Tanggal::tglIndo($nia->rencana[$z]->jatuh_tempo) }}
@@ -225,7 +225,7 @@
 
                     @if (isset($nia->rencana[$z + $baris]))
                         <td class="l {{ $i == $baris_angsuran ? 'b' : '' }}" align="center">
-                            {{ $nia->rencana[$z + $baris]->angsuran_ke }}
+                            {{ ($z + 1) + $baris }}
                         </td>
                         <td class="l {{ $i == $baris_angsuran ? 'b' : '' }}" align="center">
                             {{ Tanggal::tglIndo($nia->rencana[$z + $baris]->jatuh_tempo) }}
