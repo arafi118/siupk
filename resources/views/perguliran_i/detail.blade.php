@@ -165,7 +165,7 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
         'withExcel' => false,
     ];}
 
-    $jenis_jaminan = (strlen($perguliran_i->jaminan) > 5) ? json_decode($perguliran_i->jaminan, true)['jenis_jaminan']:'0';
+    $jenis_jaminan = (strlen($perguliran_i->jaminan) > 6) ? json_decode($perguliran_i->jaminan, true)['jenis_jaminan']:'0';
     @endphp
     @extends('layouts.base')
 
