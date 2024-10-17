@@ -46,6 +46,53 @@
         $("#nilai_jual_tanah").maskMoney();
     </script>
 @elseif ($id == '2')
+<div class="row">
+    <div class="col-md-6">
+        <div class="position-relative mb-3">
+            <label for="nomor_sertifikat" class="form-label">Nomor Sertifikat</label>
+            <input autocomplete="off" type="text" name="data_jaminan[nomor_sertifikat]" value="{{ isset($jaminan['nomor_sertifikat']) ? $jaminan['nomor_sertifikat'] : '' }}" id="nomor_sertifikat"
+            class="form-control">
+            <small class="text-danger" id="msg_nomor_sertifikat"></small>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="position-relative mb-3">
+            <label for="nama_pemilik" class="form-label">Nama Pemilik</label>
+            <input autocomplete="off" type="text" name="data_jaminan[nama_pemilik]" value="{{ isset($jaminan['nama_pemilik']) ? $jaminan['nama_pemilik'] : '' }}" id="nama_pemilik"
+            class="form-control">
+            <small class="text-danger" id="msg_nama_pemilik"></small>
+          </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="position-relative mb-3">
+            <label for="alamat" class="form-label">Alamat</label>
+            <input autocomplete="off" type="text" name="data_jaminan[alamat]" value="{{ isset($jaminan['alamat']) ? $jaminan['alamat'] : '' }}" id="alamat" class="form-control">
+            <small class="text-danger" id="msg_alamat"></small>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="position-relative mb-3">
+            <label for="luas" class="form-label">Luas (m²)</label>
+            <input autocomplete="off" type="text" name="data_jaminan[luas]" value="{{ isset($jaminan['luas']) ? $jaminan['luas'] : '' }}" id="luas" class="form-control">
+            <small class="text-danger" id="msg_luas"></small>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="position-relative mb-3">
+            <label for="nilai_jual_tanah" class="form-label">Nilai Jual Tanah</label>
+            <input autocomplete="off" type="text" name="data_jaminan[nilai_jual_tanah]" value="{{ isset($jaminan['nilai_jual_tanah']) ? $jaminan['nilai_jual_tanah'] : '' }}" id="nilai_jual_tanah"
+                class="form-control">
+            <small class="text-danger" id="msg_nilai_jual_tanah"></small>
+        </div>
+    </div>
+</div>
+
+    <script>
+        $("#nilai_jual_tanah").maskMoney();
+    </script>
+@elseif ($id == '3')
 
     <div class="row">
         <div class="col-md-6">
@@ -93,7 +140,7 @@
     <script>
         $("#nilai_jual_kendaraan").maskMoney();
     </script>
-@elseif ($id == '3')
+@elseif ($id == '4')
     <div class="row">
         <div class="col-md-4">
             <div class="position-relative mb-3">
