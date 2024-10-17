@@ -1,5 +1,7 @@
 @php
     use App\Utils\Tanggal;
+    use Illuminate\Support\Facades\DB;
+
     $jaminan  = json_decode($pinkel->jaminan, true);
     
     use Carbon\Carbon;
@@ -16,6 +18,7 @@
     }
     $redaksi_spk = str_replace(' <ol> ', '', str_replace(' </ol> ', '', $kec->redaksi_spk));
     $redaksi_spk = str_replace(' <ul> ', '', str_replace(' </ul> ', '', $redaksi_spk));
+
 @endphp
 @extends('perguliran_i.dokumen.layout.base')
 @section('content')
@@ -47,7 +50,6 @@
         tahun <b>{{ $keuangan->terbilang(Tanggal::tahun($pinkel->tgl_cair)) }}</b>, 
         kami yang bertandatangan di bawah ini setuju membuat Surat Perjanjian Utang Piutang, yaitu :
     </div>
-    
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
         <tr>
             <td width="5"> &nbsp; </td>
@@ -133,8 +135,12 @@
                 
                      dengan masing-masing angsuran pokok sebesar Rp. {{ number_format($wajib_pokok) }}- dan bunga 
                      sebesar Rp. {{ number_format($wajib_jasa) }}  .
+                     Serta selambat-lambatnya akan dibayar lunas pada tanggal
+                     @if ($tgl_terakhir)
+                        {{ Tanggal::tglLatin($tgl_terakhir->jatuh_tempo) }}
+                    @endif
 
-                     Serta selambat-lambatnya akan dibayar lunas pada tanggal {{ Tanggal::tglLatin( $pinkel->ra_i->last()->jatuh_tempo) }}.
+                     .
                 </li>
                 <li>
                     Pihak Pertama bersedia memberikan jaminan berupa 
