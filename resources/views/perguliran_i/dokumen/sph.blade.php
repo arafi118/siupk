@@ -148,7 +148,7 @@
                                 Nama jaminan: {{$jaminan['nama_pemilik']}},
                                 Alamat : {{$jaminan['alamat']}} Luas: {{ $jaminan['luas']}} (m²),
                                 Nilai Jual Tanah: {{ number_format($jaminan['nilai_jual_tanah']) }},
-                   @elseif ($jaminan['jenis_jaminan'] == '3')
+                    @elseif ($jaminan['jenis_jaminan'] == '3')
                                 Nomor: {{($jaminan['nomor'])}},
                                 Nama jaminan: {{$jaminan['jenis_kendaraan']}},
                                 Nopol: {{$jaminan['nopol']}},
