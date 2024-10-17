@@ -16,12 +16,12 @@
 
 
         <tr>
-            <td height="25" colspan="6"><b>A. IDENTITAS PEMINJAM (ANGGOTA)</b></td>
+            <td height="25" colspan="6"><b>A. IDENTITAS PEMINJAM (NASABAH)</b></td>
         </tr>
 
         <tr>
             <td width="4%" align="right">1. </td>
-            <td width="25%">Nama anggota</td>
+            <td width="25%">Nama Nasabah</td>
             <td colspan="4">: {{ $pinkel->anggota->namadepan }}</td>
         </tr>
         <tr>
@@ -56,7 +56,7 @@
         <tr>
             <td width="4%" align="right">7.</td>
             <td>Jenis Usaha</td>
-            <td colspan="4">: {{ $pinkel->anggota->u->nama_usaha }}</td>
+            <td colspan="4">: {{ $pinkel->anggota->nama_usaha }}</td>
         </tr>
         <tr>
             <td width="4%" align="right">8.</td>
