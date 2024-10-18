@@ -897,6 +897,8 @@ class PinjamanIndividuController extends Controller
                 ]);
             }
         } elseif ($request->status == 'W') {
+
+            $data['depe'] = ( $data['depe']) ?: 0;
             $update = [
                 'tgl_dana' => Tanggal::tglNasional($data[$tgl]),
                 $tgl => Tanggal::tglNasional($data[$tgl]),
@@ -908,7 +910,7 @@ class PinjamanIndividuController extends Controller
                 'sa_jasa' => $data['sistem_angsuran_jasa'],
                 'tgl_cair' => Tanggal::tglNasional($data['tgl_cair']),
                 'spk_no' => $data['nomor_spk'],
-                'alokasi' => str_replace(',', '', str_replace('.00', '', $data[$harga])) - str_replace(',', '', str_replace('.00', '', $data['depe'])),
+                'alokasi' => intval(str_replace(',', '', str_replace('.00', '', $data[$harga]))) - intval(str_replace(',', '', str_replace('.00', '', $data['depe']))),
                 'depe' => str_replace(',', '', str_replace('.00', '', $data['depe'])),
                 // 'depe' => str_replace(',', '', str_replace('.00', '', $data[$harga])) * ($request->depe / 100),
                 'status' => $data['status']
