@@ -25,7 +25,7 @@
     <style>
         /* styles.css */
         .centered-text {
-            font-size: 11px;
+            font-size: 11px;   
             text-align: center;
             text-align: justify;
         }
@@ -87,7 +87,6 @@
     <div class="centered-text">
         Untuk selanjutnya disebut sebagai <b>PIHAK PERTAMA</b>, dan :
     </div>
-    
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
         <tr>
             <td width="5"> &nbsp; </td>
@@ -132,15 +131,12 @@
                     $wajib_pokok = ($pinkel->alokasi / $pinkel->jangka);
                     $wajib_jasa = (($pinkel->pros_jasa * $pinkel->alokasi) / $pinkel->jangka) / 100;
                 @endphp
-                
                      dengan masing-masing angsuran pokok sebesar Rp. {{ number_format($wajib_pokok) }}- dan bunga 
                      sebesar Rp. {{ number_format($wajib_jasa) }}  .
                      Serta selambat-lambatnya akan dibayar lunas pada tanggal
                      @if ($tgl_terakhir)
                         {{ Tanggal::tglLatin($tgl_terakhir->jatuh_tempo) }}
-                    @endif
-
-                     .
+                    @endif.
                 </li>
                 <li>
                     Pihak Pertama bersedia memberikan jaminan berupa 
@@ -150,23 +146,24 @@
                                 Alamat : {{$jaminan['alamat']?? 0}} Luas: {{ $jaminan['luas']?? 0}} (m²),
                                 Nilai Jual Tanah: {{ number_format($jaminan['nilai_jual_tanah']?? 0) }},
                     @elseif ($jaminan['jenis_jaminan'] == '2')
-                                Nomor Sertifikat: {{($jaminan['nomor_sertifikat']?? 0)}},
-                                Nama jaminan: {{$jaminan['nama_pemilik']?? 0}},
-                                Alamat : {{$jaminan['alamat']?? 0}} Luas: {{ $jaminan['luas']?? 0}} (m²),
-                                Nilai Jual Tanah: {{ number_format($jaminan['nilai_jual_tanah']?? 0) }},
-                    @elseif ($jaminan['jenis_jaminan'] == '3')
                                 Nomor: {{($jaminan['nomor']?? 0)}},
                                 Nama jaminan: {{$jaminan['jenis_kendaraan']?? 0}},
                                 Nopol: {{$jaminan['nopol']?? 0}},
                                 Nilai Jual Kendaraan: {{ number_format($jaminan['nilai_jual_kendaraan']?? 0) }},
-                    @elseif ($jaminan['jenis_jaminan'] == '4')
+                    @elseif ($jaminan['jenis_jaminan'] == '3')
                                 Nomor: {{($jaminan['nomor']?? 0)}},
                                 Nama Pegawai: {{$jaminan['nama_pegawai']?? 0}},
                                 Nama Instansi Penerbit: {{$jaminan['nama_kuitansi_penerbit']?? 0}},
-                    @else
+                    @elseif ($jaminan['jenis_jaminan'] == '4')
+                    
                                 Nomor Jaminan: {{($jaminan['nama_jaminan']?? 0)}},
                                 Keterangan: {{$jaminan['keterangan']?? 0}},
                                 Nilai Jaminan: {{ number_format($jaminan['nilai_jaminan']?? 0) }},
+                    @else                    
+                                Nomor Sertifikat: {{($jaminan['nomor_sertifikat']?? 0)}},
+                                Nama jaminan: {{$jaminan['nama_pemilik']?? 0}},
+                                Alamat : {{$jaminan['alamat']?? 0}} Luas: {{ $jaminan['luas']?? 0}} (m²),
+                                Nilai Jual Tanah: {{ number_format($jaminan['nilai_jual_tanah']?? 0) }},
                     @endif
                     atas Nama {{ $pinkel->anggota->namadepan }} Yang nilainya dianggap sama dengan uang pinjaman dari Pihak Kedua.
                      Apabila kemudian hari ternyata {{ $pinkel->anggota->namadepan }} tidak dapat membayar hutang tersebut sesuai dengan perjanjian ini,

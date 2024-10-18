@@ -87,41 +87,6 @@
             </tr>
             <tr>
               <td width="5">&nbsp;</td>
-              <td height="10" class="style9">Nomor Sertifikat</td>
-              <td class="style27">: {{($jaminan['nomor_sertifikat'])}}</td>
-            </tr>
-            <tr>
-              <td width="5">&nbsp;</td>
-              <td height="10" class="style9">Nama Pemilik</td>
-              <td class="style27">: {{$jaminan['nama_pemilik']}}</td>
-            </tr>
-            <tr>
-              <td width="5">&nbsp;</td>
-              <td height="10" class="style9">Alamat</td>
-              <td class="style27">: {{$jaminan['alamat']}}</td>
-            </tr>
-            <tr>
-              <td width="5">&nbsp;</td>
-              <td height="10" class="style9">Luas</td>
-              <td class="style27">: {{ $jaminan['luas']}} (m²)</td>
-            </tr>
-            <tr>
-              <td width="5">&nbsp;</td>
-              <td height="10" class="style9">Nilai Jual Tanah</td>
-              <td class="style27">: {{$jaminan['nilai_jual_tanah']}}</td>
-            </tr>
-            <tr>
-              <td  height="10" colspan="3" class="style9"> guna memenuhi persyaratan permohonan kredit dengan Nomor Registrasi {{$pinkel->id}} pada {{$kec->nama_lembaga_sort}}.
-                    Demikian surat pernyataan kesanggupan ini saya buat dengan penuh kesadaran dan untuk menjadikan
-                    periksa bagi yang berkepentingan.
-              </td>
-            </tr>
-            @elseif ($jaminan['jenis_jaminan'] == '3')
-            <tr>
-              <td  height="10" colspan="3" class="style9">Menyatakan sanggup mengadakan barang jaminan berupa: </td>
-            </tr>
-            <tr>
-              <td width="5">&nbsp;</td>
               <td height="10" class="style9">Nomor</td>
               <td class="style27">: {{($jaminan['nomor'])}}</td>
             </tr>
@@ -146,7 +111,7 @@
                 periksa bagi yang berkepentingan.
           </td>
             </tr>
-        @elseif ($jaminan['jenis_jaminan'] == '4')
+        @elseif ($jaminan['jenis_jaminan'] == '3')
             <tr>
               <td  height="10" colspan="3" class="style9">Menyatakan sanggup mengadakan barang jaminan berupa: </td>
             </tr>
@@ -171,7 +136,7 @@
                 periksa bagi yang berkepentingan.
           </td>
             </tr>
-        @else
+            @elseif ($jaminan['jenis_jaminan'] == '4')
             <tr>
               <td  height="10" colspan="3" class="style9">Menyatakan sanggup mengadakan barang jaminan berupa: </td>
             </tr>
@@ -196,6 +161,42 @@
                 periksa bagi yang berkepentingan.
           </td>
             </tr>
+        @else
+        <tr>
+          <td  height="10" colspan="3" class="style9">Menyatakan sanggup mengadakan barang jaminan berupa: </td>
+        </tr>
+        <tr>
+          <td width="5">&nbsp;</td>
+          <td height="10" class="style9">Nomor Sertifikat</td>
+          <td class="style27">: {{($jaminan['nomor_sertifikat'])}}</td>
+        </tr>
+        <tr>
+          <td width="5">&nbsp;</td>
+          <td height="10" class="style9">Nama Pemilik</td>
+          <td class="style27">: {{$jaminan['nama_pemilik']}}</td>
+        </tr>
+        <tr>
+          <td width="5">&nbsp;</td>
+          <td height="10" class="style9">Alamat</td>
+          <td class="style27">: {{$jaminan['alamat']}}</td>
+        </tr>
+        <tr>
+          <td width="5">&nbsp;</td>
+          <td height="10" class="style9">Luas</td>
+          <td class="style27">: {{ $jaminan['luas']}} (m²)</td>
+        </tr>
+        <tr>
+          <td width="5">&nbsp;</td>
+          <td height="10" class="style9">Nilai Jual Tanah</td>
+          <td class="style27">: {{$jaminan['nilai_jual_tanah']}}</td>
+        </tr>
+        <tr>
+          <td  height="10" colspan="3" class="style9"> guna memenuhi persyaratan permohonan kredit dengan Nomor Registrasi {{$pinkel->id}} pada {{$kec->nama_lembaga_sort}}.
+                Demikian surat pernyataan kesanggupan ini saya buat dengan penuh kesadaran dan untuk menjadikan
+                periksa bagi yang berkepentingan.
+          </td>
+        </tr>
+
       @endif
       <br colspan="3">
 </table>

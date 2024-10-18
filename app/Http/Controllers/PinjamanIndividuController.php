@@ -294,19 +294,19 @@ class PinjamanIndividuController extends Controller
             ],
             [
                 'id' => '2',
-                'nama' => 'Surat Tanah dan Bangunan (SHM)',
-            ],
-            [
-                'id' => '3',
                 'nama' => 'BPKB',
             ],
             [
-                'id' => '4',
+                'id' => '3',
                 'nama' => 'SK. Pegawai',
             ],
             [
-                'id' => '5',
+                'id' => '4',
                 'nama' => 'Lain Lain',
+            ],
+            [
+                'id' => '5',
+                'nama' => 'Surat Tanah dan Bangunan (SHM)',
             ],
         ];
 
@@ -489,19 +489,19 @@ class PinjamanIndividuController extends Controller
             ],
             [
                 'id' => '2',
-                'nama' => 'Surat Tanah dan Bangunan (SHM)',
-            ],
-            [
-                'id' => '3',
                 'nama' => 'BPKB',
             ],
             [
-                'id' => '4',
+                'id' => '3',
                 'nama' => 'SK. Pegawai',
             ],
             [
-                'id' => '5',
+                'id' => '4',
                 'nama' => 'Lain Lain',
+            ],
+            [
+                'id' => '5',
+                'nama' => 'Surat Tanah dan Bangunan (SHM)',
             ],
         ];
         
@@ -536,12 +536,12 @@ class PinjamanIndividuController extends Controller
 
         if ($data['jenis_jaminan'] == '1') {
             $data['data_jaminan']['nilai_jual_tanah'] = str_replace(',', '', str_replace('.00', '', $data['data_jaminan']['nilai_jual_tanah']));
-        } elseif ($data['jenis_jaminan'] == '2') {
-            $data['data_jaminan']['nilai_jual_tanah'] = str_replace(',', '', str_replace('.00', '', $data['data_jaminan']['nilai_jual_tanah']));
-        }  elseif ($data['jenis_jaminan'] == '3') {
+        }  elseif ($data['jenis_jaminan'] == '2') {
             $data['data_jaminan']['nilai_jual_kendaraan'] = str_replace(',', '', str_replace('.00', '', $data['data_jaminan']['nilai_jual_kendaraan']));
-        } elseif ($data['jenis_jaminan'] == '5') {
+        } elseif ($data['jenis_jaminan'] == '3') {
             $data['data_jaminan']['nilai_jaminan'] = str_replace(',', '', str_replace('.00', '', $data['data_jaminan']['nilai_jaminan']));
+        } elseif ($data['jenis_jaminan'] == '5') {
+            $data['data_jaminan']['nilai_jual_tanah'] = str_replace(',', '', str_replace('.00', '', $data['data_jaminan']['nilai_jual_tanah']));
         }
 
         PinjamanIndividu::where('id', $pinjaman->id)->update([
@@ -603,19 +603,19 @@ class PinjamanIndividuController extends Controller
             ],
             [
                 'id' => '2',
-                'nama' => 'Surat Tanah dan Bangunan (SHM)',
-            ],
-            [
-                'id' => '3',
                 'nama' => 'BPKB',
             ],
             [
-                'id' => '4',
+                'id' => '3',
                 'nama' => 'SK. Pegawai',
             ],
             [
-                'id' => '5',
+                'id' => '4',
                 'nama' => 'Lain Lain',
+            ],
+            [
+                'id' => '5',
+                'nama' => 'Surat Tanah dan Bangunan (SHM)',
             ],
         ];
 
