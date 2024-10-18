@@ -206,7 +206,7 @@
                             <div class="position-relative mb-3">
                                 <label for="depe" class="form-label">Down Payment (%)</label>
                                 <input autocomplete="off" type="text" name="depe" id="depe"
-                                class="form-control" value="{{ $kec->def_depe }}">
+                                class="form-control money" value="{{ number_format($perguliran_i->verifikasi * $kec->def_depe /100 ,2) }}">
                             <small class="text-danger" id="msg_depe"></small>
                             </div>
                         </div>

@@ -723,6 +723,7 @@ class PinjamanIndividuController extends Controller
                 'sistem_angsuran_pokok',
                 'sistem_angsuran_jasa',
                 'tgl_cair',
+                'depe',
                 'nomor_spk'
             ]);
 
@@ -907,8 +908,9 @@ class PinjamanIndividuController extends Controller
                 'sa_jasa' => $data['sistem_angsuran_jasa'],
                 'tgl_cair' => Tanggal::tglNasional($data['tgl_cair']),
                 'spk_no' => $data['nomor_spk'],
-                'alokasi' => str_replace(',', '', str_replace('.00', '', $data[$harga])) - (str_replace(',', '', str_replace('.00', '', $data[$harga])) * ($request->depe / 100)),
-                'depe' => str_replace(',', '', str_replace('.00', '', $data[$harga])) * ($request->depe / 100),
+                'alokasi' => str_replace(',', '', str_replace('.00', '', $data[$harga])) - str_replace(',', '', str_replace('.00', '', $data['depe'])),
+                'depe' => str_replace(',', '', str_replace('.00', '', $data['depe'])),
+                // 'depe' => str_replace(',', '', str_replace('.00', '', $data[$harga])) * ($request->depe / 100),
                 'status' => $data['status']
             ];
         } else {
