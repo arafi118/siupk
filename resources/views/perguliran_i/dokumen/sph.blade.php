@@ -155,7 +155,6 @@
                                 Nama Pegawai: {{$jaminan['nama_pegawai']?? 0}},
                                 Nama Instansi Penerbit: {{$jaminan['nama_kuitansi_penerbit']?? 0}},
                     @elseif ($jaminan['jenis_jaminan'] == '4')
-                    
                                 Nomor Jaminan: {{($jaminan['nama_jaminan']?? 0)}},
                                 Keterangan: {{$jaminan['keterangan']?? 0}},
                                 Nilai Jaminan: {{ number_format($jaminan['nilai_jaminan']?? 0) }},
@@ -166,8 +165,8 @@
                                 Nilai Jual Tanah: {{ number_format($jaminan['nilai_jual_tanah']?? 0) }},
                     @endif
                     atas Nama {{ $pinkel->anggota->namadepan }} Yang nilainya dianggap sama dengan uang pinjaman dari Pihak Kedua.
-                     Apabila kemudian hari ternyata {{ $pinkel->anggota->namadepan }} tidak dapat membayar hutang tersebut sesuai dengan perjanjian ini,
-                     maka Pihak Kedua memiliki hak penuh 
+                    Apabila kemudian hari ternyata {{ $pinkel->anggota->namadepan }} tidak dapat membayar hutang tersebut sesuai dengan perjanjian ini,
+                    maka Pihak Kedua memiliki hak penuh 
                     atas barang jaminan baik untuk dimiliki {{ $kec->nama_lembaga_sort }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }} maupun dijual/dipindahtangankan kepada orang lain.
                 </li>
                 <li>
@@ -187,7 +186,6 @@
             Surat perjanjian ini dibuat dalam 2 (dua) rangkap dan bermaterai cukup dan memiliki kekuatan hukum yang sama,
              masing-masing surat untuk <b>Pihak Pertama</b> dan <b>Pihak Kedua</b>. Surat Perjanjian dibuat dan ditandatangani oleh kedua 
              belah pihak secara sadar dan tanpa tekanan dari pihak manapun di tempat dan waktu penandatanganan Surat Perjanjian ini.
-
         </div>
     </div>
     <div style="text-align: center;" style="font-size: 11px;">

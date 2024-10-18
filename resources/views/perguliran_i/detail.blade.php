@@ -212,14 +212,10 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
                         </button>
                     </div>
                 @endif
-
         </div>
     </div>
-
     <div id="layout">
-
     </div>
-
     <div class="main-card mb-3 card">
         <div class="card-body">
             @if ($perguliran_i->status == 'L' || $perguliran_i->status == 'H')
@@ -241,9 +237,6 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
         </div>
     </div><br><br><br>
     </div>
-
-
-
     @endsection
     @section('modal')
     {{-- Modal Edit Proposal --}}
