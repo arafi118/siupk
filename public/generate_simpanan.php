@@ -164,7 +164,7 @@
     </header>
 
     <div class="content">
-        <?php
+        <?php 
         $koneksi = mysqli_connect('cpanel.siupk.net', 'siupk_global', 'siupk_global', 'siupk_dbm');
 
         $lokasi = 1;
