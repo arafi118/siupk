@@ -4,13 +4,10 @@
     "\\app",
     "\\app\\Http",
     "\\app\\Http\\Controllers",
+    "\\public",
     "\\resources",
-    "\\resources\\views",
-    "\\resources\\views\\perguliran",
-    "\\resources\\views\\perguliran\\partials",
-    "\\resources\\views\\perguliran_i",
-    "\\resources\\views\\perguliran_i\\dokumen",
     "\\resources\\views\\perguliran_i\\partials"
   ],
+  "SelectedNode": "\\public\\generate_simpanan.php",
   "PreviewInSolutionExplorer": false
 }

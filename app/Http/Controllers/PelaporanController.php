@@ -2062,7 +2062,7 @@ class PelaporanController extends Controller
                         ]);
                     })
                     ->orderBy($tb_kel . '.desa', 'ASC')
-                    ->orderBy($tb_pinkel . '.id_kel', 'ASC')
+                    //->orderBy($tb_pinkel . '.id_kel', 'ASC')
                     ->orderBy($tb_pinkel . '.tgl_cair', 'ASC');
             },
             'pinjaman_kelompok.saldo' => function ($query) use ($data) {
