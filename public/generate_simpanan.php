@@ -167,8 +167,8 @@
         <?php 
         $koneksi = mysqli_connect('cpanel.siupk.net', 'siupk_global', 'siupk_global', 'siupk_dbm');
 
-        $lokasi = 1;
-        $kd_kab = 1;
+        $lokasi = 3;
+        $kd_kab = 3;
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
             if($id == NULL or $id == ""){
