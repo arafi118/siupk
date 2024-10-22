@@ -230,7 +230,7 @@
             $q2 = mysqli_query($koneksi,"SELECT * FROM simpanan_anggota_$kd_kab WHERE ($where) ORDER BY id ASC  LIMIT $start, $per_page");
             while ($simp = mysqli_fetch_array($q2)) {
                 $del_re = mysqli_query($koneksi,"DELETE FROM real_simpanan_$lokasi WHERE cif=$simp[id]");
-                $query  = mysqli_query($koneksi,"SELECT * FROM transaksi_$lokasi WHERE id_simp=$simp[id] ORDER BY tgl_transaksi ASC, urutan ASC, idt ASC");
+                $query  = mysqli_query($koneksi,"SELECT * FROM transaksi_$lokasi WHERE id_simp LIKE '%-$simp[id]' ORDER BY tgl_transaksi ASC, urutan ASC, idt ASC");
                 $sum = 0;
                 while ($trx = mysqli_fetch_array($query)) {
                     $cif            = $simp['id'];
