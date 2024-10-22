@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AkunLevel1;
 use App\Models\Anggota;
+use App\Models\Agent;
 use App\Models\Desa;
 use App\Models\Ebudgeting;
 use App\Models\Inventaris;
@@ -759,8 +760,12 @@ class TransaksiController extends Controller
                         //     2 => '140698',
                         //     3 => '45000000'
                         // ];
-                        $relasi = $data_relasi[1];
                         $id_pinj_i = $data_relasi[2];
+
+                        $pinj = PinjamanAnggota::where('id', $id_pinj_i)->first();
+                        $Agen = Agent::where('id', $pinj->id_agent)->first();
+
+                        $relasi = $Agen->agent;
                 }
 
                 $insert = [
@@ -2337,6 +2342,8 @@ class TransaksiController extends Controller
             $oleh = ucwords($trx->relasi);
             $dibayar = ucwords($user->namadepan . ' ' . $user->namabelakang);
         }
+
+       
 
         $logo = $kec->logo;
         if (empty($logo)) {

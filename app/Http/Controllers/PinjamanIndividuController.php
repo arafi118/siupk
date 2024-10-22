@@ -272,7 +272,7 @@ class PinjamanIndividuController extends Controller
                 $query->orderBy('tgl_proposal', 'DESC');
             },
             'pinjaman.sts'
-        ])->first();
+        ])->first();   
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $jenis_jasa = JenisJasa::all();
         $sistem_angsuran = SistemAngsuran::all();
