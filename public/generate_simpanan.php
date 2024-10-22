@@ -235,19 +235,22 @@
                 while ($trx = mysqli_fetch_array($query)) {
                     $cif            = $simp['id'];
                     $tgl_transaksi  = $trx['tgl_transaksi'];
+                    $jumlah         = $trx['jumlah'];
                     
-                    if (substr($trx['rekening_kredit'], 0, 2) == '22') {
-                        $real_d         = $trx['jumlah'];
-                        $real_k         = 0;
-                        $sum            = $sum + $real_d;
-                    } elseif (substr($trx['rekening_debit'], 0, 2) == '22') {
-                        $real_d         = 0;
-                        $real_k         = $trx['jumlah'];
-                        $sum            = $sum - $real_k;
+                    if (in_array(substr($trx['id_simp'], 0, 1), ['1', '2', '5'])) {
+                        $real_d = 0;
+                        $real_k = $jumlah;
+                        $sum += $jumlah;
+                    } elseif (in_array(substr($trx['id_simp'], 0, 1), ['3', '4', '6', '7'])) {
+                        $real_d = $jumlah;
+                        $real_k = 0;
+                        $sum -= $jumlah;
                     } else {
-                        $real_d         = $trx['jumlah'];
-                        $real_k         = $trx['jumlah'];
+                        $real_d         = 0;
+                        $real_k         = 0;
                     }
+                    
+
                     
                     $lu             = date('Y-m-d H:i:s');
                     $id_user        = $trx['id_user'];
