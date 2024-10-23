@@ -58,7 +58,12 @@ $sum =0;
                     <td>{{ number_format($sum, 0, ',', '.') }}</td>
                     <td>{{ $trx->id_user ?? '-' }}</td>
                     <td>
-                        <!-- TOMBOL -->
+                        <a class="btn btn-secondary btn-sm  float-end ms-2" data-toggle='tooltip' onclick="window.open('/cetak_koran/{{ $cif }}/{{$bulankop}}/{{$tahunkop}}')" data-placement='top' title='Kwitansi'>
+                            <i class="fa fa-print"></i> 
+                        </a>
+                        <a class="btn btn-secondary btn-sm  float-end ms-2" data-toggle='tooltip' onclick="window.open('/cetak_koran/{{ $cif }}/{{$bulankop}}/{{$tahunkop}}')" data-placement='top' title='Kwitansi'>
+                            <i class="fa fa-file-text"></i> 
+                        </a>
                     </td>
                 </tr>
             @empty
