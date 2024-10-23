@@ -3,11 +3,12 @@
     "",
     "\\app",
     "\\app\\Http",
-    "\\app\\Http\\Controllers",
-    "\\public",
     "\\resources",
-    "\\resources\\views\\perguliran_i\\partials"
+    "\\resources\\views",
+    "\\resources\\views\\dashboard",
+    "\\resources\\views\\dashboard\\partials",
+    "\\resources\\views\\pelaporan\\view\\perkembangan_piutang"
   ],
-  "SelectedNode": "\\public\\generate_simpanan.php",
+  "SelectedNode": "\\resources\\views\\dashboard\\index.blade.php",
   "PreviewInSolutionExplorer": false
 }
