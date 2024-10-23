@@ -99,12 +99,10 @@
                     <input type="hidden" name="type" id="type" value="pdf">
 
                     <br>
-                    <div class="d-flex">
-                        <button type="button" id="SimpanSaldo" class="btn btn-sm btn-danger me-2">Simpan Saldo</button>
-                        <button type="button" id="Excel" class="btn btn-sm btn-success me-2">Excel</button>
-                        <button type="button" id="Preview" class="btn btn-sm btn-dark">Preview</button>
-                    </div>
-                    
+                    <button type="button" id="SimpanSaldo" class="btn btn-sm btn-danger me-2">Simpan Saldo</button>
+                    <button type="button" id="Excel" class="btn btn-sm btn-success me-2">Excel</button>
+                    <button type="button" id="Preview" class="btn btn-sm btn-dark">Preview</button>
+
                     <br><br>
                 </form>
             </div>
@@ -212,21 +210,9 @@
             e.preventDefault()
 
             var tahun = $('select#tahun').val()
-            var bulan = $('select#bulan').val()
-            if (bulan < 1) {
-                bulan = 0
-            }
-
-            var nama_bulan = namaBulan(bulan)
-
-            var pesan = nama_bulan + " sampai Desember "
-            if (bulan == '12') {
-                pesan = nama_bulan + " "
-            }
-
             loading = Swal.fire({
                 title: "Mohon Menunggu..",
-                html: "Menyimpan Saldo Bulan " + pesan + tahun,
+                html: "Menyimpan Saldo Januari sampai Desember Th. " + tahun,
                 timerProgressBar: true,
                 allowOutsideClick: false,
                 didOpen: () => {
@@ -234,7 +220,7 @@
                 }
             })
 
-            childWindow = window.open('/simpan_saldo?bulan=00&tahun=' + tahun + '&bulan=' + bulan, '_blank');
+            childWindow = window.open('/simpan_saldo?bulan=00&tahun=' + tahun, '_blank');
         })
 
         window.addEventListener('message', function(event) {
@@ -243,48 +229,5 @@
                 window.location.reload()
             }
         })
-        
-        function namaBulan(bulan) {
-            switch (bulan) {
-                case '01':
-                    return 'Januari';
-                    break;
-                case '02':
-                    return 'Februari';
-                    break;
-                case '03':
-                    return 'Maret';
-                    break;
-                case '04':
-                    return 'April';
-                    break;
-                case '05':
-                    return 'Mei';
-                    break;
-                case '06':
-                    return 'Juni';
-                    break;
-                case '07':
-                    return 'Juli';
-                    break;
-                case '08':
-                    return 'Agustus';
-                    break;
-                case '09':
-                    return 'September';
-                    break;
-                case '10':
-                    return 'Oktober';
-                    break;
-                case '11':
-                    return 'November';
-                    break;
-                case '12':
-                    return 'Desember';
-                    break;
-            }
-
-            return 'Januari';
-        }
     </script>
 @endsection
