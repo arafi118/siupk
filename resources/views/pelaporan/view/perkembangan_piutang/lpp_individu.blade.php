@@ -149,7 +149,7 @@
                        
                         <tr style="font-weight: bold;">
                             <td class="t l b" colspan="4" align="left" height="15">
-                                Jumlah LL{{ $nama_desa }}
+                                Jumlah {{ $nama_desa }}
                             </td>
                             <td class="t l b" align="right">{{ number_format($j_alokasi) }}</td>
                             <td class="t l b" align="right">{{ number_format($j_target_pokok) }}</td>
