@@ -97,25 +97,23 @@
                 </td>
                 <td width="150">Jenis Pinjaman</td>
                 <td width="5" align="center">:</td>
-                <td width="200">{{ $nia->jpp->nama_jpp }}</td>
-                <td width="150">Loan Id.</td>
+                <td width="200">{{ $nia->jpp->nama_jpp }} ( {{ $nia->id }} )</td>
+                <td width="150">Alamat</td>
                 <td width="5" align="center">:</td>
-                <td width="200">{{ $nia->id }}</td>
+                <td width="200">{{ $nia->anggota->alamat }}</td>
             </tr>
             <tr>
-                <td>Nama Piutang</td>
+                <td>Nama Nasabah</td>
                 <td align="center">:</td>
-                <td style="font-weight: bold;" colspan="4">{{ $nia->anggota->namadepan }}</td>
-            </tr>
-            <tr>
-                <td>Alamat</td>
-                <td align="center">:</td>
-                <td colspan="4">{{ $nia->anggota->alamat }}</td>
-            </tr>
-            <tr>
+                <td style="font-weight: bold;">{{ $nia->anggota->namadepan }}</td>
                 <td>Telpon/SMS</td>
                 <td align="center">:</td>
-                <td>{{ $nia->anggota->hp }}</td>
+                <td style="font-weight: bold;">{{ $nia->anggota->hp }}</td>
+            </tr>
+            <tr>
+                <td>Tgl Cair</td>
+                <td align="center">:</td>
+                <td>{{ Tanggal::tglLatin($nia->tgl_cair) }}</td>
                 <td>Jumlah Angsuran</td>
                 <td align="center">:</td>
 
@@ -134,9 +132,9 @@
                     {{ $nia->sis_pokok->nama_sistem }}</td>
             </tr>
             <tr>
-                <td>Tgl Cair</td>
+                <td>Nilai Barang</td>
                 <td align="center">:</td>
-                <td>{{ Tanggal::tglLatin($nia->tgl_cair) }}</td>
+                <td>{{ number_format($nia->harga) }}</td>
                 <td>Jangka</td>
                 <td align="center">:</td>
                 <td>{{ $nia->jangka }} {{ $nia->sis_pokok->id == '12' ? 'Minggu' : 'Bulan' }}</td>
@@ -150,12 +148,20 @@
                 <td>{{ $nia->pros_jasa / $nia->jangka . '%' }}</td>
             </tr>
             <tr>
+                <td>Depe</td>
+                <td align="center">:</td>
+                <td>{{ number_format($nia->depe) }}</td>
                 <td>Nama Barang</td>
                 <td align="center">:</td>
                 <td>{{$nia->nama_barang }}</td>
-                <td>&nbsp</td>
-                <td align="center">&nbsp</td>
-                <td>&nbsp</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td align="center">&nbsp;</td>
+                <td style="font-weight: bold;">&nbsp;</td>
+                <td>&nbsp;</td>
+                <td align="center">&nbsp;</td>
+                <td style="font-weight: bold;">&nbsp;</td>
             </tr>
             <tr>
                 <td colspan="7" class="b t" style="font-weight: bold; font-size: 24px;" align="center">
