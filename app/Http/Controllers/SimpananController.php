@@ -195,19 +195,19 @@ class SimpananController extends Controller
 
         // Jika tahun tidak 0, tambahkan filter tahun
         if ($tahunkop != 0) {
-            $transaksiQuery->whereYear('tgl_transaksi', $tahun);
+            $transaksiQuery->whereYear('tgl_transaksi', $tahunkop);
         }
 
         // Jika bulan tidak 0, tambahkan filter bulan
         if ($bulankop != 0) {
-            $transaksiQuery->whereMonth('tgl_transaksi', $bulan);
+            $transaksiQuery->whereMonth('tgl_transaksi', $bulankop);
         }
 
         $transaksi  = $transaksiQuery->orderBy('tgl_transaksi', 'asc')->get();
 
         $title = 'Cetak Rekening Koran ' . $simpanan->anggota->namadepan;
 
-        return view('simpanan.partials.cetak_koran')->with(compact('title', 'transaksi', 'simpanan', 'kec', 'bulankop', 'tahunkop'));
+        return view('simpanan.partials.cetak_koran')->with(compact('title', 'transaksi', 'simpanan', 'kec','cif', 'bulankop', 'tahunkop'));
     }
 
     public function cetakKwitansi($idt)

@@ -98,31 +98,33 @@
                                     <div class="row mb-3">
                                         <div class="col-md-6">&nbsp;</div>
                                         <div class="col-md-3">
+<!-- Dropdown Bulan -->
     <div style="position: relative;">
-        <select id="bulants" name="bulants" class="form-control select2" style="padding-left: 10px; padding-right: 30px; appearance: none; -webkit-appearance: none; -moz-appearance: none; border: 1px solid #ccc;">
-            <option value="0" selected> <!-- Default diatur sebagai 'Semua Bulan' -->
-                Semua Bulan
-            </option>
+        <select id="bulants" name="bulants" class="form-control select2" 
+                style="padding-left: 10px; padding-right: 30px; appearance: none; 
+                       -webkit-appearance: none; -moz-appearance: none; border: 1px solid #ccc;">
             @foreach(range(1, 12) as $bulan)
-            <option value="{{$bulan}}">
+            <option value="{{ $bulan }}" 
+                    {{ $bulan == date('n') ? 'selected' : '' }}> <!-- Cek jika bulan ini -->
                 {{ date('F', mktime(0, 0, 0, $bulan, 1)) }}
             </option>
             @endforeach
         </select>
-        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none;">
+        <span style="position: absolute; right: 10px; top: 50%; 
+                     transform: translateY(-50%); pointer-events: none;">
             ▼
         </span>
     </div>
 </div>
-
+<!-- Dropdown Tahun -->
 <div class="col-md-3">
     <div style="position: relative;">
-        <select id="tahunts" name="tahunts" class="form-control select2" style="padding-left: 10px; padding-right: 30px; appearance: none; -webkit-appearance: none; -moz-appearance: none; border: 1px solid #ccc;">
-            <option value="0" selected> <!-- Default diatur sebagai 'Semua Tahun' -->
-                Semua Tahun
-            </option>
-            @foreach(range(date('Y')-5, date('Y')+5) as $tahun)
-            <option value="{{ $tahun }}">
+        <select id="tahunts" name="tahunts" class="form-control select2" 
+                style="padding-left: 10px; padding-right: 30px; appearance: none; 
+                       -webkit-appearance: none; -moz-appearance: none; border: 1px solid #ccc;">
+            @foreach(range(date('Y') - 5, date('Y') + 5) as $tahun)
+            <option value="{{ $tahun }}" 
+                    {{ $tahun == date('Y') ? 'selected' : '' }}> <!-- Cek jika tahun ini -->
                 {{ $tahun }}
             </option>
             @endforeach
@@ -156,8 +158,9 @@ $(".date").flatpickr({
 
 $(document).ready(function() {
     var currentDate = new Date();
-    var currentMonth = 0;
-    var currentYear = 0;
+    var currentMonth = currentDate.getMonth() + 1; // getMonth() dimulai dari 0 (Januari), jadi tambahkan 1
+    var currentYear = currentDate.getFullYear();   // Mendapatkan tahun saat ini
+
 
     tableTransaksi(currentMonth, currentYear);
 

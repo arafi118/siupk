@@ -1,4 +1,18 @@
 @php
+$startDate = \Carbon\Carbon::createFromDate(
+    $tahunkop, 
+    $bulankop == 0 ? 1 : $bulankop, 
+    1
+)->startOfMonth();
+
+// Calculate previous balance
+$sum = DB::table('real_simpanan_' . session('lokasi'))
+    ->where('cif', $cif)
+    ->where('tgl_transaksi', '<', $startDate)
+    ->orderBy('tgl_transaksi', 'desc')
+    ->orderBy('id', 'desc')
+    ->value('sum') ?? 0;
+
     // Array bulan dalam bahasa Indonesia
     $bulanIndo = [
         1 => 'Januari',
@@ -111,8 +125,32 @@
         <th width="10%" class="style9">SALDO</th>
         <th width="2%" class="style9">P</th>
     </tr>
-    @php  $no = 0; $sum = 0;  @endphp
-
+    @php  $no = 0;  @endphp
+    
+        @if ($bulankop != 0 && $tahunkop != 0 ) 
+            <tr>
+                <th colspan="6" class="text-center">
+                    <strong>Saldo Sebelum {{ \Carbon\Carbon::create(null, $bulankop)->translatedFormat('F') }} {{ $tahunkop }}</strong>
+                </th>
+                <th>{{ number_format($sum, 0, ',', '.') }}</td>
+                <th colspan="2">&nbsp;</th>
+            </tr>
+        @elseif($bulankop != 0 && $tahunkop == 0 )
+            <tr>
+                <th colspan="9" class="text-center">
+                    <strong>mohon untuk memilih tahun juga</strong>
+                </th>
+            </tr>
+        @elseif($bulankop == 0 && $tahunkop != 0 )
+            <tr>
+                <th colspan="6" class="text-center">
+                    <strong>Saldo Sebelum {{ $tahunkop }})</strong>
+                </th>
+                <th>{{ number_format($sum, 0, ',', '.') }}</th>
+                <th colspan="2">&nbsp;</th>
+                </th>
+            </tr>
+        @endif
                 @forelse($transaksi as $index => $trx)
 
             @php

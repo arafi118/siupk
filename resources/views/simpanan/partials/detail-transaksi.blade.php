@@ -31,26 +31,26 @@ $sum = DB::table('real_simpanan_' . session('lokasi'))
         </thead>
         @if ($bulankop != 0 && $tahunkop != 0 ) 
             <tr>
-                <td colspan="6" class="text-center">
-                    <strong>Saldo Sebelum ({{ \Carbon\Carbon::create(null, $bulankop)->translatedFormat('F') }} {{ $tahunkop }})</strong>
-                </td>
-                <td>{{ number_format($sum, 0, ',', '.') }}</td>
-                <td colspan="2">&nbsp;</td>
+                <th colspan="6" class="text-center">
+                    <strong>Saldo Sebelum {{ \Carbon\Carbon::create(null, $bulankop)->translatedFormat('F') }} {{ $tahunkop }}</strong>
+                </th>
+                <th>{{ number_format($sum, 0, ',', '.') }}</th>
+                <th colspan="2">&nbsp;</th>
             </tr>
         @elseif($bulankop != 0 && $tahunkop == 0 )
             <tr>
-                <td colspan="9" class="text-center">
+                <th colspan="9" class="text-center">
                     <strong>mohon untuk memilih tahun juga</strong>
-                </td>
+                </th>
             </tr>
         @elseif($bulankop == 0 && $tahunkop != 0 )
             <tr>
-                <td colspan="6" class="text-center">
+                <th colspan="6" class="text-center">
                     <strong>Saldo Sebelum {{ $tahunkop }})</strong>
-                </td>
-                <td>{{ number_format($sum, 0, ',', '.') }}</td>
-                <td colspan="2">&nbsp;</td>
-                </td>
+                </th>
+                <th>{{ number_format($sum, 0, ',', '.') }}</th>
+                <th colspan="2">&nbsp;</th>
+                </th>
             </tr>
         @endif
         <tbody>
@@ -117,6 +117,10 @@ $sum = DB::table('real_simpanan_' . session('lokasi'))
                 </tr>
             @endforelse
         </tbody>
+                <tr>
+                    <tH colspan="6" class="text-center">TOTAL SALDO</tH>
+                    <tH colspan="3" class="text-center">{{ number_format($sum, 0, ',', '.') }}</tH>
+                </tr>
     </table>
     <button class="btn btn-secondary btn-sm float-end ms-2" onclick="window.open('/cetak_koran/{{ $cif }}/{{$bulankop}}/{{$tahunkop}}')" type="button">
         <i class="fa fa-print"></i> Cetak Rekening Koran
