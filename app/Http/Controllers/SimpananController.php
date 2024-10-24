@@ -13,6 +13,7 @@ use App\Models\Desa;
 use App\Models\Keluarga;
 use App\Models\PinjamanIndividu;
 use App\Models\RealAngsuranI;
+use App\Models\RealSimpanan;
 use App\Models\Rekening;
 use App\Models\RencanaAngsuranI;
 use App\Models\StatusPinjaman;
@@ -33,10 +34,11 @@ use Session;
 
 class SimpananController extends Controller
 {
+
     public function index()
     {
         if (request()->ajax()) {
-            $simpanan = Simpanan::with(['anggota', 'js'])
+            $simpanan = Simpanan::with(['anggota', 'js', 'realSimpananTerbesar'])
                 ->orderBy('id', 'DESC');
 
             return DataTables::of($simpanan)
@@ -54,16 +56,9 @@ class SimpananController extends Controller
                     }
                     return $status;
                 })
-                ->addColumn('status', function ($row) {
-                    $status = '<span class="badge badge-secondary">-</span>';
-                    if ($row->status) {
-                        $badge = $row->status == 'A' ? 'success' : 'danger';
-                        $status = '<span class="badge badge-' . $badge . '">' . ($row->status == 'A' ? 'Aktif' : 'Non-Aktif') . '</span>';
-                    }
-                    return $status;
-                })
                 ->editColumn('jumlah', function ($row) {
-                    return 'Rp ' . number_format($row->jumlah, 0, ',', '.');
+                    $jumlah = $row->realSimpananTerbesar->sum ?? 0;
+                    return 'Rp ' . number_format($jumlah, 0, ',', '.');
                 })
                 ->editColumn('tgl_buka', function ($row) {
                     return date('d/m/Y', strtotime($row->tgl_buka));
@@ -71,6 +66,7 @@ class SimpananController extends Controller
                 ->rawColumns(['status'])
                 ->make(true);
         }
+
         $title = 'Daftar Simpanan';
         return view('simpanan.index')->with(compact('title'));
     }

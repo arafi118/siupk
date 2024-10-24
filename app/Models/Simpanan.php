@@ -23,7 +23,10 @@ class Simpanan extends Model
     {
         return $this->belongsTo(JenisSimpanan::class, 'jenis_simpanan');
     }
-
+    public function realSimpananTerbesar()
+    {
+        return $this->hasOne(RealSimpanan::class, 'cif', 'id')->latestOfMany();
+    }
     public function jasa()
     {
         return $this->belongsTo(JenisJasa::class, 'jenis_jasa');

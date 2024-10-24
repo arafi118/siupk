@@ -78,10 +78,7 @@
                 },
                 {
                     data: 'jumlah',
-                    name: 'jumlah',
-                    render: function(data, type, row) {
-                        return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(data);
-                    }
+                    name: 'jumlah'
                 },
                 {
                     data: 'tgl_buka',
