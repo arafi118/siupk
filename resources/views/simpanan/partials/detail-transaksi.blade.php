@@ -58,12 +58,19 @@ $sum =0;
                     <td>{{ number_format($sum, 0, ',', '.') }}</td>
                     <td>{{ $trx->id_user ?? '-' }}</td>
                     <td>
-                        <a class="btn btn-secondary btn-sm  float-end ms-2" data-toggle='tooltip' onclick="window.open('/cetak_koran/{{ $cif }}/{{$bulankop}}/{{$tahunkop}}')" data-placement='top' title='Kwitansi'>
-                            <i class="fa fa-print"></i> 
-                        </a>
-                        <a class="btn btn-secondary btn-sm  float-end ms-2" data-toggle='tooltip' onclick="window.open('/cetak_koran/{{ $cif }}/{{$bulankop}}/{{$tahunkop}}')" data-placement='top' title='Kwitansi'>
-                            <i class="fa fa-file-text"></i> 
-                        </a>
+<a class="btn btn-sm float-end ms-2" data-toggle='tooltip' 
+   onclick="window.open('/cetak_buku/{{$idt}}')" 
+   data-placement='top' style="background-color: transparent; border: none; padding: 0;"
+   title='Cetak Pada Buku'>
+    <i class="fa fa-book" style="font-size: 1rem;"></i>
+</a>
+<a class="btn btn-sm float-end ms-2" data-toggle='tooltip' 
+   onclick="window.open('/cetak_kuitansi/{{$idt}}')" 
+   data-placement='top' style="background-color: transparent; border: none; padding: 0;"
+   title='Cetak Pada Kwitansi'>
+    <i class="fa fa-file-text" style="font-size: 1rem;"></i>
+</a>
+
                     </td>
                 </tr>
             @empty
