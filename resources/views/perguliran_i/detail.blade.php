@@ -226,7 +226,7 @@ if ($saldo_pokok < 0) { $saldo_pokok=0; } $dokumen_proposal=[ [ 'title'=> 'Cover
                 <i class="fa fa-print"></i>&nbsp; Cetak Keterangan Pelunasan
             </button>
             @endif
-            <a href="/database/anggota/{{ $perguliran_i->anggota->nia }}" class="btn-shadow me-3 btn btn-primary"
+            <a href="/perguliran_i?status={{ $perguliran_i->status }}" class="btn-shadow me-3 btn btn-primary"
                 style="float: right;">
                 <i class="fa fa-reply-all"></i>&nbsp;<b>KEMBALI</b></a>
             @else
