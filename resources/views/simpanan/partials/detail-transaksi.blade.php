@@ -94,7 +94,7 @@ $sum = DB::table('real_simpanan_' . session('lokasi'))
                     <td>{{ number_format($real_d, 0, ',', '.') }}</td>
                     <td>{{ number_format($real_k, 0, ',', '.') }}</td>
                     <td>{{ number_format($sum, 0, ',', '.') }}</td>
-                    <td>{{ $trx->id_user ?? '-' }}</td>
+                    <td>{{ $user ?? '-' }}</td>
                     <td>
 <a class="btn btn-sm float-end ms-2" data-toggle='tooltip' 
    onclick="window.open('/cetak_buku/{{$idt}}')" 

@@ -78,7 +78,16 @@ class SimpananController extends Controller
     $cif = request()->input('cif');
 
     $transaksiQuery = Transaksi::where('id_simp', 'LIKE', "%-$cif");
+    
+    $userTransaksi = User::find($transaksiQuery->id_user);
+    
+    // Logika untuk menentukan user yang ditampilkan
+    $userDisplay = ($user->id == $userTransaksi->id) 
+        ? $user->ins 
+        : $user->ins . ' / ' . $userTransaksi->ins;
 
+    $user = $userDisplay;
+    
     // Jika tahun tidak 0, tambahkan filter tahun
     if ($tahun != 0) {
         $transaksiQuery->whereYear('tgl_transaksi', $tahun);
@@ -93,7 +102,7 @@ class SimpananController extends Controller
     $bulankop = $bulan;
     $tahunkop = $tahun;
 
-    return view('simpanan.partials.detail-transaksi', compact('transaksi', 'bulankop', 'tahunkop', 'cif'));
+    return view('simpanan.partials.detail-transaksi', compact('transaksi', 'bulankop', 'tahunkop', 'cif', 'user'));
 }
 
 

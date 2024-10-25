@@ -10,6 +10,6 @@
     "\\resources\\views\\simpanan",
     "\\resources\\views\\simpanan\\partials"
   ],
-  "SelectedNode": "\\resources\\views\\simpanan\\partials\\detail-transaksi.blade.php",
+  "SelectedNode": "\\resources\\views\\simpanan\\partials\\detail.blade.php",
   "PreviewInSolutionExplorer": false
 }
