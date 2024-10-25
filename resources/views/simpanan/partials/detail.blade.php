@@ -103,6 +103,10 @@
         <select id="bulants" name="bulants" class="form-control select2" 
                 style="padding-left: 10px; padding-right: 30px; appearance: none; 
                        -webkit-appearance: none; -moz-appearance: none; border: 1px solid #ccc;">
+                       
+            <option value="0"> <!-- Cek jika bulan ini -->
+                Semua Bulan
+            </option>
             @foreach(range(1, 12) as $bulan)
             <option value="{{ $bulan }}" 
                     {{ $bulan == date('n') ? 'selected' : '' }}> <!-- Cek jika bulan ini -->
@@ -122,6 +126,9 @@
         <select id="tahunts" name="tahunts" class="form-control select2" 
                 style="padding-left: 10px; padding-right: 30px; appearance: none; 
                        -webkit-appearance: none; -moz-appearance: none; border: 1px solid #ccc;">
+            <option value="0"> <!-- Cek jika bulan ini -->
+                Semua Tahun
+            </option>
             @foreach(range(date('Y') - 5, date('Y') + 5) as $tahun)
             <option value="{{ $tahun }}" 
                     {{ $tahun == date('Y') ? 'selected' : '' }}> <!-- Cek jika tahun ini -->

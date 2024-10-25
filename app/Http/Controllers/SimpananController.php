@@ -71,30 +71,39 @@ class SimpananController extends Controller
         return view('simpanan.index')->with(compact('title'));
     }
 
-    public function getTransaksi()
-{
-    $bulan = request()->input('bulan');
-    $tahun = request()->input('tahun');
-    $cif = request()->input('cif');
+    public function getTransaksi() {
+        $bulan = request()->input('bulan');
+        $tahun = request()->input('tahun');
+        $cif = request()->input('cif');
 
-    $transaksiQuery = Transaksi::where('id_simp', 'LIKE', "%-$cif");
+        // Query transaksi dengan filter berdasarkan input bulan, tahun, dan cif
+        $transaksiQuery = Transaksi::where('id_simp', 'LIKE', "%-$cif");
 
-    // Jika tahun tidak 0, tambahkan filter tahun
-    if ($tahun != 0) {
-        $transaksiQuery->whereYear('tgl_transaksi', $tahun);
+        // Filter tahun jika diberikan
+        if ($tahun != 0) {
+            $transaksiQuery->whereYear('tgl_transaksi', $tahun);
+        }
+
+        // Filter bulan jika diberikan
+        if ($bulan != 0) {
+            $transaksiQuery->whereMonth('tgl_transaksi', $bulan);
+        }
+
+        // Ambil data transaksi yang sudah difilter dan diurutkan
+        $transaksi = $transaksiQuery->orderBy('tgl_transaksi', 'asc')->get();
+
+        // Ambil data 'ins' berdasarkan id_user dari setiap transaksi
+        $transaksi->each(function ($item) {
+            $item->ins = User::where('id', $item->id_user)->value('ins');
+        });
+
+        $bulankop = $bulan;
+        $tahunkop = $tahun;
+
+        // Return view dengan semua variabel yang dibutuhkan
+        return view('simpanan.partials.detail-transaksi', compact('transaksi', 'bulankop', 'tahunkop', 'cif'));
     }
 
-    // Jika bulan tidak 0, tambahkan filter bulan
-    if ($bulan != 0) {
-        $transaksiQuery->whereMonth('tgl_transaksi', $bulan);
-    }
-
-    $transaksi = $transaksiQuery->orderBy('tgl_transaksi', 'asc')->get();
-    $bulankop = $bulan;
-    $tahunkop = $tahun;
-
-    return view('simpanan.partials.detail-transaksi', compact('transaksi', 'bulankop', 'tahunkop', 'cif'));
-}
 
 
     public function detailAnggota($id)
