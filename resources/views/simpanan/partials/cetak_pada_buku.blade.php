@@ -22,12 +22,21 @@
     @php
         // Calculate transaction count
         $jum_trans = $transaksiCount;
-        
+        $parts = explode('-', $transaksi->id_simp);
+        $cif=$parts[1];
         // Calculate line breaks needed
         $i = $jum_trans - 1;
         $a = $i % 24;
         $br = ($a <= 10) ? $a : $a + 2;
-    @endphp
+
+// Calculate previous balance
+$sum = DB::table('real_simpanan_' . session('lokasi'))
+    ->where('cif', $cif)
+    ->where('tgl_transaksi', '<=', $transaksi->tgl_transaksi)
+    ->orderBy('tgl_transaksi', 'desc')
+    ->orderBy('id', 'desc')
+    ->value('sum') ?? 0;
+@endphp
 
     <table width="100%" border="0" align="center" cellpadding="5" cellspacing="0">
         <tr>
@@ -47,7 +56,7 @@
             <td width="5%" class="style9 align-center">{{ $kode }}</td>
             <td width="16%" class="style9 align-center">{{ number_format($debit) }}</td>
             <td width="16%" class="style9 align-center">{{ number_format($kredit) }}</td>
-            <td width="16%" class="style9 align-center">{{ number_format($saldo) }}</td>
+            <td width="16%" class="style9 align-center">{{ number_format($sum) }}</td>
             <td width="10%" class="style9 align-center">{{ strtoupper($user) }}-{{ $transaksi->idt }}</td>
             <td width="25%" class="style9 align-center">&nbsp;</td>
         </tr>

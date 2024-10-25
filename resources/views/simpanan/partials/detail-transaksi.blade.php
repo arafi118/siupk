@@ -15,18 +15,18 @@ $sum = DB::table('real_simpanan_' . session('lokasi'))
     ->value('sum') ?? 0;
 @endphp
 <div class="table-responsive">
-    <table class="table table-striped align-items-center mb-0" width="100%">
+    <table class="table table-striped align-items-center mb-0" width="97%" style="table-layout: fixed; border-collapse: collapse;">
         <thead>
             <tr  style="background-color: #404040;color: #ffffff;">
-                <th>#</th>
-                <th>Tgl transaksi</th>
-                <th>Keterangan</th>
-                <th>KD.TRX</th>
-                <th>Debit (Tarik)</th>
-                <th>Kredit (Setor)</th>
-                <th>Saldo</th>
-                <th>P</th>
-                <th>#</th>
+                <th width='3%'>#</th>
+                <th width='10%'>Tgl transaksi</th>
+                <th width='35%'>Keterangan</th>
+                <th width='10%'>KD.TRX</th>
+                <th width='10%'>Debit (Tarik)</th>
+                <th width='10%'>Kredit (Setor)</th>
+                <th width='10%'>Saldo</th>
+                <th width='5%'>P</th>
+                <th width='10%'>#</th>
             </tr>
         </thead>
         @if ($bulankop != 0 && $tahunkop != 0 ) 
@@ -46,7 +46,7 @@ $sum = DB::table('real_simpanan_' . session('lokasi'))
         @elseif($bulankop == 0 && $tahunkop != 0 )
             <tr>
                 <th colspan="6" class="text-center">
-                    <strong>Saldo Sebelum {{ $tahunkop }})</strong>
+                    <strong>Saldo Sebelum {{ $tahunkop }}</strong>
                 </th>
                 <th>{{ number_format($sum, 0, ',', '.') }}</th>
                 <th colspan="2">&nbsp;</th>
@@ -89,7 +89,7 @@ $sum = DB::table('real_simpanan_' . session('lokasi'))
                 <tr>
                     <td>{{ $index + 1 }}</td>
                     <td>{{ \Carbon\Carbon::parse($trx->tgl_transaksi)->format('d/m/Y') }}</td>
-                    <td>{{$kd_trx}} | {{ $trx->keterangan_transaksi ?? '-' }}</td>
+                    <td style="word-wrap: break-word; word-break: break-word; white-space: normal;">{{$kd_trx}} | {{ $trx->keterangan_transaksi ?? '-' }}</td>
                     <td>{{ $idt ?? '-' }}</td>
                     <td>{{ number_format($real_d, 0, ',', '.') }}</td>
                     <td>{{ number_format($real_k, 0, ',', '.') }}</td>
@@ -100,13 +100,13 @@ $sum = DB::table('real_simpanan_' . session('lokasi'))
    onclick="window.open('/cetak_buku/{{$idt}}')" 
    data-placement='top' style="background-color: transparent; border: none; padding: 0;"
    title='Cetak Pada Buku'>
-    <i class="fa fa-book" style="font-size: 1rem;"></i>
+    <i class="fa fa-book" style="font-size: 1.2rem;"></i>
 </a>
 <a class="btn btn-sm float-end ms-2" data-toggle='tooltip' 
    onclick="window.open('/cetak_kuitansi/{{$idt}}')" 
    data-placement='top' style="background-color: transparent; border: none; padding: 0;"
    title='Cetak Pada Kwitansi'>
-    <i class="fa fa-file-text" style="font-size: 1rem;"></i>
+    <i class="fa fa-file-text" style="font-size: 1.2rem;"></i>
 </a>
 
                     </td>
@@ -121,8 +121,8 @@ $sum = DB::table('real_simpanan_' . session('lokasi'))
                     <tH colspan="6" class="text-center">TOTAL SALDO</tH>
                     <tH colspan="3" class="text-center">{{ number_format($sum, 0, ',', '.') }}</tH>
                 </tr>
-    </table>
-    <button class="btn btn-secondary btn-sm float-end ms-2" onclick="window.open('/cetak_koran/{{ $cif }}/{{$bulankop}}/{{$tahunkop}}')" type="button">
+    </table><br>
+    <button class="btn btn-dark btn-sm float-end ms-2" onclick="window.open('/cetak_koran/{{ $cif }}/{{$bulankop}}/{{$tahunkop}}')" type="button">
         <i class="fa fa-print"></i> Cetak Rekening Koran
     </button>
 </div>
