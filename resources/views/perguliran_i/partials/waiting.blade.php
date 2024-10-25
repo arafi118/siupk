@@ -178,6 +178,7 @@
                         <input type="hidden" name="_id" id="_id" value="{{ $perguliran_i->id }}">
                         <input type="hidden" name="status" id="status" value="A">
                         <input type="hidden" name="debet" id="debet" value="{{ $debet->kode_akun }}">
+                        <input type="hidden" name="harga" id="harga" value="{{ $perguliran_i->harga }}">
 
                     </div>
                     <div class="row">
@@ -243,7 +244,7 @@
                             <div class="position-relative mb-3">
                                 <label for="fee_supplier" class="form-label">Fee Dari Supplier</label>
                                 <input autocomplete="off" type="text" name="fee_supplier" id="fee_supplier"
-                                    class="form-control"
+                                    class="form-control money"
                                     value="{{ number_format($perguliran_i->alokasi * ($kec->def_fee_supp / 100), 2) }}">
                                 <small class="text-danger" id="msg_fee_supplier"></small>
                             </div>
@@ -252,7 +253,7 @@
                             <div class="position-relative mb-3">
                                 <label for="fee_agent" class="form-label">Fee Agent</label>
                                 <input autocomplete="off" type="text" name="fee_agent" id="fee_agent"
-                                    class="form-control"
+                                    class="form-control money"
                                     value="{{ number_format($perguliran_i->alokasi * ($kec->def_fee_agen / 100), 2) }}">
                                 <small class="text-danger" id="msg_fee_agent"></small>
                             </div>
@@ -336,9 +337,9 @@
         var lanjut = true;
         lanjut = await Swal.fire({
             title: 'Peringatan',
-            text: 'Anda akan melakukan Pencairan Piutang sebesar Rp. ' + $('#alokasi').val().split(
-                    '.00').join('') +
-                ' untuk kelompok tersebut? Setelah klik tombol Lanjutkan data tidak dapat diubah kembali !',
+            text: 'Anda akan melakukan Pencairan Piutang sebesar Rp. ' + $('#harga').val().split(
+                    '.00').join('') + 
+                ' untuk Nasabah tersebut? Setelah klik tombol Lanjutkan data tidak dapat diubah kembali !',
             showCancelButton: true,
             confirmButtonText: 'Lanjutkan',
             cancelButtonText: 'Batal',

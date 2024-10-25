@@ -369,7 +369,7 @@
             e.preventDefault()
 
             $('#BuktiAngsuran').modal('toggle');
-        })
+        })     
 
         $(document).on('click', '#BtnCetakBkm', function(e) {
             e.preventDefault()

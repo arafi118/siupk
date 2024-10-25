@@ -2475,7 +2475,7 @@ class PinjamanIndividuController extends Controller
             'sis_pokok'
         ])->first();
 
-        $data['real_i'] = RealAngsuranI::where('loan_id', $id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
+        $data['real'] = RealAngsuranI::where('loan_id', $id)->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC')->first();
         $data['ra'] = RencanaAngsuranI::where([
             ['loan_id', $id],
             ['jatuh_tempo', '<=', date('Y-m-d')]
