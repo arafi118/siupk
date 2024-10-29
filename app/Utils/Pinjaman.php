@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Utils;
+use  App\UtilsTanggal;
 
 class Pinjaman
 {
@@ -93,7 +94,7 @@ class Pinjaman
                 '{ketua}' => (!$individu) ? $pinkel->kelompok->ketua:'',
                 '{sekretaris}' =>(!$individu) ? $pinkel->kelompok->sekretaris:'',
                 '{bendahara}' => (!$individu) ? $pinkel->kelompok->bendahara:'',
-                '{tanggal}' => (!$individu && $pinkel->tgl_cair) ? date("d-m-Y", strtotime($pinkel->tgl_cair)) : '',
+                '{tanggal}' => (!$individu && $pinkel->tgl_cair) ? Tanggal::tglLatin($pinkel->tgl_cair) : '',
                 '{kades}' => $desa->kades,
                 '{nip}' => $desa->nip,
                 '{sekdes}' => $desa->sekdes,
