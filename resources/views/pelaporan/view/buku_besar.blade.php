@@ -117,7 +117,7 @@
                     $bg = 'rgba(255, 255, 255)';
                 }
                 $relasi = '';
-                if ($trx->tgl_transaksi <= '2024-10-11' && $trx->id_simp!=0 ){
+                if ($trx->tgl_transaksi >= '2024-10-11' and $trx->id_simp!=0 ){
                     $relasi = $trx->relasi;
                 }
             @endphp
