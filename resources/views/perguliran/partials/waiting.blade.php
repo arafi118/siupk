@@ -296,7 +296,7 @@
             <input type="hidden" name="debet" id="debet" value="{{ $debet->kode_akun }}">
             <div class="row">
             <?php
-                $tanggalHariIni = date('d-m-Y'); // Format: 29-10-2024
+                $tanggalHariIni = date('d-m-Y'); // Format: 29-10-2024 {{ Tanggal::tglIndo($perguliran->tgl_cair) }}
             ?>
                 <div class="col-md-4">
                     <div class="input-group input-group-static my-3">
