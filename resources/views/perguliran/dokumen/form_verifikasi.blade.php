@@ -133,7 +133,7 @@
             <td>Petugas/PJ</td>
             <td>:</td>
             <td>
-                <b> {{ $pinkel->user->namadepan }} {{ $pinkel->user->namabelakang }}</b>
+                <b> {{ $pinkel->user->namadepan ?? ''}} {{ $pinkel->user->namabelakang ?? '' }}</b>
             </td>
         </tr>
         <tr>
@@ -228,29 +228,6 @@
                 </td>
                 <td>
                     {!! $statusDokumen != 'P' || $pinkel->status == 'V' ? $pa->catatan_verifikasi : '&nbsp;' !!}
-                </td>
-            </tr>
-        @endforeach
-
-        @foreach ($data_nia as $nia => $val)
-            @php
-                $proposal_lalu += $val['alokasi'];
-                $pinjaman_lalu = $val['alokasi'];
-            @endphp
-
-            <tr>
-                <td align="center">{{ ++$no }}</td>
-                <td>{{ $val['nama'] }}</td>
-                <td align="right">{{ number_format($pinjaman_lalu) }}</td>
-                <td align="right">{{ number_format(0) }}</td>
-                <td align="right">
-                    {!! $statusDokumen != 'P' || $pinkel->status == 'V' ? number_format(0) : '&nbsp;' !!}
-                </td>
-                <td align="right">
-                    {!! $statusDokumen == 'W' || $statusDokumen == 'A' ? number_format(0) : '&nbsp;' !!}
-                </td>
-                <td>
-                    &nbsp;
                 </td>
             </tr>
         @endforeach
