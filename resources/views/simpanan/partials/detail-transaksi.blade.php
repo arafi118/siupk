@@ -31,11 +31,11 @@ $sum = DB::table('real_simpanan_' . session('lokasi'))
         </thead>
         @if ($bulankop != 0 && $tahunkop != 0 ) 
             <tr>
-                <th colspan="6" class="text-center">
-                    <strong>Saldo Sebelum {{ \Carbon\Carbon::create(null, $bulankop)->translatedFormat('F') }} {{ $tahunkop }}</strong>
-                </th>
-                <th>{{ number_format($sum, 0, ',', '.') }}</th>
-                <th colspan="2">&nbsp;</th>
+                <td colspan="6" class="text-center"><b>
+                    Saldo Sebelum {{ \Carbon\Carbon::create(null, $bulankop)->translatedFormat('F') }} {{ $tahunkop }}</b>
+                </td>
+                <td><b>{{ number_format($sum, 0, ',', '.') }}</b></td>
+                <td colspan="2">&nbsp;</td>
             </tr>
         @elseif($bulankop != 0 && $tahunkop == 0 )
             <tr>
@@ -117,10 +117,11 @@ $sum = DB::table('real_simpanan_' . session('lokasi'))
                 </tr>
             @endforelse
         </tbody>
-                <tr>
-                    <tH colspan="6" class="text-center">TOTAL SALDO</tH>
-                    <tH colspan="3" class="text-center">{{ number_format($sum, 0, ',', '.') }}</tH>
-                </tr>
+            <tr>
+                <td colspan="6" class="text-center"><b>TOTAL SALDO</b></td>
+                <td><b>{{ number_format($sum, 0, ',', '.') }}</b></td>
+                <td colspan="2">&nbsp;</td>
+            </tr>
     </table><br>
     <button class="btn btn-dark btn-sm float-end ms-2" onclick="window.open('/cetak_koran/{{ $cif }}/{{$bulankop}}/{{$tahunkop}}')" type="button">
         <i class="fa fa-print"></i> Cetak Rekening Koran

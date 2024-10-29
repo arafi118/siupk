@@ -1,15 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\app",
-    "\\app\\Http",
-    "\\app\\Http\\Controllers",
     "\\public",
     "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\simpanan",
-    "\\resources\\views\\simpanan\\partials"
+    "\\resources\\views\\perguliran_i",
+    "\\resources\\views\\perguliran_i\\dokumen"
   ],
-  "SelectedNode": "\\resources\\views\\simpanan\\partials\\detail.blade.php",
+  "SelectedNode": "\\resources\\views\\perguliran_i\\dokumen\\daftar_hadir_pencairan.blade.php",
   "PreviewInSolutionExplorer": false
 }

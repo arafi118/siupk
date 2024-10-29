@@ -63,6 +63,28 @@ $sum = DB::table('real_simpanan_' . session('lokasi'))
 
     <link id="pagestyle" href="/assets/css/material-dashboard.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/assets/css/style.css">
+
+<style>
+    .align-center {
+        text-align: center;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .align-right {
+        text-align: right;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .align-left {
+        text-align: left;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+</style>
+
+
 </head>
 <body class="g-sidenav-show  bg-gray-200" onload="window.print()">
 <table width="97%" border="0" align="center" cellpadding="3" cellspacing="0">
@@ -116,23 +138,24 @@ $sum = DB::table('real_simpanan_' . session('lokasi'))
 </table>
 <table width="96%" border="0" align="center" cellpadding="3" cellspacing="0">
     <tr>
-        <th width="4%" height="30" class="style9">NO</th>
-        <th width="8%" class="style9">TANGGAL</th>
-        <th width="6%" class="style9">REF</th>
-        <th width="40%" class="style9">KETERANGAN</th>
-        <th width="10%" class="style9">DEBIT</th>
-        <th width="10%" class="style9">KREDIT</th>
-        <th width="10%" class="style9">SALDO</th>
-        <th width="2%" class="style9">P</th>
+        <th width="4%" height="30" class="align-center">NO</th>
+        <th width="8%" class="align-center">TANGGAL</th>
+        <th width="6%" class="align-center">REF</th>
+        <th width="40%" class="align-center">KETERANGAN</th>
+        <th width="10%" class="align-center">DEBIT</th>
+        <th width="10%" class="align-center">KREDIT</th>
+        <th width="10%" class="align-center">SALDO</th>
+        <th width="2%" class="align-center">P</th>
     </tr>
     @php  $no = 0;  @endphp
     
         @if ($bulankop != 0 && $tahunkop != 0 ) 
             <tr>
-                <th colspan="6" class="text-center">
+                <th colspan="3">&nbsp;</th>
+                <th colspan="3" class="text-left">
                     <strong>Saldo Sebelum {{ \Carbon\Carbon::create(null, $bulankop)->translatedFormat('F') }} {{ $tahunkop }}</strong>
                 </th>
-                <th>{{ number_format($sum, 0, ',', '.') }}</td>
+                <th class="style9 align-right">{{ number_format($sum, 0, ',', '.') }}</td>
                 <th colspan="2">&nbsp;</th>
             </tr>
         @elseif($bulankop != 0 && $tahunkop == 0 )
@@ -143,10 +166,11 @@ $sum = DB::table('real_simpanan_' . session('lokasi'))
             </tr>
         @elseif($bulankop == 0 && $tahunkop != 0 )
             <tr>
-                <th colspan="6" class="text-center">
+                <th colspan="3">&nbsp;</th>
+                <th colspan="3" class="text-left">
                     <strong>Saldo Sebelum {{ $tahunkop }})</strong>
                 </th>
-                <th>{{ number_format($sum, 0, ',', '.') }}</th>
+                <th class="style9 align-right">{{ number_format($sum, 0, ',', '.') }}</th>
                 <th colspan="2">&nbsp;</th>
                 </th>
             </tr>
@@ -183,9 +207,9 @@ $sum = DB::table('real_simpanan_' . session('lokasi'))
             @endphp
     <tr>
         <td width="4%" height="30" class="style9">{{ $index + 1 }}</td>
-        <td width="10%" class="style9 align-center">{{ $trx->tgl_transaksi }}</td>
+        <td width="15%" class="style9 align-center">{{ $trx->tgl_transaksi }}</td>
         <td width="6%" class="style9 align-center">{{ $trx->idt }}</td>
-        <td width="40%" class="style9">{{ $trx->keterangan_transaksi }}</td>
+        <td width="35%" class="style9">{{ $trx->keterangan_transaksi }}</td>
         <td width="10%" class="style9 align-right">{{ number_format($real_d) }}</td>
         <td width="10%" class="style9 align-right">{{ number_format($real_k) }}</td>
         <td width="10%" class="style9 align-right">{{ number_format($sum) }}</td>
@@ -196,6 +220,13 @@ $sum = DB::table('real_simpanan_' . session('lokasi'))
                     <td colspan="9" class="text-center">Tidak ada transaksi di periode ini</td>
                 </tr>
             @endforelse
+            <tr>
+                <td colspan="6" class="text-center">
+                    <b>TOTAL SALDO</b>
+                </td>
+                <td class="style9 align-right"><b>{{ number_format($sum, 0, ',', '.') }}</b></td>
+                <td colspan="2">&nbsp;</td>
+            </tr>
 </table>
 </body>
 

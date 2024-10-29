@@ -269,12 +269,16 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
+                <?php
+                    $tanggalHariIni = date('d-m-Y'); // Format: 29-10-2024
+                    ?>
                     <div class="input-group input-group-static my-3">
                         <label for="tgl_cair">Tanggal Cair</label>
                         <input autocomplete="off" type="text" name="tgl_cair" id="tgl_cair"
-                            class="form-control date" value="{{ Tanggal::tglIndo($perguliran->tgl_verifikasi) }}">
+                            class="form-control date" value="{{ $tanggalHariIni }}">
                         <small class="text-danger" id="msg_tgl_cair"></small>
                     </div>
+
                 </div>
                 <div class="col-md-6">
                     <div class="input-group input-group-static my-3">
