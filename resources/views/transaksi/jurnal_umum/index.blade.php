@@ -394,8 +394,14 @@
             var id_pinjaman = parseInt(value[2])  //parseInt untuk nilai (int)
             var fee_agen = parseInt(value[3])
             
-            $('#fee_agen').val(fee_agen)
-            $('#keterangan').val("Fee ke Agen A.N " + namadepan + " (" + id_pinjaman + ")")
+            // $('#fee_agen').val(fee_agen)
+            // $('#keterangan').val("Fee ke Agen A.N " + namadepan + " (" + id_pinjaman + ")")
+
+            $('#fee_agen').val(fee_agen);
+
+            if (namadepan && !isNaN(id_pinjaman)) {
+                $('#keterangan').val("Fee ke Agen A.N " + namadepan + " (" + id_pinjaman + ")");
+            }
         })
         
         $(document).on('change', '#unit', function() {
