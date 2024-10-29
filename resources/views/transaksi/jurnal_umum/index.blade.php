@@ -593,11 +593,17 @@
             })
         })
 
+
         $(document).on('click', '#BtnCetak', function(e) {
             e.preventDefault()
 
-            $('#FormCetakDokumenTransaksi').submit()
+            if ($('#FormCetakDokumenTransaksi').serializeArray().length > 1) {
+                $('#FormCetakDokumenTransaksi').submit();
+            } else {
+                Swal.fire('Error', "Tidak ada transaksi yang dipilih.", 'error')
+            }
         })
+
 
         function initializeBootstrapTooltip() {
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]')),

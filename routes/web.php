@@ -120,6 +120,7 @@ Route::post('/dashboard/jatuh_tempo', [DashboardController::class, 'jatuhTempo']
 Route::post('/dashboard/nunggak', [DashboardController::class, 'nunggak'])->middleware('auth');
 Route::post('/dashboard/tagihan', [DashboardController::class, 'tagihan'])->middleware('auth');
 Route::get('/dashboard/pinjaman', [DashboardController::class, 'pinjaman'])->middleware('auth');
+Route::get('/dashboard/pinjamanI', [DashboardController::class, 'pinjamanI'])->middleware('auth');
 Route::get('/dashboard/pemanfaat', [DashboardController::class, 'pemanfaat'])->middleware('auth');
 
 Route::get('/pengaturan/sop', [SopController::class, 'index'])->middleware('auth');
@@ -290,6 +291,7 @@ Route::get('/transaksi/dokumen/kuitansi_thermal/{id}', [TransaksiController::cla
 Route::get('/transaksi/dokumen/bkk/{id}', [TransaksiController::class, 'bkk'])->middleware('auth');
 Route::get('/transaksi/dokumen/bkm/{id}', [TransaksiController::class, 'bkm'])->middleware('auth');
 Route::get('/transaksi/dokumen/bm/{id}', [TransaksiController::class, 'bm'])->middleware('auth');
+Route::get('/transaksi/dokumen/bm_angsuran/{id}', [TransaksiController::class, 'bm'])->middleware('auth');
 
 Route::get('/transaksi/dokumen/struk_individu/{id}', [TransaksiController::class, 'strukIndividu'])->middleware('auth');
 Route::get('/transaksi/dokumen/struk_matrix_individu/{id}', [TransaksiController::class, 'strukMatrixIndividu'])->middleware('auth');
@@ -357,8 +359,10 @@ Route::get('/simpanan/kuasa/{id}', [SimpananController::class, 'Kuasa'])->middle
 Route::post('/simpanan/store', [SimpananController::class, 'store'])->middleware('auth');
 
 Route::get('/cetak_kop/{simpanan}', [SimpananController::class, 'kop'])->middleware('auth');
+Route::get('/cetak_buku/{idt}', [SimpananController::class, 'cetakPadaBuku'])->middleware('auth');
+Route::get('/cetak_kuitansi/{idt}', [SimpananController::class, 'cetakKwitansi'])->middleware('auth');
 
-Route::get('/cetak_koran/{simpanan}', [SimpananController::class, 'koran'])->middleware('auth');
+Route::get('/cetak_koran/{cif}/{bulankop}/{tahunkop}', [SimpananController::class, 'koran'])->middleware('auth');
 
 Route::get('/simpanan/get-transaksi', [SimpananController::class, 'getTransaksi'])->middleware('auth');
 
@@ -367,5 +371,7 @@ Route::post('/simpanan/simpan-transaksi', [SimpananController::class, 'simpanTra
 Route::get('/simpanan/generate', [SimpananController::class, 'generateSimpanan'])->middleware('auth')->name('simpanan.generate');
 Route::get('/simpanan/generate-bunga', [SimpananController::class, 'generateBunga'])->name('simpanan.generate-bunga');
 Route::resource('/simpanan', SimpananController::class)->middleware('auth');
+
+Route::post('/simpanan/generate-bunga2/{offset?}', [SimpananController::class, 'generate']);
 
 Route::get('/{invoice}', [PelaporanController::class, 'invoice']);

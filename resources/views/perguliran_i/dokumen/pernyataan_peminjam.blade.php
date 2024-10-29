@@ -68,6 +68,42 @@
                         {{ $nama_kabupaten }}, benar-benar telah meminjam uang sebesar Rp. _____________________,
                         dengan jaminan berupa barang sebagai berikut :
                         <ul style="list-style: disc;">
+                            <li>
+@php
+    // Dekode JSON, jika gagal, jadikan string apa adanya.
+    $jaminan = json_decode($pinkel->jaminan, true) ?? $pinkel->jaminan;
+@endphp
+
+<table border="0" width="100%" cellspacing="0" cellpadding="5" style="font-size: 12px; border-collapse: collapse;">
+    @if (is_array($jaminan))
+        @foreach ($jaminan as $key => $value)
+            <tr>
+                <td height="12" width="80">{{ ucwords(str_replace('_', ' ', $key)) }}</td>
+                <td width="10" align="center">:</td>
+                <td>
+                    @if (is_numeric($value))
+                        Rp {{ number_format($value, 0, ',', '.') }}
+                    @else
+                        {{ $value }}
+                    @endif
+                </td>
+            </tr>
+        @endforeach
+    @else
+        <tr>
+            <td colspan="3" align="center">{{ $jaminan }}</td>
+        </tr>
+                                        <tr>
+                                            <td height="12" width="80">Nilai Jual</td>
+                                            <td width="10" align="center">:</td>
+                                            <td>
+                                                <b>Rp. _______________________</b>
+                                            </td>
+                                        </tr>
+    @endif
+</table>
+
+                                </li>
                             @for ($i = 0; $i < 3; $i++)
                                 <li>
                                     <table border="0" width="100%" cellspacing="0" cellpadding="0"

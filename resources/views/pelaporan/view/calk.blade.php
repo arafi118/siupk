@@ -235,6 +235,7 @@
                                         $sum_saldo += $saldo;
 
                                         $akun_lev4[] = [
+                                            'lev4' => $rek->lev4,
                                             'kode_akun' => $rek->kode_akun,
                                             'nama_akun' => $rek->nama_akun,
                                             'saldo' => $saldo,
@@ -262,23 +263,50 @@
                                     @endif
                                 </tr>
 
-                                @foreach ($akun_lev4 as $lev4)
+
+                                @php
+                                    // Konversi array $akun_lev4 menjadi koleksi Laravel
+                                    $grouped_lev4 = collect($akun_lev4)->groupBy(function($item) {
+                                        return $item['lev4'];
+                                    });
+                                @endphp
+
+                                @foreach ($grouped_lev4 as $key => $group)
                                     @php
                                         $bg = 'rgb(230, 230, 230)';
                                         if ($loop->iteration % 2 == 0) {
                                             $bg = 'rgba(255, 255, 255)';
                                         }
+        
+                                        // Menghitung total saldo untuk setiap grup
+                                        $total_saldo = $group->sum('saldo');
                                     @endphp
-                                    <tr style="background: rgb(255,255,255);">
-                                        <td>{{ $lev4['kode_akun'] }}.</td>
-                                        <td>{{ $lev4['nama_akun'] }}</td>
-                                        @if ($lev4['saldo'] < 0)
-                                            <td align="right">({{ number_format($lev4['saldo'] * -1, 2) }})</td>
+                                    <tr style="background: {{ $bg }};">
+                                        <td>{{ $group->first()['kode_akun'] }}.</td>
+                                        <td>{{ $group->first()['nama_akun'] }}</td>
+                                        @if ($total_saldo < 0)
+                                            <td align="right">({{ number_format($total_saldo * -1, 2) }})</td>
                                         @else
-                                            <td align="right">{{ number_format($lev4['saldo'], 2) }}</td>
+                                            <td align="right">{{ number_format($total_saldo, 2) }}</td>
                                         @endif
                                     </tr>
                                 @endforeach
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                             @endforeach
                         @endforeach
 

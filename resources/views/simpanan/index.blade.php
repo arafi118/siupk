@@ -5,8 +5,10 @@
         <div class="card-header">
             <h3 class="card-title">Daftar Simpanan</h3>
             <div class="float-right">
-                <a href="{{ route('simpanan.generate') }}" class="btn btn-primary">Generate Simpanan</a>
-                <a href="{{ route('simpanan.generate-bunga') }}" class="btn btn-success">Generate Bunga</a>
+
+            <!--    <a href="{{ route('simpanan.generate') }}" class="btn btn-primary">Generate Simpanan</a> -->
+            <a href="generate_bunga.php" class="btn btn-info " target="_blank">Generate Bunga</a>
+
             </div>
         </div>
         <div class="card-body">
@@ -28,13 +30,13 @@
             </div>
 
             <div class="text-sm mt-3">
-                <span class="badge badge-success">
+                <span class="btn btn-success">
                     Simpanan Umum
                 </span>
-                <span class="badge badge-danger">
+                <span class="btn btn-danger">
                     Simpanan Deposito
                 </span>
-                <span class="badge badge-warning">
+                <span class="btn btn-warning">
                     Simpanan Program
                 </span>
                 <!-- Tambahkan status lain sesuai kebutuhan -->
@@ -76,10 +78,7 @@
                 },
                 {
                     data: 'jumlah',
-                    name: 'jumlah',
-                    render: function(data, type, row) {
-                        return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(data);
-                    }
+                    name: 'jumlah'
                 },
                 {
                     data: 'tgl_buka',
@@ -92,13 +91,13 @@
                     searchable: false,
                     render: function(data, type, row) {
                         if (data === 'A') {
-                            return '<span class="badge badge-success">Aktif</span>';
+                            return '<span class="btn btn-success" style="background-color: green; color: white;">Aktif</span>';
                         } else if (data === 'T') {
-                            return '<span class="badge badge-danger">Ditutup</span>';
+                            return '<span class="btn btn-danger">Ditutup</span>';
                         } else if (data === 'P') {
-                            return '<span class="badge badge-warning">Pending</span>';
+                            return '<span class="btn btn-warning">Pending</span>';
                         }
-                        return '<span class="badge badge-secondary">' + data + '</span>';
+                        return ' ' + data + ' ';
                     }
                 }
             ],

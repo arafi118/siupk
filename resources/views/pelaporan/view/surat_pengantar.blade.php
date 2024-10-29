@@ -24,7 +24,7 @@
         <tr>
             <td>&nbsp;</td>
             <td colspan="2" style="padding-left: 8px; text-align: justify;">
-                <div>Dengan Hormat,</div>
+                <div>Dengan Hormat, </div>
                 <div>
                     Bersama ini kami sampaikan Laporan Keuangan {{ $nama_lembaga }} {{ $kec->sebutan_kec }}
                     {{ $kec->nama_kec }} sampai dengan
@@ -56,7 +56,8 @@
                 <br>
                 <br>
                 <div>
-                    <b>{{ $dir->namadepan . ' ' . $dir->namabelakang }}</b>
+                    <b>{{ ($dir->namadepan ?? '') . ' ' . ($dir->namabelakang ?? '') }}</b>
+
                 </div>
             </td>
         </tr>
@@ -70,7 +71,10 @@
                         @else
                             <li>Penewu {{ $kec->nama_kec }}</li>
                         @endif
-                        <li>Kades/Lurah</li>
+                        
+                        @if (session('lokasi') != 36)
+                            <li>Kades/Lurah</li>
+                        @endif
                         <li>Arsip</li>
                     </ol>
                 </div>

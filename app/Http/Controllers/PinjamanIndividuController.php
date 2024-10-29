@@ -408,9 +408,10 @@ class PinjamanIndividuController extends Controller
         $sumber_bayar = Rekening::where([
             ['lev1', '1'],
             ['lev2', '1'],
-            ['lev3', '1'],
-            ['lev4', $perguliran_i->jpp->kode + 1]
-        ])->orderBy('kode_akun', 'asc')->get();
+            ['lev3', '1']
+                ])
+        ->where('kode_akun', 'like', '%' . ($perguliran_i->jpp->kode + 1))
+        ->orderBy('kode_akun', 'asc')->get();
         $debet = Rekening::where([
             ['lev1', '1'],
             ['lev2', '1'],
@@ -1003,8 +1004,8 @@ class PinjamanIndividuController extends Controller
     {
         $param = request()->get('query');
         if (strlen($param) >= '0') {
-            $anggota = anggota::leftJoin('desa', 'desa.kd_desa', '=', 'anggota_' . Session::get('lokasi') . '.desa')
-                ->leftJoin('pinjaman_anggota_' . Session::get('lokasi') . ' as pk', 'pk.id_angg', '=', 'anggota_' . Session::get('lokasi') . '.id')
+            $anggota = anggota::join('desa', 'desa.kd_desa', '=', 'anggota_' . Session::get('lokasi') . '.desa')
+                ->join('pinjaman_anggota_' . Session::get('lokasi') . ' as pk', 'pk.id_angg', '=', 'anggota_' . Session::get('lokasi') . '.id')
                 ->where(function ($query) use ($param) {
                     $query->where('anggota_' . Session::get('lokasi') . '.namadepan', 'like', '%' . $param . '%')
                         ->orwhere('anggota_' . Session::get('lokasi') . '.kd_anggota', 'like', '%' . $param . '%')

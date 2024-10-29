@@ -166,11 +166,14 @@
             <input type="hidden" name="_id" id="_id" value="{{ $perguliran->id }}">
             <input type="hidden" name="status" id="status" value="V">
             <div class="row">
+            <?php
+                $tanggalHariIni = date('d-m-Y'); // Format: 29-10-2024
+            ?>
                 <div class="col-md-3">
                     <div class="input-group input-group-static my-3">
                         <label for="tgl_verifikasi">Tgl Verifikasi</label>
                         <input autocomplete="off" type="text" name="tgl_verifikasi" id="tgl_verifikasi"
-                            class="form-control date" value="{{ Tanggal::tglIndo($perguliran->tgl_proposal) }}">
+                            class="form-control date" value="{{ $tanggalHariIni }}">
                         <small class="text-danger" id="msg_tgl_verifikasi"></small>
                     </div>
                 </div>

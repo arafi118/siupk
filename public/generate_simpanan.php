@@ -164,11 +164,11 @@
     </header>
 
     <div class="content">
-        <?php
+        <?php 
         $koneksi = mysqli_connect('cpanel.siupk.net', 'siupk_global', 'siupk_global', 'siupk_dbm');
 
-        $lokasi = 1;
-        $kd_kab = 1;
+        $lokasi = 3;
+        $kd_kab = 3;
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
             if($id == NULL or $id == ""){
@@ -230,24 +230,27 @@
             $q2 = mysqli_query($koneksi,"SELECT * FROM simpanan_anggota_$kd_kab WHERE ($where) ORDER BY id ASC  LIMIT $start, $per_page");
             while ($simp = mysqli_fetch_array($q2)) {
                 $del_re = mysqli_query($koneksi,"DELETE FROM real_simpanan_$lokasi WHERE cif=$simp[id]");
-                $query  = mysqli_query($koneksi,"SELECT * FROM transaksi_$lokasi WHERE id_simp=$simp[id] ORDER BY tgl_transaksi ASC, urutan ASC, idt ASC");
+                $query  = mysqli_query($koneksi,"SELECT * FROM transaksi_$lokasi WHERE id_simp LIKE '%-$simp[id]' ORDER BY tgl_transaksi ASC, urutan ASC, idt ASC");
                 $sum = 0;
                 while ($trx = mysqli_fetch_array($query)) {
                     $cif            = $simp['id'];
                     $tgl_transaksi  = $trx['tgl_transaksi'];
+                    $jumlah         = $trx['jumlah'];
                     
-                    if (substr($trx['rekening_kredit'], 0, 2) == '22') {
-                        $real_d         = $trx['jumlah'];
-                        $real_k         = 0;
-                        $sum            = $sum + $real_d;
-                    } elseif (substr($trx['rekening_debit'], 0, 2) == '22') {
-                        $real_d         = 0;
-                        $real_k         = $trx['jumlah'];
-                        $sum            = $sum - $real_k;
+                    if (in_array(substr($trx['id_simp'], 0, 1), ['1', '2', '5'])) {
+                        $real_d = 0;
+                        $real_k = $jumlah;
+                        $sum += $jumlah;
+                    } elseif (in_array(substr($trx['id_simp'], 0, 1), ['3', '4', '6', '7'])) {
+                        $real_d = $jumlah;
+                        $real_k = 0;
+                        $sum -= $jumlah;
                     } else {
-                        $real_d         = $trx['jumlah'];
-                        $real_k         = $trx['jumlah'];
+                        $real_d         = 0;
+                        $real_k         = 0;
                     }
+                    
+
                     
                     $lu             = date('Y-m-d H:i:s');
                     $id_user        = $trx['id_user'];

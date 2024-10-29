@@ -1073,8 +1073,8 @@ class PinjamanKelompokController extends Controller
     {
         $param = request()->get('query');
         if (strlen($param) >= '0') {
-            $kelompok = Kelompok::leftJoin('desa', 'desa.kd_desa', '=', 'kelompok_' . Session::get('lokasi') . '.desa')
-                ->leftJoin('pinjaman_kelompok_' . Session::get('lokasi') . ' as pk', 'pk.id_kel', '=', 'kelompok_' . Session::get('lokasi') . '.id')
+            $kelompok = Kelompok::join('desa', 'desa.kd_desa', '=', 'kelompok_' . Session::get('lokasi') . '.desa')
+                ->join('pinjaman_kelompok_' . Session::get('lokasi') . ' as pk', 'pk.id_kel', '=', 'kelompok_' . Session::get('lokasi') . '.id')
                 ->where(function ($query) use ($param) {
                     $query->where('kelompok_' . Session::get('lokasi') . '.nama_kelompok', 'like', '%' . $param . '%')
                         ->orwhere('kelompok_' . Session::get('lokasi') . '.kd_kelompok', 'like', '%' . $param . '%')

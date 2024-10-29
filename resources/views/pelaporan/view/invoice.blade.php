@@ -1,12 +1,7 @@
 @php
     use App\Utils\Tanggal;
 
-    $dari =
-        Tanggal::tahun($inv->tgl_invoice) .
-        '-' .
-        Tanggal::bulan($inv->kec->tgl_pakai) .
-        '-' .
-        Tanggal::hari($inv->kec->tgl_pakai);
+    $dari = $inv->tgl_invoice;
     $sampai = date('Y-m-d', strtotime('+1 years', strtotime($dari)));
 
     if ($inv->status == 'UNPAID') {
@@ -20,8 +15,8 @@
         $status = 'P A I D';
         $keterangan = 'Masa Aktif Tanggal ' . Tanggal::tglIndo($dari) . ' - ' . Tanggal::tglIndo($sampai);
     }
-
-    $batas_waktu = $tanggal;
+    
+    $batas_waktu = date('Y-m-d', strtotime('+1 month', strtotime($tanggal)));
     $total = 0;
 
     $kecamatan = $inv->kec->sebutan_kec . ' ' . $inv->kec->nama_kec;

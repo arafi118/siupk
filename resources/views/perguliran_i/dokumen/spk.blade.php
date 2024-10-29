@@ -288,8 +288,7 @@
                         <tr>
                             <td align="center"> &nbsp; </td>
                             <td align="center"> <strong>{{ $dir->namadepan }}</strong> <strong>{{ $dir->namabelakang }}</strong> <br>
-                                Kepala
-                                UPK </td>
+                                {{ $kec->sebutan_level_1 }} {{ $kec->nama_lembaga_sort }} </td>
                             <td align="center"> &nbsp; </td>
                             <td align="center"> <strong>{{ $pinkel->anggota->namadepan }}</strong> <br> Peminjam
                             </td>

@@ -6,6 +6,53 @@
 
         <input type="hidden" name="tgl" id="tgl" value="{{ date('d/m/Y') }}">
     </form>
+    
+<!-- Trigger Button (Hidden) -->
+@if ($jumlah_unpaid > 0)
+    <button type="button" id="triggerPopup" class="d-none" data-bs-toggle="modal" data-bs-target="#notificationPopup"></button>
+@endif
+
+<!-- Popup Modal -->
+<div class="modal fade" id="notificationPopup" tabindex="-1" aria-labelledby="notificationPopupLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="notificationPopupLabel">Notification</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-justify">
+                UPK <strong>{{$nama_upk}} </strong> saat ini memiliki tagihan invoice untuk perpanjangan lisensi. Mohon segera lakukan pembayaran untuk menghindari kemungkinan pemblokiran dari sistem. Cek info selengkapnya pada menu  <strong> Biaya Perpanjangan </strong> di pojok kanan atas.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .text-justify {
+        text-align: justify;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const triggerButton = document.getElementById('triggerPopup');
+        if (triggerButton) {
+            triggerButton.click();
+        }
+        // Ensure modal can be interacted with correctly
+        const modalElement = document.getElementById('notificationPopup');
+        modalElement.addEventListener('hidden.bs.modal', function () {
+            // Ensure the backdrop is removed when modal is closed
+            const backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) {
+                backdrop.remove();
+            }
+        });
+    });
+</script>
 
     <div class="row">
         @if ($jumlah_saldo <= $jumlah)
@@ -668,6 +715,11 @@
                 $('#tbKelompok').html(result.table)
             }
         })
+        $.get('/dashboard/pinjamanI?status=A', function(result) {
+            if (result.success) {
+                $('#tbAnggota').html(result.table)
+            }
+        })
 
         $.get('/dashboard/pemanfaat?status=A', function(result) {
             if (result.success) {
@@ -901,18 +953,18 @@
                         backgroundColor: "transparent",
                         fill: true,
                         data: [
-                            "{{ $b['1'] }}",
-                            "{{ $b['2'] }}",
-                            "{{ $b['3'] }}",
-                            "{{ $b['4'] }}",
-                            "{{ $b['5'] }}",
-                            "{{ $b['6'] }}",
-                            "{{ $b['7'] }}",
-                            "{{ $b['8'] }}",
-                            "{{ $b['9'] }}",
-                            "{{ $b['10'] }}",
-                            "{{ $b['11'] }}",
-                            "{{ $b['12'] }}"
+                            "{{ $b['1']*-1 }}",
+                            "{{ $b['2']*-1 }}",
+                            "{{ $b['3']*-1 }}",
+                            "{{ $b['4']*-1 }}",
+                            "{{ $b['5']*-1 }}",
+                            "{{ $b['6']*-1 }}",
+                            "{{ $b['7']*-1 }}",
+                            "{{ $b['8']*-1 }}",
+                            "{{ $b['9']*-1 }}",
+                            "{{ $b['10']*-1 }}",
+                            "{{ $b['11']*-1 }}",
+                            "{{ $b['12']*-1 }}"
                         ],
                         maxBarThickness: 6
                     },

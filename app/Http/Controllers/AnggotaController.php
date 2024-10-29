@@ -327,13 +327,17 @@ class AnggotaController extends Controller
             'msg' => 'Penduduk dengan nama ' . $update['namadepan'] . ' berhasil disimpan'
         ], Response::HTTP_ACCEPTED);
     }
-
+    
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Anggota $penduduk)
     {
-        //
+        Anggota::where('id', $penduduk->id)->delete();
+        return response()->json([
+            'success' => true,
+            'msg' => 'Data atas nama ' . $penduduk->namadepan . ' berhasil dihapus.'
+        ]);
     }
 
     public function blokir(Request $request, Anggota $nik)

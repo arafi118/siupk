@@ -172,7 +172,7 @@
                             <button type="submit" class="btn btn-github btn-sm float-end" id="SimpanPenduduk">
                                 Simpan Penduduk
                             </button>
-                            <button type="button" class="btn btn-danger btn-sm me-3 float-end" id="BlokirPenduduk">
+                            <button type="button" class="btn btn-warning btn-sm me-3 float-end" id="BlokirPenduduk">
                                 @php
                                     $status = '0';
                                     if ($penduduk->status == '0') {
@@ -186,6 +186,11 @@
                                     Lepaskan Blokiran
                                 @endif
                             </button>
+                            @if (count($penduduk->pinjaman_anggota) <= 0)
+                                <button type="button" class="btn btn-danger btn-sm me-3 float-end" id="HapuPenduduk">
+                                    Hapus Penduduk
+                                </button>
+                            @endif
                         </form>
                     </div>
                 </div>
@@ -276,6 +281,13 @@
         @endphp
         <input type="hidden" name="status" id="status" value="{{ $status }}">
     </form>
+
+    <form action="/database/penduduk/{{ $penduduk->nik }}" method="post" id="FormHapusPenduduk">
+        @csrf
+        @method('DELETE')
+
+
+    </form>
 @endsection
 
 @section('script')
@@ -330,6 +342,42 @@
                 }
             })
         })
+
+        
+
+        $(document).on('click', '#HapuPenduduk', function(e) {
+            e.preventDefault()
+
+            Swal.fire({
+                title: 'Hapus Penduduk',
+                text: 'Data atas nama {{ $penduduk->namadepan }} akan dihapus secara permanen dari aplikasi.',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Hapus',
+                cancelButtonText: 'Batal'
+            }).then((res) => {
+                if (res.isConfirmed) {
+                    var form = $('#FormHapusPenduduk')
+                    $.ajax({
+                        type: form.attr('method'),
+                        url: form.attr('action'),
+                        data: form.serialize(),
+                        success: function(result) {
+                            if (result.success) {
+                                Swal.fire({
+                                    title: 'Berhasil',
+                                    text: result.msg,
+                                    icon: 'success',
+                                }).then(() => {
+                                    window.location.href = '/database/penduduk';
+                                })
+                            }
+                        }
+                    })
+                }
+            })
+        })
+
 
         $(document).on('click', '#BlokirPenduduk', function(e) {
             e.preventDefault()
