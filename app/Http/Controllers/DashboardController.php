@@ -66,27 +66,24 @@ class DashboardController extends Controller
 
         $tb = 'transaksi_' . Session::get('lokasi');
         $trx = Transaksi::select([
-            DB::raw("(SELECT SUM(jumlah) as j FROM $tb WHERE rekening_debit LIKE '1.1.01.%' AND rekening_kredit='1.1.03.01' AND tgl_transaksi='$tgl') as pokok_spp"),
-            DB::raw("(SELECT SUM(jumlah) as j FROM $tb WHERE rekening_debit LIKE '1.1.01.%' AND rekening_kredit='1.1.03.02' AND tgl_transaksi='$tgl') as pokok_uep"),
-            DB::raw("(SELECT SUM(jumlah) as j FROM $tb WHERE rekening_debit LIKE '1.1.01.%' AND rekening_kredit='1.1.03.03' AND tgl_transaksi='$tgl') as pokok_pl"),
-            DB::raw("(SELECT SUM(jumlah) as j FROM $tb WHERE rekening_debit LIKE '1.1.01.%' AND rekening_kredit='4.1.01.01' AND tgl_transaksi='$tgl') as jasa_spp"),
-            DB::raw("(SELECT SUM(jumlah) as j FROM $tb WHERE rekening_debit LIKE '1.1.01.%' AND rekening_kredit='4.1.01.02' AND tgl_transaksi='$tgl') as jasa_uep"),
-            DB::raw("(SELECT SUM(jumlah) as j FROM $tb WHERE rekening_debit LIKE '1.1.01.%' AND rekening_kredit='4.1.01.03' AND tgl_transaksi='$tgl') as jasa_pl"),
+            DB::raw("(SELECT SUM(jumlah) as j FROM $tb WHERE rekening_debit LIKE '1.1.01.%' AND rekening_kredit='1.1.03.01' AND tgl_transaksi='$tgl') as umum"),
+            DB::raw("(SELECT SUM(jumlah) as j FROM $tb WHERE rekening_debit LIKE '1.1.01.%' AND rekening_kredit='1.1.03.02' AND tgl_transaksi='$tgl') as kendaraan"),
+            DB::raw("(SELECT SUM(jumlah) as j FROM $tb WHERE rekening_debit LIKE '1.1.01.%' AND rekening_kredit='1.1.03.03' AND tgl_transaksi='$tgl') as elektronik"),
+            DB::raw("(SELECT SUM(jumlah) as j FROM $tb WHERE rekening_debit LIKE '1.1.01.%' AND rekening_kredit='1.1.03.04' AND tgl_transaksi='$tgl') as prt"),
+            DB::raw("(SELECT SUM(jumlah) as j FROM $tb WHERE rekening_debit LIKE '1.1.01.%' AND rekening_kredit='1.1.03.05' AND tgl_transaksi='$tgl') as lain_lain"),
         ])->first();
 
-        $data['pokok_spp'] = 0;
-        $data['pokok_uep'] = 0;
-        $data['pokok_pl'] = 0;
-        $data['jasa_spp'] = 0;
-        $data['jasa_uep'] = 0;
-        $data['jasa_pl'] = 0;
+        $data['umum'] = 0;
+        $data['kendaraan'] = 0;
+        $data['elektronik'] = 0;
+        $data['prt'] = 0;
+        $data['lain_lain'] = 0;
         if ($trx) {
-            $data['pokok_spp'] = $trx->pokok_spp;
-            $data['pokok_uep'] = $trx->pokok_uep;
-            $data['pokok_pl'] = $trx->pokok_pl;
-            $data['jasa_spp'] = $trx->jasa_spp;
-            $data['jasa_uep'] = $trx->jasa_uep;
-            $data['jasa_pl'] = $trx->jasa_pl;
+            $data['umum'] = $trx->umum;
+            $data['kendaraan'] = $trx->kendaraan;
+            $data['elektronik'] = $trx->elektronik;
+            $data['prt'] = $trx->prt;
+            $data['lain_lain'] = $trx->lain_Lain;
         }
         $unpaidInvoice = AdminInvoice::where([
             ['lokasi', Session::get('lokasi')],

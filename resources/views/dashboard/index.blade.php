@@ -968,12 +968,11 @@
             type: 'pie', 
             data: {
                 labels: [
-                    'SPP Pokok',
-                    'SPP Jasa', 
-                    'UEP Pokok', 
-                    'UEP Jasa', 
-                    'PL Jasa', 
-                    'PL Pokok'
+                    'Umum', 
+                    'Kendaraan',
+                    'Elektronik', 
+                    'PRT', 
+                    'Lain-lain', 
                 ],
                 datasets: [{
                     label: 'Projects',
@@ -983,16 +982,14 @@
                         '#344767',
                         '#7b809a',
                         '#f44335',
-                        '#fb8c00',
                     ],
                     borderWidth: 1,
                     data: [
-                        "{{ $pokok_spp }}",
-                        "{{ $jasa_spp }}",
-                        "{{ $pokok_uep }}",
-                        "{{ $jasa_uep }}",
-                        "{{ $pokok_pl }}",
-                        "{{ $jasa_pl }}",
+                        "{{ $umum }}",
+                        "{{ $kendaraan }}",
+                        "{{ $elektronik }}",
+                        "{{ $prt }}",
+                        "{{ $lain_lain }}",
                     ],
                     fill: false
                 }]
@@ -1017,7 +1014,7 @@
         });
 
         var total_angsur =
-            "{{ $pokok_spp + $jasa_spp + $pokok_uep + $jasa_uep + $pokok_pl + $jasa_pl }}"
+            "{{ $umum + $kendaraan + $elektronik + $prt + $lain_lain }}"
 
         $('#total_angsur').html(formatter.format(total_angsur))
 
