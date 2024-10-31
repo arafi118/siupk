@@ -2,16 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\app",
-    "\\app\\Http",
-    "\\app\\Http\\Controllers",
     "\\app\\Models",
     "\\resources",
     "\\resources\\views",
     "\\resources\\views\\pelaporan",
     "\\resources\\views\\pelaporan\\partials",
     "\\resources\\views\\pelaporan\\view",
+    "\\resources\\views\\pelaporan\\view\\ojk",
     "\\resources\\views\\pelaporan\\view\\perkembangan_piutang"
   ],
-  "SelectedNode": "\\resources\\views\\pelaporan\\view\\perkembangan_piutang\\kolek_individu.blade.php",
+  "SelectedNode": "\\resources\\views\\pelaporan\\view\\ojk\\daftar_rincian_pinjamanaktif.blade.php",
   "PreviewInSolutionExplorer": false
 }
