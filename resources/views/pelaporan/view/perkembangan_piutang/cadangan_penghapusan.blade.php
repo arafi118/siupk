@@ -262,7 +262,7 @@
                     <td>Kolek IV</td>
                     <td align="center">50%</td>
                     <td align="right">{{ number_format($t_kolek4) }}</td>
-                    <td align="right">{{ number_format(($t_kolek2 * 50) / 100) }}</td>
+                    <td align="right">{{ number_format(($t_kolek4 * 50) / 100) }}</td>
                 </tr>
                 <tr>
                     <td align="center">5</td>
