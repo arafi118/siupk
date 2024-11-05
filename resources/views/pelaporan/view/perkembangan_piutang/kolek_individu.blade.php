@@ -30,7 +30,6 @@
             $t_kolek4 = 0;
             $t_kolek5 = 0;
 
-          
         @endphp
         @if ($jpp->nama_jpp != 'SPP')
             <div class="break"></div>
@@ -58,7 +57,7 @@
                 <th class="t l b" width="23%">Nama - Loan ID</th>
                 <th class="t l b" width="10%">Saldo</th>
                 <th class="t l b" width="10%">Tunggakan</th>
-                 <th class="t l b">KOLEK I</th>
+                <th class="t l b">KOLEK I</th>
                 <th class="t l b">KOLEK II</th>
                 <th class="t l b ">KOLEK III</th>
                 <th class="t l b">KOLEK IV</th>
@@ -89,7 +88,7 @@
                             <td class="t l b" align="left" colspan="2">Jumlah {{ $nama_desa }}</td>
                             <td class="t l b" align="right">{{ number_format($j_saldo) }}</td>
                             <td class="t l b" align="right">{{ number_format($j_tunggakan_pokok) }}</td>
-                             <td class="t l b" align="right">{{ number_format($j_kolek1) }}</td>
+                            <td class="t l b" align="right">{{ number_format($j_kolek1) }}</td>
                             <td class="t l b" align="right">{{ number_format($j_kolek2) }}</td>
                             <td class="t l b " align="right">{{ number_format($j_kolek3) }}</td>
                             <td class="t l b" align="right">{{ number_format($j_kolek4) }}</td>
@@ -189,44 +188,43 @@
                     $selisih = $selisih_bulan + $selisih_tahun;
 
                     $_kolek = 0;
-                  
 
                     if ($wajib_pokok != '0') {
                         $_kolek = $tunggakan_pokok / $wajib_pokok;
                     }
                     $kolek = ceil($_kolek + ($selisih - $angsuran_ke));
-                    
+
                     if ($kolek <= 0) {
-                    $kolek1 = $saldo_pokok;
-                    $kolek2 = 0;
-                    $kolek3 = 0;
-                    $kolek4 = 0;
-                    $kolek5 = 0;
-                } elseif ($kolek > 0 && $kolek <= 2) {
-                    $kolek1 = 0;
-                    $kolek2 = $saldo_pokok;
-                    $kolek3 = 0;
-                    $kolek4 = 0;
-                    $kolek5 = 0;
-                } elseif ($kolek > 2 && $kolek <= 4) {
-                    $kolek1 = 0;
-                    $kolek2 = 0;
-                    $kolek3 = $saldo_pokok;
-                    $kolek4 = 0;
-                    $kolek5 = 0;
-                } elseif ($kolek > 4 && $kolek <= 6) {
-                    $kolek1 = 0;
-                    $kolek2 = 0;
-                    $kolek3 = 0;
-                    $kolek4 = $saldo_pokok;
-                    $kolek5 = 0;
-                } elseif ($kolek > 6) {
-                    $kolek1 = 0;
-                    $kolek2 = 0;
-                    $kolek3 = 0;
-                    $kolek4 = 0;
-                    $kolek5 = $saldo_pokok;
-                }
+                        $kolek1 = $saldo_pokok;
+                        $kolek2 = 0;
+                        $kolek3 = 0;
+                        $kolek4 = 0;
+                        $kolek5 = 0;
+                    } elseif ($kolek > 0 && $kolek <= 2) {
+                        $kolek1 = 0;
+                        $kolek2 = $saldo_pokok;
+                        $kolek3 = 0;
+                        $kolek4 = 0;
+                        $kolek5 = 0;
+                    } elseif ($kolek > 2 && $kolek <= 4) {
+                        $kolek1 = 0;
+                        $kolek2 = 0;
+                        $kolek3 = $saldo_pokok;
+                        $kolek4 = 0;
+                        $kolek5 = 0;
+                    } elseif ($kolek > 4 && $kolek <= 6) {
+                        $kolek1 = 0;
+                        $kolek2 = 0;
+                        $kolek3 = 0;
+                        $kolek4 = $saldo_pokok;
+                        $kolek5 = 0;
+                    } elseif ($kolek > 6) {
+                        $kolek1 = 0;
+                        $kolek2 = 0;
+                        $kolek3 = 0;
+                        $kolek4 = 0;
+                        $kolek5 = $saldo_pokok;
+                    }
 
                 @endphp
 
@@ -235,7 +233,7 @@
                     <td class="t l b" align="left">{{ $pinkel->namadepan }} - {{ $pinkel->id }}</td>
                     <td class="t l b" align="right">{{ number_format($saldo_pokok) }}</td>
                     <td class="t l b" align="right">{{ number_format($tunggakan_pokok) }}</td>
-                     <td class="t l b" align="right">{{ number_format($kolek1) }}</td>
+                    <td class="t l b" align="right">{{ number_format($kolek1) }}</td>
                     <td class="t l b" align="right">{{ number_format($kolek2) }}</td>
                     <td class="t l b " align="right">{{ number_format($kolek3) }}</td>
                     <td class="t l b" align="right">{{ number_format($kolek4) }}</td>
@@ -272,7 +270,7 @@
                     <td class="t l b" align="left" colspan="2">Jumlah {{ $nama_desa }}</td>
                     <td class="t l b" align="right">{{ number_format($j_saldo) }}</td>
                     <td class="t l b" align="right">{{ number_format($j_tunggakan_pokok) }}</td>
-                     <td class="t l b" align="right">{{ number_format($j_kolek1) }}</td>
+                    <td class="t l b" align="right">{{ number_format($j_kolek1) }}</td>
                     <td class="t l b" align="right">{{ number_format($j_kolek2) }}</td>
                     <td class="t l b r" align="right">{{ number_format($j_kolek3) }}</td>
                     <td class="t l b" align="right">{{ number_format($j_kolek4) }}</td>
@@ -293,7 +291,8 @@
                             <tr style="font-weight: bold;">
                                 <td width="25%" class="t l b" align="center" height="20">J U M L A H</td>
                                 <td width="10%" class="t l b" align="right">{{ number_format($t_saldo) }}</td>
-                                <td width="10%" class="t l b r" align="right">{{ number_format($t_tunggakan_pokok) }}
+                                <td width="10%" class="t l b r" align="right">
+                                    {{ number_format($t_tunggakan_pokok) }}
                                 </td>
                                 <td class="t l b" align="right">{{ number_format($t_kolek1) }}</td>
                                 <td class="t l b" align="right">{{ number_format($t_kolek2) }}</td>
@@ -303,7 +302,8 @@
                             </tr>
                             <tr style="font-weight: bold;">
                                 <td class="t l b" align="center" rowspan="2" height="20">Resiko Pinjaman</td>
-                                <td class="t l b" colspan="2" align="center">(Kolek I + Kolek II + Kolek III + Kolek IV + Kolek V)</td>
+                                <td class="t l b" colspan="2" align="center">(Kolek I + Kolek II + Kolek III + Kolek
+                                    IV + Kolek V)</td>
                                 <td class="t l b" align="center">Kolek I * 1%</td>
                                 <td class="t l b" align="center">Kolek II * 10%</td>
                                 <td class="t l b" align="center">Kolek III * 25%</td>
