@@ -46,10 +46,10 @@ $title_form = [
                             <div class="card-body p-3">
                                 <div class="table-responsive mb-3">
                                     <table class="table table-striped midle">
-                                        <thead class="bg-dark text-white">
+                                        {{-- <thead class="bg-dark text-white">
                                             <tr>
                                                 <th width="50%">
-                                                    <span class="text-sm">Cadangan Resikoo</span>
+                                                    <span class="text-sm">Cadangan Resiko</span>
                                                 </th>
                                                 <th width="50%">
                                                     <div class="d-flex justify-content-between">
@@ -62,7 +62,7 @@ $title_form = [
                                                     </div>
                                                 </th>
                                             </tr>
-                                        </thead>
+                                        </thead> --}}
                                         <tbody>
                                             <input type="hidden" name="total_cadangan_resiko" id="total_cadangan_resiko" class="form-control total form-control-sm text-end" value="0">
                                             @foreach ($cadangan_resiko as $cr)
