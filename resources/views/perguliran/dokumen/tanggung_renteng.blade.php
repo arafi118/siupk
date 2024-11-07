@@ -43,7 +43,27 @@
                 <td>{{ $pa->anggota->namadepan }}</td>
                 <td align="center">{{ $pa->anggota->jk }}</td>
                 <td>{{ $pa->anggota->alamat }}</td>
-                <td>{{ $jaminan }}</td>
+                <td>
+                    @if (is_array($jaminan))
+                        <table border="0">
+                        @foreach ($jaminan as $key => $value)
+                            <tr>
+                                <td>{{ ucwords(str_replace('_', ' ', $key)) }}</td>
+                                <td align="center">:</td>
+                                <td>
+                                    @if (is_numeric($value))
+                                        Rp {{ number_format($value, 0, ',', '.') }}
+                                    @else
+                                        {{ $value }}
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                        </table>
+                    @else
+                    {{ $jaminan }}
+                    @endif
+                </td>
                 <td>&nbsp;</td>
             </tr>
         @endforeach
