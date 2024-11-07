@@ -223,6 +223,7 @@
                 </p>
 
                 <table border="0" width='100%'>
+              
                     <tr>
                         <td>&nbsp;</td>
                     </tr>
@@ -232,14 +233,28 @@
                         </td>
                         <td width='30%' class='bottom'></td>
                     </tr>
+                    @foreach ($user as $r)
                     <tr>
+                        <td width="70" height="20">
+                            <div>{{ $r->namadepan }} {{ $r->namabelakang }}</div>
+                            <div>
+                                <b>{{ $r->j->nama_jabatan }}</b>
+
+                            </div>
+                        </td>
+                        <td align="right" style="vertical-align: bottom;">
+                            _____________________________________
+                        </td>
+                    </tr>
+                @endforeach
+                    {{-- <tr>
                         <td align="center" width='60%'>
                             {{ $pinkel->user->namadepan }}
                             {{ $pinkel->user->namabelakang }}<br>
                             {{ $pinkel->user->j->nama_jabatan }}
                         </td>
                         <td width='30%' class='bottom'></td>
-                    </tr>
+                    </tr> --}}
                 </table>
 
             </td>

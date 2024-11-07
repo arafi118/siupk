@@ -1605,14 +1605,14 @@ class PinjamanIndividuController extends Controller
             'anggota.d',
             'anggota.d.sebutan_desa',
             'sis_pokok',
-            'user',
+            'user'
         ])->first();
 
         $data['user'] = User::where([
             ['lokasi', Session::get('lokasi')],
             ['level', '4'],
-            ['jabatan', '70']
-        ])->with('j')->orderBy('id')->first();
+            ['jabatan', '13']
+        ])->with('j')->orderBy('id')->get();
 
         $data['keuangan'] = $keuangan;
         $data['statusDokumen'] = request()->get('status');
