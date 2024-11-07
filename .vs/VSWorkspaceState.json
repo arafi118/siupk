@@ -3,7 +3,7 @@
     "",
     "\\app",
     "\\app\\Http",
-    "\\app\\Http\\Controllers",
+    "\\app\\Models",
     "\\resources",
     "\\resources\\views",
     "\\resources\\views\\pelaporan",
@@ -11,6 +11,6 @@
     "\\resources\\views\\pelaporan\\view\\ojk",
     "\\resources\\views\\pelaporan\\view\\perkembangan_piutang"
   ],
-  "SelectedNode": "\\app\\Http\\Controllers\\TransaksiController.php",
+  "SelectedNode": "\\resources\\views\\pelaporan\\view\\ojk\\neraca_ojk.blade.php",
   "PreviewInSolutionExplorer": false
 }

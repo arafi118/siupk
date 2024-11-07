@@ -27,15 +27,23 @@
             <th width="130">Nama Anggota</th>
             <th width="10">JK</th>
             <th>Alamat</th>
+            <th>Jaminan</th>
             <th width="50">Tanda Tangan</th>
         </tr>
         @foreach ($pinkel->pinjaman_anggota as $pa)
+        
+            @php
+                // Dekode JSON, jika gagal, jadikan string apa adanya.
+                $jaminan = json_decode($pa->jaminan, true) ?? $pa->jaminan;
+            @endphp
+
             <tr>
                 <td align="center">{{ $loop->iteration }}</td>
                 <td align="center">{{ $pa->anggota->nik }}</td>
                 <td>{{ $pa->anggota->namadepan }}</td>
                 <td align="center">{{ $pa->anggota->jk }}</td>
                 <td>{{ $pa->anggota->alamat }}</td>
+                <td>{{ $jaminan }}</td>
                 <td>&nbsp;</td>
             </tr>
         @endforeach
