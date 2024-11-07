@@ -17,7 +17,7 @@ use App\Models\JenisSimpanan;
 use App\Models\Kecamatan;
 use App\Models\Kelompok;
 use App\Models\MasterArusKas;
-use App\Models\PinjamanIndividu; 
+use App\Models\PinjamanIndividu;
 use App\Models\PinjamanKelompok;
 use App\Models\Rekening;
 use App\Models\RekeningOjk;
@@ -51,7 +51,7 @@ class PelaporanController extends Controller
             $rekening = Rekening::orderBy('kode_akun', 'ASC')->get();
             return view('pelaporan.partials.sub_laporan')->with(compact('file', 'rekening'));
         }
-        
+
         if ($file == 20) {
             $ojk = SubLaporan::withoutGlobalScopes()->orderBy('id')->get();
             return view('pelaporan.partials.sub_laporan')->with(compact('file', 'ojk'));
@@ -278,7 +278,7 @@ class PelaporanController extends Controller
 
     //ojk
 
-        private function CV(array $data)
+    private function CV(array $data)
     {
         $thn = $data['tahun'];
         $bln = $data['bulan'];
@@ -457,7 +457,7 @@ private function OJKP(array $data)
             $data['judul'] = 'Laporan Keuangan';
             $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         }
-        
+
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $data['jenis_pp_i'] = JenisProdukPinjaman::where(function ($query) use ($kec) {
             $query->where('lokasi', '0')
@@ -1505,6 +1505,37 @@ private function OJKP(array $data)
         }
     }
 
+    private function kelompok(array $data)
+    {
+        $thn = $data['tahun'];
+        $bln = $data['bulan'];
+        $hari = $data['hari'];
+
+        $tgl = $thn . '-' . $bln . '-' . $hari;
+        $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
+        $data['tgl'] = Tanggal::tahun($tgl);
+        if ($data['bulanan']) {
+            $data['sub_judul'] = 'Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+            $data['tgl'] = Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+        }
+
+        $data['desa'] = Desa::where('kd_kec', $data['kec']->kd_kec)->with([
+            'kelompok' => function ($query) {
+                $query->where('jenis_produk_pinjaman', '!=', '3');
+            },
+            'sebutan_desa'
+        ])->get();
+
+        $view = view('pelaporan.view.basis_data.kelompok', $data)->render();
+
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view)->setPaper('A4', 'landscape');
+            return $pdf->stream();
+        } else {
+            return $view;
+        }
+    }
+
     private function kelompok_aktif(array $data)
     {
         $thn = $data['tahun'];
@@ -2256,7 +2287,7 @@ private function OJKP(array $data)
             return $view;
         }
     }
-    
+
     private function kolek_individu(array $data)
     {
         $thn = $data['tahun'];
