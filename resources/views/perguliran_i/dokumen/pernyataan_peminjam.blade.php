@@ -91,7 +91,11 @@
         @endforeach
     @else
         <tr>
-            <td colspan="3" align="center">{{ $jaminan }}</td>
+            <td height="12" width="80">Nama barang</td>
+            <td width="10" align="center">:</td>
+            <td>
+                <b>{{ $jaminan }}</b>
+            </td>
         </tr>
                                         <tr>
                                             <td height="12" width="80">Nilai Jual</td>

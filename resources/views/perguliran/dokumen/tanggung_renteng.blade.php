@@ -27,15 +27,43 @@
             <th width="130">Nama Anggota</th>
             <th width="10">JK</th>
             <th>Alamat</th>
+            <th>Jaminan</th>
             <th width="50">Tanda Tangan</th>
         </tr>
         @foreach ($pinkel->pinjaman_anggota as $pa)
+        
+            @php
+                // Dekode JSON, jika gagal, jadikan string apa adanya.
+                $jaminan = json_decode($pa->jaminan, true) ?? $pa->jaminan;
+            @endphp
+
             <tr>
                 <td align="center">{{ $loop->iteration }}</td>
                 <td align="center">{{ $pa->anggota->nik }}</td>
                 <td>{{ $pa->anggota->namadepan }}</td>
                 <td align="center">{{ $pa->anggota->jk }}</td>
                 <td>{{ $pa->anggota->alamat }}</td>
+                <td>
+                    @if (is_array($jaminan))
+                        <table border="0">
+                        @foreach ($jaminan as $key => $value)
+                            <tr>
+                                <td>{{ ucwords(str_replace('_', ' ', $key)) }}</td>
+                                <td align="center">:</td>
+                                <td>
+                                    @if (is_numeric($value))
+                                        Rp {{ number_format($value, 0, ',', '.') }}
+                                    @else
+                                        {{ $value }}
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                        </table>
+                    @else
+                    {{ $jaminan }}
+                    @endif
+                </td>
                 <td>&nbsp;</td>
             </tr>
         @endforeach

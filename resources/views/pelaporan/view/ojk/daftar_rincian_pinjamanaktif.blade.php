@@ -332,8 +332,8 @@
             </tr>
             <tr>
                 <td class="style10 top" colspan="11"><b>Keterangan</b> : Data yang ditampilkan diatas
-                    merupakan Individu aktif
-                    pada tahun berjalan {{$tahun}}, untuk menampilkan data Individu aktif tahun lalu dapat
+                    merupakan Kelompok aktif
+                    pada tahun berjalan {{$tahun}}, untuk menampilkan data Kelompok aktif tahun lalu dapat
                     memilih mode tahun lalu
                     {{ $tahun - 1 }}.</td>
             </tr>
