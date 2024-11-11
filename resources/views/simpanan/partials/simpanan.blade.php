@@ -218,7 +218,7 @@
         <div class="col-md-3">
             <div class="input-group input-group-static my-3">
                 <label for="bunga">Bunga</label>
-                <input autocomplete="off" type="number" name="bunga" id="bunga" class="form-control">
+                <input autocomplete="off" type="number" name="bunga" id="bunga" class="form-control" value="{{$kec->def_bunga}}">
                 <small class="text-danger" id="msg_bunga"></small>
             </div>
         </div>
@@ -226,7 +226,7 @@
             <div class="input-group input-group-static my-3">
                 <label for="pajak_bunga">Pajak Bunga</label>
                 <input autocomplete="off" type="number" name="pajak_bunga" id="pajak_bunga" class="form-control"
-                    value="">
+                    value="{{$kec->def_pajak_bunga}}">
                 <small class="text-danger" id="msg_pajak_bunga"></small>
             </div>
         </div>
@@ -234,7 +234,7 @@
             <div class="input-group input-group-static my-3">
                 <label for="admin">Admin</label>
                 <input autocomplete="off" type="text" name="admin" id="admin" class="form-control"
-                    value="">
+                    value="{{$kec->def_admin}}">
                 <small class="text-danger" id="msg_admin"></small>
             </div>
         </div>

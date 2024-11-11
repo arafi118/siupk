@@ -117,7 +117,7 @@ class SimpananController extends Controller
     public function create()
     {
         $id_angg = request()->get('id_angg');
-        $title = 'Registrasi Pinjaman Individu';
+        $title = 'Registrasi Simpanan Individu';
         return view('simpanan.create')->with(compact('title', 'id_angg'));
     }
 

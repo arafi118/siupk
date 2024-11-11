@@ -10,7 +10,7 @@
 
 @section('script')
     <script>
-        $.get('/daftar_individu?id_angg={{ $id_angg }}', async (result) => {
+        $.get('/daftar_individu_s?id_angg={{ $id_angg }}', async (result) => {
             await $('#SelectIndividu').html(result)
 
             var id_angg = $('#individu').val()

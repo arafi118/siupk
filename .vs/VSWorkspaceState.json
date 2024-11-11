@@ -6,11 +6,8 @@
     "\\app\\Models",
     "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\pelaporan",
-    "\\resources\\views\\pelaporan\\view",
-    "\\resources\\views\\pelaporan\\view\\ojk",
-    "\\resources\\views\\pelaporan\\view\\perkembangan_piutang"
+    "\\resources\\views\\perguliran",
+    "\\resources\\views\\perguliran\\dokumen"
   ],
-  "SelectedNode": "\\resources\\views\\pelaporan\\view\\ojk\\neraca_ojk.blade.php",
   "PreviewInSolutionExplorer": false
 }

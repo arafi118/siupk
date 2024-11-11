@@ -202,6 +202,7 @@ Route::get('/register_proposal_i', [PinjamanIndividuController::class, 'create']
 Route::get('/register_proposal_i/{nia}', [PinjamanIndividuController::class, 'register'])->middleware('auth');
 Route::get('/register_proposal_i/jaminan/{id}', [PinjamanIndividuController::class, 'Jaminan'])->middleware('auth');
 Route::get('/daftar_individu', [PinjamanIndividuController::class, 'DaftarAnggota'])->middleware('auth');
+Route::get('/daftar_individu_s', [PinjamanIndividuController::class, 'DaftarAnggota'])->middleware('auth');
 
 Route::get('/detail_i/{perguliran_i}', [PinjamanIndividuController::class, 'detail'])->middleware('auth');
 Route::get('/perguliran_i/proposal', [PinjamanIndividuController::class, 'proposal'])->middleware('auth');
