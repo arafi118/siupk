@@ -44,10 +44,7 @@ class DashboardController extends Controller
             ['tgl_cair', '<=', $tgl]
         ])->count();
 
-      
-
         $data['pinjaman_anggota'] = $pinj_anggota;
-
         $tb = 'pinjaman_anggota_' . Session::get('lokasi');
         $pinj = PinjamanAnggota::select([
             DB::raw("(SELECT count(*) FROM $tb WHERE status='P') as p"),
@@ -421,7 +418,7 @@ class DashboardController extends Controller
                     $table .= '<td>' . Tanggal::tglIndo($pinj_anggota->tgl_cair) . '</td>';
                     $table .= '<td align="right">' . number_format($nunggak_pokok) . '</td>';
                     $table .= '<td align="right">' . number_format($nunggak_jasa) . '</td>';
-                    $table .= '<td align="right">' . number_format(total_pokok_jasa) . '</td>';
+                    $table .= '<td align="right">' . number_format($total_pokok_jasa) . '</td>';
                     $table .= '<td align="center">' . $pinj_anggota->catatan_verifikasi. '</td>';
                     $table .= '</tr>';
                 }
