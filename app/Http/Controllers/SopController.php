@@ -162,13 +162,11 @@ class SopController extends Controller
         }
 
         $data['pembulatan'] = "$data[sistem]$data[pembulatan]";
-
         $kecamatan = Kecamatan::where('id', $kec->id)->update([
             'def_jasa' => $data['default_jasa'],
             'def_jangka' => $data['default_jangka'],
             'pembulatan' => $data['pembulatan'],
         ]);
-
         return response()->json([
             'success' => true,
             'msg' => 'Sistem Pinjaman Berhasil Diperbarui.',
@@ -201,7 +199,6 @@ class SopController extends Controller
             'usia_mak' => $data['usia_maksimal'],
             'besar_premi' => $data['presentase_premi'],
         ]);
-
         return response()->json([
             'success' => true,
             'msg' => 'Pengaturan Asuransi Berhasil Diperbarui.',
@@ -213,7 +210,6 @@ class SopController extends Controller
         $data = $request->only([
             'spk'
         ]);
-
         $validate = Validator::make($data, [
             'spk' => 'required'
         ]);
