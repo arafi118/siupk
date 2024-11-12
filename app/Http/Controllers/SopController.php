@@ -25,7 +25,6 @@ class SopController extends Controller
 
         $kec = Kecamatan::where('id', Session::get('lokasi'))->with('ttd')->first();
         $token = "UPK-" . str_pad($kec->id, 4, '0', STR_PAD_LEFT);
-
         $title = "Personalisasi SOP";
         return view('sop.index')->with(compact('title', 'kec', 'api', 'token'));
     }
@@ -38,7 +37,6 @@ class SopController extends Controller
             'akun2.akun3',
             'akun2.akun3.rek'
         ])->get();
-
         return view('sop.coa')->with(compact('title', 'akun1'));
     }
 
