@@ -410,6 +410,18 @@ class PinjamanAnggotaController extends Controller
             'id_pinkel' => $pinjaman->id_pinkel
         ]);
     }
+    public function updateCatatanVerifikasi(Request $request, $id)
+{
+    $pinjamanAnggota = PinjamanAnggota::find($id);
+    if ($pinjamanAnggota) {
+        $pinjamanAnggota->catatan_verifikasi = $request->input('catatan_verifikasi');
+        $pinjamanAnggota->save();
+
+        return response()->json(['success' => true]);
+    }
+
+    return response()->json(['success' => false], 404);
+}
 
     public function cariAnggota()
     {

@@ -39,7 +39,7 @@
                 <input autocomplete="off" type="number" name="bunga" id="bunga" class="form-control" value="{{$kec->def_bunga}}">
                 <small class="text-danger" id="msg_bunga"></small>
             </div>
-        </div>
+        </div> 
         <div class="col-md-3">
             <div class="input-group input-group-static my-3">
                 <label for="pajak_bunga">Pajak Bunga</label>

@@ -163,6 +163,8 @@ Route::resource('/database/penduduk', AnggotaController::class)->middleware('aut
 Route::get('/register_proposal', [PinjamanKelompokController::class, 'create'])->middleware('auth');
 Route::get('/register_proposal/{id_kel}', [PinjamanKelompokController::class, 'register'])->middleware('auth');
 Route::get('/daftar_kelompok', [PinjamanKelompokController::class, 'DaftarKelompok'])->middleware('auth');
+Route::post('/update-catatan-verifikasi/{id}', [PinjamanAnggotaController::class, 'updateCatatanVerifikasi']);
+
 
 Route::get('/detail/{perguliran}', [PinjamanKelompokController::class, 'detail'])->middleware('auth');
 Route::get('/perguliran/proposal', [PinjamanKelompokController::class, 'proposal'])->middleware('auth');

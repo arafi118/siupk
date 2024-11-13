@@ -3,11 +3,12 @@
     "",
     "\\app",
     "\\app\\Http",
-    "\\app\\Models",
+    "\\app\\Http\\Controllers",
     "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\perguliran",
-    "\\resources\\views\\perguliran\\dokumen"
+    "\\resources\\views\\perguliran_i",
+    "\\resources\\views\\perguliran_i\\dokumen"
   ],
+  "SelectedNode": "\\resources\\views\\perguliran_i\\dokumen\\rekomendasi_kredit.blade.php",
   "PreviewInSolutionExplorer": false
 }

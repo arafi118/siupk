@@ -115,9 +115,37 @@
                                     <div class="input-group input-group-static">
                                         <input type="text" class="form-control"
                                             name="catatan[{{ $pinjaman_anggota->id }}]"
-                                            value="{{ $pinjaman_anggota->catatan_verifikasi }}">
+                                            value="{{ $pinjaman_anggota->catatan_verifikasi }}"
+                                            onchange="updateCatatanVerifikasi({{ $pinjaman_anggota->id }}, this.value)">
                                     </div>
+
                                 </td>
+
+                                <script>
+        function updateCatatanVerifikasi(id, value) {
+            fetch(`/update-catatan-verifikasi/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({ catatan_verifikasi: value })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('Catatan verifikasi updated successfully');
+                } else {
+                    console.error('Failed to update catatan verifikasi');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+        </script>
+
+
                                 <td>
                                     <div class="btn-group">
                                         <button type="button" id="{{ $pinjaman_anggota->id }}"
