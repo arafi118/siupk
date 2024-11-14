@@ -93,7 +93,7 @@
                                 </a>
                             </div>
                             <div class="mb-3">&nbsp;
-                                <a role="tab" class="btn btn-white" style="width: 280px;" id="logo" data-bs-toggle="tab"
+                                <a role="tab" class="btn btn-white" style="width: 280px;" data-bs-toggle="tab"
                                     href="#tab-content-6">
                                     <div class="left-align">
                                         <i class="fa-solid fa-panorama"></i>&nbsp;&nbsp;<span>Logo</span>
@@ -101,8 +101,8 @@
                                 </a>
                             </div>
                             <div class="mb-3">&nbsp;
-                                <a role="tab" class="btn btn-white" style="width: 280px;" id="whatsapp"
-                                    data-bs-toggle="tab" href="#tab-content-7">
+                                <a role="tab" class="btn btn-white" style="width: 280px;" data-bs-toggle="tab"
+                                    href="#tab-content-7">
                                     <div class="left-align">
                                         <i class="fa-solid fa-camera-rotate"></i>&nbsp;&nbsp;<span>Whatsapp</span>
                                     </div>
