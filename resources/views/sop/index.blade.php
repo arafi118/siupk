@@ -85,7 +85,7 @@
                                 </a>
                             </div>
                             <div class="mb-3">&nbsp;
-                                <a role="tab" class="btn btn-white" style="width: 280px;" id="spk" data-bs-toggle="tab"
+                                <a role="tab" class="btn btn-white" style="width: 280px;" data-bs-toggle="tab"
                                     href="#tab-content-5">
                                     <div class="left-align">
                                         <i class="fa-solid fa-laptop-file"></i>&nbsp;&nbsp;<span>Redaksi SPK</span>
