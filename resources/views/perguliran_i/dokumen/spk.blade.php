@@ -169,8 +169,8 @@ $redaksi_spk = str_replace('<ul>', '', str_replace('</ul>', '', $redaksi_spk));
             sah.
         </li>
         {{-- @if ($redaksi_spk)
-            {!! json_decode($redaksi_spk, true) !!}
-            @endif --}}
+        {!! json_decode($redaksi_spk, true) !!}
+        @endif --}}
         <li>
             {{ str_replace('"', '', stripslashes(strip_tags($kec->redaksi_spk))) }}
         </li>
@@ -202,13 +202,9 @@ $redaksi_spk = str_replace('<ul>', '', str_replace('</ul>', '', $redaksi_spk));
         {{ \Carbon\Carbon::parse($pinkel->anggota->tgl_cair)->translatedFormat('d F Y') }} dan
         sampai target pelunasan, sebagaimana jadwal angsuran terlampir.
     </div>
-    <div>
-        &nbsp;
-    </div>
-    <div>
-        &nbsp;
-    </div>
-</div> <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
+<div class="break"></div>
+
 <div style="text-align: center;">
     <b class="centered-text"> PASAL 4 </b>
     <h3 class="fa fa-align-center" aria-hidden="true" style="font-size: 10px;"> Agunan </i> </h3>
