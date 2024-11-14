@@ -12,8 +12,12 @@ if (count($wt_cair) == 2) {
 $waktu = $wt_cair[0];
 $tempat = $wt_cair[1] ?? ' . . . . . . . ';
 }
-$redaksi_spk = str_replace(' <ol> ', '', str_replace(' </ol> ', '', $kec->redaksi_spk));
-$redaksi_spk = str_replace(' <ul> ', '', str_replace(' </ul> ', '', $redaksi_spk));
+
+$redaksi_spk = '';
+if ($kec->redaksi_spk) {
+$redaksi_spk = str_replace('<ol>', '', str_replace('</ol>', '', $kec->redaksi_spk));
+$redaksi_spk = str_replace('<ul>', '', str_replace('</ul>', '', $redaksi_spk));
+}
 @endphp
 @extends('perguliran_i.dokumen.layout.base')
 @section('content')
@@ -27,6 +31,7 @@ $redaksi_spk = str_replace(' <ul> ', '', str_replace(' </ul> ', '', $redaksi_spk
 
 </style>
 <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 12px;">
+    <br>
     <tr>
         <td colspan="3" align="center">
             <div style="font-size: 14px;">
@@ -163,6 +168,9 @@ $redaksi_spk = str_replace(' <ul> ', '', str_replace(' </ul> ', '', $redaksi_spk
             yang
             sah.
         </li>
+        {{-- @if ($redaksi_spk)
+            {!! json_decode($redaksi_spk, true) !!}
+            @endif --}}
         <li>
             {{ str_replace('"', '', stripslashes(strip_tags($kec->redaksi_spk))) }}
         </li>
@@ -194,24 +202,7 @@ $redaksi_spk = str_replace(' <ul> ', '', str_replace(' </ul> ', '', $redaksi_spk
         {{ \Carbon\Carbon::parse($pinkel->anggota->tgl_cair)->translatedFormat('d F Y') }} dan
         sampai target pelunasan, sebagaimana jadwal angsuran terlampir.
     </div>
-</div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br><br>
-<br>
-<br>
-<br>
-<br>
-
-<br>
-<br>
+</div> <br><br><br><br><br><br><br><br><br><br><br>
 <div style="text-align: center;">
     <b class="centered-text"> PASAL 4 </b>
     <h3 class="fa fa-align-center" aria-hidden="true" style="font-size: 10px;"> Agunan </i> </h3>
@@ -246,7 +237,6 @@ $redaksi_spk = str_replace(' <ul> ', '', str_replace(' </ul> ', '', $redaksi_spk
         </ol>
     </div>
 </div>
-<br> <br> <br>
 <div style="text-align: center;">
     <b class="centered-text"> PASAL 5 </b>
     <h3 class="fa fa-align-center" aria-hidden="true" style="font-size: 10px;"> Pengalihan Kuasa Khusus atas Agunan </i>
