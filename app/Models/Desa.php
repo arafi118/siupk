@@ -42,4 +42,9 @@ class Desa extends Model
     {
         return $this->hasOne(Saldo::class, 'kode_akun', 'kode_desa');
     }
+    public function u()
+    {
+    return $this->belongsTo(Usaha::class, 'usaha', 'id');
+    }
+
 }
