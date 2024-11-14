@@ -6,9 +6,9 @@
     "\\app\\Http\\Controllers",
     "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\perguliran_i",
-    "\\resources\\views\\perguliran_i\\dokumen"
+    "\\resources\\views\\perguliran",
+    "\\resources\\views\\perguliran\\dokumen"
   ],
-  "SelectedNode": "\\resources\\views\\perguliran_i\\dokumen\\rekomendasi_kredit.blade.php",
+  "SelectedNode": "\\resources\\views\\perguliran\\dokumen\\anggota.blade.php",
   "PreviewInSolutionExplorer": false
 }
