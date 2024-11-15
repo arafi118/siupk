@@ -71,7 +71,7 @@ $redaksi_spk = str_replace('<ul>', '', str_replace('</ul>', '', $redaksi_spk));
         <td width="5"> &nbsp; </td>
         <td> NIK </td>
         <td align="center"> : </td>
-        <td> {{ $dir->nik }} </td>
+        <td> {{ $pinkel->anggota->nik }} </td>
     </tr>
     <tr>
         <td width="5"> &nbsp; </td>
