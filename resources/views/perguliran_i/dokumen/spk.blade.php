@@ -286,6 +286,30 @@ $redaksi_spk = str_replace('<ul>', '', str_replace('</ul>', '', $redaksi_spk));
         bagian yang tidak terpisahkan dari perjanjian ini.
     </div>
 </div>
+<div style="text-align: center;">
+    <b class="centered-text"> PASAL 8 </b>
+    <h3 class="fa fa-align-center" aria-hidden="true" style="font-size: 10px;"> Penyelesaian
+        Perselisihan
+        </i> </h3>
+    <div class="centered-text">
+        Perjanjian Hutang Piutang uang ini dibuat rangkap 2 (dua) di atas kertas bermaterai
+        cukup untuk masing-masing pihak yang mempunyai kekuatan hukum yang sama dan ditanda
+        tangani oleh kedua belah pihak dalam keadaan sehat jasmani dan rohani, serta tanpa
+        unsur paksaan dari pihak manapun.
+    </div>
+</div>
+<div style="text-align: center;">
+    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;" class="p">
+        <tr>
+            <td>
+                {!! $ttd !!}
+            </td>
+        </tr>
+    </table>
+    </td>
+    </tr>
+    </table>
+</div>
 <div style="text-align: center;" style="font-size: 10px;">
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 10px;" class="p0">
         <tr>
