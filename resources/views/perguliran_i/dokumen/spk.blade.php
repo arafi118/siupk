@@ -310,7 +310,7 @@ $redaksi_spk = str_replace('<ul>', '', str_replace('</ul>', '', $redaksi_spk));
     </tr>
     </table>
 </div>
-<div style="text-align: center;" style="font-size: 10px;">
+{{-- <div style="text-align: center;" style="font-size: 10px;">
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 10px;" class="p0">
         <tr>
             <td style="padding: 0px !important;">
@@ -333,7 +333,7 @@ $redaksi_spk = str_replace('<ul>', '', str_replace('</ul>', '', $redaksi_spk));
                         </td>
                     </tr>
                 </table> <br>
-                {{-- <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
+                <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
                         <tr>
                             <td width="10" align="center"> &nbsp; </td>
                             <td width="70" align="center"> Pihak Pertama </td>
@@ -343,42 +343,42 @@ $redaksi_spk = str_replace('<ul>', '', str_replace('</ul>', '', $redaksi_spk));
                         <tr>
                             <td width="10" align="center"> &nbsp; </td>
                             <td width="70" align="center"> {{ $dir->namadepan }} {{ $dir->namabelakang }} <br>
-                Kepala
-                UPK
-            </td>
-            <td width="50" align="center"> &nbsp; </td>
-            <td width="60" align="center"> {{ $pinkel->anggota->namadepan }} <br> Peminjam
-            </td>
-            <td width="50" align="center"> {{ $pinkel->anggota->penjamin }} <br> Penjamin </td>
-        </tr> <br>
-        <tr>
-            <td width="10" align="center"> &nbsp; </td>
-            <td width="70" align="center"> &nbsp; </td>
-            <td width="60" align="center"> Mengetahui
-                <br>
-                {{ $pinkel-> anggota-> d-> sebutan_desa-> sebutan_kades }}&nbsp;{{ $pinkel-> anggota-> d-> nama_desa }}
-            </td>
-            <td width="50" align="center"> &nbsp; </td>
-            <td width="50" align="center"> &nbsp; </td>
-        </tr> <br> <br> <br> <br> <br>
-        <tr>
-            <td width="10" align="center"> &nbsp; </td>
-            <td width="70" align="center"> &nbsp; </td>
-            <td width="60" align="center"> {{ $pinkel-> anggota-> d-> kades }}
-            </td>
-            <td width="50" align="center"> &nbsp; </td>
-            <td width="50" align="center"> &nbsp; </td>
-        </tr>
-    </table> --}}
-    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;" class="p">
-        <tr>
-            <td>
-                {!! $ttd !!}
-            </td>
-        </tr>
-    </table>
+Kepala
+UPK
+</td>
+<td width="50" align="center"> &nbsp; </td>
+<td width="60" align="center"> {{ $pinkel->anggota->namadepan }} <br> Peminjam
+</td>
+<td width="50" align="center"> {{ $pinkel->anggota->penjamin }} <br> Penjamin </td>
+</tr> <br>
+<tr>
+    <td width="10" align="center"> &nbsp; </td>
+    <td width="70" align="center"> &nbsp; </td>
+    <td width="60" align="center"> Mengetahui
+        <br>
+        {{ $pinkel-> anggota-> d-> sebutan_desa-> sebutan_kades }}&nbsp;{{ $pinkel-> anggota-> d-> nama_desa }}
     </td>
+    <td width="50" align="center"> &nbsp; </td>
+    <td width="50" align="center"> &nbsp; </td>
+</tr> <br> <br> <br> <br> <br>
+<tr>
+    <td width="10" align="center"> &nbsp; </td>
+    <td width="70" align="center"> &nbsp; </td>
+    <td width="60" align="center"> {{ $pinkel-> anggota-> d-> kades }}
+    </td>
+    <td width="50" align="center"> &nbsp; </td>
+    <td width="50" align="center"> &nbsp; </td>
+</tr>
+</table>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;" class="p">
+    <tr>
+        <td>
+            {!! $ttd !!}
+        </td>
     </tr>
-    </table>
-</div>
+</table>
+</td>
+</tr>
+</table>
+</div> --}}
 @endsection
