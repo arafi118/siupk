@@ -286,7 +286,6 @@ $redaksi_spk = str_replace('<ul>', '', str_replace('</ul>', '', $redaksi_spk));
         bagian yang tidak terpisahkan dari perjanjian ini.
     </div>
 </div>
-<div class="break"></div>
 <div style="text-align: center;" style="font-size: 10px;">
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 10px;" class="p0">
         <tr>
