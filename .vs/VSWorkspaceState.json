@@ -1,14 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\app",
-    "\\app\\Http",
-    "\\app\\Http\\Controllers",
     "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\perguliran",
-    "\\resources\\views\\perguliran\\dokumen"
+    "\\resources\\views\\simpanan",
+    "\\resources\\views\\simpanan\\partials"
   ],
-  "SelectedNode": "\\resources\\views\\perguliran\\dokumen\\anggota.blade.php",
+  "SelectedNode": "\\resources\\views\\simpanan\\partials\\detail-transaksi.blade.php",
   "PreviewInSolutionExplorer": false
 }
