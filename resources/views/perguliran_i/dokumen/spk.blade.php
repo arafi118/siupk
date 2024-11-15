@@ -297,8 +297,6 @@ $redaksi_spk = str_replace('<ul>', '', str_replace('</ul>', '', $redaksi_spk));
         tangani oleh kedua belah pihak dalam keadaan sehat jasmani dan rohani, serta tanpa
         unsur paksaan dari pihak manapun.
     </div>
-</div>
-<div style="text-align: center;">
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;" class="p">
         <tr>
             <td>
