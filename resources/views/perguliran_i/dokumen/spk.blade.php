@@ -304,9 +304,6 @@ $redaksi_spk = str_replace('<ul>', '', str_replace('</ul>', '', $redaksi_spk));
             </td>
         </tr>
     </table>
-    </td>
-    </tr>
-    </table>
 </div>
 {{-- <div style="text-align: center;" style="font-size: 10px;">
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 10px;" class="p0">
