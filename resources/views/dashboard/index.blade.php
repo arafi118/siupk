@@ -565,8 +565,11 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-info btn-sm me-2 btn-pelaporan">
+                    <button type="button" class="btn btn-info btn-sm me-2 btn-pelaporan" data-print="pdf">
                         Print
+                    </button>
+                    <button type="button" class="btn btn-success btn-sm me-2 btn-pelaporan" data-print="excel">
+                        Excel
                     </button>
                     <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">
                         Tutup
@@ -841,7 +844,11 @@
         })
 
         $(document).on('click', '.btn-pelaporan', function(e) {
+            var id = $(this).attr('data-print')
+            $('#FormLaporanDashboard #type').val(id)
+
             $('#FormLaporanDashboard').submit()
+            $('#FormLaporanDashboard #type').val('pdf')
         })
 
         function setLaporan(laporan, subLaporan = null) {
