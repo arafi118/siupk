@@ -329,33 +329,33 @@ class PelaporanController extends Controller
         }
     }
 
-private function OJKP(array $data)
-{
-    $data['keuangan'] = new Keuangan;
-    $thn = $data['tahun'];
-    $bln = $data['bulan'];
-    $hari = ($data['hari']);
-    if ($bln == '1' && $hari == '1') {
-        return $this->neraca_tutup_buku($data);
+    private function OJKP(array $data)
+    {
+        $data['keuangan'] = new Keuangan;
+        $thn = $data['tahun'];
+        $bln = $data['bulan'];
+        $hari = ($data['hari']);
+        if ($bln == '1' && $hari == '1') {
+            return $this->neraca_tutup_buku($data);
+        }
+        $tgl = $thn . '-' . $bln . '-' . $hari;
+        $data['sub_judul'] = 'Per ' . date('t', strtotime($tgl)) . ' ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+        $data['tgl'] = Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+        $data['debit'] = 0;
+        $data['kredit'] = 0;
+
+        $data['rekening_ojk'] = RekeningOjk::all();
+
+        $data['laporan'] = 'Neraca';
+        $view = view('pelaporan.view.ojk.neraca_ojk', $data)->render();
+
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view);
+            return $pdf->stream();
+        } else {
+            return $view;
+        }
     }
-    $tgl = $thn . '-' . $bln . '-' . $hari;
-    $data['sub_judul'] = 'Per ' . date('t', strtotime($tgl)) . ' ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
-    $data['tgl'] = Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
-    $data['debit'] = 0;
-    $data['kredit'] = 0;
-
-    $data['rekening_ojk'] = RekeningOjk::all();
-
-    $data['laporan'] = 'Neraca';
-    $view = view('pelaporan.view.ojk.neraca_ojk', $data)->render();
-
-    if ($data['type'] == 'pdf') {
-        $pdf = PDF::loadHTML($view);
-        return $pdf->stream();
-    } else {
-        return $view;
-    }
-}
 
 
     private function LRL(array $data)
@@ -630,7 +630,7 @@ private function OJKP(array $data)
             'pinjaman_kelompok.angsuran_pokok',
             'pinjaman_kelompok.angsuran_jasa'
         ])->get();
-        
+
         $data['jenis_pp_i'] = JenisProdukPinjaman::where('lokasi', '0')->with([
             'pinjaman_individu' => function ($query) use ($data) {
                 $tb_pinj_i = 'pinjaman_anggota_' . $data['kec']->id;
@@ -1643,7 +1643,7 @@ private function OJKP(array $data)
         }
     }
 
-    private function individu_aktif(array $data)
+    private function anggota(array $data)
     {
         $thn = $data['tahun'];
         $bln = $data['bulan'];
@@ -1680,7 +1680,7 @@ private function OJKP(array $data)
                     ->withSum(['real_i' => function ($query) use ($data) {
                         $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
                     }], 'realisasi_jasa')
-                    ->where($tb_pinj_i . '.sistem_angsuran', '!=', '12')->where(function ($query) use ($data) {
+                    ->where($tb_pinj_i . '.jenis_pinjaman', 'I')->where($tb_pinj_i . '.sistem_angsuran', '!=', '12')->where(function ($query) use ($data) {
                         $query->where([
                             [$data['tb_pinj_i'] . '.status', 'A'],
                             [$data['tb_pinj_i'] . '.jenis_pinjaman', 'I'],
