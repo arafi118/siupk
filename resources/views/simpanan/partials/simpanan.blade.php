@@ -80,12 +80,8 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="input-group input-group-static my-3">
-                <label for="hubungan">Hubungan</label>
-                <input autocomplete="off" type="text" name="hubungan" id="hubungan" class="form-control"
-                    value="">
-                <small class="text-danger" id="msg_hubungan"></small>
-            </div>
+                <input autocomplete="off" type="hidden" name="hubungan" id="hubungan" class="form-control"
+                    value="1">
         </div>
     </div>
 @elseif ($id == '2')
@@ -171,12 +167,8 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="input-group input-group-static my-3">
-                <label for="hubungan">Hubungan</label>
-                <input autocomplete="off" type="text" name="hubungan" id="hubungan" class="form-control"
-                    value="">
-                <small class="text-danger" id="msg_hubungan"></small>
-            </div>
+                <input autocomplete="off" type="hidden" name="hubungan" id="hubungan" class="form-control"
+                    value="1">
         </div>
     </div>
 @elseif ($id == '3')
@@ -262,12 +254,8 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="input-group input-group-static my-3">
-                <label for="hubungan">Hubungan</label>
-                <input autocomplete="off" type="text" name="hubungan" id="hubungan" class="form-control"
-                    value="">
-                <small class="text-danger" id="msg_hubungan"></small>
-            </div>
+                <input autocomplete="off" type="hidden" name="hubungan" id="hubungan" class="form-control"
+                    value="1">
         </div>
     </div>
 
@@ -355,12 +343,8 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="input-group input-group-static my-3">
-                <label for="hubungan">Hubungan</label>
-                <input autocomplete="off" type="text" name="hubungan" id="hubungan" class="form-control"
-                    value="">
-                <small class="text-danger" id="msg_hubungan"></small>
-            </div>
+                <input autocomplete="off" type="hidden" name="hubungan" id="hubungan" class="form-control"
+                    value="1">
         </div>
     </div>
 @else
