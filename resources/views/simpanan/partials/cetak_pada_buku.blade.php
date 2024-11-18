@@ -2,11 +2,12 @@
 <html>
 <head>
     <style>
-        .style6 {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 16px; }
-        .style9 {font-family: Arial, Helvetica, sans-serif; font-size: 10px; }
-        .style10 {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; }
-        .style26 {font-family: Verdana, Arial, Helvetica, sans-serif}
-        .style27 {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; font-weight: bold; }
+    .style6 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 16px; color: #000000; }
+.style9 { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color: #000000; }
+.style10 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; color: #000000; }
+.style26 { font-family: Verdana, Arial, Helvetica, sans-serif; color: #000000; }
+.style27 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; font-weight: bold; color: #000000; }
+
         .top {border-top: 1px solid #000000; }
         .bottom {border-bottom: 1px solid #000000; }
         .left {border-left: 1px solid #000000; }
