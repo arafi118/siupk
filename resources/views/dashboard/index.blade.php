@@ -140,7 +140,12 @@
                     <div class="card-footer pt-0 pb-2 p-3 d-flex align-items-center justify-content-between">
                         <div class="w-60">
                             <div class="text-sm">
-                                Total Angsuran : <b>Rp. <span id="total_angsur"></span></b>
+                                Total Ang.Pokok: <b>Rp. <span id="total_angsur_pokok"></span></b>
+                            </div>
+                        </div>
+                        <div class="w-60">
+                            <div class="text-sm">
+                                Total Ang.Jasa: <b>Rp. <span id="total_angsur_jasa"></span></b>
                             </div>
                         </div>
                         {{-- <div class="w-40 d-flex justify-content-end">
@@ -1006,14 +1011,24 @@ $surplus = $saldo['surplus'];
                     '#344767',
                     '#7b809a',
                     '#f44335',
+                    '#1a73e8',
+                    '#4caf50',
+                    '#344767',
+                    '#7b809a',
+                    '#f44335',
                 ],
                 borderWidth: 1,
                 data: [
-                    "{{ $umum }}",
-                    "{{ $kendaraan }}",
-                    "{{ $elektronik }}",
-                    "{{ $prt }}",
-                    "{{ $lain_lain }}",
+                    "{{ $umum_pokok }}",
+                    "{{ $kendaraan_pokok }}",
+                    "{{ $elektronik_pokok }}",
+                    "{{ $prt_pokok }}",
+                    "{{ $lain_lain_pokok }}",
+                    "{{ $umum_jasa }}",
+                    "{{ $kendaraan_jasa }}",
+                    "{{ $elektronik_jasa }}",
+                    "{{ $prt_jasa }}",
+                    "{{ $lain_lain_jasa }}",
                 ],
                 fill: false
             }]
@@ -1037,10 +1052,15 @@ $surplus = $saldo['surplus'];
         }
     });
 
-    var total_angsur =
-        "{{ $umum + $kendaraan + $elektronik + $prt + $lain_lain }}"
+    var total_angsur_pokok =
+        "{{ $umum_pokok + $kendaraan_pokok + $elektronik_pokok + $prt_pokok + $lain_lain_pokok }}"
 
-    $('#total_angsur').html(formatter.format(total_angsur))
+    $('#total_angsur_pokok').html(formatter.format(total_angsur_pokok))
+
+    var total_angsur_jasa =
+        "{{ $umum_jasa + $kendaraan_jasa + $elektronik_jasa + $prt_jasa + $lain_lain_jasa }}"
+
+    $('#total_angsur_jasa').html(formatter.format(total_angsur_jasa))
 
     let childWindow, loading;
     $(document).on('click', '#simpanSaldo', function (e) {

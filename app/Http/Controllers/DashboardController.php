@@ -63,24 +63,39 @@ class DashboardController extends Controller
 
         $tb = 'transaksi_' . Session::get('lokasi');
         $trx = Transaksi::select([
-            DB::raw("(SELECT SUM(jumlah) as j FROM $tb WHERE rekening_debit LIKE '1.1.01.%' AND rekening_kredit='1.1.03.01' AND tgl_transaksi='$tgl') as umum"),
-            DB::raw("(SELECT SUM(jumlah) as j FROM $tb WHERE rekening_debit LIKE '1.1.01.%' AND rekening_kredit='1.1.03.02' AND tgl_transaksi='$tgl') as kendaraan"),
-            DB::raw("(SELECT SUM(jumlah) as j FROM $tb WHERE rekening_debit LIKE '1.1.01.%' AND rekening_kredit='1.1.03.03' AND tgl_transaksi='$tgl') as elektronik"),
-            DB::raw("(SELECT SUM(jumlah) as j FROM $tb WHERE rekening_debit LIKE '1.1.01.%' AND rekening_kredit='1.1.03.04' AND tgl_transaksi='$tgl') as prt"),
-            DB::raw("(SELECT SUM(jumlah) as j FROM $tb WHERE rekening_debit LIKE '1.1.01.%' AND rekening_kredit='1.1.03.05' AND tgl_transaksi='$tgl') as lain_lain"),
+            DB::raw("(SELECT SUM(jumlah) as j FROM $tb WHERE rekening_debit LIKE '1.1.01.%' AND rekening_kredit='1.1.03.01' AND tgl_transaksi='$tgl') as umum_pokok"),
+            DB::raw("(SELECT SUM(jumlah) as j FROM $tb WHERE rekening_debit LIKE '1.1.01.%' AND rekening_kredit='1.1.03.02' AND tgl_transaksi='$tgl') as kendaraan_pokok"),
+            DB::raw("(SELECT SUM(jumlah) as j FROM $tb WHERE rekening_debit LIKE '1.1.01.%' AND rekening_kredit='1.1.03.03' AND tgl_transaksi='$tgl') as elektronik_pokok"),
+            DB::raw("(SELECT SUM(jumlah) as j FROM $tb WHERE rekening_debit LIKE '1.1.01.%' AND rekening_kredit='1.1.03.04' AND tgl_transaksi='$tgl') as prt_pokok"),
+            DB::raw("(SELECT SUM(jumlah) as j FROM $tb WHERE rekening_debit LIKE '1.1.01.%' AND rekening_kredit='1.1.03.05' AND tgl_transaksi='$tgl') as lain_lain_pokok"),
+            DB::raw("(SELECT SUM(jumlah) as j FROM $tb WHERE rekening_debit LIKE '1.1.01.%' AND rekening_kredit='4.1.01.01' AND tgl_transaksi='$tgl') as umum_jasa"),
+            DB::raw("(SELECT SUM(jumlah) as j FROM $tb WHERE rekening_debit LIKE '1.1.01.%' AND rekening_kredit='4.1.01.02' AND tgl_transaksi='$tgl') as kendaraan_jasa"),
+            DB::raw("(SELECT SUM(jumlah) as j FROM $tb WHERE rekening_debit LIKE '1.1.01.%' AND rekening_kredit='4.1.01.03' AND tgl_transaksi='$tgl') as elektronik_jasa"),
+            DB::raw("(SELECT SUM(jumlah) as j FROM $tb WHERE rekening_debit LIKE '1.1.01.%' AND rekening_kredit='4.1.01.04' AND tgl_transaksi='$tgl') as prt_jasa"),
+            DB::raw("(SELECT SUM(jumlah) as j FROM $tb WHERE rekening_debit LIKE '1.1.01.%' AND rekening_kredit='4.1.01.05' AND tgl_transaksi='$tgl') as lain_lain_jasa"),
         ])->first();
 
-        $data['umum'] = 0;
-        $data['kendaraan'] = 0;
-        $data['elektronik'] = 0;
-        $data['prt'] = 0;
-        $data['lain_lain'] = 0;
+        $data['umum_pokok'] = 0;
+        $data['kendaraan_pokok'] = 0;
+        $data['elektronik_pokok'] = 0;
+        $data['prt_pokok'] = 0;
+        $data['lain_lain_pokok'] = 0;
+        $data['umum_jasa'] = 0;
+        $data['kendaraan_jasa'] = 0;
+        $data['elektronik_jasa'] = 0;
+        $data['prt_jasa'] = 0;
+        $data['lain_lain_jasa'] = 0;
         if ($trx) {
-            $data['umum'] = $trx->umum;
-            $data['kendaraan'] = $trx->kendaraan;
-            $data['elektronik'] = $trx->elektronik;
-            $data['prt'] = $trx->prt;
-            $data['lain_lain'] = $trx->lain_Lain;
+            $data['umum_pokok'] = $trx->umum_pokok;
+            $data['kendaraan_pokok'] = $trx->kendaraan_pokok;
+            $data['elektronik_pokok'] = $trx->elektronik_pokok;
+            $data['prt_pokok'] = $trx->prt_pokok;
+            $data['lain_lain_pokok'] = $trx->lain_Lain_pokok;
+            $data['umum_jasa'] = $trx->umum_jasa;
+            $data['kendaraan_jasa'] = $trx->kendaraan_jasa;
+            $data['elektronik_jasa'] = $trx->elektronik_jasa;
+            $data['prt_jasa'] = $trx->prt_jasa;
+            $data['lain_lain_jasa'] = $trx->lain_Lain_jasa;
         }
         $unpaidInvoice = AdminInvoice::where([
             ['lokasi', Session::get('lokasi')],
