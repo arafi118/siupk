@@ -29,7 +29,7 @@ class Desa extends Model
     
     public function anggota()
     {
-        return $this->hasMany(anggota::class, 'desa', 'kd_desa')->orderBy('desa', 'ASC');
+        return $this->hasMany(Anggota::class, 'desa', 'kd_desa')->orderBy('desa', 'ASC');
     }
 
     public function kom_saldo()
