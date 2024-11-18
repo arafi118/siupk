@@ -18,22 +18,12 @@ class PinjamanAnggota extends Model
     {
         $this->table = 'pinjaman_anggota_' . Session::get('lokasi');
     }
+ 
 
     public function sts()
     {
         return $this->belongsTo(StatusPinjaman::class, 'status', 'kd_status');
     }
-
-    public function jpp()
-    {
-        return $this->belongsTo(JenisProdukPinjaman::class, 'jenis_pp', 'id');
-    }
-
-    public function jasa()
-    {
-        return $this->belongsTo(JenisJasa::class, 'jenis_jasa');
-    }
-
 
     public function sis_pokok()
     {
@@ -53,6 +43,11 @@ class PinjamanAnggota extends Model
     public function target()
     {
         return $this->hasOne(RencanaAngsuranI::class, 'loan_id')->orderBy('jatuh_tempo', 'DESC');
+    }
+
+    public function jasa()
+    {
+        return $this->belongsTo(JenisJasa::class, 'jenis_jasa');
     }
 
     public function kelompok()
@@ -98,5 +93,34 @@ class PinjamanAnggota extends Model
     public function getTableStructure()
     {
         return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
+    }
+    public function jpp()
+    {
+        return $this->belongsTo(JenisProdukPinjaman::class, 'jenis_pp', 'id');
+    }
+    public function saldo()
+    {
+        return $this->hasOne(RealAngsuranI::class, 'loan_id')->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC');
+    }
+
+    public function saldo2()
+    {
+        return $this->hasOne(RealAngsuranI::class, 'loan_id')->orderBy('tgl_transaksi', 'ASC')->orderBy('id', 'ASC');
+    }
+    public function saldo_pinjaman()
+    {
+        return $this->hasOne(Penghapusan::class, 'id_pinj', 'id');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+    public function real()
+    {
+        return $this->hasMany(RealAngsuran::class, 'loan_id')->orderBy('tgl_transaksi', 'ASC')->orderBy('id', 'ASC');
+    }
+    public function real_i()
+    {
+        return $this->hasMany(RealAngsuranI::class, 'loan_id')->orderBy('tgl_transaksi', 'ASC')->orderBy('id', 'ASC');
     }
 }
