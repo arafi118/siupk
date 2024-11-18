@@ -35,7 +35,7 @@
                 data: form.serialize(),
                 success: function(result) {
                     Swal.fire('Berhasil', result.msg, 'success').then(() => {
-                        window.location.href = '/detail_i/' + result.id
+                        window.location.href = '/simpanan/' + result.id
                     })
                 },
                 error: function(result) {
