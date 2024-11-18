@@ -17,6 +17,7 @@ use App\Models\JenisSimpanan;
 use App\Models\Kecamatan;
 use App\Models\Kelompok;
 use App\Models\MasterArusKas;
+use App\Models\PinjamanAnggota;
 use App\Models\PinjamanIndividu;
 use App\Models\PinjamanKelompok;
 use App\Models\Rekening;
@@ -591,34 +592,34 @@ private function OJKP(array $data)
 
         $data['jenis_pp'] = JenisProdukPinjaman::where('lokasi', '0')->with([
             'pinjaman_kelompok' => function ($query) use ($data) {
-                $tb_pinj_i = 'pinjaman_kelompok_' . $data['kec']->id;
-                $tb_angg = 'kelompok_' . $data['kec']->id;
-                $data['tb_pinj_i'] = $tb_pinj_i;
+                $tb_pinj = 'pinjaman_kelompok_' . $data['kec']->id;
+                $tb_kel = 'kelompok_' . $data['kec']->id;
+                $data['tb_pinj'] = $tb_pinj;
 
-                $query->select($tb_pinj_i . '.*', $tb_angg . '.nama_kelompok', $tb_angg . '.kd_', 'desa.nama_desa', 'desa.kd_desa', 'desa.kode_desa', 'sebutan_desa.sebutan_desa')
-                    ->join($tb_angg, $tb_angg . '.id', '=', $tb_pinj_i . '.nia')
-                    ->join('desa', $tb_angg . '.desa', '=', 'desa.kd_desa')
+                $query->select($tb_pinj . '.*', $tb_kel . '.nama_kelompok', $tb_kel . '.kd_kelompok', 'desa.nama_desa', 'desa.kd_desa', 'desa.kode_desa', 'sebutan_desa.sebutan_desa')
+                    ->join($tb_kel, $tb_kel . '.id', '=', $tb_pinj . '.id')
+                    ->join('desa', $tb_kel . '.desa', '=', 'desa.kd_desa')
                     ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
-                    ->withSum(['real_i' => function ($query) use ($data) {
+                    ->withSum(['real' => function ($query) use ($data) {
                         $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
                     }], 'realisasi_pokok')
-                    ->withSum(['real_i' => function ($query) use ($data) {
+                    ->withSum(['real' => function ($query) use ($data) {
                         $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
                     }], 'realisasi_jasa')
-                    ->where($tb_pinj_i . '.sistem_angsuran', '!=', '12')->where(function ($query) use ($data) {
+                    ->where($tb_pinj . '.sistem_angsuran', '!=', '12')->where(function ($query) use ($data) {
                         $query->where([
-                            [$data['tb_pinj_i'] . '.status', 'L'],
-                            [$data['tb_pinj_i'] . '.tgl_lunas', '<=', $data['tgl_kondisi']]
+                            [$data['tb_pinj'] . '.status', 'L'],
+                            [$data['tb_pinj'] . '.tgl_lunas', '<=', $data['tgl_kondisi']]
                         ])->orwhere([
-                            [$data['tb_pinj_i'] . '.status', 'R'],
-                            [$data['tb_pinj_i'] . '.tgl_lunas', '<=', $data['tgl_kondisi']]
+                            [$data['tb_pinj'] . '.status', 'R'],
+                            [$data['tb_pinj'] . '.tgl_lunas', '<=', $data['tgl_kondisi']]
                         ])->orwhere([
-                            [$data['tb_pinj_i'] . '.status', 'H'],
-                            [$data['tb_pinj_i'] . '.tgl_lunas', '<=', $data['tgl_kondisi']]
+                            [$data['tb_pinj'] . '.status', 'H'],
+                            [$data['tb_pinj'] . '.tgl_lunas', '<=', $data['tgl_kondisi']]
                         ]);
                     })
-                    ->orderBy($tb_angg . '.desa', 'ASC')
-                    ->orderBy($tb_pinj_i . '.tgl_cair', 'ASC');
+                    ->orderBy($tb_kel . '.desa', 'ASC')
+                    ->orderBy($tb_pinj . '.tgl_cair', 'ASC');
             },
             'pinjaman_kelompok.saldo' => function ($query) use ($data) {
                 $query->where('tgl_transaksi', '<=', $data['tgl_kondisi']);
@@ -989,7 +990,7 @@ private function OJKP(array $data)
             $data['tgl'] = Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         }
 
-        $data['jenis_pp'] = JenisProdukPinjaman::where('lokasi', '0')->with([
+        $data['jenis_pp_i'] = JenisProdukPinjaman::where('lokasi', '0')->with([
             'pinjaman_anggota' => function ($query) use ($data) {
                 $tb_pinj_i = 'pinjaman_anggota_' . $data['kec']->id;
                 $tb_ang = 'anggota_' . $data['kec']->id;
