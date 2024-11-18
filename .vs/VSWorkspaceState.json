@@ -1,11 +1,7 @@
 {
   "ExpandedNodes": [
     "",
-    "\\resources",
-    "\\resources\\views",
-    "\\resources\\views\\simpanan",
-    "\\resources\\views\\simpanan\\partials"
+    "\\public"
   ],
-  "SelectedNode": "\\resources\\views\\simpanan\\partials\\detail-transaksi.blade.php",
   "PreviewInSolutionExplorer": false
 }

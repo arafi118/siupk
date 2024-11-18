@@ -493,9 +493,24 @@ public function cetakPadaBuku($idt)
             'id_pinj' => '0',
             'id_pinj_i' => '0',
             'id_simp' => $maxId,
-            'keterangan_transaksi' => 'Setoran Awal ' . $js->nama_js . ' ' . $anggota->namadepan . '',
+            'keterangan_transaksi' => 'Setoran Awal ' . $js->nama_js . ' ',
             'relasi' => $anggota->namadepan . '[' . $request->nia . ']',
             'jumlah' => str_replace(',', '', str_replace('.00', '', $request->setoran_awal)),
+            'urutan' => '0',
+            'id_user' => auth()->user()->id,
+        ]);
+
+        Transaksi::create([
+            'tgl_transaksi' => Tanggal::tglNasional($request->tgl_buka_rekening),
+            'rekening_debit' => $js->rek_kas,
+            'rekening_kredit' =>  $js->rek_adm,
+            'idtp' => '0',
+            'id_pinj' => '0',
+            'id_pinj_i' => '0',
+            'id_simp' => $maxId,
+            'keterangan_transaksi' => 'Biaya Buka Buku ' . $js->nama_js . ' ',
+            'relasi' => $anggota->namadepan . '[' . $request->nia . ']',
+            'jumlah' => str_replace(',', '', str_replace('.00', '', $request->admin)),
             'urutan' => '0',
             'id_user' => auth()->user()->id,
         ]);
