@@ -4,7 +4,7 @@
 <head>
     <style>
     .style6 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 16px; color: #000000; }
-.style9 { font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #000000; }
+.style9 { font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #000000; }
 .style10 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; color: #000000; }
 .style26 { font-family: Verdana, Arial, Helvetica, sans-serif; color: #000000; }
 .style27 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; font-weight: bold; color: #000000; }
