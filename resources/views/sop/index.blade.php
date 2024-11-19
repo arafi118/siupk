@@ -100,14 +100,14 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="mb-3">&nbsp;
+                            {{-- <div class="mb-3">&nbsp;
                                 <a role="tab" class="btn btn-white" style="width: 280px;" data-bs-toggle="tab"
                                     href="#tab-content-7">
                                     <div class="left-align">
                                         <i class="fa-solid fa-camera-rotate"></i>&nbsp;&nbsp;<span>Whatsapp</span>
                                     </div>
                                 </a>
-                            </div>
+                            </div> --}}
                         </ul>
                     </div>
                 </div>
