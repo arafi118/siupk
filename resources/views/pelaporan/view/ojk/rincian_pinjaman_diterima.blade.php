@@ -103,7 +103,8 @@ $empty = false;
         </td>
     </tr>
     <tr>
-        <td height="20" colspan="8" class="style6 bottom align-center"><br>DAFTAR RINCIAN PINJAMAN YANG DITERIMA
+        <td height="20" colspan="8" class="style6 bottom align-center"><br>DAFTAR RINCIAN PINJAMAN YANG
+            DITERIMA(KELOMPOK)
             <br><br></td>
     </tr>
 </table>
@@ -184,5 +185,122 @@ $empty = false;
 </table>
 
 @endforeach
+<div class="break"></div>
+@php
+$nomor =0;
+@endphp
 
+@foreach ($jenis_pp as $jpp)
+@php
+
+$jumlah_lunas = 0;
+$k_alokasi = 0;
+$k_saldo = 0;
+$kd_desa = [];
+
+if ($jpp->pinjaman_individu->isEmpty()) {
+$empty = true;
+continue;
+}
+$nomor++;
+@endphp
+@if ($nomor > 1)
+<div class="break"></div>
+
+@php
+$empty = false;
+@endphp
+@endif
+<table width="96%" border="0" align="center" cellpadding="3" cellspacing="0">
+    <tr>
+        <td height="20" colspan="4" class="bottom">
+        </td>
+        <td height="20" colspan="4" class="bottom">
+            <div align="right" class="style9">Dokumen Laporan ---<br>
+                Kd.Doc. H3 Lembar-1 </div>
+        </td>
+    </tr>
+    <tr>
+        <td height="20" colspan="8" class="style6 bottom align-center"><br>DAFTAR RINCIAN PINJAMAN YANG
+            DITERIMA(INDIVIDU)
+            <br><br></td>
+    </tr>
+</table>
+<table width="96%" border="0" align="center" cellpadding="3" cellspacing="0">
+    <tr>
+        <td width="20%" class="style9">NAMA LKM</td>
+        <td width="70%" class="style9">:{{ $kec->nama_lembaga_long }}</td>
+    </tr>
+    <tr>
+        <td width="20%" class="style9">SANDI LKM</td>
+        <td width="70%" class="style9">:{{ $kec->sandi_lkm }}</td>
+    </tr>
+    <tr>
+        <td width="20%" class="style9 bottom">PERIODE LAPORAN</td>
+        <td width="70%" class="style9 bottom">:{{ $tgl }}</td>
+    </tr>
+</table>
+<table width="96%" border="0" align="center" cellpadding="3" cellspacing="0">
+
+    <tr style="border: 1px solid;" align="center" height="30px" class="style9">
+        <th width="2%" rowspan="2" class="left bottom">No</th>
+        <th width="10%" rowspan="2" colspan="2" class="left bottom">Nama Pemberi Pinjaman - Loan ID</th>
+        <th colspan="2" class="left bottom">Jangka Waktu</th>
+        <th colspan="2" class="left bottom">Suku Bunga</th>
+    </tr>
+    <tr style="border: 1px solid;" align="center" height="30px" class="style9">
+        <th width="5%" class="left bottom">Mulai</th>
+        <th width="5%" class="left bottom">Jatuh Tempo</th>
+        <th width="5%" class="left bottom">%</th>
+        <th width="5%" class="left bottom">Keterangan</th>
+    </tr>
+    @foreach ($jpp->pinjaman_individu as $pinj_i)
+    @php
+    $k_alokasi += floatval((string) $pinj_i->alokasi);
+    $k_saldo += isset($pinj_i->saldo->saldo_pokok) ? floatval((string) $pinj_i->saldo->saldo_pokok) : 0;
+    @endphp
+    @php
+    $nomor = 1;
+    $kd_desa[] = $pinj_i->kd_desa;
+    $desa = $pinj_i->kd_desa;
+    @endphp
+    @if (array_count_values($kd_desa)[$pinj_i->kd_desa] <= '1' ) @if ($section !=$desa && count($kd_desa)> 1)
+        @endif
+        @endif
+        @endforeach
+        <tr>
+            <td class="style27 left top right" colspan="7">{{$pinj_i->nama_desa}}</td>
+        </tr>
+
+        @php
+        $kidp = $pinj_i['id'];
+        $nomor = 1;
+        $section = $pinj_i->kd_desa;
+        $nama_desa = $pinj_i->sebutan_desa . ' ' . $pinj_i->nama_desa;
+        $apros_jasa = number_format($pinj_i['pros_jasa'] - $pinj_i['jangka'], 2);
+        $ktgl1 = $pinj_i['tgl_cair'];
+        $kpenambahan = "+" . $pinj_i['jangka'] . " month";
+        $atgl2 = date('Y-m-d', strtotime($kpenambahan, strtotime($ktgl1)));
+        $saldopinjaman = date($tgl . "-" . $kidp);
+        $y12 = date('Y') - 1;
+        @endphp
+
+        <tr style="border: 1px solid;" align="right" height="15px" class="style9">
+            <td class="left top" align="center">{{ $nomor++ }}</td>
+            <td colspan="2" class="left top" align="left">{{ $pinj_i->namadepan }} - {{$pinj_i->id}}</td>
+            <td class="left top" align="center">{{ Tanggal::tglIndo($pinj_i->tgl_cair) }}</td>
+            <td class="left top">{{ Tanggal::tglIndo($atgl2) }}</td>
+            <td class="left top" align="center">{{ $apros_jasa }}%</td>
+            <td class="left top" align="center">per bulan</td>
+        </tr>
+
+        <tr>
+            <td class="style10 top" colspan="7"><b>Keterangan</b>: Data yang ditampilkan di atas merupakan Tabungan pada
+                tahun berjalan {{ $tahun }}, untuk menampilkan data Individu aktif tahun lalu dapat memilih mode tahun
+                lalu {{ $y12 }}.
+            </td>
+        </tr>
+</table>
+
+@endforeach
 @endsection
