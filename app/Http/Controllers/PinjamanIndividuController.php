@@ -372,6 +372,10 @@ class PinjamanIndividuController extends Controller
             'lu' => date('Y-m-d H:i:s'),
             'user_id' => auth()->user()->id
         ];
+        
+        if(Session::get('lokasi') == 3) {
+            $insert['nama_barang'] = $request->namabarang ?? '';
+        }
 
         $pinjaman_anggota = PinjamanIndividu::create($insert);
         $data_pemanfaat = DataPemanfaat::create([
