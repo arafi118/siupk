@@ -1405,9 +1405,6 @@ class TransaksiController extends Controller
             $rek1 = Rekening::where(function ($query) {
                 $query->where('lev1', '2')->orwhere('lev1', '3')->orwhere('lev1', '4');
             })->where([
-                ['kode_akun', '!=', '2.1.04.03'],
-                ['kode_akun', '!=', '2.1.02.01'],
-                ['kode_akun', '!=', '2.1.03.01'],
                 ['kode_akun', 'NOT LIKE', '4.1.01%']
             ])->orderBy('kode_akun', 'ASC')->get();
 
