@@ -293,8 +293,7 @@
               "RelativeToolTip": "resources\\views\\simpanan\\partials\\detail-transaksi.blade.php",
               "ViewState": "AgIAAFUAAAAAAAAAAAAAwIEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-10-22T03:53:34.363Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-22T03:53:34.363Z"
             },
             {
               "$type": "Document",
@@ -844,7 +843,7 @@
               "RelativeDocumentMoniker": "app\\Http\\Controllers\\PinjamanKelompokController.php",
               "ToolTip": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PinjamanKelompokController.php",
               "RelativeToolTip": "app\\Http\\Controllers\\PinjamanKelompokController.php",
-              "ViewState": "AgIAANgCAAAAAAAAAAAjwO8CAABGAAAAAAAAAA==",
+              "ViewState": "AgIAANgCAAAAAAAAAAAjwOUCAABWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
               "WhenOpened": "2024-10-21T05:11:48.377Z",
               "EditorCaption": ""

@@ -109,8 +109,8 @@
             @if ($jumlah_data_pemanfaat_a > 0)
                 <div class="alert alert-warning text-white" role="alert">
                     <span class="text-sm">
-                        Yang bersangkutan memiliki Pinjaman Aktif di {{ $data_pemanfaat->kec->sebutan_kec }}
-                        {{ $data_pemanfaat->kec->nama_kec }}</b>!
+                        Yang bersangkutan memiliki Pinjaman Aktif di {{ $data_pemanfaat->kec->sebutan_kec ?? '' }}
+                        {{ $data_pemanfaat->kec->nama_kec  ?? '' }}</b>!
                     </span>
                 </div>
             @else
