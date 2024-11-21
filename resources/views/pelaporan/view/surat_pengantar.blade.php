@@ -50,7 +50,7 @@
             <td width="20%"> &nbsp;</td>
             <td width="50%" align="center">
                 <div>{{ $nama_lembaga }}</div>
-                <div>{{ $kec->ttd_mengetahui_lap == '2' ? 'Direktur' : $kec->sebutan_level_1 }},</div>
+                <div>{{  $kec->sebutan_level_1 }},</div>
                 <br>
                 <br>
                 <br>

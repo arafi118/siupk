@@ -243,8 +243,7 @@
               "ViewState": "AgIAAO4AAAAAAAAAAAASwP0AAABTAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
               "WhenOpened": "2024-06-03T03:41:34.399Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -257,8 +256,7 @@
               "ViewState": "AgIAAMEAAAAAAAAAAAAAAMwAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
               "WhenOpened": "2024-07-18T19:21:10.088Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -272,45 +270,6 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
               "WhenOpened": "2024-10-21T05:12:08.46Z",
               "IsPinned": true
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "index.blade.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\transaksi\\jurnal_umum\\index.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\transaksi\\jurnal_umum\\index.blade.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\transaksi\\jurnal_umum\\index.blade.php",
-              "RelativeToolTip": "resources\\views\\transaksi\\jurnal_umum\\index.blade.php",
-              "ViewState": "AgIAAAEBAAAAAAAAAAAAACABAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-11-19T09:00:05.313Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "register.blade.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pinjaman_i\\partials\\register.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\pinjaman_i\\partials\\register.blade.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pinjaman_i\\partials\\register.blade.php",
-              "RelativeToolTip": "resources\\views\\pinjaman_i\\partials\\register.blade.php",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAAB4AAABcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-11-19T05:40:26.352Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "create.blade.php",
-              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pinjaman_i\\create.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\pinjaman_i\\create.blade.php",
-              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pinjaman_i\\create.blade.php",
-              "RelativeToolTip": "resources\\views\\pinjaman_i\\create.blade.php",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-11-19T05:40:11.42Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -335,6 +294,42 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "index.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\transaksi\\jurnal_umum\\index.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\transaksi\\jurnal_umum\\index.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\transaksi\\jurnal_umum\\index.blade.php",
+              "RelativeToolTip": "resources\\views\\transaksi\\jurnal_umum\\index.blade.php",
+              "ViewState": "AgIAAAEBAAAAAAAAAAAAACABAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-11-19T09:00:05.313Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "register.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pinjaman_i\\partials\\register.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\pinjaman_i\\partials\\register.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pinjaman_i\\partials\\register.blade.php",
+              "RelativeToolTip": "resources\\views\\pinjaman_i\\partials\\register.blade.php",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAAB4AAABcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-11-19T05:40:26.352Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "create.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\pinjaman_i\\create.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\pinjaman_i\\create.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\pinjaman_i\\create.blade.php",
+              "RelativeToolTip": "resources\\views\\pinjaman_i\\create.blade.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-11-19T05:40:11.42Z"
             },
             {
               "$type": "Document",
@@ -500,7 +495,7 @@
               "RelativeDocumentMoniker": "app\\Http\\Controllers\\TransaksiController.php",
               "ToolTip": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\TransaksiController.php",
               "RelativeToolTip": "app\\Http\\Controllers\\TransaksiController.php",
-              "ViewState": "AgIAAGcFAAAAAAAAAAASwHkFAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAAIAFAAAAAAAAAAAAAJYFAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
               "WhenOpened": "2024-10-31T04:43:08.445Z",
               "EditorCaption": ""
@@ -743,8 +738,7 @@
               "RelativeToolTip": "app\\Http\\Controllers\\PinjamanIndividuController.php",
               "ViewState": "AgIAAFgBAAAAAAAAAAASwHgBAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-10-23T02:36:53.949Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-23T02:36:53.949Z"
             },
             {
               "$type": "Document",
@@ -900,8 +894,7 @@
               "RelativeToolTip": "app\\Http\\Controllers\\PinjamanKelompokController.php",
               "ViewState": "AgIAANgCAAAAAAAAAAAjwOUCAABWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-10-21T05:11:48.377Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-21T05:11:48.377Z"
             },
             {
               "$type": "Document",

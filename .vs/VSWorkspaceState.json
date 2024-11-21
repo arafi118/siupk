@@ -10,6 +10,5 @@
     "\\resources\\views\\transaksi\\jurnal_umum",
     "\\resources\\views\\transaksi\\jurnal_umum\\partials"
   ],
-  "SelectedNode": "\\app\\Http\\Controllers\\TransaksiController.php",
   "PreviewInSolutionExplorer": false
 }
