@@ -49,37 +49,75 @@
                     </div>
                 </div>
             </div>
-
             <div class="row">
-                <div class="col-md-6">
-                    <div class="my-2">
-                        <label class="form-label" for="jenis_jasa">Jenis Jasa</label>
-                        <select class="form-control" name="jenis_jasa" id="jenis_jasa">
-                            @foreach ($jenis_jasa as $jj)
-                                <option value="{{ $jj->id }}">
-                                    {{ $jj->nama_jj }}
-                                </option>
-                            @endforeach
-                        </select>
-                        <small class="text-danger" id="msg_jenis_jasa"></small>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="my-2">
-                        <label class="form-label" for="jenis_produk_pinjaman">Jenis Produk Pinjaman</label>
-                        <select class="form-control" name="jenis_produk_pinjaman" id="jenis_produk_pinjaman">
-                            @foreach ($jenis_pp as $jpp)
-                                <option {{ $jenis_pp_dipilih == $jpp->id ? 'selected' : '' }}
-                                    value="{{ $jpp->id }}">
-                                    {{ $jpp->nama_jpp }} ({{ $jpp->deskripsi_jpp }})
-                                </option>
-                            @endforeach
-                        </select>
-                        <small class="text-danger" id="msg_jenis_produk_pinjaman"></small>
-                    </div>
-                </div>
-            </div>
+    <div class="col-md-6">
+        <div class="my-2">
+            <label class="form-label" for="jenis_jasa">Jenis Jasa</label>
+            <select class="form-control" name="jenis_jasa" id="jenis_jasa">
+                @foreach ($jenis_jasa as $jj)
+                    <option value="{{ $jj->id }}">
+                        {{ $jj->nama_jj }}
+                    </option>
+                @endforeach
+            </select>
+            <small class="text-danger" id="msg_jenis_jasa"></small>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="my-2">
+            <label class="form-label" for="jenis_produk_pinjaman">Jenis Produk Pinjaman</label>
+            <select class="form-control" name="jenis_produk_pinjaman" id="jenis_produk_pinjaman">
+                @foreach ($jenis_pp as $jpp)
+                    <option {{ $jenis_pp_dipilih == $jpp->id ? 'selected' : '' }}
+                        value="{{ $jpp->id }}">
+                        {{ $jpp->nama_jpp }} ({{ $jpp->deskripsi_jpp }})
+                    </option>
+                @endforeach
+            </select>
+            <small class="text-danger" id="msg_jenis_produk_pinjaman"></small>
+        </div>
+    </div>
+</div>
 
+<div class="row" id="namabarang_container">
+    <div class="col-md-12">
+        &nbsp;
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    // Function to toggle nama barang field
+    function toggleNamaBarang() {
+        var selectedValue = $('#jenis_produk_pinjaman').val();
+        var namabarangContainer = $('#namabarang_container');
+        
+        if (selectedValue === '13') {
+            namabarangContainer.html(`
+                <div class="col-md-12">
+                    <label for="namabarang">Nama Barang</label>
+                    <input autocomplete="off" type="text" name="namabarang" id="namabarang" class="form-control" style="border: 1px solid red; padding-left: 10px;">
+                    <small class="text-danger" id="namabarang"></small>
+                </div>
+            `);
+        } else {
+            namabarangContainer.html(`
+                <div class="col-md-12">
+                    &nbsp;
+                </div>
+            `);
+        }
+    }
+
+    // Initial check when page loads
+    toggleNamaBarang();
+
+    // Listen for changes on the dropdown
+    $('#jenis_produk_pinjaman').on('change', function() {
+        toggleNamaBarang();
+    });
+});
+</script>
             <div class="row">
                 <div class="col-md-4">
                     <div class="my-2">
