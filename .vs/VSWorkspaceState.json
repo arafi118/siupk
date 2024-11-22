@@ -6,9 +6,9 @@
     "\\app\\Http\\Controllers",
     "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\transaksi",
-    "\\resources\\views\\transaksi\\jurnal_umum",
-    "\\resources\\views\\transaksi\\jurnal_umum\\partials"
+    "\\resources\\views\\simpanan",
+    "\\resources\\views\\simpanan\\partials"
   ],
+  "SelectedNode": "\\resources\\views\\simpanan\\partials\\detail.blade.php",
   "PreviewInSolutionExplorer": false
 }
