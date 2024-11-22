@@ -8,7 +8,7 @@
     <div class="card-header p-3 pt-2">
         <div class="alert alert-warning text-white shadow text-center border-radius-xl mt-n4 me-3">
             Kelompok <b>{{ $kelompok->nama_kelompok ??0 }}</b> masih memiliki pinjaman dengan status
-            <b>{{ $perguliran->sts->nama_status }} ({{ $perguliran->status }})</b>
+            <b>{{ $perguliran->sts->nama_status ??0 }} ({{ $perguliran->status??0 }})</b>
         </div>
     </div>
     <div class="card-body pt-0">
