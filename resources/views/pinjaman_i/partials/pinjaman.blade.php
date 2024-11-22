@@ -1,13 +1,13 @@
 @php
     use App\Utils\Tanggal;
 
-    $perguliran = $kelompok->pinjaman;
+    $perguliran = $anggota->pinjaman;
 @endphp
 
 <div class="card">
     <div class="card-header p-3 pt-2">
         <div class="alert alert-warning text-white shadow text-center border-radius-xl mt-n4 me-3">
-            Kelompok <b>{{ $kelompok->nama_kelompok }}</b> masih memiliki pinjaman dengan status
+            Pemanfaat a.n. <b>{{ $anggota->damadepan }}</b> masih memiliki pinjaman dengan status
             <b>{{ $perguliran->sts->nama_status }} ({{ $perguliran->status }})</b>
         </div>
     </div>
