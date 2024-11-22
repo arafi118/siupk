@@ -1,15 +1,16 @@
 @php
 use App\Utils\Tanggal;
 $section = 0;
+$nomor_jenis_pp =0;
 $nomor_jenis_pp_i =0;
 @endphp
 
 @extends('pelaporan.layout.base')
 
 @section('content')
-@foreach ($jenis_pp_i as $jpp)
+@foreach ($jenis_pp as $jpp)
 @php
-if ($jpp->pinjaman_anggota->isEmpty()) {
+if ($jpp->pinjaman_kelompok->isEmpty()) {
 continue;
 }
 @endphp
@@ -26,7 +27,7 @@ $t_kolek2 = 0;
 $t_kolek3 = 0;
 @endphp
 
-@if ($jpp->$nomor_jenis_pp_i != 0)
+@if ($jpp->$nomor_jenis_pp != 0)
 <div class="break"></div>
 @endif
 <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
@@ -44,13 +45,12 @@ $t_kolek3 = 0;
         <td colspan="3" height="5"></td>
     </tr>
 </table>
-@foreach ($jpp->pinjaman_anggota as $ping_ang)
+@foreach ($jpp->pinjaman_kelompok as $pinj)
 @php
-$kd_desa[] = $ping_ang->kd_desa;
-$desa = $ping_ang->kd_desa;
-
+$kd_desa[] = $pinj->kd_desa;
+$desa = $pinj->kd_desa;
 @endphp
-@if (array_count_values($kd_desa)[$ping_ang->kd_desa] <= '1' ) @if ($section !=$desa && count($kd_desa)> 1)
+@if (array_count_values($kd_desa)[$pinj->kd_desa] <= '1' ) @if ($section !=$desa && count($kd_desa)> 1)
     @php
     $j_pross = $j_saldo / $j_alokasi;
     $t_alokasi += $j_alokasi;
@@ -71,21 +71,21 @@ $desa = $ping_ang->kd_desa;
     $j_kolek1 = 0;
     $j_kolek2 = 0;
     $j_kolek3 = 0;
-    $section = $ping_ang->kd_desa;
-    $nama_desa = $ping_ang->sebutan_desa . ' ' . $ping_ang->nama_desa;
+    $section = $pinj->kd_desa;
+    $nama_desa = $pinj->sebutan_desa . ' ' . $pinj->nama_desa;
     @endphp
     @endif
 
     @php
     $sum_pokok = 0;
     $sum_jasa = 0;
-    $saldo_pokok = $ping_ang->alokasi;
-    $saldo_jasa = $ping_ang->pros_jasa == 0 ? 0 : $ping_ang->alokasi * ($ping_ang->pros_jasa / 100);
-    if ($ping_ang->saldo) {
-    $sum_pokok = $ping_ang->saldo->sum_pokok;
-    $sum_jasa = $ping_ang->saldo->sum_jasa;
-    $saldo_pokok = $ping_ang->saldo->saldo_pokok;
-    $saldo_jasa = $ping_ang->saldo->saldo_jasa;
+    $saldo_pokok = $pinj->alokasi;
+    $saldo_jasa = $pinj->pros_jasa == 0 ? 0 : $pinj->alokasi * ($pinj->pros_jasa / 100);
+    if ($pinj->saldo) {
+    $sum_pokok = $pinj->saldo->sum_pokok;
+    $sum_jasa = $pinj->saldo->sum_jasa;
+    $saldo_pokok = $pinj->saldo->saldo_pokok;
+    $saldo_jasa = $pinj->saldo->saldo_jasa;
     }
 
     $target_pokok = 0;
@@ -93,29 +93,29 @@ $desa = $ping_ang->kd_desa;
     $wajib_pokok = 0;
     $wajib_jasa = 0;
     $angsuran_ke = 0;
-    if ($ping_ang->target) {
-    $target_pokok = $ping_ang->target->target_pokok;
-    $target_jasa = $ping_ang->target->target_jasa;
-    $wajib_pokok = $ping_ang->target->wajib_pokok;
-    $wajib_jasa = $ping_ang->target->wajib_jasa;
-    $angsuran_ke = $ping_ang->target->angsuran_ke;
+    if ($pinj->target) {
+    $target_pokok = $pinj->target->target_pokok;
+    $target_jasa = $pinj->target->target_jasa;
+    $wajib_pokok = $pinj->target->wajib_pokok;
+    $wajib_jasa = $pinj->target->wajib_jasa;
+    $angsuran_ke = $pinj->target->angsuran_ke;
     }
 
     $tunggakan_pokok = $target_pokok - $sum_pokok;
     if ($tunggakan_pokok < 0) { $tunggakan_pokok=0; } $tunggakan_jasa=$target_jasa - $sum_jasa; if ($tunggakan_jasa < 0)
-        { $tunggakan_jasa=0; } $pross=$saldo_pokok==0 ? 0 : $saldo_pokok / $ping_ang->alokasi;
+        { $tunggakan_jasa=0; } $pross=$saldo_pokok==0 ? 0 : $saldo_pokok / $pinj->alokasi;
 
-        if ($ping_ang->tgl_lunas <= $tgl_kondisi && $ping_ang->status == 'L') {
+        if ($pinj->tgl_lunas <= $tgl_kondisi && $pinj->status == 'L') {
             $tunggakan_pokok = 0;
             $tunggakan_jasa = 0;
             $saldo_pokok = 0;
             $saldo_jasa = 0;
-            } elseif ($ping_ang->tgl_lunas <= $tgl_kondisi && $ping_ang->status == 'R') {
+            } elseif ($pinj->tgl_lunas <= $tgl_kondisi && $pinj->status == 'R') {
                 $tunggakan_pokok = 0;
                 $tunggakan_jasa = 0;
                 $saldo_pokok = 0;
                 $saldo_jasa = 0;
-                } elseif ($ping_ang->tgl_lunas <= $tgl_kondisi && $ping_ang->status == 'H') {
+                } elseif ($pinj->tgl_lunas <= $tgl_kondisi && $pinj->status == 'H') {
                     $tunggakan_pokok = 0;
                     $tunggakan_jasa = 0;
                     $saldo_pokok = 0;
@@ -123,7 +123,7 @@ $desa = $ping_ang->kd_desa;
                     }
 
                     $tgl_akhir = new DateTime($tgl_kondisi);
-                    $tgl_awal = new DateTime($ping_ang->tgl_cair);
+                    $tgl_awal = new DateTime($pinj->tgl_cair);
                     $selisih = $tgl_akhir->diff($tgl_awal);
 
                     // if ($lpp == 'Minggu') {
@@ -140,7 +140,7 @@ $desa = $ping_ang->kd_desa;
                     $kolek = round($_kolek + ($selisih - $angsuran_ke));
                     if ($kolek < 6) { $kolek1=$saldo_pokok; $kolek2=0; $kolek3=0; } elseif ($kolek>= 6 && $kolek <= 12)
                             { $kolek1=0; $kolek2=$saldo_pokok; $kolek3=0; } else { $kolek1=0; $kolek2=0;
-                            $kolek3=$saldo_pokok; } $j_alokasi +=$ping_ang->alokasi;
+                            $kolek3=$saldo_pokok; } $j_alokasi +=$pinj->alokasi;
                             $j_saldo += $saldo_pokok;
                             $j_tunggakan_pokok += $tunggakan_pokok;
                             $j_tunggakan_jasa += $tunggakan_jasa;
@@ -219,10 +219,12 @@ $desa = $ping_ang->kd_desa;
                             $kec->ttd->tanda_tangan_pelaporan), true) !!}
                             @endif
                             @php
-                            $nomor_jenis_pp_i++;
+                            $nomor_jenis_pp++;
                             @endphp
                             @endforeach
+
                             <div class="break"></div>
+
                             @foreach ($jenis_pp_i as $jpp)
 
                             @php
@@ -263,13 +265,13 @@ $desa = $ping_ang->kd_desa;
                                 </tr>
                             </table>
 
-                            @foreach ($jpp->pinjaman_anggota as $ping_ang)
+                            @foreach ($jpp->pinjaman_anggota as $pinj_i)
                             @php
-                            $kd_desa[] = $ping_ang->kd_desa;
-                            $desa = $ping_ang->kd_desa;
+                            $kd_desa[] = $pinj_i->kd_desa;
+                            $desa = $pinj_i->kd_desa;
                             @endphp
 
-                            @if (array_count_values($kd_desa)[$ping_ang->kd_desa] <= '1' ) @if ($section !=$desa &&
+                            @if (array_count_values($kd_desa)[$pinj_i->kd_desa] <= '1' ) @if ($section !=$desa &&
                                 count($kd_desa)> 1)
                                 @php
                                 $j_pross = $j_saldo / $j_alokasi;
@@ -290,22 +292,22 @@ $desa = $ping_ang->kd_desa;
                                 $j_kolek1 = 0;
                                 $j_kolek2 = 0;
                                 $j_kolek3 = 0;
-                                $section = $ping_ang->kd_desa;
-                                $nama_desa = $ping_ang->sebutan_desa . ' ' . $ping_ang->nama_desa;
+                                $section = $pinj_i->kd_desa;
+                                $nama_desa = $pinj_i->sebutan_desa . ' ' . $pinj_i->nama_desa;
                                 @endphp
                                 @endif
 
                                 @php
                                 $sum_pokok = 0;
                                 $sum_jasa = 0;
-                                $saldo_pokok = $ping_ang->alokasi;
-                                $saldo_jasa = $ping_ang->pros_jasa == 0 ? 0 : $ping_ang->alokasi * ($ping_ang->pros_jasa
+                                $saldo_pokok = $pinj_i->alokasi;
+                                $saldo_jasa = $pinj_i->pros_jasa == 0 ? 0 : $pinj_i->alokasi * ($pinj_i->pros_jasa
                                 / 100);
-                                if ($ping_ang->saldo) {
-                                $sum_pokok = $ping_ang->saldo->sum_pokok;
-                                $sum_jasa = $ping_ang->saldo->sum_jasa;
-                                $saldo_pokok = $ping_ang->saldo->saldo_pokok;
-                                $saldo_jasa = $ping_ang->saldo->saldo_jasa;
+                                if ($pinj_i->saldo) {
+                                $sum_pokok = $pinj_i->saldo->sum_pokok;
+                                $sum_jasa = $pinj_i->saldo->sum_jasa;
+                                $saldo_pokok = $pinj_i->saldo->saldo_pokok;
+                                $saldo_jasa = $pinj_i->saldo->saldo_jasa;
                                 }
 
                                 $target_pokok = 0;
@@ -313,30 +315,30 @@ $desa = $ping_ang->kd_desa;
                                 $wajib_pokok = 0;
                                 $wajib_jasa = 0;
                                 $angsuran_ke = 0;
-                                if ($ping_ang->target) {
-                                $target_pokok = $ping_ang->target->target_pokok;
-                                $target_jasa = $ping_ang->target->target_jasa;
-                                $wajib_pokok = $ping_ang->target->wajib_pokok;
-                                $wajib_jasa = $ping_ang->target->wajib_jasa;
-                                $angsuran_ke = $ping_ang->target->angsuran_ke;
+                                if ($pinj_i->target) {
+                                $target_pokok = $pinj_i->target->target_pokok;
+                                $target_jasa = $pinj_i->target->target_jasa;
+                                $wajib_pokok = $pinj_i->target->wajib_pokok;
+                                $wajib_jasa = $pinj_i->target->wajib_jasa;
+                                $angsuran_ke = $pinj_i->target->angsuran_ke;
                                 }
 
                                 $tunggakan_pokok = $target_pokok - $sum_pokok;
                                 if ($tunggakan_pokok < 0) { $tunggakan_pokok=0; } $tunggakan_jasa=$target_jasa -
                                     $sum_jasa; if ($tunggakan_jasa < 0) { $tunggakan_jasa=0; } $pross=$saldo_pokok==0 ?
-                                    0 : $saldo_pokok / $ping_ang->alokasi;
+                                    0 : $saldo_pokok / $pinj_i->alokasi;
 
-                                    if ($ping_ang->tgl_lunas <= $tgl_kondisi && $ping_ang->status == 'L') {
+                                    if ($pinj_i->tgl_lunas <= $tgl_kondisi && $pinj_i->status == 'L') {
                                         $tunggakan_pokok = 0;
                                         $tunggakan_jasa = 0;
                                         $saldo_pokok = 0;
                                         $saldo_jasa = 0;
-                                        } elseif ($ping_ang->tgl_lunas <= $tgl_kondisi && $ping_ang->status == 'R') {
+                                        } elseif ($pinj_i->tgl_lunas <= $tgl_kondisi && $pinj_i->status == 'R') {
                                             $tunggakan_pokok = 0;
                                             $tunggakan_jasa = 0;
                                             $saldo_pokok = 0;
                                             $saldo_jasa = 0;
-                                            } elseif ($ping_ang->tgl_lunas <= $tgl_kondisi && $ping_ang->status == 'H')
+                                            } elseif ($pinj_i->tgl_lunas <= $tgl_kondisi && $pinj_i->status == 'H')
                                                 {
                                                 $tunggakan_pokok = 0;
                                                 $tunggakan_jasa = 0;
@@ -345,7 +347,7 @@ $desa = $ping_ang->kd_desa;
                                                 }
 
                                                 $tgl_akhir = new DateTime($tgl_kondisi);
-                                                $tgl_awal = new DateTime($ping_ang->tgl_cair);
+                                                $tgl_awal = new DateTime($pinj_i->tgl_cair);
                                                 $selisih = $tgl_akhir->diff($tgl_awal);
 
                                                 // if ($lpp == 'Minggu') {
@@ -363,7 +365,7 @@ $desa = $ping_ang->kd_desa;
                                                 if ($kolek < 6) { $kolek1=$saldo_pokok; $kolek2=0; $kolek3=0; } elseif
                                                     ($kolek>= 6 && $kolek <= 12) { $kolek1=0; $kolek2=$saldo_pokok;
                                                         $kolek3=0; } else { $kolek1=0; $kolek2=0; $kolek3=$saldo_pokok;
-                                                        } $j_alokasi +=$ping_ang->alokasi;
+                                                        } $j_alokasi +=$pinj_i->alokasi;
                                                         $j_saldo += $saldo_pokok;
                                                         $j_tunggakan_pokok += $tunggakan_pokok;
                                                         $j_tunggakan_jasa += $tunggakan_jasa;
