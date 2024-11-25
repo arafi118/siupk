@@ -321,7 +321,7 @@
             pokok = parseFloat(pokok.split(',').join('').split('.00').join(''))
 
             var next = true
-            if (pokok > sisa_pokok) {
+            if (pokok > 0 && pokok > sisa_pokok) {
                 Swal.fire('Error', 'Angsuran pokok tidak boleh melebihi saldo pinjaman saat ini.', 'warning')
                 return false
 
