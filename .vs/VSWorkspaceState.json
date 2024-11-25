@@ -2,13 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\app",
-    "\\app\\Http",
-    "\\app\\Http\\Controllers",
-    "\\resources",
-    "\\resources\\views",
-    "\\resources\\views\\simpanan",
-    "\\resources\\views\\simpanan\\partials"
+    "\\public"
   ],
-  "SelectedNode": "\\resources\\views\\simpanan\\partials\\detail.blade.php",
+  "SelectedNode": "\\public\\migrasi.php",
   "PreviewInSolutionExplorer": false
 }
