@@ -30,6 +30,10 @@ class Pinjaman
                     'des' => 'Menampilkan Nama Sebutan Pengawas',
                 ],
                 [
+                    'key' => '{namadepan}',
+                    'des' => 'Menampilkan Nama Peminjam individu',
+                ],
+                [
                     'key' => '{ketua}',
                     'des' => 'Menampilkan Nama Ketua Kelompok',
                 ],
