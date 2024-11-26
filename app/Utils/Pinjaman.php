@@ -86,15 +86,17 @@ class Pinjaman
             }
 
             $ttd = strtr(json_decode($text, true), [
+                '{nama_kec}' => $kec->nama_kec,
                 '{kepala_lembaga}' => $kec->sebutan_level_1,
                 '{kabag_administrasi}' => $kec->sebutan_level_2,
                 '{kabag_keuangan}' => $kec->sebutan_level_3,
                 '{verifikator}' => $kec->nama_tv_long,
                 '{pengawas}' => $kec->nama_bp_long,
+                '{namadepan}' => ($individu) ? $pinkel->anggota->namadepan:'',
                 '{ketua}' => (!$individu) ? $pinkel->kelompok->ketua:'',
                 '{sekretaris}' =>(!$individu) ? $pinkel->kelompok->sekretaris:'',
                 '{bendahara}' => (!$individu) ? $pinkel->kelompok->bendahara:'',
-                '{tanggal}' => (!$individu && $pinkel->tgl_cair) ? Tanggal::tglLatin($pinkel->tgl_cair) : '',
+                '{tanggal}' => Tanggal::tglLatin($pinkel->tgl_cair),
                 '{kades}' => $desa->kades,
                 '{nip}' => $desa->nip,
                 '{sekdes}' => $desa->sekdes,

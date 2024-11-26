@@ -1,9 +1,14 @@
 {
   "ExpandedNodes": [
     "",
-    "\\app",
-    "\\public"
+    "\\app\\Http",
+    "\\app\\Http\\Controllers",
+    "\\public",
+    "\\resources",
+    "\\resources\\views",
+    "\\resources\\views\\sop",
+    "\\resources\\views\\sop\\partials"
   ],
-  "SelectedNode": "\\public\\migrasi.php",
+  "SelectedNode": "\\resources\\views\\sop\\partials\\ttd_spk.blade.php",
   "PreviewInSolutionExplorer": false
 }

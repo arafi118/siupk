@@ -307,7 +307,15 @@ class SopController extends Controller
 
         return view('sop.partials.ttd_spk')->with(compact('title', 'kec', 'keyword'));
     }
+    
+    public function ttdSpk_i()
+    {
+        $title = "Pengaturan Tanda Tangan SPK";
+        $kec = Kecamatan::where('id', Session::get('lokasi'))->with('ttd')->first();
+        $keyword = Pinjaman::keyword();
 
+        return view('sop.partials.ttd_spk_i')->with(compact('title', 'kec', 'keyword'));
+    }
     public function simpanTtdPelaporan(Request $request)
     {
         $data = $request->only([
@@ -315,38 +323,55 @@ class SopController extends Controller
             'tanda_tangan'
         ]);
 
+        // Proses styling tabel sesuai kebutuhan
         if ($data['field'] == 'tanda_tangan_pelaporan') {
             $data['tanda_tangan'] = preg_replace('/<table[^>]*>/', '<table class="p0" border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">', $data['tanda_tangan'], 1);
+        } elseif ($data['field'] == 'tanda_tangan_spk_i') {
+            $data['tanda_tangan'] = preg_replace('/<table[^>]*>/', '<table class="p0" border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 12px;">', $data['tanda_tangan'], 1);
         } else {
             $data['tanda_tangan'] = preg_replace('/<table[^>]*>/', '<table class="p0" border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 12px;">', $data['tanda_tangan'], 1);
         }
-        $data['tanda_tangan'] = preg_replace('/height:\s*[^;]+;?/', '', $data['tanda_tangan']);
 
+        // Proses tambahan untuk styling
+        $data['tanda_tangan'] = preg_replace('/height:\s*[^;]+;?/', '', $data['tanda_tangan']);
         $data['tanda_tangan'] = str_replace('colgroup', 'tr', $data['tanda_tangan']);
         $data['tanda_tangan'] = preg_replace('/<col([^>]*)>/', '<td$1>&nbsp;</td>', $data['tanda_tangan']);
 
+        // Cek apakah sudah ada data tanda tangan untuk lokasi ini
         $ttd = TandaTanganLaporan::where('lokasi', Session::get('lokasi'))->count();
+
         if ($ttd <= 0) {
+            // Jika belum ada, buat record baru
             $insert = [
                 'lokasi' => Session::get('lokasi')
             ];
 
-            if ($data['field'] == 'tanda_tangan_pelaporan') {
-                $insert['tanda_tangan_spk'] = '';
-                $insert['tanda_tangan_pelaporan'] = json_encode($data['tanda_tangan']);
-            } else {
-                $insert['tanda_tangan_pelaporan'] = '';
-                $insert['tanda_tangan_spk'] = json_encode($data['tanda_tangan']);
+            // Tentukan field yang akan diisi berdasarkan jenis tanda tangan
+            switch ($data['field']) {
+                case 'tanda_tangan_pelaporan':
+                    $insert['tanda_tangan_spk'] = '';
+                    $insert['tanda_tangan_spk_i'] = '';
+                    $insert['tanda_tangan_pelaporan'] = json_encode($data['tanda_tangan']);
+                    break;
+                case 'tanda_tangan_spk':
+                    $insert['tanda_tangan_pelaporan'] = '';
+                    $insert['tanda_tangan_spk_i'] = '';
+                    $insert['tanda_tangan_spk'] = json_encode($data['tanda_tangan']);
+                    break;
+                case 'tanda_tangan_spk_i':
+                    $insert['tanda_tangan_pelaporan'] = '';
+                    $insert['tanda_tangan_spk'] = '';
+                    $insert['tanda_tangan_spk_i'] = json_encode($data['tanda_tangan']);
+                    break;
             }
 
             $tanda_tangan = TandaTanganLaporan::create($insert);
         } else {
-            // dd($data['tanda_tangan']);
+            // Jika sudah ada, update field sesuai jenis tanda tangan
             $tanda_tangan = TandaTanganLaporan::where('lokasi', Session::get('lokasi'))->update([
                 $data['field'] => json_encode($data['tanda_tangan'])
             ]);
         }
-
         return response()->json([
             'success' => true,
             'msg' => ucwords(str_replace('_', ' ', $data['field'])) . ' Berhasil diperbarui'

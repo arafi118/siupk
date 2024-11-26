@@ -276,49 +276,15 @@
                                 </div>
                             </td>
                         </tr>
-                    </table> <br>
-                    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
-                        <tr>
-                            <td width="10%" align="center"> &nbsp; </td>
-                            <td width="30%" align="center"> Pihak Pertama </td>
-                            <td width="20%" align="center"> &nbsp; </td>
-                            <td width="30%" align="center"> Pihak Kedua </td>
-                            <td width="10%" align="center"> &nbsp; </td>
-                        </tr> <br> <br> <br> <br> <br><br><br><br>
-                        <tr>
-                            <td align="center"> &nbsp; </td>
-                            <td align="center"> <strong>{{ $dir->namadepan }}</strong> <strong>{{ $dir->namabelakang }}</strong> <br>
-                                {{ $kec->sebutan_level_1 }} {{ $kec->nama_lembaga_sort }} </td>
-                            <td align="center"> &nbsp; </td>
-                            <td align="center"> <strong>{{ $pinkel->anggota->namadepan }}</strong> <br> Peminjam
-                            </td>
-                            <td align="center"> &nbsp; </td>
-                        </tr> <br>
-                        <strong>{{-- <tr>
-                        <td width="10" align="center"> &nbsp; </td>
-                        <td width="70" align="center"> &nbsp; </td>
-                        <td width="60" align="center"> Mengetahui
-                            <br> <strong>{{ $pinkel-> anggota-> d-> sebutan_desa-> sebutan_kades }}</strong>&nbsp;<strong>{{ $pinkel-> anggota-> d-> nama_desa }}</strong>
-                        </td>
-                        <td width="50" align="center"> &nbsp; </td>
-                        <td width="50" align="center"> &nbsp; </td>
-                    </tr> <br> <br> <br> <br> <br>
-                    <tr>
-                        <td width="10" align="center"> &nbsp; </td>
-                        <td width="70" align="center"> &nbsp; </td>
-                        <td width="60" align="center"> <strong>{{ $pinkel-> anggota-> d-> kades }}</strong>
-                        </td>
-                        <td width="50" align="center"> &nbsp; </td>
-                        <td width="50" align="center"> &nbsp; </td>
-                    </tr> --}}</strong>
                     </table>
-                    <strong>{{-- <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;" class="p">
-                    <tr>
-                        <td>
-                            {!! $ttd !!}
-                        </td>
-                    </tr>
-                </table> --}}</strong>
+                    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;"
+                        class="p">
+                        <tr>
+                            <td>
+                                {!! $ttd !!}
+                            </td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
         </table>
