@@ -3378,11 +3378,6 @@ class PelaporanController extends Controller
                 ]);
             }
         ])->orderBy('kode_akun', 'ASC')->get();
-        
-        $data['keterangan'] = Calk::where([
-            ['lokasi', Session::get('lokasi')],
-            ['tanggal', 'LIKE', $data['tahun'] . '-' . $data['bulan'] . '%']
-        ])->first();
 
         $data['sekr'] = User::where([
             ['level', '1'],
