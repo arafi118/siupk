@@ -1629,7 +1629,7 @@ class PinjamanIndividuController extends Controller
         ])->first();
 
         $data['keuangan'] = $keuangan;
-        $data['ttd'] = Pinjaman::keyword($data['kec']->ttd->tanda_tangan_spk, $data, true);
+        $data['ttd'] = Pinjaman::keyword($data['kec']->ttd->tanda_tangan_spk_i, $data, true);
 
         $data['dir'] = User::Where([
             ['lokasi', Session::get('lokasi')],
@@ -1639,7 +1639,6 @@ class PinjamanIndividuController extends Controller
 
         $data['judul'] = 'Surat Perjanjian Kredit (' . $data['pinkel']->anggota->namadepan . ' - Loan ID. ' . $data['pinkel']->id . ')';
         $view = view('perguliran_i.dokumen.spk', $data)->render();
-
         if ($data['type'] == 'pdf') {
             $pdf = PDF::loadHTML($view);
             return $pdf->stream();

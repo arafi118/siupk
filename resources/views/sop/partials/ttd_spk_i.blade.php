@@ -3,15 +3,15 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-    SPK KELOMPOK
+    SPK INDIVIDU
     </div>
     <div class="card-body p-2">
         <form action="/pengaturan/sop/simpanttdpelaporan" method="post" id="formTtdPelaporan">
             @csrf
-            <input type="hidden" name="field" id="field" value="tanda_tangan_spk">
+            <input type="hidden" name="field" id="field" value="tanda_tangan_spk_i">
             <textarea class="tiny-mce-editor" name="tanda_tangan" id="tanda_tangan" rows="20">
                 @if ($kec->ttd)
-                    {!! json_decode($kec->ttd->tanda_tangan_spk, true) !!}
+                    {!! json_decode($kec->ttd->tanda_tangan_spk_i, true) !!}
                 @else
                     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
                         <tr>

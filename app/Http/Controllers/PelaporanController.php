@@ -2115,7 +2115,8 @@ class PelaporanController extends Controller
             },
             'pinjaman_kelompok.target' => function ($query) use ($data) {
                 $query->where('jatuh_tempo', '<=', $data['tgl_kondisi']);
-            }
+            },
+            'pinjaman_kelompok.angsuran_pokok'
         ])->get();
 
         $data['lunas'] = PinjamanKelompok::where([
@@ -2217,7 +2218,8 @@ class PelaporanController extends Controller
             },
             'pinjaman_individu.target' => function ($query) use ($data) {
                 $query->where('jatuh_tempo', '<=', $data['tgl_kondisi']);
-            }
+            },
+            'pinjaman_individu.angsuran_pokok'
         ])->get();
 
         $data['lunas'] = PinjamanKelompok::where([
@@ -3396,6 +3398,11 @@ class PelaporanController extends Controller
                 ]);
             }
         ])->orderBy('kode_akun', 'ASC')->get();
+        
+        $data['keterangan'] = Calk::where([
+            ['lokasi', Session::get('lokasi')],
+            ['tanggal', 'LIKE', $data['tahun'] . '-' . $data['bulan'] . '%']
+        ])->first();
 
         $data['sekr'] = User::where([
             ['level', '1'],
