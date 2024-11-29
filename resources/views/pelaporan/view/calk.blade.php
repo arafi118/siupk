@@ -134,7 +134,9 @@
                         <li>
                             Laporan keuangan disusun menggunakan Standar Akuntansi Keuangan Usaha Jasa Keuangan Mikro.
                         </li>
-                        <li>Laporan keuangan disusun berdasarkan hasil Keputusan  Musyawarah Antar Desa (MAD) dan/atau Forum Musyawarah Kecamatan (FMK) berkaitan dengan Tata kelola keuangan dan Penatausahaannya beserta penyajian pelaporan keuangan {{ $kec->nama_lembaga_sort }}.</li>
+                        <li>Laporan keuangan disusun berdasarkan hasil Keputusan Musyawarah Antar Desa (MAD) dan/atau Forum
+                            Musyawarah Kecamatan (FMK) berkaitan dengan Tata kelola keuangan dan Penatausahaannya beserta
+                            penyajian pelaporan keuangan {{ $kec->nama_lembaga_sort }}.</li>
                         <li>
                             Dasar penyusunan laporan keuangan adalah biaya historis dan menggunakan asumsi dasar kas basis.
                             Mata uang penyajian yang digunakan untuk menyusun laporan keuangan ini adalah Rupiah.
@@ -266,7 +268,7 @@
 
                                 @php
                                     // Konversi array $akun_lev4 menjadi koleksi Laravel
-                                    $grouped_lev4 = collect($akun_lev4)->groupBy(function($item) {
+                                    $grouped_lev4 = collect($akun_lev4)->groupBy(function ($item) {
                                         return $item['lev4'];
                                     });
                                 @endphp
@@ -277,7 +279,7 @@
                                         if ($loop->iteration % 2 == 0) {
                                             $bg = 'rgba(255, 255, 255)';
                                         }
-        
+
                                         // Menghitung total saldo untuk setiap grup
                                         $total_saldo = $group->sum('saldo');
                                     @endphp
@@ -291,22 +293,6 @@
                                         @endif
                                     </tr>
                                 @endforeach
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                             @endforeach
                         @endforeach
 

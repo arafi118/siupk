@@ -162,7 +162,12 @@ class Keuangan
         $thn_kondisi = explode('-', $tgl_kondisi)[0];
         $awal_tahun = $thn_kondisi . '-01-01';
 
-        $trx = Transaksi::where('rekening_debit', $kode_akun)->whereBetween('tgl_transaksi', [$awal_tahun, $tgl_kondisi])->sum('jumlah');
+        if (is_array($kode_akun)) {
+            $trx = Transaksi::whereIn('rekening_debit', $kode_akun)->whereBetween('tgl_transaksi', [$awal_tahun, $tgl_kondisi])->sum('jumlah');
+        } else {
+            $trx = Transaksi::where('rekening_debit', $kode_akun)->whereBetween('tgl_transaksi', [$awal_tahun, $tgl_kondisi])->sum('jumlah');
+        }
+
         return $trx;
     }
 
@@ -172,7 +177,12 @@ class Keuangan
         $thn_kondisi = explode('-', $tgl_kondisi)[0];
         $awal_tahun = $thn_kondisi . '-01-01';
 
-        $trx = Transaksi::where('rekening_kredit', $kode_akun)->whereBetween('tgl_transaksi', [$awal_tahun, $tgl_kondisi])->sum('jumlah');
+        if (is_array($kode_akun)) {
+            $trx = Transaksi::whereIn('rekening_kredit', $kode_akun)->whereBetween('tgl_transaksi', [$awal_tahun, $tgl_kondisi])->sum('jumlah');
+        } else {
+            $trx = Transaksi::where('rekening_kredit', $kode_akun)->whereBetween('tgl_transaksi', [$awal_tahun, $tgl_kondisi])->sum('jumlah');
+        }
+
         return $trx;
     }
 
@@ -275,16 +285,35 @@ class Keuangan
     public function saldoAwal($tgl_kondisi, $kode_akun)
     {
         $thn_kondisi = explode('-', $tgl_kondisi)[0];
-        $saldo = Saldo::where([
-            ['tahun', $thn_kondisi],
-            ['bulan', '0'],
-            ['kode_akun', $kode_akun]
-        ])->first();
+        if (is_array($kode_akun)) {
+            $saldo = Saldo::whereIn('kode_akun', $kode_akun)->where([
+                'tahun' => $thn_kondisi,
+                'bulan' => '0'
+            ])->get();
 
-        return [
-            'debit' => floatval($saldo->debit),
-            'kredit' => floatval($saldo->kredit)
-        ];
+            $kom_debit = 0;
+            $kom_kredit = 0;
+            foreach ($saldo as $s) {
+                $kom_debit += floatval($s->debit);
+                $kom_kredit += floatval($s->kredit);
+            }
+
+            return [
+                'debit' => $kom_debit,
+                'kredit' => $kom_kredit
+            ];
+        } else {
+            $saldo = Saldo::where([
+                ['tahun', $thn_kondisi],
+                ['bulan', '0'],
+                ['kode_akun', $kode_akun]
+            ])->first();
+
+            return [
+                'debit' => floatval($saldo->debit),
+                'kredit' => floatval($saldo->kredit)
+            ];
+        }
     }
 
     public function saldoPerBulan($tgl_kondisi, $kode_akun)
@@ -471,7 +500,7 @@ class Keuangan
                     $query->where('jatuh_tempo', '<=', $data['tgl_kondisi']);
                 }
             ])->get();
-            
+
         $pinjaman_individu = PinjamanIndividu::where('sistem_angsuran', '!=', '12')
             ->where(function ($query) use ($data) {
                 $query->where([

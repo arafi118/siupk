@@ -1544,8 +1544,15 @@ class PelaporanController extends Controller
         }
 
         $data['rek'] = Rekening::where('kode_akun', $data['kode_akun'])->first();
+        $data['kode_akun'] = Rekening::where([
+            ['lev1', $data['rek']->lev1],
+            ['lev2', $data['rek']->lev2],
+            ['lev3', $data['rek']->lev3],
+            ['lev4', $data['rek']->lev4],
+        ])->pluck('kode_akun')->toArray();
+
         $data['transaksi'] = Transaksi::where('tgl_transaksi', 'LIKE', '%' . $tgl . '%')->where(function ($query) use ($data) {
-            $query->where('rekening_debit', $data['kode_akun'])->orwhere('rekening_kredit', $data['kode_akun']);
+            $query->whereIn('rekening_debit', $data['kode_akun'])->orWhereIn('rekening_kredit', $data['kode_akun']);
         })->with('user')->orderBy('tgl_transaksi', 'ASC')->orderBy('urutan', 'ASC')->orderBy('idt', 'ASC')->get();
 
         $data['saldo'] = $keuangan->saldoAwal($data['tgl_kondisi'], $data['kode_akun']);
@@ -3398,6 +3405,11 @@ class PelaporanController extends Controller
                 ]);
             }
         ])->orderBy('kode_akun', 'ASC')->get();
+
+        $data['keterangan'] = Calk::where([
+            ['lokasi', Session::get('lokasi')],
+            ['tanggal', 'LIKE', $data['tahun'] . '-' . $data['bulan'] . '%']
+        ])->first();
 
         $data['sekr'] = User::where([
             ['level', '1'],

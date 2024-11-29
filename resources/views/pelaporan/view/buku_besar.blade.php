@@ -85,7 +85,7 @@
 
         @foreach ($transaksi as $trx)
             @php
-                if ($trx->rekening_debit == $rek->kode_akun) {
+                if (in_array($trx->rekening_debit, $kode_akun)) {
                     $ref = substr($trx->rekening_kredit, 0, 3);
                     $debit = floatval($trx->jumlah);
                     $kredit = 0;
@@ -108,6 +108,7 @@
 
             @php
                 if ($harian && $trx->tgl_transaksi != $tgl_kondisi) {
+                    dd($trx);
                     continue;
                 }
 
@@ -117,7 +118,7 @@
                     $bg = 'rgba(255, 255, 255)';
                 }
                 $relasi = '';
-                if ($trx->tgl_transaksi >= '2024-10-11' and $trx->id_simp!=0 ){
+                if ($trx->tgl_transaksi >= '2024-10-11' and $trx->id_simp != 0) {
                     $relasi = $trx->relasi;
                 }
             @endphp
@@ -126,7 +127,7 @@
                 <td align="center">{{ $number }}</td>
                 <td align="center">{{ Tanggal::tglIndo($trx->tgl_transaksi) }}</td>
                 <td align="center">{{ $ref . '-' . $trx->idt }}</td>
-                <td>{{ $trx->keterangan_transaksi }} {{$relasi}}</td>
+                <td>{{ $trx->keterangan_transaksi }} {{ $relasi }}</td>
                 <td align="right">{{ number_format($debit, 2) }}</td>
                 <td align="right">{{ number_format($kredit, 2) }}</td>
                 <td align="right">
