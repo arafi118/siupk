@@ -239,7 +239,7 @@
                     </td>
                     <td class="t l b" align="right">{{ number_format($pinj_i->alokasi) }}</td>
                             <td class="t l b" align="right">
-                                {{ $pros_jasa == round($pros_jasa) ? number_format($pros_jasa, 0) : number_format($pros_jasa*100, 0) }}%
+                                {{ rtrim(rtrim(number_format($pros_jasa, 2, '.', ''), '0'), '.') }}%
                             </td>
                     <td class="t l b" align="right">{{ number_format($target_pokok) }}</td>
                     <td class="t l b" align="right">{{ number_format($target_jasa) }}</td>
