@@ -377,22 +377,22 @@
                                     J U M L A H
                                 </td>
                                 <td class="t l b" width="2%" align="center">{{ $t_kel }}</td>
-                                <td class="t l b" width="7%" align="right">{{ number_format($t_alokasi) }}</td>
-                                <td class="t l b" width="6%" align="right">{{ number_format($t_target_pokok) }}
+                                <td class="t l b" width="7%" align="right">{{ number_format($t_alokasi+$tl_alokasi) }}</td>
+                                <td class="t l b" width="6%" align="right">{{ number_format($t_target_pokok+$tl_target_pokok) }}
                                 </td>
-                                <td class="t l b" width="6%" align="right">{{ number_format($t_target_jasa) }}
+                                <td class="t l b" width="6%" align="right">{{ number_format($t_target_jasa+$tl_target_jasa) }}
                                 </td>
-                                <td class="t l b" width="6%" align="right">{{ number_format($t_real_bl_pokok) }}
+                                <td class="t l b" width="6%" align="right">{{ number_format($t_real_bl_pokok+$tl_real_bl_pokok) }}
                                 </td>
-                                <td class="t l b" width="6%" align="right">{{ number_format($t_real_bl_jasa) }}
+                                <td class="t l b" width="6%" align="right">{{ number_format($t_real_bl_jasa+$tl_real_bl_jasa) }}
                                 </td>
                                 <td class="t l b" width="6%" align="right">{{ number_format($t_real_pokok) }}</td>
                                 <td class="t l b" width="6%" align="right">{{ number_format($t_real_jasa) }}</td>
-                                <td class="t l b" width="6%" align="right">{{ number_format($t_real_bi_pokok) }}
+                                <td class="t l b" width="6%" align="right">{{ number_format($t_real_bi_pokok+$tl_real_bi_pokok) }}
                                 </td>
-                                <td class="t l b" width="6%" align="right">{{ number_format($t_real_bi_jasa) }}
+                                <td class="t l b" width="6%" align="right">{{ number_format($t_real_bi_jasa+$tl_real_bi_jasa) }}
                                 </td>
-                                <td class="t l b" width="12%" align="right">{{ number_format($t_saldo_pokok) }}
+                                <td class="t l b" width="12%" align="right">{{ number_format($t_saldo_pokok+$tl_saldo_pokok) }}
                                 </td>
                                 <!-- <td class="t l b" width="6%" align="right">{{ number_format($t_saldo_jasa) }}</td> -->
                                 <td class="t l b" width="2%" align="center">
