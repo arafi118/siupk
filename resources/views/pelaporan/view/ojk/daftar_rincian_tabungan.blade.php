@@ -108,10 +108,6 @@ $nomor = 1;
         <td width="70%" class="style9">:{{ $kec->nama_lembaga_long }}</td>
     </tr>
     <tr>
-        <td width="20%" class="style9">JENIS PRODUK PINJAM</td>
-        <td width="70%" class="style9">:</td>
-    </tr>
-    <tr>
         <td width="20%" class="style9 bottom">PERIODE LAPORAN</td>
         <td width="70%" class="style9 bottom">:{{ $tgl }}</td>
     </tr>
@@ -133,7 +129,7 @@ $nomor = 1;
     @php
     $total_saldo = 0; // Variabel untuk menyimpan total saldo
     @endphp
-
+    
     @foreach ($js->simpanan as $simp)
     @php
     $jumlah_aktif += 1;
@@ -146,16 +142,7 @@ $nomor = 1;
     $tgl1 = Tanggal::tglIndo($simp->tgl_tutup);
     $tgl2 = Tanggal::tglIndo($simp->tgl_buka);
     $y12 = date('Y')-1;
-
-    $sum_saldo = 0;
-    foreach ($simp->trx as $trx) {
-    if ($trx->rekening_kredit == '2.1.04.01' || $trx->rekening_kredit == '2.1.04.01') {
-    $sum_saldo -= $trx->jumlah;
-    }
-    else {
-    $sum_saldo += $trx->jumlah;
-    }
-    }
+    $sum_saldo = $simp->realSimpananTerbesar->sum ??0;
 
     // Tambahkan saldo ke total saldo
     $total_saldo += $sum_saldo;
@@ -167,7 +154,7 @@ $nomor = 1;
         </td>
         <td class="left top" align="center">{{ $simp ? $simp->bunga : '0' }}</td>
         <td width="20%" class="left top" align="left">Per Bulan</td>
-        <td class="left top" align="center" style="border: 1px solid;">{{ number_format($sum_saldo, 2) }}</td>
+        <td class="left top" align="right" style="border: 1px solid;">{{ number_format($sum_saldo, 2) }}</td>
     </tr>
     @endforeach
 

@@ -1,14 +1,15 @@
 {
   "ExpandedNodes": [
     "",
+    "\\app",
     "\\app\\Http",
     "\\app\\Http\\Controllers",
-    "\\public",
+    "\\app\\Models",
     "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\sop",
-    "\\resources\\views\\sop\\partials"
+    "\\resources\\views\\pelaporan",
+    "\\resources\\views\\pelaporan\\view",
+    "\\resources\\views\\pelaporan\\view\\tutup_buku"
   ],
-  "SelectedNode": "\\resources\\views\\sop\\partials\\ttd_spk.blade.php",
   "PreviewInSolutionExplorer": false
 }

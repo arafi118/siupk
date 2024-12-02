@@ -711,12 +711,7 @@ class PelaporanController extends Controller
                         $query->whereRaw('tgl_buka = tgl_tutup')->orwhere('tgl_tutup', '>', $data['tgl_kondisi']);
                     });
             },
-            'simpanan.trx' => function ($query) use ($data) {
-                $query->where('tgl_transaksi', '<=', $data['tgl_kondisi'])->where(function ($query) {
-                    $query->where('rekening_debit', 'LIKE', '2.2%')
-                        ->orwhere('rekening_kredit', 'LIKE', '2.2%');
-                });
-            }
+            'simpanan.realSimpananTerbesar'
         ])->where('kecuali', 'NOT LIKE', Session::get('lokasi') . '#%')->orwhere('kecuali', 'NOT LIKE', '%#' . Session::get('lokasi'))->get();
 
         $data['laporan'] = 'Rincian Tabungan';
