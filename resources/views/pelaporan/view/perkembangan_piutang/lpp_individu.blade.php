@@ -69,7 +69,7 @@
                 <th class="t l b" colspan="2">Real s.d. Bulan Lalu</th>
                 <th class="t l b" colspan="2">Real Bulan Ini</th>
                 <th class="t l b" colspan="2">Real s.d. Bulan Ini</th>
-                <th class="t l b"  rowspan="2">Saldo</th>
+                <th class="t l b"  rowspan="2" width="6%">Saldo</th>
                 <th class="t l b" rowspan="2" width="2%">%</th>
                 <th class="t l b r" colspan="2">Tunggakan</th>
             </tr>
@@ -427,7 +427,7 @@
                 </tr>
 
                 <tr>
-                    <td colspan="17" style="padding: 0px !important;">
+                    <td colspan="18" style="padding: 0px !important;">
                         <table class="p" border="0" width="100%" cellspacing="0" cellpadding="0"
                             style="font-size: 8px; table-layout: fixed;">
                             <tr style="background: rgb(230, 230, 230); font-weight: bold;">
@@ -435,7 +435,7 @@
                                     J U M L A H
                                 </td>
                                 <td class="t l b" width="6%" align="right">{{ number_format($t_alokasi) }}</td>
-                            <td class="t l b" align="right">&nbsp;</td>
+                            <td class="t l b" align="right" width="3%">&nbsp;</td>
                                 <td class="t l b" width="6%" align="right">{{ number_format($t_target_pokok) }}
                                 </td>
                                 <td class="t l b" width="6%" align="right">{{ number_format($t_target_jasa) }}
@@ -450,7 +450,7 @@
                                 </td>
                                 <td class="t l b" width="6%" align="right">{{ number_format($t_real_bi_jasa) }}
                                 </td>
-                                <td class="t l b"  width="11.5%" align="right">{{ number_format($t_saldo_pokok) }}
+                                <td class="t l b"  width="6%" align="right">{{ number_format($t_saldo_pokok) }}
                                 </td>
                                 <!-- <td class="t l b" width="6%" align="right">{{ number_format($t_saldo_jasa) }}</td> -->
                                 <td class="t l b" width="2%" align="center">
