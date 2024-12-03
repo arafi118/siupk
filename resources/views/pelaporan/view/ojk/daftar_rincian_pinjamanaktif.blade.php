@@ -190,7 +190,7 @@ $empty = false;
         $nama_desa = $pinj->sebutan_desa . ' ' . $pinj->nama_desa;
         $kpros_jasa =number_format($pinj['pros_jasa'] - $pinj['jangka'],2);
 
-        $ktgl1 = $pinj['tgl_cair'];
+        $ktgl1 = $pinj->tgl_cair;
         $kpenambahan ="+".$pinj['jangka']." month";
         $ktgl2 = date('Y-m-d', strtotime($kpenambahan, strtotime($ktgl1)));
         $kpros_jasa =number_format($pinj['pros_jasa']/$pinj['jangka'],2);
