@@ -190,9 +190,6 @@ $empty = false;
         $nama_desa = $pinj->sebutan_desa . ' ' . $pinj->nama_desa;
         $kpros_jasa =number_format($pinj['pros_jasa'] - $pinj['jangka'],2);
 
-        $ktgl1 = $pinj->tgl_cair;
-        $kpenambahan ="+".$pinj['jangka']." month";
-        $ktgl2 = date('Y-m-d', strtotime($kpenambahan, strtotime($ktgl1)));
         $kpros_jasa =number_format($pinj['pros_jasa']/$pinj['jangka'],2);
 
         $j_alokasi = 0;
@@ -278,7 +275,12 @@ $empty = false;
                                             </td>
                                             <td class="left top" align="center">{{$pinj->angsuran_pokok->nama_sistem}}
                                             </td>
-                                            <td class="left top" align="center">{{ Tanggal::tglIndo($pinj->tgl_cair) }}
+                                            @php
+        $ktgl1 = $pinj->tgl_cair;
+        $kpenambahan ="+".$pinj->jangka." month";
+        $ktgl2 = date('Y-m-d', strtotime($kpenambahan, strtotime($ktgl1)));
+                                            @endphp
+                                            <td class="left top" align="center">{{ Tanggal::tglIndo($ktgl1) }}
                                             </td>
                                             <td class="left top" align="center">{{ Tanggal::tglIndo($ktgl2)}}</td>
                                             <td class="left top">{{$kpros_jasa}}%</td>
