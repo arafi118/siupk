@@ -1773,6 +1773,7 @@ class PinjamanKelompokController extends Controller
 
     public function suratKuasa($id, $data)
     {
+        $data['kec'] = Kecamatan::where('id', Session::get('lokasi'))->with('kabupaten')->first();
         $data['pinkel'] = PinjamanKelompok::where('id', $id)->with([
             'jpp',
             'kelompok',

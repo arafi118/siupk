@@ -3,13 +3,12 @@
     "",
     "\\app",
     "\\app\\Http",
-    "\\app\\Http\\Controllers",
-    "\\app\\Models",
     "\\resources",
     "\\resources\\views",
     "\\resources\\views\\pelaporan",
     "\\resources\\views\\pelaporan\\view",
-    "\\resources\\views\\pelaporan\\view\\tutup_buku"
+    "\\resources\\views\\pelaporan\\view\\ojk"
   ],
+  "SelectedNode": "\\resources\\views\\pelaporan\\view\\ojk\\labarugi.blade.php",
   "PreviewInSolutionExplorer": false
 }

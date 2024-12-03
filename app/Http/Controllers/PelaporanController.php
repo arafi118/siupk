@@ -335,9 +335,6 @@ class PelaporanController extends Controller
         $thn = $data['tahun'];
         $bln = $data['bulan'];
         $hari = ($data['hari']);
-        if ($bln == '1' && $hari == '1') {
-            return $this->neraca_tutup_buku($data);
-        }
         $tgl = $thn . '-' . $bln . '-' . $hari;
         $data['sub_judul'] = 'Per ' . date('t', strtotime($tgl)) . ' ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         $data['tgl'] = Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
@@ -360,80 +357,23 @@ class PelaporanController extends Controller
 
     private function LRL(array $data)
     {
-        $keuangan = new Keuangan;
-
+        $data['keuangan'] = new Keuangan;
         $thn = $data['tahun'];
         $bln = $data['bulan'];
-        $hari = $data['hari'];
-        $awal_tahun = $thn . '-01-01';
-
+        $hari = ($data['hari']);
         $tgl = $thn . '-' . $bln . '-' . $hari;
-        if ($data['bulanan']) {
-            $data['sub_judul'] = 'Periode ' . Tanggal::tglLatin($thn . '-' . $bln . '-01') . ' S.D ' . Tanggal::tglLatin($data['tgl_kondisi']);
-            $data['tgl'] = Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
-            $data['tgl'] = Tanggal::tglLatin($tgl);
+        $data['sub_judul'] = 'Per ' . date('t', strtotime($tgl)) . ' ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+        $data['tgl'] = Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+        $data['debit'] = 0;
+        $data['kredit'] = 0;
 
-            $data['bulan_lalu'] = date('Y-m-t', strtotime('-1 month', strtotime($thn . '-' . $bln . '-10')));
-            $data['header_lalu'] = 'Bulan Lalu';
-            $data['header_sekarang'] = 'Bulan Ini';
-        } else {
-            $data['sub_judul'] = 'Periode ' . Tanggal::tglLatin($awal_tahun) . ' S.D ' . Tanggal::tglLatin($data['tgl_kondisi']);
-            $data['tgl'] = Tanggal::tahun($tgl);
-            $data['bulan_lalu'] = ($thn - 1) . '-12-31';
-            $data['header_lalu'] = 'Tahun Lalu';
-            $data['header_sekarang'] = 'Tahun Ini';
-        }
+        $data['rekening_ojk'] = RekeningOjk::all();
 
-        $data['rekening_ojk'] = RekeningOjk::where([
-            ['parent_id', '0'],
-            ['rekening', '=', 'lr']
-        ])->with([
-            'child',
-            'child.akun3.rek.kom_saldo' => function ($query) use ($data) {
-                $query->where('tahun', $data['tahun'])->where(function ($query) use ($data) {
-                    $query->where('bulan', '0')->orwhere('bulan', $data['bulan'])->orwhere('bulan', ($data['bulan'] - 1));
-                });
-            },
-            'child.rek.kom_saldo' => function ($query) use ($data) {
-                $query->where('tahun', $data['tahun'])->where(function ($query) use ($data) {
-                    $query->where('bulan', '0')->orwhere('bulan', $data['bulan'])->orwhere('bulan', ($data['bulan'] - 1));
-                });
-            },
-            'child.child' => function ($query) {
-                $query->where('parent_id', '!=', '0');
-            },
-            'child.child.rek.kom_saldo' => function ($query) use ($data) {
-                $query->where('tahun', $data['tahun'])->where(function ($query) use ($data) {
-                    $query->where('bulan', '0')->orwhere('bulan', $data['bulan'])->orwhere('bulan', ($data['bulan'] - 1));
-                });
-            },
-            'child.child.akun3.rek.kom_saldo' => function ($query) use ($data) {
-                $query->where('tahun', $data['tahun'])->where(function ($query) use ($data) {
-                    $query->where('bulan', '0')->orwhere('bulan', $data['bulan'])->orwhere('bulan', ($data['bulan'] - 1));
-                });
-            },
-        ])->get();
-
-        // foreach ($rekening_ojk as $ojk) {
-        //     if ($ojk->child) {
-        //         foreach ($ojk->child as $child) {
-        //             if (strlen($child->rekening) >= 7) {
-        //                 dd($ojk);
-        //             } else {
-        //                 foreach ($child->child as $sub_child) {
-        //                     dd($ojk);
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
-
-        $data['keuangan'] = $keuangan;
         $data['laporan'] = 'Laba Rugi';
         $view = view('pelaporan.view.ojk.labarugi', $data)->render();
 
         if ($data['type'] == 'pdf') {
-            $pdf = PDF::loadHTML($view)->setPaper('A4', 'portrait ');
+            $pdf = PDF::loadHTML($view);
             return $pdf->stream();
         } else {
             return $view;
