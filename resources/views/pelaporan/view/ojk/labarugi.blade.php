@@ -10,7 +10,6 @@
         $data_total = [];
         $data_total_saldo = [];
         $data_rek_beban_ops = [];
-
     @endphp
 
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
@@ -40,86 +39,95 @@
             </tr>
         </thead>
         <tbody>
+            @php
+                // Filter rekening_ojk based on super_sub
+                $filteredRekening = $rekening_ojk->where('super_sub', 4);
+                $jumlah = 0;
+                $jumlahlalu = 0;
+            @endphp
+
+            @foreach ($filteredRekening as $rek_ojk)
                 @php
-                    // Filter $rekening_ojk berdasarkan super_sub
-                    $filteredRekening = $rekening_ojk->where('super_sub', 4);
-                    $jumlah = 0;
-                    $jumlahlalu = 0;
+                    $bg = $loop->iteration % 2 == 0 ? 'rgb(255, 255, 255)' : 'rgb(230, 230, 230)';
+                    $sum_saldo = 0;
+                    $sum_saldolalu = 0;
                 @endphp
 
-                @foreach ($filteredRekening as $rek_ojk)
+                <tr style="background: {{ $bg }};">
+                    <td align='left'>{{ $rek_ojk->nomor }}</td>
+                    <td>{{ $rek_ojk->nama_akun }}</td>
+                    <td align='center'>{{ $rek_ojk->kode }}</td>
+
                     @php
-                        $bg = $loop->iteration % 2 == 0 ? 'rgb(255, 255, 255)' : 'rgb(230, 230, 230)';
-                    @endphp
+                        if ($rek_ojk->rekening === null) {
+                            echo "  <td align='right'></td>
+                                    <td align='right'></td>
+                                    <td align='right'></td>";
+                        } elseif ($rek_ojk->rekening === '0') {
+                            echo "  <td align='right'>0</td>
+                                    <td align='right'>0</td>
+                                    <td align='right'>0</td>";
+                        } elseif ($rek_ojk->rekening === "#") {
+                            echo "  <td align='right'>#</td>
+                                    <td align='right'>#</td>
+                                    <td align='right'>#</td>";
+                        } else {
+                            $kodeAkunArray = explode('#', $rek_ojk->rekening);
 
-                    <tr style="background: {{ $bg }};">
-                        <td align='left'>{{ $rek_ojk->nomor }}</td>
-                        <td>{{ $rek_ojk->nama_akun }}</td>
-                        <td align='center'>{{ $rek_ojk->kode }}</td>
-                            @php
-                                if ($rek_ojk->rekening == NULL) {
-                                    echo " ";
-                                }elseif ($rek_ojk->rekening == 0) {
-                                    echo number_format(0);
-                                }elseif ($rek_ojk->rekening == "#") {
-                                    echo "#";
-                                }else{
-                                    $kodeAkunArray = explode('#', $rek_ojk->rekening);
-                                    $sum_saldo = 0;
-                                    $sum_saldolalu = 0;
+                            foreach ($kodeAkunArray as $kodeAkun) {
+                                // Calculate previous month and year
+                                $bulanSebelumnya = $bulan - 1;
+                                $tahunSebelumnya = $tahun;
 
-                                    foreach ($kodeAkunArray as $kodeAkun) {
-                                        
-// Hitung bulan sebelumnya
-$bulanSebelumnya = $bulan - 1;
-$tahunSebelumnya = $tahun;
-
-// Jika bulan sebelumnya adalah 0, maka sesuaikan tahun dan bulan
-if ($bulanSebelumnya == 0) {
-    $bulanSebelumnya = 12;
-    $tahunSebelumnya = $tahun - 1;
-}
-
-$rek = \App\Models\Rekening::with([
-    'kom_saldo' => function ($query) use ($tahun, $bulan) {
-        $query->where('tahun', $tahun)
-            ->where(function ($query) use ($bulan) {
-                $query->where('bulan', '0')->orWhere('bulan', $bulan);
-            });
-    },
-])->where('kode_akun', $kodeAkun)->first();
-
-$reklalu = \App\Models\Rekening::with([
-    'kom_saldo' => function ($query) use ($tahunSebelumnya, $bulanSebelumnya) {
-        $query->where('tahun', $tahunSebelumnya)
-            ->where(function ($query) use ($bulanSebelumnya) {
-                $query->where('bulan', '0')->orWhere('bulan', $bulanSebelumnya);
-            });
-    },
-])->where('kode_akun', $kodeAkun)->first();
-
-                                        $saldo = $keuangan->komSaldo($rek);
-                                        $saldolalu = $keuangan->komSaldo($reklalu);
-                                        $sum_saldo += $saldo;
-                                        $sum_saldolalu += $saldolalu;
-                                    }
-
-                                    $jumlah+=$sum_saldo;
-                                    $jumlahlalu+=$sum_saldolalu;
+                                // Adjust year and month if previous month is 0
+                                if ($bulanSebelumnya == 0) {
+                                    $bulanSebelumnya = 12;
+                                    $tahunSebelumnya = $tahun - 1;
                                 }
 
+                                // Get current month's record
+                                $rek = \App\Models\Rekening::with([
+                                    'kom_saldo' => function ($query) use ($tahun, $bulan) {
+                                        $query->where('tahun', $tahun)
+                                            ->where(function ($query) use ($bulan) {
+                                                $query->where('bulan', '0')->orWhere('bulan', $bulan);
+                                            });
+                                    },
+                                ])->where('kode_akun', $kodeAkun)->first();
+
+                                // Get previous month's record
+                                $reklalu = \App\Models\Rekening::with([
+                                    'kom_saldo' => function ($query) use ($tahunSebelumnya, $bulanSebelumnya) {
+                                        $query->where('tahun', $tahunSebelumnya)
+                                            ->where(function ($query) use ($bulanSebelumnya) {
+                                                $query->where('bulan', '0')->orWhere('bulan', $bulanSebelumnya);
+                                            });
+                                    },
+                                ])->where('kode_akun', $kodeAkun)->first();
+
+                                $saldo = $keuangan->komSaldo($rek);
+                                $saldolalu = $keuangan->komSaldo($reklalu);
+                                $sum_saldo += $saldo;
+                                $sum_saldolalu += $saldolalu;
+                            }
+
+                            $jumlah += $sum_saldo;
+                            $jumlahlalu += $sum_saldolalu;
                             @endphp
-                        <td align='right'>
-                            {{number_format($jumlahlalu);}}
-                        </td>
-                        <td align='right'>
-                            {{number_format($jumlah-$jumlahlalu);}}
-                        </td>
-                        <td align='right'>
-                            {{number_format($jumlah);}}
-                        </td>
-                    </tr>
-                @endforeach
+                                <td align='right'>
+                                    {{ number_format($sum_saldolalu) }}
+                                </td>
+                                <td align='right'>
+                                    {{ number_format($sum_saldo - $sum_saldolalu) }}
+                                </td>
+                                <td align='right'>
+                                    {{ number_format($sum_saldolalu) }}
+                                </td>
+                            @php
+                        }
+                            @endphp
+                </tr>
+            @endforeach
         </tbody>
     </table>
 @endsection
