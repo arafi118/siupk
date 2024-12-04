@@ -155,7 +155,7 @@
 
         </tr>
         <tr>
-            <td align="center"><b>Data Proposal</b></td>
+            <td align="center">{{ $pinkel->status == 'P' ? '<b>Data Proposal</b>' : 'Data Proposal' }}</td>
             <td align="center">{{ Tanggal::tglLatin($pinkel->tgl_proposal) }}</td>
             <td align="right">{{ number_format($pinkel->proposal) }}</td>
             <td align="center">{{ $pinkel->pros_jasa / $pinkel->jangka }}%/{{ $pinkel->jasa->nama_jj }}</td>
@@ -163,7 +163,7 @@
             <td align="center">{{ $pinkel->sis_pokok->nama_sistem }}</td>
         </tr>
         <tr>
-            <td align="center">Data Verifikasi</td>
+            <td align="center">{{ $pinkel->status != 'P' ? '<b>Data Verifikasi</b>' : 'Data Verifikasi' }}</td>
             <td align="center">{{ $pinkel->status == 'P' ? '' : Tanggal::tglLatin($pinkel->tgl_verifikasi) }}</td>
             <td align="right">{{ $pinkel->status == 'P' ? '' : number_format($pinkel->verifikasi) }}</td>
             <td align="center">{{ $pinkel->status == 'P' ? '' : $pinkel->pros_jasa / $pinkel->jangka }}%/{{ $pinkel->status == 'P' ? '' : $pinkel->jasa->nama_jj }}</td>
