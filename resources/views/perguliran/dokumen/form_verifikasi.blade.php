@@ -164,11 +164,11 @@
         </tr>
         <tr>
             <td align="center">Data Verifikasi</td>
-            <td align="center">&nbsp;</td>
-            <td align="right">&nbsp;</td>
-            <td align="center">&nbsp;</td>
-            <td align="center">&nbsp;</td>
-            <td align="center">&nbsp;</td>
+            <td align="center">{{ $pinkel->status == 'P' ? '' : Tanggal::tglLatin($pinkel->tgl_verifikasi) }}</td>
+            <td align="right">{{ $pinkel->status == 'P' ? '' : number_format($pinkel->verifikasi) }}</td>
+            <td align="center">{{ $pinkel->status == 'P' ? '' : $pinkel->pros_jasa / $pinkel->jangka }}%/{{ $pinkel->status == 'P' ? '' : $pinkel->jasa->nama_jj }}</td>
+            <td align="center">{{ $pinkel->status == 'P' ? '' : $pinkel->jangka }} {{ $pinkel->status == 'P' ? '' : 'bulan' }}</td>
+            <td align="center">{{ $pinkel->status == 'P' ? '' : $pinkel->sis_pokok->nama_sistem }}</td>
         </tr>
         <tr>
             <td colspan="6" height="20">

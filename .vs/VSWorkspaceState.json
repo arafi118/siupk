@@ -3,12 +3,15 @@
     "",
     "\\app",
     "\\app\\Http",
+    "\\app\\Http\\Controllers",
     "\\resources",
     "\\resources\\views",
     "\\resources\\views\\pelaporan",
     "\\resources\\views\\pelaporan\\view",
-    "\\resources\\views\\pelaporan\\view\\ojk"
+    "\\resources\\views\\pelaporan\\view\\ojk",
+    "\\resources\\views\\perguliran",
+    "\\resources\\views\\perguliran\\dokumen"
   ],
-  "SelectedNode": "\\resources\\views\\pelaporan\\view\\ojk\\labarugi.blade.php",
+  "SelectedNode": "\\resources\\views\\pelaporan\\view\\ojk\\rincian_pinjaman_lunas.blade.php",
   "PreviewInSolutionExplorer": false
 }
