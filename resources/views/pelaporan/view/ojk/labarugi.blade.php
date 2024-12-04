@@ -44,6 +44,11 @@
                 $filteredRekening = $rekening_ojk->where('super_sub', 4);
                 $jumlah = 0;
                 $jumlahlalu = 0;
+                $c = 0;
+                $c_lalu = 0;
+                $f = 0;
+                $g = 0;
+                $h = 0;
             @endphp
 
             @foreach ($filteredRekening as $rek_ojk)
@@ -63,14 +68,18 @@
                             echo "  <td align='right'></td>
                                     <td align='right'></td>
                                     <td align='right'></td>";
-                        } elseif ($rek_ojk->rekening === '0') {
+                        } elseif ($rek_ojk->rekening == '0') {
                             echo "  <td align='right'>0</td>
                                     <td align='right'>0</td>
                                     <td align='right'>0</td>";
-                        } elseif ($rek_ojk->rekening === "#") {
+                        } elseif ($rek_ojk->rekening == "#") {
                             echo "  <td align='right'>#</td>
                                     <td align='right'>#</td>
                                     <td align='right'>#</td>";
+                        } elseif ($rek_ojk->rekening == "C") {
+                            echo "  <td align='right'>". number_format($c) ."</td>
+                                    <td align='right'>". number_format($c-$c_lalu) ."</td>
+                                    <td align='right'>". number_format($c_lalu) ."</td>";
                         } else {
                             $kodeAkunArray = explode('#', $rek_ojk->rekening);
 
@@ -106,9 +115,17 @@
                                 ])->where('kode_akun', $kodeAkun)->first();
 
                                 $saldo = $keuangan->komSaldo($rek);
-                                $saldolalu = $keuangan->komSaldo($reklalu);
-                                $sum_saldo += $saldo;
-                                $sum_saldolalu += $saldolalu;
+                                $saldolalu       = $keuangan->komSaldo($reklalu);
+                                $sum_saldo      += $saldo;
+                                $sum_saldolalu  += $saldolalu;
+                                if (substr($rek_ojk->kode, 0, 1) == '4') {
+                                    $c          += $saldo;
+                                    $c_lalu     += $saldolalu;
+                                }
+
+
+
+
                             }
 
                             $jumlah += $sum_saldo;
