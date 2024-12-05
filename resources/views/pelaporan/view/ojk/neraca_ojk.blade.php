@@ -68,7 +68,7 @@
                 
                 @php
                     // Filter $rekening_ojk berdasarkan super_sub
-                    $filteredRekening = $rekening_ojk->where('super_sub', $kategori[$no]['id']);
+                    $filteredRekening = $rekening_ojk->where('super_sub', $kategori[$no]['id'])->sortBy('urutan');
                     $jumlah = 0;
                 @endphp
 
@@ -154,45 +154,52 @@
                 <td align='right'>{{number_format($jumlah_liabilitas_ekuitas);}}</td>
                 </tr>
 
-                <tr><td colspan='4'>&nbsp;</td><tr>
-
-                <tr style="background: rgb(167, 167, 167); font-weight: bold; font-size: 12px;">
-                    <th height="20" width="5%">A</th>
-                    <th width="50%" align='left'>Rasio Likuiditas</th>
-                    <th width="20%"></th>
-                    <th width="20%" align='right'>{{number_format($kas_setara_kas/$liabilitas_lancar*100,2)}}%</th>
-                </tr>
-                <tr style="background: rgb(230, 230, 230);">
-                        <td align='left'>1</td>
-                        <td>Kas dan Setara Kas</td>
-                        <td align='center'></td>
-                        <td align='right'>{{number_format($kas_setara_kas);}}</td>
-                    </tr>
-                <tr style="background: {{ $bg }};">
-                        <td align='left'>2</td>
-                        <td>Liabilitas Lancar</td>
-                        <td align='center'></td>
-                        <td align='right'>{{number_format($liabilitas_lancar);}}</td>
-                    </tr>
-                <tr style="background: rgb(167, 167, 167); font-weight: bold; font-size: 12px;">
-                    <th height="20" width="5%">B</th>
-                    <th width="50%" align='left'>Rasio Solvabilitas</th>
-                    <th width="20%"></th>
-                    <th width="20%" align='right'>{{number_format($jumlah_aset/$jumlah_liabilitas*100,2)}}%</th>
-                </tr>
-                <tr style="background: rgb(230, 230, 230);">
-                        <td align='left'>1</td>
-                        <td>Total Aset</td>
-                        <td align='center'></td>
-                        <td align='right'>{{number_format($jumlah_aset);}}</td>
-                    </tr>
-                <tr style="background: {{ $bg }};">
-                        <td align='left'>2</td>
-                        <td>Total Liabilitas</td>
-                        <td align='center'></td>
-                        <td align='right'>{{number_format($jumlah_liabilitas);}}</td>
-                    </tr>
-
+                <tr><td colspan='4'>&nbsp;</td></tr>    
+                <tr>    
+                    <td colspan="4" style="padding: 0px !important;">
+                        <table class="p" border="0" width="100%" cellspacing="0" cellpadding="0"
+                            style="font-size: 11px;">
+                            <tr style="background: rgb(167, 167, 167); font-weight: bold; font-size: 12px;">
+                                <th height="20" width="5%">A</th>
+                                <th width="50%" align='left'>Rasio Likuiditas</th>
+                                <th width="20%"></th>
+                                <th width="20%" align='right'>{{number_format($kas_setara_kas/$liabilitas_lancar*100,2)}}%</th>
+                            </tr>
+                            <tr style="background: rgb(230, 230, 230);">
+                                    <td align='left'>1</td>
+                                    <td>Kas dan Setara Kas</td>
+                                    <td align='center'></td>
+                                    <td align='right'>{{number_format($kas_setara_kas);}}</td>
+                                </tr>
+                            <tr style="background: {{ $bg }};">
+                                    <td align='left'>2</td>
+                                    <td>Liabilitas Lancar</td>
+                                    <td align='center'></td>
+                                    <td align='right'>{{number_format($liabilitas_lancar);}}</td>
+                                </tr>
+                            <tr style="background: rgb(167, 167, 167); font-weight: bold; font-size: 12px;">
+                                <th height="20" width="5%">B</th>
+                                <th width="50%" align='left'>Rasio Solvabilitas</th>
+                                <th width="20%"></th>
+                                <th width="20%" align='right'>{{number_format($jumlah_aset/$jumlah_liabilitas*100,2)}}%</th>
+                            </tr>
+                            <tr style="background: rgb(230, 230, 230);">
+                                    <td align='left'>1</td>
+                                    <td>Total Aset</td>
+                                    <td align='center'></td>
+                                    <td align='right'>{{number_format($jumlah_aset);}}</td>
+                                </tr>
+                            <tr style="background: {{ $bg }};">
+                                    <td align='left'>2</td>
+                                    <td>Total Liabilitas</td>
+                                    <td align='center'></td>
+                                    <td align='right'>{{number_format($jumlah_liabilitas);}}</td>
+                                </tr>
+                        </table>
+                        <div style="margin-top: 16px;"></div>
+                        {!! json_decode(str_replace('{tanggal}', $tanggal_kondisi, $kec->ttd->tanda_tangan_pelaporan), true) !!}
+                    </td>
+                </tr>    
         </tbody>
     </table>
 @endsection

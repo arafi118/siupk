@@ -41,19 +41,27 @@
         <tbody>
             @php
                 // Filter rekening_ojk based on super_sub
-                $filteredRekening = $rekening_ojk->where('super_sub', 4);
+                $filteredRekening = $rekening_ojk->where('super_sub', 4)->sortBy('urutan');
                 $jumlah = 0;
                 $jumlahlalu = 0;
+                $a = 0;
+                $a_lalu = 0;
+                $b = 0;
+                $b_lalu = 0;
                 $c = 0;
                 $c_lalu = 0;
                 $f = 0;
+                $f_lalu = 0;
                 $g = 0;
-                $h = 0;
+                $g_lalu = 0;
             @endphp
 
             @foreach ($filteredRekening as $rek_ojk)
                 @php
                     $bg = $loop->iteration % 2 == 0 ? 'rgb(255, 255, 255)' : 'rgb(230, 230, 230)';
+                    if (!is_numeric($rek_ojk->nomor)) {
+                        $bg = $loop->iteration % 2 == 0 ? 'rgb(197, 197, 197)' : 'rgb(167, 167, 167)';
+                    }
                     $sum_saldo = 0;
                     $sum_saldolalu = 0;
                 @endphp
@@ -76,10 +84,26 @@
                             echo "  <td align='right'>#</td>
                                     <td align='right'>#</td>
                                     <td align='right'>#</td>";
+                        } elseif ($rek_ojk->rekening == "A") {
+                            echo "  <td align='right'>". number_format($a_lalu) ."</td>
+                                    <td align='right'>". number_format($a-$a_lalu) ."</td>
+                                    <td align='right'>". number_format($a) ."</td>";
+                        } elseif ($rek_ojk->rekening == "B") {
+                            echo "  <td align='right'>". number_format($b_lalu) ."</td>
+                                    <td align='right'>". number_format($b-$b_lalu) ."</td>
+                                    <td align='right'>". number_format($b) ."</td>";
                         } elseif ($rek_ojk->rekening == "C") {
-                            echo "  <td align='right'>". number_format($c) ."</td>
+                            echo "  <td align='right'>". number_format($c_lalu) ."</td>
                                     <td align='right'>". number_format($c-$c_lalu) ."</td>
-                                    <td align='right'>". number_format($c_lalu) ."</td>";
+                                    <td align='right'>". number_format($c) ."</td>";
+                        } elseif ($rek_ojk->rekening == "F") {
+                            echo "  <td align='right'>". number_format($f_lalu) ."</td>
+                                    <td align='right'>". number_format($f-$f_lalu) ."</td>
+                                    <td align='right'>". number_format($f) ."</td>";
+                        } elseif ($rek_ojk->rekening == "H") {
+                            echo "  <td align='right'>". number_format($f_lalu-$g_lalu) ."</td>
+                                    <td align='right'>". number_format(($f-$f_lalu)-($g - $g_lalu)) ."</td>
+                                    <td align='right'>". number_format(($f)-($g)) ."</td>";
                         } else {
                             $kodeAkunArray = explode('#', $rek_ojk->rekening);
 
@@ -119,8 +143,32 @@
                                 $sum_saldo      += $saldo;
                                 $sum_saldolalu  += $saldolalu;
                                 if (substr($rek_ojk->kode, 0, 1) == '4') {
+                                    $a          += $saldo;
+                                    $a_lalu     += $saldolalu;
                                     $c          += $saldo;
                                     $c_lalu     += $saldolalu;
+                                    $f          += $saldo;
+                                    $f_lalu     += $saldolalu;
+                                }
+                                if (substr($rek_ojk->kode, 0, 1) == '5') {
+                                    $b          += $saldo;
+                                    $b_lalu     += $saldolalu;
+                                    $c          -= $saldo;
+                                    $c_lalu     -= $saldolalu;
+                                    $f          -= $saldo;
+                                    $f_lalu     -= $saldolalu;
+                                }
+                                if (substr($rek_ojk->kode, 0, 1) == '6') {
+                                    $f          += $saldo;
+                                    $f_lalu     += $saldolalu;
+                                }
+                                if (substr($rek_ojk->kode, 0, 1) == '7') {
+                                    $f          -= $saldo;
+                                    $f_lalu     -= $saldolalu;
+                                }
+                                if (substr($rek_ojk->kode, 0, 1) == '8') {
+                                    $g          -= $saldo;
+                                    $g_lalu     -= $saldolalu;
                                 }
 
 
@@ -138,13 +186,20 @@
                                     {{ number_format($sum_saldo - $sum_saldolalu) }}
                                 </td>
                                 <td align='right'>
-                                    {{ number_format($sum_saldolalu) }}
+                                    {{ number_format($sum_saldo) }}
                                 </td>
                             @php
                         }
                             @endphp
                 </tr>
             @endforeach
+            
+                <tr>    
+                    <td colspan="6" style="padding: 0px !important;">
+                        <div style="margin-top: 16px;"></div>
+                        {!! json_decode(str_replace('{tanggal}', $tanggal_kondisi, $kec->ttd->tanda_tangan_pelaporan), true) !!}
+                    </td>
+                </tr>    
         </tbody>
     </table>
 @endsection

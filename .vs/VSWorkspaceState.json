@@ -4,14 +4,12 @@
     "\\app",
     "\\app\\Http",
     "\\app\\Http\\Controllers",
+    "\\app\\Utils",
     "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\pelaporan",
-    "\\resources\\views\\pelaporan\\view",
-    "\\resources\\views\\pelaporan\\view\\ojk",
     "\\resources\\views\\perguliran",
     "\\resources\\views\\perguliran\\dokumen"
   ],
-  "SelectedNode": "\\resources\\views\\pelaporan\\view\\ojk\\rincian_pinjaman_lunas.blade.php",
+  "SelectedNode": "\\resources\\views\\perguliran\\dokumen\\form_verifikasi.blade.php",
   "PreviewInSolutionExplorer": false
 }
