@@ -173,9 +173,7 @@
 
                 <p style="text-align: justify;">
                     Demikian surat ini kami sampaikan, apabila terjadi perbedaan hasil perhitungan angsuran/ tunggakan
-                    mohon untuk melakukan klarifikasi dengan {{ $kec->nama_lembaga_sort }} dan terima kasih untuk
-                    segera melakukan pelunasan tunggakan pinjamannya
-
+                    mohon untuk melakukan klarifikasi dengan {{ $kec->nama_lembaga_sort }}. Pembayaran dimohon untuk dapat dilakukan paling lambat tanggal .................... . Terima kasih atas perhatian dan kerjasamanya.
                 </p>
             </td>
         </tr>
