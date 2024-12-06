@@ -19,3 +19,7 @@ yarn-error.log
 /.idea
 /.vscode
 /public/trigger.php
+/.vs/siupk/FileContentIndex/78297214-7d96-445a-b7f3-8ce11d3f9f15.vsidx
+/.vs/siupk/FileContentIndex/f2326a2f-4ab1-4fbf-92a9-1ee3cc4e2f7e.vsidx
+/.vs/siupk/FileContentIndex/4ceb84eb-6815-43b4-9b2a-37439f1c74ba.vsidx
+*.vsidx
