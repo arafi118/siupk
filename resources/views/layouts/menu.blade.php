@@ -18,6 +18,9 @@
         <li>
                 <a href="#menu_{{ str_replace('#', '', $menu->link) }}" class="{{$active}}"
                 aria-controls="menu_{{ str_replace('#', '', $menu->link) }}" role="button" aria-expanded="false">
+                    @if ($menu->type == 'material')
+                            <i class="metismenu-icon pe-7s-{{ $menu->ikon }}">  </i>
+                    @endif
                     {{ $menu->title }}
                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                 </a>
