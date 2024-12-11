@@ -410,6 +410,7 @@ class PinjamanAnggotaController extends Controller
             'id_pinkel' => $pinjaman->id_pinkel
         ]);
     }
+
     public function updateCatatanVerifikasi(Request $request, $id)
 {
     $pinjamanAnggota = PinjamanAnggota::find($id);
