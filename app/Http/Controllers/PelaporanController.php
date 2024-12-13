@@ -571,6 +571,33 @@ class PelaporanController extends Controller
             'pinjaman_kelompok.angsuran_jasa'
         ])->get();
 
+        $data['laporan'] = 'Pinjaman Lunas';
+        $view = view('pelaporan.view.ojk.rincian_pinjaman_lunas', $data)->render();
+
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view)->setPaper('A4', 'landscape');
+            return $pdf->stream();
+        } else {
+            return $view;
+        }
+    }
+    
+    private function DRPLi(array $data)
+    {
+        $thn = $data['tahun'];
+        $bln = $data['bulan'];
+        $hari = $data['hari'];
+
+        $tgl = $thn . '-' . $bln . '-' . $hari;
+        $data['judul'] = 'Laporan Keuangan';
+        $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
+        $data['tgl'] = Tanggal::tglLatin($tgl);
+
+        if ($data['bulanan']) {
+            $data['judul'] = 'Laporan Keuangan';
+            $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+        }
+
         $data['jenis_pp_i'] = JenisProdukPinjaman::where('lokasi', '0')->with([
             'pinjaman_individu' => function ($query) use ($data) {
                 $tb_pinj_i = 'pinjaman_anggota_' . $data['kec']->id;
@@ -615,7 +642,7 @@ class PelaporanController extends Controller
             'pinjaman_individu.angsuran_jasa'
         ])->get();
         $data['laporan'] = 'Pinjaman Lunas';
-        $view = view('pelaporan.view.ojk.rincian_pinjaman_lunas', $data)->render();
+        $view = view('pelaporan.view.ojk.rincian_pinjaman_lunas_i', $data)->render();
 
         if ($data['type'] == 'pdf') {
             $pdf = PDF::loadHTML($view)->setPaper('A4', 'landscape');

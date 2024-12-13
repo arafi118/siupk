@@ -83,9 +83,9 @@ $empty = false;
 $nomor = 0;
 @endphp
 
-@foreach ($jenis_pp as $jpp)
+@foreach ($jenis_pp_i as $jpp_i)
 @php
-if ($jpp->pinjaman_kelompok->isEmpty()) {
+if ($jpp_i->pinjaman_individu->isEmpty()) {
 $empty = true;
 continue;
 }
@@ -112,7 +112,7 @@ $empty = false;
     <tr>
         <td height="20" colspan="12" class="style6 bottom align-center">
             <br>
-            DAFTAR RINCIAN PINJAMAN YANG DIBERIKAN (KELOMPOK LUNAS)
+            DAFTAR RINCIAN PINJAMAN YANG DIBERIKAN (INDIVIDU LUNAS)
             <br><br>
         </td>
     </tr>
@@ -125,7 +125,7 @@ $empty = false;
     </tr>
     <tr>
         <td width="20%" class="style9">JENIS PRODUK PINJAMAN</td>
-        <td width="70%" class="style9">: {{ $jpp->deskripsi_jpp }}</td>
+        <td width="70%" class="style9">: {{ $jpp_i->deskripsi_jpp }}</td>
     </tr>
     <tr>
         <td width="20%" class="style9 bottom">PERIODE LAPORAN</td>
@@ -156,7 +156,7 @@ $empty = false;
     </tr>
 
     <tr>
-        <th colspan="12" class="style27 top left right align-left">KELOMPOK</th>
+        <th colspan="12" class="style27 top left right align-left">INDIVIDU</th>
     </tr>
 
     @php
@@ -164,32 +164,32 @@ $empty = false;
     $alokasi = 0;
     @endphp
 
-    @foreach ($jpp->pinjaman_kelompok as $pinj)
+    @foreach ($jpp_i->pinjaman_individu as $pinj_i)
     @php
-    $k_alokasi += floatval((string) $pinj->alokasi);
-    $k_saldo += isset($pinj->saldo->saldo_pokok) ? floatval((string) $pinj->saldo->saldo_pokok) : 0;
+    $k_alokasi += floatval((string) $pinj_i->alokasi);
+    $k_saldo += isset($pinj_i->saldo->saldo_pokok) ? floatval((string) $pinj_i->saldo->saldo_pokok) : 0;
 
-    $kd_desa[] = (string) $pinj->kd_desa;
-    $desa = $pinj->kd_desa;
+    $kd_desa[] = (string) $pinj_i->kd_desa;
+    $desa = $pinj_i->kd_desa;
     @endphp
 
-    @if (array_count_values($kd_desa)[$pinj->kd_desa] <= '1' ) @if ($section !=$desa && count($kd_desa)> 1)
+    @if (array_count_values($kd_desa)[$pinj_i->kd_desa] <= '1' ) @if ($section !=$desa && count($kd_desa)> 1)
         @endif
 
         <tr>
             <td class="t l b" align="center"></td>
-            <td class="style27 left top right" colspan="11">{{ $pinj->nama_desa }}</td>
+            <td class="style27 left top right" colspan="11">{{ $pinj_i->nama_desa }}</td>
         </tr>
 
         @php
-        $kidp = $pinj['id'];
+        $kidp = $pinj_i['id'];
         $nomor = 1;
-        $section = $pinj->kd_desa;
-        $nama_desa = $pinj->sebutan_desa . ' ' . $pinj->nama_desa;
-        $apros_jasa = number_format($pinj['pros_jasa'] - $pinj['jangka'], 2);
+        $section = $pinj_i->kd_desa;
+        $nama_desa = $pinj_i->sebutan_desa . ' ' . $pinj_i->nama_desa;
+        $apros_jasa = number_format($pinj_i['pros_jasa'] - $pinj_i['jangka'], 2);
 
-        $ktgl1 = $pinj['tgl_cair'];
-        $kpenambahan = "+" . $pinj['jangka'] . " month";
+        $ktgl1 = $pinj_i['tgl_cair'];
+        $kpenambahan = "+" . $pinj_i['jangka'] . " month";
         $atgl2 = date('Y-m-d', strtotime($kpenambahan, strtotime($ktgl1)));
         $saldopinjaman = date($tgl . "-" . $kidp);
         @endphp
@@ -199,19 +199,19 @@ $empty = false;
         $jumlah_lunas += 1;
         $sum_pokok = 0;
         $sum_jasa = 0;
-        $saldo_pokok = $pinj->alokasi;
-        $saldo = $pinj->alokasi;
+        $saldo_pokok = $pinj_i->alokasi;
+        $saldo = $pinj_i->alokasi;
 
-        if ($pinj->saldo) {
-        $saldo = $pinj->alokasi - $pinj->saldo->sum_pokok;
-        $sum_pokok = $pinj->saldo->sum_pokok;
-        $sum_jasa = $pinj->saldo->sum_jasa;
+        if ($pinj_i->saldo) {
+        $saldo = $pinj_i->alokasi - $pinj_i->saldo->sum_pokok;
+        $sum_pokok = $pinj_i->saldo->sum_pokok;
+        $sum_jasa = $pinj_i->saldo->sum_jasa;
         }
 
-        $saldo_jasa = $pinj->pros_jasa == 0 ? 0 : $pinj->alokasi * ($pinj->pros_jasa / 100);
+        $saldo_jasa = $pinj_i->pros_jasa == 0 ? 0 : $pinj_i->alokasi * ($pinj_i->pros_jasa / 100);
 
-        if ($pinj->saldo) {
-        $sum_pokok = $pinj->saldo->sum_pokok;
+        if ($pinj_i->saldo) {
+        $sum_pokok = $pinj_i->saldo->sum_pokok;
         }
 
         $target_pokok = 0;
@@ -220,26 +220,26 @@ $empty = false;
         $wajib_jasa = 0;
         $angsuran_ke = 0;
 
-        if ($pinj->target) {
-        $target_pokok = $pinj->target->target_pokok;
-        $target_jasa = $pinj->target->target_jasa;
-        $wajib_pokok = $pinj->target->wajib_pokok;
-        $wajib_jasa = $pinj->target->wajib_jasa;
-        $angsuran_ke = $pinj->target->angsuran_ke;
+        if ($pinj_i->target) {
+        $target_pokok = $pinj_i->target->target_pokok;
+        $target_jasa = $pinj_i->target->target_jasa;
+        $wajib_pokok = $pinj_i->target->wajib_pokok;
+        $wajib_jasa = $pinj_i->target->wajib_jasa;
+        $angsuran_ke = $pinj_i->target->angsuran_ke;
         }
 
         $tunggakan_pokok = $target_pokok - $sum_pokok;
         if ($tunggakan_pokok < 0) { $tunggakan_pokok=0; } $tunggakan_jasa=$target_jasa - $sum_jasa; if ($tunggakan_jasa
-            < 0) { $tunggakan_jasa=0; } $pross=$saldo_pokok==0 ? 0 : $saldo_pokok / $pinj->alokasi;
+            < 0) { $tunggakan_jasa=0; } $pross=$saldo_pokok==0 ? 0 : $saldo_pokok / $pinj_i->alokasi;
 
-            if ($pinj->tgl_lunas <= $tgl_kondisi && in_array($pinj->status, ['L', 'R', 'H'])) {
+            if ($pinj_i->tgl_lunas <= $tgl_kondisi && in_array($pinj_i->status, ['L', 'R', 'H'])) {
                 $tunggakan_pokok = 0;
                 $tunggakan_jasa = 0;
                 $saldo_pokok = 0;
                 $saldo_jasa = 0;
                 }
 
-                $tgl_cair = explode('-', $pinj->tgl_cair);
+                $tgl_cair = explode('-', $pinj_i->tgl_cair);
                 $th_cair = $tgl_cair[0];
                 $bl_cair = $tgl_cair[1];
                 $tg_cair = $tgl_cair[2];
@@ -261,20 +261,15 @@ $empty = false;
                     $keterangan="Macet" ; } $jum_nunggak=$saldopinjaman==0 ? 0 : date($tgl_kondisi . "-" . $kidp); if
                     ($jum_nunggak <=0) { $jum_nunggak=0; } @endphp <tr align="right" height="15px" class="style9">
                     <td class="left top" align="center">{{ $nomor++ }}</td>
-                    <td class="left top" align="left">{{ $pinj->nama_kelompok }}-{{ $pinj->id }}</td>
+                    <td class="left top" align="left">{{ $pinj_i->namadepan }}-{{ $pinj_i->id }}</td>
                     <td class="left top" align="left">Pinjaman Modal Kerja</td>
-                    <td class="left top" align="center">{{ $pinj->angsuran_pokok->nama_sistem }}</td>
-                                            @php
-        $ktgl1 = $pinj->tgl_cair;
-        $kpenambahan ="+".$pinj->jangka." month";
-        $ktgl2 = date('Y-m-d', strtotime($kpenambahan, strtotime($ktgl1)));
-                                            @endphp
-                    <td class="left top" align="center">{{ Tanggal::tglIndo($ktgl1) }}</td>
-                    <td class="left top" align="center">{{ Tanggal::tglIndo($ktgl2) }}</td>
+                    <td class="left top" align="center">{{ $pinj_i->angsuran_pokok->nama_sistem }}</td>
+                    <td class="left top" align="center">{{ Tanggal::tglIndo($pinj_i->tgl_cair) }}</td>
+                    <td class="left top" align="center">{{ Tanggal::tglIndo($atgl2) }}</td>
                     <td class="left top">{{ $apros_jasa }}%</td>
                     <td class="left top" align="center">per bulan</td>
-                    <td class="left top">{{ number_format($pinj->alokasi) }}</td>
-                    <td class="left top">{{ $pinj->saldo ? number_format($pinj->saldo->saldo_pokok) : '0' }}</td>
+                    <td class="left top">{{ number_format($pinj_i->alokasi) }}</td>
+                    <td class="left top">{{ $pinj_i->saldo ? number_format($pinj_i->saldo->saldo_pokok) : '0' }}</td>
                     <td class="left top">{{ $kolek }}</td>
                     <td class="left top right" align="left">{{ $keterangan }}</td>
                     </tr>
@@ -283,7 +278,7 @@ $empty = false;
                     @if (count($kd_desa) > 0)
                     <tr class="style9">
                         <th colspan="8" class="left top" align="center" style="background:rgba(0,0,0, 0.3);">
-                            TOTAL ({{ $jumlah_lunas }} Kelompok)
+                            TOTAL ({{ $jumlah_lunas }} Anggota)
                         </th>
                         <th class="left top" align="right">{{ number_format($k_alokasi) }}</th>
                         <th class="left top" align="right">{{ number_format($k_saldo) }}</th>
@@ -292,9 +287,9 @@ $empty = false;
 
                     <tr>
                         <td class="style10 top" colspan="12">
-                            <b>Keterangan</b>: Data yang ditampilkan diatas merupakan Kelompok aktif pada tahun berjalan
+                            <b>Keterangan</b>: Data yang ditampilkan diatas merupakan Individu aktif pada tahun berjalan
                             {{ $tahun }},
-                            untuk menampilkan data kelompok aktif tahun lalu dapat memilih mode tahun lalu {{ $y12 }}
+                            untuk menampilkan data Individu aktif tahun lalu dapat memilih mode tahun lalu {{ $y12 }}
                         </td>
                     </tr>
                     @endif

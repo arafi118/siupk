@@ -167,15 +167,17 @@ $t_kolek3 = 0;
                                 }
                                 $kolek = round($_kolek + ($selisih - $angsuran_ke));
 
-                                if ($kolek < 6) { $kolek1=$saldo_pokok; $kolek2=0; $kolek3=0; $kolek4=0; $kolek5=0; }
-                                    elseif ($kolek>= 6 && $kolek < 12) { $kolek1=0; $kolek2=$saldo_pokok; $kolek3=0;
-                                        $kolek4=0; $kolek5=0; } elseif ($kolek>= 12) {
-                                        $kolek1 = 0;
-                                        $kolek2 = 0;
-                                        $kolek3 = 0;
-                                        $kolek4 = 0;
-                                        $kolek5 = $saldo_pokok;
-                                        }
+    if ($kolek < 6) {
+        $kolek1=$saldo_pokok; $kolek2=0; $kolek3=0; $kolek4=0; $kolek5=0; }
+    elseif ($kolek>= 6 && $kolek < 12) {
+        $kolek1=0; $kolek2=$saldo_pokok; $kolek3=0; $kolek4=0; $kolek5=0; }
+    elseif($kolek>= 12) {
+            $kolek1 = 0;
+            $kolek2 = 0;
+            $kolek5 = 0;
+            $kolek4 = 0;
+            $kolek3 = $saldo_pokok;
+            }
 
                                         @endphp
 
@@ -445,9 +447,7 @@ $t_kolek3 = 0;
                                         $kolek4=0; $kolek5=0; } elseif ($kolek>= 12) {
                                         $kolek1 = 0;
                                         $kolek2 = 0;
-                                        $kolek3 = 0;
-                                        $kolek4 = 0;
-                                        $kolek5 = $saldo_pokok;
+                                        $kolek3 = $saldo_pokok;
                                         }
                                         @endphp
 
