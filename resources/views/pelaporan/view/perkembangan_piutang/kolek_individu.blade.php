@@ -232,7 +232,7 @@
                     <td class="t l b" align="center">{{ $nomor++ }}</td>
                     <td class="t l b" align="left">{{ $pinkel->namadepan }} - {{ $pinkel->id }}</td>
                     <td class="t l b" align="right">{{ number_format($saldo_pokok) }}</td>
-                    <td class="t l b" align="right">{{ number_format($tunggakan_pokok) }}</td>
+                    <td class="t l b" align="right">{{ number_format($tunggakan_pokok) }} ({{$kolek}})</td>
                     <td class="t l b" align="right">{{ number_format($kolek1) }}</td>
                     <td class="t l b" align="right">{{ number_format($kolek2) }}</td>
                     <td class="t l b " align="right">{{ number_format($kolek3) }}</td>
