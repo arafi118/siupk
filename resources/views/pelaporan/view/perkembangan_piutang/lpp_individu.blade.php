@@ -226,7 +226,7 @@
                     }
 
                     $pros_jasa = $pinj_i->pros_jasa == 0 ? 0 : $pinj_i->pros_jasa / $pinj_i->jangka;
-                    $angke = $pinj_i->target->angsuran_ke??0;
+                    $angke = $pinj_i->target->angsuran_ke ?? 0;
                 @endphp
 
                 <tr>

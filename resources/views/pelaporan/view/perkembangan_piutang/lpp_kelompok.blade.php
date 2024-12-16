@@ -226,6 +226,7 @@
                     }
 
                     $pros_jasa = $pinkel->pros_jasa == 0 ? 0 : $pinkel->pros_jasa / $pinkel->jangka;
+                    $angke = $pinkel->target->angsuran_ke ?? 0;
                 @endphp
 
                 <tr>
@@ -234,7 +235,7 @@
                         {{ $pinkel->id }}</td>
                     <td class="t l b" align="center">{{ Tanggal::tglIndo($pinkel->tgl_cair, 'DD/MM/YY') }}</td>
                     <td class="t l b" align="center">
-                        <small>{{ $pinkel->jangka }}/{{ $pinkel->angsuran_pokok->sistem }}*{{number_format($pinkel->target->angsuran_ke /$pinkel->angsuran_pokok->sistem,0)  }}</small>
+                        <small>{{ $pinkel->jangka }}/{{ $pinkel->angsuran_pokok->sistem }}*{{number_format($angke /$pinkel->angsuran_pokok->sistem,0)  }}</small>
                     </td>
                     <td class="t l b" align="right">{{ number_format($pinkel->alokasi) }}</td>
                             <td class="t l b" align="right">
