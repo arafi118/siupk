@@ -226,6 +226,7 @@
                     }
 
                     $pros_jasa = $pinj_i->pros_jasa == 0 ? 0 : $pinj_i->pros_jasa / $pinj_i->jangka;
+                    $angke = $pinj_i->target->angsuran_ke??0;
                 @endphp
 
                 <tr>
@@ -234,7 +235,7 @@
                         {{ $pinj_i->id }}</td>
                     <td class="t l b" align="center">{{ Tanggal::tglIndo($pinj_i->tgl_cair, 'DD/MM/YY') }}</td>
                     <td class="t l b" align="center">
-                        <small>{{ $pinj_i->jangka }}/{{ $pinj_i->angsuran_pokok->sistem }}*{{number_format($pinj_i->target->angsuran_ke /$pinj_i->angsuran_pokok->sistem,0)  }}</small>
+                        <small>{{ $pinj_i->jangka }}/{{ $pinj_i->angsuran_pokok->sistem }}*{{number_format( $angke/$pinj_i->angsuran_pokok->sistem,0)  }}</small>
                     </td>
                     </td>
                     <td class="t l b" align="right">{{ number_format($pinj_i->alokasi) }}</td>

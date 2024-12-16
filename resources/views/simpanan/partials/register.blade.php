@@ -5,6 +5,10 @@
         </div>
         <h6 class="mb-0">
             Register Simpanan {{ $anggota->namadepan }}
+        <button id="informasi" class="btn btn-sm" style="font-size: 1rem; padding: 8px 12px;">
+            <i class="material-icons" style="font-size: 24px; margin-right: 5px;">info</i>
+        </button>
+        <button type="submit" id="SimpanProposal" class="btn btn-info btn-sm float-end">Simpan Proposal</button>
         </h6>
         <div class="text-xs">
             {{ $anggota->d->sebutan_desa->sebutan_desa }} {{ $anggota->d->nama_desa }},
