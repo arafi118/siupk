@@ -135,6 +135,19 @@ class AnggotaController extends Controller
 
         return view('penduduk.create')->with(compact('desa_dipilih', 'desa', 'jenis_usaha', 'jenis_usaha_dipilih', 'hubungan', 'hubungan_dipilih', 'nik', 'jk_dipilih', 'value_tanggal'));
     }
+    
+    public function edits(Request $request, $nia)
+    {
+        dd($nia);
+        $anggotas = anggotas::where('nik', $nia->nik)->get();
+
+        $jenis_jasa_dipilih = $perguliran->jenis_jasa;
+        $sistem_angsuran_pokok = $perguliran->sistem_angsuran;
+        $sistem_angsuran_jasa = $perguliran->sa_jasa;
+        $jenis_pp_dipilih = $perguliran->jenis_pp;
+
+        return view('penduduk.details')->with(compact('nia','anggotas'));
+    }
 
     /**
      * Store a newly created resource in storage.

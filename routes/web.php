@@ -166,6 +166,8 @@ Route::get('/register_proposal/{id_kel}', [PinjamanKelompokController::class, 'r
 Route::get('/daftar_kelompok', [PinjamanKelompokController::class, 'DaftarKelompok'])->middleware('auth');
 Route::post('/update-catatan-verifikasi/{id}', [PinjamanAnggotaController::class, 'updateCatatanVerifikasi']);
 
+Route::post('/anggota/edits/{nia}', [AnggotaController::class, 'edits']);
+
 
 Route::get('/detail/{perguliran}', [PinjamanKelompokController::class, 'detail'])->middleware('auth');
 Route::get('/perguliran/proposal', [PinjamanKelompokController::class, 'proposal'])->middleware('auth');

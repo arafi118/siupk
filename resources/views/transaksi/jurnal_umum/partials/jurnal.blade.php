@@ -255,7 +255,7 @@
                             </button>
                         @endif
 
-                        @if ($is_dir)
+                        @if ($is_dir || Session::get('lokasi') == 3)
                             <button type="button" data-idt="{{ $trx->idt }}"
                                 class="btn btn-tumblr btn-icon-only btn-tooltip btn-reversal" data-bs-toggle="tooltip"
                                 data-bs-placement="top" title="Reversal" data-container="body"

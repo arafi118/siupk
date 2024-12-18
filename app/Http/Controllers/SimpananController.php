@@ -194,6 +194,13 @@ class SimpananController extends Controller
         $title = 'Cetak KOP buku ' . $simpanan->anggota->namadepan;
         return view('simpanan.partials.cetak_kop')->with(compact('title', 'simpanan'));
     }
+
+    public function info(Simpanan $simpanan)
+    {
+        $simpanan = $simpanan->where('id', $simpanan->id)->with(['anggota','anggotas', 'js'])->first();
+        $title = 'Cetak KOP buku ' . $simpanan->anggota->namadepan;
+        return view('simpanan.partials.cetak_kop')->with(compact('title', 'simpanan'));
+    }
      
     public function koran($cif, $bulankop, $tahunkop)
     {

@@ -8,7 +8,7 @@
         <button id="informasi" class="btn btn-sm" style="font-size: 1rem; padding: 8px 12px;">
             <i class="material-icons" style="font-size: 24px; margin-right: 5px;">info</i>
         </button>
-        <button type="submit" id="form_simpanan" class="btn btn-warning btn-sm float-end">Form Simpanan</button>
+        <button type="submit" name="report" class="btn btn-primary btn-sm float-end">Form Simpanan</button>
         </h6>
         <div class="text-xs">
             {{ $anggota->d->sebutan_desa->sebutan_desa }} {{ $anggota->d->nama_desa }},
