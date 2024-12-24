@@ -5,10 +5,10 @@
         </div>
         <h6 class="mb-0">
             Register Simpanan {{ $anggota->namadepan }}
-        <button id="informasi" class="btn btn-sm" style="font-size: 1rem; padding: 8px 12px;">
-            <i class="material-icons" style="font-size: 24px; margin-right: 5px;">info</i>
+        <button id="informasi" data-bs-toggle="modal" class="btn btn-sm" style="font-size: 1rem; padding: 8px 12px;" data-bs-target="#modal-info">
+            <i class="fas fa-edit"></i>
         </button>
-        <button type="submit" name="report" class="btn btn-primary btn-sm float-end">Form Simpanan</button>
+        <button  onclick="window.open('/form_simp/')" class="btn btn-primary btn-sm float-end"><i class="fas fa-file-alt"></i> Form Simpanan</button>
         </h6>
         <div class="text-xs">
             {{ $anggota->d->sebutan_desa->sebutan_desa }} {{ $anggota->d->nama_desa }},
@@ -41,6 +41,165 @@
         <button type="submit" id="SimpanProposal" class="btn btn-github btn-sm float-end">Simpan Proposal</button>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="modal-info" tabindex="-1" role="dialog" aria-labelledby="modal-info" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="NamaDesa">
+                    Detail Anggota [nama_anggota]
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <div class="modal-body">
+                <form action="/database/desa/" method="post" id="FormEditDesa">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="nia" id="nia" value="">
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="input-group input-group-static my-3">
+                                <label for="nama_desa">Nama Panggilan (alias)</label>
+                                <input type="text" 
+                                       name="nama_desa" 
+                                       id="nama_desa" 
+                                       class="form-control"
+                                       value="">
+                                <small class="text-danger" id="msg_nama_desa"></small>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="input-group input-group-static my-3">
+                                <label for="nama_desa">Agama</label>
+                                <input type="text" 
+                                       name="nama_desa" 
+                                       id="nama_desa" 
+                                       class="form-control"
+                                       value="">
+                                <small class="text-danger" id="msg_nama_desa"></small>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="input-group input-group-static my-3">
+                                <label for="telp_desa">Status Pernikahan</label>
+                                <input type="text" 
+                                       name="telp_desa" 
+                                       id="telp_desa" 
+                                       class="form-control"
+                                       value="">
+                                <small class="text-danger" id="msg_telp_desa"></small>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="input-group input-group-static my-3">
+                                <label for="alamat_desa">Pendidikan Terakhir</label>
+                                <input type="text" 
+                                       name="alamat_desa" 
+                                       id="alamat_desa" 
+                                       class="form-control"
+                                       value="">
+                                <small class="text-danger" id="msg_alamat_desa"></small>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="input-group input-group-static my-3">
+                                <label for="nama_desa">NPWP</label>
+                                <input type="text" 
+                                       name="nama_desa" 
+                                       id="nama_desa" 
+                                       class="form-control"
+                                       value="">
+                                <small class="text-danger" id="msg_nama_desa"></small>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="input-group input-group-static my-3">
+                                <label for="telp_desa">Penghasilan</label>
+                                <input type="text" 
+                                       name="telp_desa" 
+                                       id="telp_desa" 
+                                       class="form-control"
+                                       value="">
+                                <small class="text-danger" id="msg_telp_desa"></small>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="input-group input-group-static my-3">
+                                <label for="alamat_desa">Sumber Penghasilan</label>
+                                <input type="text" 
+                                       name="alamat_desa" 
+                                       id="alamat_desa" 
+                                       class="form-control"
+                                       value="">
+                                <small class="text-danger" id="msg_alamat_desa"></small>
+                            </div>
+                        </div>
+                    </div>
+
+                    lfp ult dps
+                    
+
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="input-group input-group-static my-3">
+                                <label for="nama_desa">Nama Gadis Ibu Kandung</label>
+                                <input type="text" 
+                                       name="nama_desa" 
+                                       id="nama_desa" 
+                                       class="form-control"
+                                       value="">
+                                <small class="text-danger" id="msg_nama_desa"></small>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
+                <button type="submit" id="simpan-anggotas" class="btn btn-sm btn-github">Simpan</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script>
     $(document).ready(function() {
