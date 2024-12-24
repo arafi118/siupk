@@ -390,8 +390,8 @@ class TransaksiController extends Controller
             // Cadangan Kerugian Piutang
             if (Keuangan::startWith($rek->kode_akun, '1.1.04')) {
                 $jumlah = floatval(str_replace(',', '', str_replace('.00', '', $cadangan_resiko[$rek->kode_akun])));
+                $keterangan = $rek->nama_akun . ' tahun ' . $tahun;
                 if ($jumlah != 0) {
-                    $keterangan = $rek->nama_akun . ' tahun ' . $tahun;
                     $trx['insert'][] = [
                         'tgl_transaksi' => $data['tgl_mad'],
                         'rekening_debit' => '3.2.01.01',
@@ -414,8 +414,8 @@ class TransaksiController extends Controller
             // Alokasi Surplus Bersih
             else if (Keuangan::startWith($rek->kode_akun, '2.1.01')) {
                 $jumlah = str_replace(',', '', str_replace('.00', '', $surplus_bersih[$rek->kode_akun]));
-                if ($jumlah != 0) {
                     $keterangan = str_replace('Utang', '', $rek->nama_akun) . ' tahun ' . $tahun;
+                if ($jumlah != 0) {
                     $trx['insert'][] = [
                         'tgl_transaksi' => $data['tgl_mad'],
                         'rekening_debit' => '3.2.01.01',
