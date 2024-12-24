@@ -1,16 +1,6 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\app",
-    "\\app\\Models",
-    "\\resources",
-    "\\resources\\views",
-    "\\resources\\views\\simpanan",
-    "\\resources\\views\\simpanan\\partials",
-    "\\resources\\views\\transaksi",
-    "\\resources\\views\\transaksi\\jurnal_angsuran",
-    "\\resources\\views\\transaksi\\jurnal_angsuran\\individu"
+    ""
   ],
-  "SelectedNode": "\\resources\\views\\simpanan\\create.blade.php",
   "PreviewInSolutionExplorer": false
 }

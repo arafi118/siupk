@@ -258,7 +258,7 @@
                         @if ($is_dir || Session::get('lokasi') == 3)
                             <button type="button" data-idt="{{ $trx->idt }}"
                                 class="btn btn-tumblr btn-icon-only btn-tooltip btn-reversal" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Reversal" data-container="body"
+                                data-bs-placement="top" title="Reversal" data-container="body"1
                                 data-animation="true">
                                 <span class="btn-inner--icon"><i class="fas fa-code-pull-request"></i></span>
                             </button>
