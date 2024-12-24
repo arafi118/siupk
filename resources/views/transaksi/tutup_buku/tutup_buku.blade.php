@@ -68,7 +68,7 @@
                                     <tbody>
                                         <input type="hidden" name="total_cadangan_resiko" id="total_cadangan_resiko"
                                             class="form-control total form-control-sm text-end" value="0">
-                                        @foreach ($cadangan_resiko as $cr)
+                                        @forelse ($cadangan_resiko as $cr)
                                             <tr>
                                                 <td>{{ $cr->nama_akun }}</td>
                                                 <td>
@@ -80,7 +80,11 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @empty
+                                            <input type="hiden" name="cadangan_resiko[0]" id="0"
+                                                class="form-control nominal cadangan_resiko form-control-sm text-end"
+                                                value="0.00">
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
@@ -108,21 +112,19 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($kec->saldo as $saldo)
-                                            @if (substr($saldo->id, -1) <= 4)
-                                                <tr>
-                                                    <td>{{ $title_form[substr($saldo->id, -1)] }}</td>
-                                                    <td>
-                                                        <div class="input-group input-group-outline my-0">
-                                                            <input type="text"
-                                                                name="surplus_bersih[{{ substr($saldo->id, -1) }}]"
-                                                                id="surplus_bersih_{{ substr($saldo->id, -1) }}"
-                                                                class="form-control nominal surplus_bersih form-control-sm text-end"
-                                                                value="0.00">
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endif
+                                        @foreach ($pembagian_surplus as $saldo)
+                                            <tr>
+                                                <td>{{ $saldo->nama_akun }}</td>
+                                                <td>
+                                                    <div class="input-group input-group-outline my-0">
+                                                        <input type="text"
+                                                            name="surplus_bersih[{{ $saldo->kode_akun }}]"
+                                                            id="surplus_bersih_{{ $saldo->kode_akun }}"
+                                                            class="form-control nominal surplus_bersih form-control-sm text-end"
+                                                            value="0.00">
+                                                    </div>
+                                                </td>
+                                            </tr>
                                         @endforeach
 
                                         <input type="hidden" class="total" name="total_surplus_bersih"
@@ -268,7 +270,7 @@
                 success: function(result) {
                     if (result.success) {
                         Swal.fire('Selamat', result.msg, 'success').then(() => {
-                            // window.location.href = '/transaksi/tutup_buku'
+                            window.location.href = '/transaksi/tutup_buku'
                         })
                     }
                 }

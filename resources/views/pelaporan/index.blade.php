@@ -94,9 +94,9 @@
                 <input type="hidden" name="type" id="type" value="pdf">
             </form>
 
-                <button type="button" id="SimpanSaldo" class="btn btn-sm btn-danger me-2">Simpan Saldo</button>
-                <button type="button" id="Excel" class="btn btn-sm btn-success me-2">Excel</button>
-                <button type="button" id="Preview" class="btn btn-sm btn-github">Preview</button>
+            <button type="button" id="SimpanSaldo" class="btn btn-sm btn-danger me-2">Simpan Saldo</button>
+            <button type="button" id="Excel" class="btn btn-sm btn-success me-2">Excel</button>
+            <button type="button" id="Preview" class="btn btn-sm btn-github">Preview</button>
         </div>
     </div>
 
@@ -221,7 +221,7 @@
                 timerProgressBar: true,
                 allowOutsideClick: false,
                 didOpen: () => {
-                    Swal.showLoading(); 
+                    Swal.showLoading();
                 }
             })
 
