@@ -9,7 +9,7 @@
     if ($invoice->count() > 0) {
         $jumlah = $invoice->count();
     }
-    
+
 @endphp
 
 <!DOCTYPE html>
@@ -82,13 +82,18 @@
             transition: width 0.3s ease;
         }
 
+        .flatpickr-wrapper {
+            width: 100%;
+        }
+
         #html5-qrcode-anchor-scan-type-change,
         #html5-qrcode-button-camera-stop,
         #html5-qrcode-button-camera-start {
             display: none !important;
         }
 
-        .swal2-container {
+        .swal2-container,
+        .swal2-html-container {
             z-index: 9999999 !important;
         }
     </style>

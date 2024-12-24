@@ -319,10 +319,11 @@ class TransaksiController extends Controller
             'surplus_bersih',
             'total_surplus_bersih',
             'total_cadangan_resiko',
-            'cadangan_resiko'
+            'cadangan_resiko',
+            'tgl_mad'
         ]);
 
-        // dd($data);
+        $data['tgl_mad'] = Tanggal::tglNasional($data['tgl_mad']);
         $tanggal = $request->tgl_kondisi ?: date('Y-m-d');
         $tahun = Tanggal::tahun($tanggal);
         $tahun_tb = $tahun + 1;
@@ -386,16 +387,13 @@ class TransaksiController extends Controller
                 $saldo_kredit += floatval($alokasi_laba['3.2.01.01']);
             }
 
-            $tgl_tutup_buku = date('Y-m-d', strtotime($tahun_tb . '-01-01'));
-            $tgl_transaksi = (date('Y-m-d') < $tgl_tutup_buku) ? $tgl_tutup_buku : date('Y-m-d');
-
             // Cadangan Kerugian Piutang
             if (Keuangan::startWith($rek->kode_akun, '1.1.04')) {
                 $jumlah = floatval(str_replace(',', '', str_replace('.00', '', $cadangan_resiko[$rek->kode_akun])));
                 if ($jumlah != 0) {
                     $keterangan = $rek->nama_akun . ' tahun ' . $tahun;
                     $trx['insert'][] = [
-                        'tgl_transaksi' => $tgl_transaksi,
+                        'tgl_transaksi' => $data['tgl_mad'],
                         'rekening_debit' => '3.2.01.01',
                         'rekening_kredit' => $rek->kode_akun,
                         'idtp' => '0',
@@ -419,7 +417,7 @@ class TransaksiController extends Controller
                 if ($jumlah != 0) {
                     $keterangan = str_replace('Utang', '', $rek->nama_akun) . ' tahun ' . $tahun;
                     $trx['insert'][] = [
-                        'tgl_transaksi' => $tgl_transaksi,
+                        'tgl_transaksi' => $data['tgl_mad'],
                         'rekening_debit' => '3.2.01.01',
                         'rekening_kredit' => $rek->kode_akun,
                         'idtp' => '0',
