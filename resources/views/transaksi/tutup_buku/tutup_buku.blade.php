@@ -42,6 +42,7 @@
             <form action="/transaksi/simpan_laba" method="post" id="SimpanAlokasiLaba">
                 @csrf
                 <input type="hidden" name="tgl_kondisi" id="tgl_kondisi" value="{{ $tgl_kondisi }}">
+                <input type="hidden" name="tgl_mad" id="tgl_mad">
                 <div class="row">
                     <input type="hidden" name="surplus" id="surplus" value="{{ $surplus }}">
                     <div class="card">
@@ -68,7 +69,7 @@
                                     <tbody>
                                         <input type="hidden" name="total_cadangan_resiko" id="total_cadangan_resiko"
                                             class="form-control total form-control-sm text-end" value="0">
-                                        @foreach ($cadangan_resiko as $cr)
+                                        @forelse ($cadangan_resiko as $cr)
                                             <tr>
                                                 <td>{{ $cr->nama_akun }}</td>
                                                 <td>
@@ -80,7 +81,11 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @empty
+                                            <input type="hiden" name="cadangan_resiko[0]" id="0"
+                                                class="form-control nominal cadangan_resiko form-control-sm text-end"
+                                                value="0.00">
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
@@ -108,21 +113,19 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($kec->saldo as $saldo)
-                                            @if (substr($saldo->id, -1) <= 4)
-                                                <tr>
-                                                    <td>{{ $title_form[substr($saldo->id, -1)] }}</td>
-                                                    <td>
-                                                        <div class="input-group input-group-outline my-0">
-                                                            <input type="text"
-                                                                name="surplus_bersih[{{ substr($saldo->id, -1) }}]"
-                                                                id="surplus_bersih_{{ substr($saldo->id, -1) }}"
-                                                                class="form-control nominal surplus_bersih form-control-sm text-end"
-                                                                value="0.00">
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endif
+                                        @foreach ($pembagian_surplus as $saldo)
+                                            <tr>
+                                                <td>{{ $saldo->nama_akun }}</td>
+                                                <td>
+                                                    <div class="input-group input-group-outline my-0">
+                                                        <input type="text"
+                                                            name="surplus_bersih[{{ $saldo->kode_akun }}]"
+                                                            id="surplus_bersih_{{ $saldo->kode_akun }}"
+                                                            class="form-control nominal surplus_bersih form-control-sm text-end"
+                                                            value="0.00">
+                                                    </div>
+                                                </td>
+                                            </tr>
                                         @endforeach
 
                                         <input type="hidden" class="total" name="total_surplus_bersih"
@@ -257,21 +260,50 @@
             $('#laba_ditahan').val(formatter.format(sisa_surplus))
             $('[data-id=total_laba_ditahan]').html(formatter.format(sisa_surplus))
         })
+
         $(document).on('click', '#btnSimpanLaba', function(e) {
             e.preventDefault()
 
-            var form = $('#SimpanAlokasiLaba')
-            $.ajax({
-                type: form.attr('method'),
-                url: form.attr('action'),
-                data: form.serialize(),
-                success: function(result) {
-                    if (result.success) {
-                        Swal.fire('Selamat', result.msg, 'success').then(() => {
-                            // window.location.href = '/transaksi/tutup_buku'
-                        })
-                    }
+            Swal.fire({
+                title: 'Masukkan Tanggal MAD',
+                html: `<div class="input-group input-group-static"><input autocomplete="off" type="text" name="tanggal" id="tanggal" class="form-control date" value="{{ date('d/m/Y') }}"></div>`,
+                showDenyButton: true,
+                confirmButtonText: "Simpan",
+                denyButtonText: "Batal",
+                stopKeydownPropagation: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#tgl_mad').val($('#tanggal').val())
+
+                    var loading = Swal.fire({
+                        title: "Mohon Menunggu..",
+                        html: "Menyimpan Alokasi Pembagian Laba",
+                        timerProgressBar: true,
+                        allowOutsideClick: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    })
+
+                    var form = $('#SimpanAlokasiLaba')
+                    $.ajax({
+                        type: form.attr('method'),
+                        url: form.attr('action'),
+                        data: form.serialize(),
+                        success: function(result) {
+                            if (result.success) {
+                                Swal.fire('Selamat', result.msg, 'success').then(() => {
+                                    window.location.href = '/transaksi/tutup_buku'
+                                })
+                            }
+                        }
+                    })
                 }
+            });
+
+            flatpickr("#tanggal", {
+                dateFormat: "d/m/Y",
+                static: true
             })
         })
     </script>

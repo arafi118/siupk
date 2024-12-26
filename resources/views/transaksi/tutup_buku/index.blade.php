@@ -48,6 +48,12 @@
 @endsection
 
 @section('script')
+    @if (Session::get('success'))
+        <script>
+            Swal.fire('Selamat', '{{ Session::get('success') }}', 'success')
+        </script>
+    @endif
+
     <script>
         var tahun = "{{ date('Y') }}"
         var bulan = "{{ date('m') }}"
