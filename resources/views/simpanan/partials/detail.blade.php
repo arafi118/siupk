@@ -9,7 +9,7 @@
                         <div class="col-md-6">
                             <div class="card-body p-3">
                                 <h5 class="mb-1">
-                                    Nasabah {{ $nia->anggota->namadepan }} CIF. {{$nia->id}}
+                                    Nasabah {{ $nia->anggota->namadepan }} CIF. {{$nia->id}}S>
                                     ({{ $nia->js->nama_js }})
                                 </h5>
                                 <p class="mb-0">
@@ -30,6 +30,7 @@
                                 <button class="btn btn-warning btn-sm float-end ms-2" onclick="window.open('/cetak_kop/{{ $nia->id }}')" type="button">
                                     <i class="fa fa-print"></i> Cetak KOP Buku
                                 </button>
+                                <button  onclick="window.open('/form_simp/')" class="btn btn-primary btn-sm float-end"><i class="fas fa-file-alt"></i> Form Simpanan</button>
                             </div>
                         </div>
                     </div>

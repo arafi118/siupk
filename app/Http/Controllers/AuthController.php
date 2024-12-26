@@ -27,7 +27,7 @@ class AuthController extends Controller
 
         // Handle URL lokal
         if (request()->server('SERVER_NAME') === '127.0.0.1' || request()->server('SERVER_NAME') === 'localhost') {
-            $kec = Kecamatan::where('id', '18')
+            $kec = Kecamatan::where('id', '3')
                 ->with('kabupaten')
                 ->first();
         } else {
@@ -72,7 +72,7 @@ class AuthController extends Controller
         }
 
         if (request()->server('SERVER_NAME') === '127.0.0.1' || request()->server('SERVER_NAME') === 'localhost') {
-            $kec = Kecamatan::where('id', '18')
+            $kec = Kecamatan::where('id', '3')
                 ->with('kabupaten')
                 ->first();
         } else {
@@ -173,7 +173,7 @@ class AuthController extends Controller
         $password = $uname;
 
         if (request()->server('SERVER_NAME') === '127.0.0.1' || request()->server('SERVER_NAME') === 'localhost') {
-            $kec = Kecamatan::where('id', '18')
+            $kec = Kecamatan::where('id', '3')
                 ->first();
         } else {
             $kec = Kecamatan::where('web_kec', $url)

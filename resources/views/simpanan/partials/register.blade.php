@@ -172,9 +172,6 @@
                         </div>
                     </div>
 
-                    lfp ult dps
-                    
-
                     
                     <div class="row">
                         <div class="col-md-4">

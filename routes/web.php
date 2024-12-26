@@ -370,7 +370,9 @@ Route::get('/cetak_kuitansi/{idt}', [SimpananController::class, 'cetakKwitansi']
 
 Route::get('/cetak_koran/{cif}/{bulankop}/{tahunkop}', [SimpananController::class, 'koran'])->middleware('auth');
 
-Route::get('/form_simp/{nia??0}', [SimpananController::class, 'formulir'])->middleware('auth');
+Route::get('/form_simp', [SimpananController::class, 'formulir0'])->middleware('auth');
+
+Route::get('/form_simp/{nia}', [SimpananController::class, 'formulir'])->middleware('auth');
 
 Route::get('/simpanan/get-transaksi', [SimpananController::class, 'getTransaksi'])->middleware('auth');
 

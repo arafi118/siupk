@@ -227,14 +227,23 @@ class SimpananController extends Controller
     }
     
      
+    public function formulir0()
+    {
+        $anggota = '';
+        $title = 'Cetak Rekening formulir ';
+
+        return view('simpanan.partials.cetak_formulir')->with(compact('title','anggota'));
+    }
+
+     
     public function formulir($nia)
     {
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
-        $anggota = Anggota::where('id', nia)->with(['anggotas')->first();
+        $anggota = Anggota::where('id', $nia)->with(['anggotas'])->first();
 
-        $title = 'Cetak Rekening formulir ' . $simpanan->anggota->namadepan;
+        $title = 'Cetak Rekening formulir ';
 
-        return view('simpanan.partials.cetak_formulir')->with(compact('title', '$kec', '$anggota'));
+        return view('simpanan.partials.cetak_formulir')->with(compact('title', 'kec', 'anggota'));
     }
 
     public function cetakKwitansi($idt)
