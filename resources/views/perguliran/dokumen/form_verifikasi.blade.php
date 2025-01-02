@@ -133,7 +133,7 @@
             <td>Petugas/PJ</td>
             <td>:</td>
             <td>
-                <b> {{ $pinkel->user->namadepan }} {{ $pinkel->user->namabelakang }}</b>
+                <b> {{ $pinkel->user->namadepan ?? ''}} {{ $pinkel->user->namabelakang ?? '' }}</b>
             </td>
         </tr>
         <tr>
@@ -155,7 +155,7 @@
 
         </tr>
         <tr>
-            <td align="center"><b>Data Proposal</b></td>
+            <td align="center">{{ $pinkel->status == 'P' ? '<b>Data Proposal</b>' : 'Data Proposal' }}</td>
             <td align="center">{{ Tanggal::tglLatin($pinkel->tgl_proposal) }}</td>
             <td align="right">{{ number_format($pinkel->proposal) }}</td>
             <td align="center">{{ $pinkel->pros_jasa / $pinkel->jangka }}%/{{ $pinkel->jasa->nama_jj }}</td>
@@ -163,12 +163,12 @@
             <td align="center">{{ $pinkel->sis_pokok->nama_sistem }}</td>
         </tr>
         <tr>
-            <td align="center">Data Verifikasi</td>
-            <td align="center">&nbsp;</td>
-            <td align="right">&nbsp;</td>
-            <td align="center">&nbsp;</td>
-            <td align="center">&nbsp;</td>
-            <td align="center">&nbsp;</td>
+            <td align="center">{{ $pinkel->status != 'P' ? '<b>Data Verifikasi</b>' : 'Data Verifikasi' }}</td>
+            <td align="center">{{ $pinkel->status == 'P' ? '' : Tanggal::tglLatin($pinkel->tgl_verifikasi) }}</td>
+            <td align="right">{{ $pinkel->status == 'P' ? '' : number_format($pinkel->verifikasi) }}</td>
+            <td align="center">{{ $pinkel->status == 'P' ? '' : $pinkel->pros_jasa / $pinkel->jangka }}%/{{ $pinkel->status == 'P' ? '' : $pinkel->jasa->nama_jj }}</td>
+            <td align="center">{{ $pinkel->status == 'P' ? '' : $pinkel->jangka }} {{ $pinkel->status == 'P' ? '' : 'bulan' }}</td>
+            <td align="center">{{ $pinkel->status == 'P' ? '' : $pinkel->sis_pokok->nama_sistem }}</td>
         </tr>
         <tr>
             <td colspan="6" height="20">
@@ -232,29 +232,6 @@
             </tr>
         @endforeach
 
-        @foreach ($data_nia as $nia => $val)
-            @php
-                $proposal_lalu += $val['alokasi'];
-                $pinjaman_lalu = $val['alokasi'];
-            @endphp
-
-            <tr>
-                <td align="center">{{ ++$no }}</td>
-                <td>{{ $val['nama'] }}</td>
-                <td align="right">{{ number_format($pinjaman_lalu) }}</td>
-                <td align="right">{{ number_format(0) }}</td>
-                <td align="right">
-                    {!! $statusDokumen != 'P' || $pinkel->status == 'V' ? number_format(0) : '&nbsp;' !!}
-                </td>
-                <td align="right">
-                    {!! $statusDokumen == 'W' || $statusDokumen == 'A' ? number_format(0) : '&nbsp;' !!}
-                </td>
-                <td>
-                    &nbsp;
-                </td>
-            </tr>
-        @endforeach
-
         <tr>
             <td align="center" colspan="2">
                 <b>JUMLAH</b>
@@ -284,7 +261,7 @@
                     dengan hasil survey lapangan bahwa kelompok dengan identitas tersebut di atas <b>ADA/TIDAK ADA</b>
                     keberadaannya dan dapat dipertanggungjawabkan sesuai dengan peraturan yang berlaku. Serta <b>LAYAK/TIDAK
                         LAYAK</b> untuk diberikan pinjaman sesuai dengan hasil rekomendasi Verifikasi di atas. Form ini
-                    digunakan sebagai dasar Verified pada SI DBM.
+                    digunakan sebagai dasar Verified pada SI UPK.
                 </div>
             </td>
             <td width="50%" align="justify" style="vertical-align: top;">

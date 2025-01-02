@@ -1,74 +1,48 @@
 @extends('layouts.base')
 
 @section('content')
-<style>
-    .status-active {
-        color: green;
-    }
-    .status-inactive {
-        color: red;
-    }
-    .status-pending {
-        color: orange;
-    }
-    .status-default {
-        color: black;
-    }
-</style>
-<div class="app-main__inner">
-    <div class="app-page-title">
-        <div class="page-title-wrapper">
-            <div class="page-title-heading">
-                <div class="page-title-icon">
-                    <i class="fa fa-bank"></i>
-                </div>
-                <div><b>Daftar Simpanan Dan Utang</b>
-                    <div class="page-title-subheading">
-                         {{ Session::get('nama_lembaga') }}
-                    </div>
-                </div>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Daftar Simpanan</h3>
+            <div class="float-right">
+
+            <!--    <a href="{{ route('simpanan.generate') }}" class="btn btn-primary">Generate Simpanan</a> -->
+            <a href="generate_bunga.php" class="btn btn-info " target="_blank">Generate Bunga</a>
+
             </div>
         </div>
-    </div>   
-    <div class="card-body">
-        <div class="row">
-            <div class="col-lg-">
-                <div class="main-card mb-3 card">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-flush table-hover table-click" width="100%">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nomor Rekening</th>
-                                    <th>Nama Anggota</th>
-                                    <th>Jenis Simpanan</th>
-                                    <th>Jumlah</th>
-                                    <th>Tanggal Buka</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-              </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-flush table-hover table-click" width="100%">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nomor Rekening</th>
+                            <th>Nama Anggota</th>
+                            <th>Jenis Simpanan</th>
+                            <th>Jumlah</th>
+                            <th>Tanggal Buka</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
             </div>
-        </div>
-        <div class="text-sm">
-            <span class="badge bg-success">
-                Simpanan Umum
-            </span>
-            <span class="badge bg-danger">
-                Simpanan Deposito
-            </span>
-            <span class="badge bg-warning">
-                Simpanan Program
-            </span>
+
+            <div class="text-sm mt-3">
+                <span class="btn btn-success">
+                    Simpanan Umum
+                </span>
+                <span class="btn btn-danger">
+                    Simpanan Deposito
+                </span>
+                <span class="btn btn-warning">
+                    Simpanan Program
+                </span>
+                <!-- Tambahkan status lain sesuai kebutuhan -->
+            </div>
         </div>
     </div>
-</div>
 @endsection
 
 @section('script')
@@ -104,10 +78,7 @@
                 },
                 {
                     data: 'jumlah',
-                    name: 'jumlah',
-                    // render: function(data, type, row) {
-                    //     return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(data);
-                    // }
+                    name: 'jumlah'
                 },
                 {
                     data: 'tgl_buka',
@@ -120,13 +91,13 @@
                     searchable: false,
                     render: function(data, type, row) {
                         if (data === 'A') {
-                            return '<span class="badge badge-success">Aktif</span>';
+                            return '<span class="btn btn-success" style="background-color: green; color: white;">Aktif</span>';
                         } else if (data === 'T') {
-                            return '<span class="badge badge-danger">Ditutup</span>';
+                            return '<span class="btn btn-danger">Ditutup</span>';
                         } else if (data === 'P') {
-                            return '<span class="badge badge-warning">Pending</span>';
+                            return '<span class="btn btn-warning">Pending</span>';
                         }
-                        return '<span class="badge badge-secondary">' + data + '</span>';
+                        return ' ' + data + ' ';
                     }
                 }
             ],

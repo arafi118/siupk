@@ -7,7 +7,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/icon/favicon.png">
     <link rel="icon" type="image/png" href="/assets/img/icon/favicon.png">
     <title>
-        {{ $title }} &mdash; Aplikasi Dana Bergulir Masyarakat SI DBM
+        {{ $title }} &mdash; Aplikasi SI UPK
     </title>
 
     <link rel="canonical" href="https://www.creative-tim.com/product/material-dashboard-pro" />
@@ -35,15 +35,28 @@
 $saldo_pokok = $ra->target_pokok - $real->sum_pokok;
 $saldo_jasa = $ra->target_jasa - $real->sum_jasa;
 
-$keterangan1 = 'Belum Lunas';
-$keterangan2 = 'Belum Lunas';
-
-if ($saldo_pokok <= 0) { $saldo_pokok=0; $keterangan1='Lunas' ; } if ($saldo_jasa <=0) { $saldo_jasa=0;
-    $keterangan2='Lunas' ; } @endphp <body class="g-sidenav-show  bg-gray-200" onload="window.print()">
+    $keterangan1 = 'Belum Lunas';
+    $keterangan2 = 'Belum Lunas';
+    
+    if ($saldo_pokok == 0) {
+        $keterangan1 = 'Lunas';
+    }
+    
+    if ($saldo_pokok < 0) {
+        $keterangan1 = 'Lunas sebelum jatuh tempo';
+    }
+    if ($saldo_jasa == 0) {
+        $keterangan2 = 'Lunas';
+    }
+    if ($saldo_jasa < 0) {
+        $keterangan2 = 'Lunas (Pembayaran lebih dari target)';
+    } @endphp 
+    <body class="g-sidenav-show  bg-gray-200" onload="window.print()">
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <div class="card mt-3 text-sm shadow-none border-1">
             <div class="card-body">
-                Dengan mempertimbangkan Standar Operasional Prosedur (SOP) yang berlaku, dengan ini Saya selaku manajer,
+                Dengan mempertimbangkan Standar Operasional Prosedur (SOP) yang berlaku, dengan ini Saya selaku 
+                {{$kec->sebutan_level_1}}, {{$kec->nama_lembaga_sort}}
                 menyatakan dengan sebenar-benarnya bahwa :
                 <table class="table p-0 mb-3">
                     <tr class="p-1">
@@ -66,7 +79,7 @@ if ($saldo_pokok <= 0) { $saldo_pokok=0; $keterangan1='Lunas' ; } if ($saldo_jas
                     </tr>
                 </table>
 
-                REKAPITULASI
+                REKAPITULASI ANGSURAN
                 <table class="table f-12">
                     <thead class="bg-light">
                         <tr>

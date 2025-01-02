@@ -1,180 +1,157 @@
 @extends('layouts.base')
 
 @section('content')
+    <div class="nav-wrapper position-relative end-0">
+        <ul class="nav nav-pills nav-fill p-1" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link mb-0 px-0 py-1 {{ $status == 'p' ? 'active' : '' }}" data-bs-toggle="tab" href="#Proposal"
+                    role="tab" aria-controls="Proposal" aria-selected="true">
+                    <span class="material-icons align-middle mb-1">
+                        note_add
+                    </span>
+                    Proposal (P)
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link mb-0 px-0 py-1 {{ $status == 'v' ? 'active' : '' }}" data-bs-toggle="tab"
+                    href="#Verified" role="tab" aria-controls="Verified" aria-selected="false">
+                    <span class="material-icons align-middle mb-1">
+                        event_available
+                    </span>
+                    Verified (V)
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link mb-0 px-0 py-1 {{ $status == 'w' ? 'active' : '' }}" data-bs-toggle="tab" href="#Waiting"
+                    role="tab" aria-controls="Waiting" aria-selected="false">
+                    <span class="material-icons align-middle mb-1">
+                        history
+                    </span>
+                    Waiting (W)
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link mb-0 px-0 py-1 {{ $status == 'a' ? 'active' : '' }}" data-bs-toggle="tab" href="#Aktif"
+                    role="tab" aria-controls="Aktif" aria-selected="false">
+                    <span class="material-icons align-middle mb-1">
+                        import_export
+                    </span>
+                    Aktif (A)
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link mb-0 px-0 py-1 {{ $status == 'l' ? 'active' : '' }}" data-bs-toggle="tab" href="#Lunas"
+                    role="tab" aria-controls="Lunas" aria-selected="false">
+                    <span class="material-icons align-middle mb-1">
+                        cloud_done
+                    </span>
+                    Lunas (L)
+                </a>
+            </li>
+        </ul>
 
-    <div class="app-main__inner">
-        <div class="card-body">
-            <ul class="nav nav-pills nav-fill">
-                <li class="nav-item">
-                    <a data-bs-toggle="tab" id="tab-0" href="#Proposal" class="nav-link {{ $status == 'p' ? 'active' : '' }}">
-                        <i class="fa-solid fa-file-circle-plus"></i><b>&nbsp; &nbsp;Proposal (P)</b>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a data-bs-toggle="tab" id="tab-1" href="#Verified" class="nav-link {{ $status == 'v' ? 'active' : '' }}">
-                        <i class="fa fa-window-restore"></i><b>&nbsp; &nbsp;Verified (V)</b>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a data-bs-toggle="tab" id="tab-2" href="#Waiting" class="nav-link {{ $status == 'w' ? 'active' : '' }}">
-                        <i class="fa-solid fa-history"></i><b>&nbsp; &nbsp;Waiting (W)</b>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a data-bs-toggle="tab" id="tab-3" href="#Aktif" class="nav-link {{ $status == 'a' ? 'active' : '' }}">
-                        <i class="fa-solid fa-arrow-down-up-across-line"></i><b>&nbsp; &nbsp;Aktif (A)</b>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a data-bs-toggle="tab" id="tab-4" href="#Lunas" class="nav-link {{ $status == 'l' ? 'active' : '' }}">
-                        <i class="fa-solid fa-person-circle-check"></i><b>&nbsp; &nbsp;Lunas (L)</b>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        
-        <style>
-            @media (max-width: 576px) {
-                .nav-item .nav-link {
-                    display: flex;
-                    justify-content: center;
-                }
-            }
-        </style>
-        
-
-        <div class="tab-content">
-            <div class="tab-pane tabs-animation fade  {{ $status == 'p' ? 'show active' : '' }}" id="Proposal" role="tabpanel">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="main-card mb-3 card">
-
-                            <div class="card-body">
-                                <h5 class="card-title"></h5>
-                                <div class="table-responsive">
-                                    <table class="table table-flush table-hover table-click " width="100%" id="TbProposal">
-                                        <thead>
-                                            <tr>
-                                                <th>Loan id</th>
-                                                <th>Nama Anggota P</th>
-                                                <th>Desa</th>
-                                                <th>Nama Barang</th>
-                                                <th>Tgl Pengajuan</th>
-                                                <th>Pengajuan</th>
-                                                <th>Jasa/Jangka</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
-                                </div>
-                            </div>
-
+        <div class="tab-content mt-2">
+            <div class="tab-pane fade {{ $status == 'p' ? 'show active' : '' }}" id="Proposal" role="tabpanel"
+                aria-labelledby="Proposal">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-flush table-hover table-click" width="100%" id="TbProposal">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Anggota P</th>
+                                        <th>Alamat</th>
+                                        <th>Tgl Pengajuan</th>
+                                        <th>Pengajuan</th>
+                                        <th>Jasa/Jangka</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="tab-pane tabs-animation fade{{ $status == 'v' ? 'show active' : '' }}" id="Verified" role="tabpanel" >
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="mb-3 card">
-
-                            <div class="card-body">
-                                <h5 class="card-title"></h5>
-                                <div class="table-responsive">
-                                    <table class="table table-flush table-hover table-click" width="100%" id="TbVerified">
-                                        <thead>
-                                            <tr>
-                                                <th>Loan id</th>
-                                                <th>Nama Anggota V</th>
-                                                <th>Desa</th>
-                                                <th>Tgl Verified</th>
-                                                <th>Verifikasi</th>
-                                                <th>Jasa/Jangka</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane tabs-animation fade{{ $status == 'w' ? 'show active' : '' }}" id="Waiting" role="tabpanel" >
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="main-card mb-3 card">
-                            <div class="card-body">
-                                <h5 class="card-title"></h5>
-                                <div class="table-responsive">
-                                    <table class="table table-flush table-hover table-click" width="100%" id="TbWaiting">
-                                        <thead>
-                                            <tr>
-                                                <th>Loan id</th>
-                                                <th>Nama Anggota W</th>
-                                                <th>Desa</th>
-                                                <th>Tgl Waiting</th>
-                                                <th>Alokasi</th>
-                                                <th>Jasa/Jangka</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
-                                </div>
-                            </div>
+            <div class="tab-pane fade {{ $status == 'v' ? 'show active' : '' }}" id="Verified" role="tabpanel"
+                aria-labelledby="Verified">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-flush table-hover table-click" width="100%" id="TbVerified">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Anggota</th>
+                                        <th>Alamat</th>
+                                        <th>Tgl Verified</th>
+                                        <th>Verifikasi</th>
+                                        <th>Jasa/Jangka</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="tab-pane tabs-animation fade{{ $status == 'a' ? 'show active' : '' }}" id="Aktif" role="tabpanel" >
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="main-card mb-3 card">
-                            <div class="card-body">
-                                <h5 class="card-title"></h5>
-                                <div class="table-responsive">
-                                    <table class="table table-flush table-hover table-click" width="100%" id="TbAktif">
-                                        <thead>
-                                            <tr>
-                                                <th>Loan id</th>
-                                                <th>Nama Anggota A</th>
-                                                <th>Desa</th>
-                                                <th>Tgl Cair</th>
-                                                <th>Alokasi</th>
-                                                <th>Jasa/Jangka</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
-                                </div>
-                            </div>
+            <div class="tab-pane fade {{ $status == 'w' ? 'show active' : '' }}" id="Waiting" role="tabpanel"
+                aria-labelledby="Waiting">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-flush table-hover table-click" width="100%" id="TbWaiting">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Anggota</th>
+                                        <th>Alamat</th>
+                                        <th>Tgl Waiting</th>
+                                        <th>Alokasi</th>
+                                        <th>Jasa/Jangka</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="tab-pane tabs-animation fade{{ $status == 'l' ? 'show active' : '' }}" id="Lunas" role="tabpanel" >
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="main-card mb-3 card">
-                            <div class="card-body">
-                                <h5 class="card-title"></h5>
-                                <div class="table-responsive">
-                                    <table class="table table-flush table-hover table-click" width="100%" id="TbLunas">
-                                        <thead>
-                                            <tr>
-                                                <th>Nama Anggota</th>
-                                                <th>Alamat</th>
-                                                <th>Tgl Cair</th>
-                                                <th>Verifikasi</th>
-                                                <th>Jasa/Jangka</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
-                                </div>
-                            </div>
+            <div class="tab-pane fade {{ $status == 'a' ? 'show active' : '' }}" id="Aktif" role="tabpanel"
+                aria-labelledby="Aktif">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-flush table-hover table-click" width="100%" id="TbAktif">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Anggota</th>
+                                        <th>Alamat</th>
+                                        <th>Tgl Cair</th>
+                                        <th>Alokasi</th>
+                                        <th>Jasa/Jangka</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade {{ $status == 'l' ? 'show active' : '' }}" id="Lunas" role="tabpanel"
+                aria-labelledby="Lunas">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-flush table-hover table-click" width="100%" id="TbLunas">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Anggota</th>
+                                        <th>Alamat</th>
+                                        <th>Tgl Cair</th>
+                                        <th>Verifikasi</th>
+                                        <th>Jasa/Jangka</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -183,21 +160,14 @@
     </div>
 @endsection
 
-
 @section('script')
     <script>
-        var tbProposal = CreateTable('#TbProposal', '/perguliran_i/proposal', [ {
-            data: 'id',
-            name: 'id'
-        }, {
+        var tbProposal = CreateTable('#TbProposal', '/perguliran_i/proposal', [{
             data: 'anggota.namadepan',
             name: 'anggota.namadepan'
         }, {
-            data: 'anggota.d.nama_desa',
-            name: 'anggota.d.nama_desa'
-        }, {
-            data: 'nama_barang',
-            name: 'nama_barang'
+            data: 'anggota.alamat',
+            name: 'anggota.alamat'
         }, {
             data: 'tgl_proposal',
             name: 'tgl_proposal'
@@ -212,14 +182,11 @@
         }])
 
         var tbVerified = CreateTable('#TbVerified', '/perguliran_i/verified', [{
-            data: 'id',
-            name: 'id'
-        },{
             data: 'anggota.namadepan',
             name: 'anggota.namadepan'
         }, {
-            data: 'anggota.d.nama_desa',
-            name: 'anggota.d.nama_desa'
+            data: 'anggota.alamat',
+            name: 'anggota.alamat'
         }, {
             data: 'tgl_verifikasi',
             name: 'tgl_verifikasi'
@@ -234,14 +201,11 @@
         }])
 
         var tbWaiting = CreateTable('#TbWaiting', '/perguliran_i/waiting', [{
-            data: 'id',
-            name: 'id'
-        },{
             data: 'anggota.namadepan',
             name: 'anggota.namadepan'
         }, {
-            data: 'anggota.d.nama_desa',
-            name: 'anggota.d.nama_desa'
+            data: 'anggota.alamat',
+            name: 'anggota.alamat'
         }, {
             data: 'tgl_tunggu',
             name: 'tgl_tunggu'
@@ -256,14 +220,11 @@
         }])
 
         var tbAktif = CreateTable('#TbAktif', '/perguliran_i/aktif', [{
-            data: 'id',
-            name: 'id'
-        },{
             data: 'anggota.namadepan',
             name: 'anggota.namadepan'
         }, {
-            data: 'anggota.d.nama_desa',
-            name: 'anggota.d.nama_desa'
+            data: 'anggota.alamat',
+            name: 'anggota.alamat'
         }, {
             data: 'tgl_cair',
             name: 'tgl_cair'

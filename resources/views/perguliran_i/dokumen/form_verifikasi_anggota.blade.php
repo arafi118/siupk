@@ -67,7 +67,7 @@
             <tr>
                 <td class="b" colspan="3" align="center">
                     <div style="font-size: 16px;">
-                        PENILAIAN PERMOHONAN PIUTANG ANGGOTA KELOMPOK
+                        PENILAIAN PERMOHONAN PINJAMAN ANGGOTA KELOMPOK
                     </div>
                 </td>
             </tr>
@@ -195,7 +195,7 @@
                     <td>&nbsp;</td>
                     <td colspan="2">
                         <div>
-                            Anggota/Nasabah ini LAYAK / TIDAK LAYAK untuk diberikan Piutang sebesar:
+                            Anggota/pemanfaat ini LAYAK / TIDAK LAYAK untuk diberikan pinjaman sebesar:
                         </div>
                         <div>
                             ........................................................................

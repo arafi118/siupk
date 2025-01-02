@@ -1,20 +1,16 @@
 @extends('layouts.base')
+
 @section('content')
-    <div class="app-main__inner">
-        <div class="app-page-title">
-            <div class="main-card mb-3 card">
-                <div class="card-body p-3" id="SelectIndividu"></div>
-            </div>
-        </div>   
-        <div class="main-card mb-3 card">
-            <div class="mt-4 pt-1" id="RegisterSimpanan"></div>
-        </div>
-</div>
+    <div class="card mb-3">
+        <div class="card-body p-3" id="SelectIndividu"></div>
+    </div>
+
+    <div class="mt-4 pt-1" id="RegisterProposal"></div>
 @endsection
 
 @section('script')
     <script>
-        $.get('/daftar_individu?id_angg={{ $id_angg }}', async (result) => {
+        $.get('/daftar_individu_s?id_angg={{ $id_angg }}', async (result) => {
             await $('#SelectIndividu').html(result)
 
             var id_angg = $('#individu').val()
@@ -28,11 +24,11 @@
             formRegister(id_angg)
         })
 
-        $(document).on('click', '#SimpanUtang', function(e) {
+        $(document).on('click', '#SimpanProposal', function(e) {
             e.preventDefault()
             $('small').html('')
 
-            var form = $('#FormRegisterSimpanan')
+            var form = $('#FormRegisterProposal')
             $.ajax({
                 type: 'post',
                 url: form.attr('action'),
@@ -57,7 +53,7 @@
 
         function formRegister(nia) {
             $.get('/register_simpanan/' + nia, async (result) => {
-                await $('#RegisterSimpanan').html(result)
+                await $('#RegisterProposal').html(result)
             })
         }
     </script>

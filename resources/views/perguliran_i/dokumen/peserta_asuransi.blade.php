@@ -16,10 +16,10 @@
 
     <table border="0" width="100%" align="center"cellspacing="0" cellpadding="0" style="font-size: 11px;">
         <tr>
-            <td width="20%">Nasabah</td>
+            <td width="20%">Kelompok</td>
             <td align="center" width="2%">:</td>
             <td width="28%">
-                <b>{{ $pinkel->anggota->namadepan }} / {{ $pinkel->id }}</b>
+                <b>{{ $pinkel->kelompok->nama_kelompok }} / {{ $pinkel->id }}</b>
             </td>
             <td width="20%">Tanggal Cair</td>
             <td align="center" width="2%">:</td>

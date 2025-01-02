@@ -6,6 +6,9 @@
     $target_pokok = 0;
     $target_jasa = 0;
 
+    $sum_pokok = 0;
+    $sum_jasa = 0;
+
     $t_real_pokok = 0;
     $t_real_jasa = 0;
     $t_saldo = 0;
@@ -109,7 +112,17 @@
             <td width="50">Jumlah Angsuran </td>
             <td width="100">: &nbsp;
                 <b>
-                    Rp. {{ number_format($pinkel->target->wajib_pokok) }} x
+                    @php
+                        $jumlah_angsuran = 0;
+                        foreach ($rencana as $renc) {
+                            if ($jumlah_angsuran == 0) {
+                                if ($renc->wajib_pokok + $renc->wajib_jasa > $jumlah_angsuran) {
+                                    $jumlah_angsuran = $renc->wajib_pokok + $renc->wajib_jasa;
+                                }
+                            }
+                        }
+                    @endphp
+                    Rp. {{ number_format($jumlah_angsuran) }} x
                     {{ $pinkel->jangka / $pinkel->sis_pokok->sistem }}
                 </b>
             </td>
@@ -142,23 +155,32 @@
                     $target_pokok = $ra->target_pokok;
                     $target_jasa = $ra->target_jasa;
 
-                    $real_pokok = $ra->sum_pokok - $pokok;
-                    $real_jasa = $ra->sum_jasa - $jasa;
-                    $saldo = $pinkel->alokasi - $ra->sum_pokok;
+                    foreach ($ra->real as $real) {
+                        if (Tanggal::bulan($real->tgl_transaksi) == Tanggal::bulan($ra->jatuh_tempo)) {
+                            $real_pokok += $real->realisasi_pokok;
+                            $real_jasa += $real->realisasi_jasa;
+                            $sum_pokok += $real->realisasi_pokok;
+                            $sum_jasa += $real->realisasi_jasa;
+                        }
+                    }
+
+                    $saldo = $pinkel->alokasi - $sum_pokok;
                     if ($saldo < 0) {
                         $saldo = 0;
                     }
-                    $nunggak_pokok = $ra->target_pokok - $ra->sum_pokok;
+
+                    $nunggak_pokok = $ra->target_pokok - $sum_pokok;
                     if ($nunggak_pokok < 0) {
                         $nunggak_pokok = 0;
                     }
-                    $nunggak_jasa = $ra->target_jasa - $ra->sum_jasa;
+
+                    $nunggak_jasa = $ra->target_jasa - $sum_jasa;
                     if ($nunggak_jasa < 0) {
                         $nunggak_jasa = 0;
                     }
 
-                    $t_real_pokok = $ra->sum_pokok;
-                    $t_real_jasa = $ra->sum_jasa;
+                    $t_real_pokok = $sum_pokok;
+                    $t_real_jasa = $sum_jasa;
                     $t_saldo = $saldo;
                     $t_tunggakan_pokok = $nunggak_pokok;
                     $t_tunggakan_jasa = $nunggak_jasa;
@@ -201,16 +223,6 @@
                     </td>
                 @endif
             </tr>
-
-            @php
-                if ($ra->sum_pokok != $pokok) {
-                    $pokok = $ra->sum_pokok;
-                }
-
-                if ($ra->sum_jasa != $jasa) {
-                    $jasa = $ra->sum_jasa;
-                }
-            @endphp
         @endforeach
         <tr style="font-weight: bold;">
             <td class="l t b" align="center" colspan="2" height="20">

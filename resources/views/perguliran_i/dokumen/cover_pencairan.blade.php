@@ -62,8 +62,13 @@
 
 <body>
     <header>
-        <h1 style="margin: 0px;">DOKUMEN <br> PENCAIRAN KREDIT</h1>
-        
+        <h1 style="margin: 0px;">{{ strtoupper($judul) }}</h1>
+        <div style="margin: 0px; font-size: 24px;">
+            {{ strtoupper('Pinjaman Individu ' . $pinkel->jpp->nama_jpp) }}
+        </div>
+        <div style="margin: 0px;">
+            Nomor SPK : {{ $pinkel->spk_no }}
+        </div>
     </header>
 
     <main>
@@ -78,12 +83,6 @@
 
             <div style="font-size: 20px;">
                 {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }} {{ $pinkel->anggota->d->nama_desa }}
-            </div> <br> <br> <br> <br> <br>
-            <div style="margin: 0px; font-size: 16px;">
-                {{ strtoupper('Jenis Piutang : ' . $pinkel->jpp->nama_jpp) }}
-            </div>
-            <div style="margin: 0px;">
-                Nomor SPK : <br>{{ $pinkel->spk_no }}
             </div>
         </div>
 

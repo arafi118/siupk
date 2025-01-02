@@ -1,6 +1,7 @@
 @php
     use App\Utils\Tanggal;
     $batas_pemanfaat = ceil($pinkel->pinjaman_anggota_count / 2);
+
 @endphp
 
 @extends('perguliran.dokumen.layout.base')
@@ -25,9 +26,7 @@
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
         <tr>
             <td colspan="4" align="justify">
-                Yang bertanda tangan di bawah ini, kami para anggota Kelompok {{ $pinkel->kelompok->nama_kelompok }} alamat
-                {{ $pinkel->kelompok->alamat_kelompok }} {{ $pinkel->kelompok->d->sebutan_desa->sebutan_desa }}
-                {{ $pinkel->kelompok->d->nama_desa }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }} {{ $nama_kabupaten }} :
+                Yang bertanda tangan di bawah ini, kami:
             </td>
         </tr>
         <tr style="background: rgb(232, 232, 232)">
@@ -50,7 +49,9 @@
         @endforeach
         <tr>
             <td colspan="4">
-                Memberikan kuasa sepenuhnya kepada pengurus kelompok :
+                 Adalah anggota Kelompok {{ $pinkel->kelompok->nama_kelompok }} alamat
+                {{ $pinkel->kelompok->alamat_kelompok }} {{ $pinkel->kelompok->d->sebutan_desa->sebutan_desa }}
+                {{ $pinkel->kelompok->d->nama_desa }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }} {{ $nama_kabupaten }} memberikan kuasa sepenuhnya kepada pengurus kelompok :
             </td>
         </tr>
         <tr style="background: rgb(232, 232, 232)">
@@ -81,6 +82,21 @@
             <td class="l b">Bendahara</td>
             <td class="l b r">
                 {{ $pinkel->kelompok->alamat_kelompok }}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" align="left">
+                Untuk bertindak mewakili Kelompok dalam perjanjian kredit dengan <b>{{$kec->nama_lembaga_long}} {{$kec->nama_kec}}</b> sesuai dengan registrasi pinjaman tertanggal {{ Tanggal::tglLatin($pinkel->tgl_cair) }} dengan nomor SPK : {{$pinkel->spk_no}}.
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" align="left">
+                Demikian surat kuasa ini dibuat untuk dapat dilaksanakan sebagaimana mestinya.
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" align="left">
+                &nbsp;
             </td>
         </tr>
         <tr>

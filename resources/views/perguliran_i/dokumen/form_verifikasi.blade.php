@@ -9,19 +9,20 @@
 
         <tr>
             <td height="50" colspan="6" class="bottom">
-                <p align="center" style="font-size: 14px; font-weight: bold;">ANALISA PERMOHONAN KREDIT
+                <p align="center" style="font-size: 14px; font-weight: bold;">PENILAIAN PERMOHONAN PINJAMAN
+                    INDIVIDU
                 </p>
             </td>
         </tr>
 
 
         <tr>
-            <td height="25" colspan="6"><b>A. IDENTITAS PEMINJAM (NASABAH)</b></td>
+            <td height="25" colspan="6"><b>A. IDENTITAS PEMINJAM (ANGGOTA)</b></td>
         </tr>
 
         <tr>
             <td width="4%" align="right">1. </td>
-            <td width="25%">Nama Nasabah</td>
+            <td width="25%">Nama anggota</td>
             <td colspan="4">: {{ $pinkel->anggota->namadepan }}</td>
         </tr>
         <tr>
@@ -56,7 +57,7 @@
         <tr>
             <td width="4%" align="right">7.</td>
             <td>Jenis Usaha</td>
-            <td colspan="4">: {{ $pinkel->anggota->usaha }}</td>
+            <td colspan="4">: {{ is_numeric($pinkel->anggota->usaha) ? $pinkel->anggota->u->nama_usaha : $pinkel->anggota->usaha }}</td>
         </tr>
         <tr>
             <td width="4%" align="right">8.</td>
@@ -86,74 +87,74 @@
                 <div align="right">1.</div>
             </td>
             <td width="60%" colspan="2" class="style9 align-justify">Pendapatan Keluarga 1 (satu) bulan</td>
-            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
+            <td colspan="3" class="style9 align-justify">: Rp. </td>
         </tr>
         <tr>
             <td colspan="2" class="style9 align-justify">Pendapatan dari usaha suami</td>
-            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
+            <td colspan="3" class="style9 align-justify">: Rp. </td>
         </tr>
         <tr>
             <td colspan="2" class="style9 align-justify">Pendapatan dari usaha istri</td>
-            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
+            <td colspan="3" class="style9 align-justify">: Rp. </td>
         </tr>
         <tr>
             <td colspan="2" class="style9 align-justify">Pendapatan dari hasil kebun, sawah, ladang</td>
-            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
+            <td colspan="3" class="style9 align-justify">: Rp. </td>
         </tr>
         <tr>
             <td colspan="2" class="style9 align-justify">Pendapatan lain-lain</td>
-            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
+            <td colspan="3" class="style9 align-justify">: Rp. </td>
         </tr>
         <tr>
             <th colspan="2" class="style9 align-justify">
                 <div align="center" class="style28">Jumlah pendapatan </div>
             </th>
-            <td colspan="3"><strong>: Rp. _____________________ </strong></td>
+            <td colspan="3"><strong>: Rp. </strong></td>
         </tr>
         <tr>
             <td rowspan="10" valign="top" class="style9 align-justify">
                 <div align="right">2.</div>
             </td>
             <td colspan="2" class="style9 align-justify">Pengeluaran keluarga</td>
-            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
+            <td colspan="3" class="style9 align-justify">: Rp. </td>
         </tr>
         <tr>
             <td colspan="2" class="style9 align-justify">Pembelian alat/barang dagangan</td>
-            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
+            <td colspan="3" class="style9 align-justify">: Rp. </td>
         </tr>
         <tr>
             <td colspan="2" class="style9 align-justify">Pengeluaran Kebutuhan Makan/minum</td>
-            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
+            <td colspan="3" class="style9 align-justify">: Rp. </td>
         </tr>
         <tr>
             <td colspan="2" class="style9 align-justify">Pengeluaran Sabun-Cuci-mandi</td>
-            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
+            <td colspan="3" class="style9 align-justify">: Rp. </td>
         </tr>
         <tr>
             <td colspan="2" class="style9 align-justify">Pengeluaran untuk Sekolah</td>
-            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
+            <td colspan="3" class="style9 align-justify">: Rp. </td>
         </tr>
         <tr>
             <td colspan="2" class="style9 align-justify">Pengeluaran untuk sosial</td>
-            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
+            <td colspan="3" class="style9 align-justify">: Rp. </td>
         </tr>
         <tr>
             <td colspan="2" class="style9 align-justify">Pengeluaran listrik, air, telphon dll</td>
-            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
+            <td colspan="3" class="style9 align-justify">: Rp. </td>
         </tr>
         <tr>
-            <td colspan="2" class="style9 align-justify">Angsuran Piutang di bank/koperasi/perorangan</td>
-            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
+            <td colspan="2" class="style9 align-justify">Angsuran pinjaman di bank/koperasi/perorangan</td>
+            <td colspan="3" class="style9 align-justify">: Rp. </td>
         </tr>
         <tr>
             <td colspan="2" class="style9 align-justify">Pengeluaran lain-lain</td>
-            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
+            <td colspan="3" class="style9 align-justify">: Rp. </td>
         </tr>
         <tr>
             <td colspan="2" class="style9 align-justify">
                 <div align="center" class="style28"><strong>Jumlah Pengeluaran </strong></div>
             </td>
-            <td colspan="3"><strong>: Rp. _____________________ </strong></td>
+            <td colspan="3"><strong>: Rp. </strong></td>
         </tr>
         <tr>
             <td colspan="6"><strong>C. IDENTITAS JAMINAN</strong></td>
@@ -163,7 +164,7 @@
                 <div align="right">1.</div>
             </td>
             <td colspan="2" class="style9 align-justify">Tabungan di Bank/Koperasi/BMT atas nama pribadi</td>
-            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
+            <td colspan="3" class="style9 align-justify">: Rp. </td>
         </tr>
         <tr>
             <td class="style9 align-justify">
@@ -171,14 +172,14 @@
             </td>
             <td colspan="2" class="style9 align-justify">Nilai harta lain berupa
                 ...............................................</td>
-            <td colspan="3" class="style9 align-justify">: Rp. _____________________ </td>
+            <td colspan="3" class="style9 align-justify">: Rp. </td>
         </tr>
         <tr>
             <td class="style9 align-justify">&nbsp;</td>
             <td colspan="2" class="style9 align-justify">
                 <div align="center" class="style28"><strong>Total Nilai Jaminan</strong></div>
             </td>
-            <td colspan="3" class="style9 align-justify"><strong>: Rp. _____________________ </strong></td>
+            <td colspan="3" class="style9 align-justify"><strong>: Rp. </strong></td>
         </tr>
         <tr>
             <td colspan="6"><strong>D. PENILAIAN</strong></td>
@@ -206,9 +207,9 @@
         <tr>
             <td width="45%" class="style9 align-justify">
                 <p><span> E. KESIMPULAN</span><br>
-                    Nasabah/peminjam ini LAYAK / TIDAK LAYAK untuk diberikan kredit sebesar:<br>
+                    Anggota/peminjam ini LAYAK / TIDAK LAYAK untuk diberikan kredit sebesar:<br>
                     <br>
-                    <strong><u></u>Rp..................... </u></strong>
+                    <strong><u></u>Rp. {{ $pinkel->alokasi }} </u></strong>
                 </p>
                 <p>Dengan Catatan :<br><br><br><br>
                     *) coret yang tidak perlu. </p>
@@ -219,42 +220,23 @@
             <td width="50%" colspan="2" class="style9">
                 <p><br>
                     Diverifikasi Pada : ................................................<br>
-                    Oleh : Tim Verifikasi<br>
+                    Oleh : Tim Verifikasi {{ $kec->sebutan_kec }} {{ $kec->nama_kec }} <br>
                 </p>
 
-                <table border="0" width='100%'>
-              
-                    <tr>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td width='60%' class='style27'> <br>
-                            <span class='style9'> </span>
-                        </td>
-                        <td width='30%' class='bottom'></td>
-                    </tr>
+                <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
                     @foreach ($user as $r)
-                    <tr>
-                        <td width="70" height="20">
-                            <div>{{ $r->namadepan }} {{ $r->namabelakang }}</div>
-                            <div>
-                                <b>{{ $r->j->nama_jabatan }}</b>
-
-                            </div>
-                        </td>
-                        <td align="right" style="vertical-align: bottom;">
-                            _____________________________________
-                        </td>
-                    </tr>
-                @endforeach
-                    {{-- <tr>
-                        <td align="center" width='60%'>
-                            {{ $pinkel->user->namadepan }}
-                            {{ $pinkel->user->namabelakang }}<br>
-                            {{ $pinkel->user->j->nama_jabatan }}
-                        </td>
-                        <td width='30%' class='bottom'></td>
-                    </tr> --}}
+                        <tr>
+                            <td width="70" height="20">
+                                <div>{{ $r->namadepan }} {{ $r->namabelakang }}</div>
+                                <div>
+                                    <b>{{ $r->j->nama_jabatan }}</b>
+                                </div>
+                            </td>
+                            <td align="right" style="vertical-align: bottom;">
+                                _____________________________________
+                            </td>
+                        </tr>
+                    @endforeach
                 </table>
 
             </td>

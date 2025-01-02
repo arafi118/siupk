@@ -23,11 +23,19 @@
                         <td align="center">{{ $loop->iteration }}</td>
                         <td align="left">{{ ucwords(strtolower($pa->anggota->namadepan)) }} ({{ $pa->nia }})</td>
                         <td>
+                            @if ($pa->jenis_pinjaman == "K")
                             <a href="/detail/{{ $pa->id_pinkel }}" target="_blank"
                                 class="text-danger text-gradient font-weight-bold">
 
                                 {{ $pa->kelompok->nama_kelompok }} Loan ID. {{ $pa->id_pinkel }}
                             </a>.
+                            @else
+                            <a href="/detail_i/{{ $pa->id }}" target="_blank"
+                                class="text-danger text-gradient font-weight-bold">
+
+                                {{ $pa->anggota->namadepan}} Loan ID. {{ $pa->id }}
+                            </a>.
+                            @endif
                         </td>
                     </tr>
                 @endforeach
@@ -287,11 +295,14 @@
             <input type="hidden" name="status" id="status" value="A">
             <input type="hidden" name="debet" id="debet" value="{{ $debet->kode_akun }}">
             <div class="row">
+            <?php
+                $tanggalHariIni = date('d-m-Y'); // Format: 29-10-2024 {{ Tanggal::tglIndo($perguliran->tgl_cair) }}
+            ?>
                 <div class="col-md-4">
                     <div class="input-group input-group-static my-3">
                         <label for="tgl_cair">Tgl Cair</label>
                         <input autocomplete="off" type="text" name="tgl_cair" id="tgl_cair"
-                            class="form-control date" value="{{ Tanggal::tglIndo($perguliran->tgl_cair) }}">
+                            class="form-control date" value="{{ $tanggalHariIni }}">
                         <small class="text-danger" id="msg_tgl_cair"></small>
                     </div>
                 </div>

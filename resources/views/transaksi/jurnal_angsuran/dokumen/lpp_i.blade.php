@@ -6,6 +6,9 @@
     $target_pokok = 0;
     $target_jasa = 0;
 
+    $sum_pokok = 0;
+    $sum_jasa = 0;
+
     $t_real_pokok = 0;
     $t_real_jasa = 0;
     $t_saldo = 0;
@@ -20,11 +23,11 @@
         <tr>
             <td colspan="3" align="center">
                 <div style="font-size: 18px;">
-                    LAPORAN PERKEMBANGAN PINJAMAN PER KELOMPOK
+                    LAPORAN PERKEMBANGAN PINJAMAN
                 </div>
                 <div style="font-size: 18px; font-weight: bolder; text-transform: uppercase;">
-                    KELOMPOK {{ $id_pinj_i->jpp->nama_jpp }} {{ $id_pinj_i->anggota->namadepan }}
-                    {{ $id_pinj_i->anggota->d->sebutan_desa->sebutan_desa }} {{ $id_pinj_i->anggota->d->nama_desa }}
+                    {{ $pinkel->anggota->namadepan }}
+                    {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }} {{ $pinkel->anggota->d->nama_desa }}
                 </div>
             </td>
         </tr>
@@ -35,78 +38,81 @@
     <table border="0" width="90%" align="center" cellspacing="0" cellpadding="0" style="font-size: 11px;">
         <tr>
             <td width="30">&nbsp;</td>
-            <td width="50">Kd. Kelompok</td>
+            <td width="50">NIK</td>
             <td width="100">: &nbsp;
-                <b>{{ $id_pinj_i->anggota->nik}}</b>
+                <b>{{ $pinkel->anggota->nik }}</b>
             </td>
             <td width="50">Loan ID</td>
             <td width="100">: &nbsp;
-                <b>{{ $id_pinj_i->jpp->nama_jpp }}-{{ $id_pinj_i->id }}</b>
+                <b>{{ $pinkel->jpp->nama_jpp }}-{{ $pinkel->id }}</b>
             </td>
         </tr>
         <tr>
             <td width="30">&nbsp;</td>
-            <td width="50">Nama Kelompok</td>
+            <td width="50">Nama Peminjam</td>
             <td width="100">: &nbsp;
-                <b>{{ $id_pinj_i->anggota->namadepan}}</b>
+                <b>{{ $pinkel->anggota->namadepan }}</b>
             </td>
             <td width="50">Nomor SPK</td>
             <td width="100">: &nbsp;
-                <b>{{ $id_pinj_i->spk_no }}</b>
+                <b>{{ $pinkel->spk_no }}</b>
             </td>
         </tr>
         <tr>
             <td width="30">&nbsp;</td>
             <td width="50">Alamat</td>
             <td width="100">: &nbsp;
-                <b>{{ $id_pinj_i->anggota->alamat}}</b>
+                <b>{{ $pinkel->anggota->alamat }}</b>
             </td>
             <td width="50">Tanggal Cair</td>
             <td width="100">: &nbsp;
-                <b>{{ Tanggal::tglLatin($id_pinj_i->tgl_cair) }}</b>
+                <b>{{ Tanggal::tglLatin($pinkel->tgl_cair) }}</b>
             </td>
         </tr>
         <tr>
             <td width="30">&nbsp;</td>
-            <td width="50">{{ $id_pinj_i->anggota->d->sebutan_desa->sebutan_desa }}</td>
+            <td width="50">{{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }}</td>
             <td width="100">: &nbsp;
-                <b>{{ $id_pinj_i->anggota->d->nama_desa }}</b>
+                <b>{{ $pinkel->anggota->d->nama_desa }}</b>
             </td>
             <td width="50">Alokasi Pinjaman </td>
             <td width="100">: &nbsp;
-                <b>{{ number_format($id_pinj_i->alokasi) }}</b>
+                <b>{{ number_format($pinkel->alokasi) }}</b>
             </td>
         </tr>
         <tr>
             <td width="30">&nbsp;</td>
             <td width="50">Telpon/SMS </td>
             <td width="100">: &nbsp;
-                <b>{{ $id_pinj_i->anggota->hp}}</b>
+                <b>{{ $pinkel->anggota->hp }}</b>
             </td>
             <td width="50">Prosentase, Jenis Jasa</td>
             <td width="100">: &nbsp;
-                <b>{{ $id_pinj_i->pros_jasa > 0 ? $id_pinj_i->pros_jasa / $id_pinj_i->jangka : '0' }}% / Bulan,
-                    {{ $id_pinj_i->jasa->nama_jj }}</b>
+                <b>{{ $pinkel->pros_jasa > 0 ? $pinkel->pros_jasa / $pinkel->jangka : '0' }}% / Bulan,
+                    {{ $pinkel->jasa->nama_jj }}</b>
             </td>
         </tr>
         <tr>
             <td width="30">&nbsp;</td>
-            <td width="50">&nbsp;</td>
-            <td width="100">&nbsp;</td>
             <td width="50">Sistem Angsuran</td>
             <td width="100">: &nbsp;
-                <b>{{ $id_pinj_i->sis_pokok->nama_sistem }} ({{ $id_pinj_i->jangka }} Bulan)</b>
+                <b>{{ $pinkel->sis_pokok->nama_sistem }} ({{ $pinkel->jangka }} Bulan)</b>
             </td>
-        </tr>
-        <tr>
-            <td width="30">&nbsp;</td>
-            <td width="50">&nbsp;</td>
-            <td width="100">&nbsp;</td>
             <td width="50">Jumlah Angsuran </td>
             <td width="100">: &nbsp;
                 <b>
-                    Rp. {{ number_format($id_pinj_i->target->wajib_pokok) }} x
-                    {{ $id_pinj_i->jangka / $id_pinj_i->sis_pokok->sistem }}
+                    @php
+                        $jumlah_angsuran = 0;
+                        foreach ($rencana as $renc) {
+                            if ($jumlah_angsuran == 0) {
+                                if ($renc->wajib_pokok + $renc->wajib_jasa > $jumlah_angsuran) {
+                                    $jumlah_angsuran = $renc->wajib_pokok + $renc->wajib_jasa;
+                                }
+                            }
+                        }
+                    @endphp
+                    Rp. {{ number_format($jumlah_angsuran) }} x
+                    {{ $pinkel->jangka / $pinkel->sis_pokok->sistem }}
                 </b>
             </td>
         </tr>
@@ -133,29 +139,37 @@
                 $warna = '';
                 $real_pokok = 0;
                 $real_jasa = 0;
-                $nunggak_pokok  =0;
                 $bulan_ini = date('Y-m-t', strtotime($ra->jatuh_tempo));
                 if ($bulan_ini <= $bulan) {
                     $target_pokok = $ra->target_pokok;
                     $target_jasa = $ra->target_jasa;
 
-                    $real_pokok = $ra->sum_pokok - $pokok;
-                    $real_jasa = $ra->sum_jasa - $jasa;
-                    $saldo = $id_pinj_i->alokasi - $ra->sum_pokok;
+                    foreach ($ra->real as $real) {
+                        if (Tanggal::bulan($real->tgl_transaksi) == Tanggal::bulan($ra->jatuh_tempo)) {
+                            $real_pokok += $real->realisasi_pokok;
+                            $real_jasa += $real->realisasi_jasa;
+                            $sum_pokok += $real->realisasi_pokok;
+                            $sum_jasa += $real->realisasi_jasa;
+                        }
+                    }
+
+                    $saldo = $pinkel->alokasi - $sum_pokok;
                     if ($saldo < 0) {
                         $saldo = 0;
                     }
-                    $nunggak_pokok = $ra->target_pokok - $ra->sum_pokok;
+
+                    $nunggak_pokok = $ra->target_pokok - $sum_pokok;
                     if ($nunggak_pokok < 0) {
                         $nunggak_pokok = 0;
                     }
-                    $nunggak_jasa = $ra->target_jasa - $ra->sum_jasa;
+
+                    $nunggak_jasa = $ra->target_jasa - $sum_jasa;
                     if ($nunggak_jasa < 0) {
                         $nunggak_jasa = 0;
                     }
 
-                    $t_real_pokok = $ra->sum_pokok;
-                    $t_real_jasa = $ra->sum_jasa;
+                    $t_real_pokok = $sum_pokok;
+                    $t_real_jasa = $sum_jasa;
                     $t_saldo = $saldo;
                     $t_tunggakan_pokok = $nunggak_pokok;
                     $t_tunggakan_jasa = $nunggak_jasa;
@@ -198,23 +212,13 @@
                     </td>
                 @endif
             </tr>
-
-            @php
-                if ($ra->sum_pokok != $pokok) {
-                    $pokok = $ra->sum_pokok;
-                }
-
-                if ($ra->sum_jasa != $jasa) {
-                    $jasa = $ra->sum_jasa;
-                }
-            @endphp
         @endforeach
         <tr style="font-weight: bold;">
             <td class="l t b" align="center" colspan="2" height="20">
                 REKAPITULASI
             </td>
-            <td class="t l b" align="right">{{ number_format($target_pokok) }}</td>
-            <td class="t l b" align="right">{{ number_format($target_jasa) }}</td>
+            <td class="t l b" align="right">&nbsp;</td>
+            <td class="t l b" align="right">&nbsp;</td>
             <td class="t l b" align="right">{{ number_format($t_real_pokok) }}</td>
             <td class="t l b" align="right">{{ number_format($t_real_jasa) }}</td>
             <td class="t l b" align="right">{{ number_format($t_saldo) }}</td>

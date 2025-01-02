@@ -21,21 +21,16 @@ class Desa extends Model
     {
         return $this->belongsTo(SebutanDesa::class, 'sebutan', 'id');
     }
-    
 
     public function kelompok()
     {
         return $this->hasMany(Kelompok::class, 'desa', 'kd_desa')->orderBy('desa', 'ASC');
     }
-    
-    // public function anggota()
-    // {
-    //     return $this->hasMany(anggota::class, 'desa', 'kd_desa')->orderBy('desa', 'ASC');
-    // }
-      public function anggota()
-      {
-      return $this->hasMany(Anggota::class, 'desa', 'kd_desa')->orderBy('nik', 'ASC');
-      }
+
+    public function anggota()
+    {
+        return $this->hasMany(Anggota::class, 'desa', 'kd_desa')->orderBy('desa', 'ASC');
+    }
 
     public function kom_saldo()
     {
@@ -46,9 +41,4 @@ class Desa extends Model
     {
         return $this->hasOne(Saldo::class, 'kode_akun', 'kode_desa');
     }
-    public function u()
-    {
-    return $this->belongsTo(Usaha::class, 'usaha', 'id');
-    }
-
 }

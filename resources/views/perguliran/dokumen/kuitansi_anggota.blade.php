@@ -13,7 +13,7 @@
     @foreach ($pinjaman as $pinj)
         @php
             $waktu = date('H:i');
-            $tempat = 'Kantor DBM';
+            $tempat = 'Kantor UPK';
 
             $wt_cair = explode('_', $pinj->pinkel->wt_cair);
             if (count($wt_cair) == 1) {
@@ -30,8 +30,8 @@
             <div class="break">&nbsp;</div>
         @endif
         <div style="text-align: center; font-size: 18px; margin-bottom: 12px; text-transform: uppercase;">
-            <div>Bukti Transaksi</div>
-            <div>Pinjaman Kelompok</div>
+            <div>Bukti Transaksi </div>
+            <div>Pinjaman Anggota </div>
         </div>
 
         <div style="padding: 60px; padding-top: 0px; border: 1px solid #000; height: 82%;">

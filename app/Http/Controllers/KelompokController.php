@@ -45,7 +45,7 @@ class KelompokController extends Controller
                         $status_pinjaman = $pinjaman->status;
 
                         $badge = ($pinjaman->sts) ? $pinjaman->sts->warna_status : '';
-                        $status = '<span class="badge bg-' . $badge . '">' . $status_pinjaman . '</span>';
+                        $status = '<span class="badge badge-' . $badge . '">' . $status_pinjaman . '</span>';
                     }
 
                     return $status;
@@ -79,7 +79,7 @@ class KelompokController extends Controller
             $data_kelompok = $jumlah_kelompok_by_kd_desa->first();
             $kd_kelompok = $data_kelompok->kd_kelompok + 1;
         } else {
-            $jumlah_kelompok = str_pad(Kelompok::where('desa', $kd_desa)->count() + 1, 4, "0", STR_PAD_LEFT); // 0004
+            $jumlah_kelompok = str_pad(Kelompok::where('desa', $kd_desa)->count() + 1, 4, "0", STR_PAD_LEFT);
             $kd_kelompok = $kd_desa . $jumlah_kelompok;
         }
 

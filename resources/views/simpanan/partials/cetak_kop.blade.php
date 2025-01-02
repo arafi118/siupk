@@ -2,6 +2,22 @@
 <html lang="en">
 
 <head>
+    <style>
+    .style6 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 16px; color: #000000; }
+.style9 { font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #000000; }
+.style10 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; color: #000000; }
+.style26 { font-family: Verdana, Arial, Helvetica, sans-serif; color: #000000; }
+.style27 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; font-weight: bold; color: #000000; }
+
+        .top {border-top: 1px solid #000000; }
+        .bottom {border-bottom: 1px solid #000000; }
+        .left {border-left: 1px solid #000000; }
+        .right {border-right: 1px solid #000000; }
+        .all {border: 1px solid #000000; }
+        .align-justify {text-align:justify; }
+        .align-center {text-align:center; }
+        .align-right {text-align:right; }
+    </style>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/icon/favicon.png">

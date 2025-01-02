@@ -100,7 +100,7 @@
                     </div>
                     <div style="font-size: 14px;">{{ $nia->anggota->nik }}</div>
                 </td>
-                <td width="150">Jenis Piutang</td>
+                <td width="150">Jenis Pinjaman</td>
                 <td width="5" align="center">:</td>
                 <td width="200">{{ $nia->jpp->nama_jpp }}</td>
                 <td width="150">Loan Id.</td>
@@ -335,13 +335,13 @@
             </tr>
             <tr>
                 <td width="350" rowspan="3">
-                    <div>Lembar 1 : Untuk Nasabah</div>
+                    <div>Lembar 1 : Untuk Pemanfaat</div>
                     <div>Lembar 2 : Arsip Lembaga</div>
                 </td>
                 <td style="font-weight: bold; font-size: 12px;" width="350" align="center">
                     <div>{{ $kec->sebutan_level_1 }} {{ $kec->nama_lembaga_sort }}</div>
                 </td>
-                <td style="font-weight: bold; font-size: 12px;" width="350" align="center">Nasabah</td>
+                <td style="font-weight: bold; font-size: 12px;" width="350" align="center">Pemanfaat</td>
             </tr>
             <tr>
                 <td colspan="2" height="50"></td>

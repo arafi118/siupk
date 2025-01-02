@@ -75,20 +75,20 @@ $keuangan = new Keuangan();
 </table> --}}
 <table width="97%" border="0" align="center" cellpadding="3" cellspacing="0">
     <tr>
-        <td class="style6 align-center" colspan="3"><b>PROFIL LKM</b> <br>
+        <td class="style6 align-center" colspan="3"><b>PROFIL Lembaga</b> <br>
             <span class="style9 align-center">Untuk Periode Yang Berakhir Pada Tanggal {{ $tgl }}</span>
             <p class="style9 align-center"> &nbsp; </p>
         </td>
     </tr>
     <tr>
         <td width="2%" class="style9">1.</td>
-        <td width="30%" class="style9">Nama LKM</td>
+        <td width="30%" class="style9">Nama Lembaga</td>
         <td width="60%" class="style9">: {{$kec->nama_lembaga_long}}</td>
     </tr>
     <tr>
         <td width="2%" class="style9">2.</td>
-        <td width="30%" class="style9">Nomor Sandi LKM</td>
-        <td width="60%" class="style9">: {{$kec->sandi_lkm}}</td>
+        <td width="30%" class="style9">Nomor Lembaga</td>
+        <td width="60%" class="style9">: {{$kec->sandi_Lembaga}}</td>
     </tr>
     <tr>
         <td width="2%" class="style9">3.</td>
@@ -170,26 +170,30 @@ $keuangan = new Keuangan();
                     $jrp_saham1 = 0;
                     $pros_saham1 = 0;
                 @endphp
-                @foreach ($kec->saham as $sa)
-                @php
-                    $jrp_saham1 += $sa->rp_saham;
-                    $pros_saham1 += $sa->pros_saham;
-                @endphp
-                <tr>
-                    <td class="style9 bottom align-center">{{ $sa->nama_saham }}&nbsp;</td>
-                    <td class="style9 bottom align-center" width="33%">{{ number_format($sa->rp_saham) }}&nbsp;</td>
-                    <td class="style9 bottom align-center" width="33%">{{ $sa->pros_saham }}&nbsp;</td>
-                </tr>
-                @endforeach
                 <tr>
                     <td class="style9 bottom align-center">&nbsp;</td>
                     <td class="style9 bottom align-center" width="33%">&nbsp;</td>
                     <td class="style9 bottom align-center" width="33%">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td class="style9 bottom align-center">Total</td>
-                    <td class="style9 bottom align-center" width="33%">{{ number_format($jrp_saham1) }}&nbsp;</td>
-                    <td align="center"class="style9 bottom align- center" width="33%">{{ number_format($pros_saham1) }}&nbsp;</td>
+                    <td class="style9 bottom align-center">&nbsp;</td>
+                    <td class="style9 bottom align-center" width="33%">&nbsp;</td>
+                    <td class="style9 bottom align-center" width="33%">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="style9 bottom align-center">&nbsp;</td>
+                    <td class="style9 bottom align-center" width="33%">&nbsp;</td>
+                    <td class="style9 bottom align-center" width="33%">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="style9 bottom align-center">&nbsp;</td>
+                    <td class="style9 bottom align-center" width="33%">&nbsp;</td>
+                    <td class="style9 bottom align-center" width="33%">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="style9 bottom align-center">&nbsp;</td>
+                    <td class="style9 bottom align-center" width="33%">&nbsp;</td>
+                    <td class="style9 bottom align-center" width="33%">&nbsp;</td>
                 </tr>
             </table>
         </td>
@@ -215,50 +219,25 @@ $keuangan = new Keuangan();
                     <th class="style9 bottom top align-center" width="50%">Jabatan</th>
                 </tr>
 
-                @foreach ($kec->saham as $sa)
-                @php
-                    // Count the number of non-empty entries for direksi and komisaris
-                    $direksiCount = ($sa->nama_direksi ? 1 : 0) + ($sa->jab_direksi ? 1 : 0);
-                    $komCount = ($sa->nama_kom ? 1 : 0) + ($sa->jab_kom ? 1 : 0);
-            
-                    // Determine the maximum count
-                    $maxCount = max($direksiCount, $komCount);
-                @endphp
-            
                 <tr>
-                    @for ($i = 0; $i < $maxCount; $i++)
-                        @if ($i == 0)
-                            @if ($sa->nama_direksi)
-                                <td class="style9 bottom align-center" width="50%">{{$sa->nama_direksi}}&nbsp;</td>
-                            @else
-                                <td class="style9 bottom align-center" width="50%">&nbsp;</td>
-                            @endif
-            
-                            @if ($sa->jab_direksi)
-                                <td class="style9 bottom align-center" width="50%">{{$sa->jab_direksi}}&nbsp;</td>
-                            @else
-                                <td class="style9 bottom align-center" width="50%">&nbsp;</td>
-                            @endif
-                        @endif
-                        <th>&nbsp;</th>
-
-                        @if ($i == 0)
-                            @if ($sa->nama_kom)
-                                <td class="style9 bottom align-center" width="50%">{{$sa->nama_kom}}&nbsp;</td>
-                            @else
-                                <td class="style9 bottom align-center" width="50%">&nbsp;</td>
-                            @endif
-            
-                            @if ($sa->jab_kom)
-                                <td class="style9 bottom align-center" width="50%">{{$sa->jab_kom}}&nbsp;</td>
-                            @else
-                                <td class="style9 bottom align-center" width="50%">&nbsp;</td>
-                            @endif
-                        @endif
-                    @endfor
+                    <td class="style9 " width="50%">&nbsp;</td>
+                    <td class="style9 " width="50%">&nbsp;</td>
                 </tr>
-            @endforeach
-            
+
+                <tr>
+                    <td class="style9 " width="50%">&nbsp;</td>
+                    <td class="style9 " width="50%">&nbsp;</td>
+                </tr>
+
+                <tr>
+                    <td class="style9 " width="50%">&nbsp;</td>
+                    <td class="style9 " width="50%">&nbsp;</td>
+                </tr>
+
+                <tr>
+                    <td class="style9 " width="50%">&nbsp;</td>
+                    <td class="style9 " width="50%">&nbsp;</td>
+                </tr>
 
                 <tr>
                     <td class="style9 " width="50%">&nbsp;</td>
@@ -271,7 +250,7 @@ $keuangan = new Keuangan();
     <tr>
         <td width="2%" class="style9"></td>
         <td width="40%" class="style9">*) coret yang tidak perlu
-            <br> **) hanya diisi untuk LKM berbentuk PT
+            <br> **) hanya diisi untuk Lembaga berbentuk PT
         </td>
 </table>
 <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
@@ -297,7 +276,7 @@ $keuangan = new Keuangan();
         <td width="70" align="center"></td>
         <td width="50" align="center"></td>
         <td width="60" align="center">
-            <strong><u>{{ $dir->namadepan }} {{$dir->namabelakang}}</u></strong>
+            <strong><u>{{ $dir->namadepan ?? ''}} {{$dir->namabelakang ?? ''}}</u></strong>
         </td>        
     </tr> 
     <tr>

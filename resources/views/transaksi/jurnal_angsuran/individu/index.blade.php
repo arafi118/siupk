@@ -1,133 +1,127 @@
 @extends('layouts.base')
 
 @section('content')
-    <div class="app-main__inner">
-        <div class="tab-content">
-            <div class="row">
-                <div class="col-12" id="notif">
+    <div class="row">
+        <div class="col-12" id="notif">
 
-                </div>
-                <div class="col-md-8 mb-3">
-                    <div class="card mb-3">
-                        <div class="card-body py-2">
-                            <form action="/transaksi/angsuran_individu" method="post" id="FormAngsuranIndividu">
-                                @csrf
+        </div>
+        <div class="col-md-8 mb-3">
+            <div class="card mb-3">
+                <div class="card-body py-2">
+                    <form action="/transaksi/angsuran_individu" method="post" id="FormAngsuranIndividu">
+                        @csrf
 
-                                <input type="hidden" name="id" id="id"
-                                    value="{{ Request::get('pinkel') ?: 0 }}">
-                                <input type="hidden" name="_pokok" id="_pokok">
-                                <input type="hidden" name="_jasa" id="_jasa">
-                                <input type="hidden" name="tgl_pakai_aplikasi" id="tgl_pakai_aplikasi"
-                                    value="{{ $kec->tgl_pakai }}">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="position-relative mb-3">
-                                            <label for="tgl_transaksi">Tgl Transaksi </label>
-                                            <input autocomplete="off" type="text" name="tgl_transaksi" id="tgl_transaksi"
-                                                class="form-control date" value="{{ date('d/m/Y') }}">
-                                            <small class="text-danger" id="msg_tgl_transaksi"></small>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="position-relative mb-3">
-                                            <label for="pokok">Pokok </label>
-                                            <input autocomplete="off" type="text" name="pokok" id="pokok"
-                                                class="form-control">
-                                            <small class="text-danger" id="msg_pokok"></small>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="position-relative mb-3">
-                                            <label for="jasa">Jasa </label>
-                                            <input autocomplete="off" type="text" name="jasa" id="jasa"
-                                                class="form-control">
-                                            <small class="text-danger" id="msg_jasa"></small>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="position-relative mb-3">
-                                            <label for="denda">Denda </label>
-                                            <input autocomplete="off" type="text" name="denda" id="denda"
-                                                class="form-control">
-                                            <small class="text-danger" id="msg_denda"></small>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="position-relative mb-3">
-                                            <label for="total">Total Bayar </label>
-                                            <input autocomplete="off" readonly disabled type="text" name="total"
-                                                id="total" class="form-control">
-                                            <small class="text-danger" id="msg_total"></small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-
-                            <div class="d-flex justify-content-end">
-                                <button type="button"class="btn btn-warning btn-sm me-3" style="color: white;">
-                                    Loan id 
-                                    <span class="badge badge-info" id="loan-id" style="font-size: 16px;">
-                                    </span>
-                                </button>
-                                <button type="button" id="btnDetailIndividu" class="btn btn-info btn-sm me-3">
-                                    Detail Pemanfaat 
-                                </button>
-                                <button type="button" id="SimpanAngsuran"
-                                    class="btn btn-github btn-sm btn btn-sm btn-dark mb-0">Posting</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card card-body p-2 pb-0 mb-3">
+                        <input type="hidden" name="id" id="id" value="{{ Request::get('pinkel') ?: 0 }}">
+                        <input type="hidden" name="_pokok" id="_pokok">
+                        <input type="hidden" name="_jasa" id="_jasa">
+                        <input type="hidden" name="tgl_pakai_aplikasi" id="tgl_pakai_aplikasi"
+                            value="{{ $kec->tgl_pakai }}">
                         <div class="row">
-                            <div class="col-4">
-                                <div class="d-grid">
-                                    <a id="cetakKartuAngsuran" class="btn btn-success btn-sm mb-2">Kartu</a>
+                            <div class="col-12">
+                                <div class="input-group input-group-static my-3">
+                                    <label for="tgl_transaksi">Tanggal Transaksi</label>
+                                    <input autocomplete="off" type="text" name="tgl_transaksi" id="tgl_transaksi"
+                                        class="form-control date" value="{{ date('d/m/Y') }}">
+                                    <small class="text-danger" id="msg_tgl_transaksi"></small>
                                 </div>
                             </div>
-                            <div class="col-4">
-                                <div class="d-grid">
-                                    <button class="btn btn-danger btn-sm mb-2" id="btnDetailAngsuran">Detail</button>
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-static my-3">
+                                    <label for="pokok">Pokok</label>
+                                    <input autocomplete="off" type="text" name="pokok" id="pokok"
+                                        class="form-control">
+                                    <small class="text-danger" id="msg_pokok"></small>
                                 </div>
                             </div>
-                            <div class="col-4">
-                                <div class="d-grid">
-                                    <button class="btn btn-info btn-sm mb-2" id=cetakLPP>LPP per bulan</button>
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-static my-3">
+                                    <label for="jasa">Jasa</label>
+                                    <input autocomplete="off" type="text" name="jasa" id="jasa"
+                                        class="form-control">
+                                    <small class="text-danger" id="msg_jasa"></small>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-static my-3">
+                                    <label for="denda">Denda</label>
+                                    <input autocomplete="off" type="text" name="denda" id="denda"
+                                        class="form-control">
+                                    <small class="text-danger" id="msg_denda"></small>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-static my-3">
+                                    <label for="total">Total Bayar</label>
+                                    <input autocomplete="off" readonly disabled type="text" name="total" id="total"
+                                        class="form-control">
+                                    <small class="text-danger" id="msg_total"></small>
                                 </div>
                             </div>
                         </div>
+                    </form>
+
+                    <div class="d-flex justify-content-end">
+                        <button type="button" id="btnDetailIndividu" class="btn btn-info btn-sm me-3">
+                            Detail Pemanfaat <span class="badge badge-info" id="loan-id"></span>
+                        </button>
+                        <button type="button" id="SimpanAngsuran" class="btn btn-github btn-sm">Posting</button>
                     </div>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <div class="nav-wrapper position-relative end-0">
-                        <div class="d-flex justify-content-between p-1" role="tablist">
-                            <button class="btn btn-outline-primary flex-fill me-1 active" data-bs-toggle="tab" data-bs-target="#Pokok" role="tab" aria-controls="Pokok" aria-selected="true">
-                                Pokok
-                            </button>
-                            <button class="btn btn-outline-warning flex-fill" data-bs-toggle="tab" data-bs-target="#Jasa" role="tab" aria-controls="Jasa" aria-selected="false">
-                                Jasa
-                            </button>
-                        </div>                        
+            </div>
 
-                        <div class="tab-content mt-3">
-                            <div class="tab-pane fade show active" id="Pokok" role="tabpanel"
-                                aria-labelledby="Pokok">
-                                <div class="card card-body p-2">
-                                    <canvas id="chartP"></canvas>
-                                    <div class="d-flex justify-content-between mt-3 mb-1 mx-3 text-sm fw-bold">
-                                        <span>Alokasi</span>
-                                        <span id="alokasi_pokok"></span>
-                                    </div>
-                                </div>
+            <div class="card card-body p-2 pb-0 mb-3">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="d-grid">
+                            <a id="cetakKartuAngsuran" class="btn btn-success btn-sm mb-2">Kartu</a>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="d-grid">
+                            <button class="btn btn-danger btn-sm mb-2" id="btnDetailAngsuran">Detail</button>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="d-grid">
+                            <button class="btn btn-info btn-sm mb-2" id=cetakLPP>LPP per bulan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="nav-wrapper position-relative end-0">
+                <ul class="nav nav-pills nav-fill p-1" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab" href="#Pokok" role="tab"
+                            aria-controls="Pokok" aria-selected="true">
+                            Pokok
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#Jasa" role="tab"
+                            aria-controls="Jasa" aria-selected="false">
+                            Jasa
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="tab-content mt-3">
+                    <div class="tab-pane fade show active" id="Pokok" role="tabpanel" aria-labelledby="Pokok">
+                        <div class="card card-body p-2">
+                            <canvas id="chartP"></canvas>
+                            <div class="d-flex justify-content-between mt-3 mb-1 mx-3 text-sm fw-bold">
+                                <span>Alokasi</span>
+                                <span id="alokasi_pokok"></span>
                             </div>
-                            <div class="tab-pane fade" id="Jasa" role="tabpanel" aria-labelledby="Jasa">
-                                <div class="card card-body p-2">
-                                    <canvas id="chartJ"></canvas>
-                                    <div class="d-flex justify-content-between mt-3 mb-1 mx-3 text-sm fw-bold">
-                                        <span>Jasa</span>
-                                        <span id="alokasi_jasa"></span>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="Jasa" role="tabpanel" aria-labelledby="Jasa">
+                        <div class="card card-body p-2">
+                            <canvas id="chartJ"></canvas>
+                            <div class="d-flex justify-content-between mt-3 mb-1 mx-3 text-sm fw-bold">
+                                <span>Jasa</span>
+                                <span id="alokasi_jasa"></span>
                             </div>
                         </div>
                     </div>
@@ -135,12 +129,30 @@
             </div>
         </div>
     </div>
-@endsection
 
-@section('modal')
+    <div class="modal fade" id="DetailIndividu" tabindex="-1" aria-labelledby="DetailIndividuLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="DetailIndividuLabel">
+
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="LayoutDetailIndividu"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="DetailAngsuran" tabindex="-1" aria-labelledby="DetailAngsuranLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen">
+        <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="DetailAngsuranLabel">
@@ -161,28 +173,8 @@
         </div>
     </div>
 
-    <div class="modal fade" id="DetailIndividu" tabindex="-1" aria-labelledby="DetailIndividuLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="DetailIndividuLabel">
-
-                    </h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div id="LayoutDetailIndividu"></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Tutup</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="modal fade" id="BuktiAngsuran" tabindex="-1" aria-labelledby="BuktiAngsuranLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen">
+        <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="BuktiAngsuranLabel">
@@ -205,7 +197,7 @@
 
     <div class="modal fade" id="AngsuranAnggota" tabindex="-1" aria-labelledby="AngsuranAnggotaLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="AngsuranAnggotaLabel">
@@ -222,43 +214,36 @@
             </div>
         </div>
     </div>
-    
-    <form action="/transaksi/reversal" method="post" id="formReversal">
-        @csrf
-
-        <input type="hidden" name="rev_idt" id="rev_idt">
-        <input type="hidden" name="rev_idtp" id="rev_idtp">
-        <input type="hidden" name="rev_id_pinj_i" id="rev_id_pinj_">
-    </form>
-
-    <form action="/transaksi/hapus" method="post" id="formHapus">
-        @csrf
-
-        <input type="hidden" name="del_idt" id="del_idt">
-        <input type="hidden" name="del_id_pinj" id="del_id_pinj">
-        <input type="hidden" name="del_idtp" id="del_idtp">
-    </form>
 @endsection
 
 @section('script')
     <script>
-        $("#pokok").maskMoney({
-            allowNegative: true
-        });
-        $("#jasa").maskMoney({
-            allowNegative: true
-        });
-        $("#denda").maskMoney({
-            allowNegative: true
-        });
-        $('.date').datepicker({
-            dateFormat: 'dd/mm/yy'
-        });
-
-        var chr_pokok, chr_jasa = ''
         var formatter = new Intl.NumberFormat('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
+        })
+
+        var pokok, jasa = 0;
+
+        $("#pokok").maskMoney({
+            allowNegative: true
+        });
+
+        $("#jasa").maskMoney({
+            allowNegative: true
+        });
+
+        $("#denda").maskMoney({
+            allowNegative: true
+        });
+
+        $("#total").maskMoney({
+            allowNegative: true
+        });
+
+
+        $(".date").flatpickr({
+            dateFormat: "d/m/Y"
         })
 
         var id_pinkel = "{{ Request::get('pinkel') ?: 0 }}"
@@ -325,7 +310,7 @@
             pokok = parseFloat(pokok.split(',').join('').split('.00').join(''))
 
             var next = true
-            if (pokok > sisa_pokok) {
+            if (pokok > 0 && pokok > sisa_pokok) {
                 Swal.fire('Error', 'Angsuran pokok tidak boleh melebihi saldo pinjaman saat ini.', 'warning')
                 return false
 
@@ -389,43 +374,6 @@
                     }
                 })
             }
-        })
-
-        $(document).on('click', '.btn-delete', function(e) {
-            e.preventDefault()
-
-            var idt = $(this).attr('data-idt')
-            $.get('/transaksi/data/' + idt, function(result) {
-
-                $('#del_idt').val(result.idt)
-                $('#del_idtp').val(result.idtp)
-                $('#del_id_pinj').val(result.id_pinj)
-                Swal.fire({
-                    title: 'Peringatan',
-                    text: 'Setelah menekan tombol Hapus Transaksi dibawah, maka transaksi ini akan dihapus dari aplikasi secara permanen.',
-                    showCancelButton: true,
-                    confirmButtonText: 'Hapus Transaksi',
-                    cancelButtonText: 'Batal',
-                    icon: 'warning'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        var form = $('#formHapus')
-                        $.ajax({
-                            type: form.attr('method'),
-                            url: form.attr('action'),
-                            data: form.serialize(),
-                            success: function(result) {
-                                if (result.success) {
-                                    Swal.fire('Berhasil!', result.msg, 'success')
-                                        .then(() => {
-                                            $('#detailTransaksi').modal('hide')
-                                        })
-                                }
-                            }
-                        })
-                    }
-                })
-            })
         })
 
         $(document).on('click', '#cetakKartuAngsuran', function(e) {
@@ -529,14 +477,14 @@
                 }),
                 success: function(result) {
                     if (result.status) {
-                        MultiToast('success', 'Pesan untuk Nasabah ' + nama + ' berhasil dikirim')
+                        MultiToast('success', 'Pesan untuk kelompok ' + nama + ' berhasil dikirim')
                     } else {
                         if (repeat < 1) {
                             setTimeout(function() {
                                 sendMsg(number, nama, msg, repeat + 1)
                             }, 1000)
                         } else {
-                            MultiToast('error', 'Pesan untuk Nasabah ' + nama + ' gagal dikirim')
+                            MultiToast('error', 'Pesan untuk kelompok ' + nama + ' gagal dikirim')
                         }
                     }
                 },
@@ -546,7 +494,7 @@
                             sendMsg(number, nama, msg, repeat + 1)
                         }, 1000)
                     } else {
-                        MultiToast('error', 'Pesan untuk Nasabah ' + nama + ' gagal dikirim')
+                        MultiToast('error', 'Pesan untuk kelompok ' + nama + ' gagal dikirim')
                     }
                 }
             })

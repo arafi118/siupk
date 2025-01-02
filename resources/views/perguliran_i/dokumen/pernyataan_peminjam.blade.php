@@ -9,7 +9,7 @@
         <tr class="b">
             <td colspan="3" align="center">
                 <div style="font-size: 18px;">
-                    <b>SURAT PERNYATAAN</b>
+                    <b>SURAT PERNYATAAN PEMINJAM</b>
                 </div>
             </td>
         </tr>
@@ -33,10 +33,10 @@
 
         </tr>
         <tr>
-            <td>Tempat, Tgl. lahir</td>
+            <td>Tempat, Tangal lahir</td>
             <td align="right">:</td>
             <td>{{ $pinkel->anggota->tempat_lahir }}
-            {{ Tanggal::tglLatin($pinkel->anggota->tgl_lahir) }} 
+                {{ Tanggal::tglLatin($pinkel->anggota->tgl_lahir) }}
             </td>
         </tr>
         <tr>
@@ -47,20 +47,12 @@
         <tr>
             <td>Alamat</td>
             <td align="right">:</td>
-            <td>{{ $pinkel->anggota->alamat}} {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }}
-                {{ $pinkel->anggota->d->desa }} {{$kec->sebutan_kec }} {{ $kec->nama_kec }}
-                {{ $nama_kabupaten }} </td>
+            <td>{{ $pinkel->anggota->d->nama_desa }}</td>
         </tr>
         <tr>
             <td>Jenis Usaha</td>
             <td align="right">:</td>
-            <td>
-                @if (is_numeric($pinkel->anggota->usaha))
-                    {{$pinkel->anggota->u->nama_usaha}}
-                @else
-                    {{$pinkel->anggota->usaha}}
-                @endif
-            </td>
+            <td>{{ $pinkel->anggota->usaha }}</td>
         </tr>
         <tr>
             <td width="100" colspan="3">
@@ -70,9 +62,52 @@
 
                 <ol>
                     <li>
-                    Saya selaku Nasabah {{ $kec->nama_lembaga_sort }} menyatakan benar-benar telah meminjam uang sebesar <br> Rp. _____________________,
+                        Saya selaku Pemanfaat pinjaman individu pada Kecamatan {{ $kec->nama_kec }}
+                        melalui {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }} {{ $pinkel->anggota->d->nama_desa }},
+                        Kecamatan {{ $kec->nama_kec }}
+                        {{ $nama_kabupaten }}, benar-benar telah meminjam uang sebesar Rp. _____________________,
                         dengan jaminan berupa barang sebagai berikut :
                         <ul style="list-style: disc;">
+                            <li>
+@php
+    // Dekode JSON, jika gagal, jadikan string apa adanya.
+    $jaminan = json_decode($pinkel->jaminan, true) ?? $pinkel->jaminan;
+@endphp
+
+<table border="0" width="100%" cellspacing="0" cellpadding="5" style="font-size: 12px; border-collapse: collapse;">
+    @if (is_array($jaminan))
+        @foreach ($jaminan as $key => $value)
+            <tr>
+                <td height="12" width="80">{{ ucwords(str_replace('_', ' ', $key)) }}</td>
+                <td width="10" align="center">:</td>
+                <td>
+                    @if (is_numeric($value))
+                        Rp {{ number_format($value, 0, ',', '.') }}
+                    @else
+                        {{ $value }}
+                    @endif
+                </td>
+            </tr>
+        @endforeach
+    @else
+        <tr>
+            <td height="12" width="80">Nama barang</td>
+            <td width="10" align="center">:</td>
+            <td>
+                <b>{{ $jaminan }}</b>
+            </td>
+        </tr>
+                                        <tr>
+                                            <td height="12" width="80">Nilai Jual</td>
+                                            <td width="10" align="center">:</td>
+                                            <td>
+                                                <b>Rp. _______________________</b>
+                                            </td>
+                                        </tr>
+    @endif
+</table>
+
+                                </li>
                             @for ($i = 0; $i < 3; $i++)
                                 <li>
                                     <table border="0" width="100%" cellspacing="0" cellpadding="0"
@@ -97,7 +132,7 @@
                         </ul>
                     </li>
                     <li>
-                        Barang yang saya jaminkan tersebut adalah benar-benar milik saya sendiri,
+                        Barang yang saya jaminkan kepada kelompok tersebut adalah benar-benar milik saya sendiri,
                     </li>
                     <li>
                         Saya berkewajiban merawat dan melindungi barang jaminan tersebut dan tidak akan menjual,
@@ -126,7 +161,8 @@
                 </ol>
 
                 <div>
-                Demikian surat pernyataan ini saya buat dengan sebenarnya dan dengan penuh kesadaran serta rasa tanggung jawab.
+                    Demikian surat pernyataan ini saya buat dengan sebenarnya dan dengan penuh kesadaran serta rasa tanggung
+                    jawab.
 
 
                 </div>
@@ -152,7 +188,7 @@
         </tr>
         <tr>
             <td align="center">
-                <b>{{ $pinkel->anggota->ketua }}</b>
+                <b>____________________</b>
             </td>
             <td align="center">
                 <b>____________________</b>

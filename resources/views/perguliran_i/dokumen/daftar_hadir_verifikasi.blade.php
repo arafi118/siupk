@@ -63,7 +63,7 @@
                 <td>
                     <div class="fw-bold" style="font-size: 14px;">{{ $pa->anggota->namadepan }}</div>
                 </td>
-                <td align="center">Nasabah</td>
+                <td align="center">Pemanfaat</td>
                 <td>{{ $pa->anggota->alamat }}</td>
                 <td>{{ $no }}.</td>
             </tr>

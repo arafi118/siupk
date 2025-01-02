@@ -25,10 +25,10 @@
                     <b>ANALISA DAN KEPUTUSAN KREDIT</b>
                 </div>
                 <div style="font-size: 12px;">
-                    <b>Pengajuan Perorangan {{ $kec->nama_lembaga_sort }}</b>
+                    <b>Pinjaman Perorangan {{ $kec->nama_lembaga_sort }}</b>
                 </div>
                 <div style="font-size: 13px;">
-                    <b>Nomor :_________________</b>
+                    <b>Nomor : 53 /VIII/2018</b>
                 </div>
                 <div style="font-size: 13px;">
                     <b>KREDIT BARU</b>
@@ -55,8 +55,7 @@
             <td width="45%">Tempat & tgl lahir</td>
             <td align="center"width="5%">:</td>
             <td>
-                <b>{{ $pinkel->anggota->tempat_lahir }} 
-                  {{ \Carbon\Carbon::parse($pinkel->anggota->tgl_lahir)->translatedFormat('d F Y') }}</b>
+                <b>{{ $pinkel->anggota->tempat_lahir }} {{ $pinkel->anggota->tgl_lahir }}</b>
             </td>
         </tr>
         <tr>
@@ -134,7 +133,7 @@
         </tr>
     </table>
 
-    <h3><b>II. PERMOHONAN PIUTANG</b></h3>
+    <h3><b>II. PERMOHONAN PINJAMAN</b></h3>
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
         <tr>
             <td align="center"width="5%">1.</td>
@@ -206,7 +205,7 @@
         </tr>
         <tr>
             <td align="center"width="5%">3.</td>
-            <td width="45%">Maks Pemberian Piutang Sesuai Dinas</td>
+            <td width="45%">Maks Pemberian Pinjaman Sesuai Dinas</td>
             <td align="center"width="5%">:</td>
             <td>
                 {{-- <b>{{ $pinkel->anggota->jk }}</b> --}}
@@ -287,7 +286,7 @@
             <td width="40%">a. Provisi Kredit</td>
             <td align="center"width="5%">:</td>
             <td>
-                {{-- <b>{{ $pinkel->anggota->u->nama_usaha }}</b> --}}
+                {{-- <b>{{ is_numeric($pinkel->anggota->usaha) ? $pinkel->anggota->u->nama_usaha : $pinkel->anggota->usaha }}</b> --}}
             </td>
         </tr>
         <tr>
@@ -296,7 +295,7 @@
             <td width="40%">b. Premi Angsuran</td>
             <td align="center"width="5%">:</td>
             <td>
-                {{-- <b>{{ $pinkel->anggota->u->nama_usaha }}</b> --}}
+                {{-- <b>{{ is_numeric($pinkel->anggota->usaha) ? $pinkel->anggota->u->nama_usaha : $pinkel->anggota->usaha }}</b> --}}
             </td>
         </tr>
         <tr>
@@ -305,7 +304,7 @@
             <td width="40%">c. Biaya</td>
             <td align="center"width="5%">:</td>
             <td>
-                {{-- <b>{{ $pinkel->anggota->u->nama_usaha }}</b> --}}
+                {{-- <b>{{ is_numeric($pinkel->anggota->usaha) ? $pinkel->anggota->u->nama_usaha : $pinkel->anggota->usaha }}</b> --}}
             </td>
         </tr>
         <tr>
@@ -314,11 +313,11 @@
             <td width="40%">d. Pelunasan kredit Lama</td>
             <td align="center"width="5%">:</td>
             <td>
-                {{-- <b>{{ $pinkel->anggota->u->nama_usaha }}</b> --}}
+                {{-- <b>{{ is_numeric($pinkel->anggota->usaha) ? $pinkel->anggota->u->nama_usaha : $pinkel->anggota->usaha }}</b> --}}
             </td>
-        </tr><br><br>
+        </tr>
         <tr>
-            <td align="center"width="5%">9.</td>
+            <td align="center"width="5%">8.</td>
             <td colspan="2"width="45%">Lain-lainya :</td>
             <td align="center"width="5%"></td>
             <td></td>
@@ -329,7 +328,7 @@
             <td width="40%">a. Nilai Pertangungan Asuransi</td>
             <td align="center"width="5%">:</td>
             <td>
-                {{-- <b>{{ $pinkel->anggota->u->nama_usaha }}</b> --}}
+                {{-- <b>{{ is_numeric($pinkel->anggota->usaha) ? $pinkel->anggota->u->nama_usaha : $pinkel->anggota->usaha }}</b> --}}
             </td>
         </tr>
         <tr>
@@ -338,7 +337,7 @@
             <td width="40%">b. Rencana Realisasi Hari/Tanggal</td>
             <td align="center"width="5%">:</td>
             <td>
-                {{-- <b>{{ $pinkel->anggota->u->nama_usaha }}</b> --}}
+                {{-- <b>{{ is_numeric($pinkel->anggota->usaha) ? $pinkel->anggota->u->nama_usaha : $pinkel->anggota->usaha }}</b> --}}
             </td>
         </tr>
     </table>

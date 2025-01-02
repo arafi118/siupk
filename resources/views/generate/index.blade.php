@@ -12,7 +12,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{ $logo }}">
     <link rel="icon" type="image/png" href="{{ $logo }}">
     <title>
-        GENERATE &mdash; SI LKM Online
+        GENERATE &mdash; SI UPK Online
     </title>
 
     <link rel="stylesheet" type="text/css"
@@ -39,7 +39,7 @@
     <main class="main-content mt-3">
         <section class="container">
             <div class="nav-wrapper position-relative end-0">
-                {{-- <ul class="nav nav-pills nav-fill p-1" role="tablist">
+                <ul class="nav nav-pills nav-fill p-1" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab" href="#Individu" role="tab"
                             aria-controls="Individu" aria-selected="true">
@@ -49,12 +49,28 @@
                             Individu
                         </a>
                     </li>
-                </ul> --}}
+                    <li class="nav-item">
+                        <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#Kelompok" role="tab"
+                            aria-controls="Kelompok" aria-selected="false">
+                            <span class="material-icons align-middle mb-1">
+                                people
+                            </span>
+                            Kelompok
+                        </a>
+                    </li>
+                </ul>
 
                 <div class="tab-content mt-2">
                     <div class="tab-pane fade show active" id="Individu" role="tabpanel" aria-labelledby="Individu">
                         <div class="card">
                             <div class="card-body" id="StructruIndividu">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="Kelompok" role="tabpanel" aria-labelledby="Kelompok">
+                        <div class="card">
+                            <div class="card-body" id="StructurKelompok">
 
                             </div>
                         </div>

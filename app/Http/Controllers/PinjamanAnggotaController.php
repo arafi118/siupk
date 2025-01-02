@@ -78,6 +78,7 @@ class PinjamanAnggotaController extends Controller
                 if ($pinkel->id == $pinjaman_anggota_a->id_pinkel) $enable_alokasi = false;
             }
 
+            if ($anggota->status == '0') $enable_alokasi = false;
 
             $view = view('pinjaman.anggota.register')->with(compact('anggota', 'pinjaman_anggota', 'jumlah_pinjaman_anggota', 'pinjaman_anggota_a', 'jumlah_pinjaman_anggota_a', 'data_pemanfaat', 'jumlah_data_pemanfaat', 'data_pemanfaat_a', 'jumlah_data_pemanfaat_a'))->render();
             return [
@@ -114,6 +115,11 @@ class PinjamanAnggotaController extends Controller
         $pinkel = PinjamanKelompok::where('id', $request->id_pinkel)->first();
         $anggota = Anggota::where('id', $request->nia_pemanfaat)->first();
 
+        $pros_jasa = $pinkel->pros_jasa;
+        if ($pinkel->pros_jasa / $pinkel->jangka == '1.5' && Session::get('lokasi') == '68') {
+            $pros_jasa = 1.8 * $pinkel->jangka;
+        }
+
         $insert = [
             'jenis_pinjaman' => 'K',
             'id_kel' => $pinkel->id_kel,
@@ -134,7 +140,7 @@ class PinjamanAnggotaController extends Controller
             'kom_jasa' => '0',
             'spk_no' => $pinkel->spk_no,
             'sumber' => $pinkel->sumber,
-            'pros_jasa' => $pinkel->pros_jasa,
+            'pros_jasa' => $pros_jasa,
             'jenis_jasa' => $pinkel->jenis_jasa,
             'jangka' => $pinkel->jangka,
             'sistem_angsuran' => $pinkel->sistem_angsuran,
@@ -405,12 +411,25 @@ class PinjamanAnggotaController extends Controller
         ]);
     }
 
+    public function updateCatatanVerifikasi(Request $request, $id)
+{
+    $pinjamanAnggota = PinjamanAnggota::find($id);
+    if ($pinjamanAnggota) {
+        $pinjamanAnggota->catatan_verifikasi = $request->input('catatan_verifikasi');
+        $pinjamanAnggota->save();
+
+        return response()->json(['success' => true]);
+    }
+
+    return response()->json(['success' => false], 404);
+}
+
     public function cariAnggota()
     {
         $param = request()->get('query');
         if (strlen($param) >= '0') {
-            $anggota = Anggota::leftJoin('desa', 'desa.kd_desa', '=', 'anggota_' . Session::get('lokasi') . '.desa')
-                ->leftJoin('pinjaman_anggota_' . Session::get('lokasi') . ' as pk', 'pk.nia', '=', 'anggota_' . Session::get('lokasi') . '.id')
+            $anggota = Anggota::join('desa', 'desa.kd_desa', '=', 'anggota_' . Session::get('lokasi') . '.desa')
+                ->join('pinjaman_anggota_' . Session::get('lokasi') . ' as pk', 'pk.nia', '=', 'anggota_' . Session::get('lokasi') . '.id')
                 ->where(function ($query) use ($param) {
                     $query->where('anggota_' . Session::get('lokasi') . '.namadepan', 'like', '%' . $param . '%')
                         ->orwhere('anggota_' . Session::get('lokasi') . '.nik', 'like', '%' . $param . '%');

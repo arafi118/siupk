@@ -96,6 +96,10 @@
                         <td class="t l b r" width="14%">&nbsp;</td>
                     </tr>
                 </table>
+                
+                        @php
+                            $values = explode('_', $pinkel->wt_cair);
+                        @endphp
 
                 <table class="p" border="0" width="100%" cellspacing="0" cellpadding="0"
                     style="font-size: 11px;">
@@ -103,7 +107,7 @@
                         <td width="60%">&nbsp;</td>
                         <td width="60">Diterima Di</td>
                         <td width="2">:</td>
-                        <td>{{ substr($pinkel->wt_cair, 6) }}</td>
+                        <td>{{ $values[1] ? $values[1] : '' }}</td>
                     </tr>
                     <tr>
                         <td width="60%">&nbsp;</td>

@@ -36,7 +36,7 @@
         <td height="10" class="style9">&nbsp;</td>
       </tr>
       <tr>
-        <td height="10" class="style9">Tempat,Tgl Lahir </td>
+        <td height="10" class="style9">Tempat, Tanggal Lahir </td>
         <td class="style27">:  {{ $pinkel->anggota->tempat_lahir}} 
                 {{ Tanggal::tglLatin($pinkel->anggota->tgl_lahir) }} 
             </td>
@@ -44,25 +44,14 @@
       </tr>
       <tr>
         <td width="20%" height="10" class="style9">Alamat</td>
-        <td width="42%" class="style27">: {{ $pinkel->anggota->alamat}} {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }}
-          {{ $pinkel->anggota->d->desa }} {{$kec->sebutan_kec }} {{ $kec->nama_kec }}
-          {{ $nama_kabupaten }} </td>
+        <td width="42%" class="style27">: {{ $pinkel->anggota->d->nama_desa }}</td>
         <td height="10" class="style9">&nbsp;</td>
       </tr>
       <tr>
         <td height="10" class="style9">Jenis Usaha</td>
-        <td class="style27">
-            :
-            @if (is_numeric($pinkel->anggota->usaha))
-            {{ $pinkel->anggota->u->nama_usaha }}
-            @else
-                {{ $pinkel->anggota->usaha }}
-            @endif
-        
-        </td>
+        <td class="style27">: {{ is_numeric($pinkel->anggota->usaha) ? $pinkel->anggota->u->nama_usaha : $pinkel->anggota->usaha }}</td>
         <td height="10" class="style9">&nbsp;</td>
-    </tr>
-    
+      </tr>
 	  <tr>
         <td height="10" class="style9">Nomor HP</td>
         <td class="style27">: {{ $pinkel->anggota->hp }}</td>
@@ -95,48 +84,35 @@
     <tr>
         <td height="10" colspan="3" class="style9 align-justify">
             <p>
-                Untuk  menggunakan barang jaminan yang kami serahterimakan kepada {{ $kec->nama_lembaga_sort }}, sebagaimana tertuang dalam bukti serah terima barang jaminan yang menjadi bagian tidak terpisahkan dari dokumen Pencairan Kredit berkaitan dengan permohonan kredit ini.
-                Selanjutnya saya menyatakan sanggup untuk memberikan keterangan, memberikan dukungan dan/atau menandatangani kelengkapan dokumen apabila dikemudian hari diperlukan dalam proses eksekusi barang jaminan dalam rangka memenuhi kewajiban pengembalian kredit saya kepada {{ $kec->nama_lembaga_sort }}.
-               <br> Demikian surat persetujuan/pernyataan sekaligus Surat kuasa khusus ini saya buat secara sadar tanpa tekanan dari pihak manapun serta untuk dapat dipergunakan dimana perlu.
+                Untuk  menggunakan barang jaminan yang kami serahterimakan kepada {{ $kec->nama_lembaga_sort }}, sebagaimana tertuang dalam bukti serah terima barang jaminan yang menjadi bagian dari kelengkapan dokumen Pencairan Pinjaman kelak pada saat pencairan pinjaman berkaitan dengan pangajuan pinjaman ini.
+                Selanjutnya saya menyatakan sanggup untuk memberikan keterangan, memberikan dukungan dan/atau menandatangani kelengkapan dokumen apabila dikemudian hari diperlukan proses eksekusi barang jaminan guna memenuhi kewajiban pengembalian pinjaman saya kepada {{ $kec->nama_lembaga_sort }}.
+                Demikian surat persetujuan/pernyataan sekaligus Surat kuasa khusus ini saya buat secara sadar tanpa tekanan dari pihak manapun serta untuk dapat dipergunakan dimana perlu.
             </p>
         </td>
     </tr>
 
       <tr>
         <td height="20" colspan="2" class="style9"></td>
-        <td height="20" class="style9"><div align="right"><span class="style9"><br></span></div></td>
+        <td height="20" class="style9"><div align="right"><span class="style9"><br>{{$pinkel->anggota->d->nama_desa}}, {{ Tanggal::tglLatin($pinkel->tgl_proposal) }}</span></div></td>
       </tr>
 </table>
 	  
 <table width="97%" border="0" align="center" cellpadding="3" cellspacing="0">
    
   <tr>
-        <td width="10%" height="36" colspan="1" class="style26"><div align="center" class="style9">
+        <td width="10%" height="30" colspan="1" class="style26"><div align="center" class="style9">
           <p></p>
         </div></td>
 		 <td class="style26"><div align="center" class="style9">
-          <p>&nbsp;</p>
-          <p>Penerima Kuasa </p>
+          <p>Penerima Kuasa <br><br><br><br>
+{{$pinkel->anggota->namadepan}}        </p>
         </div></td>
         <td class="style26"><div align="center" class="style9">
-          {{$pinkel->anggota->d->nama_desa}}, {{ Tanggal::tglLatin($pinkel->tgl_proposal) }} <br>
-          <p>Pemberi Kuasa</p>
+          <p>Pemberi Kuasa <br><br><br><br>
+          {{ $dir->namadepan }} {{$dir->namabelakang}}
+         </p>
         </div></td>
       </tr>	
-	<tr>
-	    <td align="center"height="24" class="style9">&nbsp;</p>
-        <p >&nbsp;</p>
-        <p>
-        </p></td>
-		
-        <td align="center" class="style9"><p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p>{{ $dir->namadepan }} {{$dir->namabelakang}}<br></p></td>
-		
-		<td align="center" class="style9"><p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p>{{$pinkel->anggota->namadepan}}<br></p></td>
-		
-  </tr>
+	
 </table>
 @endsection

@@ -1,7 +1,6 @@
 @php
     use App\Utils\Tanggal;
     $section = 0;
-    $nomor_jenis_pp = 0;
 @endphp
 
 @extends('pelaporan.layout.base')
@@ -9,7 +8,7 @@
 @section('content')
     @foreach ($jenis_pp as $jpp)
         @php
-            if ($jpp->pinjaman_anggota->isEmpty()) {
+            if ($jpp->pinjaman_kelompok->isEmpty()) {
                 continue;
             }
         @endphp
@@ -24,18 +23,17 @@
             $t_kolek1 = 0;
             $t_kolek2 = 0;
             $t_kolek3 = 0;
-        @endphp
-        @if ($nomor_jenis_pp != 0)
+            $t_kolek4 = 0;
+            $t_kolek5 = 0;
+                   @endphp
+        @if ($jpp->nama_jpp != 'SPP')
             <div class="break"></div>
         @endif
         <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
             <tr>
                 <td colspan="3" align="center">
                     <div style="font-size: 18px;">
-                        <b>
-                            DAFTAR KOLEKTIBILITAS REKAP DESA
-                             {{ strtoupper($jpp->nama_jpp) }}
-                        </b>
+                        <b>DAFTAR KOLEKTIBILITAS REKAP DESA {{ strtoupper($jpp->nama_jpp) }}</b>
                     </div>
                     <div style="font-size: 16px;">
                         <b>{{ strtoupper($sub_judul) }}</b>
@@ -50,24 +48,19 @@
 
         <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px; table-layout: fixed;">
             <tr>
-                <th class="t l b" rowspan="2" width="24%">Nama Desa</th>
-                <th class="t l b" rowspan="2" width="10%">Alokasi</th>
-                <th class="t l b" rowspan="2" width="10%">Saldo</th>
-                <th class="t l b" rowspan="2" width="4%">%</th>
-                <th class="t l b" colspan="2" width="20%">Tunggakan</th>
-                <th class="t l b" width="10%">Lancar</th>
-                <th class="t l b" width="10%">Diragukan</th>
-                <th class="t l b r" width="10%">Macet</th>
+            <th class="t l b" width="2%">No</th>
+                <th class="t l b" width="23%">Desa</th>
+                <th class="t l b" width="10%">Saldo</th>
+                <th class="t l b" width="10%">Tunggakan</th>
+                <th class="t l b">KOLEK I</th>
+                <th class="t l b">KOLEK II</th>
+                <th class="t l b ">KOLEK III</th>
+                <th class="t l b">KOLEK IV</th>
+                <th class="t l b r">KOLEK V</th>
             </tr>
-            <tr>
-                <th class="t l b" width="10%">Pokok</th>
-                <th class="t l b" width="10%">Jasa</th>
-                <th class="t l b">(Menunggak 0-6)</th>
-                <th class="t l b">(Menunggak 6+ s/d 12)</th>
-                <th class="t l b r">(Menunggak 12+)</th>
-            </tr>
+            
 
-            @foreach ($jpp->pinjaman_anggota as $pinkel)
+            @foreach ($jpp->pinjaman_kelompok as $pinkel)
                 @php
                     $kd_desa[] = $pinkel->kd_desa;
                     $desa = $pinkel->kd_desa;
@@ -84,17 +77,19 @@
                             $t_kolek1 += $j_kolek1;
                             $t_kolek2 += $j_kolek2;
                             $t_kolek3 += $j_kolek3;
+                            $t_kolek4 += $j_kolek4;
+                            $t_kolek5 += $j_kolek5;
+                       
                         @endphp
-                        <tr>
-                            <td class="t l b" align="left">{{ $nomor++ }}. {{ $nama_desa }}</td>
-                            <td class="t l b" align="right">{{ number_format($j_alokasi) }}</td>
+                        <tr style="font-weight: bold;">
+                            <td class="t l b" align="left" colspan="2">{{ $nomor++ }}. {{ $nama_desa }}</td>
                             <td class="t l b" align="right">{{ number_format($j_saldo) }}</td>
-                            <td class="t l b" align="center">{{ number_format(floor($j_pross * 100)) }}</td>
                             <td class="t l b" align="right">{{ number_format($j_tunggakan_pokok) }}</td>
-                            <td class="t l b" align="right">{{ number_format($j_tunggakan_jasa) }}</td>
                             <td class="t l b" align="right">{{ number_format($j_kolek1) }}</td>
                             <td class="t l b" align="right">{{ number_format($j_kolek2) }}</td>
-                            <td class="t l b r" align="right">{{ number_format($j_kolek3) }}</td>
+                            <td class="t l b " align="right">{{ number_format($j_kolek3) }}</td>
+                            <td class="t l b" align="right">{{ number_format($j_kolek4) }}</td>
+                            <td class="t l b r" align="right">{{ number_format($j_kolek5) }}</td>
                         </tr>
                     @endif
 
@@ -106,6 +101,8 @@
                         $j_kolek1 = 0;
                         $j_kolek2 = 0;
                         $j_kolek3 = 0;
+                        $j_kolek4 = 0;
+                        $j_kolek5 = 0;
                         $section = $pinkel->kd_desa;
                         $nama_desa = $pinkel->sebutan_desa . ' ' . $pinkel->nama_desa;
                     @endphp
@@ -172,36 +169,53 @@
                         $saldo_jasa = 0;
                     }
 
-                    $tgl_akhir = new DateTime($tgl_kondisi);
-                    $tgl_awal = new DateTime($pinkel->tgl_cair);
-                    $selisih = $tgl_akhir->diff($tgl_awal);
+                    $tgl_cair = explode('-', $pinkel->tgl_cair);
+                    $th_cair = $tgl_cair[0];
+                    $bl_cair = $tgl_cair[1];
+                    $tg_cair = $tgl_cair[2];
 
-                    // if ($lpp == 'Minggu') {
-                    //     $selisih_hari = $selisih->days;
-                    //     $selisih = floor($selisih_hari / 7);
-                    // } else {
-                        
-                    // }
-                    $selisih = $selisih->y * 12 + $selisih->m;
+                    $selisih_tahun = ($tahun - $th_cair) * 12;
+                    $selisih_bulan = $bulan - $bl_cair;
+
+                    $selisih = $selisih_bulan + $selisih_tahun;
 
                     $_kolek = 0;
                     if ($wajib_pokok != '0') {
                         $_kolek = $tunggakan_pokok / $wajib_pokok;
                     }
-                    $kolek = round($_kolek + ($selisih - $angsuran_ke));
-                    if ($kolek < 6) {
-                        $kolek1 = $saldo_pokok;
-                        $kolek2 = 0;
-                        $kolek3 = 0;
-                    } elseif ($kolek >= 6 && $kolek <= 12) {
-                        $kolek1 = 0;
-                        $kolek2 = $saldo_pokok;
-                        $kolek3 = 0;
-                    } else {
-                        $kolek1 = 0;
-                        $kolek2 = 0;
-                        $kolek3 = $saldo_pokok;
-                    }
+                    $kolek = ceil($_kolek + ($selisih - $angsuran_ke));
+                    
+                    if ($kolek <= 0) {
+                    $kolek1 = $saldo_pokok;
+                    $kolek2 = 0;
+                    $kolek3 = 0;
+                    $kolek4 = 0;
+                    $kolek5 = 0;
+                } elseif ($kolek > 0 && $kolek <= 2) {
+                    $kolek1 = 0;
+                    $kolek2 = $saldo_pokok;
+                    $kolek3 = 0;
+                    $kolek4 = 0;
+                    $kolek5 = 0;
+                } elseif ($kolek > 2 && $kolek <= 4) {
+                    $kolek1 = 0;
+                    $kolek2 = 0;
+                    $kolek3 = $saldo_pokok;
+                    $kolek4 = 0;
+                    $kolek5 = 0;
+                } elseif ($kolek > 4 && $kolek <= 6) {
+                    $kolek1 = 0;
+                    $kolek2 = 0;
+                    $kolek3 = 0;
+                    $kolek4 = $saldo_pokok;
+                    $kolek5 = 0;
+                } elseif ($kolek > 6) {
+                    $kolek1 = 0;
+                    $kolek2 = 0;
+                    $kolek3 = 0;
+                    $kolek4 = 0;
+                    $kolek5 = $saldo_pokok;
+                }
 
                     $j_alokasi += $pinkel->alokasi;
                     $j_saldo += $saldo_pokok;
@@ -210,6 +224,8 @@
                     $j_kolek1 += $kolek1;
                     $j_kolek2 += $kolek2;
                     $j_kolek3 += $kolek3;
+                    $j_kolek4 += $kolek4;
+                    $j_kolek5 += $kolek5;
                 @endphp
             @endforeach
 
@@ -223,17 +239,19 @@
                     $t_kolek1 += $j_kolek1;
                     $t_kolek2 += $j_kolek2;
                     $t_kolek3 += $j_kolek3;
+                    $t_kolek4 += $j_kolek4;
+                    $t_kolek5 += $j_kolek5;
                 @endphp
-                <tr>
-                    <td class="t l b" align="left">{{ $nomor++ }}. {{ $nama_desa }}</td>
-                    <td class="t l b" align="right">{{ number_format($j_alokasi) }}</td>
+                <tr style="font-weight: bold;">
+                
+                    <td class="t l b" align="left" colspan="2">{{ $nomor++ }}. {{ $nama_desa }}</td>
                     <td class="t l b" align="right">{{ number_format($j_saldo) }}</td>
-                    <td class="t l b" align="center">{{ number_format(floor($j_pross * 100)) }}</td>
                     <td class="t l b" align="right">{{ number_format($j_tunggakan_pokok) }}</td>
-                    <td class="t l b" align="right">{{ number_format($j_tunggakan_jasa) }}</td>
                     <td class="t l b" align="right">{{ number_format($j_kolek1) }}</td>
                     <td class="t l b" align="right">{{ number_format($j_kolek2) }}</td>
-                    <td class="t l b r" align="right">{{ number_format($j_kolek3) }}</td>
+                    <td class="t l b" align="right">{{ number_format($j_kolek3) }}</td>
+                    <td class="t l b" align="right">{{ number_format($j_kolek4) }}</td>
+                    <td class="t l b r" align="right">{{ number_format($j_kolek5) }}</td>
                 </tr>
 
                 @php
@@ -244,40 +262,41 @@
                 @endphp
                 <tr>
                     <td colspan="9" style="padding: 0px !important;">
-                        <table class="p" border="0" width="100%" cellspacing="0" cellpadding="0"
+                        <table border="0" width="100%" cellspacing="0" cellpadding="0"
                             style="font-size: 11px; table-layout: fixed;">
                             <tr style="font-weight: bold;">
-                                <td class="t l b" width="24%" align="center" height="20">J U M L A H</td>
-                                <td class="t l b" width="10%" align="right">{{ number_format($t_alokasi) }}</td>
-                                <td class="t l b" width="10%" align="right">{{ number_format($t_saldo) }}</td>
-                                <td class="t l b" width="4%" align="center">
-                                    {{ number_format(floor($t_pross * 100)) }}</td>
-                                <td class="t l b" width="10%" align="right">{{ number_format($t_tunggakan_pokok) }}
+                                <td width="25%" class="t l b" align="center" height="20">J U M L A H</td>
+                                <td width="10%" class="t l b" align="right">{{ number_format($t_saldo) }}</td>
+                                <td width="10%" class="t l b r" align="right">{{ number_format($t_tunggakan_pokok) }}
                                 </td>
-                                <td class="t l b" width="10%" align="right">{{ number_format($t_tunggakan_jasa) }}
-                                </td>
-                                <td class="t l b" width="10%" align="right">{{ number_format($t_kolek1) }}</td>
-                                <td class="t l b" width="10%" align="right">{{ number_format($t_kolek2) }}</td>
-                                <td class="t l b r" width="10%" align="right">{{ number_format($t_kolek3) }}</td>
+                                <td class="t l b" align="right">{{ number_format($t_kolek1) }}</td>
+                                <td class="t l b" align="right">{{ number_format($t_kolek2) }}</td>
+                                <td class="t l b" align="right">{{ number_format($t_kolek3) }}</td>
+                                <td class="t l b" align="right">{{ number_format($t_kolek4) }}</td>
+                                <td class="t l b r" align="right">{{ number_format($t_kolek5) }}</td>
                             </tr>
                             <tr style="font-weight: bold;">
                                 <td class="t l b" align="center" rowspan="2" height="20">Resiko Pinjaman</td>
-                                <td class="t l b" colspan="5" align="center">(Lancar + Diragukan + Macet)</td>
-                                <td class="t l b" align="center">Lancar * 0%</td>
-                                <td class="t l b" align="center">Diragukan * 50%</td>
-                                <td class="t l b r" align="center">Macet * 100%</td>
+                                <td class="t l b" colspan="2" align="center">(Kolek I + Kolek II + Kolek III + Kolek IV + Kolek V)</td>
+                                <td class="t l b" align="center">Kolek I * 1%</td>
+                                <td class="t l b" align="center">Kolek II * 10%</td>
+                                <td class="t l b" align="center">Kolek III * 25%</td>
+                                <td class="t l b" align="center">Kolek IV * 50%</td>
+                                <td class="t l b r" align="center">Kolek V * 100%</td>
                             </tr>
                             <tr>
-                                <td class="t l b" align="center" colspan="5">
-                                    {{ number_format(($t_kolek1 * 0) / 100 + ($t_kolek2 * 50) / 100 + ($t_kolek3 * 100) / 100) }}
+                                <td class="t l b" align="center" colspan="2">
+                                {{ number_format(($t_kolek1 * 1) / 100 + ($t_kolek2 * 10) / 100 + ($t_kolek3 * 25) / 100 + ($t_kolek4 * 50) / 100 + ($t_kolek3 * 100) / 100) }}
                                 </td>
-                                <td class="t l b" align="center">{{ number_format(($t_kolek1 * 0) / 100) }}</td>
-                                <td class="t l b" align="center">{{ number_format(($t_kolek2 * 50) / 100) }}</td>
-                                <td class="t l b r" align="center">{{ number_format(($t_kolek3 * 100) / 100) }}</td>
+                                <td class="t l b" align="center">{{ number_format(($t_kolek1 * 1) / 100) }}</td>
+                                <td class="t l b" align="center">{{ number_format(($t_kolek2 * 10) / 100) }}</td>
+                                <td class="t l b" align="center">{{ number_format(($t_kolek3 * 25) / 100) }}</td>
+                                <td class="t l b" align="center">{{ number_format(($t_kolek4 * 50) / 100) }}</td>
+                                <td class="t l b r" align="center">{{ number_format(($t_kolek5 * 100) / 100) }}</td>
                             </tr>
 
                             <tr>
-                                <td colspan="9">
+                                <td colspan="8">
                                     <div style="margin-top: 16px;"></div>
                                     {!! json_decode(str_replace('{tanggal}', $tanggal_kondisi, $kec->ttd->tanda_tangan_pelaporan), true) !!}
                                 </td>
@@ -287,8 +306,5 @@
                 </tr>
             @endif
         </table>
-        @php
-            $nomor_jenis_pp++;
-        @endphp
     @endforeach
 @endsection

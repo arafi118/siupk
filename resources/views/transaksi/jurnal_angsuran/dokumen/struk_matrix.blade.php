@@ -73,7 +73,9 @@
 
         $no_kuitansi .= $trx->idt . '/';
 
-        $nama_user = $trx->user->namadepan . ' ' . $trx->user->namabelakang;
+        if ($trx->user) {
+            $nama_user = $trx->user->namadepan . ' ' . $trx->user->namabelakang;
+        }
     @endphp
 @endforeach
 
@@ -161,22 +163,22 @@
             <th class="bottom top">JASA</th>
         </tr>
         <tr>
-            <td>ID Nasabah</td>
-            <td colspan="3">: {{ $pinkel->anggota->id }}</td>
+            <td>ID Kelompok </td>
+            <td colspan="3">: {{ $pinkel->kelompok->kd_kelompok }}</td>
             <td>Alokasi Pinjaman </td>
             <td align="right">{{ number_format($pinkel->alokasi) }}</td>
             <td align="right">{{ number_format(($pinkel->alokasi * $pinkel->pros_jasa) / 100) }}</td>
         </tr>
         <tr>
-            <td>Nama Nasabah </td>
-            <td colspan="3"><b>: {{ $pinkel->anggota->namadepan }}</b></td>
+            <td>Nama Kelompok </td>
+            <td colspan="3"><b>: {{ $pinkel->kelompok->nama_kelompok }} - {{ $pinkel->kelompok->ketua }}</b></td>
             <td>Target Pengembalian (x)</td>
             <td align="right">{{ number_format($ra->target_pokok) }}</td>
             <td align="right">{{ number_format($ra->target_jasa) }}</td>
         </tr>
         <tr>
             <td>Alamat</td>
-            <td colspan="3">: {{ $pinkel->anggota->d->nama_desa }}</td>
+            <td colspan="3">: {{ $pinkel->kelompok->d->nama_desa }}</td>
             <td class="bottom">Realisasi Pengembalian</td>
             <td class="bottom" align="right">{{ number_format($real->sum_pokok) }}</td>
             <td class="bottom" align="right">{{ number_format($real->sum_jasa) }}</td>
@@ -280,9 +282,9 @@
             <td colspan="4" rowspan="2" class="style2 top">
                 - <br>
                 - Dicetak pada {{ date('Y-m-d H:i:s A') }}<br>
-                - Lembar 1 untuk Nasabah, lembar 2 Arsip DBM<br>
+                - Lembar 1 untuk Kelompok, lembar 2 Arsip UPK<br>
                 - Bawalah kartu angsuran dan slip ini pada saat mengangsur bulan depan<br>
-                - Cek status pinjaman anggota anda di {{ $kec->web_kec }} </td>
+                - Cek status pinjaman kelompok anda di {{ $kec->web_kec }} </td>
             <th valign="top">
                 <div align="center" class="bottom">
                     {{ $nama_user }}
@@ -297,5 +299,5 @@
         </tr>
     </table>
 
-    <title>Struk Angsuran Kelompok {{ $pinkel->anggota->nama_anggota }} &mdash; {{ $pinkel->id }}</title>
+    <title>Struk Angsuran Kelompok {{ $pinkel->kelompok->nama_kelompok }} &mdash; {{ $pinkel->id }}</title>
 </body>

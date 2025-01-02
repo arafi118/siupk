@@ -1,12 +1,7 @@
 @php
     use App\Utils\Tanggal;
 
-    $dari =
-        Tanggal::tahun($inv->tgl_invoice) .
-        '-' .
-        Tanggal::bulan($inv->kec->tgl_pakai) .
-        '-' .
-        Tanggal::hari($inv->kec->tgl_pakai);
+    $dari = $inv->tgl_invoice;
     $sampai = date('Y-m-d', strtotime('+1 years', strtotime($dari)));
 
     if ($inv->status == 'UNPAID') {
@@ -20,8 +15,8 @@
         $status = 'P A I D';
         $keterangan = 'Masa Aktif Tanggal ' . Tanggal::tglIndo($dari) . ' - ' . Tanggal::tglIndo($sampai);
     }
-
-    $batas_waktu = $tanggal;
+    
+    $batas_waktu = date('Y-m-d', strtotime('+1 month', strtotime($tanggal)));
     $total = 0;
 
     $kecamatan = $inv->kec->sebutan_kec . ' ' . $inv->kec->nama_kec;
@@ -182,7 +177,7 @@
             <tr style="background: rgb(232, 232, 232)">
                 <td height="70" align="center" style="font-size: 11px;">
                     <div>
-                        {{ $inv->jp->nama_jp }} SI UPK {{ $inv->kec->sebutan_kec }} {{ $inv->kec->nama_kec }}
+                        {{ $inv->jp->nama_jp }} SI UPK Online {{ $inv->kec->sebutan_kec }} {{ $inv->kec->nama_kec }}
                     </div>
                     <div>{{ $keterangan }}</div>
                 </td>
@@ -195,7 +190,7 @@
                 </td>
             </tr>
             <tr style="font-weight: bold;">
-                <td align="right" style="font-size: 11px;">PPN 11%</td>
+                <td align="right" style="font-size: 11px;">PPN 10%</td>
                 <td align="right" style="font-size: 11px; color: #fff; background: rgb(130, 164, 176)">
                     {{ number_format(($inv->jumlah * 10) / 100, 2) }}
                 </td>
@@ -241,7 +236,7 @@
                         }
                     @endphp
                     <tr>
-                        <td align="center">{{ $trx->idt }}/SI UPK</td>
+                        <td align="center">{{ $trx->idt }}/SI UPK Online</td>
                         <td align="center">{{ Tanggal::tglIndo($trx->tgl_transaksi) }}</td>
                         <td align="center">{{ $trx->keterangan_transaksi }} {{ $keterangan }}</td>
                         <td align="right">{{ number_format($trx->jumlah, 2) }}</td>

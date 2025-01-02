@@ -73,17 +73,17 @@ $empty = false;
 </style>
 
 @php
-    $jumlah_aktif = 0;
+$jumlah_aktif = 0;
 @endphp
 
 @foreach ($jenis_simpanan as $js)
 @php
-    $jumlah_aktif_per_jenis = 0;
-    $nomor = 1;
+$jumlah_aktif_per_jenis = 0;
+$nomor = 1;
 @endphp
 
 @if ($js->nama_js != 'Simpanan Umum')
-    <div class="break"></div>
+<div class="break"></div>
 @endif
 
 <table width="90%" border="0" align="center" cellpadding="3" cellspacing="0">
@@ -93,7 +93,7 @@ $empty = false;
 
         </td>
         <td height="20" colspan="3" class="bottom">
-         
+
         </td>
     </tr>
 
@@ -104,12 +104,8 @@ $empty = false;
 </table>
 <table width="90%" border="0" align="center" cellpadding="3" cellspacing="0">
     <tr>
-        <td width="20%" class="style9">NAMA LKM</td>
+        <td width="20%" class="style9">NAMA lembaga</td>
         <td width="70%" class="style9">:{{ $kec->nama_lembaga_long }}</td>
-    </tr>
-    <tr>
-        <td width="20%" class="style9">SANDI LKM</td>
-        <td width="70%" class="style9">:{{ $kec->sandi_lkm }}</td>
     </tr>
     <tr>
         <td width="20%" class="style9 bottom">PERIODE LAPORAN</td>
@@ -120,8 +116,8 @@ $empty = false;
     <tr align="center" height="30px" class="style9 ">
         <th width="6%" rowspan="2" class="left bottom">No</th>
         <th width="10%" rowspan="2" colspan="2" class="left bottom">Nama Penyimpan - CIF</a></th>
-        <th width="20%"colspan="2" class="left bottom">Suku Bunga</a></th>
-        <th width="20%"rowspan="2" class="left bottom right">Jumlah </a></th>
+        <th width="20%" colspan="2" class="left bottom">Suku Bunga</a></th>
+        <th width="20%" rowspan="2" class="left bottom right">Jumlah </a></th>
 
     </tr>
 
@@ -132,33 +128,24 @@ $empty = false;
     </tr>
     @php
     $total_saldo = 0; // Variabel untuk menyimpan total saldo
-@endphp
-
-@foreach ($js->simpanan as $simp)
+    @endphp
+    
+    @foreach ($js->simpanan as $simp)
     @php
-        $jumlah_aktif += 1;
-        $jumlah_aktif_per_jenis += 1;
-        $tgl_buka = explode('-', $simp->tgl_buka);
-        $tgl1 = new DateTime($simp->tgl_tutup);
-        $tgl2 = new DateTime($simp->tgl_buka);
-        $selisih = $tgl2->diff($tgl1);
+    $jumlah_aktif += 1;
+    $jumlah_aktif_per_jenis += 1;
+    $tgl_buka = explode('-', $simp->tgl_buka);
+    $tgl1 = new DateTime($simp->tgl_tutup);
+    $tgl2 = new DateTime($simp->tgl_buka);
+    $selisih = $tgl2->diff($tgl1);
 
-        $tgl1 = Tanggal::tglIndo($simp->tgl_tutup);
-        $tgl2 = Tanggal::tglIndo($simp->tgl_buka);
-        $y12 = date('Y')-1;
+    $tgl1 = Tanggal::tglIndo($simp->tgl_tutup);
+    $tgl2 = Tanggal::tglIndo($simp->tgl_buka);
+    $y12 = date('Y')-1;
+    $sum_saldo = $simp->realSimpananTerbesar->sum ??0;
 
-        $sum_saldo = 0;
-        foreach ($simp->trx as $trx) {
-            if ($trx->rekening_kredit == '2.1.04.01' || $trx->rekening_kredit == '2.1.04.01') {
-                $sum_saldo -= $trx->jumlah;
-            } 
-            else {
-                $sum_saldo += $trx->jumlah;
-            }
-        }
-
-        // Tambahkan saldo ke total saldo
-        $total_saldo += $sum_saldo;
+    // Tambahkan saldo ke total saldo
+    $total_saldo += $sum_saldo;
     @endphp
     <tr align="right" height="15px" class="style9">
         <td class="left top" align="center">{{ $nomor++ }}</td>
@@ -167,14 +154,14 @@ $empty = false;
         </td>
         <td class="left top" align="center">{{ $simp ? $simp->bunga : '0' }}</td>
         <td width="20%" class="left top" align="left">Per Bulan</td>
-        <td class="left top" align="center"style="border: 1px solid;">{{ number_format($sum_saldo, 2) }}</td>
+        <td class="left top" align="right" style="border: 1px solid;">{{ number_format($sum_saldo, 2) }}</td>
     </tr>
-@endforeach
+    @endforeach
 
-<tr class="style9">
-    <th colspan="5" class="left bottom top" align="center" style="background:rgba(0,0,0, 0.3);">JUMLAH SALDO</th>
-    <th class="left right bottom top" align="center">{{ number_format($total_saldo, 2) }}</th>
-</tr>
+    <tr class="style9">
+        <th colspan="5" class="left bottom top" align="center" style="background:rgba(0,0,0, 0.3);">JUMLAH SALDO</th>
+        <th class="left right bottom top" align="center">{{ number_format($total_saldo, 2) }}</th>
+    </tr>
 
     <tr class="style9">
         <th colspan="5" class="bottom" align="center">&nbsp;</th>
@@ -188,5 +175,4 @@ $empty = false;
 
 </table>
 @endforeach
-
 @endsection

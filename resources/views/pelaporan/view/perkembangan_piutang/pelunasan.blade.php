@@ -131,9 +131,6 @@
         @endforeach
 
         @php
-            $nama_desa="";
-            $j_pokok=0;
-            $j_jasa=0;
             $t_pokok += $j_pokok;
             $t_jasa += $j_jasa;
         @endphp

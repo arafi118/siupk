@@ -22,7 +22,7 @@
             <td width="50">Nomor</td>
             <td width="10" align="center">:</td>
             <td colspan="2">
-                ______ /______/{{ Tanggal::tglRomawi($pinkel->tgl_cair) }} </td>
+                ______ /SI UPK/{{ Tanggal::tglRomawi($pinkel->tgl_cair) }} </td>
         </tr>
         <tr>
             <td>Sifat</td>
@@ -68,7 +68,7 @@
                 <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 12px;">
                     <tr>
                         <td width="10">1.</td>
-                        <td width="120">Nama Nasabah</td>
+                        <td width="120">Nama Pemanfaat</td>
                         <td width="5">:</td>
                         <td>{{ $pinkel->anggota->namadepan }}</td>
                     </tr>

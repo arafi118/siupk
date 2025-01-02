@@ -1,111 +1,102 @@
 @extends('layouts.base')
 
 @section('content')
-<style>
-    .btn--text {
-        color: white;
-        font-weight: bold;
-
-    }
-</style>
-<div class="app-main__inner">
-        <div class="tab-content">
-            <br>
-            <div class="row">
-
-                <div class="col-md-9">
-                    <div class="main-card mb-3 card">
-                        <div class="card-body">
-                        <form action="/transaksi" method="post" id="FormTransaksi">
+    <div class="row">
+        <div class="col-lg-9 mb-4">
+            <div class="card">
+                <div class="card-body py-2">
+                    <form action="/transaksi" method="post" id="FormTransaksi">
                         @csrf
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="position-relative mb-3">
-                                            <label for="tgl_transaksi">Tgl Transaksi</label>
-                                            <input autocomplete="off" type="text" name="tgl_transaksi" id="tgl_transaksi"
-                                                class="form-control date" value="{{ date('d/m/Y') }}">
-                                            <small class="text-danger" id="msg_tgl_transaksi"></small>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="position-relative mb-3">
-                                            <label for="jenis_transaksi">Jenis Transaksi</label>
-                                            <select class="js-example-basic-single form-control" name="jenis_transaksi" id="jenis_transaksi">
-                                                <option value="">-- Pilih Jenis Transaksi --</option>
-                                                @foreach ($jenis_transaksi as $jt)
-                                                    <option value="{{ $jt->id }}">
-                                                        {{ $jt->nama_jt }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            <small class="text-danger" id="msg_jenis_transaksi"></small>
-                                        </div>
-                                    </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-static my-3">
+                                    <label for="tgl_transaksi">Tgl Transaksi</label>
+                                    <input autocomplete="off" type="text" name="tgl_transaksi" id="tgl_transaksi"
+                                        class="form-control date" value="{{ date('d/m/Y') }}">
+                                    <small class="text-danger" id="msg_tgl_transaksi"></small>
                                 </div>
-                                <div class="row" id="kd_rekening">
-                                    <div class="col-md-6">
-                                        <div class="position-relative mb-3">
-                                            <label for="sumber_dana">Sumber Dana</label>
-                                            <select class="js-example-basic-single form-control" name="sumber_dana" id="sumber_dana">
-                                                <option value="">-- Sumber Dana --</option>
-                                            </select>
-                                            <small class="text-danger" id="msg_sumber_dana"></small>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="position-relative mb-3">
-                                            <label for="disimpan_ke">Disimpan Ke</label>
-                                            <select class="js-example-basic-single form-control" name="disimpan_ke" id="disimpan_ke">
-                                                <option value="">-- Disimpan Ke --</option>
-                                            </select>
-                                            <small class="text-danger" id="msg_disimpan_ke"></small>
-                                        </div>
-                                    </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="my-2">
+                                    <label class="form-label" for="jenis_transaksi">Jenis Transaksi</label>
+                                    <select class="form-control" name="jenis_transaksi" id="jenis_transaksi">
+                                        <option value="">-- Pilih Jenis Transaksi --</option>
+                                        @foreach ($jenis_transaksi as $jt)
+                                            <option value="{{ $jt->id }}">
+                                                {{ $jt->nama_jt }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <small class="text-danger" id="msg_jenis_transaksi"></small>
                                 </div>
-                                <div class="row" id="form_nominal">
-                                    <div class="col-md-12">
-                                        <div class="position-relative mb-3">
-                                            <label for="keterangan">Keterangan</label>
-                                            <input autocomplete="off" type="text" name="keterangan" id="keterangan"
-                                            class="form-control">
-                                            <small class="text-danger" id="msg_keterangan"></small>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="position-relative mb-3">
-                                             <label for="nominal">Nominal Rp.</label>
-                                             <input autocomplete="off" type="text" name="nominal" id="nominal"class="form-control">
-                                             <small class="text-danger" id="msg_nominal"></small>
-                                        </div>
-                                    </div>
-                                </div><br>
-                                <div style="text-align: right;">
-                                    <button type="button" id="SimpanTransaksi"  class="mt-2 btn btn-focus btn--text">SIMPAN TRANSAKSI</button>
-                                </div><br>
-                            </form>
+                            </div>
                         </div>
+                        <div class="row" id="kd_rekening">
+                            <div class="col-sm-6">
+                                <div class="my-2">
+                                    <label class="form-label" for="sumber_dana">Sumber Dana</label>
+                                    <select class="form-control" name="sumber_dana" id="sumber_dana">
+                                        <option value="">-- Sumber Dana --</option>
+                                    </select>
+                                    <small class="text-danger" id="msg_sumber_dana"></small>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="my-2">
+                                    <label class="form-label" for="disimpan_ke">Disimpan Ke</label>
+                                    <select class="form-control" name="disimpan_ke" id="disimpan_ke">
+                                        <option value="">-- Disimpan Ke --</option>
+                                    </select>
+                                    <small class="text-danger" id="msg_disimpan_ke"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="form_nominal">
+                            <div class="col-sm-12">
+                                <div class="input-group input-group-static my-3">
+                                    <label for="keterangan">Keterangan</label>
+                                    <input autocomplete="off" type="text" name="keterangan" id="keterangan"
+                                        class="form-control">
+                                    <small class="text-danger" id="msg_keterangan"></small>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="input-group input-group-static my-3">
+                                    <label for="nominal">Nominal Rp.</label>
+                                    <input autocomplete="off" type="text" name="nominal" id="nominal"
+                                        class="form-control">
+                                    <small class="text-danger" id="msg_nominal"></small>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="d-flex justify-content-end">
+                        <button type="button" id="SimpanTransaksi" class="btn btn-sm btn-github">Simpan Transaksi</button>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="col-lg-3 mb-4">
+            <div class="card">
+                <div class="card-body p-3 pb-0">
+                    <div class="d-flex justify-content-between">
+                        <div class="text-sm">Saldo:</div>
+                        <div class="text-sm fw-bold">
+                            Rp. <span id="saldo">0.00</span>
+                        </div>
+                    </div>
 
-                <div class="col-md-3">
-                    <div class="mb-12 card">
+                    <hr class="horizontal dark">
+                    <div class="text-sm fw-bold text-center">Cetak Buku Bantu</div>
+                    <hr class="horizontal dark mb-0">
 
-                        <div class="card-body">
-                            <form class="">
-                                <div class="d-flex justify-content-between">
-                                    <div class="text-sm">Saldo:</div>
-                                    <div class="text-sm fw-bold">
-                                        Rp. <span id="saldo">0.00</span>
-                                    </div>
-                                </div>
-
-                                <hr class="horizontal dark">
-                                <div class="text-sm fw-bold text-center">Cetak Buku Bantu</div>
-                                <hr class="horizontal dark mb-0">
-                                <div class="row">
-                                    <div class="position-relative mb-3">
-                                    <label class="form-label" for="tahun">Tahunan</label>
-                                <select class="js-example-basic-single form-control" name="tahun" id="tahun">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="my-2">
+                                <label class="form-label" for="tahun">Tahunan</label>
+                                <select class="form-control" name="tahun" id="tahun">
                                     @php
                                         $tgl_pakai = $kec->tgl_pakai;
                                         $th_pakai = explode('-', $tgl_pakai)[0];
@@ -115,151 +106,181 @@
                                             {{ $i }}</option>
                                     @endfor
                                 </select>
-                                        <small class="text-danger" id="msg_tahun"></small>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="position-relative mb-3">
-                                        <label class="form-label" for="bulan">Bulanan</label>
-                                            <select class="js-example-basic-single form-control" name="bulan" id="bulan">
-                                                <option value="">--</option>
-                                                <option {{ date('m') == '01' ? 'selected' : '' }} value="01">01. JANUARI</option>
-                                                <option {{ date('m') == '02' ? 'selected' : '' }} value="02">02. FEBRUARI</option>
-                                                <option {{ date('m') == '03' ? 'selected' : '' }} value="03">03. MARET</option>
-                                                <option {{ date('m') == '04' ? 'selected' : '' }} value="04">04. APRIL</option>
-                                                <option {{ date('m') == '05' ? 'selected' : '' }} value="05">05. MEI</option>
-                                                <option {{ date('m') == '06' ? 'selected' : '' }} value="06">06. JUNI</option>
-                                                <option {{ date('m') == '07' ? 'selected' : '' }} value="07">07. JULI</option>
-                                                <option {{ date('m') == '08' ? 'selected' : '' }} value="08">08. AGUSTUS</option>
-                                                <option {{ date('m') == '09' ? 'selected' : '' }} value="09">09. SEPTEMBER
-                                                </option>
-                                                <option {{ date('m') == '10' ? 'selected' : '' }} value="10">10. OKTOBER</option>
-                                                <option {{ date('m') == '11' ? 'selected' : '' }} value="11">11. NOVEMBER
-                                                </option>
-                                                <option {{ date('m') == '12' ? 'selected' : '' }} value="12">12. DESEMBER
-                                                </option>
-                                            </select>
-                                            <small class="text-danger" id="msg_bulan"></small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="position-relative mb-3">
-                                        <label class="form-label" for="tanggal">Tanggal</label>
-                                        <select class="js-example-basic-single form-control" name="tanggal" id="tanggal">
-                                            <option value="">--</option>
-                                            @for ($j = 1; $j <= 31; $j++)
-                                                @php $no=str_pad($j, 2, "0" , STR_PAD_LEFT) @endphp
-                                                <option value="{{ $no }}">{{ $no }}</option>
-                                            @endfor
-                                        </select>
-                                        <small class="text-danger" id="msg_tanggal"></small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="text-align: right;">
-                                    <button type="button" id="BtndetailTransaksi" class="mt-2 btn btn-success btn--text">DETAIL TRANSAKSI</button>
-                                </div>
-
-                            </form>
+                                <small class="text-danger" id="msg_tahun"></small>
+                            </div>
                         </div>
+                        <div class="col-12">
+                            <div class="my-2">
+                                <label class="form-label" for="bulan">Bulanan</label>
+                                <select class="form-control" name="bulan" id="bulan">
+                                    <option value="">--</option>
+                                    <option {{ date('m') == '01' ? 'selected' : '' }} value="01">01. JANUARI</option>
+                                    <option {{ date('m') == '02' ? 'selected' : '' }} value="02">02. FEBRUARI</option>
+                                    <option {{ date('m') == '03' ? 'selected' : '' }} value="03">03. MARET</option>
+                                    <option {{ date('m') == '04' ? 'selected' : '' }} value="04">04. APRIL</option>
+                                    <option {{ date('m') == '05' ? 'selected' : '' }} value="05">05. MEI</option>
+                                    <option {{ date('m') == '06' ? 'selected' : '' }} value="06">06. JUNI</option>
+                                    <option {{ date('m') == '07' ? 'selected' : '' }} value="07">07. JULI</option>
+                                    <option {{ date('m') == '08' ? 'selected' : '' }} value="08">08. AGUSTUS</option>
+                                    <option {{ date('m') == '09' ? 'selected' : '' }} value="09">09. SEPTEMBER
+                                    </option>
+                                    <option {{ date('m') == '10' ? 'selected' : '' }} value="10">10. OKTOBER</option>
+                                    <option {{ date('m') == '11' ? 'selected' : '' }} value="11">11. NOVEMBER
+                                    </option>
+                                    <option {{ date('m') == '12' ? 'selected' : '' }} value="12">12. DESEMBER
+                                    </option>
+                                </select>
+                                <small class="text-danger" id="msg_bulan"></small>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="my-2">
+                                <label class="form-label" for="tanggal">Tanggal</label>
+                                <select class="form-control" name="tanggal" id="tanggal">
+                                    <option value="">--</option>
+                                    @for ($j = 1; $j <= 31; $j++)
+                                        @php $no=str_pad($j, 2, "0" , STR_PAD_LEFT) @endphp
+                                        <option value="{{ $no }}">{{ $no }}</option>
+                                    @endfor
+                                </select>
+                                <small class="text-danger" id="msg_tanggal"></small>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="d-flex justify-content-end">
+                        <button type="button" id="BtndetailTransaksi" class="btn btn-sm btn-success">
+                            Detail Transaksi
+                        </button>
                     </div>
                 </div>
             </div>
-
-            <br>
-        <div id="notifikasi"></div>
         </div>
-    </div> <br><br><br>
+    </div>
+
+    <div id="notifikasi"></div>
+
+    <div class="modal fade" id="detailTransaksi" tabindex="-1" aria-labelledby="detailTransaksiLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="detailTransaksiLabel">
+
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="LayoutdetailTransaksi"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="BtnCetakBuktiTransaksi" class="btn btn-sm btn-info">
+                        Cetak Bukti Transaksi
+                    </button>
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="CetakBuktiTransaksi" tabindex="-1" aria-labelledby="CetakBuktiTransaksiLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="CetakBuktiTransaksiLabel">
+
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="LayoutCetakBuktiTransaksi"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="BtnCetak" class="btn btn-sm btn-info">
+                        Print
+                    </button>
+                    <button type="button" id="BtnCetakBuktiTransaksi" class="btn btn-danger btn-sm">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <form action="/transaksi/reversal" method="post" id="formReversal">
         @csrf
-    
+
         <input type="hidden" name="rev_idt" id="rev_idt">
         <input type="hidden" name="rev_idtp" id="rev_idtp">
         <input type="hidden" name="rev_id_pinj" id="rev_id_pinj">
     </form>
-    
+
     <form action="/transaksi/hapus" method="post" id="formHapus">
         @csrf
 
         <input type="hidden" name="del_idt" id="del_idt">
         <input type="hidden" name="del_idtp" id="del_idtp">
         <input type="hidden" name="del_id_pinj" id="del_id_pinj">
+        <input type="hidden" name="del_id_pinj_i" id="del_id_pinj_i">
     </form>
 @endsection
 
-@section('modal')
-<div class="modal fade" id="detailTransaksi" tabindex="-1" aria-labelledby="detailTransaksiLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="detailTransaksiLabel">
-
-                </h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div id="LayoutdetailTransaksi"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="BtnCetakBuktiTransaksi" class="btn btn-sm btn-info">
-                    Cetak Bukti Transaksi
-                </button>
-                <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Tutup</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="CetakBuktiTransaksi" tabindex="-1" aria-labelledby="CetakBuktiTransaksiLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="CetakBuktiTransaksiLabel">
-
-                </h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div id="LayoutCetakBuktiTransaksi"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="BtnCetak" class="btn btn-sm btn-info">
-                    Print
-                </button>
-                <button type="button" id="BtnCetakBuktiTransaksi" class="btn btn-danger btn-sm">Tutup</button>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
-
 @section('script')
-
-<script>
-
-    $('.js-example-basic-single').select2({
-        theme: 'bootstrap-5'
-        });
-
-    $("#nominal").maskMoney({
-            allowNegative: true
-        });
-
-    $('.date').datepicker({
-        dateFormat: 'dd/mm/yy'
-    });
-
+    <script>
         var formatter = new Intl.NumberFormat('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
         })
+
+        var jenis_transaksi = new Choices($('#jenis_transaksi')[0], {
+            shouldSort: false,
+            fuseOptions: {
+                threshold: 0.1,
+                distance: 1000
+            }
+        })
+        var sumber = new Choices($('#sumber_dana')[0], {
+            shouldSort: false,
+            fuseOptions: {
+                threshold: 0.1,
+                distance: 1000
+            }
+        })
+        var simpan = new Choices($('#disimpan_ke')[0], {
+            shouldSort: false,
+            fuseOptions: {
+                threshold: 0.1,
+                distance: 1000
+            }
+        })
+        var selectTahun = new Choices($('select#tahun')[0], {
+            shouldSort: false,
+            fuseOptions: {
+                threshold: 0.1,
+                distance: 1000
+            }
+        })
+        var selectBulan = new Choices($('select#bulan')[0], {
+            shouldSort: false,
+            fuseOptions: {
+                threshold: 0.1,
+                distance: 1000
+            }
+        })
+        new Choices($('select#tanggal')[0], {
+            shouldSort: false,
+            fuseOptions: {
+                threshold: 0.1,
+                distance: 1000
+            }
+        })
+
+        $(".date").flatpickr({
+            dateFormat: "d/m/Y"
+        })
+
+        $("#nominal").maskMoney({
+            allowNegative: true
+        });
 
         $(document).on('change', '#jenis_transaksi', function(e) {
             e.preventDefault()
@@ -279,13 +300,25 @@
             var bulan = tgl_transaksi[1];
             var hari = tgl_transaksi[0];
 
-            $('select#tahun').val(tahun).change()
-            $('select#bulan').val(bulan).change()
+            selectTahun.setChoiceByValue(tahun)
+            selectBulan.setChoiceByValue(bulan)
         })
 
         $(document).on('change', '#sumber_dana', function(e) {
             e.preventDefault()
             var sumber_dana = $(this).val()
+
+            if (sumber_dana == '1.2.02.01') {
+                simpan.setChoiceByValue('5.1.07.08')
+            }
+
+            if (sumber_dana == '1.2.02.02') {
+                simpan.setChoiceByValue('5.1.07.09')
+            }
+
+            if (sumber_dana == '1.2.02.03') {
+                simpan.setChoiceByValue('5.1.07.10')
+            }
 
             var tgl_transaksi = $('#tgl_transaksi').val().split('/')
             var tahun = tgl_transaksi[2];
@@ -339,6 +372,8 @@
                 success: function(result) {
                     if (result.success) {
                         Swal.fire('Berhasil', result.msg, 'success').then(() => {
+                            jenis_transaksi.setChoiceByValue('')
+
                             $('#notifikasi').html(result.view)
                             var sumber_dana = $('#sumber_dana').val()
                             var tgl_transaksi = $('#tgl_transaksi').val().split('/')
@@ -386,24 +421,6 @@
             $('#harga_jual').val(formatter.format(nilai_buku))
         })
 
-        $(document).on('change', '#relasi', function(e) {
-            var value = $(this).val().split('#')
-
-            var nik = value[0] 
-            var namadepan = value[1] 
-            var id_pinjaman = parseInt(value[2])  //parseInt untuk nilai (int)
-            var fee_agen = parseInt(value[3])
-            
-            // $('#fee_agen').val(fee_agen)
-            // $('#keterangan').val("Fee ke Agen A.N " + namadepan + " (" + id_pinjaman + ")")
-
-            $('#fee_agen').val(fee_agen);
-
-            if (namadepan && !isNaN(id_pinjaman)) {
-                $('#keterangan').val("Fee ke Agen A.N " + namadepan + " (" + id_pinjaman + ")");
-            }
-        })
-        
         $(document).on('change', '#unit', function() {
             var max = parseInt($(this).attr('max'))
             var unit = parseInt($(this).val())
@@ -424,7 +441,7 @@
             $('#nilai_buku').val(formatter.format(nilai_buku))
             $('#harga_jual').val(formatter.format(nilai_buku))
         })
-        
+
         $(document).on('change', '#alasan', function() {
             var status = $(this).val()
             console.log(status)
@@ -547,6 +564,7 @@
                 $('#del_idt').val(result.idt)
                 $('#del_idtp').val(result.idtp)
                 $('#del_id_pinj').val(result.id_pinj)
+                $('#del_id_pinj_i').val(result.id_pinj_i)
                 Swal.fire({
                     title: 'Peringatan',
                     text: 'Setelah menekan tombol Hapus Transaksi dibawah, maka transaksi ini akan dihapus dari aplikasi secara permanen.',
@@ -575,11 +593,17 @@
             })
         })
 
+
         $(document).on('click', '#BtnCetak', function(e) {
             e.preventDefault()
 
-            $('#FormCetakDokumenTransaksi').submit()
+            if ($('#FormCetakDokumenTransaksi').serializeArray().length > 1) {
+                $('#FormCetakDokumenTransaksi').submit();
+            } else {
+                Swal.fire('Error', "Tidak ada transaksi yang dipilih.", 'error')
+            }
         })
+
 
         function initializeBootstrapTooltip() {
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]')),

@@ -12,17 +12,23 @@
         $saldo_pokok = $ra->target_pokok - $real->sum_pokok;
         $saldo_jasa = $ra->target_jasa - $real->sum_jasa;
 
-        $keterangan1 = 'Belum Lunas';
-        $keterangan2 = 'Belum Lunas';
-
-        if ($saldo_pokok <= 0) {
-            $saldo_pokok = 0;
-            $keterangan1 = 'Lunas';
-        }
-        if ($saldo_jasa <= 0) {
-            $saldo_jasa = 0;
-            $keterangan2 = 'Lunas';
-    } @endphp <div class="card mb-3">
+    $keterangan1 = 'Belum Lunas';
+    $keterangan2 = 'Belum Lunas';
+    
+    if ($saldo_pokok == 0) {
+        $keterangan1 = 'Lunas';
+    }
+    
+    if ($saldo_pokok < 0) {
+        $keterangan1 = 'Lunas sebelum jatuh tempo';
+    }
+    if ($saldo_jasa == 0) {
+        $keterangan2 = 'Lunas';
+    }
+    if ($saldo_jasa < 0) {
+        $keterangan2 = 'Lunas (Pembayaran lebih dari target)';
+    }
+     @endphp <div class="card mb-3">
         <div class="card-body p-3">
             <h5 class="mb-1">
                 Kelompok {{ $perguliran->kelompok->nama_kelompok }} Loan ID. {{ $perguliran->id }}
@@ -43,7 +49,8 @@
 
     <div class="card">
         <div class="card-body text-sm">
-            Dengan mempertimbangkan Standar Operasional Prosedur (SOP) yang berlaku, dengan ini Saya selaku manajer,
+            Dengan mempertimbangkan Standar Operasional Prosedur (SOP) yang berlaku,dengan ini Saya selaku 
+            {{$kec->sebutan_level_1}}, {{$kec->nama_lembaga_sort}}
             menyatakan dengan sebenar-benarnya bahwa :
             <table class="table p-0 mb-3">
                 <tr>
@@ -64,9 +71,37 @@
                     <td>Sistem</td>
                     <td>{{ $perguliran->jangka }} bulan / {{ $perguliran->sis_pokok->nama_sistem }}</td>
                 </tr>
+
+                @if ($perguliran->kelompok->ketua !== null && $perguliran->kelompok->ketua !== '')
+                        <tr>
+                            <td> &nbsp; Ketua Kelompok</td>
+                            <td>: {{ $perguliran->kelompok->ketua }}</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        
+                    @if ($perguliran->kelompok->sekretaris !== null && $perguliran->kelompok->sekretaris !== '')
+                        <tr>
+                            <td> &nbsp; Sekretaris Kelompok</td>
+                            <td>: {{ $perguliran->kelompok->sekretaris }}</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                   @endif
+                    @if ($perguliran->kelompok->bendahara !== null && $perguliran->kelompok->bendahara !== '')
+                        <tr>
+                            <td> &nbsp; Bendahara Kelompok</td>
+                            <td>: {{ $perguliran->kelompok->bendahara }}</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                   @endif
+               @endif
+
+                
             </table>
 
-            REKAPITULASI
+            REKAPITULASI ANGSURAN
             <table class="table f-12">
                 <thead class="bg-light">
                     <tr>

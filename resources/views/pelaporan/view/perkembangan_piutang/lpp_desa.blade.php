@@ -12,16 +12,11 @@
             margin-right: 40px;
         }
     </style>
-    @php
-        $nomor = 0;
-    @endphp
     @foreach ($jenis_pp as $jpp)
         @php
-            if ($jpp->pinjaman_individu->isEmpty()) {
+            if ($jpp->pinjaman_kelompok->isEmpty()) {
                 continue;
             }
-            $nomor++;
-
         @endphp
         @php
             $kd_desa = [];
@@ -41,14 +36,14 @@
             $t_tunggakan_jasa = 0;
             $t_kel = 0;
         @endphp
-    @if ($nomor > 1)
-        <div class="break"></div>
-    @endif
+        @if ($jpp->nama_jpp != 'SPP')
+            <div class="break"></div>
+        @endif
         <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
             <tr>
                 <td colspan="3" align="center">
                     <div style="font-size: 18px;">
-                        <b>DAFTAR PERKEMBANGAN PIUTANG REKAP DESA {{ strtoupper($jpp->nama_jpp) }}</b>
+                        <b>DAFTAR PERKEMBANGAN PINJAMAN REKAP DESA {{ strtoupper($jpp->nama_jpp) }}</b>
                     </div>
                     <div style="font-size: 16px;">
                         <b>{{ strtoupper($sub_judul) }}</b>
@@ -61,7 +56,7 @@
         </table>
         <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 8px; table-layout: fixed;">
             <tr style="background: rgb(230, 230, 230); font-weight: bold;">
-                <th class="t l b" rowspan="2" width="17%">Nasabah - Loan ID</th>
+                <th class="t l b" rowspan="2" width="17%">Kelompok - Loan ID</th>
                 <th class="t l b" rowspan="2" width="2%">Kel</th>
                 <th class="t l b" rowspan="2" width="7%">Alokasi</th>
                 <th class="t l b" colspan="2" width="12%">Target</th>
@@ -87,7 +82,7 @@
                 <th class="t l b r" width="6%">Jasa</th>
             </tr>
 
-            @foreach ($jpp->pinjaman_individu as $pinkel)
+            @foreach ($jpp->pinjaman_kelompok as $pinkel)
                 @php
                     $kd_desa[] = $pinkel->kd_desa;
                     $desa = $pinkel->kd_desa;
@@ -369,8 +364,8 @@
                     <td class="t l b" align="right">{{ number_format($tl_saldo_pokok) }}</td>
                     <!-- <td class="t l b" align="right">{{ number_format($tl_saldo_jasa) }}</td> -->
                     <td class="t l b" align="center">{{ number_format($tl_pross) }}</td>
-                    <td class="t l b" align="right">{{ number_format($tl_tunggakan_pokok) }}</td>
-                    <td class="t l b r" align="right">{{ number_format($tl_tunggakan_jasa) }}</td>
+                    <td class="t l b" align="right">0</td>
+                    <td class="t l b r" align="right">0</td>
                 </tr>
 
                 <tr>
@@ -382,22 +377,22 @@
                                     J U M L A H
                                 </td>
                                 <td class="t l b" width="2%" align="center">{{ $t_kel }}</td>
-                                <td class="t l b" width="7%" align="right">{{ number_format($t_alokasi) }}</td>
-                                <td class="t l b" width="6%" align="right">{{ number_format($t_target_pokok) }}
+                                <td class="t l b" width="7%" align="right">{{ number_format($t_alokasi+$tl_alokasi) }}</td>
+                                <td class="t l b" width="6%" align="right">{{ number_format($t_target_pokok+$tl_target_pokok) }}
                                 </td>
-                                <td class="t l b" width="6%" align="right">{{ number_format($t_target_jasa) }}
+                                <td class="t l b" width="6%" align="right">{{ number_format($t_target_jasa+$tl_target_jasa) }}
                                 </td>
-                                <td class="t l b" width="6%" align="right">{{ number_format($t_real_bl_pokok) }}
+                                <td class="t l b" width="6%" align="right">{{ number_format($t_real_bl_pokok+$tl_real_bl_pokok) }}
                                 </td>
-                                <td class="t l b" width="6%" align="right">{{ number_format($t_real_bl_jasa) }}
+                                <td class="t l b" width="6%" align="right">{{ number_format($t_real_bl_jasa+$tl_real_bl_jasa) }}
                                 </td>
                                 <td class="t l b" width="6%" align="right">{{ number_format($t_real_pokok) }}</td>
                                 <td class="t l b" width="6%" align="right">{{ number_format($t_real_jasa) }}</td>
-                                <td class="t l b" width="6%" align="right">{{ number_format($t_real_bi_pokok) }}
+                                <td class="t l b" width="6%" align="right">{{ number_format($t_real_bi_pokok+$tl_real_bi_pokok) }}
                                 </td>
-                                <td class="t l b" width="6%" align="right">{{ number_format($t_real_bi_jasa) }}
+                                <td class="t l b" width="6%" align="right">{{ number_format($t_real_bi_jasa+$tl_real_bi_jasa) }}
                                 </td>
-                                <td class="t l b" width="12%" align="right">{{ number_format($t_saldo_pokok) }}
+                                <td class="t l b" width="12%" align="right">{{ number_format($t_saldo_pokok+$tl_saldo_pokok) }}
                                 </td>
                                 <!-- <td class="t l b" width="6%" align="right">{{ number_format($t_saldo_jasa) }}</td> -->
                                 <td class="t l b" width="2%" align="center">

@@ -68,18 +68,18 @@
     @php
         $keterangan .= $trx->keterangan_transaksi . '<br>';
         if (
-            $trx->rekening_kredit == '4.1.02.01' ||
-            $trx->rekening_kredit == '4.1.02.02' ||
-            $trx->rekening_kredit == '4.1.02.03' || 
-            $trx->rekening_kredit == '4.1.02.04' || 
-            $trx->rekening_kredit == '4.1.02.05' 
+            $trx->rekening_kredit == '4.1.01.04' ||
+            $trx->rekening_kredit == '4.1.01.05' ||
+            $trx->rekening_kredit == '4.1.01.06'
         ) {
             $denda += $trx->jumlah;
         }
 
         $no_kuitansi .= $trx->idt . '/';
 
-        $nama_user = $trx->user->namadepan . ' ' . $trx->user->namabelakang;
+        if ($trx->user) {
+            $nama_user = $trx->user->namadepan . ' ' . $trx->user->namabelakang;
+        }
     @endphp
 @endforeach
 
@@ -285,7 +285,7 @@
             <td colspan="4" rowspan="2" class="style2 top">
                 - <br>
                 - Dicetak pada {{ date('Y-m-d H:i:s A') }}<br>
-                - Lembar 1 untuk Kelompok, lembar 2 Arsip DBM<br>
+                - Lembar 1 untuk Kelompok, lembar 2 Arsip UPK<br>
                 - Bawalah kartu angsuran dan slip ini pada saat mengangsur bulan depan<br>
                 - Cek status pinjaman kelompok anda di {{ $kec->web_kec }} </td>
             <th valign="top">
@@ -294,7 +294,7 @@
                 </div>
             </th>
             <th valign="top">
-                <div align="center" class="bottom"> {{ $pinkel->anggota->namadepan }}</div>
+                <div align="center" class="bottom">&nbsp;</div>
             </th>
         </tr>
         <tr>

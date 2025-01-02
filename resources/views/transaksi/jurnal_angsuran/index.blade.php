@@ -1,137 +1,226 @@
 @extends('layouts.base')
 
 @section('content')
-    <div class="app-main__inner">
-        <div class="tab-content">
-            <br>
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="main-card mb-3 card">
-                        <div class="card-body">
-                            <form class="">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="position-relative mb-3"><label for="exampleState"
-                                                class="form-label">Tanggal Transaksi</label><input name=""
-                                                id="exampleState" placeholder="with a placeholder" type="date"
-                                                class="form-control"></div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="position-relative mb-3"><label for="exampleState"
-                                                class="form-label">Pokok</label><input name="password" id="exampleState"
-                                                placeholder="password placeholder" type="password" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="position-relative mb-3"><label for="exampleState"
-                                                class="form-label">Denda</label><input name="text" id="exampleState"
-                                                placeholder="with a placeholder" type="text" class="form-control"></div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="position-relative mb-3"><label for="exampleState"
-                                                class="form-label">Jasa</label><input name="password" id="exampleState"
-                                                placeholder="password placeholder" type="password" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-8">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="position-relative mb-3">
-                                            <label for="exampleState" class="form-label">Total Bayar</label>
-                                            <input name="state" id="exampleState" type="text" class="form-control"></div>
-                                    </div>
-                                </div>
-                                <div style="text-align: right;">
-                                    <style>
-                                        .btn--text {
-                                            color: white;
-                                            font-weight: bold;
+    <div class="row">
+        <div class="col-12" id="notif">
 
-                                        }
-                                    </style>
-                                    <button class="mt-2 btn btn-info btn--text">DETAIL KELOMPOK</button>
-                                    <button class="mt-2 btn btn-warning btn--text">ANGSURAN ANGGOTA</button>
-                                    <button class="mt-2 btn btn-secondary btn--text">POSTING</button>
+        </div>
+        <div class="col-md-8 mb-3">
+            <div class="card mb-3">
+                <div class="card-body py-2">
+                    <form action="/transaksi/angsuran" method="post" id="FormAngsuran">
+                        @csrf
+
+                        <input type="hidden" name="id" id="id" value="{{ Request::get('pinkel') ?: 0 }}">
+                        <input type="hidden" name="_pokok" id="_pokok">
+                        <input type="hidden" name="_jasa" id="_jasa">
+                        <input type="hidden" name="tgl_pakai_aplikasi" id="tgl_pakai_aplikasi"
+                            value="{{ $kec->tgl_pakai }}">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="input-group input-group-static my-3">
+                                    <label for="tgl_transaksi">Tanggal Transaksi</label>
+                                    <input autocomplete="off" type="text" name="tgl_transaksi" id="tgl_transaksi"
+                                        class="form-control date" value="{{ date('d/m/Y') }}">
+                                    <small class="text-danger" id="msg_tgl_transaksi"></small>
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="mb-12 card">
-                        <div class="card-body">
-                            <ul class="tabs-animated-shadow nav-justified tabs-animated nav">
-                                <li class="nav-item">
-                                    <a role="tab" class="nav-link active" id="tab-c1-0" data-bs-toggle="tab"
-                                        href="#tab-animated1-0">
-                                        <span class="nav-text"><b>Pokok</b></span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a role="tab" class="nav-link" id="tab-c1-1" data-bs-toggle="tab"
-                                        href="#tab-animated1-1">
-                                        <span class="nav-text"><b>Jasa</b></span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="tab-animated1-0" role="tabpanel">
-                                    <p class="mb-0">Lorem Ipsum has been the industry's standard dummy text ever
-                                        since the 1500s, when an unknown printer took a galley of type and scrambled it
-                                        to make a type specimen
-                                        book.
-                                        It has survived not only five centuries, but also the leap into electronic
-                                        typesetting, remaining essentially unchanged. </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-static my-3">
+                                    <label for="pokok">Pokok</label>
+                                    <input autocomplete="off" type="text" name="pokok" id="pokok"
+                                        class="form-control">
+                                    <small class="text-danger" id="msg_pokok"></small>
                                 </div>
-                                <div class="tab-pane" id="tab-animated1-1" role="tabpanel">
-                                    <p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting
-                                        industry. Lorem Ipsum has been the industry's standard dummy text ever since the
-                                        1500s, when an
-                                        unknown
-                                        printer took a galley of type and scrambled it to make a type specimen book. It
-                                        has survived not only five centuries, but also the leap into electronic
-                                        typesetting, remaining essentially unchanged. </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-static my-3">
+                                    <label for="jasa">Jasa</label>
+                                    <input autocomplete="off" type="text" name="jasa" id="jasa"
+                                        class="form-control">
+                                    <small class="text-danger" id="msg_jasa"></small>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-static my-3">
+                                    <label for="denda">Denda</label>
+                                    <input autocomplete="off" type="text" name="denda" id="denda"
+                                        class="form-control">
+                                    <small class="text-danger" id="msg_denda"></small>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-static my-3">
+                                    <label for="total">Total Bayar</label>
+                                    <input autocomplete="off" readonly disabled type="text" name="total" id="total"
+                                        class="form-control">
+                                    <small class="text-danger" id="msg_total"></small>
                                 </div>
                             </div>
                         </div>
+                    </form>
+
+                    <div class="d-flex justify-content-end">
+                        <button type="button" id="btnDetailKelompok" class="btn btn-info btn-sm me-3">
+                            Detail Kelompok <span class="badge badge-info" id="loan-id"></span>
+                        </button>
+                        <button type="button" id="btnAngsuranAnggota" class="btn btn-warning btn-sm me-3">
+                            Angsuran Anggota
+                        </button>
+                        <button type="button" id="SimpanAngsuran" class="btn btn-github btn-sm">Posting</button>
                     </div>
                 </div>
-                <div class="col-md-8">
-                    <div class="main-card mb-3 card">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-center">
-                                <style>
-                                    .btn-white-text {
-                                        color: white;
-                                        font-weight: bold;
-                                        width: 100%;
-                                        /* Set the width to 100% to make buttons equally wide */
-                                        max-width: 200px;
-                                        /* Optional: set max-width to avoid buttons being too wide */
-                                    }
-                                </style>
-                                <button class="mt-2 btn btn-success btn-white-text">KARTU</button>&nbsp;&nbsp;
-                                <button class="mt-2 btn btn-danger btn-white-text">DETAIL</button>&nbsp;&nbsp;
-                                <button class="mt-2 btn btn-info btn-white-text">LPP PER BULAN</button>
+            </div>
+
+            <div class="card card-body p-2 pb-0 mb-3">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="d-grid">
+                            <a id="cetakKartuAngsuran" class="btn btn-success btn-sm mb-2">Kartu</a>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="d-grid">
+                            <button class="btn btn-danger btn-sm mb-2" id="btnDetailAngsuran">Detail</button>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="d-grid">
+                            <button class="btn btn-info btn-sm mb-2" id=cetakLPP>LPP per bulan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="nav-wrapper position-relative end-0">
+                <ul class="nav nav-pills nav-fill p-1" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab" href="#Pokok" role="tab"
+                            aria-controls="Pokok" aria-selected="true">
+                            Pokok
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#Jasa" role="tab"
+                            aria-controls="Jasa" aria-selected="false">
+                            Jasa
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="tab-content mt-3">
+                    <div class="tab-pane fade show active" id="Pokok" role="tabpanel" aria-labelledby="Pokok">
+                        <div class="card card-body p-2">
+                            <canvas id="chartP"></canvas>
+                            <div class="d-flex justify-content-between mt-3 mb-1 mx-3 text-sm fw-bold">
+                                <span>Alokasi</span>
+                                <span id="alokasi_pokok"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="Jasa" role="tabpanel" aria-labelledby="Jasa">
+                        <div class="card card-body p-2">
+                            <canvas id="chartJ"></canvas>
+                            <div class="d-flex justify-content-between mt-3 mb-1 mx-3 text-sm fw-bold">
+                                <span>Jasa</span>
+                                <span id="alokasi_jasa"></span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
+    <div class="modal fade" id="DetailKelompok" tabindex="-1" aria-labelledby="DetailKelompokLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="DetailKelompokLabel">
+
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="LayoutDetailKelompok"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="DetailAngsuran" tabindex="-1" aria-labelledby="DetailAngsuranLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="DetailAngsuranLabel">
+
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="LayoutDetailAngsuran"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info btn-sm" id="cetakBuktiAngsuran">
+                        Cetak Bukti Angsuran
+                    </button>
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="BuktiAngsuran" tabindex="-1" aria-labelledby="BuktiAngsuranLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="BuktiAngsuranLabel">
+
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="LayoutBuktiAngsuran"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="BtnCetakBkm" class="btn btn-info btn-sm">
+                        Print
+                    </button>
+                    <button type="button" class="btn btn-danger btn-sm" id="tutupBuktiAngsuran">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="AngsuranAnggota" tabindex="-1" aria-labelledby="AngsuranAnggotaLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="AngsuranAnggotaLabel">
+
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="LayoutAngsuranAnggota"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
 
 @section('script')
     <script>
-            $("#exampleState").maskMoney({
-            allowNegative: true
-        });
         var formatter = new Intl.NumberFormat('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
@@ -232,7 +321,7 @@
             pokok = parseFloat(pokok.split(',').join('').split('.00').join(''))
 
             var next = true
-            if (pokok > sisa_pokok) {
+            if (pokok > 0 && pokok > sisa_pokok) {
                 Swal.fire('Error', 'Angsuran pokok tidak boleh melebihi saldo pinjaman saat ini.', 'warning')
                 return false
 
@@ -369,7 +458,7 @@
             e.preventDefault()
 
             $('#BuktiAngsuran').modal('toggle');
-        })     
+        })
 
         $(document).on('click', '#BtnCetakBkm', function(e) {
             e.preventDefault()

@@ -41,7 +41,7 @@
             <td width="50">Nomor</td>
             <td width="10" align="center">:</td>
             <td colspan="2">
-                ______/______/{{ Tanggal::tglRomawi(date('Y-m-d')) }}
+                __________/{{ Tanggal::tglRomawi(date('Y-m-d')) }}
             </td>
         </tr>
         <tr>
@@ -91,13 +91,13 @@
                     antara {{ $PL }} {{ $pinkel->anggota->namadepan }}
                     {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }} {{ $pinkel->anggota->d->nama_desa }}
                     dengan
-                    {{ $kec->nama_lembaga_sort }} Tanggal {{ Tanggal::tglLatin($pinkel->tgl_cair) }} dengan rincian kredit
+                    {{ $kec->nama_lembaga_sort }} Tanggal {{ Tanggal::tglLatin($pinkel->tgl_cair) }} dengan rincian pinjaman
                     sebagai berikut ;
                 </div>
                 <table>
                     <tr>
                         <td width="10">1.</td>
-                        <td width="140">Nilai perincian kredit</td>
+                        <td width="140">Alokasi Pinjaman</td>
                         <td width="5">:</td>
                         <td>
                             <b>Rp. {{ number_format($pinkel->alokasi) }}</b>
@@ -173,9 +173,7 @@
 
                 <p style="text-align: justify;">
                     Demikian surat ini kami sampaikan, apabila terjadi perbedaan hasil perhitungan angsuran/ tunggakan
-                    mohon untuk melakukan klarifikasi dengan {{ $kec->nama_lembaga_sort }} dan terima kasih untuk
-                    segera melakukan pelunasan tunggakan pinjamannya
-
+                    mohon untuk melakukan klarifikasi dengan {{ $kec->nama_lembaga_sort }}. Pembayaran dimohon untuk dapat dilakukan paling lambat tanggal .................... . Terima kasih atas perhatian dan kerjasamanya.
                 </p>
             </td>
         </tr>
@@ -192,7 +190,7 @@
         </tr>
         <tr>
             <td>&nbsp;</td>
-            <td align="center">{{ $kec->sebutan_level_1 }} DBM</td>
+            <td align="center">{{ $kec->sebutan_level_1 }}</td>
         </tr>
         <tr>
             <td colspan="2" height="40">&nbsp;</td>

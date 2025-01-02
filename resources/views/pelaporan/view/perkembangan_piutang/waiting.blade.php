@@ -2,7 +2,6 @@
     use App\Utils\Tanggal;
     $section = 0;
     $empty = false;
-
 @endphp
 
 @extends('pelaporan.layout.base')
@@ -10,7 +9,7 @@
 @section('content')
     @foreach ($jenis_pp as $jpp)
         @php
-            if (count($jpp->pinjaman_anggota) < 1) {
+            if ($jpp->pinjaman_kelompok->isEmpty()) {
                 $empty = true;
                 continue;
             }
@@ -20,7 +19,7 @@
             $t_alokasi = 0;
         @endphp
 
-        @if ($jpp->nama_jpp != 'Kendaraan' && !$empty)
+        @if ($jpp->nama_jpp != 'SPP' && !$empty)
             <div class="break"></div>
             @php
                 $empty = false;
@@ -31,7 +30,7 @@
             <tr>
                 <td colspan="3" align="center">
                     <div style="font-size: 18px;">
-                        <b>DAFTAR PERMOHONAN KREDIT {{ strtoupper($jpp->nama_jpp) }}</b>
+                        <b>DAFTAR PINJAMAN WAITING {{ strtoupper($jpp->nama_jpp) }}</b>
                     </div>
                     <div style="font-size: 16px;">
                         <b>{{ strtoupper($sub_judul) }}</b>
@@ -46,19 +45,19 @@
         <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
             <tr style="background: rgb(230, 230, 230); font-weight: bold;">
                 <th class="t l b" height="20" width="5%">No</th>
-                <th class="t l b" width="5%">Loan ID.</th>
-                <th class="t l b" width="20%">Nasabah</th>
+                <th class="t l b" width="45%">Kelompok - Loan ID.</th>
+                <th class="t l b" width="10%">Anggota</th>
                 <th class="t l b" width="15%">Tgl Cair</th>
                 <th class="t l b" width="10%">Tempo</th>
                 <th class="t l b r" width="15%">Alokasi</th>
             </tr>
 
-            @foreach ($jpp->pinjaman_anggota as $pinj_ang)
+            @foreach ($jpp->pinjaman_kelompok as $pinkel)
                 @php
-                    $kd_desa[] = $pinj_ang->kd_desa;
-                    $desa = $pinj_ang->kd_desa;
+                    $kd_desa[] = $pinkel->kd_desa;
+                    $desa = $pinkel->kd_desa;
                 @endphp
-                @if (array_count_values($kd_desa)[$pinj_ang->kd_desa] <= '1')
+                @if (array_count_values($kd_desa)[$pinkel->kd_desa] <= '1')
                     @if ($section != $desa && count($kd_desa) > 1)
                         @php
                             $t_angg += $j_angg;
@@ -72,7 +71,7 @@
 
                     <tr style="font-weight: bold;">
                         <td class="t l b r" colspan="6" align="left">
-                            {{ $pinj_ang->kode_desa }}. {{ $pinj_ang->nama_desa }}
+                            {{ $pinkel->kode_desa }}. {{ $pinkel->nama_desa }}
                         </td>
                     </tr>
 
@@ -80,22 +79,25 @@
                         $nomor = 1;
                         $j_angg = 0;
                         $j_alokasi = 0;
-                        $section = $pinj_ang->kd_desa;
-                        $nama_desa = $pinj_ang->sebutan_desa . ' ' . $pinj_ang->nama_desa;
+                        $section = $pinkel->kd_desa;
+                        $nama_desa = $pinkel->sebutan_desa . ' ' . $pinkel->nama_desa;
                     @endphp
                 @endif
 
                 <tr>
                     <td class="t l b" align="center">{{ $nomor++ }}</td>
-                    <td class="t l b" align="left">{{ $pinj_ang->id }}</td>
-                    <td class="t l b" align="left">{{ $pinj_ang->namadepan}}</td>
-                    <td class="t l b" align="center">{{ Tanggal::tglIndo($pinj_ang->tgl_cair) }}</td>
-                    <td class="t l b" align="center">{{ $pinj_ang->jangka }}/{{ $pinj_ang->sis_pokok->sistem }}</td>
-                    <td class="t l b r" align="right">{{ number_format($pinj_ang->alokasi) }}</td>
+                    <td class="t l b" align="left">
+                        {{ $pinkel->nama_kelompok }} [{{ $pinkel->ketua }}] - {{ $pinkel->id }}
+                    </td>
+                    <td class="t l b" align="center">{{ $pinkel->pinjaman_anggota_count }}</td>
+                    <td class="t l b" align="center">{{ Tanggal::tglIndo($pinkel->tgl_cair) }}</td>
+                    <td class="t l b" align="center">{{ $pinkel->jangka }}/{{ $pinkel->sis_pokok->sistem }}</td>
+                    <td class="t l b r" align="right">{{ number_format($pinkel->alokasi) }}</td>
                 </tr>
 
                 @php
-                    $j_alokasi += $pinj_ang->alokasi;
+                    $j_angg += $pinkel->pinjaman_anggota_count;
+                    $j_alokasi += $pinkel->alokasi;
                 @endphp
             @endforeach
             @if (count($kd_desa) > 0)

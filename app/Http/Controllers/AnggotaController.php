@@ -38,13 +38,13 @@ class AnggotaController extends Controller
                 ->addColumn('status', function ($row) {
                     $pinjaman = $row->pinjaman;
 
-                    $status = '<span class="badge bg-secondary">n</span>';
+                    $status = '<span class="badge badge-secondary">n</span>';
                     if ($row->pinjaman) {
                         $status_pinjaman = $pinjaman->status;
 
                         if ($pinjaman->sts) {
                             $badge = $pinjaman->sts->warna_status;
-                            $status = '<span class="badge bg-' . $badge . '">' . $status_pinjaman . '</span>';
+                            $status = '<span class="badge badge-' . $badge . '">' . $status_pinjaman . '</span>';
                         }
                     }
 
@@ -86,7 +86,7 @@ class AnggotaController extends Controller
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $desa = Desa::where('kd_kec', $kec->kd_kec)->with('sebutan_desa')->get();
         $jenis_usaha = Usaha::orderBy('nama_usaha', 'ASC')->get();
-        $hubungan = Keluarga::orderBy('id', 'ASC')->get();
+        $hubungan = Keluarga::orderBy('kekeluargaan', 'ASC')->get();
 
         $desa_dipilih = 0;
         $jenis_usaha_dipilih = 0;
@@ -121,9 +121,32 @@ class AnggotaController extends Controller
                 $tgl = $tanggal;
                 $jk_dipilih = 'L';
             }
+            if ($tgl < 10) {
+                $tgl = "$tgl";
+            }
+            if ($tahun < 20) {
+                $thn = "20$tahun";
+            } else {
+                $thn = "19$tahun";
+            }
+
+            $value_tanggal = Tanggal::tglIndo("$thn-$bulan-$tgl");
         }
 
         return view('penduduk.create')->with(compact('desa_dipilih', 'desa', 'jenis_usaha', 'jenis_usaha_dipilih', 'hubungan', 'hubungan_dipilih', 'nik', 'jk_dipilih', 'value_tanggal'));
+    }
+    
+    public function edits(Request $request, $nia)
+    {
+        dd($nia);
+        $anggotas = anggotas::where('nik', $nia->nik)->get();
+
+        $jenis_jasa_dipilih = $perguliran->jenis_jasa;
+        $sistem_angsuran_pokok = $perguliran->sistem_angsuran;
+        $sistem_angsuran_jasa = $perguliran->sa_jasa;
+        $jenis_pp_dipilih = $perguliran->jenis_pp;
+
+        return view('penduduk.details')->with(compact('nia','anggotas'));
     }
 
     /**
@@ -131,29 +154,20 @@ class AnggotaController extends Controller
      */
     public function store(Request $request)
     {
-        $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
-
         $data = $request->only([
             'nik',
             'nama_lengkap',
-            'nama_pangilan',
             'desa',
             'tempat_lahir',
             'tgl_lahir',
             'jenis_kelamin',
             'no_telp',
-            'agama',
-            'pendidikan',
-            'status_pernikahan',
             'alamat',
-            'domisi',
             'no_kk',
             'jenis_usaha',
             'nik_penjamin',
             'penjamin',
-            'hubungan',
-            'nama_ibu',
-            'tempat_kerja'
+            'hubungan'
         ]);
 
 
@@ -161,32 +175,22 @@ class AnggotaController extends Controller
         $rules = [
             'nik' => 'required|unique:anggota_' . Session::get('lokasi') . ',nik|min:16|max:16',
             'nama_lengkap' => 'required',
-            'nama_pangilan' => 'required',
             'desa' => 'required',
             'tempat_lahir' => 'required',
             'tgl_lahir' => 'required',
             'jenis_kelamin' => 'required',
             'no_telp' => 'required',
-            'agama' => 'required',
-            'pendidikan' => 'required',
-            'status_pernikahan' => 'required',
             'alamat' => 'required',
-            'domisi' => 'required',
             'no_kk' => 'required',
             'jenis_usaha' => 'required',
             'nik_penjamin' => 'required|max:16',
             'penjamin' => 'required',
-            'hubungan' => 'required',
-            'nama_ibu' => 'required',
-            'tempat_kerja' => 'required'
+            'hubungan' => 'required'
         ];
 
         if (strlen($request->no_kk) >= 16) {
-            if ($kec->hak_kredit == 1) {
-                $rules['no_kk'] = 'required|unique:anggota_' . Session::get('lokasi') . ',kk';
-            }
+            $rules['no_kk'] = 'required|unique:anggota_' . Session::get('lokasi') . ',kk';
         }
-
 
         $validate = Validator::make($data, $rules);
 
@@ -197,24 +201,17 @@ class AnggotaController extends Controller
         $insert = [
             'nik' => $request->nik,
             'namadepan' => $request->nama_lengkap,
-            'nama_pangilan' => $request->nama_pangilan,
             'jk' => $request->jenis_kelamin,
             'tempat_lahir' => $request->tempat_lahir,
             'tgl_lahir' => Tanggal::tglNasional($request->tgl_lahir),
             'alamat' => $request->alamat,
-            'domisi' => $request->domisi,
             'desa' => $request->desa,
             'lokasi' => Session::get('lokasi'),
             'hp' => $request->no_telp,
-            'agama' => $request->agama,
-            'pendidikan' => $request->pendidikan,
-            'status_pernikahan' => $request->status_pernikahan,
             'kk' => $request->no_kk,
             'nik_penjamin' => $request->nik_penjamin,
             'penjamin' => $request->penjamin,
             'hubungan' => $request->hubungan,
-            'nama_ibu' => $request->nama_ibu,
-            'tempat_kerja' => $request->tempat_kerja,
             'usaha' => $request->jenis_usaha,
             'foto' => '1',
             'terdaftar' => date('Y-m-d'),
@@ -236,7 +233,7 @@ class AnggotaController extends Controller
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $desa = Desa::where('kd_kec', $kec->kd_kec)->with('sebutan_desa')->get();
         $jenis_usaha = Usaha::orderBy('nama_usaha', 'ASC')->get();
-        $hubungan = Keluarga::orderBy('id', 'ASC')->get();
+        $hubungan = Keluarga::orderBy('kekeluargaan', 'ASC')->get();
 
         $penduduk = $penduduk->with([
             'pinjaman_anggota',
@@ -272,46 +269,32 @@ class AnggotaController extends Controller
         $data = $request->only([
             'nik',
             'nama_lengkap',
-            'nama_pangilan',
             'desa',
             'tempat_lahir',
             'tgl_lahir',
             'jenis_kelamin',
             'no_telp',
-            'agama',
-            'pendidikan',
-            'status_pernikahan',
             'alamat',
-            'domisi',
             'no_kk',
             'jenis_usaha',
             'nik_penjamin',
             'penjamin',
-            'hubungan',
-            'nama_ibu',
-            'tempat_kerja'
+            'hubungan'
         ]);
 
         $rules = [
             'nama_lengkap' => 'required',
-            'nama_pangilan' => 'required',
             'desa' => 'required',
             'tempat_lahir' => 'required',
             'tgl_lahir' => 'required',
             'jenis_kelamin' => 'required',
             'no_telp' => 'required',
-            'agama' => 'required',
-            'pendidikan' => 'required',
-            'status_pernikahan' => 'required',
             'alamat' => 'required',
-            'domisi' => 'required',
             'no_kk' => 'required',
             'jenis_usaha' => 'required',
             'nik_penjamin' => 'required|max:16',
             'penjamin' => 'required',
-            'hubungan' => 'required',
-            'nama_ibu' => 'required',
-            'tempat_kerja' => 'required'
+            'hubungan' => 'required'
         ];
 
         if ($request->nik != $penduduk->nik) {
@@ -334,24 +317,17 @@ class AnggotaController extends Controller
         $update = [
             'nik' => $request->nik,
             'namadepan' => $request->nama_lengkap,
-            'nama_pangilan' => $request->nama_pangilan,
             'jk' => $request->jenis_kelamin,
             'tempat_lahir' => $request->tempat_lahir,
             'tgl_lahir' => Tanggal::tglNasional($request->tgl_lahir),
             'alamat' => $request->alamat,
-            'domisi' => $request->domisi,
             'desa' => $request->desa,
             'lokasi' => Session::get('lokasi'),
             'hp' => $request->no_telp,
-            'agama' => $request->agama,
-            'pendidikan' => $request->pendidikan,
-            'status_pernikahan' => $request->status_pernikahan,
             'kk' => $request->no_kk,
             'nik_penjamin' => $request->nik_penjamin,
             'penjamin' => $request->penjamin,
             'hubungan' => $request->hubungan,
-            'nama_ibu' => $request->nama_ibu,
-            'tempat_kerja' => $request->tempat_kerja,
             'usaha' => $request->jenis_usaha,
             'foto' => '1',
             'terdaftar' => date('Y-m-d'),
@@ -364,13 +340,17 @@ class AnggotaController extends Controller
             'msg' => 'Penduduk dengan nama ' . $update['namadepan'] . ' berhasil disimpan'
         ], Response::HTTP_ACCEPTED);
     }
-
+    
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Anggota $penduduk)
     {
-        //
+        Anggota::where('id', $penduduk->id)->delete();
+        return response()->json([
+            'success' => true,
+            'msg' => 'Data atas nama ' . $penduduk->namadepan . ' berhasil dihapus.'
+        ]);
     }
 
     public function blokir(Request $request, Anggota $nik)

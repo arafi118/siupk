@@ -4,6 +4,7 @@ namespace App\Utils;
 
 use App\Models\AkunLevel2;
 use App\Models\Kecamatan;
+use App\Models\PinjamanKelompok;
 use App\Models\PinjamanIndividu;
 use App\Models\Rekening;
 use App\Models\Saldo;
@@ -161,7 +162,12 @@ class Keuangan
         $thn_kondisi = explode('-', $tgl_kondisi)[0];
         $awal_tahun = $thn_kondisi . '-01-01';
 
-        $trx = Transaksi::where('rekening_debit', $kode_akun)->whereBetween('tgl_transaksi', [$awal_tahun, $tgl_kondisi])->sum('jumlah');
+        if (is_array($kode_akun)) {
+            $trx = Transaksi::whereIn('rekening_debit', $kode_akun)->whereBetween('tgl_transaksi', [$awal_tahun, $tgl_kondisi])->sum('jumlah');
+        } else {
+            $trx = Transaksi::where('rekening_debit', $kode_akun)->whereBetween('tgl_transaksi', [$awal_tahun, $tgl_kondisi])->sum('jumlah');
+        }
+
         return $trx;
     }
 
@@ -171,7 +177,12 @@ class Keuangan
         $thn_kondisi = explode('-', $tgl_kondisi)[0];
         $awal_tahun = $thn_kondisi . '-01-01';
 
-        $trx = Transaksi::where('rekening_kredit', $kode_akun)->whereBetween('tgl_transaksi', [$awal_tahun, $tgl_kondisi])->sum('jumlah');
+        if (is_array($kode_akun)) {
+            $trx = Transaksi::whereIn('rekening_kredit', $kode_akun)->whereBetween('tgl_transaksi', [$awal_tahun, $tgl_kondisi])->sum('jumlah');
+        } else {
+            $trx = Transaksi::where('rekening_kredit', $kode_akun)->whereBetween('tgl_transaksi', [$awal_tahun, $tgl_kondisi])->sum('jumlah');
+        }
+
         return $trx;
     }
 
@@ -208,90 +219,6 @@ class Keuangan
         }
 
         return $saldo;
-    }
-
-    public function komSaldoLR($rek, $tanggal)
-    {
-        $tgl = explode('-', $tanggal);
-        $tahun = $tgl[0];
-        $bulan = $tgl[1];
-        $hari = $tgl[2];
-
-        $awal_debit = 0;
-        $awal_kredit = 0;
-
-        $bulan_lalu_debit = 0;
-        $bulan_lalu_kredit = 0;
-
-        $sd_bulan_ini_debit = 0;
-        $sd_bulan_ini_kredit = 0;
-
-        foreach ($rek->kom_saldo as $kom_saldo) {
-            if ($kom_saldo->bulan == 0) {
-                $awal_debit += floatval($kom_saldo->debit);
-                $awal_kredit += floatval($kom_saldo->kredit);
-            }
-
-            if ($kom_saldo->bulan > 0 && $kom_saldo->bulan < $bulan && $kom_saldo->tahun == $tahun) {
-                $bulan_lalu_debit += floatval($kom_saldo->debit);
-                $bulan_lalu_kredit += floatval($kom_saldo->kredit);
-            }
-
-            if ($kom_saldo->bulan > 0 && $kom_saldo->bulan == $bulan && $kom_saldo->tahun == $tahun) {
-                $sd_bulan_ini_debit += floatval($kom_saldo->debit);
-                $sd_bulan_ini_kredit += floatval($kom_saldo->kredit);
-            }
-        }
-
-        if ($rek->lev1 == 1 || $rek->lev1 == '5') {
-            $saldo_awal = $awal_debit - $awal_kredit;
-
-            $bulan_lalu = $saldo_awal + ($bulan_lalu_debit - $bulan_lalu_kredit);
-            $sd_bulan_ini = $saldo_awal + ($sd_bulan_ini_debit - $sd_bulan_ini_kredit);
-        } else {
-            $saldo_awal = $awal_kredit - $awal_debit;
-
-            $bulan_lalu = $saldo_awal + ($bulan_lalu_kredit - $bulan_lalu_debit);
-            $sd_bulan_ini = $saldo_awal + ($sd_bulan_ini_kredit - $sd_bulan_ini_debit);
-        }
-
-        return [
-            'bulan_lalu' => $bulan_lalu,
-            'sd_bulan_ini' => $sd_bulan_ini
-        ];
-    }
-
-    public function komBebanOps($kode_akun, $tanggal, $rek)
-    {
-        $tgl = explode('-', $tanggal);
-        $data['tahun'] = $tgl[0];
-        $data['bulan'] = $tgl[1];
-        $data['hari'] = $tgl[2];
-
-        $rekening = Rekening::where('kode_akun', 'LIKE', $kode_akun)->whereNotIn('kode_akun', $rek)->with([
-            'kom_saldo' => function ($query) use ($data) {
-                $query->where('tahun', $data['tahun'])->where(function ($query) use ($data) {
-                    $query->where('bulan', '0')->orwhere('bulan', $data['bulan'])->orwhere('bulan', ($data['bulan'] - 1));
-                });
-            }
-        ])->get();
-
-        $bulan_lalu = 0;
-        $bulan_ini = 0;
-        $sd_bulan_ini = 0;
-        foreach ($rekening as $rek) {
-            $data_saldo = $this->komSaldoLR($rek, $tanggal);
-
-            $bulan_lalu += $data_saldo['bulan_lalu'];
-            $bulan_ini += $data_saldo['sd_bulan_ini'] - $data_saldo['bulan_lalu'];
-            $sd_bulan_ini += $data_saldo['sd_bulan_ini'];
-        }
-
-        return [
-            'bulan_lalu' => $bulan_lalu,
-            'bulan_ini' => $bulan_ini,
-            'sd_bulan_ini' => $sd_bulan_ini
-        ];
     }
 
     public function saldoKas($tgl_kondisi)
@@ -358,16 +285,35 @@ class Keuangan
     public function saldoAwal($tgl_kondisi, $kode_akun)
     {
         $thn_kondisi = explode('-', $tgl_kondisi)[0];
-        $saldo = Saldo::where([
-            ['tahun', $thn_kondisi],
-            ['bulan', '0'],
-            ['kode_akun', $kode_akun]
-        ])->first();
+        if (is_array($kode_akun)) {
+            $saldo = Saldo::whereIn('kode_akun', $kode_akun)->where([
+                'tahun' => $thn_kondisi,
+                'bulan' => '0'
+            ])->get();
 
-        return [
-            'debit' => floatval($saldo->debit),
-            'kredit' => floatval($saldo->kredit)
-        ];
+            $kom_debit = 0;
+            $kom_kredit = 0;
+            foreach ($saldo as $s) {
+                $kom_debit += floatval($s->debit);
+                $kom_kredit += floatval($s->kredit);
+            }
+
+            return [
+                'debit' => $kom_debit,
+                'kredit' => $kom_kredit
+            ];
+        } else {
+            $saldo = Saldo::where([
+                ['tahun', $thn_kondisi],
+                ['bulan', '0'],
+                ['kode_akun', $kode_akun]
+            ])->first();
+
+            return [
+                'debit' => floatval($saldo->debit),
+                'kredit' => floatval($saldo->kredit)
+            ];
+        }
     }
 
     public function saldoPerBulan($tgl_kondisi, $kode_akun)
@@ -516,7 +462,7 @@ class Keuangan
         $sum_kolek2 = 0;
         $sum_kolek3 = 0;
 
-        $pinjaman_anggota = PinjamanIndividu::where('sistem_angsuran', '!=', '12')
+        $pinjaman_kelompok = PinjamanKelompok::where('sistem_angsuran', '!=', '12')
             ->where(function ($query) use ($data) {
                 $query->where([
                     ['status', 'A'],
@@ -555,7 +501,53 @@ class Keuangan
                 }
             ])->get();
 
-        foreach ($pinjaman_anggota as $pinkel) {
+        $pinjaman_individu = PinjamanIndividu::where('sistem_angsuran', '!=', '12')
+            ->where(function ($query) use ($data) {
+                $query->where([
+                    ['status', 'A'],
+                    ['jenis_pinjaman', 'I'],
+                    ['tgl_cair', '<=', $data['tgl_kondisi']]
+                ])->orwhere([
+                    ['status', 'L'],
+                    ['jenis_pinjaman', 'I'],
+                    ['tgl_cair', '<=', $data['tgl_kondisi']],
+                    ['tgl_lunas', '>=', "$data[tahun]-01-01"]
+                ])->orwhere([
+                    ['status', 'L'],
+                    ['jenis_pinjaman', 'I'],
+                    ['tgl_lunas', '<=', $data['tgl_kondisi']],
+                    ['tgl_lunas', '>=', "$data[tahun]-01-01"]
+                ])->orwhere([
+                    ['status', 'R'],
+                    ['jenis_pinjaman', 'I'],
+                    ['tgl_cair', '<=', $data['tgl_kondisi']],
+                    ['tgl_lunas', '>=', "$data[tahun]-01-01"]
+                ])->orwhere([
+                    ['status', 'R'],
+                    ['jenis_pinjaman', 'I'],
+                    ['tgl_lunas', '<=', $data['tgl_kondisi']],
+                    ['tgl_lunas', '>=', "$data[tahun]-01-01"]
+                ])->orwhere([
+                    ['status', 'H'],
+                    ['jenis_pinjaman', 'I'],
+                    ['tgl_cair', '<=', $data['tgl_kondisi']],
+                    ['tgl_lunas', '>=', "$data[tahun]-01-01"]
+                ])->orwhere([
+                    ['status', 'H'],
+                    ['jenis_pinjaman', 'I'],
+                    ['tgl_lunas', '<=', $data['tgl_kondisi']],
+                    ['tgl_lunas', '>=', "$data[tahun]-01-01"]
+                ]);
+            })->with([
+                'saldo' => function ($query) use ($data) {
+                    $query->where('tgl_transaksi', '<=', $data['tgl_kondisi']);
+                },
+                'target' => function ($query) use ($data) {
+                    $query->where('jatuh_tempo', '<=', $data['tgl_kondisi']);
+                }
+            ])->get();
+
+        foreach ($pinjaman_kelompok as $pinkel) {
             $real_pokok = 0;
             $real_jasa = 0;
             $sum_pokok = 0;
@@ -614,6 +606,101 @@ class Keuangan
             }
 
             $tgl_cair = explode('-', $pinkel->tgl_cair);
+            $th_cair = $tgl_cair[0];
+            $bl_cair = $tgl_cair[1];
+            $tg_cair = $tgl_cair[2];
+
+            $selisih_tahun = ($data['tahun'] - $th_cair) * 12;
+            $selisih_bulan = $data['bulan'] - $bl_cair;
+
+            $selisih = $selisih_bulan + $selisih_tahun;
+
+            $_kolek = 0;
+            if ($wajib_pokok != '0') {
+                $_kolek = ($tunggakan_pokok / $wajib_pokok);
+            }
+            $kolek = round($_kolek + ($selisih - $angsuran_ke));
+            if ($kolek <= 3) {
+                $kolek1 = $saldo_pokok;
+                $kolek2 = 0;
+                $kolek3 = 0;
+            } elseif ($kolek <= 5) {
+                $kolek1 = 0;
+                $kolek2 = $saldo_pokok;
+                $kolek3 = 0;
+            } else {
+                $kolek1 = 0;
+                $kolek2 = 0;
+                $kolek3 = $saldo_pokok;
+            }
+
+            $sum_nunggak_pokok += $tunggakan_pokok;
+            $sum_nunggak_jasa += $tunggakan_jasa;
+            $sum_saldo_pokok += $saldo_pokok;
+            $sum_saldo_jasa += $saldo_jasa;
+            $sum_kolek1 += $kolek1;
+            $sum_kolek2 += $kolek2;
+            $sum_kolek3 += $kolek3;
+        }
+        foreach ($pinjaman_individu as $pinj_i) {
+            $real_pokok = 0;
+            $real_jasa = 0;
+            $sum_pokok = 0;
+            $sum_jasa = 0;
+            $saldo_pokok = $pinj_i->alokasi;
+            $saldo_jasa = 0;
+            if ($pinj_i->pros_jasa > 0) {
+                $saldo_jasa = $pinj_i->pros_jasa == 0 ? 0 : $pinj_i->alokasi * ($pinj_i->pros_jasa / 100);
+            }
+            if ($pinj_i->saldo) {
+                $real_pokok = $pinj_i->saldo->realisasi_pokok;
+                $real_jasa = $pinj_i->saldo->realisasi_jasa;
+                $sum_pokok = $pinj_i->saldo->sum_pokok;
+                $sum_jasa = $pinj_i->saldo->sum_jasa;
+                $saldo_pokok = $pinj_i->saldo->saldo_pokok;
+                $saldo_jasa = $pinj_i->saldo->saldo_jasa;
+            }
+
+            $target_pokok = 0;
+            $target_jasa = 0;
+            $wajib_pokok = 0;
+            $wajib_jasa = 0;
+            $angsuran_ke = 0;
+            if ($pinj_i->target) {
+                $target_pokok = $pinj_i->target->target_pokok;
+                $target_jasa = $pinj_i->target->target_jasa;
+                $wajib_pokok = $pinj_i->target->wajib_pokok;
+                $wajib_jasa = $pinj_i->target->wajib_jasa;
+                $angsuran_ke = $pinj_i->target->angsuran_ke;
+            }
+
+            $tunggakan_pokok = $target_pokok - $sum_pokok;
+            if ($tunggakan_pokok < 0) {
+                $tunggakan_pokok = 0;
+            }
+            $tunggakan_jasa = $target_jasa - $sum_jasa;
+            if ($tunggakan_jasa < 0) {
+                $tunggakan_jasa = 0;
+            }
+
+            if ($pinj_i->tgl_lunas <= $data['tgl_kondisi'] && $pinj_i->status == 'L') {
+                $tunggakan_pokok = 0;
+                $tunggakan_jasa = 0;
+                $saldo_pokok = 0;
+                $saldo_jasa = 0;
+            } elseif ($pinj_i->tgl_lunas <= $data['tgl_kondisi'] && $pinj_i->status == 'R') {
+                $tunggakan_pokok = 0;
+                $tunggakan_jasa = 0;
+                $saldo_pokok = 0;
+                $saldo_jasa = 0;
+            } elseif ($pinj_i->tgl_lunas <= $data['tgl_kondisi'] && $pinj_i->status == 'H') {
+                $tunggakan_pokok = 0;
+                $tunggakan_jasa = 0;
+                $saldo_pokok = 0;
+                $saldo_jasa = 0;
+            }
+
+            $tgl_cair = explode('-', $pinj_i->tgl_cair);
             $th_cair = $tgl_cair[0];
             $bl_cair = $tgl_cair[1];
             $tg_cair = $tgl_cair[2];
@@ -856,7 +943,7 @@ class Keuangan
         ];
     }
 
-    public function laporan_laba_rugi($tgl_kondisi, $jenis = 'Bulanan', $ojk = false)
+    public function laporan_laba_rugi($tgl_kondisi, $jenis = 'Bulanan')
     {
         $tanggal = explode('-', $tgl_kondisi);
         $tahun = $tanggal[0];
@@ -866,158 +953,77 @@ class Keuangan
         $bulan_lalu = $bulan - 1;
         $tgl_lalu = date('Y-m-d', strtotime('-1 month', strtotime($tgl_kondisi)));
 
-        if ($ojk) {
-            $akun2 = AkunLevel2::where('lev1', '4')->orwhere('lev1', '5')->with([
-                'akun3',
-                'akun3.rek',
-                'akun3.rek.kom_saldo' => function ($query) use ($tahun, $bulan, $bulan_lalu, $hari) {
-                    if ($bulan == '1' && $hari == '1') {
-                        $query->where([
-                            ['tahun', $tahun],
-                            ['bulan', '0']
-                        ]);
-                    } else {
-                        $query->where('tahun', $tahun)->where(function ($query) use ($bulan, $bulan_lalu) {
-                            $query->where('bulan', $bulan_lalu)->orwhere('bulan', $bulan);
-                        });
-                    }
-                },
-                'akun3.rek.saldo' => function ($query) use ($tahun) {
+        $akun2 = AkunLevel2::where('lev1', '4')->orwhere('lev1', '5')->with([
+            'rek',
+            'rek.kom_saldo' => function ($query) use ($tahun, $bulan, $bulan_lalu, $hari) {
+                if ($bulan == '1' && $hari == '1') {
                     $query->where([
                         ['tahun', $tahun],
                         ['bulan', '0']
                     ]);
+                } else {
+                    $query->where('tahun', $tahun)->where(function ($query) use ($bulan, $bulan_lalu) {
+                        $query->where('bulan', $bulan_lalu)->orwhere('bulan', $bulan);
+                    });
                 }
-            ])->orderBy('kode_akun', 'ASC')->get();
-        } else {
-            $akun2 = AkunLevel2::where('lev1', '4')->orwhere('lev1', '5')->with([
-                'rek',
-                'rek.kom_saldo' => function ($query) use ($tahun, $bulan, $bulan_lalu, $hari) {
-                    if ($bulan == '1' && $hari == '1') {
-                        $query->where([
-                            ['tahun', $tahun],
-                            ['bulan', '0']
-                        ]);
-                    } else {
-                        $query->where('tahun', $tahun)->where(function ($query) use ($bulan, $bulan_lalu) {
-                            $query->where('bulan', $bulan_lalu)->orwhere('bulan', $bulan);
-                        });
-                    }
-                },
-                'rek.saldo' => function ($query) use ($tahun) {
-                    $query->where([
-                        ['tahun', $tahun],
-                        ['bulan', '0']
-                    ]);
-                }
-            ])->orderBy('kode_akun', 'ASC')->get();
-        }
+            },
+            'rek.saldo' => function ($query) use ($tahun) {
+                $query->where([
+                    ['tahun', $tahun],
+                    ['bulan', '0']
+                ]);
+            }
+        ])->orderBy('kode_akun', 'ASC')->get();
 
         $pendapatan = [];
         $beban = [];
         $pendapatan_non_ops = [];
         $beban_non_ops = [];
         foreach ($akun2 as $akn2) {
+            $data = [];
+            foreach ($akn2->rek as $rek) {
+                $debit_bulan_ini = 0;
+                $kredit_bulan_ini = 0;
 
-            if ($ojk) {
-                $data = [];
-                foreach ($akn2->akun3 as $akn3) {
-                    $sum_saldo_bulan_ini = 0;
-                    $sum_saldo_bulan_lalu = 0;
-                    foreach ($akn3->rek as $rek) {
-                        $debit_bulan_ini = 0;
-                        $kredit_bulan_ini = 0;
-
-                        $debit_bulan_lalu = 0;
-                        $kredit_bulan_lalu = 0;
-                        foreach ($rek->kom_saldo as $kom_saldo) {
-                            if ($kom_saldo->bulan == $bulan) {
-                                $debit_bulan_ini += floatval($kom_saldo->debit);
-                                $kredit_bulan_ini += floatval($kom_saldo->kredit);
-                            } else {
-                                if ($bulan == 1 || $jenis != 'Bulanan') {
-                                    $debit_bulan_lalu += 0;
-                                    $kredit_bulan_lalu += 0;
-                                } else {
-                                    $debit_bulan_lalu += floatval($kom_saldo->debit);
-                                    $kredit_bulan_lalu += floatval($kom_saldo->kredit);
-                                }
-                            }
-                        }
-
-                        $debit_awal = 0;
-                        $kredit_awal = 0;
-                        if ($rek->saldo) {
-                            $debit_awal = floatval($rek->saldo->debit);
-                            $kredit_awal = floatval($rek->saldo->kredit);
-                        }
-
-                        $saldo_awal = $debit_awal - $kredit_awal;
-                        $saldo_bulan_ini = $saldo_awal + ($debit_bulan_ini - $kredit_bulan_ini);
-                        $saldo_bulan_lalu = $saldo_awal + ($debit_bulan_lalu - $kredit_bulan_lalu);
-                        if ($rek->lev1 == 4) {
-                            $saldo_awal = $kredit_awal - $debit_awal;
-                            $saldo_bulan_ini = $saldo_awal + ($kredit_bulan_ini - $debit_bulan_ini);
-                            $saldo_bulan_lalu = $saldo_awal + ($kredit_bulan_lalu - $debit_bulan_lalu);
-                        }
-
-                        $sum_saldo_bulan_ini += $saldo_bulan_ini;
-                        $sum_saldo_bulan_lalu += $saldo_bulan_lalu;
-                    }
-
-                    $data[$akn3->kode_akun] = [
-                        'kode_akun' => $akn3->kode_akun,
-                        'nama_akun' => $akn3->nama_akun,
-                        'saldo' => $sum_saldo_bulan_ini,
-                        'saldo_bln_lalu' => $sum_saldo_bulan_lalu
-                    ];
-                }
-            } else {
-                $data = [];
-                foreach ($akn2->rek as $rek) {
-                    $debit_bulan_ini = 0;
-                    $kredit_bulan_ini = 0;
-
-                    $debit_bulan_lalu = 0;
-                    $kredit_bulan_lalu = 0;
-                    foreach ($rek->kom_saldo as $kom_saldo) {
-                        if ($kom_saldo->bulan == $bulan) {
-                            $debit_bulan_ini += floatval($kom_saldo->debit);
-                            $kredit_bulan_ini += floatval($kom_saldo->kredit);
+                $debit_bulan_lalu = 0;
+                $kredit_bulan_lalu = 0;
+                foreach ($rek->kom_saldo as $kom_saldo) {
+                    if ($kom_saldo->bulan == $bulan) {
+                        $debit_bulan_ini += floatval($kom_saldo->debit);
+                        $kredit_bulan_ini += floatval($kom_saldo->kredit);
+                    } else {
+                        if ($bulan == 1 || $jenis != 'Bulanan') {
+                            $debit_bulan_lalu += 0;
+                            $kredit_bulan_lalu += 0;
                         } else {
-                            if ($bulan == 1 || $jenis != 'Bulanan') {
-                                $debit_bulan_lalu += 0;
-                                $kredit_bulan_lalu += 0;
-                            } else {
-                                $debit_bulan_lalu += floatval($kom_saldo->debit);
-                                $kredit_bulan_lalu += floatval($kom_saldo->kredit);
-                            }
+                            $debit_bulan_lalu += floatval($kom_saldo->debit);
+                            $kredit_bulan_lalu += floatval($kom_saldo->kredit);
                         }
                     }
-
-                    $debit_awal = 0;
-                    $kredit_awal = 0;
-                    if ($rek->saldo) {
-                        $debit_awal = floatval($rek->saldo->debit);
-                        $kredit_awal = floatval($rek->saldo->kredit);
-                    }
-
-                    $saldo_awal = $debit_awal - $kredit_awal;
-                    $saldo_bulan_ini = $saldo_awal + ($debit_bulan_ini - $kredit_bulan_ini);
-                    $saldo_bulan_lalu = $saldo_awal + ($debit_bulan_lalu - $kredit_bulan_lalu);
-                    if ($rek->lev1 == 4) {
-                        $saldo_awal = $kredit_awal - $debit_awal;
-                        $saldo_bulan_ini = $saldo_awal + ($kredit_bulan_ini - $debit_bulan_ini);
-                        $saldo_bulan_lalu = $saldo_awal + ($kredit_bulan_lalu - $debit_bulan_lalu);
-                    }
-
-                    $data[$rek->kode_akun] = [
-                        'kode_akun' => $rek->kode_akun,
-                        'nama_akun' => $rek->nama_akun,
-                        'saldo' => $saldo_bulan_ini,
-                        'saldo_bln_lalu' => $saldo_bulan_lalu
-                    ];
                 }
+
+                $debit_awal = 0;
+                $kredit_awal = 0;
+                if ($rek->saldo) {
+                    $debit_awal = floatval($rek->saldo->debit);
+                    $kredit_awal = floatval($rek->saldo->kredit);
+                }
+
+                $saldo_awal = $debit_awal - $kredit_awal;
+                $saldo_bulan_ini = $saldo_awal + ($debit_bulan_ini - $kredit_bulan_ini);
+                $saldo_bulan_lalu = $saldo_awal + ($debit_bulan_lalu - $kredit_bulan_lalu);
+                if ($rek->lev1 == 4) {
+                    $saldo_awal = $kredit_awal - $debit_awal;
+                    $saldo_bulan_ini = $saldo_awal + ($kredit_bulan_ini - $debit_bulan_ini);
+                    $saldo_bulan_lalu = $saldo_awal + ($kredit_bulan_lalu - $debit_bulan_lalu);
+                }
+
+                $data[$rek->kode_akun] = [
+                    'kode_akun' => $rek->kode_akun,
+                    'nama_akun' => $rek->nama_akun,
+                    'saldo' => $saldo_bulan_ini,
+                    'saldo_bln_lalu' => $saldo_bulan_lalu
+                ];
             }
 
             // Pendapatan

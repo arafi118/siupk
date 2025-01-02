@@ -74,7 +74,7 @@
     $logo = $kec->logo;
     $nama_lembaga = $kec->nama_lembaga_sort;
     $nama_kecamatan = $kec->sebutan_kec . ' ' . $kec->nama_kec;
-    
+
     if (Keuangan::startWith($kab->nama_kab, 'KOTA') || Keuangan::startWith($kab->nama_kab, 'KAB')) {
         $nama_kecamatan .= ' ' . ucwords(strtolower($kab->nama_kab));
         $nama_kabupaten = ucwords(strtolower($kab->nama_kab));
@@ -82,7 +82,7 @@
         $nama_kecamatan .= ' Kabupaten ' . ucwords(strtolower($kab->nama_kab));
         $nama_kabupaten = ' Kabupaten ' . ucwords(strtolower($kab->nama_kab));
     }
-    
+
     $nomor_usaha = 'SK Kemenkumham RI No.' . $kec->nomor_bh;
     $info = $kec->alamat_kec . ', Telp.' . $kec->telpon_kec;
     $email = $kec->email_kec;
@@ -91,26 +91,28 @@
 <body onload="window.print()">
     <header>
         @if ($laporan == 'surat_pengantar')
-            <table width="100%" style="border-bottom: 1px double #000; border-width: 4px;">
+            <table width="100%" style="border-bottom: 1px solid grey;">
                 <tr>
-                    <td width="70">
-                        <img src="/storage/logo/{{ $logo }}" width="80" alt="{{ $logo }}">
+                    <td width="30">
+                        <img src="../storage/app/public/logo/{{ $logo }}" width="40" height="40"
+                            alt="{{ $logo }}">
                     </td>
-                    <td align="center">
-                        <div>{{ strtoupper($nama_lembaga) }}</div>
-                        <div>
+                    <td>
+                        <div style="font-size: 12px;">{{ strtoupper($nama_lembaga) }}</div>
+                        <div style="font-size: 12px;">
                             <b>{{ strtoupper($nama_kecamatan) }}</b>
                         </div>
-                        <div style="font-size: 10px; color: grey;">
+                        <div style="font-size: 10px; ">
                             <i>{{ $nomor_usaha }}</i>
                         </div>
-                        <div style="font-size: 10px; color: grey;">
+                        <div style="font-size: 10px; ">
                             <i>{{ $info }}</i>
                         </div>
-                        <div style="font-size: 10px; color: grey;">
-                            <i>{{ $email }}</i>
-                        </div>
+                        <!--<div style="font-size: 10px; ">-->
+                        <!--    <i>{{ $email }}</i>-->
+                        <!--</div>-->
                     </td>
+
                 </tr>
             </table>
         @else
@@ -124,10 +126,19 @@
                         <div style="font-size: 12px;">
                             <b>{{ strtoupper($nama_kecamatan) }}</b>
                         </div>
+                        <div style="font-size: 10px; ">
+                            <i>{{ $nomor_usaha }}</i>
+                        </div>
+                        <div style="font-size: 10px; ">
+                            <i>{{ $info }}</i>
+                        </div>
+                        <!--<div style="font-size: 10px; ">-->
+                        <!--    <i>{{ $email }}</i>-->
+                        <!--</div>-->
                     </td>
                 </tr>
             </table>
-            <table width="100%" style="position: relative; top: -10px;">
+            {{-- <table width="100%" style="position: relative; top: -10px;">
                 <tr>
                     <td>
                         <span style="font-size: 8px; color: grey;">
@@ -140,7 +151,7 @@
                         </span>
                     </td>
                 </tr>
-            </table>
+            </table> --}}
         @endif
     </header>
 

@@ -22,9 +22,9 @@
                 <div style="font-size: 18px;">
                     <b>BERITA ACARA PENCAIRAN</b>
                 </div>
-                {{-- <div style="font-size: 16px;">
+                <div style="font-size: 16px;">
                     <b>PINJAMAN INDIVIDU {{ $pinkel->jpp->nama_jpp }}</b>
-                </div> --}}
+                </div>
             </td>
         </tr>
         <tr>
@@ -34,14 +34,14 @@
 
 
     <p style="text-align: justify;">
-        Sesuai Surat Pengajuan Kredit (SPK) nomor : {{ $pinkel->spk_no }}. Pada hari ini
+        Sesuai Surat Perjanjian Kredit (SPK) nomor : {{ $pinkel->spk_no }}. Pada hari ini
         {{ Tanggal::namaHari($pinkel->tgl_cair) }}
         tanggal
         {{ $keuangan->terbilang(Tanggal::hari($pinkel->tgl_cair)) }} bulan {{ Tanggal::namaBulan($pinkel->tgl_cair) }}
         tahun
         {{ $keuangan->terbilang(Tanggal::tahun($pinkel->tgl_cair)) }}, telah diadakan pencairan dana
         perguliran {{ $kec->nama_lembaga_sort }} {{ $kec->sebutan_kec }} {{ $kec->nama_kec }}
-        {{ $pinkel->anggota->kd_kelompok }} dengan detail identitas Nasabah dan detail pengajuan sebagai
+        {{ $pinkel->anggota->kd_kelompok }} dengan detail identitas pemanfaat dan detail pinjaman sebagai
         berikut :
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
 
@@ -49,7 +49,7 @@
 
         <tr>
             <td align="center">1.</td>
-            <td>Nama Nasabah</td>
+            <td>Nama Pemanfaat</td>
             <td align="center">:</td>
             <td>
                 <b> {{ $pinkel->anggota->namadepan }}</b>
@@ -86,7 +86,7 @@
             </td>
 
             <td align="center">11.</td>
-            <td>Jenis Piutang</td>
+            <td>Jenis Pinjaman</td>
             <td align="center">:</td>
             <td>
                 <b>{{ $pinkel->jpp->nama_jpp }}</b>
@@ -102,7 +102,7 @@
             </td>
 
             <td align="center">12.</td>
-            <td>Alokasi Piutang</td>
+            <td>Alokasi Pinjaman</td>
             <td align="center">:</td>
             <td>
                 <b>Rp. {{ number_format($pinkel->alokasi) }},-</b>
@@ -141,7 +141,7 @@
         </tr>
         <tr>
             <td align="center">7.</td>
-            <td>No Hp</td>
+            <td>Contact Person</td>
             <td align="center">:</td>
             <td>
                 <b>{{ $pinkel->anggota->hp }} </b>
@@ -160,7 +160,7 @@
             <td>Jenis Usaha</td>
             <td align="center">:</td>
             <td>
-                <b></b>
+                <b>{{ $pinkel->anggota->usaha }}</b>
             </td>
 
 
@@ -175,7 +175,7 @@
     </table>
 
     <p>
-        Demikian, berita acara ini dibuat sekaligus sebagai bukti pencairan dana pengajuan di atas.
+        Demikian, berita acara ini dibuat sekaligus sebagai bukti pencairan dana pinjaman di atas.
     </p>
     </div>
 

@@ -1,5 +1,6 @@
 @php
-    use App\Utils\Tanggal;
+    use App\Utils\Keuangan;
+    $keuangan = new Keuangan();
 @endphp
 
 @extends('pelaporan.layout.base')
@@ -7,246 +8,198 @@
 @section('content')
     @php
         $data_total = [];
+        $data_total_saldo = [];
         $data_rek_beban_ops = [];
     @endphp
 
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
         <tr>
-            <td style="border: 1px solid;" align="center" height="30" colspan="5" class="style3 bottom"
-                style="font-size: 15px;">
-                <div>{{ $kec->nama_lembaga_long }}</div>
-                <div>SANDI LKM {{ $kec->sandi_lkm }}</div>
-                <div>LAPORAN KINERJA KEUANGAN</div>
-                <div>Untuk Periode Yang Berakhir Pada Tanggal {{ Tanggal::tglLatin($tgl_kondisi) }}</div>
+            <td align="center" height="30" colspan="4" class="style3 bottom" style="font-size: 15px;">
+                <br>
+                <b>{{ $kec->nama_lembaga_long }}</b>
+                <br>
+                <b>SANDI LKM {{ $kec->sandi_lkm }}</b>
+                <br>
+                <b>LAPORAN POSISI KEUANGAN</b>
+                <br>
+                <b>{{ strtoupper($sub_judul) }}</b>
             </td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
         </tr>
     </table>
 
-    <table border="0" width="96%" cellspacing="0" cellpadding="0" style="font-size: 11px; border-color: black;">
+    <table border="0" width="96%" cellspacing="0" cellpadding="0" style="font-size: 11px; border-color: black; table-layout: fixed;">
         <thead>
-            <tr style="background: rgb(232, 232, 232); font-weight: bold; font-size: 12px;">
-                <th height="20">No</th>
+            <tr style="background: rgb(74, 74, 74); color: #fff; font-weight: bold; font-size: 12px;">
+                <th height="20" width="5%">No</th>
                 <th>Nama Akun</th>
-                <th>Kode Akun</th>
-                <th>SD. Bulan Lalu</th>
-                <th>Bulan Ini</th>
-                <th>SD. Bulan Ini</th>
+                <th width="20%">Kode Akun</th>
+                <th width="15%">s.d. Bulan Lalu</th>
+                <th width="15%">Bulan Ini</th>
+                <th width="15%">s.d. Bulan Ini</th>
             </tr>
         </thead>
         <tbody>
             @php
-                $core_number = 1;
+                // Filter rekening_ojk based on super_sub
+                $filteredRekening = $rekening_ojk->where('super_sub', 4)->sortBy('urutan');
+                $jumlah = 0;
+                $jumlahlalu = 0;
+                $a = 0;
+                $a_lalu = 0;
+                $b = 0;
+                $b_lalu = 0;
+                $c = 0;
+                $c_lalu = 0;
+                $f = 0;
+                $f_lalu = 0;
+                $g = 0;
+                $g_lalu = 0;
             @endphp
-            @foreach ($rekening_ojk as $rek_ojk)
-                @php
-                    $total_bulan_lalu = 0;
-                    $total_bulan_ini = 0;
-                    $total_sd_bulan_ini = 0;
 
-                    $saldo_bulan_lalu = 0;
-                    $saldo_bulan_ini = 0;
-                    $saldo_sd_bulan_ini = 0;
+            @foreach ($filteredRekening as $rek_ojk)
+                @php
+                    $bg = $loop->iteration % 2 == 0 ? 'rgb(255, 255, 255)' : 'rgb(230, 230, 230)';
+                    if (!is_numeric($rek_ojk->nomor)) {
+                        $bg = $loop->iteration % 2 == 0 ? 'rgb(197, 197, 197)' : 'rgb(167, 167, 167)';
+                    }
+                    $sum_saldo = 0;
+                    $sum_saldolalu = 0;
                 @endphp
 
-                {{-- NON OPERASIONAL --}}
-                @foreach ($rek_ojk->child as $rek_child)
-                    @php
-                        if (strlen($rek_child->kode) != '0') {
-                            continue;
-                        }
-
-                        $bulan_lalu = 0;
-                        $bulan_ini = 0;
-                        $sd_bulan_ini = 0;
-                        if (substr($rek_child->rekening, -2) != '00') {
-                            foreach ($rek_child->rek as $rek) {
-                                $data_saldo = $keuangan->komSaldoLR($rek, $tgl_kondisi);
-
-                                $bulan_lalu += $data_saldo['bulan_lalu'];
-                                $bulan_ini += $data_saldo['sd_bulan_ini'] - $data_saldo['bulan_lalu'];
-                                $sd_bulan_ini += $data_saldo['sd_bulan_ini'];
-
-                                $data_rek_beban_ops[] = $rek->kode_akun;
-                            }
-                        } else {
-                            foreach ($rek_child->akun3 as $akun3) {
-                                foreach ($akun3->rek as $rek) {
-                                    $data_saldo = $keuangan->komSaldoLR($rek, $tgl_kondisi);
-
-                                    $bulan_lalu += $data_saldo['bulan_lalu'];
-                                    $bulan_ini += $data_saldo['sd_bulan_ini'] - $data_saldo['bulan_lalu'];
-                                    $sd_bulan_ini += $data_saldo['sd_bulan_ini'];
-
-                                    $data_rek_beban_ops[] = $rek->kode_akun;
-                                }
-                            }
-                        }
-
-                        $saldo_bulan_lalu += $bulan_lalu;
-                        $saldo_bulan_ini += $bulan_ini;
-                        $saldo_sd_bulan_ini += $sd_bulan_ini;
-                    @endphp
-                @endforeach
-
-                @php
-                    if ($core_number == 3) {
-                        $saldo_bulan_lalu = $data_total[1]['bulan_lalu'] - $data_total[2]['bulan_lalu'];
-                        $saldo_bulan_ini = $data_total[1]['bulan_ini'] - $data_total[2]['bulan_ini'];
-                        $saldo_sd_bulan_ini = $data_total[1]['sd_bulan_ini'] - $data_total[2]['sd_bulan_ini'];
-                    }
-
-                    if ($core_number == 6) {
-                        $saldo_bulan_lalu =
-                            $data_total[3]['bulan_lalu'] +
-                            ($data_total[4]['bulan_lalu'] - $data_total[5]['bulan_lalu']);
-                        $saldo_bulan_ini =
-                            $data_total[3]['bulan_ini'] + ($data_total[4]['bulan_ini'] - $data_total[5]['bulan_ini']);
-                        $saldo_sd_bulan_ini =
-                            $data_total[3]['sd_bulan_ini'] +
-                            ($data_total[4]['sd_bulan_ini'] - $data_total[5]['sd_bulan_ini']);
-                    }
-
-                    if ($core_number == 8) {
-                        $saldo_bulan_lalu = $data_total[6]['bulan_lalu'] - $data_total[7]['bulan_lalu'];
-                        $saldo_bulan_ini = $data_total[6]['bulan_ini'] - $data_total[7]['bulan_ini'];
-                        $saldo_sd_bulan_ini = $data_total[6]['sd_bulan_ini'] - $data_total[7]['sd_bulan_ini'];
-                    }
-
-                    $data_total[$core_number] = [
-                        'bulan_lalu' => $saldo_bulan_lalu,
-                        'bulan_ini' => $saldo_bulan_ini,
-                        'sd_bulan_ini' => $saldo_sd_bulan_ini,
-                    ];
-
-                    $this_bg = 'rgb(200, 200, 200)';
-                    if ($core_number == 4 || $core_number == 7) {
-                        $this_bg = 'rgb(230, 230, 230)';
-                    }
-
-                    if ($core_number == 5) {
-                        $this_bg = 'rgb(255, 255, 255)';
-                    }
-
-                    $style = 'style="background: ' . $this_bg . ';"';
-                    if (!in_array($core_number, ['4', '5', '7'])) {
-                        $style = 'style="font-weight: bold; background: ' . $this_bg . '; text-transform: uppercase;"';
-                    }
-                @endphp
-
-                <tr {!! $style !!}>
-                    <td align="center">{{ $core_number }}</td>
+                <tr style="background: {{ $bg }};">
+                    <td align='left'>{{ $rek_ojk->nomor }}</td>
                     <td>{{ $rek_ojk->nama_akun }}</td>
-                    @if ($core_number <= 2)
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    @else
-                        <td align="center">{{ $rek_ojk->kode }}</td>
-                        <td align="right">{{ number_format($saldo_bulan_lalu, 2) }}</td>
-                        <td align="right">{{ number_format($saldo_bulan_ini, 2) }}</td>
-                        <td align="right">{{ number_format($saldo_sd_bulan_ini, 2) }}</td>
-                    @endif
-                </tr>
+                    <td align='center'>{{ $rek_ojk->kode }}</td>
 
-                @php
-                    $point_number = 1;
-                @endphp
-
-                {{-- OPERASIONAL --}}
-                @foreach ($rek_ojk->child as $rek_child)
                     @php
-                        if (strlen($rek_child->kode) < 1) {
-                            continue;
-                        }
+                        if ($rek_ojk->rekening === null) {
+                            echo "  <td align='right'></td>
+                                    <td align='right'></td>
+                                    <td align='right'></td>";
+                        } elseif ($rek_ojk->rekening == '0') {
+                            echo "  <td align='right'>0</td>
+                                    <td align='right'>0</td>
+                                    <td align='right'>0</td>";
+                        } elseif ($rek_ojk->rekening == "#") {
+                            echo "  <td align='right'>#</td>
+                                    <td align='right'>#</td>
+                                    <td align='right'>#</td>";
+                        } elseif ($rek_ojk->rekening == "A") {
+                            echo "  <td align='right'>". number_format($a_lalu) ."</td>
+                                    <td align='right'>". number_format($a-$a_lalu) ."</td>
+                                    <td align='right'>". number_format($a) ."</td>";
+                        } elseif ($rek_ojk->rekening == "B") {
+                            echo "  <td align='right'>". number_format($b_lalu) ."</td>
+                                    <td align='right'>". number_format($b-$b_lalu) ."</td>
+                                    <td align='right'>". number_format($b) ."</td>";
+                        } elseif ($rek_ojk->rekening == "C") {
+                            echo "  <td align='right'>". number_format($c_lalu) ."</td>
+                                    <td align='right'>". number_format($c-$c_lalu) ."</td>
+                                    <td align='right'>". number_format($c) ."</td>";
+                        } elseif ($rek_ojk->rekening == "F") {
+                            echo "  <td align='right'>". number_format($f_lalu) ."</td>
+                                    <td align='right'>". number_format($f-$f_lalu) ."</td>
+                                    <td align='right'>". number_format($f) ."</td>";
+                        } elseif ($rek_ojk->rekening == "H") {
+                            echo "  <td align='right'>". number_format($f_lalu-$g_lalu) ."</td>
+                                    <td align='right'>". number_format(($f-$f_lalu)-($g - $g_lalu)) ."</td>
+                                    <td align='right'>". number_format(($f)-($g)) ."</td>";
+                        } else {
+                            $kodeAkunArray = explode('#', $rek_ojk->rekening);
 
-                        $bulan_lalu = 0;
-                        $bulan_ini = 0;
-                        $sd_bulan_ini = 0;
+                            foreach ($kodeAkunArray as $kodeAkun) {
+                                // Calculate previous month and year
+                                $bulanSebelumnya = $bulan - 1;
+                                $tahunSebelumnya = $tahun;
 
-                        foreach ($rek_child->child as $child) {
-                            if (substr($child->rekening, -2) != '00') {
-                                foreach ($child->rek as $rek) {
-                                    $data_saldo = $keuangan->komSaldoLR($rek, $tgl_kondisi);
-
-                                    $bulan_lalu += $data_saldo['bulan_lalu'];
-                                    $bulan_ini += $data_saldo['sd_bulan_ini'] - $data_saldo['bulan_lalu'];
-                                    $sd_bulan_ini += $data_saldo['sd_bulan_ini'];
-
-                                    $data_rek_beban_ops[] = $rek->kode_akun;
+                                // Adjust year and month if previous month is 0
+                                if ($bulanSebelumnya == 0) {
+                                    $bulanSebelumnya = 12;
+                                    $tahunSebelumnya = $tahun - 1;
                                 }
-                            } else {
-                                foreach ($child->akun3 as $akun3) {
-                                    foreach ($akun3->rek as $rek) {
-                                        $data_saldo = $keuangan->komSaldoLR($rek, $tgl_kondisi);
 
-                                        $bulan_lalu += $data_saldo['bulan_lalu'];
-                                        $bulan_ini += $data_saldo['sd_bulan_ini'] - $data_saldo['bulan_lalu'];
-                                        $sd_bulan_ini += $data_saldo['sd_bulan_ini'];
+                                // Get current month's record
+                                $rek = \App\Models\Rekening::with([
+                                    'kom_saldo' => function ($query) use ($tahun, $bulan) {
+                                        $query->where('tahun', $tahun)
+                                            ->where(function ($query) use ($bulan) {
+                                                $query->where('bulan', '0')->orWhere('bulan', $bulan);
+                                            });
+                                    },
+                                ])->where('kode_akun', $kodeAkun)->first();
 
-                                        $data_rek_beban_ops[] = $rek->kode_akun;
-                                    }
+                                // Get previous month's record
+                                $reklalu = \App\Models\Rekening::with([
+                                    'kom_saldo' => function ($query) use ($tahunSebelumnya, $bulanSebelumnya) {
+                                        $query->where('tahun', $tahunSebelumnya)
+                                            ->where(function ($query) use ($bulanSebelumnya) {
+                                                $query->where('bulan', '0')->orWhere('bulan', $bulanSebelumnya);
+                                            });
+                                    },
+                                ])->where('kode_akun', $kodeAkun)->first();
+
+                                $saldo = $keuangan->komSaldo($rek);
+                                $saldolalu       = $keuangan->komSaldo($reklalu);
+                                $sum_saldo      += $saldo;
+                                $sum_saldolalu  += $saldolalu;
+                                if (substr($rek_ojk->kode, 0, 1) == '4') {
+                                    $a          += $saldo;
+                                    $a_lalu     += $saldolalu;
+                                    $c          += $saldo;
+                                    $c_lalu     += $saldolalu;
+                                    $f          += $saldo;
+                                    $f_lalu     += $saldolalu;
                                 }
+                                if (substr($rek_ojk->kode, 0, 1) == '5') {
+                                    $b          += $saldo;
+                                    $b_lalu     += $saldolalu;
+                                    $c          -= $saldo;
+                                    $c_lalu     -= $saldolalu;
+                                    $f          -= $saldo;
+                                    $f_lalu     -= $saldolalu;
+                                }
+                                if (substr($rek_ojk->kode, 0, 1) == '6') {
+                                    $f          += $saldo;
+                                    $f_lalu     += $saldolalu;
+                                }
+                                if (substr($rek_ojk->kode, 0, 1) == '7') {
+                                    $f          -= $saldo;
+                                    $f_lalu     -= $saldolalu;
+                                }
+                                if (substr($rek_ojk->kode, 0, 1) == '8') {
+                                    $g          -= $saldo;
+                                    $g_lalu     -= $saldolalu;
+                                }
+
+
+
+
                             }
+
+                            $jumlah += $sum_saldo;
+                            $jumlahlalu += $sum_saldolalu;
+                            @endphp
+                                <td align='right'>
+                                    {{ number_format($sum_saldolalu) }}
+                                </td>
+                                <td align='right'>
+                                    {{ number_format($sum_saldo - $sum_saldolalu) }}
+                                </td>
+                                <td align='right'>
+                                    {{ number_format($sum_saldo) }}
+                                </td>
+                            @php
                         }
-                    @endphp
-                    @php
-                        $bg = 'rgb(230, 230, 230)';
-                        if ($point_number % 2 == 0) {
-                            $bg = 'rgb(255, 255, 255)';
-                        }
-                    @endphp
-                    <tr style="background: {{ $bg }}">
-                        <td align="center">{{ $core_number }}.{{ $point_number }}</td>
-                        <td>{{ $rek_child->nama_akun }}</td>
-                        <td align="center">{{ $rek_child->kode }}</td>
-                        <td align="right">{{ number_format($bulan_lalu, 2) }}</td>
-                        <td align="right">{{ number_format($bulan_ini, 2) }}</td>
-                        <td align="right">{{ number_format($sd_bulan_ini, 2) }}</td>
-                    </tr>
-
-                    @php
-                        $point_number++;
-
-                        $total_bulan_lalu += $bulan_lalu;
-                        $total_bulan_ini += $bulan_ini;
-                        $total_sd_bulan_ini += $sd_bulan_ini;
-                    @endphp
-                @endforeach
-
-                @if ($core_number < 3)
-                    <tr style="background: rgb(150, 150, 150); font-weight: bold;">
-                        <th height="14" colspan="3">Jumlah {{ $rek_ojk->nama_akun }}</th>
-                        <th align="right">{{ number_format($total_bulan_lalu, 2) }}</th>
-                        <th align="right">{{ number_format($total_bulan_ini, 2) }}</th>
-                        <th align="right">{{ number_format($total_sd_bulan_ini, 2) }}</th>
-                    </tr>
-
-                    @php
-                        $data_total[$core_number] = [
-                            'bulan_lalu' => $total_bulan_lalu,
-                            'bulan_ini' => $total_bulan_ini,
-                            'sd_bulan_ini' => $total_sd_bulan_ini,
-                        ];
-                    @endphp
-                @endif
-
-                @php
-                    $core_number++;
-                @endphp
+                            @endphp
+                </tr>
             @endforeach
+            
+                <tr>    
+                    <td colspan="6" style="padding: 0px !important;">
+                        <div style="margin-top: 16px;"></div>
+                        {!! json_decode(str_replace('{tanggal}', $tanggal_kondisi, $kec->ttd->tanda_tangan_pelaporan), true) !!}
+                    </td>
+                </tr>    
         </tbody>
-    </table>
-    <table class="p" border="0" align="center" width="96%" cellspacing="0" cellpadding="0"
-        style="font-size: 12px;">
-        <tr>
-            <td colspan="14">
-                <div style="margin-top: 14px;"></div>
-                {!! json_decode(str_replace('{tanggal}', $tanggal_kondisi, $kec->ttd->tanda_tangan_pelaporan), true) !!}
-            </td>
-        </tr>
     </table>
 @endsection

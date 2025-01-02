@@ -107,11 +107,11 @@
                         </div>
                         <div style="margin-top: 8px;">
                             <img width="150" src="data:image/png;base64,{{ $barcode }}"
-                                alt="{{ $pinkel->anggota->id }}">
+                                alt="{{ $pinkel->kelompok->kd_kelompok }}">
                         </div>
-                        <div style="font-size: 14px;">{{ $pinkel->anggota->id }}</div>
+                        <div style="font-size: 14px;">{{ $pinkel->kelompok->kd_kelompok }}</div>
                     </td>
-                    <td width="150">Jenis Piutang</td>
+                    <td width="150">Jenis Pinjaman</td>
                     <td width="5" align="center">:</td>
                     <td width="200">{{ $pinkel->jpp->nama_jpp }}</td>
                     <td width="150">Loan Id.</td>
@@ -119,20 +119,20 @@
                     <td width="200">{{ $pinkel->id }}</td>
                 </tr>
                 <tr>
-                    <td>Nama Nasabah</td>
+                    <td>Nama Kelompok</td>
                     <td align="center">:</td>
-                    <td style="font-weight: bold;" colspan="4">{{ $pinkel->anggota->namadepan }}</td>
+                    <td style="font-weight: bold;" colspan="4">{{ $pinkel->kelompok->nama_kelompok }}</td>
                 </tr>
                 <tr>
                     <td>Alamat</td>
                     <td align="center">:</td>
-                    <td colspan="4">{{ $pinkel->anggota->alamat}}</td>
+                    <td colspan="4">{{ $pinkel->kelompok->alamat_kelompok }}</td>
                 </tr>
                 <tr>
                     <td>Telpon/SMS</td>
                     <td align="center">:</td>
                     <td>{{ $pinj->anggota->hp }}</td>
-                    <td>Nasabah</td>
+                    <td>Pemanfaat</td>
                     <td align="center">:</td>
                     <td style="font-weight: bold;">{{ $pinj->anggota->namadepan }}</td>
                 </tr>
@@ -428,9 +428,9 @@
                         <div>Lembar 1 : Untuk Kelompok</div>
                         <div>Lembar 2 : Arsip Lembaga</div>
                     </td>
-                    {{-- <td style="font-weight: bold; font-size: 12px;" width="350" align="center">Ketua Kelompok</td> --}}
+                    <td style="font-weight: bold; font-size: 12px;" width="350" align="center">Ketua Kelompok</td>
                     <td style="font-weight: bold; font-size: 12px;" width="350" align="center">
-                        <div>Anggota Nasabah</div>
+                        <div>Anggota Pemanfaat</div>
                     </td>
                 </tr>
                 <tr>
@@ -438,7 +438,7 @@
                 </tr>
                 <tr style="font-weight: bold; font-size: 12px; text-transform: uppercase;">
                     <td width="350" align="center">
-                        {{ $pinkel->anggota->namadepan }}
+                        {{ $pinkel->kelompok->ketua }}
                     </td>
                     <td width="350" align="center">
                         <div>{{ $pinj->anggota->namadepan }}</div>

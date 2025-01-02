@@ -59,15 +59,17 @@
 
 <body>
     <header>
-        <h1 style="margin: 0px;">DOKUMEN <br> PERMOHONAN KREDIT</h1>
-        
+        <h1 style="margin: 0px;">{{ strtoupper($judul) }}</h1>
+        <div style="margin: 0px; font-size: 24px;">
+            {{ strtoupper('Pinjaman Individu ' . $pinkel->jpp->nama_jpp) }}
+        </div>
     </header>
 
     <main>
         <div class="center">
             <img src="../storage/app/public/logo/{{ $logo }}" width="290" alt="{{ $logo }}">
             <div style="margin-top: 10px; font-size: 18px;">
-             Pemohon :
+             Pemanfaat :
             </div>
             <div style="margin-top: 10px; font-size: 20px;">
                  {{ $pinkel->anggota->namadepan }} 
@@ -77,12 +79,9 @@
                </div>
              <div style="margin-top: 10px; font-size: size: 18px;">
                 {{ $pinkel->anggota->d->sebutan_desa->sebutan_desa }} {{ $pinkel->anggota->d->nama_desa }}
-            </div> <br> <br> <br> <br> <br>
-            <div style="margin: 0px; font-size: 18px;">
-                Jenis Kredit : <br> {{ strtoupper($pinkel->jpp->nama_jpp) }}
             </div>
         </div>
-        
+
         <div class="bottom">
             <div style="font-weight: bold;">Pengajuan Rp. {{ number_format($pinkel->proposal) }}</div>
             <div style="font-weight: bold;">Tanggal Proposal {{ Tanggal::tglLatin($pinkel->tgl_proposal) }}</div>

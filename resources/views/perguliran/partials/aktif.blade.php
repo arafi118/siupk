@@ -172,9 +172,9 @@
                             $verifikasi += $pinjaman_anggota->verifikasi;
                             $alokasi += $pinjaman_anggota->alokasi;
 
-                            $warna = $perguliran->status == 'A' ? '' : 'class="text-danger fw-bold"';
+                            $warna = $pinjaman_anggota->status == 'A' ? '' : 'class="text-danger fw-bold"';
                         @endphp
-                        <tr class="{{ $perguliran->status == 'A' ? 'pointer btn-click' : '' }}"
+                        <tr class="{{ $pinjaman_anggota->status == 'A' ? 'pointer btn-click' : '' }}"
                             data-id="{{ $pinjaman_anggota->id }}">
                             <td {!! $warna !!} align="center">{{ $loop->iteration }}</td>
                             <td {!! $warna !!}>
@@ -322,7 +322,7 @@
                                         </li>
                                         <li>
                                             <a class="dropdown-item border-radius-md" target="_blank"
-                                                href="/perguliran_i/dokumen/cetak_kartu_angsuran_anggota/{{ $real->loan_id }}/{{ $real->id }}">
+                                                href="/perguliran/dokumen/cetak_kartu_angsuran_anggota/{{ $real->loan_id }}/{{ $real->id }}">
                                                 Anggota
                                             </a>
                                         </li>

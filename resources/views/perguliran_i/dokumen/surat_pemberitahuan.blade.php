@@ -42,7 +42,7 @@
             <td width="50">Nomor</td>
             <td width="10" align="center">:</td>
             <td colspan="2">
-                ______/LKM/{{ Tanggal::tglRomawi(date('Y-m-d')) }}
+                ______/UPK/{{ Tanggal::tglRomawi(date('Y-m-d')) }}
             </td>
         </tr>
         <tr>
@@ -56,7 +56,7 @@
             <td>Perihal</td>
             <td align="center">:</td>
             <td colspan="2">
-                <b>Surat Persetujuan Kredit (SP2K)</b>
+                <b>Surat Persetujuan Perjanjian Kredit (SP2K)</b>
             </td>
         </tr>
         <tr>
@@ -88,7 +88,7 @@
             <td colspan="3">
                 <div style="text-align: justify;">
                     Dengan ini diberitahukan bahwa sesuai dengan surat permohonan kredit saudara dan setelah diadakan
-                    verifikasi serta penilaian Analisa dan kredit, maka {{ $kec->nama_lembaga_sort }} menyetujui permohonan tersebut dengan
+                    verifikasi serta penilaian, maka {{ $kec->nama_lembaga_sort }} menyetujui permohonan tersebut dengan
                     ketentuan
                     dan syarat- syarat sebagai berikut:
                 </div>
@@ -117,7 +117,7 @@
                         <td>Jenis Kredit</td>
                         <td align="center"width="5%">:</td>
                         <td>
-                            Rp. {{ number_format($pinkel->jenis_pp) }}
+                            {{$pinkel->sis_pokok->nama_sistem}}
                         </td>
                     </tr>
                     <tr>
@@ -125,7 +125,7 @@
                         <td>Suku Jasa Kredit</td>
                         <td align="center"width="5%">:</td>
                         <td>
-                            Rp. {{ number_format($pinkel->pros_jasa) }}
+                            {{ $pinkel->pros_jasa / $pinkel->jangka}} % per bulan
                         </td>
                     </tr>
                     <tr>
@@ -194,14 +194,12 @@
                 {{ $kec->nama_kec }}, {{ Tanggal::tglLatin($pinkel->tgl_cair) }}
             </td>
         </tr>
+
         <tr>
             <td align="center">
                 Direktur
             </td>
-            <td colspan="2" align="center">Piutang</td>
-        </tr>
-        <tr>
-            <td colspan="3" height="40">&nbsp;</td>
+            <td colspan="2" align="center">Peminjam</td>
         </tr>
         <tr>
             <td colspan="3" height="40">&nbsp;</td>

@@ -1,3 +1,37 @@
+@php
+$startDate = \Carbon\Carbon::createFromDate(
+    $tahunkop, 
+    $bulankop == 0 ? 1 : $bulankop, 
+    1
+)->startOfMonth();
+
+// Calculate previous balance
+$sum = DB::table('real_simpanan_' . session('lokasi'))
+    ->where('cif', $cif)
+    ->where('tgl_transaksi', '<', $startDate)
+    ->orderBy('tgl_transaksi', 'desc')
+    ->orderBy('id', 'desc')
+    ->value('sum') ?? 0;
+
+    // Array bulan dalam bahasa Indonesia
+    $bulanIndo = [
+        1 => 'Januari',
+        2 => 'Februari',
+        3 => 'Maret',
+        4 => 'April',
+        5 => 'Mei',
+        6 => 'Juni',
+        7 => 'Juli',
+        8 => 'Agustus',
+        9 => 'September',
+        10 => 'Oktober',
+        11 => 'November',
+        12 => 'Desember'
+    ];
+
+    // Cek apakah bulan 0 atau nilai bulan lainnya
+    $bulanTeks = $bulankop == 0 ? "Sepanjang Tahun $tahunkop" : $bulanIndo[$bulankop] . " $tahunkop";
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,6 +63,40 @@
 
     <link id="pagestyle" href="/assets/css/material-dashboard.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/assets/css/style.css">
+    
+    <style>
+    .style6 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 16px; color: #000000; }
+.style9 { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color: #000000; }
+.style10 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; color: #000000; }
+.style26 { font-family: Verdana, Arial, Helvetica, sans-serif; color: #000000; }
+.style27 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; font-weight: bold; color: #000000; }
+
+        .top {border-top: 1px solid #000000; }
+        .bottom {border-bottom: 1px solid #000000; }
+        .left {border-left: 1px solid #000000; }
+        .right {border-right: 1px solid #000000; }
+        .all {border: 1px solid #000000; }
+        .align-justify {text-align:justify; }
+    .align-center {
+        text-align: center;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .align-right {
+        text-align: right;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .align-left {
+        text-align: left;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+</style>
+
+
 </head>
 <body class="g-sidenav-show  bg-gray-200" onload="window.print()">
 <table width="97%" border="0" align="center" cellpadding="3" cellspacing="0">
@@ -46,7 +114,7 @@
     </tr>
     <tr>
         <td height="50" colspan="4" class="">
-            <p align="center" class="style6">REKENING KORAN {{ strtoupper($simpanan->js->nama_js) }}</p>
+            <p align="center" class="style6">REKENING KORAN {{ strtoupper($simpanan->js->nama_js) }} <br> {{$bulanTeks}}</p>
         </td>
     </tr>
     <tr>
@@ -82,40 +150,95 @@
 </table>
 <table width="96%" border="0" align="center" cellpadding="3" cellspacing="0">
     <tr>
-        <th width="4%" height="30" class="style9">NO</th>
-        <th width="8%" class="style9">TANGGAL</th>
-        <th width="6%" class="style9">REF</th>
-        <th width="40%" class="style9">KETERANGAN</th>
-        <th width="10%" class="style9">DEBIT</th>
-        <th width="10%" class="style9">KREDIT</th>
-        <th width="10%" class="style9">SALDO</th>
-        <th width="2%" class="style9">P</th>
+        <th width="4%" height="30" class="align-center">NO</th>
+        <th width="8%" class="align-center">TANGGAL</th>
+        <th width="6%" class="align-center">REF</th>
+        <th width="40%" class="align-center">KETERANGAN</th>
+        <th width="10%" class="align-center">DEBIT</th>
+        <th width="10%" class="align-center">KREDIT</th>
+        <th width="10%" class="align-center">SALDO</th>
+        <th width="2%" class="align-center">P</th>
     </tr>
-    @php /* $no = 0; $saldosamping = 0; @endphp
-    @foreach($transaksi as $row2)
-    @php
-    $no++;
-    $rek = \App\Models\Rekening::where(['kd_jb' => $kd_jb, 'kd_rekening' => $row2->rekening_kredit])->count();
-    $file = jenisrek("2-{$simpanan->jenis_simpanan}") ? "c_bkm" : "c_bkk";
-    $debit = $rek > 0 ? 0 : $row2->jumlah;
-    $kredit = $rek > 0 ? $row2->jumlah : 0;
-    $prasaldo = $kredit - $debit;
-    $saldosamping += $prasaldo;
-    $user = \App\Models\User::find($row2->id_user);
-    @endphp
-    <tr>
-        <td width="4%" height="30" class="style9">{{ $no }}</td>
-        <td width="10%" class="style9 align-center">{{ $row2->tgl_transaksi }}</td>
-        <td width="6%" class="style9 align-center">{{ $row2->idt }}</td>
-        <td width="40%" class="style9">{{ $row2->keterangan_transaksi }}</td>
-        <td width="10%" class="style9 align-right">{{ number_format($debit) }}</td>
-        <td width="10%" class="style9 align-right">{{ number_format($kredit) }}</td>
-        <td width="10%" class="style9 align-right">{{ number_format($saldosamping) }}</td>
-        <td width="2%" class="style9 align-center">{{ $user->ins }}</td>
-    </tr>
-    @endforeach
+    @php  $no = 0;  @endphp
     
-    @endphp
+        @if ($bulankop != 0 && $tahunkop != 0 ) 
+            <tr>
+                <th colspan="3">&nbsp;</th>
+                <th colspan="3" class="text-left">
+                    <strong>Saldo Sebelum {{ \Carbon\Carbon::create(null, $bulankop)->translatedFormat('F') }} {{ $tahunkop }}</strong>
+                </th>
+                <th class="style9 align-right">{{ number_format($sum, 0, ',', '.') }}</td>
+                <th colspan="2">&nbsp;</th>
+            </tr>
+        @elseif($bulankop != 0 && $tahunkop == 0 )
+            <tr>
+                <th colspan="9" class="text-center">
+                    <strong>mohon untuk memilih tahun juga</strong>
+                </th>
+            </tr>
+        @elseif($bulankop == 0 && $tahunkop != 0 )
+            <tr>
+                <th colspan="3">&nbsp;</th>
+                <th colspan="3" class="text-left">
+                    <strong>Saldo Sebelum {{ $tahunkop }})</strong>
+                </th>
+                <th class="style9 align-right">{{ number_format($sum, 0, ',', '.') }}</th>
+                <th colspan="2">&nbsp;</th>
+                </th>
+            </tr>
+        @endif
+                @forelse($transaksi as $index => $trx)
+
+            @php
+                $id_simp = $trx->id_simp; //ini nanti di ganti ambil dari real_simpanan_$lokasi
+                    if (strpos($id_simp, '-') !== false) {
+                        // Jika ada tanda "-", pisahkan menjadi dua bagian
+                        list($kd_trx, $cif) = explode("-", $id_simp);
+                    } else {
+                        // Jika tidak ada tanda "-", atur kd_trx = 0 dan cif = id_simp
+                        $kd_trx = 0;
+                        $cif = $id_simp;
+                    }
+
+                
+                    $jumlah = floatval($trx->jumlah); // Ensure $trx->jumlah is numeric
+                    
+                    if(in_array(substr($trx->id_simp, 0, 1), ['1', '2', '5'])) {
+                        $real_d = 0;
+                        $real_k = $jumlah;
+                        $sum += $jumlah;
+                    } elseif(in_array(substr($trx->id_simp, 0, 1), ['3', '4', '6', '7'])) {
+                        $real_d = $jumlah;
+                        $real_k = 0;
+                        $sum -= $jumlah;
+                    } else {
+                        $real_d = 0;
+                        $real_k = 0;
+                    }
+                        
+            @endphp
+    <tr>
+        <td width="4%" height="30" class="style9">{{ $index + 1 }}</td>
+        <td width="15%" class="style9 align-center">{{ $trx->tgl_transaksi }}</td>
+        <td width="6%" class="style9 align-center">{{ $trx->idt }}</td>
+        <td width="35%" class="style9">{{ $trx->keterangan_transaksi }}</td>
+        <td width="10%" class="style9 align-right">{{ number_format($real_d) }}</td>
+        <td width="10%" class="style9 align-right">{{ number_format($real_k) }}</td>
+        <td width="10%" class="style9 align-right">{{ number_format($sum) }}</td>
+        <td width="2%" class="style9 align-center">{{ $trx->id_user }}</td>
+    </tr>
+            @empty
+                <tr>
+                    <td colspan="9" class="text-center">Tidak ada transaksi di periode ini</td>
+                </tr>
+            @endforelse
+            <tr>
+                <td colspan="6" class="text-center">
+                    <b>TOTAL SALDO</b>
+                </td>
+                <td class="style9 align-right"><b>{{ number_format($sum, 0, ',', '.') }}</b></td>
+                <td colspan="2">&nbsp;</td>
+            </tr>
 </table>
 </body>
 

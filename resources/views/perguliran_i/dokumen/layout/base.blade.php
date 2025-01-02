@@ -104,7 +104,7 @@
         <style>
             header {
                 position: fixed;
-                top: -30px;
+                top: -10px;
                 left: 0px;
                 right: 0px;
             }
@@ -117,26 +117,31 @@
             }
         </style>
         <header>
-            <table width="100%" style="border-bottom: 1px double #000; border-width: 4px;">
+            <table width="100%" style="border-bottom: 1px solid grey;">
                 <tr>
-                    <td width="70">
-                        <img src="../storage/app/public/logo/{{ $logo }}" height="70"
-                            alt="{{ $kec->id }}">
+                    <td width="30">
+                        <img src="../storage/app/public/logo/{{ $logo }}" width="40" height="40"
+                            alt="{{ $logo }}">
                     </td>
                     <td>
-                        <div>{{ strtoupper($nama_lembaga) }}</div>
-                        <div>
+                        <div style="font-size: 12px;">{{ strtoupper($nama_lembaga) }}</div>
+                        <div style="font-size: 12px;">
                             <b>{{ strtoupper($nama_kecamatan) }}</b>
                         </div>
-                        <div style="font-size: 10px; color: grey;">
+                    </td>
+                </tr>
+            </table>
+            <table width="100%" style="position: relative; top: -10px;">
+                <tr>
+                    <td>
+                        <span style="font-size: 8px; color: grey;">
                             <i>{{ $nomor_usaha }}</i>
-                        </div>
-                        <div style="font-size: 10px; color: grey;">
+                        </span>
+                    </td>
+                    <td align="right">
+                        <span style="font-size: 8px; color: grey;">
                             <i>{{ $info }}</i>
-                        </div>
-                        <div style="font-size: 10px; color: grey;">
-                            <i>{{ $email }}</i>
-                        </div>
+                        </span>
                     </td>
                 </tr>
             </table>

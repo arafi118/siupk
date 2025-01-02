@@ -115,9 +115,37 @@
                                     <div class="input-group input-group-static">
                                         <input type="text" class="form-control"
                                             name="catatan[{{ $pinjaman_anggota->id }}]"
-                                            value="{{ $pinjaman_anggota->catatan_verifikasi }}">
+                                            value="{{ $pinjaman_anggota->catatan_verifikasi }}"
+                                            onchange="updateCatatanVerifikasi({{ $pinjaman_anggota->id }}, this.value)">
                                     </div>
+
                                 </td>
+
+                                <script>
+        function updateCatatanVerifikasi(id, value) {
+            fetch(`/update-catatan-verifikasi/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({ catatan_verifikasi: value })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('Catatan verifikasi updated successfully');
+                } else {
+                    console.error('Failed to update catatan verifikasi');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+        </script>
+
+
                                 <td>
                                     <div class="btn-group">
                                         <button type="button" id="{{ $pinjaman_anggota->id }}"
@@ -166,11 +194,14 @@
             <input type="hidden" name="_id" id="_id" value="{{ $perguliran->id }}">
             <input type="hidden" name="status" id="status" value="V">
             <div class="row">
+            <?php
+                $tanggalHariIni = date('d-m-Y'); // Format: 29-10-2024
+            ?>
                 <div class="col-md-3">
                     <div class="input-group input-group-static my-3">
                         <label for="tgl_verifikasi">Tgl Verifikasi</label>
                         <input autocomplete="off" type="text" name="tgl_verifikasi" id="tgl_verifikasi"
-                            class="form-control date" value="{{ Tanggal::tglIndo($perguliran->tgl_proposal) }}">
+                            class="form-control date" value="{{ $tanggalHariIni }}">
                         <small class="text-danger" id="msg_tgl_verifikasi"></small>
                     </div>
                 </div>

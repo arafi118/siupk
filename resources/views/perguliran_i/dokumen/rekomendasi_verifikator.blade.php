@@ -1,9 +1,102 @@
 @php
     use App\Utils\Tanggal;
 @endphp
-@extends('perguliran_i.dokumen.layout.base')
 
-<br><br><br><br>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ ucwords(str_replace('_', ' ', $judul)) }}</title>
+    <style>
+        * {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html {
+            margin: 75.59px;
+            margin-left: 94.48px;
+        }
+
+        ul,
+        ol {
+            margin-left: -10px;
+            page-break-inside: auto !important;
+        }
+
+        header {
+            position: fixed;
+            top: -10px;
+            left: 0px;
+            right: 0px;
+        }
+
+        footer {
+            position: fixed;
+            bottom: -50px;
+            left: 0px;
+            right: 0px;
+        }
+
+        table tr th,
+        table tr td {
+            padding: 2px 4px;
+        }
+
+        table tr td table tr td {
+            padding: 0 !important;
+        }
+
+        .break {
+            page-break-after: always;
+        }
+
+        li {
+            text-align: justify;
+        }
+
+        .l {
+            border-left: 1px solid #000;
+        }
+
+        .t {
+            border-top: 1px solid #000;
+        }
+
+        .r {
+            border-right: 1px solid #000;
+        }
+
+        .b {
+            border-bottom: 1px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <table border="0" width="100%" cellspacing="0" cellpadding="0"
+            style="font-size: 11px; position: relative; top: -20px;">
+            <tr class="b">
+                <td align="center">
+                    <img src="../storage/app/public/logo_kab/{{ $kab->id }}.png" width="70"
+                        alt="{{ $kab->id }}.png" style="margin-bottom: 8px;">
+                </td>
+                <td align="center">
+                    <div style="font-size: 18px;">
+                    {{ $kec->nama_lembaga_sort }} {{ strtoupper($nama_kabupaten) }}
+                    </div>
+                    <div style="font-size: 18px;">
+                        {{ strtoupper($kec->sebutan_kec) }} {{ strtoupper($kec->nama_kec) }}
+                    </div>
+                    <div align="center"style="font-size: 12px;">
+                 Alamat:...........................................................................
+
+                      
+                    </div>
+                </td>
+            </tr>
+        </table>
+
         <table border="0" width="85%" align="center"cellspacing="0" cellpadding="0" style="font-size: 12px;">
             <tr>
                 <td align="center">
@@ -52,11 +145,11 @@
                 {{ $pinkel->anggota->d->nama_desa }}</td>
             </tr>
             <tr>
-                    <td width="30">&nbsp;</td>
-                        <td width="120" style="vertical-align: top;">Nomor dan Tanggal</td>
-                        <td align="center">:</td>
-                        <td>( {{ $pinkel->jpp->nama_jpp }} - {{ $pinkel->id}} ) / {{ \Carbon\Carbon::parse($pinkel->tgl_proposal)->format('d F Y') }}</td>
-                    </tr>
+            <td width="30">&nbsp;</td>
+                <td width="120" style="vertical-align: top;">Tanggal dan Nomor Permohonan Kredit</td>
+                <td align="center">:</td>
+                <td>____________/____________</td>
+            </tr>
             <tr>
             <td width="30">&nbsp;</td>
                 <td width="120" style="vertical-align: top;">Nilai Permohonan </td>
@@ -128,7 +221,7 @@
             <tr>
             <td width="200"align="center"colspan="1">&nbsp;</td>
                 <td align="center">
-                Verifikator/Analis Kredit                </td>
+                Verifikatis/Analis Kredit                </td>
             </tr>
             <tr>
                 <td colspan="3" height="40">&nbsp;</td>
@@ -137,8 +230,13 @@
             <td width="200"align="center"colspan="1">&nbsp;</td>
                 <td align="center">
                     <u>
-                        <u> {{$user->namadepan }} {{$user->namabelakang }}</u>
+                        <p>({{$dir->namadepan }} {{$dir->namabelakang }})<br>
+                    Ketua Tim
+                   </p>
                     </u>
+                    @if ($pinkel->anggota->d->nip)
+                        <div><small>NIP. {{ $pinkel->anggota->d->nip }}</small></div>
+                    @endif
                 </td>
             </tr>
         </table>

@@ -19,7 +19,7 @@
         <tr class="b">
             <td colspan="4" align="center">
                 <div style="font-size: 16px;">
-                    SURAT PERNYATAAN/PERSETUJUAN
+                    SURAT PERNYATAAN/PERSETUJUAN SUAMI
                 </div>
             </td>
         </tr>
@@ -90,10 +90,10 @@
         <tr>
             <td colspan="4" align="justify">
                 <p>
-                    Menerangkan dengan sebenarnya, bahwa saya mengetahui dan menyetujui permohonan kredit sebesar Rp.
+                    Menerangkan dengan sebenarnya, bahwa saya mengetahui dan menyetujui pinjaman sebesar Rp.
                     {{ number_format($pinkel->alokasi) }} ({{ $keuangan->terbilang($pinkel->alokasi) }} Rupiah) yang akan
                     diajukan kepada {{ $kec->nama_lembaga_sort }} Sebagai salah satu syarat
-                    pengajuan permohonan kredit.
+                    pengajuan pinjaman.
                 </p>
                 <p>
                     Sebagai bentuk tanggung jawab saya sebagai Suami, maka saya akan turut bertanggung jawab dalam
@@ -114,14 +114,14 @@
             <td align="center" width="50%">{{ $kec->nama_kec }}, {{ Tanggal::tglLatin($pinkel->tgl_cair) }}</td>
         </tr>
         <tr>
-            <td align="center">{{ $kec->sebutan_level_1 }} {{ $kec->nama_lembaga_sort }}</td>
+            <td align="center">&nbsp;</td>
             <td align="center">Nama Penjamin</td>
         </tr>
         <tr>
             <td align="center" colspan="2" height="30">&nbsp;</td>
         </tr>
         <tr style="font-weight: bold;">
-            <td align="center"> {{ $dir->namadepan }} {{ $dir->namabelakang }}</td>
+            <td align="center">&nbsp;</td>
             <td align="center">{{ $pinkel->anggota->penjamin }}</td>
         </tr>
     </table>

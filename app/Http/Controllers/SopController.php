@@ -24,39 +24,9 @@ class SopController extends Controller
         $api = env('APP_API', 'https://api-whatsapp.siupk.net');
 
         $kec = Kecamatan::where('id', Session::get('lokasi'))->with('ttd')->first();
-        $token = "LKM-" . str_replace('.', '', $kec->kd_kec) . '-' . str_pad($kec->id, 4, '0', STR_PAD_LEFT);
-
+        $token = "UPK-" . str_pad($kec->id, 4, '0', STR_PAD_LEFT);
         $title = "Personalisasi SOP";
         return view('sop.index')->with(compact('title', 'kec', 'api', 'token'));
-    }
-
-    public function users()
-    {
-
-        $kec = Kecamatan::where('id', Session::get('lokasi'))->with('ttd')->first();
-
-        $dir = User::where([
-            ['jabatan','1'],
-            ['level', '1']
-        ])->first();
-
-        $seke = User::where([
-            ['jabatan','1'],
-            ['level', '2']
-        ])->first();
-
-        $bend = User::where([
-            ['jabatan','1'],
-            ['level', '3']
-        ])->first();
-
-        $manaj = User::where([
-            ['jabatan','1'],
-            ['level', '7']
-        ])->first();
-
-        $title = "Users aplikasi";
-        return view('sop.users')->with(compact('title', 'kec', 'dir', 'seke', 'bend', 'manaj'));
     }
 
     public function coa()
@@ -67,7 +37,6 @@ class SopController extends Controller
             'akun2.akun3',
             'akun2.akun3.rek'
         ])->get();
-
         return view('sop.coa')->with(compact('title', 'akun1'));
     }
 
@@ -114,8 +83,8 @@ class SopController extends Controller
         ];
 
         $kecamatan = Kecamatan::where('id', $kec->id)->update([
-            'nama_lembaga_sort' => ucwords(strtolower($data['nama_bumdesma'])),
-            'nama_lembaga_long' => ucwords(strtolower($data['nama_bumdesma'])),
+            'nama_lembaga_sort' => $data['nama_bumdesma'],
+            'nama_lembaga_long' => $data['nama_bumdesma'],
             'nomor_bh' => $data['nomor_badan_hukum'],
             'telpon_kec' => $data['telpon'],
             'email_kec' => $data['email'],
@@ -123,7 +92,7 @@ class SopController extends Controller
             'calk' => json_encode($calk),
         ]);
 
-        Session::put('nama_lembaga', ucwords(strtolower($data['nama_bumdesma'])));
+        Session::put('nama_lembaga', $data['nama_bumdesma']);
 
         return response()->json([
             'success' => true,
@@ -179,29 +148,13 @@ class SopController extends Controller
             'default_jasa',
             'default_jangka',
             'pembulatan',
-            'sistem',
-            'def_fee_supp',
-            'def_fee_agen',
-            'hit_fee_agen',
-            'jdwl_angsuran',
-            'hak_kredit',
-            'provisi',
-            'def_admin',
-            'def_depe'
+            'sistem'
         ]);
 
         $validate = Validator::make($data, [
-            'default_jasa'      => 'required',
-            'default_jangka'    => 'required',
-            'pembulatan'        => 'required',
-            'def_fee_supp'      => 'required',
-            'def_fee_agen'      => 'required',
-            'hit_fee_agen'      => 'required',
-            'jdwl_angsuran'     => 'required',
-            'hak_kredit'        => 'required',
-            'provisi'           => 'required',
-            'def_admin'         => 'required',
-            'def_depe'          => 'required'
+            'default_jasa' => 'required',
+            'default_jangka' => 'required',
+            'pembulatan' => 'required'
         ]);
 
         if ($validate->fails()) {
@@ -209,21 +162,11 @@ class SopController extends Controller
         }
 
         $data['pembulatan'] = "$data[sistem]$data[pembulatan]";
-
         $kecamatan = Kecamatan::where('id', $kec->id)->update([
-            'def_jasa'      => $data['default_jasa'],
-            'def_jangka'    => $data['default_jangka'],
-            'pembulatan'    => $data['pembulatan'],
-            'def_fee_supp'  => $data['def_fee_supp'],
-            'def_fee_agen'  => $data['def_fee_agen'],
-            'hit_fee_agen' => $data['hit_fee_agen'],
-            'jdwl_angsuran' => $data['jdwl_angsuran'],
-            'hak_kredit'    => $data['hak_kredit'],
-            'provisi'       => $data['provisi'],
-            'def_admin'     => $data['def_admin'],
-            'def_depe'      => $data['def_depe'],
+            'def_jasa' => $data['default_jasa'],
+            'def_jangka' => $data['default_jangka'],
+            'pembulatan' => $data['pembulatan'],
         ]);
-
         return response()->json([
             'success' => true,
             'msg' => 'Sistem Pinjaman Berhasil Diperbarui.',
@@ -256,7 +199,6 @@ class SopController extends Controller
             'usia_mak' => $data['usia_maksimal'],
             'besar_premi' => $data['presentase_premi'],
         ]);
-
         return response()->json([
             'success' => true,
             'msg' => 'Pengaturan Asuransi Berhasil Diperbarui.',
@@ -268,7 +210,6 @@ class SopController extends Controller
         $data = $request->only([
             'spk'
         ]);
-
         $validate = Validator::make($data, [
             'spk' => 'required'
         ]);
@@ -366,7 +307,15 @@ class SopController extends Controller
 
         return view('sop.partials.ttd_spk')->with(compact('title', 'kec', 'keyword'));
     }
+    
+    public function ttdSpk_i()
+    {
+        $title = "Pengaturan Tanda Tangan SPK";
+        $kec = Kecamatan::where('id', Session::get('lokasi'))->with('ttd')->first();
+        $keyword = Pinjaman::keyword();
 
+        return view('sop.partials.ttd_spk_i')->with(compact('title', 'kec', 'keyword'));
+    }
     public function simpanTtdPelaporan(Request $request)
     {
         $data = $request->only([
@@ -374,38 +323,55 @@ class SopController extends Controller
             'tanda_tangan'
         ]);
 
+        // Proses styling tabel sesuai kebutuhan
         if ($data['field'] == 'tanda_tangan_pelaporan') {
             $data['tanda_tangan'] = preg_replace('/<table[^>]*>/', '<table class="p0" border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">', $data['tanda_tangan'], 1);
+        } elseif ($data['field'] == 'tanda_tangan_spk_i') {
+            $data['tanda_tangan'] = preg_replace('/<table[^>]*>/', '<table class="p0" border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 12px;">', $data['tanda_tangan'], 1);
         } else {
             $data['tanda_tangan'] = preg_replace('/<table[^>]*>/', '<table class="p0" border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 12px;">', $data['tanda_tangan'], 1);
         }
-        $data['tanda_tangan'] = preg_replace('/height:\s*[^;]+;?/', '', $data['tanda_tangan']);
 
+        // Proses tambahan untuk styling
+        $data['tanda_tangan'] = preg_replace('/height:\s*[^;]+;?/', '', $data['tanda_tangan']);
         $data['tanda_tangan'] = str_replace('colgroup', 'tr', $data['tanda_tangan']);
         $data['tanda_tangan'] = preg_replace('/<col([^>]*)>/', '<td$1>&nbsp;</td>', $data['tanda_tangan']);
 
+        // Cek apakah sudah ada data tanda tangan untuk lokasi ini
         $ttd = TandaTanganLaporan::where('lokasi', Session::get('lokasi'))->count();
+
         if ($ttd <= 0) {
+            // Jika belum ada, buat record baru
             $insert = [
                 'lokasi' => Session::get('lokasi')
             ];
 
-            if ($data['field'] == 'tanda_tangan_pelaporan') {
-                $insert['tanda_tangan_spk'] = '';
-                $insert['tanda_tangan_pelaporan'] = json_encode($data['tanda_tangan']);
-            } else {
-                $insert['tanda_tangan_pelaporan'] = '';
-                $insert['tanda_tangan_spk'] = json_encode($data['tanda_tangan']);
+            // Tentukan field yang akan diisi berdasarkan jenis tanda tangan
+            switch ($data['field']) {
+                case 'tanda_tangan_pelaporan':
+                    $insert['tanda_tangan_spk'] = '';
+                    $insert['tanda_tangan_spk_i'] = '';
+                    $insert['tanda_tangan_pelaporan'] = json_encode($data['tanda_tangan']);
+                    break;
+                case 'tanda_tangan_spk':
+                    $insert['tanda_tangan_pelaporan'] = '';
+                    $insert['tanda_tangan_spk_i'] = '';
+                    $insert['tanda_tangan_spk'] = json_encode($data['tanda_tangan']);
+                    break;
+                case 'tanda_tangan_spk_i':
+                    $insert['tanda_tangan_pelaporan'] = '';
+                    $insert['tanda_tangan_spk'] = '';
+                    $insert['tanda_tangan_spk_i'] = json_encode($data['tanda_tangan']);
+                    break;
             }
 
             $tanda_tangan = TandaTanganLaporan::create($insert);
         } else {
-            // dd($data['tanda_tangan']);
+            // Jika sudah ada, update field sesuai jenis tanda tangan
             $tanda_tangan = TandaTanganLaporan::where('lokasi', Session::get('lokasi'))->update([
                 $data['field'] => json_encode($data['tanda_tangan'])
             ]);
         }
-
         return response()->json([
             'success' => true,
             'msg' => ucwords(str_replace('_', ' ', $data['field'])) . ' Berhasil diperbarui'
@@ -421,18 +387,15 @@ class SopController extends Controller
                 ->editColumn('tgl_invoice', function ($row) {
                     return Tanggal::tglIndo($row->tgl_invoice);
                 })
-                ->editColumn('tgl_lunas', function ($row) {
-                    return Tanggal::tglIndo($row->tgl_lunas);
-                })
                 ->editColumn('jumlah', function ($row) {
                     return number_format($row->jumlah);
                 })
                 ->editColumn('status', function ($row) {
                     if ($row->status == 'PAID') {
-                        return '<span class="badge bg-success">' . $row->status . '</span>';
+                        return '<span class="badge badge-success">' . $row->status . '</span>';
                     }
 
-                    return '<span class="badge bg-danger">' . $row->status . '</span>';
+                    return '<span class="badge badge-danger">' . $row->status . '</span>';
                 })
                 ->addColumn('saldo', function ($row) {
                     if ($row->trx_sum_jumlah) {
@@ -545,5 +508,4 @@ class SopController extends Controller
         $title = 'Invoice #' . $inv->nomor . ' - ' . $inv->jp->nama_jp;
         return view('sop.detail_invoice')->with(compact('title', 'inv'));
     }
-
 }

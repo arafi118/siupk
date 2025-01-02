@@ -3,33 +3,10 @@
     $liabilitas = 0;
     $laba_rugi = 0;
 @endphp
-<style>
-    /* CSS untuk .app-wrapper-title */
-    .app-title {
-        background-color: #ffa200; /* Warna latar belakang untuk app-page-title */
-        padding: 15px; /* Padding untuk ruang di sekitar konten */
-        border-radius: 8px; /* Membuat sudut melengkung */
-        margin-bottom: 20px; /* Jarak bawah dari elemen lain */
-    }
-    /* CSS untuk .page-title-subheading */
-    .app-text_fount {
-    font-size: 16px; /* Ukuran font untuk subjudul */
-    color: #ffffff; /* Warna teks untuk subjudul */
-    margin-top: 0px; /* Jarak atas dari judul */
-    text-align: center; /* Pusatkan teks secara horizontal */
-}
-    </style>
-<div class="app-title">
-    <div class="app-wrapper">
-        <div class="app-heading">
-            <div class="app-text_fount">
-                <div>
-                    <b>Saldo Tutup Buku</b> tidak sama dengan <b>Saldo Neraca?</b> Klik
-                    <a href="#" id="SimpanSaldo" class="alert-link text-primary">Disini</a>.
-                </div>
-            </div>
-        </div> 
-    </div>
+
+<div class="alert alert-warning text-white">
+    <b>Saldo Tutup Buku</b> tidak sama dengan <b>Saldo Neraca?</b> Klik
+    <a href="#" id="SimpanSaldo" class="alert-link text-white">Disini</a>.
 </div>
 
 @foreach ($akun1 as $lev1)

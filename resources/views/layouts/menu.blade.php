@@ -3,36 +3,44 @@
         @php
             $link = [];
             $path = '/' . Request::path();
+
             $links = $menu->pluck('link');
             $links->each(function ($menu_link) {
                 $link[] = $menu_link;
             });
+
             $active = '';
             if (in_array($path, $link)) {
-                $active = 'mm-active';
+                $active = 'active';
             }
+
             if (in_array(str_replace('#', '', $menu->link), explode('/', $path))) {
-                $active = 'mm-active';
+                $active = 'active';
             }
         @endphp
-        <li>
-                <a href="#menu_{{ str_replace('#', '', $menu->link) }}" class="{{$active}}"
+        <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#menu_{{ str_replace('#', '', $menu->link) }}"
+                class="nav-link text-white {{ $active }}"
                 aria-controls="menu_{{ str_replace('#', '', $menu->link) }}" role="button" aria-expanded="false">
-                    @if ($menu->type == 'material')
-                            <i class="metismenu-icon pe-7s-{{ $menu->ikon }}">  </i>
-                    @endif
-                    {{ $menu->title }}
-                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-                </a>
-                <ul>
+                @if ($menu->type == 'material')
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">{{ $menu->ikon }}</i>
+                    </div>
+                @else
+                    <span class="sidenav-mini-icon"> {{ $menu->ikon }} </span>
+                @endif
+                <span class="nav-link-text ms-1">{{ $menu->title }}</span>
+            </a>
+            <div class="collapse" id="menu_{{ str_replace('#', '', $menu->link) }}">
+                <ul class="nav nav-sm flex-column">
                     @include('layouts.menu', ['parent_menu' => $menu->child])
                 </ul>
-            </li>
+            </div>
+        </li>
     @else
         @if ($menu->link == '' && $menu->type == '' && $menu->ikon == '')
-            <hr class="horizontal light mt-0">
-            <li>
-                <h6 class="text-uppercase ">{{ $menu->title }}</h6>
+            <li class="nav-item mt-3">
+                <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder text-white">{{ $menu->title }}</h6>
             </li>
         @else
             @php
@@ -46,22 +54,26 @@
 
                 $active = '';
                 if ($path == $menu->link || $end_page == $end_menu_link) {
-                    $active = 'mm-active';
+                    $active = 'active';
                 }
 
                 if (
                     (in_array('detail', $arr_path) || in_array('lunas', $arr_path)) &&
                     ($menu->link == '/perguliran' || $menu->link == '/perguliran_i')
                 ) {
-                    $active = 'mm-active';
+                    $active = 'active';
                 }
             @endphp
-            <li>
-                <a href="{{$menu->link}}" class="{{$active}}">
+            <li class="nav-item nav-item-link {{ $active }}">
+                <a class="nav-link text-white {{ $active }}" href="{{ $menu->link }}">
                     @if ($menu->type == 'material')
-                            <i class="metismenu-icon pe-7s-{{ $menu->ikon }}">  </i>
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">{{ $menu->ikon }}</i>
+                        </div>
+                    @else
+                        <span class="sidenav-mini-icon"> {{ $menu->ikon }} </span>
                     @endif
-                    {{ $menu->title }}
+                    <span class="nav-link-text ms-1">{{ $menu->title }}</span>
                 </a>
             </li>
         @endif

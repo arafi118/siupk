@@ -21,7 +21,7 @@
             <td width="50">Nomor</td>
             <td width="10" align="center">:</td>
             <td colspan="2">
-                ______/DBM/{{ Tanggal::tglRomawi($pinkel->tgl_dana) }}
+                ______/UPK/{{ Tanggal::tglRomawi($pinkel->tgl_dana) }}
             </td>
         </tr>
         <tr>
@@ -140,7 +140,7 @@
             <td colspan="2" height="40">&nbsp;</td>
         </tr>
         <tr>
-            <td>&nbsp;</td>
+            <td>&nbsp; </td>
             <td align="center">{{ $dir->namadepan }} {{ $dir->namabelakang }}</td>
         </tr>
     </table>

@@ -12,21 +12,14 @@
             margin-right: 40px;
         }
     </style>
-    @php
-        $nomor = 0;
-    @endphp
     @foreach ($jenis_pp as $jpp)
         @php
             if ($jpp->pinjaman_individu->isEmpty()) {
                 continue;
             }
-
-            $nomor++;
         @endphp
         @php
             $kd_desa = [];
-            $id_agent = [];
-            $agent = [];
             $t_alokasi = 0;
             $t_target_pokok = 0;
             $t_target_jasa = 0;
@@ -41,14 +34,14 @@
             $t_tunggakan_pokok = 0;
             $t_tunggakan_jasa = 0;
         @endphp
-        @if ($nomor > 1)
+        @if ($jpp->nama_jpp != 'SPP')
             <div class="break"></div>
         @endif
         <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
             <tr>
                 <td colspan="3" align="center">
                     <div style="font-size: 18px;">
-                        <b>DAFTAR PERKEMBANGAN PIUTANG {{ strtoupper($jpp->nama_jpp) }}</b>
+                        <b>DAFTAR PERKEMBANGAN PINJAMAN INDIVIDU {{ strtoupper($jpp->nama_jpp) }}</b>
                     </div>
                     <div style="font-size: 16px;">
                         <b>{{ strtoupper($sub_judul) }}</b>
@@ -62,20 +55,21 @@
         <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 8px; table-layout: fixed;">
             <tr style="background: rgb(230, 230, 230); font-weight: bold;">
                 <th class="t l b" rowspan="2" width="2%">No</th>
-                <th class="t l b" rowspan="2">Nasabah - Loan ID</th>
+                <th class="t l b" rowspan="2">Kelompok - Loan ID</th>
                 <th class="t l b" rowspan="2" width="4%">
                     <div>Tgl Cair</div>
                     <div>
                         <small>(dd/mm/yy)</small>
                     </div>
                 </th>
-                <th class="t l b" rowspan="2" width="3%">Bln</th>
+                <th class="t l b" rowspan="2" width="3%">Tem<br>po</th>
                 <th class="t l b" rowspan="2" width="6%">Alokasi</th>
+                <th class="t l b" rowspan="2" width="3%">%</th>
                 <th class="t l b" colspan="2">Target</th>
                 <th class="t l b" colspan="2">Real s.d. Bulan Lalu</th>
                 <th class="t l b" colspan="2">Real Bulan Ini</th>
                 <th class="t l b" colspan="2">Real s.d. Bulan Ini</th>
-                <th class="t l b"  rowspan="2">Saldo</th>
+                <th class="t l b"  rowspan="2" width="6%">Saldo</th>
                 <th class="t l b" rowspan="2" width="2%">%</th>
                 <th class="t l b r" colspan="2">Tunggakan</th>
             </tr>
@@ -98,6 +92,7 @@
                 @php
                     $kd_desa[] = $pinj_i->kd_desa;
                     $desa = $pinj_i->kd_desa;
+
                 @endphp
                 @if (array_count_values($kd_desa)[$pinj_i->kd_desa] <= '1')
                     @if ($section != $desa && count($kd_desa) > 1)
@@ -120,38 +115,13 @@
                             if ($j_target_pokok != 0) {
                                 $j_pross = $j_real_bi_pokok / $j_target_pokok;
                             }
-
-                            $a_pross = 1;
-                            if ($a_target_pokok != 0) {
-                                $a_pross = $a_real_bi_pokok / $a_target_pokok;
-                            }
-                            
                         @endphp
-                        @if (count($id_agent) > 0)
-                        <tr style="font-weight: bold;">
-                            <td class="t l b r" colspan="4" align="left">
-                                Jumlah Agent {{ $nama_agent }}
-                            </td>
-                            <td class="t l b" align="right">{{ number_format($a_alokasi) }}</td>
-                            <td class="t l b" align="right">{{ number_format($a_target_pokok) }}</td>
-                            <td class="t l b" align="right">{{ number_format($a_target_jasa) }}</td>
-                            <td class="t l b" align="right">{{ number_format($a_real_bl_pokok) }}</td>
-                            <td class="t l b" align="right">{{ number_format($a_real_bl_jasa)}}</td>
-                            <td class="t l b" align="right">{{ number_format($a_real_pokok) }}</td>
-                            <td class="t l b" align="right">{{ number_format($a_real_jasa) }}</td>
-                            <td class="t l b" align="right">{{ number_format($a_real_bi_pokok) }}</td>
-                            <td class="t l b" align="right">{{ number_format($a_real_bi_jasa) }}</td>
-                            <td class="t l b" align="right">{{ number_format($a_saldo_pokok) }}</td>
-                            <td class="t l b" align="center">{{ number_format(floor($a_pross * 100)) }}</td>
-                            <td class="t l b" align="right">{{ number_format($a_tunggakan_pokok) }}</td>
-                            <td class="t l b r" align="right">{{ number_format($a_tunggakan_jasa) }}</td>
-                        </tr>
-                       
                         <tr style="font-weight: bold;">
                             <td class="t l b" colspan="4" align="left" height="15">
                                 Jumlah {{ $nama_desa }}
                             </td>
                             <td class="t l b" align="right">{{ number_format($j_alokasi) }}</td>
+                            <td class="t l b" align="right">&nbsp;</td>
                             <td class="t l b" align="right">{{ number_format($j_target_pokok) }}</td>
                             <td class="t l b" align="right">{{ number_format($j_target_jasa) }}</td>
                             <td class="t l b" align="right">{{ number_format($j_real_bl_pokok) }}</td>
@@ -166,18 +136,15 @@
                             <td class="t l b" align="right">{{ number_format($j_tunggakan_pokok) }}</td>
                             <td class="t l b r" align="right">{{ number_format($j_tunggakan_jasa) }}</td>
                         </tr>
-                        @endif 
                     @endif
+
                     <tr style="font-weight: bold;">
-                        <td class="t l b r" colspan="17" align="left">
-                            {{ $pinj_i->kode_desa }}. {{ $pinj_i->nama_desa }}
-                        </td>
+                        <td class="t l b r" colspan="18" align="left">{{ $pinj_i->kode_desa }}.
+                            {{ $pinj_i->nama_desa }}</td>
                     </tr>
-                    
 
                     @php
                         $nomor = 1;
-
                         $j_alokasi = 0;
                         $j_target_pokok = 0;
                         $j_target_jasa = 0;
@@ -193,67 +160,7 @@
                         $j_tunggakan_jasa = 0;
                         $section = $pinj_i->kd_desa;
                         $nama_desa = $pinj_i->sebutan_desa . ' ' . $pinj_i->nama_desa;
-                        
-                        $id_agent = [];
-                        $this_agent = 0;
                     @endphp
-                @endif
-
-                @php
-                    $id_agent[] = $pinj_i->id_agent;
-                    $agent = $pinj_i->id_agent;
-                    $a_pross = 1;
-                @endphp
-
-                @if (array_count_values($id_agent)[$pinj_i->id_agent] <= '1')
-                    @if ($this_agent != $agent && count($id_agent) > 1)
-                        @php
-                            if ($a_target_pokok != 0) {
-                                $a_pross = $a_real_bi_pokok / $a_target_pokok;
-                            }
-                        @endphp
-                        <tr style="font-weight: bold;">
-                            <td class="t l b r" colspan="4" align="left">
-                                Jumlah Agent {{ $nama_agent }}
-                            </td>
-                            <td class="t l b" align="right">{{ number_format($a_alokasi) }}</td>
-                            <td class="t l b" align="right">{{ number_format($a_target_pokok) }}</td>
-                            <td class="t l b" align="right">{{ number_format($a_target_jasa) }}</td>
-                            <td class="t l b" align="right">{{ number_format($a_real_bl_pokok) }}</td>
-                            <td class="t l b" align="right">{{ number_format($a_real_bl_jasa)}}</td>
-                            <td class="t l b" align="right">{{ number_format($a_real_pokok) }}</td>
-                            <td class="t l b" align="right">{{ number_format($a_real_jasa) }}</td>
-                            <td class="t l b" align="right">{{ number_format($a_real_bi_pokok) }}</td>
-                            <td class="t l b" align="right">{{ number_format($a_real_bi_jasa) }}</td>
-                            <td class="t l b" align="right">{{ number_format($a_saldo_pokok) }}</td>
-                            <td class="t l b" align="center">{{ number_format(floor($a_pross * 100)) }}</td>
-                            <td class="t l b" align="right">{{ number_format($a_tunggakan_pokok) }}</td>
-                            <td class="t l b r" align="right">{{ number_format($a_tunggakan_jasa) }}</td>
-                        </tr>
-                    @endif
-                    <tr style="font-weight: bold;">
-                        <td class="t l b r" colspan="17" align="left">
-                            {{ $pinj_i->nama_agent }}
-                        </td>
-                    </tr>  
-
-                    @php
-                        $this_agent = $pinj_i->id_agent;
-                        $nama_agent = $pinj_i->nama_agent;
-                        $a_alokasi = 0;
-                        $a_target_pokok = 0;
-                        $a_target_jasa = 0;
-                        $a_real_bl_pokok = 0;
-                        $a_real_bl_jasa = 0;
-                        $a_real_pokok = 0;
-                        $a_real_jasa = 0;
-                        $a_real_bi_pokok = 0;
-                        $a_real_bi_jasa = 0;
-                        $a_saldo_pokok = 0;
-                        $a_saldo_jasa = 0;
-                        $a_tunggakan_pokok = 0;
-                        $a_tunggakan_jasa = 0;
-                    @endphp      
                 @endif
 
                 @php
@@ -319,6 +226,7 @@
                     }
 
                     $pros_jasa = $pinj_i->pros_jasa == 0 ? 0 : $pinj_i->pros_jasa / $pinj_i->jangka;
+                    $angke = $pinj_i->target->angsuran_ke ?? 0;
                 @endphp
 
                 <tr>
@@ -327,9 +235,13 @@
                         {{ $pinj_i->id }}</td>
                     <td class="t l b" align="center">{{ Tanggal::tglIndo($pinj_i->tgl_cair, 'DD/MM/YY') }}</td>
                     <td class="t l b" align="center">
-                        <small>{{ $pinj_i->jangka }}*{{ number_format($pros_jasa, 2) }}</small>
+                        <small>{{ $pinj_i->jangka }}/{{ $pinj_i->angsuran_pokok->sistem }}*{{number_format( $angke/$pinj_i->angsuran_pokok->sistem,0)  }}</small>
+                    </td>
                     </td>
                     <td class="t l b" align="right">{{ number_format($pinj_i->alokasi) }}</td>
+                            <td class="t l b" align="right">
+                                {{ rtrim(rtrim(number_format($pros_jasa, 2, '.', ''), '0'), '.') }}%
+                            </td>
                     <td class="t l b" align="right">{{ number_format($target_pokok) }}</td>
                     <td class="t l b" align="right">{{ number_format($target_jasa) }}</td>
                     <td class="t l b" align="right">{{ number_format($sum_pokok - $pinj_i->real_i_sum_realisasi_pokok) }}
@@ -363,20 +275,6 @@
                 </tr>
 
                 @php
-                    $a_alokasi += $pinj_i->alokasi;
-                    $a_target_pokok += $target_pokok;
-                    $a_target_jasa += $target_jasa;
-                    $a_real_bl_pokok += $sum_pokok - $pinj_i->real_i_sum_realisasi_pokok;
-                    $a_real_bl_jasa += $sum_jasa - $pinj_i->real_i_sum_realisasi_jasa;
-                    $a_real_pokok += $pinj_i->real_i_sum_realisasi_pokok;
-                    $a_real_jasa += $pinj_i->real_i_sum_realisasi_jasa;
-                    $a_real_bi_pokok += $sum_pokok;
-                    $a_real_bi_jasa += $sum_jasa;
-                    $a_saldo_pokok += $saldo_pokok;
-                    $a_saldo_jasa += $saldo_jasa;
-                    $a_tunggakan_pokok += $tunggakan_pokok;
-                    $a_tunggakan_jasa += $tunggakan_jasa;
-                    
                     $j_alokasi += $pinj_i->alokasi;
                     $j_target_pokok += $target_pokok;
                     $j_target_jasa += $target_jasa;
@@ -413,35 +311,12 @@
                 }
             @endphp
             @if (count($kd_desa) > 0)
-                @php
-                    if ($a_target_pokok != 0) {
-                        $a_pross = $a_real_bi_pokok / $a_target_pokok;
-                    }
-                @endphp
-                <tr style="font-weight: bold;">
-                    <td class="t l b r" colspan="4" align="left">
-                        Jumlah Agent {{ $nama_agent }}
-                    </td>
-                    <td class="t l b" align="right">{{ number_format($a_alokasi) }}</td>
-                    <td class="t l b" align="right">{{ number_format($a_target_pokok) }}</td>
-                    <td class="t l b" align="right">{{ number_format($a_target_jasa) }}</td>
-                    <td class="t l b" align="right">{{ number_format($a_real_bl_pokok) }}</td>
-                    <td class="t l b" align="right">{{ number_format($a_real_bl_jasa)}}</td>
-                    <td class="t l b" align="right">{{ number_format($a_real_pokok) }}</td>
-                    <td class="t l b" align="right">{{ number_format($a_real_jasa) }}</td>
-                    <td class="t l b" align="right">{{ number_format($a_real_bi_pokok) }}</td>
-                    <td class="t l b" align="right">{{ number_format($a_real_bi_jasa) }}</td>
-                    <td class="t l b" align="right">{{ number_format($a_saldo_pokok) }}</td>
-                    <td class="t l b" align="center">{{ number_format(floor($a_pross * 100)) }}</td>
-                    <td class="t l b" align="right">{{ number_format($a_tunggakan_pokok) }}</td>
-                    <td class="t l b r" align="right">{{ number_format($a_tunggakan_jasa) }}</td>
-                </tr>
-
                 <tr style="font-weight: bold;">
                     <td class="t l b" colspan="4" align="left" height="15">
-                        Jumlah  {{ $nama_desa }}
+                        Jumlah {{ $nama_desa }}
                     </td>
                     <td class="t l b" align="right">{{ number_format($j_alokasi) }}</td>
+                            <td class="t l b" align="right">&nbsp;</td>
                     <td class="t l b" align="right">{{ number_format($j_target_pokok) }}</td>
                     <td class="t l b" align="right">{{ number_format($j_target_jasa) }}</td>
                     <td class="t l b" align="right">{{ number_format($j_real_bl_pokok) }}</td>
@@ -536,6 +411,7 @@
                         Lunas s.d. Tahun Lalu
                     </td>
                     <td class="t l b" align="right">{{ number_format($tl_alokasi) }}</td>
+                            <td class="t l b" align="right">&nbsp;</td>
                     <td class="t l b" align="right">{{ number_format($tl_target_pokok) }}</td>
                     <td class="t l b" align="right">{{ number_format($tl_target_jasa) }}</td>
                     <td class="t l b" align="right">{{ number_format($tl_real_bl_pokok) }}</td>
@@ -547,34 +423,35 @@
                     <td class="t l b" align="right">{{ number_format($tl_saldo_pokok) }}</td>
                     <!-- <td class="t l b" align="right">{{ number_format($tl_saldo_jasa) }}</td> -->
                     <td class="t l b" align="center">{{ number_format($tl_pross) }}</td>
-                    <td class="t l b" align="right">{{ number_format($tl_tunggakan_pokok) }}</td>
-                    <td class="t l b r" align="right">{{ number_format($tl_tunggakan_jasa) }}</td>
+                    <td class="t l b" align="right">0</td>
+                    <td class="t l b r" align="right">0</td>
                 </tr>
 
                 <tr>
-                    <td colspan="17" style="padding: 0px !important;">
+                    <td colspan="18" style="padding: 0px !important;">
                         <table class="p" border="0" width="100%" cellspacing="0" cellpadding="0"
                             style="font-size: 8px; table-layout: fixed;">
                             <tr style="background: rgb(230, 230, 230); font-weight: bold;">
                                 <td class="t l b" align="center" height="15">
                                     J U M L A H
                                 </td>
-                                <td class="t l b" width="6%" align="right">{{ number_format($t_alokasi) }}</td>
-                                <td class="t l b" width="6%" align="right">{{ number_format($t_target_pokok) }}
+                                <td class="t l b" width="6%" align="right">{{ number_format($t_alokasi+$tl_alokasi) }}</td>
+                            <td class="t l b" align="right" width="3%">&nbsp;</td>
+                                <td class="t l b" width="6%" align="right">{{ number_format($t_target_pokok+$tl_target_pokok) }}
                                 </td>
-                                <td class="t l b" width="6%" align="right">{{ number_format($t_target_jasa) }}
+                                <td class="t l b" width="6%" align="right">{{ number_format($t_target_jasa+$tl_target_jasa) }}
                                 </td>
-                                <td class="t l b" width="6%" align="right">{{ number_format($t_real_bl_pokok) }}
+                                <td class="t l b" width="6%" align="right">{{ number_format($t_real_bl_pokok+$tl_real_bl_pokok) }}
                                 </td>
-                                <td class="t l b" width="6%" align="right">{{ number_format($t_real_bl_jasa) }}
+                                <td class="t l b" width="6%" align="right">{{ number_format($t_real_bl_jasa+$tl_real_bl_jasa) }}
                                 </td>
                                 <td class="t l b" width="6%" align="right">{{ number_format($t_real_pokok) }}</td>
                                 <td class="t l b" width="6%" align="right">{{ number_format($t_real_jasa) }}</td>
-                                <td class="t l b" width="6%" align="right">{{ number_format($t_real_bi_pokok) }}
+                                <td class="t l b" width="6%" align="right">{{ number_format($t_real_bi_pokok+$tl_real_bi_pokok) }}
                                 </td>
-                                <td class="t l b" width="6%" align="right">{{ number_format($t_real_bi_jasa) }}
+                                <td class="t l b" width="6%" align="right">{{ number_format($t_real_bi_jasa+$tl_real_bi_jasa) }}
                                 </td>
-                                <td class="t l b"  width="11.5%" align="right">{{ number_format($t_saldo_pokok) }}
+                                <td class="t l b"  width="6%" align="right">{{ number_format($t_saldo_pokok+$tl_saldo_pokok) }}
                                 </td>
                                 <!-- <td class="t l b" width="6%" align="right">{{ number_format($t_saldo_jasa) }}</td> -->
                                 <td class="t l b" width="2%" align="center">
@@ -586,7 +463,7 @@
                             </tr>
 
                             <tr>
-                                <td colspan="14">
+                                <td colspan="15">
                                     <div style="margin-top: 16px;"></div>
                                     {!! json_decode(str_replace('{tanggal}', $tanggal_kondisi, $kec->ttd->tanda_tangan_pelaporan), true) !!}
                                 </td>

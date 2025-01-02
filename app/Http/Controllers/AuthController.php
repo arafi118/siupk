@@ -11,7 +11,6 @@ use App\Models\User;
 use App\Utils\Keuangan;
 use App\Utils\Tanggal;
 use Auth;
-use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Session;
@@ -28,7 +27,7 @@ class AuthController extends Controller
 
         // Handle URL lokal
         if (request()->server('SERVER_NAME') === '127.0.0.1' || request()->server('SERVER_NAME') === 'localhost') {
-            $kec = Kecamatan::where('id', '1')
+            $kec = Kecamatan::where('id', '3')
                 ->with('kabupaten')
                 ->first();
         } else {
@@ -73,7 +72,7 @@ class AuthController extends Controller
         }
 
         if (request()->server('SERVER_NAME') === '127.0.0.1' || request()->server('SERVER_NAME') === 'localhost') {
-            $kec = Kecamatan::where('id', '1')
+            $kec = Kecamatan::where('id', '3')
                 ->with('kabupaten')
                 ->first();
         } else {
@@ -105,23 +104,32 @@ class AuthController extends Controller
                 if (Auth::loginUsingId($user->id)) {
                     $hak_akses = explode(',', $user->hak_akses);
                     $menu = Menu::where('parent_id', '0')
-                            ->whereNotIn('id', $hak_akses)
-                            ->where('aktif', 'Y')
-                            ->where(function ($query) use ($lokasi) {
-                                $query->where('lokasi', '0')
-                                      ->orWhere('lokasi', 'LIKE', '%#' . $lokasi . '#%');
-                            })
-                            ->with([
-                                'child' => function ($query) use ($hak_akses) {
-                                    $query->whereNotIn('id', $hak_akses);
-                                },
-                                'child.child'  => function ($query) use ($hak_akses) {
-                                    $query->whereNotIn('id', $hak_akses);
-                                }
-                            ])
-                            ->orderBy('sort', 'ASC')
-                            ->orderBy('id', 'ASC')
-                            ->get();
+                        ->whereNotIn('id', $hak_akses)
+                        ->where('aktif', 'Y')
+                        ->where(function ($query) use ($lokasi) {
+                            $query->where('lokasi', 0)
+                                ->orWhere('lokasi', $lokasi);
+                        })
+                        ->with([
+                            'child' => function ($query) use ($hak_akses, $lokasi) {
+                                $query->whereNotIn('id', $hak_akses)
+                                    ->where(function ($query) use ($lokasi) {
+                                        $query->where('lokasi', 0)
+                                            ->orWhere('lokasi', $lokasi);
+                                    });
+                            },
+                            'child.child'  => function ($query) use ($hak_akses, $lokasi) {
+                                $query->whereNotIn('id', $hak_akses)
+                                    ->where(function ($query) use ($lokasi) {
+                                        $query->where('lokasi', 0)
+                                            ->orWhere('lokasi', $lokasi);
+                                    });
+                            }
+                        ])
+                        ->orderBy('sort', 'ASC')
+                        ->orderBy('id', 'ASC')
+                        ->get();
+
 
                     $angsuran = true;
                     if (in_array('19', $hak_akses) || in_array('21', $hak_akses)) {
@@ -165,7 +173,7 @@ class AuthController extends Controller
         $password = $uname;
 
         if (request()->server('SERVER_NAME') === '127.0.0.1' || request()->server('SERVER_NAME') === 'localhost') {
-            $kec = Kecamatan::where('id', '1')
+            $kec = Kecamatan::where('id', '3')
                 ->first();
         } else {
             $kec = Kecamatan::where('web_kec', $url)
@@ -193,23 +201,32 @@ class AuthController extends Controller
                 if (Auth::loginUsingId($user->id)) {
                     $hak_akses = explode(',', $user->hak_akses);
                     $menu = Menu::where('parent_id', '0')
-                            ->whereNotIn('id', $hak_akses)
-                            ->where('aktif', 'Y')
-                            ->where(function ($query) use ($lokasi) {
-                                $query->where('lokasi', '0')
-                                      ->orWhere('lokasi', 'LIKE', '%#' . $lokasi . '#%');
-                            })
-                            ->with([
-                                'child' => function ($query) use ($hak_akses) {
-                                    $query->whereNotIn('id', $hak_akses);
-                                },
-                                'child.child'  => function ($query) use ($hak_akses) {
-                                    $query->whereNotIn('id', $hak_akses);
-                                }
-                            ])
-                            ->orderBy('sort', 'ASC')
-                            ->orderBy('id', 'ASC')
-                            ->get();
+                        ->whereNotIn('id', $hak_akses)
+                        ->where('aktif', 'Y')
+                        ->where(function ($query) use ($lokasi) {
+                            $query->where('lokasi', 0)
+                                ->orWhere('lokasi', $lokasi);
+                        })
+                        ->with([
+                            'child' => function ($query) use ($hak_akses, $lokasi) {
+                                $query->whereNotIn('id', $hak_akses)
+                                    ->where(function ($query) use ($lokasi) {
+                                        $query->where('lokasi', 0)
+                                            ->orWhere('lokasi', $lokasi);
+                                    });
+                            },
+                            'child.child'  => function ($query) use ($hak_akses, $lokasi) {
+                                $query->whereNotIn('id', $hak_akses)
+                                    ->where(function ($query) use ($lokasi) {
+                                        $query->where('lokasi', 0)
+                                            ->orWhere('lokasi', $lokasi);
+                                    });
+                            }
+                        ])
+                        ->orderBy('sort', 'ASC')
+                        ->orderBy('id', 'ASC')
+                        ->get();
+
 
                     $angsuran = true;
                     if (in_array('19', $hak_akses) || in_array('21', $hak_akses)) {
@@ -311,68 +328,9 @@ class AuthController extends Controller
 
     public function app()
     {
-        $no = 1;
-        $rekening = [];
-        $rekening_ojk = DB::table('rekening_ojk_php')->where('sub', '0')->get();
-        foreach ($rekening_ojk as $ojk) {
-            $rekening[$no] = [
-                'id' => $no,
-                'nama_akun' => $ojk->nama_akun,
-                'kode' => $ojk->kode,
-                'rekening' => '',
-                'parent_id' => 0
-            ];
-
-            $parent_id = $no;
-            $kode_rek = explode('#', $ojk->rekening);
-            foreach ($kode_rek as $rek) {
-                if ($rek != '0') {
-                    $no++;
-
-                    $rekening[$no] = [
-                        'id' => $no,
-                        'nama_akun' => '',
-                        'kode' => '',
-                        'rekening' => $rek,
-                        'parent_id' => $parent_id
-                    ];
-                }
-            }
-
-            $rekening_child = [];
-            $child = DB::table('rekening_ojk_php')->where('sub', $ojk->id)->get();
-            foreach ($child as $ch) {
-
-                $no++;
-                $rekening[$no] = [
-                    'id' => $no,
-                    'nama_akun' => $ch->nama_akun,
-                    'kode' => $ch->kode,
-                    'rekening' => 0,
-                    'parent_id' => $parent_id
-                ];
-
-                $child_parent_id = $no;
-                $kode_rek = explode('#', $ch->rekening);
-                foreach ($kode_rek as $rek) {
-                    if ($rek != '0') {
-                        $no++;
-
-                        $rekening[$no] = [
-                            'id' => $no,
-                            'nama_akun' => '',
-                            'kode' => '',
-                            'rekening' => $rek,
-                            'parent_id' => $child_parent_id
-                        ];
-                    }
-                }
-            }
-
-            $no++;
-        }
-
-        // DB::table('rekening_ojk_test')->insert($rekening);
-        dd($rekening);
+        return response()->json([
+            'success' => true,
+            'time' => date('Y-m-d H:i:s')
+        ]);
     }
 }

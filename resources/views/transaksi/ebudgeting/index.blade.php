@@ -1,44 +1,40 @@
 @extends('layouts.base')
 
 @section('content')
-    <div class="app-main__inner">
-        <div class="tab-content">
-            <div class="main-card mb-3 card">
-                <div class="card-body">
-                    <br>
-                    <form action="/transaksi/anggaran" method="post" id="formAnggaran">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="position-relative mb-3"><label for="exampleEmail11"
-                                        class="form-label">Tahun</label>
-                                    <input autocomplete="off" type="number" name="tahun" id="tahun"
-                                        class="form-control" value="{{ date('Y') }}">
-                                    <small class="text-danger" id="msg_tahun"></small>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="position-relative mb-3"><label for="examplePassword11"
-                                        class="form-label">Bulan</label>
-                                    <input autocomplete="off" type="number" name="bulan" id="bulan"
-                                        class="form-control" value="{{ date('m') }}" max="12" min="01">
-                                    <small class="text-danger" id="msg_bulan"></small>
-                                </div>
-                            </div>
+    <div class="card mb-4">
+        <div class="card-body">
+            <form action="/transaksi/anggaran" method="post" id="formAnggaran">
+                @csrf
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-static my-3">
+                            <label for="tahun">Tahun</label>
+                            <input autocomplete="off" type="number" name="tahun" id="tahun" class="form-control"
+                                value="{{ date('Y') }}">
+                            <small class="text-danger" id="msg_tahun"></small>
                         </div>
-                        <button type="button" id="anggaran" class="btn btn-sm btn-dark mb-0"
-                            style=" float: right;">TENTUKAN RENCANA ANGGARAN</button>
-                    </form>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-static my-3">
+                            <label for="bulan">Bulan</label>
+                            <input autocomplete="off" type="number" name="bulan" id="bulan" class="form-control"
+                                value="{{ date('m') }}" max="12" min="01">
+                            <small class="text-danger" id="msg_bulan"></small>
+                        </div>
+                    </div>
                 </div>
+            </form>
+
+            <div class="d-flex justify-content-end">
+                <button type="button" id="anggaran" class="btn btn-sm btn-github mb-0">Tentukan Rencana Anggaran</button>
             </div>
         </div>
-        <div class="tab-content">
-            <div class="main-card mb-3 card">
-                <div class="card-body">
-                    <br>
-                    <div id="formEbudgeting"></div>
-                </div>
-            </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div id="formEbudgeting"></div>
         </div>
     </div>
 @endsection

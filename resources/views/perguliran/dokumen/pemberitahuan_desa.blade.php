@@ -12,6 +12,7 @@
         $waktu = $wt_cair[0];
         $tempat = $wt_cair[1];
     }
+    $jumlah=0;
 @endphp
 
 @extends('perguliran.dokumen.layout.base')
@@ -22,7 +23,7 @@
             <td width="50">Nomor</td>
             <td width="10" align="center">:</td>
             <td colspan="2">
-                ______/DBM/{{ Tanggal::tglRomawi($pinkel->tgl_cair) }} </td>
+                ______/______/{{ Tanggal::tglRomawi($pinkel->tgl_cair) }} </td>
         </tr>
         <tr>
             <td>Sifat</td>
@@ -118,7 +119,15 @@
                             <td class="t l b">{{ $pa->anggota->alamat }}</td>
                             <td class="t l b r" align="right">{{ number_format($pa->alokasi) }}</td>
                         </tr>
+@php
+$jumlah=$jumlah+$pa->alokasi;
+@endphp
                     @endforeach
+
+                        <tr>
+                            <th class="t l b" align="center" colspan="3">JUMLAH</th>
+                            <th class="t l b r" align="right">{{ number_format($jumlah)}}</th>
+                        </tr>
                 </table>
             </td>
         </tr>

@@ -69,7 +69,7 @@
         <tr>
             <td colspan="3" align="justify">
                 Dalam hal ini bertindak untuk dan atas nama {{ $kec->nama_lembaga_sort }} selaku pengelola dana iuran
-                tanggung renteng kematian bagi Nasabah {{ $pinkel->jpp->nama_jpp }}, selanjutnya disebut Pihak Pertama,
+                tanggung renteng kematian bagi pemanfaat {{ $pinkel->jpp->nama_jpp }}, selanjutnya disebut Pihak Pertama,
                 dan
             </td>
         </tr>
@@ -112,7 +112,7 @@
                     {{ Tanggal::namaBulan($pinkel->tgl_cair) }} tahun
                     {{ $keuangan->terbilang(Tanggal::tahun($pinkel->tgl_cair)) }}, bertempat di {{ $tempat }} sadar
                     dan suka rela menyatakan telah membuat perjanjian iuran tanggung renteng kematian bagi anggota kelompok
-                    Nasabah yang meninggal dunia dengan ketentuan-ketentuan yang disepakati.
+                    pemanfaat yang meninggal dunia dengan ketentuan-ketentuan yang disepakati.
                 </p>
                 <p style="text-align: justify;">
                     Pihak Kedua menyatakan secara sadar dan suka rela telah menanda-tangani akad atau perjanjian iuran

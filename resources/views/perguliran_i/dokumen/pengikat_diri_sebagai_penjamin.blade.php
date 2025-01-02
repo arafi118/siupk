@@ -54,7 +54,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2">Hubungan dengan Piutang</td>
+            <td colspan="2">Hubungan dengan Peminjam</td>
             <td align="center">:</td>
             <td>
                 @if ($pinkel->anggota->keluarga)
@@ -70,7 +70,7 @@
         <tr>
             <td width="5%" align="center">1.</td>
             <td colspan="3">
-                Saya <b>menyetujui dan menjamin</b> sepenuhnya nasabah sebagai berikut :
+                Saya <b>menyetujui dan menjamin</b> sepenuhnya peminjam sebagai berikut :
             </td>
         </tr>
         <tr>
@@ -123,18 +123,18 @@
             </td>
         </tr>
         <tr>
-            <td width="5%" align="center" style="vertical-align: top;">2.</td>
+		<td width="5%" style="text-align: center; vertical-align: top;">2.</td>
             <td colspan="3">
                 Apabila orang tersebut diatas tidak memenuhi kewajibannya (membayar angsuran dan kewajiban lainnya)
                 sesuai ketentuan dalam surat perjanjian kredit (SPK) maka dengan ini saya mengikatkan diri dan mejamin untuk
-                membayar seluruh tagihan yang menjadi kewajiban Piutang tersebut diatas sesuai hasil perhitungan saldo
-                utang dan tagihan jasa serta kewajiban lainnya di {{ $kec->nama_lembaga_sort }}.
+                membayar seluruh tagihan yang menjadi kewajiban peminjam tersebut diatas sesuai hasil perhitungan saldo
+                pinjaman dan tagihan jasa serta kewajiban lainnya di {{ $kec->nama_lembaga_sort }}.
             </td>
         </tr>
     </table>
     <p>Demikian pernyataan penjaminan ini saya buat dengan sebenar-benarnya dan merupakan bagian tidak terpisahkan dari
         Surat Perjanjian Kredit, dalam kondisi sehat lahir dan batin serta tanpa paksan dari pihak manapun serta bersedia
-        dituntut dimuka hukum apabila dikemudian hari saya mengkingkari pernyataan ini.
+        dituntut dimuka hukum apabila dikemudian hari saya mengingkari pernyataan ini.
 
 
     </p>
@@ -145,14 +145,14 @@
             <td align="center" width="50%">{{ $kec->nama_kec }}, {{ Tanggal::tglLatin($pinkel->tgl_cair) }}</td>
         </tr>
         <tr>
-            <td align="center">{{ $kec->sebutan_level_1 }} {{ $kec->nama_lembaga_sort }}</td>
+            <td align="center">&nbsp;</td>
             <td align="center">Nama Penjamin</td>
         </tr>
         <tr>
             <td align="center" colspan="2" height="30">&nbsp;</td>
         </tr>
         <tr style="font-weight: bold;">
-            <td align="center"> {{ $dir->namadepan }} {{ $dir->namabelakang }}</td>
+            <td align="center">&nbsp;</td>
             <td align="center">{{ $pinkel->anggota->penjamin }}</td>
         </tr>
     </table>
