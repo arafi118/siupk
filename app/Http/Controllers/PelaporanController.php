@@ -979,8 +979,15 @@ class PelaporanController extends Controller
             $data['tgl'] = Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         }
 
-
-        $data['jenis_pp'] = JenisProdukPinjaman::where('lokasi', '0')->with([
+        
+        $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
+        $data['jenis_pp'] = JenisProdukPinjaman::where(function ($query) use ($kec) {
+            $query->where('lokasi', '0')
+                ->orWhere(function ($query) use ($kec) {
+                    $query->where('kecuali', 'NOT LIKE', "%-{$kec['id']}-%")
+                        ->where('lokasi', 'LIKE', "%-{$kec['id']}-%");
+                });
+        })->with([
             'pinjaman_kelompok' => function ($query) use ($data) {
                 $tb_pinj = 'pinjaman_kelompok_' . $data['kec']->id;
                 $tb_kel = 'kelompok_' . $data['kec']->id;
@@ -1037,73 +1044,76 @@ class PelaporanController extends Controller
             }
         ])->get();
 
-        $data['jenis_pp_i'] = JenisProdukPinjaman::where('lokasi', '0')->with([
+        
+        $data['jenis_pp_i'] = JenisProdukPinjaman::where(function ($query) use ($kec) {
+            $query->where('lokasi', '0')
+                ->orWhere(function ($query) use ($kec) {
+                    $query->where('kecuali', 'NOT LIKE', "%-{$kec['id']}-%")
+                        ->where('lokasi', 'LIKE', "%-{$kec['id']}-%");
+                });
+        })->with([
             'pinjaman_anggota' => function ($query) use ($data) {
                 $tb_pinj_i = 'pinjaman_anggota_' . $data['kec']->id;
-                $tb_ang = 'anggota_' . $data['kec']->id;
+                $tb_angg = 'anggota_' . $data['kec']->id;
                 $data['tb_pinj_i'] = $tb_pinj_i;
 
-                $query->select(
-                    $tb_pinj_i . '.*',
-                    $tb_ang . '.namadepan',
-                    'desa.nama_desa',
-                    'desa.kd_desa',
-                    'desa.kode_desa',
-                    'sebutan_desa.sebutan_desa'
-                )
-                    ->join($tb_ang, $tb_ang . '.id', '=', $tb_pinj_i . '.nia')
-                    ->join('desa', $tb_ang . '.desa', '=', 'desa.kd_desa')
-                    ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
-                    ->withSum(['real_i' => function ($query) use ($data) {
-                        $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
-                    }], 'realisasi_pokok')
-                    ->withSum(['real_i' => function ($query) use ($data) {
-                        $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
-                    }], 'realisasi_jasa')
-                    ->where($tb_pinj_i . '.sistem_angsuran', '!=', '12')->where(function ($query) use ($data) {
-                        $query->where([
-                            [$data['tb_pinj_i'] . '.status', 'A'],
-                            [$data['tb_pinj_i'] . '.tgl_cair', '<=', $data['tgl_kondisi']]
-                        ])->orwhere([
-                            [$data['tb_pinj_i'] . '.status', 'L'],
-                            [$data['tb_pinj_i'] . '.tgl_cair', '<=', $data['tgl_kondisi']], [
-                                $data['tb_pinj_i'] . '.tgl_lunas', '>=', "$data[tahun]-01-01"
-                            ]
-                        ])->orwhere([
-                            [$data['tb_pinj_i'] . '.status', 'L'],
-                            [$data['tb_pinj_i'] . '.tgl_lunas', '<=', $data['tgl_kondisi']], [
-                                $data['tb_pinj_i'] . '.tgl_lunas', '>=', "$data[tahun]-01-01"
-                            ]
-                        ])->orwhere([
-                            [$data['tb_pinj_i'] . '.status', 'R'],
-                            [$data['tb_pinj_i'] . '.tgl_cair', '<=', $data['tgl_kondisi']], [
-                                $data['tb_pinj_i'] . '.tgl_lunas', '>=', "$data[tahun]-01-01"
-                            ]
-                        ])->orwhere([
-                            [$data['tb_pinj_i'] . '.status', 'R'],
-                            [$data['tb_pinj_i'] . '.tgl_lunas', '<=', $data['tgl_kondisi']], [$data['tb_pinj_i']
-                                . '.tgl_lunas', '>=', "$data[tahun]-01-01"]
-                        ])->orwhere([
-                            [$data['tb_pinj_i'] . '.status', 'H'],
-                            [$data['tb_pinj_i'] . '.tgl_cair', '<=', $data['tgl_kondisi']], [$data['tb_pinj_i']
-                                . '.tgl_lunas', '>=', "$data[tahun]-01-01"]
-                        ])->orwhere([
-                            [$data['tb_pinj_i'] . '.status', 'H'],
-                            [$data['tb_pinj_i'] . '.tgl_lunas', '<=', $data['tgl_kondisi']], [$data['tb_pinj_i']
-                                . '.tgl_lunas', '>=', "$data[tahun]-01-01"]
-                        ]);
-                    })->orderBy(
-                        $tb_ang . '.desa',
-                        'ASC'
-                    )
-                    ->orderBy($tb_pinj_i . '.tgl_cair', 'ASC');
-            },
-            'pinjaman_anggota.saldo' => function ($query) use ($data) {
-                $query->where('tgl_transaksi', '<=', $data['tgl_kondisi']);
-            }, 'pinjaman_anggota.target' => function ($query) use ($data) {
-                $query->where('jatuh_tempo', '<=', $data['tgl_kondisi']);
-            }
-        ])->get();
+                    $query->select($tb_pinj_i . '.*', $tb_angg . '.namadepan', 'desa.nama_desa', 'desa.kd_desa', 'desa.kode_desa', 'sebutan_desa.sebutan_desa')
+                        ->join($tb_angg, $tb_angg . '.id', '=', $tb_pinj_i . '.nia')
+                        ->join('desa', $tb_angg . '.desa', '=', 'desa.kd_desa')
+                        ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
+                        ->withSum(['real_i' => function ($query) use ($data) {
+                            $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
+                        }], 'realisasi_pokok')
+                        ->withSum(['real_i' => function ($query) use ($data) {
+                            $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
+                        }], 'realisasi_jasa')
+                        ->where($tb_pinj_i . '.sistem_angsuran', '!=', '12')->where(function ($query) use ($data) {
+                            $query->where([
+                                [$data['tb_pinj_i'] . '.status', 'A'],
+                                [$data['tb_pinj_i'] . '.jenis_pinjaman', 'I'],
+                                [$data['tb_pinj_i'] . '.tgl_cair', '<=', $data['tgl_kondisi']]
+                            ])->orwhere([
+                                [$data['tb_pinj_i'] . '.status', 'L'],
+                                [$data['tb_pinj_i'] . '.jenis_pinjaman', 'I'],
+                                [$data['tb_pinj_i'] . '.tgl_cair', '<=', $data['tgl_kondisi']],
+                                [$data['tb_pinj_i'] . '.tgl_lunas', '>=', "$data[tahun]-01-01"]
+                            ])->orwhere([
+                                [$data['tb_pinj_i'] . '.status', 'L'],
+                                [$data['tb_pinj_i'] . '.jenis_pinjaman', 'I'],
+                                [$data['tb_pinj_i'] . '.tgl_lunas', '<=', $data['tgl_kondisi']],
+                                [$data['tb_pinj_i'] . '.tgl_lunas', '>=', "$data[tahun]-01-01"]
+                            ])->orwhere([
+                                [$data['tb_pinj_i'] . '.status', 'R'],
+                                [$data['tb_pinj_i'] . '.jenis_pinjaman', 'I'],
+                                [$data['tb_pinj_i'] . '.tgl_cair', '<=', $data['tgl_kondisi']],
+                                [$data['tb_pinj_i'] . '.tgl_lunas', '>=', "$data[tahun]-01-01"]
+                            ])->orwhere([
+                                [$data['tb_pinj_i'] . '.status', 'R'],
+                                [$data['tb_pinj_i'] . '.jenis_pinjaman', 'I'],
+                                [$data['tb_pinj_i'] . '.tgl_lunas', '<=', $data['tgl_kondisi']],
+                                [$data['tb_pinj_i'] . '.tgl_lunas', '>=', "$data[tahun]-01-01"]
+                            ])->orwhere([
+                                [$data['tb_pinj_i'] . '.status', 'H'],
+                                [$data['tb_pinj_i'] . '.jenis_pinjaman', 'I'],
+                                [$data['tb_pinj_i'] . '.tgl_cair', '<=', $data['tgl_kondisi']],
+                                [$data['tb_pinj_i'] . '.tgl_lunas', '>=', "$data[tahun]-01-01"]
+                            ])->orwhere([
+                                [$data['tb_pinj_i'] . '.status', 'H'],
+                                [$data['tb_pinj_i'] . '.jenis_pinjaman', 'I'],
+                                [$data['tb_pinj_i'] . '.tgl_lunas', '<=', $data['tgl_kondisi']],
+                                [$data['tb_pinj_i'] . '.tgl_lunas', '>=', "$data[tahun]-01-01"]
+                            ]);
+                        })
+                        ->orderBy($tb_angg . '.desa', 'ASC')
+                        ->orderBy($tb_pinj_i . '.tgl_cair', 'ASC');
+                },
+                'pinjaman_individu.saldo' => function ($query) use ($data) {
+                    $query->where('tgl_transaksi', '<=', $data['tgl_kondisi']);
+                },
+                'pinjaman_individu.target' => function ($query) use ($data) {
+                    $query->where('jatuh_tempo', '<=', $data['tgl_kondisi']);
+                }
+            ])->get();
 
         $view = view('pelaporan.view.ojk.penyisihan_cadangan', $data)->render();
 
