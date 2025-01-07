@@ -27,21 +27,13 @@
         $cif=$parts[1];
         // Calculate line breaks needed
         $i = $jum_trans - 1;
-<<<<<<< HEAD
         $a = $i % 24; 
-=======
-        $a = $i % 24;
->>>>>>> d20899d9b66b43977dc757b2de08a0e3327d9f1b
         $br = ($a <= 10) ? $a : $a + 2;
 
 // Calculate previous balance
 $sum = DB::table('real_simpanan_' . session('lokasi'))
     ->where('cif', $cif)
-<<<<<<< HEAD
     ->where('tgl_transaksi', '<', $transaksi->tgl_transaksi)
-=======
-    ->where('tgl_transaksi', '<=', $transaksi->tgl_transaksi)
->>>>>>> d20899d9b66b43977dc757b2de08a0e3327d9f1b
     ->orderBy('tgl_transaksi', 'desc')
     ->orderBy('id', 'desc')
     ->value('sum') ?? 0;
