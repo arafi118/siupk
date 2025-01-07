@@ -33,7 +33,7 @@
 // Calculate previous balance
 $sum = DB::table('real_simpanan_' . session('lokasi'))
     ->where('cif', $cif)
-    ->where('tgl_transaksi', '<=', $transaksi->tgl_transaksi)
+    ->where('tgl_transaksi', '<', $transaksi->tgl_transaksi)
     ->orderBy('tgl_transaksi', 'desc')
     ->orderBy('id', 'desc')
     ->value('sum') ?? 0;

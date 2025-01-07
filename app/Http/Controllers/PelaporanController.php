@@ -651,6 +651,48 @@ class PelaporanController extends Controller
             return $view;
         }
     }
+
+    private function bunga(array $data)
+    {
+        $thn = $data['tahun'];
+        $bln = $data['bulan'];
+        $hari = $data['hari'];
+
+        $tgl = $thn . '-' . $bln . '-' . $hari;
+        $data['judul'] = 'Laporan Keuangan';
+        $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
+        $data['tgl'] = Tanggal::tglLatin($tgl);
+
+        if ($data['bulanan']) {
+            $data['judul'] = 'Laporan Keuangan';
+            $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+        }
+
+        $data['jenis_simpanan'] = JenisSimpanan::with([
+            'simpanan' => function ($query) use ($data) {
+                $tb_anggota = 'anggota_' . Session::get('lokasi');
+                $tb_simpanan = 'simpanan_anggota_' . Session::get('lokasi');
+
+                $query->select($tb_simpanan . '.*', $tb_anggota . '.namadepan', $tb_anggota . '.nik')
+                    ->join($tb_anggota, $tb_simpanan . '.nia', $tb_anggota . '.id')
+                    ->where('tgl_buka', '<=', $data['tgl_kondisi'],)->where(function ($query) use ($data) {
+                        $query->whereRaw('tgl_buka = tgl_tutup')->orwhere('tgl_tutup', '>', $data['tgl_kondisi']);
+                    });
+            },
+            'simpanan.realSimpananTerbesar'
+        ])->where('kecuali', 'NOT LIKE', Session::get('lokasi') . '#%')->orwhere('kecuali', 'NOT LIKE', '%#' . Session::get('lokasi'))->get();
+
+        $data['laporan'] = 'Rincian Bunga';
+        $view = view('pelaporan.view.ojk.daftar_rincian_bunga', $data)->render();
+
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view);
+            return $pdf->stream();
+        } else {
+            return $view;
+        }
+    }
+
     private function DRT(array $data)
     {
         $thn = $data['tahun'];
@@ -691,6 +733,7 @@ class PelaporanController extends Controller
             return $view;
         }
     }
+    
     private function SMPN(array $data)
     {
         $thn = $data['tahun'];
