@@ -27,7 +27,7 @@
         $cif=$parts[1];
         // Calculate line breaks needed
         $i = $jum_trans - 1;
-        $a = $i % 24; 
+        $a = $i % 24;
         $br = ($a <= 10) ? $a : $a + 2;
 
 // Calculate previous balance
