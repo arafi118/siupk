@@ -665,7 +665,7 @@ class PelaporanController extends Controller
         if ($data['bulanan']) {
             $data['judul'] = 'Laporan Keuangan';
             $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
-        }
+        } 
 
         $data['jenis_simpanan'] = JenisSimpanan::with([
             'simpanan' => function ($query) use ($data) {
