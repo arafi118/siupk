@@ -289,7 +289,10 @@ continue;
 $kd_desa = [];
 $t_alokasi = 0;
 $t_saldo = 0;
+<<<<<<< HEAD
         $nomor = 1;
+=======
+>>>>>>> d20899d9b66b43977dc757b2de08a0e3327d9f1b
 $t_tunggakan_pokok = 0;
 $t_tunggakan_jasa = 0;
 $t_kolek1 = 0;
@@ -511,7 +514,11 @@ $t_kolek3 = 0;
                                             </td>
                                             <td width="10%" class="t l b" align="right">{{ number_format($t_kolek1) }}
                                             </td>
+<<<<<<< HEAD
                                             <td width="10%" class="t l b" align="right">{{ number_format($t_kolek2) }}a
+=======
+                                            <td width="10%" class="t l b" align="right">{{ number_format($t_kolek2) }}
+>>>>>>> d20899d9b66b43977dc757b2de08a0e3327d9f1b
                                             </td>
                                             <td width="10%" class="t l b r" align="right">{{ number_format($t_kolek3) }}
                                             </td>

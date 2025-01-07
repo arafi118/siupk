@@ -27,7 +27,11 @@ $nomor_jenis_pp_i = 0;
         $t_kolek3 = 0;
         @endphp
 
+<<<<<<< HEAD
         @if ($nomor_jenis_pp != 0)
+=======
+        @if ($jpp->$nomor_jenis_pp != 0)
+>>>>>>> d20899d9b66b43977dc757b2de08a0e3327d9f1b
             <div class="break"></div>
         @endif
 
@@ -236,6 +240,7 @@ $nomor_jenis_pp_i = 0;
         $nomor_jenis_pp++;
         @endphp
     @endforeach
+<<<<<<< HEAD
             <div class="break"></div>
     @foreach ($jenis_pp_i as $jpp)
         @php
@@ -466,4 +471,7 @@ $nomor_jenis_pp_i = 0;
         $nomor_jenis_pp_i++;
         @endphp
     @endforeach
+=======
+    
+>>>>>>> d20899d9b66b43977dc757b2de08a0e3327d9f1b
 @endsection
