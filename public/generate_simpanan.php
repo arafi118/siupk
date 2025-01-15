@@ -256,8 +256,8 @@
                     $lu             = date('Y-m-d H:i:s');
                     $id_user        = $trx['id_user'];
                     
-                    $insert_t = mysqli_query($koneksi,"INSERT INTO `real_simpanan_$lokasi`(`cif`, `idt`, `real_d`, `real_k`, `sum`, `lu`, `id_user`) 
-                                 VALUES ('$cif','$idt','$real_d','$real_k','$sum','$lu','$id_user')");
+                    $insert_t = mysqli_query($koneksi,"INSERT INTO `real_simpanan_$lokasi`(`cif`, `idt`,`tgl_transaksi`, `real_d`, `real_k`, `sum`, `lu`, `id_user`) 
+                                 VALUES ('$cif','$idt','$tgl_transaksi','$real_d','$real_k','$sum','$lu','$id_user')");
                 }
             }
             
