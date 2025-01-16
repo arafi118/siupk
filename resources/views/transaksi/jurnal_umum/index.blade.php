@@ -101,9 +101,10 @@
                                         $tgl_pakai = $kec->tgl_pakai;
                                         $th_pakai = explode('-', $tgl_pakai)[0];
                                     @endphp
-                                    @for ($i = $th_pakai; $i <= date('Y'); $i++)
-                                        <option value="{{ $i }}" {{ date('Y') == $i ? 'selected' : '' }}>
-                                            {{ $i }}</option>
+                                    @for ($i = date('Y'); $i >= $th_pakai; $i--)
+                                        <option {{ $i == date('Y') ? 'selected' : '' }} value="{{ $i }}">
+                                            {{ $i }}
+                                        </option>
                                     @endfor
                                 </select>
                                 <small class="text-danger" id="msg_tahun"></small>
@@ -335,6 +336,7 @@
                 Swal.fire('warning', 'Sumber Dana dan Keperluan tidak boleh sama', 'warning');
             }
         });
+        var value_disimpan_ke = ''
         $(document).on('change', '#sumber_dana,#disimpan_ke', function(e) {
             e.preventDefault()
 
@@ -342,6 +344,17 @@
             var jenis_transaksi = $('#jenis_transaksi').val()
             var sumber_dana = $('#sumber_dana').val()
             var disimpan_ke = $('#disimpan_ke').val()
+
+            if (sumber_dana == disimpan_ke) {
+                $('#SimpanTransaksi').attr('disabled', true)
+                simpan.setChoiceByValue(value_disimpan_ke)
+
+                Toastr('warning', 'Kode Akun tidak boleh sama')
+                return false
+            } else {
+                $('#SimpanTransaksi').attr('disabled', false)
+                value_disimpan_ke = disimpan_ke
+            }
 
             $.get('/transaksi/form_nominal/', {
                 jenis_transaksi,
