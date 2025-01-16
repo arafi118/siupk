@@ -304,15 +304,6 @@
             selectBulan.setChoiceByValue(bulan)
         })
 
-        $(document).on('change', '#disimpan_ke', function(e) {
-            e.preventDefault()
-            var disimpan_ke = $(this).val()
-            var sumber_dana = $(this).val()
-
-            if (sumber_dana == disimpan_ke) {
-                    Swal.fire('Error', 'sumber dan keperluan tidak boleh sama', 'error')
-            }
-        })
         
         $(document).on('change', '#sumber_dana', function(e) {
             e.preventDefault()
