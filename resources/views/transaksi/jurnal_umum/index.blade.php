@@ -304,34 +304,37 @@
             selectBulan.setChoiceByValue(bulan)
         })
 
-        
+        let sumber_dana;
+
         $(document).on('change', '#sumber_dana', function(e) {
-            e.preventDefault()
-            var sumber_dana = $(this).val()
-
+            e.preventDefault();
+            sumber_dana = $(this).val();
             if (sumber_dana == '1.2.02.01') {
-                simpan.setChoiceByValue('5.1.07.08')
+                simpan.setChoiceByValue('5.1.07.08');
             }
-
             if (sumber_dana == '1.2.02.02') {
-                simpan.setChoiceByValue('5.1.07.09')
+                simpan.setChoiceByValue('5.1.07.09');
             }
-
             if (sumber_dana == '1.2.02.03') {
-                simpan.setChoiceByValue('5.1.07.10')
+                simpan.setChoiceByValue('5.1.07.10');
             }
-
-            var tgl_transaksi = $('#tgl_transaksi').val().split('/')
+            var tgl_transaksi = $('#tgl_transaksi').val().split('/');
             var tahun = tgl_transaksi[2];
             var bulan = tgl_transaksi[1];
             var hari = tgl_transaksi[0];
-
             $.get('/trasaksi/saldo/' + sumber_dana + '?tahun=' + tahun + '&bulan=' + bulan + '&hari=' + hari,
                 function(result) {
-                    $('#saldo').html(formatter.format(result.saldo))
-                })
-        })
+                    $('#saldo').html(formatter.format(result.saldo));
+                });
+        });
 
+        $(document).on('change', '#disimpan_ke', function(e) {
+            e.preventDefault();
+            var disimpan_ke = $(this).val();
+            if (sumber_dana == disimpan_ke) {
+                Swal.fire('warning', 'Sumber Dana dan Keperluan tidak boleh sama', 'warning');
+            }
+        });
         $(document).on('change', '#sumber_dana,#disimpan_ke', function(e) {
             e.preventDefault()
 
