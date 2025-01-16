@@ -51,14 +51,16 @@
 
                     @foreach ($lev3->rek as $rek)
                         @php
-                            $saldo = $rek->saldo->debit - $rek->saldo->kredit;
+                            $debit = $rek->saldo ? ($rek->saldo->debit ?? 0) : 0;
+                            $kredit = $rek->saldo ? ($rek->saldo->kredit ?? 0) : 0;
+                            $saldo = $debit - $kredit;
+        
                             if ($lev1->lev1 > 1) {
-                                $saldo = $rek->saldo->kredit - $rek->saldo->debit;
+                                $saldo = $kredit - $debit;
                             }
                             if ($rek->kode_akun == '3.2.01.01') {
                                 $saldo += $keuangan->laba_rugi($tahun + 1 . '-00-00');
                             }
-
                             $sum_saldo += $saldo;
                         @endphp
                     @endforeach
