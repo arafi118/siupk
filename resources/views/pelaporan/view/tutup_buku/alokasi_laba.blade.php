@@ -120,53 +120,9 @@
                         </tr>
                     @endforeach
 
-        <tr style="background: rgb(150, 150, 150); font-weight: bold;">
-            <td colspan="2">LABA DITAHAN</td>
-        </tr>
-
-        @foreach ($saldo_calk as $saldo)
-            @if (substr($saldo->id, -1) > 3)
-                @php
-                    $jumlah += floatval($saldo->kredit);
-                    $total += floatval($saldo->kredit);
-                    $bg = 'rgb(230, 230, 230)';
-                    if ($loop->iteration % 2 == 0) {
-                        $bg = 'rgb(255, 255, 255)';
-                    }
-                @endphp
-                <tr style="background: {{ $bg }}">
-                    <td>aaaa</td>
-                    <td align="right">
-                        Rp. {{ number_format(floatval($saldo->kredit), 2) }}
-                    </td>
-                </tr>
-            @endif
-        @endforeach
-
-        <tr style="background: rgb(150, 150, 150); font-weight: bold;">
-            <td height="15">
-                <b>Jumlah</b>
-            </td>
-            <td align="right">
-                <b>Rp. {{ number_format($jumlah, 2) }}</b>
-            </td>
-        </tr>
-
 
         <tr>
             <td colspan="2" style="padding: 0px !important;">
-                <table class="p" border="0" width="100%" cellspacing="0" cellpadding="0"
-                    style="font-size: 11px;">
-                    <tr style="background: rgb(74, 74, 74); color: #fff;">
-                        <td align="center" height="20">
-                            <b>Total Alokasi Laba Usaha</b>
-                        </td>
-                        <td align="right">
-                            <b>Rp. {{ number_format($total, 2) }}</b>
-                        </td>
-                    </tr>
-                </table>
-
                 <div style="margin-top: 16px;"></div>
                 {!! json_decode(str_replace('{tanggal}', $tanggal_kondisi, $kec->ttd->tanda_tangan_pelaporan), true) !!}
             </td>

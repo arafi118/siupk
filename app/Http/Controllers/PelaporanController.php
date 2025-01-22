@@ -3254,35 +3254,53 @@ class PelaporanController extends Controller
 
         $data['tahun_tb'] = $thn-1;
         $data['surplus'] = $keuangan->laba_rugi(($data['tahun'] - 1) . '-13-00');
-        $data['akun1'] = AkunLevel1::where('lev1', '2')->with([
-            'akun2' => function ($query) {
-                $query->where('lev1', '2')
-                      ->where('lev2', '1');
-            },
-            'akun2.akun3' => function ($query) {
-                $query->where('lev1', '2')
-                      ->where('lev2', '1')
-                      ->where('lev3', '1');
-            },
-            'akun2.akun3.rek',
-            'akun2.akun3.rek.kom_saldo' => function ($query) use ($data) {
-                $query->where('tahun', $data['tahun'])
-                      ->where(function ($query) use ($data) {
-                          $query->where('bulan', '0')
-                                ->orWhere('bulan', $data['bulan']);
-                      });
-            },
-        ])->orderBy('kode_akun', 'ASC')->get();
 
-        $data['desa'] = Desa::where('kd_kec', $data['kec']->kd_kec)->with([
-            'saldo' => function ($query) use ($data) {
-                $query->where([
-                    ['tahun', $data['tahun_tb']],
-                    ['bulan', '0']
-                ]);
-            },
-            'sebutan_desa'
-        ])->get();
+        $data['akun1'] = AkunLevel1::whereIn('lev1', [1, 2, 3])->with([
+    'akun2' => function ($query) {
+        $query->where(function($q) {
+            $q->where(function($q) {
+                  $q->where('lev1', '1')
+                    ->where('lev2', '1');
+              })
+              ->orWhere(function($q) {
+                  $q->where('lev1', '2')
+                    ->where('lev2', '1');
+              })
+              ->orWhere(function($q) {
+                  $q->where('lev1', '3')
+                    ->where('lev2', '2');
+              });
+        });
+    },
+    'akun2.akun3' => function ($query) {
+        $query->where(function($q) {
+            $q->where(function($q) {
+                  $q->where('lev1', '1')
+                    ->where('lev2', '1')
+                    ->where('lev3', '4');
+              })
+              ->orWhere(function($q) {
+                  $q->where('lev1', '2')
+                    ->where('lev2', '1')
+                    ->where('lev3', '1');
+              })
+              ->orWhere(function($q) {
+                  $q->where('lev1', '3')
+                    ->where('lev2', '2')
+                    ->where('lev3', '1');
+              });
+        });
+    },
+    'akun2.akun3.rek',
+    'akun2.akun3.rek.kom_saldo' => function ($query) use ($data) {
+        $query->where('tahun', $data['tahun'])
+              ->where(function ($query) use ($data) {
+                  $query->where('bulan', '0')
+                        ->orWhere('bulan', $data['bulan']);
+              });
+    },
+])->orderBy('kode_akun', 'ASC')->get();
+
         $data['saldo_calk'] = Saldo::where([
             ['kode_akun', $data['kec']->kd_kec],
             ['tahun', $data['tahun_tb']]
