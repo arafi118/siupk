@@ -3229,7 +3229,7 @@ class PelaporanController extends Controller
         $pdf = PDF::loadHTML($view)->setPaper('A4', 'landscape');
         return $pdf->stream();
     }
-
+    
     private function alokasi_laba(array $data)
     {
         $keuangan = new Keuangan;
@@ -3238,20 +3238,48 @@ class PelaporanController extends Controller
         $hari = 1;
 
         $tgl = $thn . '-' . $bln . '-' . $hari;
-        $data['tanggal_kondisi'] = Tanggal::tglLatin(date('Y-m-d', strtotime($tgl)));
+        $trx_pembagian_laba = Transaksi::where([
+            ['rekening_debit', '3.2.01.01'],
+            ['keterangan_transaksi', 'LIKE', '%tahun 2024%']
+        ])->first();
+
+        $tgl_kondisi = $tgl;
+        if ($trx_pembagian_laba) {
+            $tgl_kondisi = $trx_pembagian_laba->tgl_transaksi;
+        }
+
+        $data['tanggal_kondisi'] = Tanggal::tglLatin(date('Y-m-d', strtotime($tgl_kondisi)));
         $data['sub_judul'] = 'Tahun ' . ($thn - 1);
         $data['tgl'] = Tanggal::tahun($tgl) - 1;
 
-        $data['tahun_tb'] = $thn;
+        $data['tahun_tb'] = $thn-1;
         $data['surplus'] = $keuangan->laba_rugi(($data['tahun'] - 1) . '-13-00');
-        $data['rekening'] = Rekening::where('kode_akun', 'like', '2.1.04%')->with([
-            'saldo' => function ($query) use ($data) {
-                $query->where('tahun', $data['tahun_tb']);
-            }
-        ])->get();
+        $data['akun1'] = AkunLevel1::where('lev1', '2')->with([
+            'akun2' => function ($query) {
+                $query->where('lev1', '2')
+                      ->where('lev2', '1');
+            },
+            'akun2.akun3' => function ($query) {
+                $query->where('lev1', '2')
+                      ->where('lev2', '1')
+                      ->where('lev3', '1');
+            },
+            'akun2.akun3.rek',
+            'akun2.akun3.rek.kom_saldo' => function ($query) use ($data) {
+                $query->where('tahun', $data['tahun'])
+                      ->where(function ($query) use ($data) {
+                          $query->where('bulan', '0')
+                                ->orWhere('bulan', $data['bulan']);
+                      });
+            },
+        ])->orderBy('kode_akun', 'ASC')->get();
+
         $data['desa'] = Desa::where('kd_kec', $data['kec']->kd_kec)->with([
             'saldo' => function ($query) use ($data) {
-                $query->where('tahun', $data['tahun_tb']);
+                $query->where([
+                    ['tahun', $data['tahun_tb']],
+                    ['bulan', '0']
+                ]);
             },
             'sebutan_desa'
         ])->get();
@@ -3259,6 +3287,7 @@ class PelaporanController extends Controller
             ['kode_akun', $data['kec']->kd_kec],
             ['tahun', $data['tahun_tb']]
         ])->get();
+
 
         $data['tgl_transaksi'] = $thn . '-12-31';
         $data['laporan'] = 'Alokasi Laba';
