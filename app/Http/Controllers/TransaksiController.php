@@ -1430,11 +1430,11 @@ class TransaksiController extends Controller
         $sumber_dana = request()->get('sumber_dana');
         $disimpan_ke = request()->get('disimpan_ke');
 
-        if (Keuangan::startWith($sumber_dana, '1.2.02') && Keuangan::startWith($disimpan_ke, '5.3.02.01') && $jenis_transaksi == 2) {
-            if ($sumber_dana == '1.2.02.01') {
+        if (Keuangan::startWith($sumber_dana, '1.2.01') && Keuangan::startWith($disimpan_ke, '5.3.02.01') && $jenis_transaksi == 2) {
+            if ($sumber_dana == '1.2.01.01') {
                 $jenis = '1';
                 $kategori = '2';
-            } elseif ($sumber_dana == '1.2.02.02') {
+            } elseif ($sumber_dana == '1.2.01.02') {
                 $jenis = '1';
                 $kategori = '3';
             } else {
