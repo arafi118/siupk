@@ -95,6 +95,8 @@ class DashboardController extends Controller
             ['lokasi', Session::get('lokasi')],
             ['status', 'UNPAID']
         ])->count();
+
+        $data['kec'] = $kec;
         $data['jumlah_unpaid'] = $unpaidInvoice;
         $data['user'] = auth()->user();
         $data['saldo'] = $this->_saldo($tgl);
