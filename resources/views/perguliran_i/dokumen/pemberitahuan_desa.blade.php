@@ -22,7 +22,7 @@
             <td width="50">Nomor</td>
             <td width="10" align="center">:</td>
             <td colspan="2">
-                ______ /SI UPK/{{ Tanggal::tglRomawi($pinkel->tgl_cair) }} </td>
+                &nbsp; </td>
         </tr>
         <tr>
             <td>Sifat</td>

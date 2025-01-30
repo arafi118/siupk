@@ -729,6 +729,54 @@ class PelaporanController extends Controller
             return $view;
         }
     }
+
+private function bunga(array $data)
+{
+    $thn = $data['tahun'];
+    $bln = $data['bulan'];
+    $hari = $data['hari'];
+    $tgl = $thn . '-' . $bln . '-' . $hari;
+    $data['judul'] = 'Laporan Keuangan';
+    $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
+    $data['tgl'] = Tanggal::tglLatin($tgl);
+
+    if ($data['bulanan']) {
+        $data['judul'] = 'Laporan Keuangan';
+        $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+    }
+
+    // Mengambil data jenis simpanan dengan relasi ke anggota
+    $data['jenis_simpanan'] = JenisSimpanan::with([
+        'simpanan' => function ($query) use ($data) {
+            $query->select('*')
+                ->with(['anggota' => function ($query) {
+                    $query->select('id', 'namadepan', 'nik');
+                }])
+                ->where('tgl_buka', '<=', $data['tgl_kondisi'])
+                ->where(function ($query) use ($data) {
+                    $query->whereRaw('tgl_buka = tgl_tutup')
+                          ->orWhere('tgl_tutup', '>', $data['tgl_kondisi']);
+                });
+        }
+    ])->where(function ($query) {
+        $lokasi = Session::get('lokasi');
+        $query->where('kecuali', 'NOT LIKE', "$lokasi#%")
+              ->orWhere('kecuali', 'NOT LIKE', "%#$lokasi");
+    })->get();
+
+    $data['laporan'] = 'Simpanan';
+
+    // Render tampilan
+    $view = view('pelaporan.view.ojk.daftar_bunga', $data)->render();
+
+    if ($data['type'] == 'pdf') {
+        $pdf = PDF::loadHTML($view);
+        return $pdf->stream();
+    } else {
+        return $view;
+    }
+}
+
     private function DRPY(array $data)
     {
         $thn = $data['tahun'];

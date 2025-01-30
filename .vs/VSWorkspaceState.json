@@ -1,7 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\app",
+    "\\resources",
+    "\\resources\\views",
+    "\\resources\\views\\pelaporan",
+    "\\resources\\views\\pelaporan\\view"
   ],
-  "SelectedNode": "\\C:\\laragon\\www\\siupk",
+  "SelectedNode": "\\resources\\views\\pelaporan\\view\\laba_rugi.blade.php",
   "PreviewInSolutionExplorer": false
 }

@@ -42,8 +42,8 @@
             <td width="50">Nomor</td>
             <td width="10" align="center">:</td>
             <td colspan="2">
-                ______/UPK/{{ Tanggal::tglRomawi(date('Y-m-d')) }}
-            </td>
+                
+                &nbsp; </td>
         </tr>
         <tr>
             <td>Sifat</td>
