@@ -581,7 +581,7 @@ class PelaporanController extends Controller
             return $view;
         }
     }
-    
+
     private function DRPLi(array $data)
     {
         $thn = $data['tahun'];
@@ -665,7 +665,7 @@ class PelaporanController extends Controller
         if ($data['bulanan']) {
             $data['judul'] = 'Laporan Keuangan';
             $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
-        } 
+        }
 
         $data['jenis_simpanan'] = JenisSimpanan::with([
             'simpanan' => function ($query) use ($data) {
@@ -730,52 +730,52 @@ class PelaporanController extends Controller
         }
     }
 
-private function bunga(array $data)
-{
-    $thn = $data['tahun'];
-    $bln = $data['bulan'];
-    $hari = $data['hari'];
-    $tgl = $thn . '-' . $bln . '-' . $hari;
-    $data['judul'] = 'Laporan Keuangan';
-    $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
-    $data['tgl'] = Tanggal::tglLatin($tgl);
-
-    if ($data['bulanan']) {
+    private function bunga(array $data)
+    {
+        $thn = $data['tahun'];
+        $bln = $data['bulan'];
+        $hari = $data['hari'];
+        $tgl = $thn . '-' . $bln . '-' . $hari;
         $data['judul'] = 'Laporan Keuangan';
-        $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
-    }
+        $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
+        $data['tgl'] = Tanggal::tglLatin($tgl);
 
-    // Mengambil data jenis simpanan dengan relasi ke anggota
-    $data['jenis_simpanan'] = JenisSimpanan::with([
-        'simpanan' => function ($query) use ($data) {
-            $query->select('*')
-                ->with(['anggota' => function ($query) {
-                    $query->select('id', 'namadepan', 'nik');
-                }])
-                ->where('tgl_buka', '<=', $data['tgl_kondisi'])
-                ->where(function ($query) use ($data) {
-                    $query->whereRaw('tgl_buka = tgl_tutup')
-                          ->orWhere('tgl_tutup', '>', $data['tgl_kondisi']);
-                });
+        if ($data['bulanan']) {
+            $data['judul'] = 'Laporan Keuangan';
+            $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         }
-    ])->where(function ($query) {
-        $lokasi = Session::get('lokasi');
-        $query->where('kecuali', 'NOT LIKE', "$lokasi#%")
-              ->orWhere('kecuali', 'NOT LIKE', "%#$lokasi");
-    })->get();
 
-    $data['laporan'] = 'Simpanan';
+        // Mengambil data jenis simpanan dengan relasi ke anggota
+        $data['jenis_simpanan'] = JenisSimpanan::with([
+            'simpanan' => function ($query) use ($data) {
+                $query->select('*')
+                    ->with(['anggota' => function ($query) {
+                        $query->select('id', 'namadepan', 'nik');
+                    }])
+                    ->where('tgl_buka', '<=', $data['tgl_kondisi'])
+                    ->where(function ($query) use ($data) {
+                        $query->whereRaw('tgl_buka = tgl_tutup')
+                            ->orWhere('tgl_tutup', '>', $data['tgl_kondisi']);
+                    });
+            }
+        ])->where(function ($query) {
+            $lokasi = Session::get('lokasi');
+            $query->where('kecuali', 'NOT LIKE', "$lokasi#%")
+                ->orWhere('kecuali', 'NOT LIKE', "%#$lokasi");
+        })->get();
 
-    // Render tampilan
-    $view = view('pelaporan.view.ojk.daftar_bunga', $data)->render();
+        $data['laporan'] = 'Simpanan';
 
-    if ($data['type'] == 'pdf') {
-        $pdf = PDF::loadHTML($view);
-        return $pdf->stream();
-    } else {
-        return $view;
+        // Render tampilan
+        $view = view('pelaporan.view.ojk.daftar_bunga', $data)->render();
+
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view);
+            return $pdf->stream();
+        } else {
+            return $view;
+        }
     }
-}
 
     private function DRPY(array $data)
     {
@@ -3277,7 +3277,7 @@ private function bunga(array $data)
         $pdf = PDF::loadHTML($view)->setPaper('A4', 'landscape');
         return $pdf->stream();
     }
-    
+
     private function alokasi_laba(array $data)
     {
         $keuangan = new Keuangan;
@@ -3300,54 +3300,54 @@ private function bunga(array $data)
         $data['sub_judul'] = 'Tahun ' . ($thn - 1);
         $data['tgl'] = Tanggal::tahun($tgl) - 1;
 
-        $data['tahun_tb'] = $thn-1;
+        $data['tahun_tb'] = $thn - 1;
         $data['surplus'] = $keuangan->laba_rugi(($data['tahun'] - 1) . '-13-00');
 
         $data['akun1'] = AkunLevel1::whereIn('lev1', [1, 2, 3])->with([
-    'akun2' => function ($query) {
-        $query->where(function($q) {
-            $q->where(function($q) {
-                  $q->where('lev1', '1')
-                    ->where('lev2', '1');
-              })
-              ->orWhere(function($q) {
-                  $q->where('lev1', '2')
-                    ->where('lev2', '1');
-              })
-              ->orWhere(function($q) {
-                  $q->where('lev1', '3')
-                    ->where('lev2', '2');
-              });
-        });
-    },
-    'akun2.akun3' => function ($query) {
-        $query->where(function($q) {
-            $q->where(function($q) {
-                  $q->where('lev1', '1')
-                    ->where('lev2', '1')
-                    ->where('lev3', '4');
-              })
-              ->orWhere(function($q) {
-                  $q->where('lev1', '2')
-                    ->where('lev2', '1')
-                    ->where('lev3', '1');
-              })
-              ->orWhere(function($q) {
-                  $q->where('lev1', '3')
-                    ->where('lev2', '2')
-                    ->where('lev3', '1');
-              });
-        });
-    },
-    'akun2.akun3.rek',
-    'akun2.akun3.rek.kom_saldo' => function ($query) use ($data) {
-        $query->where('tahun', $data['tahun'])
-              ->where(function ($query) use ($data) {
-                  $query->where('bulan', '0')
-                        ->orWhere('bulan', $data['bulan']);
-              });
-    },
-])->orderBy('kode_akun', 'ASC')->get();
+            'akun2' => function ($query) {
+                $query->where(function ($q) {
+                    $q->where(function ($q) {
+                        $q->where('lev1', '1')
+                            ->where('lev2', '1');
+                    })
+                        ->orWhere(function ($q) {
+                            $q->where('lev1', '2')
+                                ->where('lev2', '1');
+                        })
+                        ->orWhere(function ($q) {
+                            $q->where('lev1', '3')
+                                ->where('lev2', '2');
+                        });
+                });
+            },
+            'akun2.akun3' => function ($query) {
+                $query->where(function ($q) {
+                    $q->where(function ($q) {
+                        $q->where('lev1', '1')
+                            ->where('lev2', '1')
+                            ->where('lev3', '4');
+                    })
+                        ->orWhere(function ($q) {
+                            $q->where('lev1', '2')
+                                ->where('lev2', '1')
+                                ->where('lev3', '1');
+                        })
+                        ->orWhere(function ($q) {
+                            $q->where('lev1', '3')
+                                ->where('lev2', '2')
+                                ->where('lev3', '1');
+                        });
+                });
+            },
+            'akun2.akun3.rek',
+            'akun2.akun3.rek.kom_saldo' => function ($query) use ($data) {
+                $query->where('tahun', $data['tahun'])
+                    ->where(function ($query) use ($data) {
+                        $query->where('bulan', '0')
+                            ->orWhere('bulan', $data['bulan']);
+                    });
+            },
+        ])->orderBy('kode_akun', 'ASC')->get();
 
         $data['saldo_calk'] = Saldo::where([
             ['kode_akun', $data['kec']->kd_kec],

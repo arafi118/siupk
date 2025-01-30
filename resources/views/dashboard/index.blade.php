@@ -737,59 +737,38 @@
         $(document).on('click', '#KirimPesan', function(e) {
             e.preventDefault()
 
-            var form = $('#FormPemberitahuan')
-            var values = $('[data-input=checked]:checked').map(function(i) {
-                setTimeout(() => {
-                    var pesan = this.value
-                    var number = pesan.split('||')[0]
-                    var kelompok = pesan.split('||')[1]
-                    var msg = pesan.split('||')[2]
+            var messages = [];
+            $('[data-input=checked]:checked').each(function(i) {
+                var pesan = this.value
 
-                    sendMsg(number, kelompok, msg)
-                }, i * 1500);
-            }).get();
-        })
+                var number = pesan.split('||')[0]
+                var kelompok = pesan.split('||')[1]
+                var msg = pesan.split('||')[2]
 
-        function sendMsg(number, nama, msg, repeat = 0) {
+                if (!number.startsWith('08') && !number.startsWith('628')) {
+                    number = '0' + number;
+                }
+
+                messages.push({
+                    number,
+                    message: msg
+                })
+            });
+
             $.ajax({
-                type: 'post',
-                url: '{{ $api }}/send-text',
-                timeout: 0,
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                xhrFields: {
-                    withCredentials: true
-                },
+                type: 'POST',
+                url: '{{ $api }}/api/message/{{ $kec->token }}/send_messages',
+                contentType: 'application/json',
                 data: JSON.stringify({
-                    token: "{{ auth()->user()->ip }}",
-                    number: number,
-                    text: msg
+                    messages
                 }),
                 success: function(result) {
-                    if (result.status) {
-                        MultiToast('success', 'Pesan untuk kelompok ' + nama + ' berhasil dikirim')
-                    } else {
-                        if (repeat < 1) {
-                            setTimeout(function() {
-                                sendMsg(number, nama, msg, repeat + 1)
-                            }, 1000)
-                        } else {
-                            MultiToast('error', 'Pesan untuk kelompok ' + nama + ' gagal dikirim')
-                        }
-                    }
-                },
-                error: function(result) {
-                    if (repeat < 1) {
-                        setTimeout(function() {
-                            sendMsg(number, nama, msg, repeat + 1)
-                        }, 1000)
-                    } else {
-                        MultiToast('error', 'Pesan untuk kelompok ' + nama + ' gagal dikirim')
+                    if (result.success) {
+                        Swal.fire('Berhasil', 'Pesan Berhasil Dikirim', 'success')
                     }
                 }
             })
-        }
+        })
 
         $(document).on('click', '#btnjatuhTempo', function(e) {
             e.preventDefault()
