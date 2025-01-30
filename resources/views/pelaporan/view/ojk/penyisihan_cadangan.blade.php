@@ -27,11 +27,7 @@ $nomor_jenis_pp_i = 0;
         $t_kolek3 = 0;
         @endphp
 
-<<<<<<< HEAD
         @if ($nomor_jenis_pp != 0)
-=======
-        @if ($jpp->$nomor_jenis_pp != 0)
->>>>>>> d20899d9b66b43977dc757b2de08a0e3327d9f1b
             <div class="break"></div>
         @endif
 
@@ -87,13 +83,14 @@ $nomor_jenis_pp_i = 0;
             @php
             $sum_pokok = 0;
             $sum_jasa = 0;
-            $saldo_pokok = $pinj->alokasi;
-            $saldo_jasa = $pinj->pros_jasa == 0 ? 0 : $pinj->alokasi * ($pinj->pros_jasa / 100);
+            $saldo_pokok = (float)$pinj->alokasi;
+            $saldo_jasa = $pinj->pros_jasa == 0 ? 0 : (float)$pinj->alokasi * ((float)$pinj->pros_jasa / 100);
+
             if ($pinj->saldo) {
-                $sum_pokok = $pinj->saldo->sum_pokok;
-                $sum_jasa = $pinj->saldo->sum_jasa;
-                $saldo_pokok = $pinj->saldo->saldo_pokok;
-                $saldo_jasa = $pinj->saldo->saldo_jasa;
+                $sum_pokok = (float)$pinj->saldo->sum_pokok;
+                $sum_jasa = (float)$pinj->saldo->sum_jasa;
+                $saldo_pokok = (float)$pinj->saldo->saldo_pokok;
+                $saldo_jasa = (float)$pinj->saldo->saldo_jasa;
             }
 
             $target_pokok = 0;
@@ -101,12 +98,13 @@ $nomor_jenis_pp_i = 0;
             $wajib_pokok = 0;
             $wajib_jasa = 0;
             $angsuran_ke = 0;
+
             if ($pinj->target) {
-                $target_pokok = $pinj->target->target_pokok;
-                $target_jasa = $pinj->target->target_jasa;
-                $wajib_pokok = $pinj->target->wajib_pokok;
-                $wajib_jasa = $pinj->target->wajib_jasa;
-                $angsuran_ke = $pinj->target->angsuran_ke;
+                $target_pokok = (float)$pinj->target->target_pokok;
+                $target_jasa = (float)$pinj->target->target_jasa;
+                $wajib_pokok = (float)$pinj->target->wajib_pokok;
+                $wajib_jasa = (float)$pinj->target->wajib_jasa;
+                $angsuran_ke = (float)$pinj->target->angsuran_ke;
             }
 
             $tunggakan_pokok = $target_pokok - $sum_pokok;
@@ -117,23 +115,20 @@ $nomor_jenis_pp_i = 0;
             if ($tunggakan_jasa < 0) {
                 $tunggakan_jasa = 0;
             }
-            $pross = $saldo_pokok == 0 ? 0 : $saldo_pokok / $pinj->alokasi;
+            $pross = $saldo_pokok == 0 ? 0 : $saldo_pokok / (float)$pinj->alokasi;
 
-            if ($pinj->tgl_lunas <= $tgl_kondisi && $pinj->status == 'L') {
+            // Reset nilai jika sudah lunas
+            if ($pinj->tgl_lunas <= $tgl_kondisi && in_array($pinj->status, ['L', 'R', 'H'])) {
                 $tunggakan_pokok = 0;
                 $tunggakan_jasa = 0;
                 $saldo_pokok = 0;
                 $saldo_jasa = 0;
-            } elseif ($pinj->tgl_lunas <= $tgl_kondisi && $pinj->status == 'R') {
-                $tunggakan_pokok = 0;
-                $tunggakan_jasa = 0;
-                $saldo_pokok = 0;
-                $saldo_jasa = 0;
-            } elseif ($pinj->tgl_lunas <= $tgl_kondisi && $pinj->status == 'H') {
-                $tunggakan_pokok = 0;
-                $tunggakan_jasa = 0;
-                $saldo_pokok = 0;
-                $saldo_jasa = 0;
+            }
+            
+            // Hitung kolektibilitas
+            $_kolek = 0;
+            if ($wajib_pokok != 0) {
+                $_kolek = $tunggakan_pokok / $wajib_pokok;
             }
 
             $tgl_akhir = new DateTime($tgl_kondisi);
@@ -141,11 +136,9 @@ $nomor_jenis_pp_i = 0;
             $selisih = $tgl_akhir->diff($tgl_awal);
             $selisih = $selisih->y * 12 + $selisih->m;
 
-            $_kolek = 0;
-            if ($wajib_pokok != '0') {
-                $_kolek = $tunggakan_pokok / $wajib_pokok;
-            }
             $kolek = round($_kolek + ($selisih - $angsuran_ke));
+
+            // Set nilai kolektibilitas
             if ($kolek < 6) {
                 $kolek1 = $saldo_pokok;
                 $kolek2 = 0;
@@ -159,7 +152,9 @@ $nomor_jenis_pp_i = 0;
                 $kolek2 = 0;
                 $kolek3 = $saldo_pokok;
             }
-            $j_alokasi += $pinj->alokasi;
+
+            // Update total
+            $j_alokasi += (float)$pinj->alokasi;
             $j_saldo += $saldo_pokok;
             $j_tunggakan_pokok += $tunggakan_pokok;
             $j_tunggakan_jasa += $tunggakan_jasa;
@@ -168,7 +163,6 @@ $nomor_jenis_pp_i = 0;
             $j_kolek3 += $kolek3;
             @endphp
         @endforeach
-
         @if (count($kd_desa) > 0)
             @php
             $j_pross = $j_saldo / $j_alokasi;
@@ -240,11 +234,11 @@ $nomor_jenis_pp_i = 0;
         $nomor_jenis_pp++;
         @endphp
     @endforeach
-<<<<<<< HEAD
-            <div class="break"></div>
+
+    <div class="break"></div>
+    
     @foreach ($jenis_pp_i as $jpp)
         @php
-        
         if ($jpp->pinjaman_anggota->isEmpty()) {
             continue;
         }
@@ -318,13 +312,15 @@ $nomor_jenis_pp_i = 0;
             @php
             $sum_pokok = 0;
             $sum_jasa = 0;
-            $saldo_pokok = $pinj->alokasi;
-            $saldo_jasa = $pinj->pros_jasa == 0 ? 0 : $pinj->alokasi * ($pinj->pros_jasa / 100);
+            $saldo_pokok = floatval($pinj->alokasi);
+            $pros_jasa = floatval($pinj->pros_jasa);
+            $saldo_jasa = $pros_jasa == 0 ? 0 : ($saldo_pokok * ($pros_jasa / 100));
+
             if ($pinj->saldo) {
-                $sum_pokok = $pinj->saldo->sum_pokok;
-                $sum_jasa = $pinj->saldo->sum_jasa;
-                $saldo_pokok = $pinj->saldo->saldo_pokok;
-                $saldo_jasa = $pinj->saldo->saldo_jasa;
+                $sum_pokok = floatval($pinj->saldo->sum_pokok);
+                $sum_jasa = floatval($pinj->saldo->sum_jasa);
+                $saldo_pokok = floatval($pinj->saldo->saldo_pokok);
+                $saldo_jasa = floatval($pinj->saldo->saldo_jasa);
             }
 
             $target_pokok = 0;
@@ -333,38 +329,34 @@ $nomor_jenis_pp_i = 0;
             $wajib_jasa = 0;
             $angsuran_ke = 0;
             if ($pinj->target) {
-                $target_pokok = $pinj->target->target_pokok;
-                $target_jasa = $pinj->target->target_jasa;
-                $wajib_pokok = $pinj->target->wajib_pokok;
-                $wajib_jasa = $pinj->target->wajib_jasa;
-                $angsuran_ke = $pinj->target->angsuran_ke;
+                $target_pokok = floatval($pinj->target->target_pokok);
+                $target_jasa = floatval($pinj->target->target_jasa);
+                $wajib_pokok = floatval($pinj->target->wajib_pokok);
+                $wajib_jasa = floatval($pinj->target->wajib_jasa);
+                $angsuran_ke = floatval($pinj->target->angsuran_ke);
             }
 
+            // Hitung tunggakan
             $tunggakan_pokok = $target_pokok - $sum_pokok;
-            if ($tunggakan_pokok < 0) {
-                $tunggakan_pokok = 0;
-            }
+            $tunggakan_pokok = max(0, $tunggakan_pokok);
+            
             $tunggakan_jasa = $target_jasa - $sum_jasa;
-            if ($tunggakan_jasa < 0) {
-                $tunggakan_jasa = 0;
-            }
-            $pross = $saldo_pokok == 0 ? 0 : $saldo_pokok / $pinj->alokasi;
+            $tunggakan_jasa = max(0, $tunggakan_jasa);
 
-            if ($pinj->tgl_lunas <= $tgl_kondisi && $pinj->status == 'L') {
+            $pross = $saldo_pokok == 0 ? 0 : ($saldo_pokok / floatval($pinj->alokasi));
+
+            // Reset nilai jika sudah lunas
+            if ($pinj->tgl_lunas <= $tgl_kondisi && in_array($pinj->status, ['L', 'R', 'H'])) {
                 $tunggakan_pokok = 0;
                 $tunggakan_jasa = 0;
                 $saldo_pokok = 0;
                 $saldo_jasa = 0;
-            } elseif ($pinj->tgl_lunas <= $tgl_kondisi && $pinj->status == 'R') {
-                $tunggakan_pokok = 0;
-                $tunggakan_jasa = 0;
-                $saldo_pokok = 0;
-                $saldo_jasa = 0;
-            } elseif ($pinj->tgl_lunas <= $tgl_kondisi && $pinj->status == 'H') {
-                $tunggakan_pokok = 0;
-                $tunggakan_jasa = 0;
-                $saldo_pokok = 0;
-                $saldo_jasa = 0;
+            }
+
+            // Hitung kolektibilitas
+            $_kolek = 0;
+            if ($wajib_pokok != 0) {
+                $_kolek = $tunggakan_pokok / $wajib_pokok;
             }
 
             $tgl_akhir = new DateTime($tgl_kondisi);
@@ -372,11 +364,9 @@ $nomor_jenis_pp_i = 0;
             $selisih = $tgl_akhir->diff($tgl_awal);
             $selisih = $selisih->y * 12 + $selisih->m;
 
-            $_kolek = 0;
-            if ($wajib_pokok != '0') {
-                $_kolek = $tunggakan_pokok / $wajib_pokok;
-            }
             $kolek = round($_kolek + ($selisih - $angsuran_ke));
+
+            // Set nilai kolektibilitas
             if ($kolek < 6) {
                 $kolek1 = $saldo_pokok;
                 $kolek2 = 0;
@@ -390,7 +380,9 @@ $nomor_jenis_pp_i = 0;
                 $kolek2 = 0;
                 $kolek3 = $saldo_pokok;
             }
-            $j_alokasi += $pinj->alokasi;
+
+            // Update total
+            $j_alokasi += floatval($pinj->alokasi);
             $j_saldo += $saldo_pokok;
             $j_tunggakan_pokok += $tunggakan_pokok;
             $j_tunggakan_jasa += $tunggakan_jasa;
@@ -399,6 +391,7 @@ $nomor_jenis_pp_i = 0;
             $j_kolek3 += $kolek3;
             @endphp
         @endforeach
+
 
         @if (count($kd_desa) > 0)
             @php
@@ -471,7 +464,4 @@ $nomor_jenis_pp_i = 0;
         $nomor_jenis_pp_i++;
         @endphp
     @endforeach
-=======
-    
->>>>>>> d20899d9b66b43977dc757b2de08a0e3327d9f1b
 @endsection
