@@ -529,8 +529,15 @@ class PelaporanController extends Controller
             $data['judul'] = 'Laporan Keuangan';
             $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         }
-
-        $data['jenis_pp'] = JenisProdukPinjaman::where('lokasi', '0')->with([
+        
+        $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
+        $data['jenis_pp'] = JenisProdukPinjaman::where(function ($query) use ($kec) {
+            $query->where('lokasi', '0')
+                ->orWhere(function ($query) use ($kec) {
+                    $query->where('kecuali', 'NOT LIKE', "%-{$kec['id']}-%")
+                        ->where('lokasi', 'LIKE', "%-{$kec['id']}-%");
+                });
+        })->with([
             'pinjaman_kelompok' => function ($query) use ($data) {
                 $tb_pinj = 'pinjaman_kelompok_' . $data['kec']->id;
                 $tb_kel = 'kelompok_' . $data['kec']->id;
@@ -597,8 +604,15 @@ class PelaporanController extends Controller
             $data['judul'] = 'Laporan Keuangan';
             $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         }
-
-        $data['jenis_pp_i'] = JenisProdukPinjaman::where('lokasi', '0')->with([
+        
+        $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
+        $data['jenis_pp_i'] = JenisProdukPinjaman::where(function ($query) use ($kec) {
+            $query->where('lokasi', '0')
+                ->orWhere(function ($query) use ($kec) {
+                    $query->where('kecuali', 'NOT LIKE', "%-{$kec['id']}-%")
+                        ->where('lokasi', 'LIKE', "%-{$kec['id']}-%");
+                });
+        })->with([
             'pinjaman_individu' => function ($query) use ($data) {
                 $tb_pinj_i = 'pinjaman_anggota_' . $data['kec']->id;
                 $tb_angg = 'anggota_' . $data['kec']->id;
@@ -792,7 +806,14 @@ class PelaporanController extends Controller
             $data['judul'] = 'Laporan Keuangan';
             $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         }
-        $data['jenis_pp'] = JenisProdukPinjaman::where('lokasi', '0')->with([
+        $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
+        $data['jenis_pp'] = JenisProdukPinjaman::where(function ($query) use ($kec) {
+            $query->where('lokasi', '0')
+                ->orWhere(function ($query) use ($kec) {
+                    $query->where('kecuali', 'NOT LIKE', "%-{$kec['id']}-%")
+                        ->where('lokasi', 'LIKE', "%-{$kec['id']}-%");
+                });
+        })->with([
             'pinjaman_kelompok' => function ($query) use ($data) {
                 $tb_pinj = 'pinjaman_kelompok_' . $data['kec']->id;
                 $tb_kel = 'kelompok_' . $data['kec']->id;
@@ -817,7 +838,13 @@ class PelaporanController extends Controller
                     }], 'realisasi_jasa'); // Add closing parenthesis and square bracket here
             }
         ])->get();
-        $data['jenis_pp_i'] = JenisProdukPinjaman::where('lokasi', '0')->with([
+        $data['jenis_pp_i'] = JenisProdukPinjaman::where(function ($query) use ($kec) {
+            $query->where('lokasi', '0')
+                ->orWhere(function ($query) use ($kec) {
+                    $query->where('kecuali', 'NOT LIKE', "%-{$kec['id']}-%")
+                        ->where('lokasi', 'LIKE', "%-{$kec['id']}-%");
+                });
+        })->with([
             'pinjaman_individu' => function ($query) use ($data) {
                 $tb_pinj_i = 'pinjaman_anggota_' . $data['kec']->id;
                 $tb_angg = 'anggota_' . $data['kec']->id;
@@ -1027,8 +1054,15 @@ class PelaporanController extends Controller
             $data['tgl'] = Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         }
 
-
-        $data['jenis_pp'] = JenisProdukPinjaman::where('lokasi', '0')->with([
+        
+        $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
+        $data['jenis_pp'] = JenisProdukPinjaman::where(function ($query) use ($kec) {
+            $query->where('lokasi', '0')
+                ->orWhere(function ($query) use ($kec) {
+                    $query->where('kecuali', 'NOT LIKE', "%-{$kec['id']}-%")
+                        ->where('lokasi', 'LIKE', "%-{$kec['id']}-%");
+                });
+        })->with([
             'pinjaman_kelompok' => function ($query) use ($data) {
                 $tb_pinj = 'pinjaman_kelompok_' . $data['kec']->id;
                 $tb_kel = 'kelompok_' . $data['kec']->id;
@@ -1084,8 +1118,14 @@ class PelaporanController extends Controller
                 $query->where('jatuh_tempo', '<=', $data['tgl_kondisi']);
             }
         ])->get();
-
-        $data['jenis_pp_i'] = JenisProdukPinjaman::where('lokasi', '0')->with([
+        
+        $data['jenis_pp_i'] = JenisProdukPinjaman::where(function ($query) use ($kec) {
+            $query->where('lokasi', '0')
+                ->orWhere(function ($query) use ($kec) {
+                    $query->where('kecuali', 'NOT LIKE', "%-{$kec['id']}-%")
+                        ->where('lokasi', 'LIKE', "%-{$kec['id']}-%");
+                });
+        })->with([
             'pinjaman_anggota' => function ($query) use ($data) {
                 $tb_pinj_i = 'pinjaman_anggota_' . $data['kec']->id;
                 $tb_ang = 'anggota_' . $data['kec']->id;
