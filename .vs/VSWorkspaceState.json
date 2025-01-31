@@ -2,11 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\app",
-    "\\resources",
+    "\\app\\Utils",
     "\\resources\\views",
-    "\\resources\\views\\pelaporan",
-    "\\resources\\views\\pelaporan\\view"
+    "\\resources\\views\\transaksi",
+    "\\resources\\views\\transaksi\\jurnal_umum",
+    "\\resources\\views\\transaksi\\jurnal_umum\\partials"
   ],
-  "SelectedNode": "\\resources\\views\\pelaporan\\view\\laba_rugi.blade.php",
+  "SelectedNode": "\\app\\Utils\\Inventaris.php",
   "PreviewInSolutionExplorer": false
 }

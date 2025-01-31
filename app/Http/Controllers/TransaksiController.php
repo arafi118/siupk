@@ -1433,8 +1433,11 @@ class TransaksiController extends Controller
         if (Keuangan::startWith($sumber_dana, '1.2.01') && Keuangan::startWith($disimpan_ke, '5.3.02.01') && $jenis_transaksi == 2) {
             if ($sumber_dana == '1.2.01.01') {
                 $jenis = '1';
-                $kategori = '2';
+                $kategori = '1';
             } elseif ($sumber_dana == '1.2.01.02') {
+                $jenis = '1';
+                $kategori = '2';
+            } elseif ($sumber_dana == '1.2.01.03') {
                 $jenis = '1';
                 $kategori = '3';
             } else {
