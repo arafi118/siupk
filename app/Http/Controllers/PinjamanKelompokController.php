@@ -2531,7 +2531,7 @@ class PinjamanKelompokController extends Controller
                 } else {
                     $penambahan = "+$x month";
                 }
-
+                 
                 $tanggal_cair = date('Y-m', strtotime($tgl));
                 $jatuh_tempo = date('Y-m', strtotime($penambahan, strtotime($tanggal_cair)));
 

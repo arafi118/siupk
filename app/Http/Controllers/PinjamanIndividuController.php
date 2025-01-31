@@ -2520,7 +2520,15 @@ class PinjamanIndividuController extends Controller
                 } else {
                     $penambahan = "+$x month";
                 }
-                $jatuh_tempo = date('Y-m-d', strtotime($penambahan, strtotime($tgl)));
+
+                $tanggal_cair = date('Y-m', strtotime($tgl));
+                $jatuh_tempo = date('Y-m', strtotime($penambahan, strtotime($tanggal_cair)));
+
+                if (date('d', strtotime($tgl)) > date('t', strtotime($jatuh_tempo))) {
+                    $jatuh_tempo = date('Y-m-t', strtotime($jatuh_tempo));
+                } else {
+                    $jatuh_tempo = date('Y-m', strtotime($jatuh_tempo)) . '-' . date('d', strtotime($tgl));
+                }
 
                 $pokok = $ra[$x]['pokok'];
                 $jasa = $ra[$x]['jasa'];
