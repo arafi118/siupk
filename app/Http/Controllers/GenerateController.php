@@ -353,14 +353,13 @@ class GenerateController extends Controller
                 } else {
                     $penambahan = "+$x month";
                 }
-                
-                $tanggal_cair = date('Y-m', strtotime($tgl));
+                $tanggal_cair = date('Y-m', strtotime($tgl_cair));
                 $jatuh_tempo = date('Y-m', strtotime($penambahan, strtotime($tanggal_cair)));
 
-                if (date('d', strtotime($tgl)) > date('t', strtotime($jatuh_tempo))) {
+                if (date('d', strtotime($tgl_cair)) > date('t', strtotime($jatuh_tempo))) {
                     $jatuh_tempo = date('Y-m-t', strtotime($jatuh_tempo));
                 } else {
-                    $jatuh_tempo = date('Y-m', strtotime($jatuh_tempo)) . '-' . date('d', strtotime($tgl));
+                    $jatuh_tempo = date('Y-m', strtotime($jatuh_tempo)) . '-' . date('d', strtotime($tgl_cair));
                 }
 
                 $pokok = $ra[$x]['pokok'];
