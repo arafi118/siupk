@@ -347,6 +347,26 @@
                         $tl_saldo_jasa = 0;
                     }
                 @endphp
+                <tr style="font-weight: bold;">
+                    <td class="t l b" align="left" height="15">
+                        Aktif s.d. {{$sub_judul}}
+                    </td>
+                                <td class="t l b" width="2%" align="center">{{ $t_kel }}</td>
+                    <td class="t l b" align="right">{{ number_format($t_alokasi) }}</td>
+                    <td class="t l b" align="right">{{ number_format($t_target_pokok) }}</td>
+                    <td class="t l b" align="right">{{ number_format($t_target_jasa) }}</td>
+                    <td class="t l b" align="right">{{ number_format($t_real_bl_pokok) }}</td>
+                    <td class="t l b" align="right">{{ number_format($t_real_bl_jasa) }}</td>
+                    <td class="t l b" align="right">{{ number_format($t_real_pokok) }}</td>
+                    <td class="t l b" align="right">{{ number_format($t_real_jasa) }}</td>
+                    <td class="t l b" align="right">{{ number_format($t_real_bi_pokok) }}</td>
+                    <td class="t l b" align="right">{{ number_format($t_real_bi_jasa) }}</td>
+                    <td class="t l b" align="right">{{ number_format($t_saldo_pokok) }}</td>
+                    <!-- <td class="t l b" align="right">{{ number_format($tl_saldo_jasa) }}</td> -->
+                    <td class="t l b" align="center">{{ number_format(floor($t_pross * 100)) }}</td>
+                    <td class="t l b" align="right">{{ number_format($t_tunggakan_pokok) }}</td>
+                    <td class="t l b r" align="right">{{ number_format($t_tunggakan_jasa) }}</td>
+                </tr>
 
                 <tr style="font-weight: bold;">
                     <td class="t l b" align="left" colspan="2" height="15">

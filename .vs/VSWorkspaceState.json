@@ -2,12 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\app",
+    "\\app\\Http",
+    "\\app\\Http\\Controllers",
     "\\app\\Utils",
+    "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\transaksi",
-    "\\resources\\views\\transaksi\\jurnal_umum",
-    "\\resources\\views\\transaksi\\jurnal_umum\\partials"
+    "\\resources\\views\\perguliran",
+    "\\resources\\views\\perguliran\\dokumen"
   ],
-  "SelectedNode": "\\app\\Utils\\Inventaris.php",
+  "SelectedNode": "\\app\\Http\\Controllers\\GenerateController.php",
   "PreviewInSolutionExplorer": false
 }
