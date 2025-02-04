@@ -32,16 +32,6 @@ class Simpanan extends Model
         return $this->belongsTo(JenisJasa::class, 'jenis_jasa');
     }
 
-    public function angsuran_pokok()
-    {
-        return $this->belongsTo(SistemAngsuran::class, 'sistem_angsuran');
-    }
-
-    public function angsuran_jasa()
-    {
-        return $this->belongsTo(SistemAngsuran::class, 'sa_jasa');
-    }
-
     public function anggota()
     {
         return $this->belongsTo(Anggota::class, 'nia', 'id');
@@ -52,59 +42,14 @@ class Simpanan extends Model
         return $this->belongsTo(StatusPinjaman::class, 'status', 'kd_status');
     }
 
-    public function ra_i()
+    public function real_s()
     {
-        return $this->hasMany(RencanaAngsuranI::class, 'loan_id')->orderBy('angsuran_ke', 'ASC');
-    }
-
-    public function real_i()
-    {
-        return $this->hasMany(RealAngsuranI::class, 'loan_id')->orderBy('tgl_transaksi', 'ASC')->orderBy('id', 'ASC');
-    }
-
-    public function sis_pokok()
-    {
-        return $this->belongsTo(SistemAngsuran::class, 'sistem_angsuran');
-    }
-
-    public function sis_jasa()
-    {
-        return $this->belongsTo(SistemAngsuran::class, 'sa_jasa');
-    }
-
-    public function saldo()
-    {
-        return $this->hasOne(RealAngsuranI::class, 'loan_id')->orderBy('tgl_transaksi', 'DESC')->orderBy('id', 'DESC');
-    }
-
-    public function saldo2()
-    {
-        return $this->hasOne(RealAngsuranI::class, 'loan_id')->orderBy('tgl_transaksi', 'ASC')->orderBy('id', 'ASC');
-    }
-
-    public function target()
-    {
-        return $this->hasOne(RencanaAngsuranI::class, 'loan_id')->orderBy('jatuh_tempo', 'DESC');
-    }
-
-    public function rencana()
-    {
-        return $this->hasMany(RencanaAngsuranI::class, 'loan_id')->orderBy('jatuh_tempo', 'ASC');
-    }
-
-    public function rencana1()
-    {
-        return $this->hasOne(RencanaAngsuranI::class, 'loan_id')->orderBy('jatuh_tempo', 'ASC');
+        return $this->hasMany(RealSimpanan::class, 'cif', 'id')->orderBy('tgl_transaksi', 'ASC')->orderBy('id', 'ASC');
     }
 
     public function trx()
     {
         return $this->hasMany(Transaksi::class, 'id_simp', 'id')->orderBy('tgl_transaksi', 'ASC')->orderBy('idtp', 'ASC');
-    }
-
-    public function saldo_pinjaman()
-    {
-        return $this->hasOne(Penghapusan::class, 'id_pinj_i', 'id');
     }
 
     public function user()

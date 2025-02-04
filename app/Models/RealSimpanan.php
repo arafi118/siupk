@@ -25,4 +25,8 @@ class RealSimpanan extends Model
     {
         return $this->belongsTo(Simpanan::class, 'cif', 'id');
     }
+    public function transaksi()
+    {
+        return $this->belongsTo(Transaksi::class, 'idt', 'idt');
+    }
 }

@@ -3669,7 +3669,7 @@ class PelaporanController extends Controller
         }
 
         $data['tgl_lalu'] = $data['tahun'] . '-' . $data['bulan'] . '-01';
-
+        //
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $data['jenis_ps'] = JenisSimpanan::where(function ($query) use ($kec) {
             $query->where('lokasi', '0')
@@ -3687,12 +3687,14 @@ class PelaporanController extends Controller
                     ->join($tb_angg, $tb_angg . '.id', '=', $tb_simp . '.nia')
                     ->join('desa', $tb_angg . '.desa', '=', 'desa.kd_desa')
                     ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
-                    ->withSum(['real_i' => function ($query) use ($data) {
-                        $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
-                    }], 'realisasi_pokok')
-                    ->withSum(['real_i' => function ($query) use ($data) {
-                        $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
-                    }], 'realisasi_jasa')
+                    ->withSum(['real_s' => function ($query) use ($data) {
+                        $tgl_kondisi = $data['tahun'] . '-' . $data['bulan'] . '-' . $data['hari'];
+                        $query->where('tgl_transaksi', '<', $tgl_kondisi);
+                    }], 'real_d')
+                    ->withSum(['real_s' => function ($query) use ($data) {
+                        $tgl_kondisi = $data['tahun'] . '-' . $data['bulan'] . '-' . $data['hari'];
+                        $query->where('tgl_transaksi', '<', $tgl_kondisi);
+                    }], 'real_k')
                     ->where(function ($query) use ($data) {
                         $query->where([
                             [$data['tb_simp'] . '.status', 'A'],
@@ -3706,8 +3708,11 @@ class PelaporanController extends Controller
                     ->orderBy($tb_angg . '.desa', 'ASC')
                     ->orderBy($tb_simp . '.tgl_buka', 'ASC');
             },
+            'simpanan.realSimpananTerbesar' => function ($query) use ($data) {
+                $query->where('tgl_transaksi', '<=', $data['tgl_kondisi']);
+            },
         ])->get();
-
+        
         $data['lunas'] = Simpanan::where([
             ['tgl_tutup', '<', $thn . '-01-01'],
             ['status', 'L']

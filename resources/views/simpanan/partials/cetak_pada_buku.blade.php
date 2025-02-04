@@ -30,16 +30,6 @@
         $a = $i % 24;
         $br = ($a <= 10) ? $a : $a + 2;
 
-// Calculate previous balance
-$sum = DB::table('real_simpanan_' . session('lokasi'))
-    ->where('cif', $cif)
-    ->where('tgl_transaksi', '<', $transaksi->tgl_transaksi)
-    ->orderBy('tgl_transaksi', 'desc')
-    ->orderBy('id', 'desc')
-    ->value('sum') ?? 0;
-    
-                    $sum_tampil=$sum+$kredit-$debit;
-    
 
 @endphp
 
@@ -59,9 +49,9 @@ $sum = DB::table('real_simpanan_' . session('lokasi'))
         <tr>
             <td width="12%" class="style9 align-center">{{ $transaksi->tgl_transaksi }}</td>
             <td width="5%" class="style9 align-center">{{ $kode }}</td>
-            <td width="16%" class="style9 align-center">{{ number_format($debit) }}</td>
-            <td width="16%" class="style9 align-center">{{ number_format($kredit) }}</td>
-            <td width="16%" class="style9 align-center">{{ number_format($sum_tampil) }}</td>
+            <td width="16%" class="style9 align-center">{{ number_format($transaksi->realSimpanan->real_d) }}</td>
+            <td width="16%" class="style9 align-center">{{ number_format($transaksi->realSimpanan->real_k) }}</td>
+            <td width="16%" class="style9 align-center">{{ number_format($transaksi->realSimpanan->sum) }}</td>
             <td width="10%" class="style9 align-center">{{ strtoupper($user) }}-{{ $transaksi->idt }}</td>
             <td width="25%" class="style9 align-center">&nbsp;</td>
         </tr>

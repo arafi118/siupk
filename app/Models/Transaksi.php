@@ -50,4 +50,8 @@ class Transaksi extends Model
     {
         return $this->belongsTo(Simpanan::class, 'id_simp', 'id');
     }
+    public function realSimpanan()
+    {
+        return $this->hasOne(RealSimpanan::class, 'idt', 'idt');
+    }
 }

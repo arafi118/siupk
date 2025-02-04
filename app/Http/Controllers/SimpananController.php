@@ -76,33 +76,39 @@ class SimpananController extends Controller
         $tahun = request()->input('tahun');
         $cif = request()->input('cif');
 
-        // Query transaksi dengan filter berdasarkan input bulan, tahun, dan cif
         $transaksiQuery = Transaksi::where('id_simp', 'LIKE', "%-$cif");
 
-        // Filter tahun jika diberikan
         if ($tahun != 0) {
             $transaksiQuery->whereYear('tgl_transaksi', $tahun);
         }
 
-        // Filter bulan jika diberikan
         if ($bulan != 0) {
             $transaksiQuery->whereMonth('tgl_transaksi', $bulan);
         }
 
-        // Ambil data transaksi yang sudah difilter dan diurutkan
-        $transaksi = $transaksiQuery->orderBy('tgl_transaksi', 'asc')->get();
+        $transaksi = $transaksiQuery->with('realSimpanan')->orderBy('tgl_transaksi', 'asc')->get();
 
-        // Ambil data 'ins' berdasarkan id_user dari setiap transaksi
         $transaksi->each(function ($item) {
             $item->ins = User::where('id', $item->id_user)->value('ins');
         });
 
         $bulankop = $bulan;
         $tahunkop = $tahun;
+        
+    $startDate = \Carbon\Carbon::createFromDate(
+        $tahunkop, 
+        $bulankop == 0 ? 1 : $bulankop, 
+        1
+    )->startOfMonth();
 
-        // Return view dengan semua variabel yang dibutuhkan
-        return view('simpanan.partials.detail-transaksi', compact('transaksi', 'bulankop', 'tahunkop', 'cif'));
-    }
+    $last_sum = RealSimpanan::where('cif', $cif)
+        ->where('tgl_transaksi', '<', $startDate)
+        ->orderBy('tgl_transaksi', 'desc')
+        ->orderBy('id', 'desc')
+        ->value('sum') ?? 0;
+
+    return view('simpanan.partials.detail-transaksi', compact('transaksi', 'bulankop', 'tahunkop', 'cif', 'last_sum'));
+}
 
 
 
@@ -275,7 +281,7 @@ class SimpananController extends Controller
 public function cetakPadaBuku($idt)
 {
     $saldo = 0;
-    $transaksi = Transaksi::where('idt', $idt)->first();
+    $transaksi = Transaksi::where('idt', $idt)->with('realSimpanan')->orderBy('tgl_transaksi', 'asc')->first();
     $parts = explode('-', $transaksi->id_simp);
 
     $transaksiCount = Transaksi::where('id_simp', 'like', '%-' . $parts[1])
@@ -304,7 +310,6 @@ public function cetakPadaBuku($idt)
                     }
 
         $title = 'Cetak Pada Buku '.$transaksi->id_simp;
-
         return view('simpanan.partials.cetak_pada_buku')->with(compact('title','transaksi', 'transaksiCount', 'kode', 'user', 'debit', 'kredit',  'saldo'));
     }
 
@@ -319,7 +324,7 @@ public function cetakPadaBuku($idt)
 
         // Mengambil jenis_simpanan dari tabel tb_simpanan berdasarkan id ($nia)
         $simpanan = Simpanan::where('id', $nia)->first();
-    
+
         if (!$simpanan) {
             return response()->json(['success' => false, 'message' => 'Data simpanan tidak ditemukan']);
         }
@@ -330,6 +335,14 @@ public function cetakPadaBuku($idt)
         if (!$jenisSimpanan) {
             return response()->json(['success' => false, 'message' => 'Jenis simpanan tidak ditemukan']);
         }
+
+        // Mengambil real_simpanan terbaru berdasarkan tgl_transaksi dan cif
+        $realSimpanan = RealSimpanan::where('cif', $simpanan->id)
+            ->where('tgl_transaksi', '<=', $tglTransaksi)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        $sum_baru = $realSimpanan ? ($realSimpanan->sum - ($jenisMutasi == '1' ? 0 : $jumlah) + ($jenisMutasi == '1' ? $jumlah : 0)) : $jumlah;
 
         $transaksi = new Transaksi();
         $transaksi->tgl_transaksi = Tanggal::tglNasional($tglTransaksi);
@@ -346,6 +359,18 @@ public function cetakPadaBuku($idt)
         $transaksi->id_user = auth()->user()->id;
 
         if ($transaksi->save()) {
+            // Menyimpan ke real_simpanan_3
+            RealSimpanan::create([
+                'cif' => $simpanan->id,
+                'idt' => $transaksi->id,
+                'tgl_transaksi' => $tglTransaksi,
+                'real_d' => $jenisMutasi == '1' ? 0 : $jumlah,
+                'real_k' => $jenisMutasi == '1' ? $jumlah : 0,
+                'sum' => $sum_baru,
+                'lu' => now(),
+                'id_user' => $transaksi->id_user,
+            ]);
+
             return response()->json(['success' => true]);
         } else {
             return response()->json(['success' => false, 'message' => 'Gagal menyimpan transaksi']);

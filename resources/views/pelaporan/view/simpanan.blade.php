@@ -178,16 +178,16 @@
                     </td>
                     <td class="t l b" align="left">{{ $pinkel->namadepan }}</td>
                     <td class="t l b" align="left">{{ $pinkel->alamat }}</td>
-                    <td class="t l b" align="right">{{ number_format($pinkel->debit) }}</td>
-                    <td class="t l b" align="right">{{ number_format($pinkel->kredit) }}</td>
-                    <td class="t l b r" align="right">{{ number_format($pinkel->saldo) }}</td>
+                    <td class="t l b" align="right">{{ number_format($pinkel->real_s_sum_real_d) }}</td>
+                    <td class="t l b" align="right">{{ number_format($pinkel->real_s_sum_real_k) }}</td>
+                    <td class="t l b r" align="right">{{ number_format($pinkel->realSimpananTerbesar->sum??0) }}</td>
                 </tr>
                 </tr>
 
                 @php
-                    $j_debit += $pinkel->debit;
-                    $j_kredit += $pinkel->kredit;
-                    $j_saldo += $pinkel->saldo;
+                    $j_debit += $pinkel->real_s_sum_real_d;
+                    $j_kredit += $pinkel->real_s_sum_real_k;
+                    $j_saldo += $pinkel->realSimpananTerbesar->sum??0;
                 @endphp
             @endforeach
             @php
