@@ -359,10 +359,9 @@ public function cetakPadaBuku($idt)
         $transaksi->id_user = auth()->user()->id;
 
         if ($transaksi->save()) {
-            // Menyimpan ke real_simpanan_3
             RealSimpanan::create([
                 'cif' => $simpanan->id,
-                'idt' => $transaksi->id,
+                'idt' => $transaksi->idt,
                 'tgl_transaksi' => $tglTransaksi,
                 'real_d' => $jenisMutasi == '1' ? 0 : $jumlah,
                 'real_k' => $jenisMutasi == '1' ? $jumlah : 0,
