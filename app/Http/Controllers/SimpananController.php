@@ -321,6 +321,7 @@ public function cetakPadaBuku($idt)
         $nomorRekening = $request->nomor_rekening;
         $namaDebitur = $request->nama_debitur;
         $nia = $request->nia;
+        $tgl=Tanggal::tglNasional($tglTransaksi);
 
         // Mengambil jenis_simpanan dari tabel tb_simpanan berdasarkan id ($nia)
         $simpanan = Simpanan::where('id', $nia)->first();
@@ -338,7 +339,7 @@ public function cetakPadaBuku($idt)
 
         // Mengambil real_simpanan terbaru berdasarkan tgl_transaksi dan cif
         $realSimpanan = RealSimpanan::where('cif', $simpanan->id)
-            ->where('tgl_transaksi', '<=', $tglTransaksi)
+            ->where('tgl_transaksi', '<=', $tgl)
             ->orderBy('id', 'desc')
             ->first();
 
@@ -362,7 +363,7 @@ public function cetakPadaBuku($idt)
             RealSimpanan::create([
                 'cif' => $simpanan->id,
                 'idt' => $transaksi->idt,
-                'tgl_transaksi' => $tglTransaksi,
+                'tgl_transaksi' => $tgl,
                 'real_d' => $jenisMutasi == '1' ? 0 : $jumlah,
                 'real_k' => $jenisMutasi == '1' ? $jumlah : 0,
                 'sum' => $sum_baru,
