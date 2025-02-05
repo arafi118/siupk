@@ -3375,7 +3375,6 @@ class PelaporanController extends Controller
             ['kode_akun', $data['kec']->kd_kec],
             ['tahun', $data['tahun_tb']]
         ])->get();
-
         $data['tgl_transaksi'] = $thn . '-12-31';
         $data['laporan'] = 'Alokasi Laba';
         $view = view('pelaporan.view.tutup_buku.alokasi_laba', $data)->render();

@@ -73,7 +73,7 @@
                 }
 
                 // Menghitung total saldo untuk setiap grup
-                $total_saldo = $trx->saldo->kredit - $trx->saldo->debit;
+                $total_saldo = $trx->trx_kredit_sum_jumlah;
                 $total_tr += $total_saldo;
             @endphp
             <tr style="background: {{ $bg }};">
