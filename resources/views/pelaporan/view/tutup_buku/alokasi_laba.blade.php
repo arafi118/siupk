@@ -60,7 +60,7 @@
         
             <tr style="background: rgb(167, 167, 167); font-weight: bold;">
                 <td height="20" align="left">
-                    <b>Jumlah Cadangan Kerugian Piutang</b>
+                    <b>Jumlah Penambahan Cadangan Kerugian Piutang</b>
                 </td>
                 <td align="right">{{ number_format($total_cr, 2) }}</td>
             </tr>
@@ -88,18 +88,22 @@
         
             <tr style="background: rgb(167, 167, 167); font-weight: bold;">
                 <td height="20" align="left">
-                    <b>Jumlah Cadangan Kerugian Piutang</b>
+                    <b>Jumlah Utang Laba</b>
                 </td>
                 <td align="right">{{ number_format($total_tr, 2) }}</td>
             </tr>
-
+            
+            <tr>
+                <td>Penambahan Modal</td>
+                    <td align="right">{{ number_format($jumlah_laba_ditahan - $total_tr -$total_cr, 2) }}</td>
+            </tr>
         <tr>
             <td colspan="2" style="padding: 0px !important;">
                 <table class="p" border="0" width="100%" cellspacing="0" cellpadding="0"
                     style="font-size: 11px;">
                     <tr style="background: rgb(74, 74, 74); color: #fff;">
                         <td align="center" height="20">
-                            <b>Total Alokasi Laba Usaha</b>
+                            <b>Total Penambahan Modal</b>
                         </td>
                         <td align="right">
                             <b>Rp. {{ number_format($jumlah_laba_ditahan - $total_tr -$total_cr, 2) }}</b>
