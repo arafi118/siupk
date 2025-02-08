@@ -9,7 +9,13 @@
                         <div class="col-md-6">
                             <div class="card-body p-3">
                                 <h5 class="mb-1">
-                                    Nasabah {{ $nia->anggota->namadepan }} CIF. {{$nia->id}}S>
+                                @php
+                                    $qq="";
+                                    if($nia->lembaga != 0){
+                                        $qq= "qq. ".$nia->lembaga;
+                                    }
+                                @endphp
+                                    Nasabah {{ $nia->anggota->namadepan }} {{$qq}} CIF. {{$nia->id}}
                                     ({{ $nia->js->nama_js }})
                                 </h5>
                                 <p class="mb-0">

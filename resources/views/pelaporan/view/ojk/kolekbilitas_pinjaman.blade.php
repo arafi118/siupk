@@ -47,6 +47,7 @@ $t_kolek3 = 0;
     <tr>
         <th class="t l b" width="2%">No</th>
         <th class="t l b" width="23%">Kelompok - Loan ID</th>
+        <th class="t l b" width="10%">Alokasi</th>
         <th class="t l b" width="10%">Saldo</th>
         <th class="t l b" width="10%">Tunggakan</th>
         <th class="t l b" width="10%">Lancar</th>
@@ -73,6 +74,7 @@ $t_kolek3 = 0;
         @endphp
         <tr style="font-weight: bold;">
             <td class="t l b" align="left" colspan="2">Jumlah {{ $nama_desa }}</td>
+            <td class="t l b" align="right">{{ number_format($j_alokasi) }}</td>
             <td class="t l b" align="right">{{ number_format($j_saldo) }}</td>
             <td class="t l b" align="right">{{ number_format($j_tunggakan_pokok) }}</td>
             <td class="t l b" align="right">{{ number_format($j_kolek1) }}</td>
@@ -82,7 +84,7 @@ $t_kolek3 = 0;
         @endif
 
         <tr style="font-weight: bold;">
-            <td class="t l b r" colspan="7" align="left">{{ $pinkel->kode_desa }}.
+            <td class="t l b r" colspan="8" align="left">{{ $pinkel->kode_desa }}.
                 {{ $pinkel->nama_desa }}</td>
         </tr>
         @php
@@ -185,6 +187,7 @@ $t_kolek3 = 0;
                                             <td class="t l b" align="center">{{ $nomor++ }}</td>
                                             <td class="t l b" align="left">{{ $pinkel->nama_kelompok }} -
                                                 {{ $pinkel->id }}</td>
+                                            <td class="t l b" align="right">{{ number_format($pinkel->alokasi) }}</td>
                                             <td class="t l b" align="right">{{ number_format($saldo_pokok) }}</td>
                                             <td class="t l b" align="right">{{ number_format($tunggakan_pokok) }}</td>
                                             <td class="t l b" align="right">{{ number_format($kolek1) }}</td>
@@ -216,6 +219,7 @@ $t_kolek3 = 0;
                                         @endphp
                                         <tr style="font-weight: bold;">
                                             <td class="t l b" align="left" colspan="2">Jumlah {{ $nama_desa }}</td>
+                                            <td class="t l b" align="right">{{ number_format($j_alokasi) }}</td>
                                             <td class="t l b" align="right">{{ number_format($j_saldo) }}</td>
                                             <td class="t l b" align="right">{{ number_format($j_tunggakan_pokok) }}</td>
                                             <td class="t l b" align="right">{{ number_format($j_kolek1) }}</td>
@@ -231,6 +235,7 @@ $t_kolek3 = 0;
                                         @endphp
                                         <tr style="font-weight: bold;">
                                             <td class="t l b" align="center" height="20" colspan="2">J U M L A H</td>
+                                            <td class="t l b" align="right">{{ number_format($t_alokasi) }}</td>
                                             <td class="t l b" align="right">{{ number_format($t_saldo) }}</td>
                                             <td class="t l b r" align="right">
                                                 {{ number_format($t_tunggakan_pokok) }}
@@ -242,14 +247,14 @@ $t_kolek3 = 0;
                                         <tr style="font-weight: bold;">
                                             <td class="t l b" align="center" colspan="2" rowspan="2" height="20">Resiko
                                                 Pinjaman</td>
-                                            <td class="t l b" colspan="2" align="center">(Lancar + Diragukan + Macet)
+                                            <td class="t l b" colspan="3" align="center">(Lancar + Diragukan + Macet)
                                             </td>
                                             <td class="t l b" align="center">Lancar * 0% </td>
                                             <td class="t l b" align="center">Diragukan * 50%</td>
                                             <td class="t l b r" align="center">Macet * 100%</td>
                                         </tr>
                                         <tr>
-                                            <td class="t l b" align="center" colspan="2">
+                                            <td class="t l b" align="center" colspan="3">
                                                 {{ number_format(($t_kolek1 * 1) / 100 + ($t_kolek2 * 10) / 100 + ($t_kolek3 * 25) / 100 + ($t_kolek3 * 100) / 100) }}
                                             </td>
                                             <td class="t l b" align="center">{{ number_format(($t_kolek1 * 1) / 100) }}
@@ -260,7 +265,7 @@ $t_kolek3 = 0;
                                                 {{ number_format(($t_kolek3 * 25) / 100) }}</td>
                                         </tr>
                                         <tr>
-                                            <td colspan="7" style="padding: 0px !important;">
+                                            <td colspan="8" style="padding: 0px !important;">
                                                 <table border="0" width="100%" cellspacing="0" cellpadding="0"
                                                     style="font-size: 11px; table-layout: fixed;">
                                                     <tr>
@@ -289,7 +294,6 @@ continue;
 $kd_desa = [];
 $t_alokasi = 0;
 $t_saldo = 0;
-        $nomor = 1;
 $t_tunggakan_pokok = 0;
 $t_tunggakan_jasa = 0;
 $t_kolek1 = 0;
@@ -320,7 +324,8 @@ $t_kolek3 = 0;
 <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px; table-layout: fixed;">
     <tr>
         <th class="t l b" width="2%">No</th>
-        <th class="t l b" width="23%">Nama - Loan ID</th>
+        <th class="t l b" width="23%">Kelompok - Loan ID</th>
+        <th class="t l b" width="10%">Alokasi</th>
         <th class="t l b" width="10%">Saldo</th>
         <th class="t l b" width="10%">Tunggakan</th>
         <th class="t l b" width="10%">Lancar</th>
@@ -332,11 +337,9 @@ $t_kolek3 = 0;
     @php
     $kd_desa[] = $pinj_i->kd_desa;
     $desa = $pinj_i->kd_desa;
-    @endphp
 
-    $counted_values = array_count_values($kd_desa);
-    @if (isset($counted_values[$pinj_i->kd_desa]) && $counted_values[$pinj_i->kd_desa] <= 1) @if ($section !=$desa &&
-        count($kd_desa)> 1)
+    @endphp
+    @if (array_count_values($kd_desa)[$pinj_i->kd_desa] <= '1' ) @if ($section !=$desa && count($kd_desa)> 1)
         @php
         $j_pross = $j_saldo / $j_alokasi;
         $t_alokasi += $j_alokasi;
@@ -349,6 +352,7 @@ $t_kolek3 = 0;
         @endphp
         <tr style="font-weight: bold;">
             <td class="t l b" align="left" colspan="2">Jumlah {{ $nama_desa }}</td>
+            <td class="t l b" align="right">{{ number_format($j_alokasi) }}</td>
             <td class="t l b" align="right">{{ number_format($j_saldo) }}</td>
             <td class="t l b" align="right">{{ number_format($j_tunggakan_pokok) }}</td>
             <td class="t l b" align="right">{{ number_format($j_kolek1) }}</td>
@@ -358,7 +362,7 @@ $t_kolek3 = 0;
         @endif
 
         <tr style="font-weight: bold;">
-            <td class="t l b r" colspan="7" align="left">{{ $pinj_i->kode_desa }}.
+            <td class="t l b r" colspan="8" align="left">{{ $pinj_i->kode_desa }}.
                 {{ $pinj_i->nama_desa }}</td>
         </tr>
         @php
@@ -441,21 +445,27 @@ $t_kolek3 = 0;
                                 if ($wajib_pokok != '0') {
                                 $_kolek = $tunggakan_pokok / $wajib_pokok;
                                 }
-                                $kolek = ceil($_kolek + ($selisih - $angsuran_ke));
+                                $kolek = round($_kolek + ($selisih - $angsuran_ke));
 
-                                if ($kolek < 6) { $kolek1=$saldo_pokok; $kolek2=0; $kolek3=0; $kolek4=0; $kolek5=0; }
-                                    elseif ($kolek>= 6 && $kolek < 12) { $kolek1=0; $kolek2=$saldo_pokok; $kolek3=0;
-                                        $kolek4=0; $kolek5=0; } elseif ($kolek>= 12) {
-                                        $kolek1 = 0;
-                                        $kolek2 = 0;
-                                        $kolek3 = $saldo_pokok;
-                                        }
+    if ($kolek < 6) {
+        $kolek1=$saldo_pokok; $kolek2=0; $kolek3=0; $kolek4=0; $kolek5=0; }
+    elseif ($kolek>= 6 && $kolek < 12) {
+        $kolek1=0; $kolek2=$saldo_pokok; $kolek3=0; $kolek4=0; $kolek5=0; }
+    elseif($kolek>= 12) {
+            $kolek1 = 0;
+            $kolek2 = 0;
+            $kolek5 = 0;
+            $kolek4 = 0;
+            $kolek3 = $saldo_pokok;
+            }
+
                                         @endphp
 
                                         <tr>
                                             <td class="t l b" align="center">{{ $nomor++ }}</td>
-                                            <td class="t l b" align="left">{{ $pinj_i->namadepan }} -
+                                            <td class="t l b" align="left">{{ $pinj_i->nama_kelompok }} -
                                                 {{ $pinj_i->id }}</td>
+                                            <td class="t l b" align="right">{{ number_format($pinj_i->alokasi) }}</td>
                                             <td class="t l b" align="right">{{ number_format($saldo_pokok) }}</td>
                                             <td class="t l b" align="right">{{ number_format($tunggakan_pokok) }}</td>
                                             <td class="t l b" align="right">{{ number_format($kolek1) }}</td>
@@ -487,6 +497,7 @@ $t_kolek3 = 0;
                                         @endphp
                                         <tr style="font-weight: bold;">
                                             <td class="t l b" align="left" colspan="2">Jumlah {{ $nama_desa }}</td>
+                                            <td class="t l b" align="right">{{ number_format($j_alokasi) }}</td>
                                             <td class="t l b" align="right">{{ number_format($j_saldo) }}</td>
                                             <td class="t l b" align="right">{{ number_format($j_tunggakan_pokok) }}</td>
                                             <td class="t l b" align="right">{{ number_format($j_kolek1) }}</td>
@@ -500,33 +511,28 @@ $t_kolek3 = 0;
                                         $t_pross = $t_saldo / $t_alokasi;
                                         }
                                         @endphp
-
                                         <tr style="font-weight: bold;">
-                                            <td width="25%" class="t l b" colspan="2" align="center" height="20">J U M L
-                                                A H</td>
-                                            <td width="10%" class="t l b" align="right">{{ number_format($t_saldo) }}
-                                            </td>
-                                            <td width="10%" class="t l b r" align="right">
+                                            <td class="t l b" align="center" height="20" colspan="2">J U M L A H</td>
+                                            <td class="t l b" align="right">{{ number_format($t_alokasi) }}</td>
+                                            <td class="t l b" align="right">{{ number_format($t_saldo) }}</td>
+                                            <td class="t l b r" align="right">
                                                 {{ number_format($t_tunggakan_pokok) }}
                                             </td>
-                                            <td width="10%" class="t l b" align="right">{{ number_format($t_kolek1) }}
-                                            </td>
-                                            <td width="10%" class="t l b" align="right">{{ number_format($t_kolek2) }}a
-                                            </td>
-                                            <td width="10%" class="t l b r" align="right">{{ number_format($t_kolek3) }}
-                                            </td>
+                                            <td class="t l b" align="right">{{ number_format($t_kolek1) }}</td>
+                                            <td class="t l b" align="right">{{ number_format($t_kolek2) }}</td>
+                                            <td class="t l b r" align="right">{{ number_format($t_kolek3) }}</td>
                                         </tr>
                                         <tr style="font-weight: bold;">
                                             <td class="t l b" align="center" colspan="2" rowspan="2" height="20">Resiko
                                                 Pinjaman</td>
-                                            <td class="t l b" colspan="2" align="center">(Lancar + Diragukan + Macet)
+                                            <td class="t l b" colspan="3" align="center">(Lancar + Diragukan + Macet)
                                             </td>
                                             <td class="t l b" align="center">Lancar * 0% </td>
                                             <td class="t l b" align="center">Diragukan * 50%</td>
                                             <td class="t l b r" align="center">Macet * 100%</td>
                                         </tr>
                                         <tr>
-                                            <td class="t l b" align="center" colspan="2">
+                                            <td class="t l b" align="center" colspan="3">
                                                 {{ number_format(($t_kolek1 * 1) / 100 + ($t_kolek2 * 10) / 100 + ($t_kolek3 * 25) / 100 + ($t_kolek3 * 100) / 100) }}
                                             </td>
                                             <td class="t l b" align="center">{{ number_format(($t_kolek1 * 1) / 100) }}
@@ -536,9 +542,8 @@ $t_kolek3 = 0;
                                             <td class="t l b r" align="center">
                                                 {{ number_format(($t_kolek3 * 25) / 100) }}</td>
                                         </tr>
-
                                         <tr>
-                                            <td colspan="7" style="padding: 0px !important;">
+                                            <td colspan="8" style="padding: 0px !important;">
                                                 <table border="0" width="100%" cellspacing="0" cellpadding="0"
                                                     style="font-size: 11px; table-layout: fixed;">
                                                     <tr>
