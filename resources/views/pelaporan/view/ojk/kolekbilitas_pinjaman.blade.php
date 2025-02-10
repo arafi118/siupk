@@ -167,13 +167,13 @@ $t_kolek3 = 0;
                                 if ($wajib_pokok != '0') {
                                 $_kolek = $tunggakan_pokok / $wajib_pokok;
                                 }
-                                $kolek = ceil($_kolek + ($selisih - $angsuran_ke));
+                                $kolek = floor($_kolek + ($selisih - $angsuran_ke));
 
-    if ($kolek < 3) {
+    if ($kolek <= 3) {
         $kolek1=$saldo_pokok; $kolek2=0; $kolek3=0; $kolek4=0; $kolek5=0; }
-    elseif ($kolek>= 3 && $kolek < 9) {
+    elseif ($kolek> 3 && $kolek <= 9) {
         $kolek1=0; $kolek2=$saldo_pokok; $kolek3=0; $kolek4=0; $kolek5=0; }
-    elseif($kolek>= 9) {
+    elseif($kolek> 9) {
             $kolek1 = 0;
             $kolek2 = 0;
             $kolek5 = 0;
@@ -445,13 +445,13 @@ $t_kolek3 = 0;
                                 if ($wajib_pokok != '0') {
                                 $_kolek = $tunggakan_pokok / $wajib_pokok;
                                 }
-                                $kolek = ceil($_kolek + ($selisih - $angsuran_ke));
+                                $kolek = floor($_kolek + ($selisih - $angsuran_ke));
 
-    if ($kolek < 3) {
+    if ($kolek <= 3) {
         $kolek1=$saldo_pokok; $kolek2=0; $kolek3=0; $kolek4=0; $kolek5=0; }
-    elseif ($kolek>= 3 && $kolek < 9) {
+    elseif ($kolek> 3 && $kolek <= 9) {
         $kolek1=0; $kolek2=$saldo_pokok; $kolek3=0; $kolek4=0; $kolek5=0; }
-    elseif($kolek>= 9) {
+    elseif($kolek> 9) {
             $kolek1 = 0;
             $kolek2 = 0;
             $kolek5 = 0;
