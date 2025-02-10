@@ -271,7 +271,7 @@ $t_kolek3 = 0;
             <tr>
                 <td colspan="3" align="center">
                     <div style="font-size: 18px;">
-                        <b>Cadangan Kerugian Piutang {{ $jpp->nama_jpp }}(INDIVIDU)</b>
+                        <b>Cadangan Kerugian Piutang {{ $jpp_i->nama_jpp }}(INDIVIDU)</b>
                     </div>
                     <div style="font-size: 16px;">
                         <b>{{ strtoupper($sub_judul) }}</b>
