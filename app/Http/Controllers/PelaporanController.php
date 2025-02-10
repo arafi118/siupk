@@ -1950,8 +1950,8 @@ class PelaporanController extends Controller
             return $view;
         }
     }
-
-    private function anggota(array $data)
+    
+    private function individu_aktif(array $data)
     {
         $thn = $data['tahun'];
         $bln = $data['bulan'];
