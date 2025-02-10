@@ -255,14 +255,14 @@ $t_kolek3 = 0;
                                         </tr>
                                         <tr>
                                             <td class="t l b" align="center" colspan="3">
-                                                {{ number_format(($t_kolek1 * 1) / 100 + ($t_kolek2 * 10) / 100 + ($t_kolek3 * 25) / 100 + ($t_kolek3 * 100) / 100) }}
+                                                {{ number_format(($t_kolek1 * 0) / 100 + ($t_kolek2 * 50) / 100 + ($t_kolek3 * 100) / 100) }}
                                             </td>
-                                            <td class="t l b" align="center">{{ number_format(($t_kolek1 * 1) / 100) }}
+                                            <td class="t l b" align="center">{{ number_format(($t_kolek1 * 0) / 100) }}
                                             </td>
-                                            <td class="t l b" align="center">{{ number_format(($t_kolek2 * 10) / 100) }}
+                                            <td class="t l b" align="center">{{ number_format(($t_kolek2 * 50) / 100) }}
                                             </td>
                                             <td class="t l b r" align="center">
-                                                {{ number_format(($t_kolek3 * 25) / 100) }}</td>
+                                                {{ number_format(($t_kolek3 * 100) / 100) }}</td>
                                         </tr>
                                         <tr>
                                             <td colspan="8" style="padding: 0px !important;">
@@ -463,7 +463,7 @@ $t_kolek3 = 0;
 
                                         <tr>
                                             <td class="t l b" align="center">{{ $nomor++ }}</td>
-                                            <td class="t l b" align="left">{{ $pinj_i->nama_kelompok }} -
+                                            <td class="t l b" align="left">{{ $pinj_i->namadepan }} -
                                                 {{ $pinj_i->id }}</td>
                                             <td class="t l b" align="right">{{ number_format($pinj_i->alokasi) }}</td>
                                             <td class="t l b" align="right">{{ number_format($saldo_pokok) }}</td>
@@ -533,14 +533,14 @@ $t_kolek3 = 0;
                                         </tr>
                                         <tr>
                                             <td class="t l b" align="center" colspan="3">
-                                                {{ number_format(($t_kolek1 * 1) / 100 + ($t_kolek2 * 10) / 100 + ($t_kolek3 * 25) / 100 + ($t_kolek3 * 100) / 100) }}
+                                                {{ number_format(($t_kolek1 * 0) / 100 + ($t_kolek2 * 50) / 100 + ($t_kolek3 * 100) / 100) }}
                                             </td>
-                                            <td class="t l b" align="center">{{ number_format(($t_kolek1 * 1) / 100) }}
+                                            <td class="t l b" align="center">{{ number_format(($t_kolek1 * 0) / 100) }}
                                             </td>
-                                            <td class="t l b" align="center">{{ number_format(($t_kolek2 * 10) / 100) }}
+                                            <td class="t l b" align="center">{{ number_format(($t_kolek2 * 50) / 100) }}
                                             </td>
                                             <td class="t l b r" align="center">
-                                                {{ number_format(($t_kolek3 * 25) / 100) }}</td>
+                                                {{ number_format(($t_kolek3 * 100) / 100) }}</td>
                                         </tr>
                                         <tr>
                                             <td colspan="8" style="padding: 0px !important;">
