@@ -53,7 +53,7 @@ $t_kolek5 = 0;
         <th class="t l b" width="10%">Tunggakan</th>
         <th class="t l b" width="3%">NH</th>
         <th class="t l b" width="10%">Lancar</th>
-        <th class="t l b" width="10%">Dalam Pengawasan</th>
+        <th class="t l b" width="10%">Dalam Perhatian Khusus</th>
         <th class="t l b" width="10%">kurang Lancar</th>
         <th class="t l b" width="10%">Diragukan</th>
         <th class="t l b r" width="10%">Macet</th>
@@ -292,7 +292,7 @@ $t_kolek5 = 0;
                                                         <td class="t l b" colspan="2" align="center">Jumlah Resiko</td>
                                                         <td class="t l b" align="right">&nbsp;</td>
                                                         <td class="t l b" align="center">Lancar * 0%</td>
-                                                        <td class="t l b" align="center">Dalam Pengawasan * 5%</td>
+                                                        <td class="t l b" align="center">Dalam Perhatian Khusus * 5%</td>
                                                         <td class="t l b" align="center">Kurang Lancar * 15%</td>
                                                         <td class="t l b" align="center">Diragukan * 50%</td>
                                                         <td class="t l b r" align="center">Macet * 100%</td>
@@ -390,7 +390,7 @@ $t_kolek5 = 0;
         <th class="t l b" width="10%">Tunggakan</th>
         <th class="t l b" width="3%">NH</th>
         <th class="t l b" width="10%">Lancar</th>
-        <th class="t l b" width="10%">Dalam Pengawasan</th>
+        <th class="t l b" width="10%">Dalam Perhatian Khusus</th>
         <th class="t l b" width="10%">kurang Lancar</th>
         <th class="t l b" width="10%">Diragukan</th>
         <th class="t l b r" width="10%">Macet</th>
@@ -635,7 +635,7 @@ $t_kolek5 = 0;
                                                         <td class="t l b" colspan="2" align="center">Jumlah Resiko</td>
                                                         <td class="t l b" align="right">&nbsp;</td>
                                                         <td class="t l b" align="center">Lancar * 0%</td>
-                                                        <td class="t l b" align="center">Dalam Pengawasan * 5%</td>
+                                                        <td class="t l b" align="center">Dalam Perhatian Khusus * 5%</td>
                                                         <td class="t l b" align="center">Kurang Lancar * 15%</td>
                                                         <td class="t l b" align="center">Diragukan * 50%</td>
                                                         <td class="t l b r" align="center">Macet * 100%</td>
