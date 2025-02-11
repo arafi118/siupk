@@ -194,28 +194,38 @@ class Keuangan
         $saldo_kredit = 0;
 
         $nomor = 0;
-        foreach ($rek->kom_saldo as $kom_saldo) {
-            if ($nomor > 2) {
-                continue;
-            }
+        $awal_debit = 0;
+        $awal_kredit = 0;
+        $saldo_debit = 0;
+        $saldo_kredit = 0;
 
-            if ($kom_saldo->bulan == 0) {
-                $awal_debit += floatval($kom_saldo->debit);
-                $awal_kredit += floatval($kom_saldo->kredit);
-            } else {
-                $saldo_debit += floatval($kom_saldo->debit);
-                $saldo_kredit += floatval($kom_saldo->kredit);
+        if ($rek !== null && isset($rek->kom_saldo)) {
+            foreach ($rek->kom_saldo as $kom_saldo) {
+                if ($nomor > 2) {
+                    continue;
+                }
+        
+                if ($kom_saldo->bulan == 0) {
+                    $awal_debit += floatval($kom_saldo->debit ?? 0);
+                    $awal_kredit += floatval($kom_saldo->kredit ?? 0);
+                } else {
+                    $saldo_debit += floatval($kom_saldo->debit ?? 0);
+                    $saldo_kredit += floatval($kom_saldo->kredit ?? 0);
+                }
+                $nomor++;
             }
-
-            $nomor++;
         }
+        $saldo_awal = 0;
+        $saldo = 0;
 
-        if ($rek->lev1 == 1 || $rek->lev1 == '5') {
-            $saldo_awal = $awal_debit - $awal_kredit;
-            $saldo = $saldo_awal + ($saldo_debit - $saldo_kredit);
-        } else {
-            $saldo_awal = $awal_kredit - $awal_debit;
-            $saldo = $saldo_awal + ($saldo_kredit - $saldo_debit);
+        if ($rek !== null && isset($rek->lev1)) {
+            if ($rek->lev1 == 1 || $rek->lev1 == '5') {
+                $saldo_awal = $awal_debit - $awal_kredit;
+                $saldo = $saldo_awal + ($saldo_debit - $saldo_kredit);
+            } else {
+                $saldo_awal = $awal_kredit - $awal_debit;
+                $saldo = $saldo_awal + ($saldo_kredit - $saldo_debit);
+            }
         }
 
         return $saldo;

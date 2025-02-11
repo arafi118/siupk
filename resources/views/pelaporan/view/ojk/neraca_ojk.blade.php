@@ -37,9 +37,7 @@
         <tr>
             <td align="center" height="30" colspan="4" class="style3 bottom" style="font-size: 15px;">
                 <br>
-                <b>{{ $kec->nama_lembaga_long }}</b>
-                <br>
-                <b>SANDI LKM {{ $kec->sandi_lkm }}</b>
+                <b>{{ strtoupper($kec->nama_lembaga_long) }}</b>
                 <br>
                 <b>LAPORAN POSISI KEUANGAN</b>
                 <br>
@@ -105,9 +103,9 @@
 
                                         $saldo = $keuangan->komSaldo($rek);
                                         
-                                        if ($rek->kode_akun == '3.2.02.01') {
-                                            $saldo = $keuangan->laba_rugi($tgl_kondisi);
-                                        }
+                                        if ($rek !== null && isset($rek->kode_akun) && $rek->kode_akun == '3.2.02.01') {
+                                                $saldo = $keuangan->laba_rugi($tgl_kondisi);
+                                            }
                                         $sum_saldo += $saldo;
                                     }
 
