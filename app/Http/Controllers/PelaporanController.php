@@ -1383,6 +1383,20 @@ class PelaporanController extends Controller
             $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
             $data['tgl'] = Tanggal::tahun($tgl);
         }
+        
+        $jabatan = '1';
+        $level = '1';
+        if (Session::get('lokasi') == '207') {
+            $jabatan = '1';
+            $level = '2';
+        }
+
+        $data['dir'] = User::where([
+            ['lokasi', Session::get('lokasi')],
+            ['jabatan', $jabatan],
+            ['level', $level]
+        ])->first();
+
 
         $view = view('pelaporan.view.surat_pengantar', $data)->render();
 
