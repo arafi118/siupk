@@ -78,8 +78,8 @@
                         @else
                             <li>Penewu {{ $kec->nama_kec }}</li>
                         @endif
-                        
-                        @if (session('lokasi') != 36)
+
+                        @if (session('lokasi') != 36 && session('lokasi') != 3)
                             <li>Kades/Lurah</li>
                         @endif
                         <li>Arsip</li>
