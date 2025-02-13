@@ -1644,6 +1644,13 @@ class PelaporanController extends Controller
             ['tanggal', 'LIKE', $data['tahun'] . '-' . $data['bulan'] . '%']
         ])->first();
 
+        $data['dir'] = User::where([
+            ['level', '1'],
+            ['jabatan', '1'],
+            ['lokasi', Session::get('lokasi')],
+        ])->first();
+
+
         $data['sekr'] = User::where([
             ['level', '1'],
             ['jabatan', '2'],
