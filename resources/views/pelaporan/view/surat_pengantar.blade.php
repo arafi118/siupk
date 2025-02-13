@@ -14,7 +14,11 @@
             <td>&nbsp;</td>
             <td colspan="2" align="left" style="padding-left: 8px;">
                 <div>Kepada Yth.</div>
+                        @if (session('lokasi') == 3)
+                <div><b>BP DAPM Kecamatan Kandangan</b></div>
+                        @else
                 <div><b>Kepala Dinas PMD {{ $nama_kabupaten }}</b></div>
+                        @endif
                 <div>Di {{ $kab->alamat_kab }}.</div>
             </td>
         </tr>
@@ -66,6 +70,9 @@
                 <div>
                     Tembusan :
                     <ol>
+                        @if (session('lokasi') == 3)
+                            <li>Kepala dinas koperasi kabupaten Temanggung </li>
+                        @endif
                         @if ($kec->sebutan_kec == "Kecamatan")
                             <li>Camat {{ $kec->nama_kec }}</li>
                         @else
