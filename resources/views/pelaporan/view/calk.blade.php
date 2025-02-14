@@ -326,16 +326,16 @@
             </div>
             <ol>
                 <li>
-                    Kelembagaan maksimal maksimal 30%
+                    Kelembagaan maksimal maksimal 
                 </li>
                 <li>
-                    Dana Sosial minimal 15%
+                    Dana Sosial minimal 
                 </li>
                 <li>
-                    Bonus {{ $kec->nama_lembaga_sort }} 5%
+                    Bonus {{ $kec->nama_lembaga_sort }} 
                 </li>
                 <li>
-                    Penambahan modal 50%
+                    Penambahan modal 
                 </li>
                 <li>
                     Lain-lain.
