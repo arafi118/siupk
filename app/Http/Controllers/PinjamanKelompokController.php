@@ -911,7 +911,7 @@ class PinjamanKelompokController extends Controller
             'lu' => date('Y-m-d H:i:s'),
             'user_id' => auth()->user()->id
         ]);
-
+        
         $trx_cair = Transaksi::create([
             'tgl_transaksi' => (string) Tanggal::tglNasional($tgl_resceduling),
             'rekening_debit' => (string) $rekening_2,
@@ -964,8 +964,9 @@ class PinjamanKelompokController extends Controller
 
             $pinj_a = PinjamanAnggota::create($pinjaman_anggota);
         }
-
-
+        
+        $this->generate($pinjaman->id, null, null, null, null);
+        
         return response()->json([
             'success' => true,
             'status' => 'A',
@@ -2285,7 +2286,7 @@ class PinjamanKelompokController extends Controller
     }
 
     public function generate($id_pinj, $pinkel = null, $alokasi = null, $tgl = null, $pros_jasa = null)
-    {
+    {//
         $rencana = [];
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
 
