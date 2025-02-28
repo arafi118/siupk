@@ -1,5 +1,6 @@
 @php
     use App\Utils\Tanggal;
+    use Illuminate\Support\Str;
 
     $keterangan = '';
     $denda = 0;
@@ -67,13 +68,9 @@
 @foreach ($real->trx as $trx)
     @php
         $keterangan .= $trx->keterangan_transaksi . '<br>';
-        if (
-            $trx->rekening_kredit == '4.1.01.04' ||
-            $trx->rekening_kredit == '4.1.01.05' ||
-            $trx->rekening_kredit == '4.1.01.06'
-        ) {
-            $denda += $trx->jumlah;
-        }
+        if (Str::startsWith($trx->rekening_kredit, '4.1.02')) {
+                $denda += $trx->jumlah;
+            }
 
         $no_kuitansi .= $trx->idt . '/';
 
