@@ -356,6 +356,7 @@ $bulan_nama = $nama_bulan[$bulan];
                     while ($trx = mysqli_fetch_array($query)) {
                         $cif            = $simp['id'] ?? 0;
                         $tgl_transaksi  = $trx['tgl_transaksi'] ?? 0;
+                        $idt  = $trx['idt'] ?? 0;
                         
                         if (substr($trx['rekening_kredit'], 0, 2) == '22') {
                             $real_d         = $trx['jumlah'] ?? 0;
@@ -375,8 +376,8 @@ $bulan_nama = $nama_bulan[$bulan];
                         $lu             = date('Y-m-d H:i:s');
                         $id_user        = $trx['id_user'] ?? 0;
                         
-                        $insert_t = mysqli_query($koneksi,"INSERT INTO `real_simpanan_$lokasi`(`cif`, `tgl_transaksi`, `real_d`, `real_k`, `sum`, `lu`, `id_user`) 
-                                     VALUES ('$cif','$tgl_transaksi','$real_d','$real_k','$sum','$lu','$id_user')");
+                        $insert_t = mysqli_query($koneksi,"INSERT INTO `real_simpanan_$lokasi`(`cif`, `idt`, `tgl_transaksi`, `real_d`, `real_k`, `sum`, `lu`, `id_user`) 
+                                     VALUES ('$cif','$idt','$tgl_transaksi','$real_d','$real_k','$sum','$lu','$id_user')");
                     }
         }
             
