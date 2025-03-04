@@ -260,41 +260,19 @@ $bulan_nama = $nama_bulan[$bulan];
             $pros_bunga = $simp['bunga']/100;
             $pros_pajak = $simp['pajak']/100;
             $jenis_simpanan = $simp['jenis_simpanan'] ?? 0;
-                if($jenis_simpanan==1){ //di laravel bisa menggunakan tb jenis_simpanan
-                    $rek_bunga = "221.02";
-                    $rek_pajak = "221.05";
-                    $rek_admin = "221.03";
-                    
-                    $pas_bunga = "515.01";
-                    $pas_pajak = "231.01";
-                    $pas_admin = "413.01";
+            $jens = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM jenis_simpanan WHERE id=$jenis_simpanan"));
+            $rek_bunga = $rek_pajak = $rek_admin = $jens['rek_simp'];
+            $pas_bunga = "5.3.04.01";
+            $pas_pajak = "2.1.03.01";
+            $pas_admin = "4.1.03.01";
+
+                if($jenis_simpanan==1){ 
                     $js = "SU";
                 }elseif($jenis_simpanan==2){
-                    $rek_bunga = "222.02";
-                    $rek_pajak = "222.05";
-                    $rek_admin = "222.03";
-                    
-                    $pas_bunga = "515.02";
-                    $pas_pajak = "231.02";
-                    $pas_admin = "413.02";
                     $js = "SD";
                 }elseif($jenis_simpanan==3){
-                    $rek_bunga = "223.02";
-                    $rek_pajak = "223.05";
-                    $rek_admin = "223.03";
-                    
-                    $pas_bunga = "515.03";
-                    $pas_pajak = "231.03";
-                    $pas_admin = "413.03";
                     $js = "SP";
                 }else{
-                    $rek_bunga = "221.02";
-                    $rek_pajak = "221.05";
-                    $rek_admin = "221.03";
-                    
-                    $pas_bunga = "515.01";
-                    $pas_pajak = "231.01";
-                    $pas_admin = "413.01";
                     $js = "SU";
                 }
             
