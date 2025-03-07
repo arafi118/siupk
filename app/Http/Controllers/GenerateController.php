@@ -296,6 +296,16 @@ class GenerateController extends Controller
                 $wajib_pokok = Keuangan::pembulatan($alokasi / $tempo_pokok, (string) $kec->pembulatan);
                 $sum_pokok = $wajib_pokok * ($tempo_pokok - 1);
 
+                    if ($sa_pokok == 11 && $i <= 24) {
+                        $wajib_pokok = 0;
+                    } else if ($sa_pokok == 14 && $i <= 3) {
+                        $wajib_pokok = 0;
+                    } else if ($sa_pokok == 15 && $i <= 2) {
+                        $wajib_pokok = 0;
+                    } else if ($sa_pokok == 20 && $i <= 12) {
+                        $wajib_pokok = 0;
+                    }
+                    
                 if ($sisa == 0 and $ke != $tempo_pokok) {
                     $angsuran_pokok = $wajib_pokok;
                 } elseif ($sisa == 0 and $ke == $tempo_pokok) {
@@ -326,7 +336,17 @@ class GenerateController extends Controller
                     $wajib_jasa = $alokasi_jasa / $tempo_jasa;
                     $wajib_jasa = Keuangan::pembulatan($wajib_jasa, (string) $kec->pembulatan);
                     $sum_jasa = $wajib_jasa * ($tempo_jasa - 1);
-
+                    
+                    if ($sa_jasa == 11 && $i <= 24) {
+                        $wajib_jasa = 0;
+                    } else if ($sa_jasa == 14 && $i <= 3) {
+                        $wajib_jasa = 0;
+                    } else if ($sa_jasa == 15 && $i <= 2) {
+                        $wajib_jasa = 0;
+                    } else if ($sa_jasa == 20 && $i <= 12) {
+                        $wajib_jasa = 0;
+                    }
+                    
                     if ($sisa == 0 and $ke != $tempo_jasa) {
                         $angsuran_jasa = $wajib_jasa;
                     } elseif ($sisa == 0 and $ke == $tempo_jasa) {
