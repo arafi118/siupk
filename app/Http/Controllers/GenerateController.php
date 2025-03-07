@@ -227,25 +227,25 @@ class GenerateController extends Controller
             $sistem_jasa = ($pinkel->sis_jasa) ? $pinkel->sis_jasa->sistem : '1';
 
             if ($sa_pokok == 11) {
-                $tempo_pokok        = ($jangka) - 24 / $sistem_pokok;
+                $tempo_pokok        = floor(($jangka) - 24 / $sistem_pokok);
             } else if ($sa_pokok == 14) {
-                $tempo_pokok        = ($jangka) - 3 / $sistem_pokok;
+                $tempo_pokok        = floor(($jangka) - 3 / $sistem_pokok);
             } else if ($sa_pokok == 15) {
-                $tempo_pokok        = ($jangka) - 2 / $sistem_pokok;
+                $tempo_pokok        = floor(($jangka) - 2 / $sistem_pokok);
             } else if ($sa_pokok == 20) {
-                $tempo_pokok        = ($jangka) - 12 / $sistem_pokok;
+                $tempo_pokok        = floor(($jangka) - 12 / $sistem_pokok);
             } else {
                 $tempo_pokok        = floor($jangka / $sistem_pokok);
             }
 
             if ($sa_jasa == 11) {
-                $tempo_jasa        = ($jangka) - 24 / $sistem_jasa;
+                $tempo_jasa        = floor(($jangka) - 24 / $sistem_jasa);
             } else if ($sa_jasa == 14) {
-                $tempo_jasa        = ($jangka) - 3 / $sistem_jasa;
+                $tempo_jasa        = floor(($jangka) - 3 / $sistem_jasa);
             } else if ($sa_jasa == 15) {
-                $tempo_jasa        = ($jangka) - 2 / $sistem_jasa;
+                $tempo_jasa        = floor(($jangka) - 2 / $sistem_jasa);
             } else if ($sa_jasa == 20) {
-                $tempo_jasa        = ($jangka) - 12 / $sistem_jasa;
+                $tempo_jasa        = floor(($jangka) - 12 / $sistem_jasa);
             } else {
                 $tempo_jasa        = floor($jangka / $sistem_jasa);
             }
