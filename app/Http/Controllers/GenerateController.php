@@ -283,13 +283,13 @@ class GenerateController extends Controller
                 $sisa = $i % $sistem_pokok;
                 $ke = $i / $sistem_pokok;
                 
-                    if ($sa_pokok == 11 && $x <= 24) {
+                    if ($sa_pokok == 11 && $i <= 24) {
                         $ke = $ke-24;
-                    } else if ($sa_pokok == 14 && $x <= 3) {
+                    } else if ($sa_pokok == 14 && $i <= 3) {
                         $ke = $ke-3;
-                    } else if ($sa_pokok == 15 && $x <= 2) {
+                    } else if ($sa_pokok == 15 && $i <= 2) {
                         $ke = $ke-2;
-                    } else if ($sa_pokok == 20 && $x <= 12) {
+                    } else if ($sa_pokok == 20 && $i <= 12) {
                         $ke = $ke-12;
                     }
                     
@@ -312,13 +312,13 @@ class GenerateController extends Controller
                     $sisa = $j % $sistem_jasa;
                     $ke = $j / $sistem_jasa;
                     
-                    if ($sa_jasa == 11 && $x <= 24) {
+                    if ($sa_jasa == 11 && $i <= 24) {
                         $ke = $ke-24;
-                    } else if ($sa_jasa == 14 && $x <= 3) {
+                    } else if ($sa_jasa == 14 && $i <= 3) {
                         $ke = $ke-3;
-                    } else if ($sa_jasa == 15 && $x <= 2) {
+                    } else if ($sa_jasa == 15 && $i <= 2) {
                         $ke = $ke-2;
-                    } else if ($sa_jasa == 20 && $x <= 12) {
+                    } else if ($sa_jasa == 20 && $i <= 12) {
                         $ke = $ke-12;
                     }
                     
