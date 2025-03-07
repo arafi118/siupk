@@ -284,13 +284,13 @@ class GenerateController extends Controller
                 $ke = $i / $sistem_pokok;
                 
                     if ($sa_pokok == 11 && $i <= 24) {
-                        $ke = $ke-24;
+                        $ke = $ke-25;
                     } else if ($sa_pokok == 14 && $i <= 3) {
-                        $ke = $ke-3;
+                        $ke = $ke-4;
                     } else if ($sa_pokok == 15 && $i <= 2) {
-                        $ke = $ke-2;
+                        $ke = $ke-3;
                     } else if ($sa_pokok == 20 && $i <= 12) {
-                        $ke = $ke-12;
+                        $ke = $ke-13;
                     }
                     
                 $wajib_pokok = Keuangan::pembulatan($alokasi / $tempo_pokok, (string) $kec->pembulatan);
@@ -313,13 +313,13 @@ class GenerateController extends Controller
                     $ke = $j / $sistem_jasa;
                     
                     if ($sa_jasa == 11 && $i <= 24) {
-                        $ke = $ke-24;
+                        $ke = $ke-25;
                     } else if ($sa_jasa == 14 && $i <= 3) {
-                        $ke = $ke-3;
+                        $ke = $ke-4;
                     } else if ($sa_jasa == 15 && $i <= 2) {
-                        $ke = $ke-2;
+                        $ke = $ke-3;
                     } else if ($sa_jasa == 20 && $i <= 12) {
-                        $ke = $ke-12;
+                        $ke = $ke-13;
                     }
                     
                     $alokasi_jasa = $alokasi_pokok * ($pros_jasa / 100);
