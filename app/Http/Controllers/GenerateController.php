@@ -282,7 +282,17 @@ class GenerateController extends Controller
             for ($i = 1; $i <= $jangka; $i++) {
                 $sisa = $i % $sistem_pokok;
                 $ke = $i / $sistem_pokok;
-
+                
+                    if ($sa_pokok == 11 && $x <= 24) {
+                        $ke = $ke-24;
+                    } else if ($sa_pokok == 14 && $x <= 3) {
+                        $ke = $ke-3;
+                    } else if ($sa_pokok == 15 && $x <= 2) {
+                        $ke = $ke-2;
+                    } else if ($sa_pokok == 20 && $x <= 12) {
+                        $ke = $ke-12;
+                    }
+                    
                 $wajib_pokok = Keuangan::pembulatan($alokasi / $tempo_pokok, (string) $kec->pembulatan);
                 $sum_pokok = $wajib_pokok * ($tempo_pokok - 1);
 
@@ -301,7 +311,17 @@ class GenerateController extends Controller
                 for ($j = 1; $j <= $jangka; $j++) {
                     $sisa = $j % $sistem_jasa;
                     $ke = $j / $sistem_jasa;
-
+                    
+                    if ($sa_jasa == 11 && $x <= 24) {
+                        $ke = $ke-24;
+                    } else if ($sa_jasa == 14 && $x <= 3) {
+                        $ke = $ke-3;
+                    } else if ($sa_jasa == 15 && $x <= 2) {
+                        $ke = $ke-2;
+                    } else if ($sa_jasa == 20 && $x <= 12) {
+                        $ke = $ke-12;
+                    }
+                    
                     $alokasi_jasa = $alokasi_pokok * ($pros_jasa / 100);
                     $wajib_jasa = $alokasi_jasa / $tempo_jasa;
                     $wajib_jasa = Keuangan::pembulatan($wajib_jasa, (string) $kec->pembulatan);
@@ -365,16 +385,6 @@ class GenerateController extends Controller
                 $pokok = $ra[$x]['pokok'];
                 $jasa = $ra[$x]['jasa'];
 
-                    if ($sa_pokok == 11 && $x <= 24) {
-                        $pokok = 0;
-                    } else if ($sa_pokok == 14 && $x <= 3) {
-                        $pokok = 0;
-                    } else if ($sa_pokok == 15 && $x <= 2) {
-                        $pokok = 0;
-                    } else if ($sa_pokok == 20 && $x <= 12) {
-                        $pokok = 0;
-                    }
-                    
                     if ($sa_jasa == 11 && $x <= 24) {
                         $jasa = 0;
                     } else if ($sa_jasa == 14 && $x <= 3) {
