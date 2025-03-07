@@ -365,6 +365,27 @@ class GenerateController extends Controller
                 $pokok = $ra[$x]['pokok'];
                 $jasa = $ra[$x]['jasa'];
 
+                    if ($sa_pokok == 11 && $x >= 24) {
+                        $pokok = 0;
+                    } else if ($sa_pokok == 14 && $x >= 3) {
+                        $pokok = 0;
+                    } else if ($sa_pokok == 15 && $x >= 2) {
+                        $pokok = 0;
+                    } else if ($sa_pokok == 20 && $x >= 12) {
+                        $pokok = 0;
+                    }
+                    
+                    if ($sa_jasa == 11 && $x >= 24) {
+                        $jasa = 0;
+                    } else if ($sa_jasa == 14 && $x >= 3) {
+                        $jasa = 0;
+                    } else if ($sa_jasa == 15 && $x >= 2) {
+                        $jasa = 0;
+                    } else if ($sa_jasa == 20 && $x >= 12) {
+                        $jasa = 0;
+                    }
+
+
                 if ($x == 1) {
                     $target_pokok = $pokok;
                 } elseif ($x >= 2) {
@@ -375,7 +396,6 @@ class GenerateController extends Controller
                 } elseif ($x >= 2) {
                     $target_jasa += $jasa;
                 }
-
                 $data_rencana[strtotime($jatuh_tempo)] = [
                     'loan_id' => $pinkel->id,
                     'angsuran_ke' => $x,
