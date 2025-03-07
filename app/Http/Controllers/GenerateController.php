@@ -365,23 +365,23 @@ class GenerateController extends Controller
                 $pokok = $ra[$x]['pokok'];
                 $jasa = $ra[$x]['jasa'];
 
-                    if ($sa_pokok == 11 && $x >= 24) {
+                    if ($sa_pokok == 11 && $x <= 24) {
                         $pokok = 0;
-                    } else if ($sa_pokok == 14 && $x >= 3) {
+                    } else if ($sa_pokok == 14 && $x <= 3) {
                         $pokok = 0;
-                    } else if ($sa_pokok == 15 && $x >= 2) {
+                    } else if ($sa_pokok == 15 && $x <= 2) {
                         $pokok = 0;
-                    } else if ($sa_pokok == 20 && $x >= 12) {
+                    } else if ($sa_pokok == 20 && $x <= 12) {
                         $pokok = 0;
                     }
                     
-                    if ($sa_jasa == 11 && $x >= 24) {
+                    if ($sa_jasa == 11 && $x <= 24) {
                         $jasa = 0;
-                    } else if ($sa_jasa == 14 && $x >= 3) {
+                    } else if ($sa_jasa == 14 && $x <= 3) {
                         $jasa = 0;
-                    } else if ($sa_jasa == 15 && $x >= 2) {
+                    } else if ($sa_jasa == 15 && $x <= 2) {
                         $jasa = 0;
-                    } else if ($sa_jasa == 20 && $x >= 12) {
+                    } else if ($sa_jasa == 20 && $x <= 12) {
                         $jasa = 0;
                     }
 
