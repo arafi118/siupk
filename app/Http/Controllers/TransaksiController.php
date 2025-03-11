@@ -1818,6 +1818,35 @@ class TransaksiController extends Controller
         ];
     }
 
+    public function editTransaksi(Request $request)
+    {
+        $trx = Transaksi::find($request->idt);
+
+        if (!$trx) {
+            return response()->json(['error' => 'Data tidak ditemukan'], 404);
+        }
+
+        return view('transaksi.jurnal_umum.partials.form_edit', compact('trx'))->render();
+    }
+
+    public function updateTransaksi(Request $request)
+    {
+        $trx = Transaksi::find($request->idt);
+
+        if (!$trx) {
+            return response()->json(['error' => 'Data tidak ditemukan'], 404);
+        }
+
+        $trx->tgl_transaksi = $request->tgl_transaksi;
+        $trx->keterangan_transaksi = $request->keterangan;
+        $trx->rekening_debit = $request->disimpan_ke;
+        $trx->rekening_kredit = $request->sumber_dana;
+        $trx->jumlah = $request->nominal;
+        $trx->save();
+
+        return response()->json(['success' => 'Data berhasil diperbarui']);
+    }
+
     public function data($idt)
     {
         $trx = Transaksi::where('idt', $idt)->first();

@@ -535,7 +535,7 @@
 
             open_window(action)
         })
-
+        
         $(document).on('click', '.btn-reversal', function(e) {
             e.preventDefault()
 
@@ -573,6 +573,49 @@
                 })
             })
         })
+
+        $(document).on('click', '.btn-edit', function(e) {
+            e.preventDefault();
+            var idt = $(this).attr('data-idt');
+            var editRow = $(this).closest('tr').next('tr.tr_edit');
+
+            if (editRow.is(':visible')) {
+                editRow.hide(); 
+                return;
+            }
+
+            if (!editRow.data('loaded')) {
+                $.ajax({
+                    url: '/transaksi/edit_transaksi',
+                    type: 'GET',
+                    data: { idt: idt },
+                    success: function(result) {
+                        editRow.find('td').html(result);
+                        editRow.data('loaded', true); 
+                    }
+                });
+            }
+
+            editRow.show(); 
+        });
+
+        $(document).on('click', '.btn-save', function() {
+                        var form = $('#editForm')
+
+            $.ajax({
+                type: form.attr('method'),
+                url: form.attr('action'),
+                data: form.serialize(),
+                success: function(response) {
+                    Swal.fire('Berhasil!', result.msg, 'success')
+                        .then(() => {
+                            $('#detailTransaksi').modal('hide')
+                        })
+                }
+            });
+
+            editRow.hide();
+        });
 
         $(document).on('click', '.btn-delete', function(e) {
             e.preventDefault()

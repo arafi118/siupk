@@ -15,7 +15,6 @@
     $total_debit = 0;
     $total_kredit = 0;
 @endphp
-
 <table border="0" width="100%" cellspacing="0" cellpadding="0" class="table table-striped midle">
     <thead class="bg-dark text-white">
         <tr>
@@ -262,6 +261,13 @@
                                 data-animation="true">
                                 <span class="btn-inner--icon"><i class="fas fa-code-pull-request"></i></span>
                             </button>
+                                
+                                <button type="button" data-idt="{{ $trx->idt }}"
+                                    class="btn btn-secondary btn-icon-only btn-tooltip btn-edit"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="edit"
+                                    data-container="body" data-animation="true">
+                                    <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
+                                </button>
                             @if (!$is_ben)
                                 <button type="button" data-idt="{{ $trx->idt }}"
                                     class="btn btn-github btn-icon-only btn-tooltip btn-delete"
@@ -273,7 +279,12 @@
                         @endif
                     </div>
                 </td>
+
             </tr>
+            <tr class="tr_edit" style="display: none;">
+                <td colspan="10"></td>
+            </tr>
+
         @endforeach
 
         <tr>

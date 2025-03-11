@@ -289,6 +289,9 @@ Route::get('/transaksi/regenerate_real/{id_pinkel}', [TransaksiController::class
 Route::get('/transaksi/angsuran/form_anggota/{id_pinkel}', [TransaksiController::class, 'formAnggota'])->middleware('auth');
 Route::get('/transaksi/angsuran/form_anggota_i/{id_pinkel}', [TransaksiController::class, 'formAnggotaIndividu'])->middleware('auth');
 
+Route::get('/transaksi/edit_transaksi', [TransaksiController::class, 'editTransaksi']);
+Route::post('/transaksi/update_transaksi', [TransaksiController::class, 'updateTransaksi']);
+
 Route::get('/angsuran/notifikasi/{idtp}', [TransaksiController::class, 'notifikasi'])->middleware('auth');
 Route::get('/angsuran/notifikasi_i/{idtp}', [TransaksiController::class, 'notifikasiIndividu'])->middleware('auth');
 
