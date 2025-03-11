@@ -1822,20 +1822,12 @@ class TransaksiController extends Controller
     {
         $trx = Transaksi::find($request->idt);
 
-        if (!$trx) {
-            return response()->json(['error' => 'Data tidak ditemukan'], 404);
-        }
-
         return view('transaksi.jurnal_umum.partials.form_edit', compact('trx'))->render();
     }
 
     public function updateTransaksi(Request $request)
     {
         $trx = Transaksi::find($request->idt);
-
-        if (!$trx) {
-            return response()->json(['error' => 'Data tidak ditemukan'], 404);
-        }
 
         $trx->tgl_transaksi = $request->tgl_transaksi;
         $trx->keterangan_transaksi = $request->keterangan;
