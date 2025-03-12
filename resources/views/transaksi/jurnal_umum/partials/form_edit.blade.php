@@ -16,29 +16,6 @@
         <div class="col-sm-3"></div>
     </div>
 
-    <div class="row" id="kd_rekening">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-3">
-            <div class="my-2">
-                <label class="form-label" for="sumber_dana">Sumber Dana</label>
-                <input autocomplete="off" type="text" name="sumber_dana" id="sumber_dana"
-                value="{{ $trx->rekening_kredit }}"
-                    class="form-control">
-                <small class="text-danger" id="msg_sumber_dana"></small>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="my-2">
-                <label class="form-label" for="disimpan_ke">Disimpan Ke</label>
-                <input autocomplete="off" type="text" name="disimpan_ke" id="disimpan_ke"
-                value="{{ $trx->rekening_debit }}"
-                    class="form-control">
-                <small class="text-danger" id="msg_disimpan_ke"></small>
-            </div>
-        </div>
-        <div class="col-sm-3"></div>
-    </div>
-
     <div class="row" id="form_nominal">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">

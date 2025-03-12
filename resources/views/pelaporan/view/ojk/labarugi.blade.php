@@ -85,25 +85,25 @@
                                     <td align='right'>#</td>
                                     <td align='right'>#</td>";
                         } elseif ($rek_ojk->rekening == "A") {
-                            echo "  <td align='right'>". number_format($a_lalu) ."</td>
-                                    <td align='right'>". number_format($a-$a_lalu) ."</td>
-                                    <td align='right'>". number_format($a) ."</td>";
+                            echo "  <td align='right'>". number_format($a_lalu, 2) ."</td>
+                                    <td align='right'>". number_format($a-$a_lalu, 2) ."</td>
+                                    <td align='right'>". number_format($a, 2) ."</td>";
                         } elseif ($rek_ojk->rekening == "B") {
-                            echo "  <td align='right'>". number_format($b_lalu) ."</td>
-                                    <td align='right'>". number_format($b-$b_lalu) ."</td>
-                                    <td align='right'>". number_format($b) ."</td>";
+                            echo "  <td align='right'>". number_format($b_lalu, 2) ."</td>
+                                    <td align='right'>". number_format($b-$b_lalu, 2) ."</td>
+                                    <td align='right'>". number_format($b, 2) ."</td>";
                         } elseif ($rek_ojk->rekening == "C") {
-                            echo "  <td align='right'>". number_format($c_lalu) ."</td>
-                                    <td align='right'>". number_format($c-$c_lalu) ."</td>
-                                    <td align='right'>". number_format($c) ."</td>";
+                            echo "  <td align='right'>". number_format($c_lalu, 2) ."</td>
+                                    <td align='right'>". number_format($c-$c_lalu, 2) ."</td>
+                                    <td align='right'>". number_format($c, 2) ."</td>";
                         } elseif ($rek_ojk->rekening == "F") {
-                            echo "  <td align='right'>". number_format($f_lalu) ."</td>
-                                    <td align='right'>". number_format($f-$f_lalu) ."</td>
-                                    <td align='right'>". number_format($f) ."</td>";
+                            echo "  <td align='right'>". number_format($f_lalu, 2) ."</td>
+                                    <td align='right'>". number_format($f-$f_lalu, 2) ."</td>
+                                    <td align='right'>". number_format($f, 2) ."</td>";
                         } elseif ($rek_ojk->rekening == "H") {
-                            echo "  <td align='right'>". number_format($f_lalu-$g_lalu) ."</td>
-                                    <td align='right'>". number_format(($f-$f_lalu)-($g - $g_lalu)) ."</td>
-                                    <td align='right'>". number_format(($f)-($g)) ."</td>";
+                            echo "  <td align='right'>". number_format($f_lalu-$g_lalu, 2) ."</td>
+                                    <td align='right'>". number_format(($f-$f_lalu)-($g - $g_lalu), 2) ."</td>
+                                    <td align='right'>". number_format(($f)-($g), 2) ."</td>";
                         } else {
                             $kodeAkunArray = explode('#', $rek_ojk->rekening);
 
@@ -180,13 +180,13 @@
                             $jumlahlalu += $sum_saldolalu;
                             @endphp
                                 <td align='right'>
-                                    {{ number_format($sum_saldolalu) }}
+                                    {{ number_format($sum_saldolalu, 2) }}
                                 </td>
                                 <td align='right'>
-                                    {{ number_format($sum_saldo - $sum_saldolalu) }}
+                                    {{ number_format($sum_saldo - $sum_saldolalu, 2) }}
                                 </td>
                                 <td align='right'>
-                                    {{ number_format($sum_saldo) }}
+                                    {{ number_format($sum_saldo, 2) }}
                                 </td>
                             @php
                         }

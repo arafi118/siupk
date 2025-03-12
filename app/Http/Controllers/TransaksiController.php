@@ -1831,8 +1831,6 @@ class TransaksiController extends Controller
 
         $trx->tgl_transaksi = $request->tgl_transaksi;
         $trx->keterangan_transaksi = $request->keterangan;
-        $trx->rekening_debit = $request->disimpan_ke;
-        $trx->rekening_kredit = $request->sumber_dana;
         $trx->jumlah = $request->nominal;
         $trx->save();
 

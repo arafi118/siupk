@@ -84,7 +84,7 @@
                                 if ($rek_ojk->rekening == NULL) {
                                     echo " ";
                                 }elseif ($rek_ojk->rekening == 0) {
-                                    echo number_format(0);
+                                    echo number_format(0,2);
                                 }elseif ($rek_ojk->rekening == "#") {
                                     echo "#";
                                 }else{
@@ -109,7 +109,7 @@
                                         $sum_saldo += $saldo;
                                     }
 
-                                    echo number_format($sum_saldo);
+                                    echo number_format($sum_saldo,2);
                                     $jumlah+=$sum_saldo;
                                     //Jumlah A
                                     if($no=="A"){
@@ -143,13 +143,13 @@
                 @endforeach
                 <tr style=" background: rgb(230, 230, 230); font-weight: bold; font-size: 12px;">
                 <td align='center' colspan='3'>Jumlah {{ $kategori[$no]['nama'] }}</td>
-                <td align='right'>{{number_format($jumlah);}}</td>
+                <td align='right'>{{number_format($jumlah,2);}}</td>
                 </tr>
             @endforeach
 
                 <tr style=" font-weight: bold; font-size: 12px;">
                 <td align='center' colspan='3'>Jumlah Liabisaelitas + Ekuitas</td>
-                <td align='right'>{{number_format($jumlah_liabilitas_ekuitas);}}</td>
+                <td align='right'>{{number_format($jumlah_liabilitas_ekuitas,2);}}</td>
                 </tr>
 
                 <tr><td colspan='4'>&nbsp;</td></tr>    
@@ -161,37 +161,41 @@
                                 <th height="20" width="5%">A</th>
                                 <th width="50%" align='left'>Rasio Likuiditas</th>
                                 <th width="20%"></th>
-                                <th width="20%" align='right'>{{number_format($kas_setara_kas/$liabilitas_lancar*100,2)}}%</th>
+                                <th width="20%" align='right'>
+                                    {{ $liabilitas_lancar ? number_format($kas_setara_kas / $liabilitas_lancar * 100, 2) . '%' : '-' }}
+                                </th>
                             </tr>
                             <tr style="background: rgb(230, 230, 230);">
                                     <td align='left'>1</td>
                                     <td>Kas dan Setara Kas</td>
                                     <td align='center'></td>
-                                    <td align='right'>{{number_format($kas_setara_kas);}}</td>
+                                    <td align='right'>{{number_format($kas_setara_kas,2);}}</td>
                                 </tr>
                             <tr style="background: {{ $bg }};">
                                     <td align='left'>2</td>
                                     <td>Liabilitas Lancar</td>
                                     <td align='center'></td>
-                                    <td align='right'>{{number_format($liabilitas_lancar);}}</td>
+                                    <td align='right'>{{number_format($liabilitas_lancar,2);}}</td>
                                 </tr>
                             <tr style="background: rgb(167, 167, 167); font-weight: bold; font-size: 12px;">
                                 <th height="20" width="5%">B</th>
                                 <th width="50%" align='left'>Rasio Solvabilitas</th>
                                 <th width="20%"></th>
-                                <th width="20%" align='right'>{{number_format($jumlah_aset/$jumlah_liabilitas*100,2)}}%</th>
+                                <th width="20%" align='right'>
+                                    {{ $jumlah_liabilitas ? number_format($jumlah_aset / $jumlah_liabilitas * 100, 2) . '%' : '-' }}
+                                </th>
                             </tr>
                             <tr style="background: rgb(230, 230, 230);">
                                     <td align='left'>1</td>
                                     <td>Total Aset</td>
                                     <td align='center'></td>
-                                    <td align='right'>{{number_format($jumlah_aset);}}</td>
+                                    <td align='right'>{{number_format($jumlah_aset,2);}}</td>
                                 </tr>
                             <tr style="background: {{ $bg }};">
                                     <td align='left'>2</td>
                                     <td>Total Liabilitas</td>
                                     <td align='center'></td>
-                                    <td align='right'>{{number_format($jumlah_liabilitas);}}</td>
+                                    <td align='right'>{{number_format($jumlah_liabilitas,2);}}</td>
                                 </tr>
                         </table>
                         <div style="margin-top: 16px;"></div>
