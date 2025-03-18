@@ -1,7 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\app",
+    "\\app\\Utils",
+    "\\resources",
+    "\\resources\\views",
+    "\\resources\\views\\pelaporan",
+    "\\resources\\views\\pelaporan\\view"
   ],
-  "SelectedNode": "\\C:\\laragon\\www\\siupk",
   "PreviewInSolutionExplorer": false
 }

@@ -3389,6 +3389,48 @@ class PelaporanController extends Controller
         }
     }
     
+    private function Sehat(array $data)
+    {
+        $thn = $data['tahun'];
+        $bln = $data['bulan'];
+        $hari = $data['hari'];
+
+        $tgl = $thn . '-' . $bln . '-' . $hari;
+        $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
+        $data['tgl'] = Tanggal::tahun($tgl);
+        if ($data['bulanan']) {
+            $data['sub_judul'] = 'Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+            $data['tgl'] = Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
+        }
+
+        $data['dir'] = User::where([
+            ['level', $data['kec']->ttd_mengetahui_lap],
+            ['jabatan', '1'],
+            ['lokasi', Session::get('lokasi')]
+        ])->first();
+
+        $data['pengawas'] = User::where([
+            ['level', '3'],
+            ['jabatan', '1'],
+            ['lokasi', Session::get('lokasi')]
+        ])->first();
+
+        $data['bendahara'] = User::where([
+            ['level', '1'],
+            ['jabatan', '3'],
+            ['lokasi', Session::get('lokasi')]
+        ])->first();
+
+        $view = view('pelaporan.view.ojk.penilaian_kesehatan', $data)->render();
+
+        if ($data['type'] == 'pdf') {
+            $pdf = PDF::loadHTML($view)->setPaper('A4', 'landscape');
+            return $pdf->stream();
+        } else {
+            return $view;
+        }
+    }
+    
     private function EB(array $data)
     {
         $keuangan = new Keuangan;
