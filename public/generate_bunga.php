@@ -294,7 +294,7 @@ $bulan_nama = $nama_bulan[$bulan];
                     $jumdeb  = $jumdeb+($real['real_d']*($jumlah_hari-($hari_ke+1)));
                     $jumkre  = $jumkre+($real['real_k']*($jumlah_hari-($hari_ke+1)));
                     }
-                $saldo = (($saldo_terakhir*($jumlah_hari-1))+($jumkre-$jumdeb)/$jumlah_hari);
+                $saldo = (($saldo_terakhir*($jumlah_hari-1))+($jumkre-$jumdeb))/$jumlah_hari;
             }
             //hitung bunga dan pajak
             if($kec['min_bunga']<=$saldo){
