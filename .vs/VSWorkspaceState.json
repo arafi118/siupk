@@ -2,11 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\app",
-    "\\app\\Utils",
-    "\\resources",
-    "\\resources\\views",
-    "\\resources\\views\\pelaporan",
-    "\\resources\\views\\pelaporan\\view"
+    "\\app\\Http",
+    "\\app\\Http\\Controllers"
   ],
+  "SelectedNode": "\\app\\Http\\Controllers\\PelaporanController.php",
   "PreviewInSolutionExplorer": false
 }

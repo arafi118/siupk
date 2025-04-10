@@ -137,6 +137,9 @@ $host = "localhost";
 $user = "siupk_global"; 
 $pass = "siupk_global"; 
 $db = "siupk_dbm"; 
+    $jbunga = 0;
+    $jpajak = 0;
+    $jadmin = 0;
 
 // Membuat koneksi
 $koneksi = mysqli_connect($host, $user, $pass, $db);
@@ -245,9 +248,6 @@ $bulan_nama = $nama_bulan[$bulan];
     </form>
     <?php
     $q2 = mysqli_query($koneksi,"SELECT * FROM simpanan_anggota_$lokasi WHERE ($where) AND tgl_buka>=$tgl_awal ORDER BY id ASC  LIMIT $start, $per_page");
-    $jbunga = 0;
-    $jpajak = 0;
-    $jadmin = 0;
         while ($simp = mysqli_fetch_array($q2)) {
             $a = mysqli_fetch_array(mysqli_query($koneksi,"SELECT * FROM anggota_$lokasi where id = '$simp[nia]'")); 
             $no_rek = $simp['nomor_rekening'] ?? 0;
@@ -311,21 +311,21 @@ $bulan_nama = $nama_bulan[$bulan];
             if($bunga>0 and $jum_bunga<1){
                 $insert_bunga = mysqli_query($koneksi,"INSERT INTO `transaksi_$lokasi` 
                 (`idt`, `tgl_transaksi`, `rekening_debit`, `rekening_kredit`, `idtp`, `id_pinj`, `id_pinj_i`, `id_simp`, `keterangan_transaksi`, `jumlah`, `urutan`, `id_user`) VALUES 
-                (NULL, '$tgl_trans', '$pas_bunga', '$rek_bunga', '0', '0', '0', '$simp[id]', 'Bunga $js $no_rek $nama_depan $bulan_nama', '$bunga', '0', '1')");
+                (NULL, '$tgl_trans', '$pas_bunga', '$rek_bunga', '0', '0', '0', '4-$simp[id]', 'Bunga $js $no_rek $nama_depan $bulan_nama', '$bunga', '0', '1')");
                 $jbunga = $jbunga +1;
             }
             
             if($pajak>0 and $jum_pajak<1){
                 $insert_bunga = mysqli_query($koneksi,"INSERT INTO `transaksi_$lokasi` 
                 (`idt`, `tgl_transaksi`, `rekening_debit`, `rekening_kredit`, `idtp`, `id_pinj`, `id_pinj_i`, `id_simp`, `keterangan_transaksi`, `jumlah`, `urutan`, `id_user`) VALUES 
-                (NULL, '$tgl_trans', '$rek_pajak', '$pas_pajak', '0', '0', '0', '$simp[id]', 'Pajak $js $no_rek $nama_depan $bulan_nama', '$pajak', '0', '1')");
+                (NULL, '$tgl_trans', '$rek_pajak', '$pas_pajak', '0', '0', '0', '10-$simp[id]', 'Pajak $js $no_rek $nama_depan $bulan_nama', '$pajak', '0', '1')");
                 $jpajak = $jpajak +1;
             }
             
             if($admin>0 and $jum_admin<1){
                 $insert_bunga = mysqli_query($koneksi,"INSERT INTO `transaksi_$lokasi` 
                 (`idt`, `tgl_transaksi`, `rekening_debit`, `rekening_kredit`, `idtp`, `id_pinj`, `id_pinj_i`, `id_simp`, `keterangan_transaksi`, `jumlah`, `urutan`, `id_user`) VALUES 
-                (NULL, '$tgl_trans', '$rek_admin', '$pas_admin', '0', '0', '0', '$simp[id]', 'Admin $js $no_rek $nama_depan $bulan_nama', '$admin', '0', '1')");
+                (NULL, '$tgl_trans', '$rek_admin', '$pas_admin', '0', '0', '0', '5-$simp[id]', 'Admin $js $no_rek $nama_depan $bulan_nama', '$admin', '0', '1')");
                 $jadmin = $jadmin +1;
             }
             $del_re = mysqli_query($koneksi,"DELETE FROM real_simpanan_$lokasi WHERE cif=$simp[id] AND tgl_transaksi>='$tgl_awal'");
