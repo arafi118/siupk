@@ -155,7 +155,6 @@ $koneksi = mysqli_connect($host, $user, $pass, $db);
         // Jika $bulan adalah 1 (Januari), maka bulan lalu adalah Desember tahun sebelumnya
         if ($bulan_lalu == 0) {
             $bulan_lalu = 12;
-            $bulan_lalu = 12;
             $tahun--;
         }
     $limit = $_GET['where'] ?? 0;
@@ -295,7 +294,7 @@ $bulan_nama = $nama_bulan[$bulan];
                     $jumdeb  = $jumdeb+($real['real_d']*($jumlah_hari-($hari_ke+1)));
                     $jumkre  = $jumkre+($real['real_k']*($jumlah_hari-($hari_ke+1)));
                     }
-                $saldo = ($saldo_terakhir*($jumlah_hari-1))+($jumdeb-$jumkre);
+                $saldo = ($saldo_terakhir*($jumlah_hari-1))+($jumkre-$jumdeb);
             }
             //hitung bunga dan pajak
             if($kec['min_bunga']<=$saldo){
