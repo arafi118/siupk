@@ -299,10 +299,10 @@ $bulan_nama = $nama_bulan[$bulan];
             }
             //hitung bunga dan pajak
             if($kec['min_bunga']<=$saldo){
-                $bunga  = $saldo * $pros_bunga;
+                $bunga = number_format($saldo * $pros_bunga, 2, '.', '');
             }
             if($kec['min_pajak']<=$bunga){
-                $pajak  = $bunga * $pros_bunga;
+                $pajak = number_format($bunga * $pros_pajak, 2, '.', '');
             }
             
             $jum_bunga = mysqli_num_rows(mysqli_query($koneksi,"SELECT * FROM transaksi_$lokasi WHERE tgl_transaksi='$tgl_trans' AND rekening_kredit LIKE '22_.02' AND id_simp=$simp[id]"));
@@ -311,22 +311,22 @@ $bulan_nama = $nama_bulan[$bulan];
             if($bunga>0 and $jum_bunga<1){
                 $insert_bunga = mysqli_query($koneksi,"INSERT INTO `transaksi_$lokasi` 
                 (`idt`, `tgl_transaksi`, `rekening_debit`, `rekening_kredit`, `idtp`, `id_pinj`, `id_pinj_i`, `id_simp`, `keterangan_transaksi`, `jumlah`, `urutan`, `id_user`) VALUES 
-                (NULL, '$tgl_trans', '$pas_bunga', '$rek_bunga', '0', '0', '0', '4-$simp[id]', 'Bunga $js $no_rek $nama_depan $bulan_nama', '$bunga', '0', '1')");
-                $jbunga = $jbunga +1;
+                (NULL, '$tgl_trans', '$pas_bunga', '$rek_bunga', '0', '0', '0', '5-$simp[id]', 'Bunga $js $no_rek $nama_depan $bulan_nama', '$bunga', '0', '1')");
+                $jbunga = $jbunga + 1;
             }
             
             if($pajak>0 and $jum_pajak<1){
                 $insert_bunga = mysqli_query($koneksi,"INSERT INTO `transaksi_$lokasi` 
                 (`idt`, `tgl_transaksi`, `rekening_debit`, `rekening_kredit`, `idtp`, `id_pinj`, `id_pinj_i`, `id_simp`, `keterangan_transaksi`, `jumlah`, `urutan`, `id_user`) VALUES 
-                (NULL, '$tgl_trans', '$rek_pajak', '$pas_pajak', '0', '0', '0', '10-$simp[id]', 'Pajak $js $no_rek $nama_depan $bulan_nama', '$pajak', '0', '1')");
-                $jpajak = $jpajak +1;
+                (NULL, '$tgl_trans', '$rek_pajak', '$pas_pajak', '0', '0', '0', '6-$simp[id]', 'Pajak $js $no_rek $nama_depan $bulan_nama', '$pajak', '0', '1')");
+                $jpajak = $jpajak + 1;
             }
             
             if($admin>0 and $jum_admin<1){
                 $insert_bunga = mysqli_query($koneksi,"INSERT INTO `transaksi_$lokasi` 
                 (`idt`, `tgl_transaksi`, `rekening_debit`, `rekening_kredit`, `idtp`, `id_pinj`, `id_pinj_i`, `id_simp`, `keterangan_transaksi`, `jumlah`, `urutan`, `id_user`) VALUES 
                 (NULL, '$tgl_trans', '$rek_admin', '$pas_admin', '0', '0', '0', '5-$simp[id]', 'Admin $js $no_rek $nama_depan $bulan_nama', '$admin', '0', '1')");
-                $jadmin = $jadmin +1;
+                $jadmin = $jadmin + 1;
             }
             $del_re = mysqli_query($koneksi,"DELETE FROM real_simpanan_$lokasi WHERE cif=$simp[id] AND tgl_transaksi>='$tgl_awal'");
             $query  = mysqli_query($koneksi,"SELECT * FROM transaksi_$lokasi WHERE id_simp=$simp[id] AND tgl_transaksi>='$tgl_awal' ORDER BY idt ASC");
@@ -336,20 +336,18 @@ $bulan_nama = $nama_bulan[$bulan];
                         $tgl_transaksi  = $trx['tgl_transaksi'] ?? 0;
                         $idt  = $trx['idt'] ?? 0;
                         
-                        if (substr($trx['rekening_kredit'], 0, 2) == '22') {
-                            $real_d         = $trx['jumlah'] ?? 0;
-                            $real_k         = 0;
-                            $sum            = $sum + $real_d;
-                        } elseif (substr($trx['rekening_debit'], 0, 2) == '22') {
-                            $real_d         = 0;
-                            $real_k         = $trx['jumlah'] ?? 0;
-                            $sum            = $sum - $real_k;
-                        } else {
-                            // Jika tidak memenuhi kedua kondisi di atas, gunakan nilai default
-                            $real_d         = $trx['jumlah'] ?? 0;
-                            $real_k         = $trx['jumlah'] ?? 0;
-                            // $sum tidak berubah dalam kasus ini
-                        }
+                            if (in_array(substr($trx['id_simp'], 0, 1), ['1', '2', '5'])) {
+                                $real_d = 0;
+                                $real_k = $jumlah;
+                                $sum += $jumlah;
+                            } elseif (in_array(substr($trx['id_simp'], 0, 1), ['3', '4', '6', '7'])) {
+                                $real_d = $jumlah;
+                                $real_k = 0;
+                                $sum -= $jumlah;
+                            } else {
+                                $real_d         = 0;
+                                $real_k         = 0;
+                            }
                         
                         $lu             = date('Y-m-d H:i:s');
                         $id_user        = $trx['id_user'] ?? 0;
