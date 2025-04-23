@@ -187,14 +187,13 @@ $(document).ready(function() {
             $('#transaksi-container').html(result);
         }).fail(function(xhr, status, error) {
             console.error("Error loading transactions:", error);
-            $('#transaksi-container').html('<p>Error loading transactions. Please try again.</p>');
+            $('#transaksi-container').html('<p>Terjadi error pada Transaksi, silakan hubungi teknikal support untuk perbaikan data.</p>');
         });
     }
 
     $('#bulants, #tahunts').change(function() {
         var bulan = $('#bulants').val();
         var tahun = $('#tahunts').val();
-        console.log('Bulan:', bulan, 'Tahun:', tahun); // Tambahkan log ini
         tableTransaksi(bulan, tahun);
     });
 

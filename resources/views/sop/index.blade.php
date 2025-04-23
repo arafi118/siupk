@@ -26,6 +26,16 @@
                             <span class="text-sm">Sistem Pinjaman</span>
                         </a>
                     </li>
+
+                    @if (session('lokasi') == 1 || session('lokasi') == 3)
+                        <li class="nav-item pt-2">
+                            <a class="nav-link text-dark d-flex" data-scroll="" href="#simpanan">
+                                <i class="material-icons text-lg me-2">poll</i>
+                                <span class="text-sm">Sistem Simpanan</span>
+                            </a>
+                        </li>
+                    @endif
+
                     <li class="nav-item pt-2">
                         <a class="nav-link text-dark d-flex" data-scroll="" href="#asuransi">
                             <i class="material-icons text-lg me-2">account_balance_wallet</i>
@@ -85,6 +95,16 @@
                     @include('sop.partials._pinjaman')
                 </div>
             </div>
+                    @if (session('lokasi') == 1 || session('lokasi') == 3)
+            <div class="card mt-4" id="simpanan">
+                <div class="card-header">
+                    <h5 class="mb-0">Sistem Simpanan</h5>
+                </div>
+                <div class="card-body pt-0">
+                    @include('sop.partials._simpanan')
+                </div>
+            </div>
+                   @endif
             <div class="card mt-4" id="asuransi">
                 <div class="card-header">
                     <h5 class="mb-0">Pengaturan Asuransi</h5>
@@ -305,6 +325,14 @@
             }
         })
         new Choices($('#jenis_asuransi')[0], {
+            shouldSort: false,
+            fuseOptions: {
+                threshold: 0.1,
+                distance: 1000
+            }
+        })
+
+        new Choices($('#hitung_bunga')[0], {
             shouldSort: false,
             fuseOptions: {
                 threshold: 0.1,

@@ -133,6 +133,7 @@ Route::put('/pengaturan/pesan_whatsapp/{kec}', [SopController::class, 'pesanWhat
 Route::put('/pengaturan/lembaga/{kec}', [SopController::class, 'lembaga'])->middleware('auth');
 Route::put('/pengaturan/pengelola/{kec}', [SopController::class, 'pengelola'])->middleware('auth');
 Route::put('/pengaturan/pinjaman/{kec}', [SopController::class, 'pinjaman'])->middleware('auth');
+Route::put('/pengaturan/simpanan/{kec}', [SopController::class, 'simpanan'])->middleware('auth');
 Route::put('/pengaturan/asuransi/{kec}', [SopController::class, 'asuransi'])->middleware('auth');
 Route::put('/pengaturan/spk/{kec}', [SopController::class, 'spk'])->middleware('auth');
 Route::put('/pengaturan/logo/{kec}', [SopController::class, 'logo'])->middleware('auth');
@@ -386,5 +387,9 @@ Route::get('/simpanan/generate-bunga', [SimpananController::class, 'generateBung
 Route::resource('/simpanan', SimpananController::class)->middleware('auth');
 
 Route::post('/simpanan/generate-bunga2/{offset?}', [SimpananController::class, 'generate']);
+
+Route::get('/bunga_simpanan', [SimpananController::class, 'bunga_simpanan'])->middleware('auth');
+Route::get('/bunga_simpanan/info', [SimpananController::class, 'infoBunga'])->middleware('auth');
+Route::get('/simpan_bunga', [SimpananController::class, 'simpanBunga'])->middleware('auth');
 
 Route::get('/{invoice}', [PelaporanController::class, 'invoice']);
