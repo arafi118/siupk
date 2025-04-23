@@ -689,7 +689,7 @@ public function cetakPadaBuku($idt)
                     ->first();
             //bunga
             if($saldo>0){
-                $sum_baru = $realSimpanan ? ($realSimpanan->sum + saldo);
+                $sum_baru = $realSimpanan ? $realSimpanan->sum + $saldo : $saldo;
 
                 $transaksi = new Transaksi();
                 $transaksi->tgl_transaksi = Tanggal::tglNasional($tglTransaksi);
