@@ -797,8 +797,8 @@ public function cetakPadaBuku($idt)
             echo '<script>window.opener.postMessage("closed", "*"); window.close();</script>';
             exit;
         }
-
     }
+
     public function store(Request $request)
     {
         $rules = [
