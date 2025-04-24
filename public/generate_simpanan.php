@@ -258,11 +258,11 @@
 
 
 
-                    if (in_array($kode), ['1', '2', '5'])) {
+                    if (in_array($kode, ['1', '2', '5'])) {
                         $real_d = 0;
                         $real_k = $jumlah;
                         $sum += $jumlah;
-                    } elseif (in_array($kode), ['3', '4', '6', '7'])) {
+                    } elseif (in_array($kode, ['3', '4', '6', '7'])) {
                         $real_d = $jumlah;
                         $real_k = 0;
                         $sum -= $jumlah;
