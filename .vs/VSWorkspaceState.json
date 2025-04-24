@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\resources",
+    "\\resources\\views",
+    "\\resources\\views\\simpanan",
+    "\\resources\\views\\simpanan\\partials"
   ],
-  "SelectedNode": "\\G:\\laragon\\www\\siupk",
+  "SelectedNode": "\\resources\\views\\simpanan\\partials\\register.blade.php",
   "PreviewInSolutionExplorer": false
 }

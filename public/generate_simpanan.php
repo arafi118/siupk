@@ -237,12 +237,32 @@
                     $idt            = $trx['idt'];
                     $tgl_transaksi  = $trx['tgl_transaksi'];
                     $jumlah         = $trx['jumlah'];
-                    
-                    if (in_array(substr($trx['id_simp'], 0, 1), ['1', '2', '5'])) {
+                    $rdeb           = $trx['rekening_debit'];
+                    $rkre           = $trx['rekening_kredit'];
+
+                    $str=1;
+                    if(substr($rdeb, 0, 6) == '1.1.01' AND substr($rkre, 0, 6) == '2.1.05' AND $str==1){  //setor awal
+                        $kode = 1;
+                        $str=2;
+                    }elseif (substr($rdeb, 0, 6) == '1.1.01' AND substr($rkre, 0, 6) == '2.1.05') {    //setor    
+                        $kode = 2;
+                    }elseif (substr($rdeb, 0, 6) == '2.1.05' AND substr($rkre, 0, 6) == '1.1.01') {    //tarik
+                        $kode = 3;
+                    }elseif (substr($rdeb, 0, 6) == '5.2.01' AND substr($rkre, 0, 6) == '2.1.05') {    //bunga
+                        $kode = 5;
+                    }elseif (substr($rdeb, 0, 6) == '2.1.05' AND substr($rkre, 0, 6) == '2.1.03') {    //pajak
+                        $kode = 6;
+                    }elseif (substr($rdeb, 0, 6) == '2.1.05' AND substr($rkre, 0, 6) == '4.1.03') {    //admin
+                        $kode = 7;
+                    }
+
+
+
+                    if (in_array($kode), ['1', '2', '5'])) {
                         $real_d = 0;
                         $real_k = $jumlah;
                         $sum += $jumlah;
-                    } elseif (in_array(substr($trx['id_simp'], 0, 1), ['3', '4', '6', '7'])) {
+                    } elseif (in_array($kode), ['3', '4', '6', '7'])) {
                         $real_d = $jumlah;
                         $real_k = 0;
                         $sum -= $jumlah;
@@ -251,13 +271,11 @@
                         $real_k         = 0;
                     }
                     
-
-                    
                     $lu             = date('Y-m-d H:i:s');
                     $id_user        = $trx['id_user'];
                     
-                    $insert_t = mysqli_query($koneksi,"INSERT INTO `real_simpanan_$lokasi`(`cif`, `idt`,`tgl_transaksi`, `real_d`, `real_k`, `sum`, `lu`, `id_user`) 
-                                 VALUES ('$cif','$idt','$tgl_transaksi','$real_d','$real_k','$sum','$lu','$id_user')");
+                    $insert_t = mysqli_query($koneksi,"INSERT INTO `real_simpanan_$lokasi`(`cif`, `idt`,`kode`,`tgl_transaksi`, `real_d`, `real_k`, `sum`, `lu`, `id_user`) 
+                                 VALUES ('$cif','$idt','$kode','$tgl_transaksi','$real_d','$real_k','$sum','$lu','$id_user')");
                 }
             }
             

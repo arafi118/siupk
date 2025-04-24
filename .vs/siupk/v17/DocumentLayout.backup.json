@@ -3,12 +3,24 @@
   "WorkspaceRootPath": "G:\\laragon\\www\\siupk\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|G:\\laragon\\www\\siupk\\resources\\views\\generate\\generate.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\generate\\generate.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|G:\\laragon\\www\\siupk\\app\\Http\\Controllers\\SimpananController.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\Http\\Controllers\\SimpananController.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|G:\\laragon\\www\\siupk\\public\\generate_bunga.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:public\\generate_bunga.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|G:\\laragon\\www\\siupk\\public\\generate_simpanan.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:public\\generate_simpanan.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|G:\\laragon\\www\\siupk\\app\\Http\\Controllers\\GenerateController.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\Http\\Controllers\\GenerateController.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|G:\\laragon\\www\\siupk\\resources\\views\\generate\\generate.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\generate\\generate.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|G:\\laragon\\www\\siupk\\routes\\web.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
@@ -39,10 +51,6 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\sop\\partials\\_simpanan.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|G:\\laragon\\www\\siupk\\app\\Http\\Controllers\\SimpananController.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\Http\\Controllers\\SimpananController.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|G:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PelaporanController.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\Http\\Controllers\\PelaporanController.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
@@ -61,14 +69,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|G:\\laragon\\www\\siupk\\resources\\views\\sop\\partials\\_asuransi.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\sop\\partials\\_asuransi.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|G:\\laragon\\www\\siupk\\public\\generate_bunga.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:public\\generate_bunga.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|G:\\laragon\\www\\siupk\\public\\generate_simpanan.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:public\\generate_simpanan.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|G:\\laragon\\www\\siupk\\resources\\views\\pelaporan\\view\\tutup_buku\\alokasi_laba.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
@@ -182,11 +182,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 17,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "web.php",
               "DocumentMoniker": "G:\\laragon\\www\\siupk\\routes\\web.php",
               "RelativeDocumentMoniker": "routes\\web.php",
@@ -199,7 +199,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "AuthController.php",
               "DocumentMoniker": "G:\\laragon\\www\\siupk\\app\\Http\\Controllers\\AuthController.php",
               "RelativeDocumentMoniker": "app\\Http\\Controllers\\AuthController.php",
@@ -212,16 +212,17 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "PelaporanController.php",
-              "DocumentMoniker": "G:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PelaporanController.php",
-              "RelativeDocumentMoniker": "app\\Http\\Controllers\\PelaporanController.php",
-              "ToolTip": "G:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PelaporanController.php",
-              "RelativeToolTip": "app\\Http\\Controllers\\PelaporanController.php",
-              "ViewState": "AgIAANkNAAAAAAAAAAAlwN8NAAAFAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "SimpananController.php",
+              "DocumentMoniker": "G:\\laragon\\www\\siupk\\app\\Http\\Controllers\\SimpananController.php",
+              "RelativeDocumentMoniker": "app\\Http\\Controllers\\SimpananController.php",
+              "ToolTip": "G:\\laragon\\www\\siupk\\app\\Http\\Controllers\\SimpananController.php",
+              "RelativeToolTip": "app\\Http\\Controllers\\SimpananController.php",
+              "ViewState": "AgIAALwCAAAAAAAAAAAAANUCAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2024-10-21T05:12:08.46Z",
-              "IsPinned": true
+              "WhenOpened": "2025-04-11T04:26:59.474Z",
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -281,20 +282,31 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 12,
+              "Title": "PelaporanController.php",
+              "DocumentMoniker": "G:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PelaporanController.php",
+              "RelativeDocumentMoniker": "app\\Http\\Controllers\\PelaporanController.php",
+              "ToolTip": "G:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PelaporanController.php",
+              "RelativeToolTip": "app\\Http\\Controllers\\PelaporanController.php",
+              "ViewState": "AgIAANkNAAAAAAAAAAAlwN8NAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2024-10-21T05:12:08.46Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "generate.blade.php",
               "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\generate\\generate.blade.php",
               "RelativeDocumentMoniker": "resources\\views\\generate\\generate.blade.php",
               "ToolTip": "G:\\laragon\\www\\siupk\\resources\\views\\generate\\generate.blade.php",
               "RelativeToolTip": "resources\\views\\generate\\generate.blade.php",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAACAAAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABsAAABMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2025-04-16T04:14:59.968Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-16T04:14:59.968Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "DashboardController.php",
               "DocumentMoniker": "G:\\laragon\\www\\siupk\\app\\Http\\Controllers\\DashboardController.php",
               "RelativeDocumentMoniker": "app\\Http\\Controllers\\DashboardController.php",
@@ -306,7 +318,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "detail.blade.php",
               "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\simpanan\\partials\\detail.blade.php",
               "RelativeDocumentMoniker": "resources\\views\\simpanan\\partials\\detail.blade.php",
@@ -318,7 +330,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "info_hitung_bunga.blade.php",
               "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\simpanan\\partials\\info_hitung_bunga.blade.php",
               "RelativeDocumentMoniker": "resources\\views\\simpanan\\partials\\info_hitung_bunga.blade.php",
@@ -330,7 +342,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "bunga.blade.php",
               "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\simpanan\\bunga.blade.php",
               "RelativeDocumentMoniker": "resources\\views\\simpanan\\bunga.blade.php",
@@ -342,19 +354,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "SimpananController.php",
-              "DocumentMoniker": "G:\\laragon\\www\\siupk\\app\\Http\\Controllers\\SimpananController.php",
-              "RelativeDocumentMoniker": "app\\Http\\Controllers\\SimpananController.php",
-              "ToolTip": "G:\\laragon\\www\\siupk\\app\\Http\\Controllers\\SimpananController.php",
-              "RelativeToolTip": "app\\Http\\Controllers\\SimpananController.php",
-              "ViewState": "AgIAAI8AAAAAAAAAAAAAAKcAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2025-04-11T04:26:59.474Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "SopController.php",
               "DocumentMoniker": "G:\\laragon\\www\\siupk\\app\\Http\\Controllers\\SopController.php",
               "RelativeDocumentMoniker": "app\\Http\\Controllers\\SopController.php",
@@ -366,7 +366,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "_asuransi.blade.php",
               "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\sop\\partials\\_asuransi.blade.php",
               "RelativeDocumentMoniker": "resources\\views\\sop\\partials\\_asuransi.blade.php",
@@ -378,7 +378,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "_pinjaman.blade.php",
               "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\sop\\partials\\_pinjaman.blade.php",
               "RelativeDocumentMoniker": "resources\\views\\sop\\partials\\_pinjaman.blade.php",
@@ -390,7 +390,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "_simpanan.blade.php",
               "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\sop\\partials\\_simpanan.blade.php",
               "RelativeDocumentMoniker": "resources\\views\\sop\\partials\\_simpanan.blade.php",
@@ -402,7 +402,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "index.blade.php",
               "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\sop\\index.blade.php",
               "RelativeDocumentMoniker": "resources\\views\\sop\\index.blade.php",
@@ -546,13 +546,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "GenerateController.php",
               "DocumentMoniker": "G:\\laragon\\www\\siupk\\app\\Http\\Controllers\\GenerateController.php",
               "RelativeDocumentMoniker": "app\\Http\\Controllers\\GenerateController.php",
               "ToolTip": "G:\\laragon\\www\\siupk\\app\\Http\\Controllers\\GenerateController.php",
               "RelativeToolTip": "app\\Http\\Controllers\\GenerateController.php",
-              "ViewState": "AgIAAP8BAAAAAAAAAAASwCICAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAIgAAAAAAAAAAAASwKcAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
               "WhenOpened": "2025-03-07T02:49:31.125Z"
             },
@@ -738,25 +738,25 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 2,
               "Title": "generate_simpanan.php",
               "DocumentMoniker": "G:\\laragon\\www\\siupk\\public\\generate_simpanan.php",
               "RelativeDocumentMoniker": "public\\generate_simpanan.php",
               "ToolTip": "G:\\laragon\\www\\siupk\\public\\generate_simpanan.php",
               "RelativeToolTip": "public\\generate_simpanan.php",
-              "ViewState": "AgIAAOYAAAAAAAAAAAAAAPIAAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAAOYAAAAAAAAAAAAAAPcAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
               "WhenOpened": "2025-04-10T04:54:27.137Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 1,
               "Title": "generate_bunga.php",
               "DocumentMoniker": "G:\\laragon\\www\\siupk\\public\\generate_bunga.php",
               "RelativeDocumentMoniker": "public\\generate_bunga.php",
               "ToolTip": "G:\\laragon\\www\\siupk\\public\\generate_bunga.php",
               "RelativeToolTip": "public\\generate_bunga.php",
-              "ViewState": "AgIAAAwBAAAAAAAAAAAQwMEAAAA5AAAAAAAAAA==",
+              "ViewState": "AgIAAIwAAAAAAAAAAAAAALIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
               "WhenOpened": "2025-03-03T05:07:47.353Z"
             }
