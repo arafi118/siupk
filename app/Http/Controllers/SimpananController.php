@@ -317,7 +317,7 @@ class SimpananController extends Controller
 
     public function cetakKwitansi($idt)
 {
-    $transaksi = Transaksi::where('idt', $idt)->first();
+    $transaksi = Transaksi::where('idt', $idt)->with('realSimpanan')->first();
     $user = auth()->user();
     $userTransaksi = User::find($transaksi->id_user);
     
@@ -329,7 +329,7 @@ class SimpananController extends Controller
     $user = $userDisplay;
     // Menentukan kode berdasarkan jenis rekening
     
-    $kode=substr($transaksi->id_simp, 0, 1);
+    $kode=$transaksi->realSimpanan->kode;
 
         $title = 'Cetak Pada Kwitansi '.$transaksi->id_simp;
 
@@ -347,7 +347,7 @@ public function cetakPadaBuku($idt)
     $transaksi = Transaksi::where('idt', $idt)->with('realSimpanan')->orderBy('tgl_transaksi', 'asc')->first();
     $parts = explode('-', $transaksi->id_simp);
 
-    $transaksiCount = Transaksi::where('id_simp', 'like', '%-' . $parts[1])
+    $transaksiCount = Transaksi::where('id_simp', $transaksi->id_simp)
                                ->where('idt', '<=', $idt)
                                ->count();
     $user = auth()->user();
@@ -358,7 +358,7 @@ public function cetakPadaBuku($idt)
         ? $user->ins 
         : $user->ins . ' / ' . $userTransaksi->ins;
     $user = $userDisplay;
-    $kode=substr($transaksi->id_simp, 0, 1);
+    $kode=$transaksi->realSimpanan->kode;
                     if(in_array(substr($transaksi->id_simp, 0, 1), ['1', '2', '5'])) {
                         $debit = 0;
                         $kredit = $transaksi->jumlah;
@@ -415,7 +415,7 @@ public function cetakPadaBuku($idt)
         $transaksi->idtp = 0;
         $transaksi->id_pinj = 0;
         $transaksi->id_pinj_i = 0;
-        $transaksi->id_simp = $jenisMutasi == '1' ? "2-{$nia}" : "3-{$nia}";
+        $transaksi->id_simp = $nia;
         $transaksi->keterangan_transaksi = $jenisMutasi == '1' ? "Setor Tunai Rekening {$nomorRekening}" : "Tarik Tunai Rekening {$nomorRekening}";
         $transaksi->relasi = $namaDebitur;
         $transaksi->jumlah = $jumlah;
@@ -426,6 +426,7 @@ public function cetakPadaBuku($idt)
             RealSimpanan::create([
                 'cif' => $simpanan->id,
                 'idt' => $transaksi->idt,
+                'kode' => $jenisMutasi == '1' ? "2" : "3",
                 'tgl_transaksi' => $tgl,
                 'real_d' => $jenisMutasi == '1' ? 0 : $jumlah,
                 'real_k' => $jenisMutasi == '1' ? $jumlah : 0,
@@ -652,7 +653,7 @@ public function cetakPadaBuku($idt)
                     ->first();
 
                 $saldo_terakhir = $saldo_terakhir_data->sum ?? 0;
-
+                
                 $transaksi = RealSimpanan::where('cif', $simp->id)
                     ->whereBetween('tgl_transaksi', [$tgl_awal, $tgl_akhir])
                     ->get();
@@ -662,23 +663,23 @@ public function cetakPadaBuku($idt)
 
                 foreach ($transaksi as $real) {
                     $hari_ke = (strtotime($real->tgl_transaksi) - strtotime($tgl_awal)) / (60 * 60 * 24) + 1;
-                    $jumdeb += ($real->real_d * ($jumlah_hari - ($hari_ke + 1)));
-                    $jumkre += ($real->real_k * ($jumlah_hari - ($hari_ke + 1)));
+                    $jumdeb += ($real->real_d * ($jumlah_hari - ($hari_ke - 1)));
+                    $jumkre += ($real->real_k * ($jumlah_hari - ($hari_ke - 1)));
                 }
-
-                $saldo = (($saldo_terakhir * ($jumlah_hari - 1)) + ($jumkre - $jumdeb)) / $jumlah_hari;
+                
+                $saldo = $saldo_terakhir+($jumkre/$jumlah_hari)-($jumdeb/$jumlah_hari);
             }
-
+            
             // Hitung bunga dan pajak
             $bunga = 0;
             $pajak = 0;
 
             if ($kec->min_bunga <= $saldo) {
-                $bunga = number_format($saldo * $kec->pros_bunga, 2, '.', '');
+                $bunga = number_format($saldo * $simp->bunga/100, 0, '.', '');
             }
         
             if ($kec->min_pajak <= $bunga) {
-                $pajak = number_format($bunga * $kec->pros_pajak, 2, '.', '');
+                $pajak = number_format($bunga * $simp->pajak/100, 0, '.', '');
             }
             $admin = $simp->admin;
 
@@ -688,10 +689,26 @@ public function cetakPadaBuku($idt)
                 ->orderBy('id', 'desc')
                 ->first();
                 
-        $jenisSimpanan = JenisSimpanan::where('id', $simp->jenis_simpanan)->first();
-        $idmax = Transaksi::max('idt');
-            // Bunga
-            if ($bunga > 0) {
+            $jenisSimpanan = JenisSimpanan::where('id', $simp->jenis_simpanan)->first();
+            $idmax = Transaksi::max('idt');
+                $tanggal_formatted = Tanggal::tglNasional($tgl_trans);
+                $bungaExists = Transaksi::where('tgl_transaksi', $tanggal_formatted)
+                                   ->where('rekening_debit', $jenisSimpanan->rek_bunga)
+                                   ->where('rekening_kredit', $jenisSimpanan->rek_simp)
+                                   ->where('id_simp', $simp->id)
+                                   ->exists();
+                $pajakExists = Transaksi::where('tgl_transaksi', $tanggal_formatted)
+                                   ->where('rekening_debit', $jenisSimpanan->rek_simp)
+                                   ->where('rekening_kredit', $jenisSimpanan->rek_pajak)
+                                   ->where('id_simp', $simp->id)
+                                   ->exists();
+                $adminExists = Transaksi::where('tgl_transaksi', $tanggal_formatted)
+                                   ->where('rekening_debit', $jenisSimpanan->rek_simp)
+                                   ->where('rekening_kredit', $jenisSimpanan->rek_adm)
+                                   ->where('id_simp', $simp->id)
+                                   ->exists();
+
+            if (!$bungaExists && $bunga > 0) {
                 $idmax++;
                 $sum_baru = $realSimpanan ? $realSimpanan->sum + $bunga : $bunga;
 
@@ -711,7 +728,7 @@ public function cetakPadaBuku($idt)
 
                 if ($transaksi->save()) {
                     RealSimpanan::create([
-                        'cif' => $simpanan->id,
+                        'cif' => $simp->id,
                         'idt' => $idmax,
                         'kode' => 5,
                         'tgl_transaksi' => $tgl_trans,
@@ -725,7 +742,7 @@ public function cetakPadaBuku($idt)
             }
 
             // pajak
-            if ($pajak > 0) {
+            if (!$pajakExists && $pajak > 0) {
                 $idmax++;
                 $sum_baru = $realSimpanan ? $realSimpanan->sum - $pajak : $pajak;
 
@@ -745,7 +762,7 @@ public function cetakPadaBuku($idt)
                 
                 if ($transaksi->save()) {
                     RealSimpanan::create([
-                        'cif' => $simpanan->id,
+                        'cif' => $simp->id,
                         'idt' => $idmax,
                         'kode' => 6,
                         'tgl_transaksi' => $tgl_trans,
@@ -758,14 +775,14 @@ public function cetakPadaBuku($idt)
                 }
             }
             // admin
-            if ($admin > 0) {
+            if (!$adminExists && $admin > 0) {
                 $idmax++;
                 $sum_baru = $realSimpanan ? $realSimpanan->sum - $admin : $admin;
 
                 $transaksi = new Transaksi();
                 $transaksi->tgl_transaksi = Tanggal::tglNasional($tgl_trans);
                 $transaksi->rekening_debit = $jenisSimpanan->rek_simp;
-                $transaksi->rekening_kredit = $jenisSimpanan->rek_pajak;
+                $transaksi->rekening_kredit = $jenisSimpanan->rek_adm;
                 $transaksi->idtp = 0;
                 $transaksi->id_pinj = 0;
                 $transaksi->id_pinj_i = 0;
@@ -778,7 +795,7 @@ public function cetakPadaBuku($idt)
                 
                 if ($transaksi->save()) {
                     RealSimpanan::create([
-                        'cif' => $simpanan->id,
+                        'cif' => $simp->id,
                         'idt' => $idmax,
                         'kode' => 7,
                         'tgl_transaksi' => $tgl_trans,
@@ -943,14 +960,26 @@ public function cetakPadaBuku($idt)
             'idtp' => '0',
             'id_pinj' => '0',
             'id_pinj_i' => '0',
-            'id_simp' => '1-'.$maxId.'',
+            'id_simp' => $maxId,
             'keterangan_transaksi' => 'Setoran Awal ' . $js->nama_js . ' ',
             'relasi' => $anggota->namadepan . '[' . $request->nia . ']',
             'jumlah' => str_replace(',', '', str_replace('.00', '', $request->setoran_awal)),
             'urutan' => '0',
             'id_user' => auth()->user()->id,
         ]);
-
+            $idmax = Transaksi::max('idt');
+                    RealSimpanan::create([
+                        'cif' => $maxId,
+                        'idt' => $idmax,
+                        'kode' => 1,
+                        'tgl_transaksi' => Tanggal::tglNasional($request->tgl_buka_rekening),
+                        'real_d' => 0,
+                        'real_k' => str_replace(',', '', str_replace('.00', '', $request->setoran_awal)),
+                        'sum' => str_replace(',', '', str_replace('.00', '', $request->setoran_awal)),
+                        'lu' => now(),
+                        'id_user' => auth()->user()->id,
+                    ]);
+                    $idmax++;
         Transaksi::create([
             'tgl_transaksi' => Tanggal::tglNasional($request->tgl_buka_rekening),
             'rekening_debit' => $js->rek_kas,
@@ -958,13 +987,24 @@ public function cetakPadaBuku($idt)
             'idtp' => '0',
             'id_pinj' => '0',
             'id_pinj_i' => '0',
-            'id_simp' => '7-'.$maxId.'',
+            'id_simp' => $maxId,
             'keterangan_transaksi' => 'Biaya Buka Buku ' . $js->nama_js . ' ',
             'relasi' => $anggota->namadepan . '[' . $request->nia . ']',
             'jumlah' => str_replace(',', '', str_replace('.00', '', $request->admin)),
             'urutan' => '0',
             'id_user' => auth()->user()->id,
         ]);
+                    RealSimpanan::create([
+                        'cif' => $maxId,
+                        'idt' => $idmax,
+                        'kode' => 7,
+                        'tgl_transaksi' => Tanggal::tglNasional($request->tgl_buka_rekening),
+                        'real_d' => str_replace(',', '', str_replace('.00', '', $request->admin)),
+                        'real_k' => 0,
+                        'sum' => (str_replace(',', '', str_replace('.00', '', $request->setoran_awal)))-(str_replace(',', '', str_replace('.00', '', $request->admin))),
+                        'lu' => now(),
+                        'id_user' => auth()->user()->id,
+                    ]);
 
         return response()->json([
             'success' => true,

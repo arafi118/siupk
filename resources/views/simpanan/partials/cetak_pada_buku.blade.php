@@ -23,8 +23,7 @@
     @php
         // Calculate transaction count
         $jum_trans = $transaksiCount;
-        $parts = explode('-', $transaksi->id_simp);
-        $cif=$parts[1];
+        $cif=$transaksi->id_simp;
         // Calculate line breaks needed
         $i = $jum_trans - 1;
         $a = $i % 24;
