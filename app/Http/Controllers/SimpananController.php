@@ -680,6 +680,7 @@ public function cetakPadaBuku($idt)
             if ($kec->min_pajak <= $bunga) {
                 $pajak = number_format($bunga * $kec->pros_pajak, 2, '.', '');
             }
+            $admin = $simp->admin;
 
             // Insert ke transaksi dan real
             $realSimpanan = RealSimpanan::where('cif', $simp->id)
@@ -688,8 +689,10 @@ public function cetakPadaBuku($idt)
                 ->first();
                 
         $jenisSimpanan = JenisSimpanan::where('id', $simp->jenis_simpanan)->first();
+        $idmax = Transaksi::max('idt');
             // Bunga
-            if ($saldo > 0) {
+            if ($bunga > 0) {
+                $idmax++;
                 $sum_baru = $realSimpanan ? $realSimpanan->sum + $bunga : $bunga;
 
                 $transaksi = new Transaksi();
@@ -709,41 +712,78 @@ public function cetakPadaBuku($idt)
                 if ($transaksi->save()) {
                     RealSimpanan::create([
                         'cif' => $simpanan->id,
-                        'idt' => $transaksi->idt,
-                        'tgl_transaksi' => $tgl,
-                        'real_d' => $jenisMutasi == '1' ? 0 : $jumlah,
-                        'real_k' => $jenisMutasi == '1' ? $jumlah : 0,
+                        'idt' => $idmax,
+                        'kode' => 5,
+                        'tgl_transaksi' => $tgl_trans,
+                        'real_d' => 0,
+                        'real_k' => $bunga,
                         'sum' => $sum_baru,
                         'lu' => now(),
                         'id_user' => $transaksi->id_user,
                     ]);
                 }
             }
+
             // pajak
             if ($pajak > 0) {
-                $sum_baru = $realSimpanan ? $realSimpanan->sum + $bunga : $bunga;
+                $idmax++;
+                $sum_baru = $realSimpanan ? $realSimpanan->sum - $pajak : $pajak;
 
                 $transaksi = new Transaksi();
                 $transaksi->tgl_transaksi = Tanggal::tglNasional($tgl_trans);
-                $transaksi->rekening_debit = $jenisSimpanan->rek_bunga;
-                $transaksi->rekening_kredit = $jenisSimpanan->rek_simp;
+                $transaksi->rekening_debit = $jenisSimpanan->rek_simp;
+                $transaksi->rekening_kredit = $jenisSimpanan->rek_pajak;
                 $transaksi->idtp = 0;
                 $transaksi->id_pinj = 0;
                 $transaksi->id_pinj_i = 0;
                 $transaksi->id_simp = $simp->id;
-                $transaksi->keterangan_transaksi = "Bunga ".$simp->nomor_rekening." ".$simp->anggota->namadepan." bulan ".$bulan." ".$tahun;
+                $transaksi->keterangan_transaksi = "Pajak Bunga ".$simp->nomor_rekening." ".$simp->anggota->namadepan." bulan ".$bulan." ".$tahun;
                 $transaksi->relasi = $simp->anggota->namadepan;
-                $transaksi->jumlah = $bunga;
+                $transaksi->jumlah = $pajak;
                 $transaksi->urutan = 0;
                 $transaksi->id_user = auth()->user()->id;
-
+                
                 if ($transaksi->save()) {
                     RealSimpanan::create([
                         'cif' => $simpanan->id,
-                        'idt' => $transaksi->idt,
-                        'tgl_transaksi' => $tgl,
-                        'real_d' => $jenisMutasi == '1' ? 0 : $jumlah,
-                        'real_k' => $jenisMutasi == '1' ? $jumlah : 0,
+                        'idt' => $idmax,
+                        'kode' => 6,
+                        'tgl_transaksi' => $tgl_trans,
+                        'real_d' => $pajak,
+                        'real_k' => 0,
+                        'sum' => $sum_baru,
+                        'lu' => now(),
+                        'id_user' => $transaksi->id_user,
+                    ]);
+                }
+            }
+            // admin
+            if ($admin > 0) {
+                $idmax++;
+                $sum_baru = $realSimpanan ? $realSimpanan->sum - $admin : $admin;
+
+                $transaksi = new Transaksi();
+                $transaksi->tgl_transaksi = Tanggal::tglNasional($tgl_trans);
+                $transaksi->rekening_debit = $jenisSimpanan->rek_simp;
+                $transaksi->rekening_kredit = $jenisSimpanan->rek_pajak;
+                $transaksi->idtp = 0;
+                $transaksi->id_pinj = 0;
+                $transaksi->id_pinj_i = 0;
+                $transaksi->id_simp = $simp->id;
+                $transaksi->keterangan_transaksi = "Admin ".$simp->nomor_rekening." ".$simp->anggota->namadepan." bulan ".$bulan." ".$tahun;
+                $transaksi->relasi = $simp->anggota->namadepan;
+                $transaksi->jumlah = $admin;
+                $transaksi->urutan = 0;
+                $transaksi->id_user = auth()->user()->id;
+                
+                if ($transaksi->save()) {
+                    RealSimpanan::create([
+                        'cif' => $simpanan->id,
+                        'idt' => $idmax,
+                        'kode' => 7,
+                        'tgl_transaksi' => $tgl_trans,
+                        'real_d' => $admin,
+                        'real_k' => 0,
                         'sum' => $sum_baru,
                         'lu' => now(),
                         'id_user' => $transaksi->id_user,
