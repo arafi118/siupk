@@ -76,7 +76,7 @@ class SimpananController extends Controller
         $tahun = request()->input('tahun');
         $cif = request()->input('cif');
 
-        $transaksiQuery = Transaksi::where('id_simp', 'LIKE', "%-$cif");
+        $transaksiQuery = Transaksi::where('id_simp', $cif);
 
         if ($tahun != 0) {
             $transaksiQuery->whereYear('tgl_transaksi', $tahun);
@@ -276,7 +276,7 @@ class SimpananController extends Controller
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $simpanan = Simpanan::where('id', $cif)->with(['anggota', 'js'])->first();
         
-    $transaksiQuery = Transaksi::where('id_simp', 'LIKE', "%-$cif");
+    $transaksiQuery = Transaksi::where('id_simp',  "$cif");
 
         // Jika tahun tidak 0, tambahkan filter tahun
         if ($tahunkop != 0) {
@@ -552,6 +552,7 @@ public function cetakPadaBuku($idt)
                            ->orderBy('id', 'asc')
                            ->skip($start)
                            ->take($limit)
+                           ->with(['anggota', 'js'])
                            ->get();
         } else {
             $id_array = explode(',', $id);
@@ -566,9 +567,9 @@ public function cetakPadaBuku($idt)
                            ->orderBy('id', 'asc')
                            ->skip($start)
                            ->take($limit)
+                           ->with(['anggota', 'js'])
                            ->get();
         }
-
         $tahun_now = $tahun;
         // Hitung bulan lalu
         $tahun_lalu = $tahun_now;
@@ -685,22 +686,54 @@ public function cetakPadaBuku($idt)
                 ->where('tgl_transaksi', '<=', $tgl_trans)
                 ->orderBy('id', 'desc')
                 ->first();
-            
+                
+        $jenisSimpanan = JenisSimpanan::where('id', $simp->jenis_simpanan)->first();
             // Bunga
             if ($saldo > 0) {
                 $sum_baru = $realSimpanan ? $realSimpanan->sum + $bunga : $bunga;
 
                 $transaksi = new Transaksi();
                 $transaksi->tgl_transaksi = Tanggal::tglNasional($tgl_trans);
-                $transaksi->rekening_debit = $jenisMutasi == '1' ? $jenisSimpanan->rek_kas : $jenisSimpanan->rek_simp;
-                $transaksi->rekening_kredit = $jenisMutasi == '1' ? $jenisSimpanan->rek_simp : $jenisSimpanan->rek_kas;
+                $transaksi->rekening_debit = $jenisSimpanan->rek_bunga;
+                $transaksi->rekening_kredit = $jenisSimpanan->rek_simp;
                 $transaksi->idtp = 0;
                 $transaksi->id_pinj = 0;
                 $transaksi->id_pinj_i = 0;
-                $transaksi->id_simp = $jenisMutasi == '1' ? "2-{$nia}" : "3-{$nia}";
-                $transaksi->keterangan_transaksi = $jenisMutasi == '1' ? "Setor Tunai Rekening {$nomorRekening}" : "Tarik Tunai Rekening {$nomorRekening}";
-                $transaksi->relasi = $namaDebitur;
-                $transaksi->jumlah = $jumlah;
+                $transaksi->id_simp = $simp->id;
+                $transaksi->keterangan_transaksi = "Bunga ".$simp->nomor_rekening." ".$simp->anggota->namadepan." bulan ".$bulan." ".$tahun;
+                $transaksi->relasi = $simp->anggota->namadepan;
+                $transaksi->jumlah = $bunga;
+                $transaksi->urutan = 0;
+                $transaksi->id_user = auth()->user()->id;
+
+                if ($transaksi->save()) {
+                    RealSimpanan::create([
+                        'cif' => $simpanan->id,
+                        'idt' => $transaksi->idt,
+                        'tgl_transaksi' => $tgl,
+                        'real_d' => $jenisMutasi == '1' ? 0 : $jumlah,
+                        'real_k' => $jenisMutasi == '1' ? $jumlah : 0,
+                        'sum' => $sum_baru,
+                        'lu' => now(),
+                        'id_user' => $transaksi->id_user,
+                    ]);
+                }
+            }
+            // pajak
+            if ($pajak > 0) {
+                $sum_baru = $realSimpanan ? $realSimpanan->sum + $bunga : $bunga;
+
+                $transaksi = new Transaksi();
+                $transaksi->tgl_transaksi = Tanggal::tglNasional($tgl_trans);
+                $transaksi->rekening_debit = $jenisSimpanan->rek_bunga;
+                $transaksi->rekening_kredit = $jenisSimpanan->rek_simp;
+                $transaksi->idtp = 0;
+                $transaksi->id_pinj = 0;
+                $transaksi->id_pinj_i = 0;
+                $transaksi->id_simp = $simp->id;
+                $transaksi->keterangan_transaksi = "Bunga ".$simp->nomor_rekening." ".$simp->anggota->namadepan." bulan ".$bulan." ".$tahun;
+                $transaksi->relasi = $simp->anggota->namadepan;
+                $transaksi->jumlah = $bunga;
                 $transaksi->urutan = 0;
                 $transaksi->id_user = auth()->user()->id;
 

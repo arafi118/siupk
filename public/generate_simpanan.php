@@ -230,17 +230,18 @@
             $q2 = mysqli_query($koneksi,"SELECT * FROM simpanan_anggota_$kd_kab WHERE ($where) ORDER BY id ASC  LIMIT $start, $per_page");
             while ($simp = mysqli_fetch_array($q2)) {
                 $del_re = mysqli_query($koneksi,"DELETE FROM real_simpanan_$lokasi WHERE cif=$simp[id]");
-                $query  = mysqli_query($koneksi,"SELECT * FROM transaksi_$lokasi WHERE id_simp LIKE '%-$simp[id]' ORDER BY tgl_transaksi ASC, urutan ASC, idt ASC");
+                $query  = mysqli_query($koneksi,"SELECT * FROM transaksi_$lokasi WHERE id_simp LIKE '$simp[id]' ORDER BY tgl_transaksi ASC, urutan ASC, idt ASC");
                 $sum = 0;
+                        $str=1;
                 while ($trx = mysqli_fetch_array($query)) {
                     $cif            = $simp['id'];
                     $idt            = $trx['idt'];
                     $tgl_transaksi  = $trx['tgl_transaksi'];
                     $jumlah         = $trx['jumlah'];
+                    
                     $rdeb           = $trx['rekening_debit'];
                     $rkre           = $trx['rekening_kredit'];
 
-                    $str=1;
                     if(substr($rdeb, 0, 6) == '1.1.01' AND substr($rkre, 0, 6) == '2.1.05' AND $str==1){  //setor awal
                         $kode = 1;
                         $str=2;
@@ -255,9 +256,7 @@
                     }elseif (substr($rdeb, 0, 6) == '2.1.05' AND substr($rkre, 0, 6) == '4.1.03') {    //admin
                         $kode = 7;
                     }
-
-
-
+                    
                     if (in_array($kode, ['1', '2', '5'])) {
                         $real_d = 0;
                         $real_k = $jumlah;
@@ -270,6 +269,8 @@
                         $real_d         = 0;
                         $real_k         = 0;
                     }
+                    
+
                     
                     $lu             = date('Y-m-d H:i:s');
                     $id_user        = $trx['id_user'];
