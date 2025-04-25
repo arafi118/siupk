@@ -1,3 +1,4 @@
+<?php /*
 <!DOCTYPE html>
 <html lang="id">
 
@@ -78,7 +79,7 @@
         }
         .result-text {
             margin-bottom: 20px;
-            color: #5DC4BF;  /* Warna hijau seperti tombol */
+            color: #5DC4BF; 
             font-weight: bold;
             font-size: 18px;
         }
@@ -426,3 +427,5 @@ $bulan_nama = $nama_bulan[$bulan];
 </body>
 
 </html>
+*/ ?>
+//Fitur ini telah dipindahkan ke menu Simpanan.
