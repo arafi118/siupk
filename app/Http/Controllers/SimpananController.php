@@ -359,9 +359,9 @@ public function cetakPadaBuku($idt)
     $user = $userDisplay;
     $kode=$transaksi->realSimpanan->kode;
 	
-                    $debit = $trx->realSimpanan->real_d;
-                    $kredit = $trx->realSimpanan->real_k;
-                    $saldo    = $trx->realSimpanan->sum;
+                    $debit = $transaksi->realSimpanan->real_d;
+                    $kredit = $transaksi->realSimpanan->real_k;
+                    $saldo    = $transaksi->realSimpanan->sum;
                         
                         
         $title = 'Cetak Pada Buku '.$transaksi->id_simp;
