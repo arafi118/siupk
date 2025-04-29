@@ -336,19 +336,9 @@ $bulan_nama = $nama_bulan[$bulan];
                         $tgl_transaksi  = $trx['tgl_transaksi'] ?? 0;
                         $idt  = $trx['idt'] ?? 0;
                         
-                            if (in_array(substr($trx['id_simp'], 0, 1), ['1', '2', '5'])) {
-                                $real_d = 0;
-                                $real_k = $jumlah;
-                                $sum += $jumlah;
-                            } elseif (in_array(substr($trx['id_simp'], 0, 1), ['3', '4', '6', '7'])) {
-                                $real_d = $jumlah;
-                                $real_k = 0;
-                                $sum -= $jumlah;
-                            } else {
-                                $real_d         = 0;
-                                $real_k         = 0;
-                            }
-                        
+                    $real_d = $trx->realSimpanan->real_d;
+                    $real_k = $trx->realSimpanan->real_k;
+                    $sum    = $trx->realSimpanan->sum;
                         $lu             = date('Y-m-d H:i:s');
                         $id_user        = $trx['id_user'] ?? 0;
                         

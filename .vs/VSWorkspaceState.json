@@ -1,11 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\resources",
-    "\\resources\\views",
-    "\\resources\\views\\simpanan",
-    "\\resources\\views\\simpanan\\partials"
+    ""
   ],
-  "SelectedNode": "\\resources\\views\\simpanan\\partials\\cetak_pada_buku.blade.php",
+  "SelectedNode": "\\G:\\laragon\\www\\siupk",
   "PreviewInSolutionExplorer": false
 }

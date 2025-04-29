@@ -57,32 +57,16 @@ $sum = DB::table('real_simpanan_' . session('lokasi'))
             @forelse($transaksi as $index => $trx)
 
             @php
-                $id_simp = $trx->id_simp; //ini nanti di ganti ambil dari real_simpanan_$lokasi
-                    if (strpos($id_simp, '-') !== false) {
-                        // Jika ada tanda "-", pisahkan menjadi dua bagian
-                        list($kd_trx, $cif) = explode("-", $id_simp);
-                    } else {
-                        // Jika tidak ada tanda "-", atur kd_trx = 0 dan cif = id_simp
-                        $kd_trx = 0;
-                        $cif = $id_simp;
-                    }
+            
+                $id_simp = $trx->id_simp;
+                    $cif = $id_simp;
                     $idt=$trx->idt;
 
-                
-                    $jumlah = floatval($trx->jumlah); // Ensure $trx->jumlah is numeric
-                    
-                    if(in_array(substr($trx->id_simp, 0, 1), ['1', '2', '5'])) {
-                        $real_d = 0;
-                        $real_k = $jumlah;
-                        $sum += $jumlah;
-                    } elseif(in_array(substr($trx->id_simp, 0, 1), ['3', '4', '6', '7'])) {
-                        $real_d = $jumlah;
-                        $real_k = 0;
-                        $sum -= $jumlah;
-                    } else {
-                        $real_d = 0;
-                        $real_k = 0;
-                    }
+                    $real_d = $trx->realSimpanan->real_d;
+                    $real_k = $trx->realSimpanan->real_k;
+                    $sum    = $trx->realSimpanan->sum;
+                    $kd_trx = $trx->realSimpanan->kode;
+                        
                         
             @endphp
 

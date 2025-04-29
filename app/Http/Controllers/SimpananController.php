@@ -343,7 +343,6 @@ class SimpananController extends Controller
 
 public function cetakPadaBuku($idt)
 {
-    $saldo = 0;
     $transaksi = Transaksi::where('idt', $idt)->with('realSimpanan')->orderBy('tgl_transaksi', 'asc')->first();
     $parts = explode('-', $transaksi->id_simp);
 
@@ -359,19 +358,12 @@ public function cetakPadaBuku($idt)
         : $user->ins . ' / ' . $userTransaksi->ins;
     $user = $userDisplay;
     $kode=$transaksi->realSimpanan->kode;
-                    if(in_array(substr($transaksi->id_simp, 0, 1), ['1', '2', '5'])) {
-                        $debit = 0;
-                        $kredit = $transaksi->jumlah;
-                        $saldo += $transaksi->jumlah;
-                    } elseif(in_array(substr($transaksi->id_simp, 0, 1), ['3', '4', '6', '7'])) {
-                        $debit = $transaksi->jumlah;
-                        $kredit = 0;
-                        $saldo -= $transaksi->jumlah;
-                    } else {
-                        $debit = 0;
-                        $kredit = 0;
-                    }
-
+	
+                    $debit = $trx->realSimpanan->real_d;
+                    $kredit = $trx->realSimpanan->real_k;
+                    $saldo    = $trx->realSimpanan->sum;
+                        
+                        
         $title = 'Cetak Pada Buku '.$transaksi->id_simp;
         return view('simpanan.partials.cetak_pada_buku')->with(compact('title','transaksi', 'transaksiCount', 'kode', 'user', 'debit', 'kredit',  'saldo'));
     }
@@ -485,18 +477,9 @@ public function cetakPadaBuku($idt)
                 $cif = $simp->id;
                 $tgl_transaksi = $trx->tgl_transaksi;
                 
-                    if(in_array(substr($trx->id_simp, 0, 1), ['1', '2', '5'])) {
-                        $real_d = 0;
-                        $real_k = $jumlah;
-                        $sum += $jumlah;
-                    } elseif(in_array(substr($trx->id_simp, 0, 1), ['3', '4', '6', '7'])) {
-                        $real_d = $jumlah;
-                        $real_k = 0;
-                        $sum -= $jumlah;
-                    } else {
-                        $real_d = 0;
-                        $real_k = 0;
-                    }
+                    $real_d = $trx->realSimpanan->real_d;
+                    $real_k = $trx->realSimpanan->real_k;
+                    $sum    = $trx->realSimpanan->sum;
 
                 $lu = now();
                 $id_user = $trx->id_user;
