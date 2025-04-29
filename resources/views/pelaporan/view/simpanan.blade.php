@@ -214,12 +214,6 @@
 
                 @endphp
 
-                <tr style="font-weight: bold;">
-                    <td class="t l b" align="left" colspan="4" height="15">
-                        Lunas s.d. Tahun Lalu
-                    </td>
-                </tr>
-
                 <tr>
                     <td colspan="9" style="padding: 0px !important;">
                         <table class="p" border="0" width="100%" cellspacing="0" cellpadding="0"
@@ -228,6 +222,9 @@
                                 <td class="t l b" align="center" height="15">
                                     J U M L A H
                                 </td>
+								<td class="t l b" align="right">{{ number_format($t_debit) }}</td>
+								<td class="t l b" align="right">{{ number_format($t_kredit) }}</td>
+								<td class="t l b" align="right">{{ number_format($t_saldo) }}</td>
                             </tr>
 
                             <tr>
