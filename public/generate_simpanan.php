@@ -241,22 +241,22 @@
                     
                     $rdeb           = $trx['rekening_debit'];
                     $rkre           = $trx['rekening_kredit'];
+                    echo $rkre;
 
-                    if(substr($rdeb, 0, 6) == '1.1.01' AND substr($rkre, 0, 6) == '2.1.05' AND $str==1){  //setor awal
+                    if(substr($rdeb, 0, 6) == '1.1.01' AND (substr($rkre, 0, 6) == '2.1.05' or substr($rkre, 0, 6) == '2.2.05' ) AND $str==1){  //setor awal
                         $kode = 1;
                         $str=2;
-                    }elseif (substr($rdeb, 0, 6) == '1.1.01' AND substr($rkre, 0, 6) == '2.1.05') {    //setor    
+                    }elseif (substr($rdeb, 0, 6) == '1.1.01' AND (substr($rkre, 0, 6) == '2.1.05' or substr($rkre, 0, 6) == '2.2.05' )) {    //setor    
                         $kode = 2;
-                    }elseif (substr($rdeb, 0, 6) == '2.1.05' AND substr($rkre, 0, 6) == '1.1.01') {    //tarik
+                    }elseif ((substr($rdeb, 0, 6) == '2.1.05' or substr($rdeb, 0, 6) == '2.2.05' ) AND substr($rkre, 0, 6) == '1.1.01') {    //tarik
                         $kode = 3;
-                    }elseif (substr($rdeb, 0, 6) == '5.2.01' AND substr($rkre, 0, 6) == '2.1.05') {    //bunga
+                    }elseif (substr($rdeb, 0, 6) == '5.2.01' AND (substr($rkre, 0, 6) == '2.1.05' or substr($rkre, 0, 6) == '2.2.05' )) {    //bunga
                         $kode = 5;
-                    }elseif (substr($rdeb, 0, 6) == '2.1.05' AND substr($rkre, 0, 6) == '2.1.03') {    //pajak
+                    }elseif ((substr($rdeb, 0, 6) == '2.1.05' or substr($rdeb, 0, 6) == '2.2.05' ) AND substr($rkre, 0, 6) == '2.1.03') {    //pajak
                         $kode = 6;
-                    }elseif (substr($rdeb, 0, 6) == '2.1.05' AND substr($rkre, 0, 6) == '4.1.03') {    //admin
+                    }elseif ((substr($rdeb, 0, 6) == '2.1.05' or substr($rdeb, 0, 6) == '2.2.05' ) AND substr($rkre, 0, 6) == '4.1.03') {    //admin
                         $kode = 7;
                     }
-                    
                     if (in_array($kode, ['1', '2', '5'])) {
                         $real_d = 0;
                         $real_k = $jumlah;

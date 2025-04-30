@@ -3894,7 +3894,7 @@ class PelaporanController extends Controller
                     ->orderBy($tb_simp . '.tgl_buka', 'ASC');
             },
             'simpanan.realSimpananTerbesar' => function ($query) use ($data) {
-                $query->where('tgl_transaksi', '<=', $data['tgl_kondisi']);
+                $query->where('tgl_transaksi', '<=', $data['tgl_kondisi'])->orderBy('id', 'desc');
             },
         ])->get();
         
