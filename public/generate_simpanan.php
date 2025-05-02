@@ -241,7 +241,6 @@
                     
                     $rdeb           = $trx['rekening_debit'];
                     $rkre           = $trx['rekening_kredit'];
-                    echo $rkre;
 
                     if(substr($rdeb, 0, 6) == '1.1.01' AND (substr($rkre, 0, 6) == '2.1.05' or substr($rkre, 0, 6) == '2.2.05' ) AND $str==1){  //setor awal
                         $kode = 1;

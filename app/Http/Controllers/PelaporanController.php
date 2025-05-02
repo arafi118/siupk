@@ -3855,49 +3855,57 @@ class PelaporanController extends Controller
 
         $data['tgl_lalu'] = $data['tahun'] . '-' . $data['bulan'] . '-01';
         //
-        $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
+        $kec = Kecamatan::where('id', Session::get('lokasi'))->first();$tgl_kondisi = "{$data['tahun']}-{$data['bulan']}-{$data['hari']}";
+        $tb_simp = 'simpanan_anggota_' . $data['kec']->id;
+        $tb_angg = 'anggota_' . $data['kec']->id;
+        $data['tb_simp'] = $tb_simp;
+
+        // Query dasar JenisSimpanan
         $data['jenis_ps'] = JenisSimpanan::where(function ($query) use ($kec) {
             $query->where('lokasi', '0')
-                ->orWhere(function ($query) use ($kec) {
-                    $query->where('kecuali', 'NOT LIKE', "%-{$kec['id']}-%")
-                        ->where('lokasi', 'LIKE', "%-{$kec['id']}-%");
-                });
+                  ->orWhere(function ($query) use ($kec) {
+                      $query->where('kecuali', 'NOT LIKE', "%-{$kec['id']}-%")
+                            ->where('lokasi', 'LIKE', "%-{$kec['id']}-%");
+                  });
         })->with([
-            'simpanan' => function ($query) use ($data) {
-                $tb_simp = 'simpanan_anggota_' . $data['kec']->id;
-                $tb_angg = 'anggota_' . $data['kec']->id;
-                $data['tb_simp'] = $tb_simp;
-
-                $query->select($tb_simp . '.*', $tb_angg . '.namadepan', 'desa.nama_desa', 'desa.kd_desa', 'desa.kode_desa', 'sebutan_desa.sebutan_desa')
-                    ->join($tb_angg, $tb_angg . '.id', '=', $tb_simp . '.nia')
-                    ->join('desa', $tb_angg . '.desa', '=', 'desa.kd_desa')
+            'simpanan' => function ($query) use ($tb_simp, $tb_angg, $tgl_kondisi) {
+                $query->select(
+                        "{$tb_simp}.*",
+                        "{$tb_angg}.namadepan",
+                        'desa.nama_desa',
+                        'desa.kd_desa',
+                        'desa.kode_desa',
+                        'sebutan_desa.sebutan_desa'
+                    )
+                    ->join($tb_angg, "{$tb_angg}.id", '=', "{$tb_simp}.nia")
+                    ->join('desa', "{$tb_angg}.desa", '=', 'desa.kd_desa')
                     ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
-                    ->withSum(['real_s' => function ($query) use ($data) {
-                        $tgl_kondisi = $data['tahun'] . '-' . $data['bulan'] . '-' . $data['hari'];
+                    ->withSum(['real_s' => function ($query) use ($tgl_kondisi) {
                         $query->where('tgl_transaksi', '<', $tgl_kondisi);
                     }], 'real_d')
-                    ->withSum(['real_s' => function ($query) use ($data) {
-                        $tgl_kondisi = $data['tahun'] . '-' . $data['bulan'] . '-' . $data['hari'];
+                    ->withSum(['real_s' => function ($query) use ($tgl_kondisi) {
                         $query->where('tgl_transaksi', '<', $tgl_kondisi);
                     }], 'real_k')
-                    ->where(function ($query) use ($data) {
+                    ->where(function ($query) use ($tb_simp, $tgl_kondisi) {
                         $query->where([
-                            [$data['tb_simp'] . '.status', 'A'],
-                            [$data['tb_simp'] . '.tgl_buka', '<=', $data['tgl_kondisi']]
-                        ])->orwhere([
-                            [$data['tb_simp'] . '.status', 'L'],
-                            [$data['tb_simp'] . '.tgl_buka', '<=', $data['tgl_kondisi']],
-                            [$data['tb_simp'] . '.tgl_tutup', '>=', $data['tgl_kondisi']]
-                        ]);
+                                ["{$tb_simp}.status", 'A'],
+                                ["{$tb_simp}.tgl_buka", '<=', $tgl_kondisi]
+                            ])
+                            ->orWhere([
+                                ["{$tb_simp}.status", 'L'],
+                                ["{$tb_simp}.tgl_buka", '<=', $tgl_kondisi],
+                                ["{$tb_simp}.tgl_tutup", '>=', $tgl_kondisi]
+                            ]);
                     })
-                    ->orderBy($tb_angg . '.desa', 'ASC')
-                    ->orderBy($tb_simp . '.tgl_buka', 'ASC');
+                    ->orderBy("{$tb_angg}.desa", 'ASC')
+                    ->orderBy("{$tb_simp}.tgl_buka", 'ASC');
             },
-            'simpanan.realSimpananTerbesar' => function ($query) use ($data) {
-                $query->where('tgl_transaksi', '<=', $data['tgl_kondisi'])->orderBy('id', 'desc');
+            'simpanan.realSimpananTerbesar' => function ($query) use ($tgl_kondisi) {
+                $query->where('tgl_transaaseksi', '<=', $tgl_kondisi)
+                      ->orderBy('id', 'desc');
             },
         ])->get();
-        
+
         $data['lunas'] = Simpanan::where([
             ['tgl_tutup', '<', $thn . '-01-01'],
             ['status', 'L']

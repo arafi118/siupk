@@ -27,6 +27,7 @@ class Simpanan extends Model
     {
         return $this->hasOne(RealSimpanan::class, 'cif', 'id')->latestOfMany();
     }
+
     public function jasa()
     {
         return $this->belongsTo(JenisJasa::class, 'jenis_jasa');

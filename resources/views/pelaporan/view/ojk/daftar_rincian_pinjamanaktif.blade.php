@@ -450,12 +450,6 @@ $empty = false;
         $nomor = 1;
         $section = $pinj_i->kd_desa;
         $nama_desa = $pinj_i->sebutan_desa . ' ' . $pinj_i->nama_desa;
-        $kpros_jasa =number_format($pinj_i['pros_jasa'] - $pinj_i['jangka'],2);
-
-        $ktgl1 = $pinj_i['tgl_cair'];
-        $kpenambahan ="+".$pinj_i['jangka']." month";
-        $ktgl2 = date('Y-m-d', strtotime($kpenambahan, strtotime($ktgl1)));
-        $kpros_jasa =number_format($pinj_i['pros_jasa']/$pinj_i['jangka'],2);
 
         $j_alokasi = 0;
         $j_saldo = 0;
@@ -536,14 +530,17 @@ $empty = false;
                                             $keterangan="Diragukan" ; }else{ $keterangan="Macet" ; } @endphp <tr
                                             align="right" height="15px" class="style9">
                                             <td class="left top" align="center">{{ $nomor++ }}</td>
-                                            <td class="left top" align="left">{{ $pinj_i->namadepan }} -{{$pinj_i->id}}
-                                            </td>
-                                            <td class="left top" align="center">{{$pinj_i->angsuran_pokok->nama_sistem}}
-                                            </td>
-                                            <td class="left top" align="center">
-                                                {{ Tanggal::tglIndo($pinj_i->tgl_cair) }}</td>
+                                            <td class="left top" align="left">{{ $pinj_i->namadepan }} -{{$pinj_i->id}}</td>
+                                            <td class="left top" align="center">{{$pinj_i->angsuran_pokok->nama_sistem}}</td>
+                                            <td class="left top" align="center">{{ Tanggal::tglIndo($pinj_i->tgl_cair) }}</td>
+                                                    @php
+                                                        $ktgl1 = $pinj_i->tgl_cair;
+                                                        $kpenambahan ="+".$pinj_i['jangka']." month";
+                                                        $ktgl2 = date('Y-m-d', strtotime($kpenambahan, strtotime($ktgl1)));
+                                                        $prooos = number_format($pinj_i->pros_jasa/$pinj_i->jangka,2);
+                                                    @endphp
                                             <td class="left top" align="center">{{ Tanggal::tglIndo($ktgl2)}}</td>
-                                            <td class="left top">{{$kpros_jasa}}%</td>
+                                            <td class="left top">{{$prooos}}%</td>
                                             <td class="left top" align="center">per bulan</td>
                                             <td class="left top">{{number_format($pinj_i->alokasi)}}</td>
                                             <td class="left top">{{ number_format($saldo_pokok) }}</td>
