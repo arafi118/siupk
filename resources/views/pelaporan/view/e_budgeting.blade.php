@@ -133,7 +133,7 @@
 
                                 @foreach ($rek->kom_saldo as $saldo)
                                     @php
-                                        if ($bulan_ini != 0) {
+                                        if ($bulan_ini != 0 && $sub!=12) {
                                             $realisasi_bulan_lalu = $saldo_lalu;
                                         }
 
