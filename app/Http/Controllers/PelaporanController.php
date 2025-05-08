@@ -98,6 +98,10 @@ class PelaporanController extends Controller
                 3 => [
                     'title' => '04. Oktober - Desember',
                     'id' => '10,11,12'
+                ],
+                4 => [
+                    'title' => '05. Januari - Desember',
+                    'id' => '12'
                 ]
             ];
 
