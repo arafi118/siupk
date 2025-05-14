@@ -78,7 +78,7 @@
                 $no = $loop->iteration;
             @endphp
             <tr>
-                <td height="15" align="center"><b>{{ $no }}.</b></td>
+                <td height="25" align="center"><b>{{ $no }}.</b></td>
                 <td>{{ $pa->anggota->namadepan }}</td>
                 <td align="center">Pemanfaat</td>
                 <td>{{ $pa->anggota->alamat }}</td>
@@ -86,9 +86,9 @@
             </tr>
         @endforeach
 
-        @for ($i = $no + 1; $i <= 25; $i++)
+        @for ($i = $no + 1; $i <= 17; $i++)
             <tr>
-                <td height="15" align="center"><b>{{ $i }}.</b></td>
+                <td height="25" align="center"><b>{{ $i }}.</b></td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>

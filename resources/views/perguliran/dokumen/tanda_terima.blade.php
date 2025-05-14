@@ -73,7 +73,7 @@
                 $no = $loop->iteration;
             @endphp
             <tr>
-                <td class="t l b" height="15" align="center">{{ $no }}</td>
+                <td class="t l b" height="25" align="center">{{ $no }}</td>
                 <td class="t l b">{{ $pa->anggota->nik }}</td>
                 <td class="t l b">{{ $pa->anggota->namadepan }}</td>
                 <td class="t l b" align="center">{{ $pa->anggota->jk }}</td>

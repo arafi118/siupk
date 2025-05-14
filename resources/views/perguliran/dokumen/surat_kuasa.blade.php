@@ -99,18 +99,6 @@
                 &nbsp;
             </td>
         </tr>
-        <tr>
-            <td colspan="3">&nbsp;</td>
-            <td align="center">
-                {{ $kec->nama_kec }}, {{ Tanggal::tglLatin($pinkel->tgl_cair) }}
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3">&nbsp;</td>
-            <td align="center">
-                Anggota Kelompok selaku pemberi kuasa :
-            </td>
-        </tr>
     </table>
 
     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
@@ -118,12 +106,24 @@
             <td style="padding: 0px !important;">
                 <table border="0" width="100%" cellspacing="0" cellpadding="0"
                     style="font-size: 11px; margin-top: 8px;" class="p0">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+            <td colspan="2" align="center">
+                {{ $kec->nama_kec }}, {{ Tanggal::tglLatin($pinkel->tgl_cair) }}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+            <td colspan="2" align="center">
+                Anggota Kelompok selaku pemberi kuasa : <br> <br>
+            </td>
+        </tr>
                     @for ($i = 1; $i <= $batas_pemanfaat; $i++)
                         @php
                             $j = $i - 1;
                         @endphp
                         <tr>
-                            <td width="25%">
+                            <td width="25%" height="25">
                                 @if (isset($pinkel->pinjaman_anggota[$j]))
                                     {{ $i }}. {{ $pinkel->pinjaman_anggota[$j]->anggota->namadepan }}
                                 @endif
