@@ -225,16 +225,14 @@
                 >
                     Kembalikan Ke Proposal
                 </button>
-                <button type="button"
-                    {{ $pinj_a['jumlah_pinjaman'] > '0' || $pinj_a['jumlah_pemanfaat'] > '0' || $pinj_a['jumlah_kelompok'] > '0' ? 'disabled' : '' }}
-                    id="Simpan" class="btn btn-github ms-1 btn-sm"
+                <button type="button" id="Simpan" class="btn btn-github ms-1 btn-sm"
                     @if (!in_array('perguliran.cairkan', Session::get('tombol', [])))
                         disabled
                     @endif
                 >
                     Cairkan Sekarang
                 </button>
-
+                
             </div>
         </div>
     </div>
