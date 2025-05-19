@@ -273,13 +273,21 @@
                 </tbody>
             </table>
         </div>
-
-        @if ($perguliran_i->status == 'A')
+        
+        @if ($perguliran->status == 'A')
             <div class="d-flex justify-content-end mt-3">
                 <button type="button" data-bs-toggle="modal" data-bs-target="#Rescedule"
-                    class="btn btn-warning btn-sm">Resceduling Pinjaman</button>
+                    class="btn btn-warning btn-sm"
+                    @if (!in_array('perguliran.resceduling', Session::get('tombol', [])))
+                        disabled
+                    @endif
+                >Resceduling Pinjaman</button>
                 <button type="button" data-bs-toggle="modal" data-bs-target="#Penghapusan"
-                    class="btn btn-danger btn-sm ms-1">Penghapusan Pinjaman</button>
+                    class="btn btn-danger btn-sm ms-1"
+                    @if (!in_array('perguliran.penghapusan', Session::get('tombol', [])))
+                        disabled
+                    @endif
+                >Penghapusan Pinjaman</button>
             </div>
         @endif
     </div>

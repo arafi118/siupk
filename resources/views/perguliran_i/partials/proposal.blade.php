@@ -167,9 +167,13 @@
                     </div>
                 </div>
             </div>
-
-            <button type="button" id="Simpan" class="btn btn-github float-end btn-sm">
-                Simpan Rekom Verifikator
+            
+            <button type="button" id="Simpan" class="btn btn-github float-end btn-sm"
+                @if (!in_array('perguliran.simpan_verifikator', Session::get('tombol', [])))
+                    disabled
+                @endif
+            >
+                Simpan Rekom Verifikatora
             </button>
         </div>
     </div>

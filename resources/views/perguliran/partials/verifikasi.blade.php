@@ -291,10 +291,18 @@
             </div>
 
             <div class="d-flex justify-content-end mt-3">
-                <button type="button" id="kembaliProposal" class="btn btn-warning btn-sm">
+                <button type="button" id="kembaliProposal" class="btn btn-warning btn-sm"
+                    @if (!in_array('perguliran.balik_proposal', Session::get('tombol', [])))
+                        disabled
+                    @endif
+                >
                     Kembalikan Ke Proposal
                 </button>
-                <button type="button" id="Simpan" class="btn btn-github ms-1 btn-sm">
+                <button type="button" id="Simpan" class="btn btn-github ms-1 btn-sm"
+                    @if (!in_array('perguliran.simpan_dana', Session::get('tombol', [])))
+                        disabled
+                    @endif
+                >
                     Simpan Keputusan Pendanaan
                 </button>
             </div>
