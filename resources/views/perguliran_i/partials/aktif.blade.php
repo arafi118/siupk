@@ -274,7 +274,7 @@
             </table>
         </div>
         
-        @if ($perguliran->status == 'A')
+        @if ($perguliran_i->status == 'A')
             <div class="d-flex justify-content-end mt-3">
                 <button type="button" data-bs-toggle="modal" data-bs-target="#Rescedule"
                     class="btn btn-warning btn-sm"

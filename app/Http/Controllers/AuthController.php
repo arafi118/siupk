@@ -18,7 +18,7 @@ use Session;
 
 class AuthController extends Controller
 {
-    private const ID_KEC = 310;
+    private const ID_KEC = 199;
 
     public function index()
     {
