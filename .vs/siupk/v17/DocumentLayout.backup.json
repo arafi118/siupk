@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\perguliran_i\\partials\\waiting.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|G:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\aktif.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\perguliran_i\\partials\\aktif.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|G:\\laragon\\www\\siupk\\app\\Http\\Controllers\\AuthController.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\Http\\Controllers\\AuthController.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
@@ -29,10 +33,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|G:\\laragon\\www\\siupk\\resources\\views\\perguliran\\partials\\proposal.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\perguliran\\partials\\proposal.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|G:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\aktif.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\perguliran_i\\partials\\aktif.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|G:\\laragon\\www\\siupk\\resources\\views\\perguliran\\partials\\aktif.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
@@ -126,7 +126,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 16,
           "Children": [
             {
               "$type": "Document",
@@ -143,17 +143,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "AuthController.php",
               "DocumentMoniker": "G:\\laragon\\www\\siupk\\app\\Http\\Controllers\\AuthController.php",
               "RelativeDocumentMoniker": "app\\Http\\Controllers\\AuthController.php",
               "ToolTip": "G:\\laragon\\www\\siupk\\app\\Http\\Controllers\\AuthController.php",
               "RelativeToolTip": "app\\Http\\Controllers\\AuthController.php",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
               "WhenOpened": "2024-12-16T02:21:53.627Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -167,136 +166,6 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
               "WhenOpened": "2025-04-11T04:26:59.474Z",
               "IsPinned": true
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "waiting.blade.php",
-              "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\waiting.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\perguliran_i\\partials\\waiting.blade.php",
-              "ToolTip": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\waiting.blade.php",
-              "RelativeToolTip": "resources\\views\\perguliran_i\\partials\\waiting.blade.php",
-              "ViewState": "AgIAAM4AAAAAAAAAAAAawOUAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2025-05-19T05:19:39.781Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "verifikasi.blade.php",
-              "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\verifikasi.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\perguliran_i\\partials\\verifikasi.blade.php",
-              "ToolTip": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\verifikasi.blade.php",
-              "RelativeToolTip": "resources\\views\\perguliran_i\\partials\\verifikasi.blade.php",
-              "ViewState": "AgIAANEAAAAAAAAAAAAawPEAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2025-05-19T05:18:52.148Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "proposal.blade.php",
-              "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\proposal.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\perguliran_i\\partials\\proposal.blade.php",
-              "ToolTip": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\proposal.blade.php",
-              "RelativeToolTip": "resources\\views\\perguliran_i\\partials\\proposal.blade.php",
-              "ViewState": "AgIAAJMAAAAAAAAAAAAAALAAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2025-05-19T05:18:21.677Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "aktif.blade.php",
-              "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\aktif.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\perguliran_i\\partials\\aktif.blade.php",
-              "ToolTip": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\aktif.blade.php",
-              "RelativeToolTip": "resources\\views\\perguliran_i\\partials\\aktif.blade.php",
-              "ViewState": "AgIAAAMBAAAAAAAAAAAAACIBAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2025-05-19T05:17:53.42Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "lunas.blade.php",
-              "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran\\partials\\lunas.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\perguliran\\partials\\lunas.blade.php",
-              "ToolTip": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran\\partials\\lunas.blade.php",
-              "RelativeToolTip": "resources\\views\\perguliran\\partials\\lunas.blade.php",
-              "ViewState": "AgIAAIoAAAAAAAAAAAApwJoAAABYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2025-05-19T05:15:10.933Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "aktif.blade.php",
-              "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran\\partials\\aktif.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\perguliran\\partials\\aktif.blade.php",
-              "ToolTip": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran\\partials\\aktif.blade.php",
-              "RelativeToolTip": "resources\\views\\perguliran\\partials\\aktif.blade.php",
-              "ViewState": "AgIAAEYBAAAAAAAAAAApwFgBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2025-05-19T05:14:04.189Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "waiting.blade.php",
-              "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran\\partials\\waiting.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\perguliran\\partials\\waiting.blade.php",
-              "ToolTip": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran\\partials\\waiting.blade.php",
-              "RelativeToolTip": "resources\\views\\perguliran\\partials\\waiting.blade.php",
-              "ViewState": "AgIAADcBAAAAAAAAAAApwEsBAAA5AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2025-05-19T05:13:01.131Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "verifikasi.blade.php",
-              "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran\\partials\\verifikasi.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\perguliran\\partials\\verifikasi.blade.php",
-              "ToolTip": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran\\partials\\verifikasi.blade.php",
-              "RelativeToolTip": "resources\\views\\perguliran\\partials\\verifikasi.blade.php",
-              "ViewState": "AgIAABABAAAAAAAAAAApwCQBAAA5AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2025-05-19T05:11:53.007Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "proposal.blade.php",
-              "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran\\partials\\proposal.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\perguliran\\partials\\proposal.blade.php",
-              "ToolTip": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran\\partials\\proposal.blade.php",
-              "RelativeToolTip": "resources\\views\\perguliran\\partials\\proposal.blade.php",
-              "ViewState": "AgIAABEBAAAAAAAAAAD4vx8BAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2025-05-19T05:06:25.814Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "index.blade.php",
-              "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\dashboard\\index.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\dashboard\\index.blade.php",
-              "ToolTip": "G:\\laragon\\www\\siupk\\resources\\views\\dashboard\\index.blade.php",
-              "RelativeToolTip": "resources\\views\\dashboard\\index.blade.php",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2025-05-19T04:07:53.131Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -349,6 +218,127 @@
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "waiting.blade.php",
+              "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\waiting.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\perguliran_i\\partials\\waiting.blade.php",
+              "ToolTip": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\waiting.blade.php",
+              "RelativeToolTip": "resources\\views\\perguliran_i\\partials\\waiting.blade.php",
+              "ViewState": "AgIAAMcAAAAAAAAAAAAAAN4AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-05-19T05:19:39.781Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "verifikasi.blade.php",
+              "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\verifikasi.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\perguliran_i\\partials\\verifikasi.blade.php",
+              "ToolTip": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\verifikasi.blade.php",
+              "RelativeToolTip": "resources\\views\\perguliran_i\\partials\\verifikasi.blade.php",
+              "ViewState": "AgIAANEAAAAAAAAAAAAawPEAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-05-19T05:18:52.148Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "proposal.blade.php",
+              "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\proposal.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\perguliran_i\\partials\\proposal.blade.php",
+              "ToolTip": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\proposal.blade.php",
+              "RelativeToolTip": "resources\\views\\perguliran_i\\partials\\proposal.blade.php",
+              "ViewState": "AgIAAJMAAAAAAAAAAAAAALAAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-05-19T05:18:21.677Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "aktif.blade.php",
+              "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\aktif.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\perguliran_i\\partials\\aktif.blade.php",
+              "ToolTip": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\aktif.blade.php",
+              "RelativeToolTip": "resources\\views\\perguliran_i\\partials\\aktif.blade.php",
+              "ViewState": "AgIAAP8AAAAAAAAAAAAAABMBAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-05-19T05:17:53.42Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "lunas.blade.php",
+              "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran\\partials\\lunas.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\perguliran\\partials\\lunas.blade.php",
+              "ToolTip": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran\\partials\\lunas.blade.php",
+              "RelativeToolTip": "resources\\views\\perguliran\\partials\\lunas.blade.php",
+              "ViewState": "AgIAAIoAAAAAAAAAAAApwJoAAABYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-05-19T05:15:10.933Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "aktif.blade.php",
+              "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran\\partials\\aktif.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\perguliran\\partials\\aktif.blade.php",
+              "ToolTip": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran\\partials\\aktif.blade.php",
+              "RelativeToolTip": "resources\\views\\perguliran\\partials\\aktif.blade.php",
+              "ViewState": "AgIAAEYBAAAAAAAAAAApwFgBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-05-19T05:14:04.189Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "waiting.blade.php",
+              "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran\\partials\\waiting.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\perguliran\\partials\\waiting.blade.php",
+              "ToolTip": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran\\partials\\waiting.blade.php",
+              "RelativeToolTip": "resources\\views\\perguliran\\partials\\waiting.blade.php",
+              "ViewState": "AgIAADcBAAAAAAAAAAApwEsBAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-05-19T05:13:01.131Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "verifikasi.blade.php",
+              "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran\\partials\\verifikasi.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\perguliran\\partials\\verifikasi.blade.php",
+              "ToolTip": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran\\partials\\verifikasi.blade.php",
+              "RelativeToolTip": "resources\\views\\perguliran\\partials\\verifikasi.blade.php",
+              "ViewState": "AgIAABABAAAAAAAAAAApwCQBAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-05-19T05:11:53.007Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "proposal.blade.php",
+              "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran\\partials\\proposal.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\perguliran\\partials\\proposal.blade.php",
+              "ToolTip": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran\\partials\\proposal.blade.php",
+              "RelativeToolTip": "resources\\views\\perguliran\\partials\\proposal.blade.php",
+              "ViewState": "AgIAABEBAAAAAAAAAAD4vx8BAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-05-19T05:06:25.814Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "index.blade.php",
+              "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\dashboard\\index.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\dashboard\\index.blade.php",
+              "ToolTip": "G:\\laragon\\www\\siupk\\resources\\views\\dashboard\\index.blade.php",
+              "RelativeToolTip": "resources\\views\\dashboard\\index.blade.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-05-19T04:07:53.131Z"
             },
             {
               "$type": "Document",

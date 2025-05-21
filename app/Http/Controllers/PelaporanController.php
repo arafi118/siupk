@@ -3267,12 +3267,9 @@ class PelaporanController extends Controller
 
         $view = view('pelaporan.view.perkembangan_piutang.tunggakan', $data)->render();
 
-        if ($data['type'] == 'pdf') {
             $pdf = PDF::loadHTML($view)->setPaper('A4', 'landscape');
             return $pdf->stream();
-        } else {
-            return $view;
-        }
+        
     }
 
     private function ati(array $data)
