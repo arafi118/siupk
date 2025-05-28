@@ -116,10 +116,10 @@ class AuthController extends Controller
                     ])->orderBy('sort', 'ASC')->orderBy('id', 'ASC')->get();
 
                     $AksesMenu = explode(',', $user->akses_menu);
-                    $Menu = Menu::whereNotIn('id', $AksesMenu)->pluck('akses')->toArray();
+                    $Menu = Menu::whereNotIn('id', $AksesMenu)->toArray();
 
                     $AksesTombol = explode(',', $user->akses_tombol);
-                    $MenuTombol = MenuTombol::whereNotIn('id', $AksesTombol)->pluck('akses')->toArray();
+                    $MenuTombol = MenuTombol::whereNotIn('id', $AksesTombol)->toArray();
 
                     $inv = $this->generateInvoice($kec);
 
