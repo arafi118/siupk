@@ -152,7 +152,7 @@
               "RelativeDocumentMoniker": "routes\\web.php",
               "ToolTip": "G:\\laragon\\www\\siupk\\routes\\web.php",
               "RelativeToolTip": "routes\\web.php",
-              "ViewState": "AgIAAGEAAAAAAAAAAAAAAHYAAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAAGcAAAAAAAAAAAAAAH4AAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
               "WhenOpened": "2024-06-03T03:41:34.399Z",
               "IsPinned": true,
@@ -169,8 +169,7 @@
               "ViewState": "AgIAAGMAAAAAAAAAAAAAAHkAAABYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
               "WhenOpened": "2024-12-16T02:21:53.627Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -184,32 +183,6 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
               "WhenOpened": "2025-04-11T04:26:59.474Z",
               "IsPinned": true
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "waiting.blade.php",
-              "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\waiting.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\perguliran_i\\partials\\waiting.blade.php",
-              "ToolTip": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\waiting.blade.php",
-              "RelativeToolTip": "resources\\views\\perguliran_i\\partials\\waiting.blade.php",
-              "ViewState": "AgIAAMcAAAAAAAAAAAAAANEAAABFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2025-05-19T05:19:39.781Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "navbar.blade.php",
-              "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\layouts\\navbar.blade.php",
-              "RelativeDocumentMoniker": "resources\\views\\layouts\\navbar.blade.php",
-              "ToolTip": "G:\\laragon\\www\\siupk\\resources\\views\\layouts\\navbar.blade.php",
-              "RelativeToolTip": "resources\\views\\layouts\\navbar.blade.php",
-              "ViewState": "AgIAAKIAAAAAAAAAAAAAALUAAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2025-05-28T04:05:55.062Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -265,6 +238,30 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "waiting.blade.php",
+              "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\waiting.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\perguliran_i\\partials\\waiting.blade.php",
+              "ToolTip": "G:\\laragon\\www\\siupk\\resources\\views\\perguliran_i\\partials\\waiting.blade.php",
+              "RelativeToolTip": "resources\\views\\perguliran_i\\partials\\waiting.blade.php",
+              "ViewState": "AgIAAMcAAAAAAAAAAAAAANEAAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-05-19T05:19:39.781Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "navbar.blade.php",
+              "DocumentMoniker": "G:\\laragon\\www\\siupk\\resources\\views\\layouts\\navbar.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\layouts\\navbar.blade.php",
+              "ToolTip": "G:\\laragon\\www\\siupk\\resources\\views\\layouts\\navbar.blade.php",
+              "RelativeToolTip": "resources\\views\\layouts\\navbar.blade.php",
+              "ViewState": "AgIAAKIAAAAAAAAAAAAAALUAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-05-28T04:05:55.062Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 3,
               "Title": "MenuController.php",
               "DocumentMoniker": "G:\\laragon\\www\\siupk\\app\\Http\\Controllers\\Admin\\MenuController.php",
@@ -273,8 +270,7 @@
               "RelativeToolTip": "app\\Http\\Controllers\\Admin\\MenuController.php",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2025-05-28T04:01:43.246Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-28T04:01:43.246Z"
             },
             {
               "$type": "Document",
@@ -286,8 +282,7 @@
               "RelativeToolTip": "resources\\views\\layouts\\menu.blade.php",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2025-05-28T04:00:58.502Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-28T04:00:58.502Z"
             },
             {
               "$type": "Document",
@@ -299,8 +294,7 @@
               "RelativeToolTip": "app\\Models\\Menu.php",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2025-05-19T03:37:27.046Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-19T03:37:27.046Z"
             },
             {
               "$type": "Document",
@@ -468,8 +462,7 @@
               "RelativeToolTip": "app\\Http\\Controllers\\Admin\\UserController.php",
               "ViewState": "AgIAAF8AAAAAAAAAAAAAAG0AAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2025-05-19T03:10:48.384Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-19T03:10:48.384Z"
             },
             {
               "$type": "Document",

@@ -108,6 +108,12 @@ class DashboardController extends Controller
         return view('dashboard.index')->with($data);
     }
 
+    public function keluar()
+    {
+        $data['title'] = "keluar";
+        return view('dashboard.keluar')->with($data);
+    }
+
     public function pinjaman()
     {
         $status = request()->get('status');

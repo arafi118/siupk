@@ -10,6 +10,8 @@
             $tanggal = true;
         }
     }
+    
+    $jumlah = $jumlah ?? 0; // Jika $jumlah belum ada, set jadi 0
 
     if (!$tanggal) {
         $jumlah += 1;
@@ -96,21 +98,6 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end p-2 me-sm-n4" aria-labelledby="dropdownMenuButton">
                         <li class="mb-2">
-                            @if ($jumlah > 0)
-                                @foreach ($inv as $in)
-                                    <a class="dropdown-item border-radius-md"
-                                        href="/pelaporan/invoice/{{ $in->idv }}" target="_blank">
-                                        <div class="d-flex align-items-center py-1">
-                                            <span class="material-icons">event</span>
-                                            <div class="ms-2">
-                                                <h6 class="text-sm font-weight-normal my-auto">
-                                                    {{ $in->jp->nama_jp }}
-                                                </h6>
-                                            </div>
-                                        </div>
-                                    </a>
-                                @endforeach
-                            @endif
                             @if (!$tanggal)
                                 <a class="dropdown-item border-radius-md" href="/pengaturan/ttd_pelaporan">
                                     <div class="d-flex align-items-center py-1">

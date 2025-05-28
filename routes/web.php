@@ -124,6 +124,7 @@ Route::post('/dashboard/tagihan', [DashboardController::class, 'tagihan'])->midd
 Route::get('/dashboard/pinjaman', [DashboardController::class, 'pinjaman'])->middleware('auth');
 Route::get('/dashboard/pinjamanI', [DashboardController::class, 'pinjamanI'])->middleware('auth');
 Route::get('/dashboard/pemanfaat', [DashboardController::class, 'pemanfaat'])->middleware('auth');
+Route::get('/keluar', [DashboardController::class, 'keluar']);
 
 Route::get('/pengaturan/sop', [SopController::class, 'index'])->middleware('auth');
 Route::get('/pengaturan/coa', [SopController::class, 'coa'])->middleware('auth');

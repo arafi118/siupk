@@ -1,14 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\app",
-    "\\app\\Http",
-    "\\app\\Http\\Controllers\\Admin",
-    "\\app\\Models",
-    "\\resources",
-    "\\resources\\views",
-    "\\resources\\views\\layouts"
+    ""
   ],
-  "SelectedNode": "\\app\\Models\\Menu.php",
+  "SelectedNode": "\\G:\\laragon\\www\\siupk",
   "PreviewInSolutionExplorer": false
 }
