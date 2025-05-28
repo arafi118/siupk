@@ -9,13 +9,7 @@ class MenuController extends Controller
 {
     public function index()
     {
-        $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
-        $menu = Menu::where(function ($query) use ($kec) {
-    $query->where('lokasi', '0')
-          ->orWhere(function ($query) use ($kec) {
-              $query->where('lokasi', 'LIKE', "%-{$kec['id']}-%");
-          });
-})->where('parent_id', '0')->get();
+        $menu = Menu::where('parent_id', '0')->with('child', 'child.child')->get();
 
         $title = 'Pengaturan Menu';
         return view('admin.menu.index')->with(compact('title'));
