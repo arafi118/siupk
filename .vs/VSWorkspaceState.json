@@ -1,14 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\app",
-    "\\app\\Http",
-    "\\app\\Http\\Controllers",
-    "\\resources",
-    "\\resources\\views",
-    "\\resources\\views\\perguliran_i",
-    "\\resources\\views\\perguliran_i\\dokumen"
+    ""
   ],
-  "SelectedNode": "\\resources\\views\\perguliran_i\\dokumen\\anggota.blade.php",
+  "SelectedNode": "\\G:\\laragon\\www\\siupk",
   "PreviewInSolutionExplorer": false
 }

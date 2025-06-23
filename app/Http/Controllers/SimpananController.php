@@ -965,7 +965,7 @@ public function cetakPadaBuku($idt)
                     $idmax++;
         Transaksi::create([
             'tgl_transaksi' => Tanggal::tglNasional($request->tgl_buka_rekening),
-            'rekening_debit' => $js->rek_kas,
+            'rekening_debit' => $js->rek_simp,
             'rekening_kredit' =>  $js->rek_adm,
             'idtp' => '0',
             'id_pinj' => '0',
