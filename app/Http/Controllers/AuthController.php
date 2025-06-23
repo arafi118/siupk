@@ -18,7 +18,7 @@ use Session;
 
 class AuthController extends Controller
 {
-    private const ID_KEC = 197;
+    private const ID_KEC = 1;
 
     public function index()
     {
@@ -29,7 +29,9 @@ class AuthController extends Controller
         }
 
         // Handle URL lokal
-        if (request()->server('SERVER_NAME') === '127.0.0.1' || request()->server('SERVER_NAME') === 'localhost') {
+        if (request()->server('SERVER_NAME') === '127.0.0.1' || 
+            request()->server('SERVER_NAME') === 'localhost' ||
+            str_ends_with(request()->server('SERVER_NAME'), '.test')) {
             $kec = Kecamatan::where('id', self::ID_KEC)
                 ->with('kabupaten')
                 ->first();
@@ -73,8 +75,10 @@ class AuthController extends Controller
                 'password' => 'required'
             ]);
         }
-
-        if (request()->server('SERVER_NAME') === '127.0.0.1' || request()->server('SERVER_NAME') === 'localhost') {
+        
+        if (request()->server('SERVER_NAME') === '127.0.0.1' || 
+            request()->server('SERVER_NAME') === 'localhost' ||
+            str_ends_with(request()->server('SERVER_NAME'), '.test')) {
             $kec = Kecamatan::where('id', self::ID_KEC)
                 ->with('kabupaten')
                 ->first();
@@ -165,8 +169,10 @@ class AuthController extends Controller
         $url = $request->getHost();
         $username = $uname;
         $password = $uname;
-
-        if (request()->server('SERVER_NAME') === '127.0.0.1' || request()->server('SERVER_NAME') === 'localhost') {
+        
+        if (request()->server('SERVER_NAME') === '127.0.0.1' || 
+            request()->server('SERVER_NAME') === 'localhost' ||
+            str_ends_with(request()->server('SERVER_NAME'), '.test')) {
             $kec = Kecamatan::where('id', self::ID_KEC)
                 ->first();
         } else {

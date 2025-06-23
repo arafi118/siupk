@@ -6,8 +6,9 @@
     "\\app\\Http\\Controllers",
     "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\pinjaman_i"
+    "\\resources\\views\\perguliran_i",
+    "\\resources\\views\\perguliran_i\\dokumen"
   ],
-  "SelectedNode": "\\resources\\views\\pinjaman_i\\create.blade.php",
+  "SelectedNode": "\\resources\\views\\perguliran_i\\dokumen\\anggota.blade.php",
   "PreviewInSolutionExplorer": false
 }
