@@ -1,7 +1,13 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\app",
+    "\\app\\Http",
+    "\\app\\Http\\Controllers",
+    "\\resources",
+    "\\resources\\views",
+    "\\resources\\views\\pinjaman_i"
   ],
-  "SelectedNode": "\\G:\\laragon\\www\\siupk",
+  "SelectedNode": "\\resources\\views\\pinjaman_i\\create.blade.php",
   "PreviewInSolutionExplorer": false
 }

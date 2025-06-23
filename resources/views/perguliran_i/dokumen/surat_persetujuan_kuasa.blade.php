@@ -17,7 +17,7 @@
       <tr>
         <td height="10" colspan="3" class="style9"></td>
       </tr>
-      <tr>
+      <tr> 
         <td height="10" colspan="3" class="style9">Yang bertanda tangan dan/atau membubuhkan cap jempol dibawah ini,</td>
       </tr>
       <tr>
@@ -105,11 +105,11 @@
         </div></td>
 		 <td class="style26"><div align="center" class="style9">
           <p>Penerima Kuasa <br><br><br><br>
-{{$pinkel->anggota->namadepan}}        </p>
+          {{ $dir->namadepan }} {{$dir->namabelakang}}
         </div></td>
         <td class="style26"><div align="center" class="style9">
           <p>Pemberi Kuasa <br><br><br><br>
-          {{ $dir->namadepan }} {{$dir->namabelakang}}
+{{$pinkel->anggota->namadepan}}        </p>
          </p>
         </div></td>
       </tr>	
