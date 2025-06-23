@@ -255,6 +255,8 @@
                         $kode = 6;
                     }elseif ((substr($rdeb, 0, 6) == '2.1.05' or substr($rdeb, 0, 6) == '2.2.05' ) AND substr($rkre, 0, 6) == '4.1.03') {    //admin
                         $kode = 7;
+                    }else{
+                        $kode = 0;
                     }
                     if (in_array($kode, ['1', '2', '5'])) {
                         $real_d = 0;
