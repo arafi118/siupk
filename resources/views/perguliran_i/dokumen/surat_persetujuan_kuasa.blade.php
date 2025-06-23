@@ -69,7 +69,7 @@
       </tr>
       <tr>
         <td height="10" class="style9">Jabatan </td>
-        <td class="style27">: {{ $dir->j->nama_jabatan }} {{ $kec->nama_lembaga_sort }}</td>
+        <td class="style27">: {{ $kec->sebutan_level_1 }} {{ $kec->nama_lembaga_sort }}</td>
         <td height="10" class="style9">&nbsp;</td>
       </tr>
       </table> 
