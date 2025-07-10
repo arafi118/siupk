@@ -185,7 +185,6 @@
                 </tr>
 
                 @php
-                dd($pinkel->realSimpananTerbesar);
                     $j_debit += $pinkel->real_s_sum_real_d;
                     $j_kredit += $pinkel->real_s_sum_real_k;
                     $j_saldo += $pinkel->realSimpananTerbesar->sum ?? 0;
