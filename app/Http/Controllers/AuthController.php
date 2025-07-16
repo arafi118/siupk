@@ -18,7 +18,7 @@ use Session;
 
 class AuthController extends Controller
 {
-    private const ID_KEC = 3;
+    private const ID_KEC = 196;
 
     public function index()
     {
@@ -149,6 +149,11 @@ class AuthController extends Controller
                     }
 
                     $inv = $this->generateInvoice($kec);
+                    
+                    $unpaidInvoice = AdminInvoice::where([
+                        ['lokasi', $lokasi],
+                        ['status', 'UNPAID']
+                    ])->count();
 
                     $request->session()->regenerate();
                     session([
@@ -156,6 +161,7 @@ class AuthController extends Controller
                         'nama' => $user->namadepan . ' ' . $user->namabelakang,
                         'foto' => $user->foto,
                         'logo' => $kec->logo,
+                        'unpaidInvoice' => $unpaidInvoice,
                         'lokasi' => $user->lokasi,
                         'lokasi_user' => $user->lokasi,
                         'menu' => $menu,
