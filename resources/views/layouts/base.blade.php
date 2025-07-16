@@ -122,7 +122,10 @@
                     selengkapnya pada menu <strong> Pengaturan -> Invoice</strong>.
                 </div>
                 <div class="modal-footer">
+                
+    @if (session('unpaidInvoice') == 1)
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+    @endif
                 </div>
             </div>
         </div>
