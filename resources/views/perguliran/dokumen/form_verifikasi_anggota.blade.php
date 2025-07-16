@@ -129,14 +129,17 @@
                                 $title = 'Pendapatan';
                             }
                         @endphp
-
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td align="center" width="3%">{{ $number }}</td>
-                            <td colspan="2">{{ $val }}</td>
-                            <td width="7%">Rp.</td>
-                            <td colspan="2">&nbsp;</td>
-                        </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td align="center" width="3%">{{ $number }}</td>
+                        <td colspan="2">
+                            <span style="display: inline-block; border-bottom: 1px dotted #000; width: 100%;">
+                                {{ $val }}
+                            </span>
+                        </td>
+                        <td width="7%">Rp.</td>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
                     @endforeach
 
                     <tr style="font-weight: bold;">
@@ -218,14 +221,14 @@
                                 <tr>
                                     <td width="60%">
                                         <div>
-                                            <b>{{ $verif->namadepan . ' ' . $verif->namabelakang }}</b>
+                                            {{ $verif->namadepan . ' ' . $verif->namabelakang }}
                                         </div>
                                         <div>
-                                            <b>(Verifikator)</b>
+                                            (Verifikator)
                                         </div>
                                     </td>
                                     <td width="40%" align="right">
-                                        <b>__________________</b>
+                                        __________________
                                     </td>
                                 </tr>
                             @endforeach
