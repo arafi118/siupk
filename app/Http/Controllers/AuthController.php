@@ -14,6 +14,7 @@ use App\Utils\Tanggal;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
+use Carbon\Carbon;
 use Session;
 
 class AuthController extends Controller
@@ -153,7 +154,9 @@ class AuthController extends Controller
                     $unpaidInvoice = AdminInvoice::where([
                         ['lokasi', $lokasi],
                         ['status', 'UNPAID']
-                    ])->count();
+                    ])
+                    ->whereDate('tgl_invoice', '<', Carbon::now()->subMonth())
+                    ->count();
 
                     $request->session()->regenerate();
                     session([
