@@ -9,7 +9,7 @@
     if ($invoice->count() > 0) {
         $jumlah = $invoice->count();
     }
-
+    $url = request()->fullUrl();
 @endphp
 
 <!DOCTYPE html>
@@ -102,7 +102,7 @@
 <body class="g-sidenav-show  bg-gray-200">
 
     <!-- Trigger Button (Hidden) -->
-    @if (session('unpaidInvoice') > 0)
+    @if (strpos($url, 'invoice') === false && session('unpaidInvoice') > 0)
         <button type="button" id="triggerPopup" class="d-none" data-bs-toggle="modal"
             data-bs-target="#notificationPopup"></button>
     @endif
@@ -119,7 +119,7 @@
                 <div class="modal-body text-justify">
                      <strong>{{ session('nama_lembaga') }} </strong> saat ini memiliki tagihan invoice untuk perpanjangan lisensi.
                     Mohon segera lakukan pembayaran untuk menghindari kemungkinan pemblokiran dari sistem. Cek info
-                    selengkapnya pada menu <strong> Biaya Perpanjangan </strong> di pojok kanan atas.
+                    selengkapnya pada menu <strong> Pengaturan -> Invoice</strong>.
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
