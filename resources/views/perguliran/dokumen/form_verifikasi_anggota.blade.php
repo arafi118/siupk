@@ -160,7 +160,10 @@
                     <tr>
                         <td>&nbsp;</td>
                         <td align="center" width="3%">{{ $loop->iteration }}.</td>
-                        <td colspan="2">{{ $val }}</td>
+                        <td colspan="2">
+                            <span style="display: inline-block; border-bottom: 1px dotted #000; width: 100%;">
+                                {{ $val }}
+                            </span></td>
                         <td width="7%">Rp.</td>
                         <td colspan="2">&nbsp;</td>
                     </tr>
