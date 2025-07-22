@@ -66,6 +66,7 @@
 
             @foreach ($jpp->simpanan as $pinkel)
                 @php
+                dd($pinkel);
                     $kd_desa[] = $pinkel->kd_desa;
                     $desa = $pinkel->kd_desa;
 

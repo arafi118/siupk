@@ -25,7 +25,7 @@ class Simpanan extends Model
     }
     public function realSimpananTerbesar()
     {
-        return $this->hasOne(RealSimpanan::class, 'cif', 'id')->latestOfMany();
+    return $this->hasMany(RealSimpanan::class, 'cif', 'id');
     }
 
     public function jasa()
