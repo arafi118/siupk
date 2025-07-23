@@ -142,7 +142,7 @@ $nomor = 1;
     $tgl1 = Tanggal::tglIndo($simp->tgl_tutup);
     $tgl2 = Tanggal::tglIndo($simp->tgl_buka);
     $y12 = date('Y')-1;
-    $sum_saldo = $simp->realSimpananTerbesar->sum ??0;
+    $sum_saldo = $simp->realSimpananTerbesar->pluck('sum')->first() ?? 0;
 
     // Tambahkan saldo ke total saldo
     $total_saldo += $sum_saldo;

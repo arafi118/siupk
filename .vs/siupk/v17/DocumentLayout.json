@@ -709,8 +709,7 @@
               "RelativeToolTip": "app\\Models\\Simpanan.php",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAABoAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2025-04-30T08:04:03.305Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-30T08:04:03.305Z"
             },
             {
               "$type": "Document",
@@ -732,7 +731,7 @@
               "RelativeDocumentMoniker": "app\\Http\\Controllers\\PelaporanController.php",
               "ToolTip": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\PelaporanController.php",
               "RelativeToolTip": "app\\Http\\Controllers\\PelaporanController.php",
-              "ViewState": "AgIAACAPAAAAAAAAAAAIwDAPAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAACAPAAAAAAAAAAAIwCsPAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
               "WhenOpened": "2025-04-30T03:47:15.062Z",
               "EditorCaption": ""
@@ -759,8 +758,7 @@
               "RelativeToolTip": "resources\\views\\pelaporan\\view\\simpanan.blade.php",
               "ViewState": "AgIAAEQAAAAAAAAAAAAAAEwAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2025-04-30T03:45:25.96Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-30T03:45:25.96Z"
             },
             {
               "$type": "Document",

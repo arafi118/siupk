@@ -66,7 +66,6 @@
 
             @foreach ($jpp->simpanan as $pinkel)
                 @php
-                dd($pinkel);
                     $kd_desa[] = $pinkel->kd_desa;
                     $desa = $pinkel->kd_desa;
 
@@ -181,14 +180,14 @@
                     <td class="t l b" align="left">{{ $pinkel->alamat }}</td>
                     <td class="t l b" align="right">{{ number_format($pinkel->real_s_sum_real_d) }}</td>
                     <td class="t l b" align="right">{{ number_format($pinkel->real_s_sum_real_k) }}</td>
-                    <td class="t l b r" align="right">{{ number_format($pinkel->realSimpananTerbesar->sum??0) }}</td>
+                    <td class="t l b r" align="right">{{ number_format($pinkel->realSimpananTerbesar[0]->sum??0) }}</td>
                 </tr>
                 </tr>
 
                 @php
                     $j_debit += $pinkel->real_s_sum_real_d;
                     $j_kredit += $pinkel->real_s_sum_real_k;
-                    $j_saldo += $pinkel->realSimpananTerbesar->sum ?? 0;
+                    $j_saldo += $pinkel->realSimpananTerbesar[0]->sum ?? 0;
                 @endphp
             @endforeach
             @php
@@ -220,7 +219,7 @@
                         <table class="p" border="0" width="100%" cellspacing="0" cellpadding="0"
                             style="font-size: 8px; table-layout: fixed;">
                             <tr style="background: rgb(230, 230, 230); font-weight: bold;">
-                                <td class="t l b" align="center" height="15">
+                                <td class="t l b"  colspan="6"  align="center" height="15">
                                     J U M L A H
                                 </td>
 								<td class="t l b" align="right">{{ number_format($t_debit) }}</td>

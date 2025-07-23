@@ -696,7 +696,11 @@ class PelaporanController extends Controller
                         $query->whereRaw('tgl_buka = tgl_tutup')->orwhere('tgl_tutup', '>', $data['tgl_kondisi']);
                     });
             },
-            'simpanan.realSimpananTerbesar'
+            
+            'simpanan.realSimpananTerbesar' => function ($query1) use ($tgl) {
+                $query1->where('tgl_transaksi', '<=', $tgl)
+                       ->orderBy('tgl_transaksi', 'desc');
+            },
         ])->where('kecuali', 'NOT LIKE', Session::get('lokasi') . '#%')->orwhere('kecuali', 'NOT LIKE', '%#' . Session::get('lokasi'))->get();
 
         $data['laporan'] = 'Rincian Tabungan';
@@ -3903,8 +3907,7 @@ class PelaporanController extends Controller
             },
             'simpanan.realSimpananTerbesar' => function ($query1) use ($tgl_kondisi) {
                 $query1->where('tgl_transaksi', '<=', $tgl_kondisi)
-                       ->orderBy('sum', 'desc')
-                       ->take(1); // atau 
+                       ->orderBy('tgl_transaksi', 'desc');
             },
         ])->get();
 
