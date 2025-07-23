@@ -166,7 +166,8 @@
                     }
 
                     $pros_jasa = $pinkel->pros_jasa == 0 ? 0 : $pinkel->pros_jasa / $pinkel->jangka;
-                    
+
+
                 @endphp
 
                 <tr>
@@ -180,20 +181,18 @@
                     <td class="t l b" align="left">{{ $pinkel->alamat }}</td>
                     <td class="t l b" align="right">{{ number_format($pinkel->real_s_sum_real_d) }}</td>
                     <td class="t l b" align="right">{{ number_format($pinkel->real_s_sum_real_k) }}</td>
-                    <td class="t l b r" align="right">{{ number_format($pinkel->realSimpananTerbesar[0]->sum??0) }}</td>
+                    <td class="t l b r" align="right">{{ number_format($pinkel->real_s_sum_real_k - $pinkel->real_s_sum_real_d) }}</td>
                 </tr>
                 </tr>
 
                 @php
                     $j_debit += $pinkel->real_s_sum_real_d;
                     $j_kredit += $pinkel->real_s_sum_real_k;
-                    $j_saldo += $pinkel->realSimpananTerbesar[0]->sum ?? 0;
                 @endphp
             @endforeach
             @php
                     $t_debit += $j_debit;
                     $t_kredit += $j_kredit;
-                    $t_saldo += $j_saldo;
 
             @endphp
             @if (count($kd_desa) > 0)
@@ -203,7 +202,7 @@
                     </td>
                     <td class="t l b" align="right">{{ number_format($j_debit) }}</td>
                     <td class="t l b" align="right">{{ number_format($j_kredit) }}</td>
-                    <td class="t l b" align="right">{{ number_format($j_saldo) }}</td>
+                    <td class="t l b" align="right">{{ number_format($j_kredit-$j_debit) }}</td>
                 </tr>
 
                 @php
@@ -224,7 +223,7 @@
                                 </td>
 								<td class="t l b" align="right">{{ number_format($t_debit) }}</td>
 								<td class="t l b" align="right">{{ number_format($t_kredit) }}</td>
-								<td class="t l b" align="right">{{ number_format($t_saldo) }}</td>
+								<td class="t l b" align="right">{{ number_format($t_kredit-$t_debit) }}</td>
                             </tr>
 
                             <tr>

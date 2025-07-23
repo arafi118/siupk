@@ -3886,10 +3886,10 @@ class PelaporanController extends Controller
                     ->join('desa', "{$tb_angg}.desa", '=', 'desa.kd_desa')
                     ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
                     ->withSum(['real_s' => function ($query) use ($tgl_kondisi) {
-                        $query->where('tgl_transaksi', '<', $tgl_kondisi);
+                        $query->where('tgl_transaksi', '<=', $tgl_kondisi);
                     }], 'real_d')
                     ->withSum(['real_s' => function ($query) use ($tgl_kondisi) {
-                        $query->where('tgl_transaksi', '<', $tgl_kondisi);
+                        $query->where('tgl_transaksi', '<=', $tgl_kondisi);
                     }], 'real_k')
                     ->where(function ($query) use ($tb_simp, $tgl_kondisi) {
                         $query->where([
