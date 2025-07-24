@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\public"
   ],
-  "SelectedNode": "\\C:\\laragon\\www\\siupk",
+  "SelectedNode": "\\public\\regenerate.php",
   "PreviewInSolutionExplorer": false
 }
