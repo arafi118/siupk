@@ -1738,7 +1738,6 @@ class TransaksiController extends Controller
 
         $saldo_pokok = ($target_pokok - $real->sum_pokok > 0) ? $target_pokok - $real->sum_pokok : 0;
         $saldo_jasa = ($target_jasa - $real->sum_jasa > 0) ? $target_jasa - $real->sum_jasa : 0;
-        dd();
         return response()->json([
             'penyetor' => $pinkel->kelompok->ketua,
             'saldo_pokok' => $saldo_pokok,

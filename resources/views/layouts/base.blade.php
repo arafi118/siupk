@@ -421,7 +421,10 @@
         function angsuran(destroy = false, result) {
             $('#pokok').val(formatter.format(result.saldo_pokok))
             $('#jasa').val(formatter.format(result.saldo_jasa))
-            $('#penyetor').val(result.pinkel.kelompok.ketua)
+            // ✅ cek dulu apakah ada ketua
+            if (result.pinkel && result.pinkel.kelompok && result.pinkel.kelompok.ketua) {
+                $('#penyetor').val(result.pinkel.kelompok.ketua)
+            }
             $('#id').val(result.pinkel.id)
 
             $('#_pokok').val(result.sisa_pokok)
