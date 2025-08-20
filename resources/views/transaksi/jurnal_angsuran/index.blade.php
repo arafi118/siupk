@@ -17,7 +17,7 @@
                         <input type="hidden" name="tgl_pakai_aplikasi" id="tgl_pakai_aplikasi"
                             value="{{ $kec->tgl_pakai }}">
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-6">
                                 <div class="input-group input-group-static my-3">
                                     <label for="tgl_transaksi">Tanggal Transaksi</label>
                                     <input autocomplete="off" type="text" name="tgl_transaksi" id="tgl_transaksi"
@@ -25,6 +25,15 @@
                                         value="{{ date('d/m/Y') }}"
                                         @if(session('lokasi') == 197) readonly @endif>
                                     <small class="text-danger" id="msg_tgl_transaksi"></small>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group input-group-static my-3">
+                                    <label for="penyetor">Nama Penyetor</label>
+                                    <input autocomplete="off" type="text" name="penyetor" id="penyetor"
+                                        class="form-control"
+                                        value="{{ $penyetor }}">
+                                    <small class="text-danger" id="msg_penyetor"></small>
                                 </div>
                             </div>
                             <div class="col-sm-6">

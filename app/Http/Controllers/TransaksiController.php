@@ -55,15 +55,17 @@ class TransaksiController extends Controller
         $title = 'Jurnal Angsuran';
 
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
+        $penyetor = "";
         if (request()->get('pinkel')) {
             $pinkel = PinjamanKelompok::where('id', request()->get('pinkel'))->with('kelompok');
             $pinkel = $pinkel->first();
+            $penyetor = $pinkel->kelompok->ketua;
         } else {
             $pinkel = '0';
         }
 
         $api = env('APP_API', 'https://api-whatsapp.siupk.net');
-        return view('transaksi.jurnal_angsuran.index')->with(compact('title', 'pinkel', 'kec', 'api'));
+        return view('transaksi.jurnal_angsuran.index')->with(compact('title', 'pinkel', 'kec','penyetor', 'api'));
     }
 
     public function jurnalAngsuranIndividu()
@@ -771,6 +773,7 @@ class TransaksiController extends Controller
             $data = $request->only([
                 'id',
                 'tgl_transaksi',
+                'penyetor',
                 'pokok',
                 'jasa',
                 'denda'
@@ -780,7 +783,8 @@ class TransaksiController extends Controller
                 'tgl_transaksi' => 'required',
                 'pokok' => 'required',
                 'jasa' => 'required',
-                'denda' => 'required'
+                'denda' => 'required',
+                'penyetor' => 'required'
             ]);
 
             if ($validate->fails()) {
@@ -801,7 +805,7 @@ class TransaksiController extends Controller
                     'msg' => 'Total Bayar tidak boleh nol'
                 ]);
             }
-
+            $penyetor = $request->penyetor;
             $tgl_transaksi = Tanggal::tglNasional($request->tgl_transaksi);
 
             $pinkel = PinjamanKelompok::where('id', $request->id)->with([
@@ -880,7 +884,7 @@ class TransaksiController extends Controller
                     'id_pinj' => $pinkel->id,
                     'id_pinj_i' => '0',
                     'keterangan_transaksi' => (string) 'Angs. (P) ' . $pinkel->kelompok->nama_kelompok . ' (' . $pinkel->id . ')' . ' [' . $pinkel->kelompok->d->nama_desa . ']',
-                    'relasi' => (string) $pinkel->kelompok->nama_kelompok,
+                    'relasi' => (string) $penyetor,
                     'jumlah' => str_replace(',', '', str_replace('.00', '', $request->pokok)),
                     'urutan' => '0',
                     'id_user' => auth()->user()->id
@@ -896,7 +900,7 @@ class TransaksiController extends Controller
                     'id_pinj' => $pinkel->id,
                     'id_pinj_i' => '0',
                     'keterangan_transaksi' => (string) 'Angs. (J) ' . $pinkel->kelompok->nama_kelompok . ' (' . $pinkel->id . ')' . ' [' . $pinkel->kelompok->d->nama_desa . ']',
-                    'relasi' => (string) $pinkel->kelompok->nama_kelompok,
+                    'relasi' => (string) $penyetor,
                     'jumlah' => str_replace(',', '', str_replace('.00', '', $request->jasa)),
                     'urutan' => '0',
                     'id_user' => auth()->user()->id
@@ -912,7 +916,7 @@ class TransaksiController extends Controller
                     'id_pinj' => $pinkel->id,
                     'id_pinj_i' => '0',
                     'keterangan_transaksi' => (string) 'Denda. ' . $pinkel->kelompok->nama_kelompok . ' (' . $pinkel->id . ')' . ' [' . $pinkel->kelompok->d->nama_desa . ']',
-                    'relasi' => (string) $pinkel->kelompok->nama_kelompok,
+                    'relasi' => (string) $penyetor,
                     'jumlah' => str_replace(',', '', str_replace('.00', '', $request->denda)),
                     'urutan' => '0',
                     'id_user' => auth()->user()->id
@@ -1734,8 +1738,9 @@ class TransaksiController extends Controller
 
         $saldo_pokok = ($target_pokok - $real->sum_pokok > 0) ? $target_pokok - $real->sum_pokok : 0;
         $saldo_jasa = ($target_jasa - $real->sum_jasa > 0) ? $target_jasa - $real->sum_jasa : 0;
-
+        dd();
         return response()->json([
+            'penyetor' => $pinkel->kelompok->ketua,
             'saldo_pokok' => $saldo_pokok,
             'saldo_jasa' => $saldo_jasa
         ]);

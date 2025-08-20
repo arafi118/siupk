@@ -290,7 +290,9 @@
                 </div>
             </th>
             <th valign="top">
-                <div align="center" class="bottom">&nbsp;</div>
+                <div align="center" class="bottom">
+                    {{ $trx->relasi }}
+                </div>
             </th>
         </tr>
         <tr>
