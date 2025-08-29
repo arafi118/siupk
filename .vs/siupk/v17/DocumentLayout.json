@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\laragon\\www\\siupk\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\AuthController.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\Http\\Controllers\\AuthController.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\resources\\views\\perguliran\\dokumen\\ba_musyawarah.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\perguliran\\dokumen\\ba_musyawarah.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\resources\\views\\layouts\\base.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\layouts\\base.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
@@ -43,10 +51,6 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:resources\\views\\transaksi\\dokumen\\kuitansi.blade.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\AuthController.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\Http\\Controllers\\AuthController.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\laragon\\www\\siupk\\routes\\web.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:routes\\web.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
@@ -66,11 +70,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 23,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "web.php",
               "DocumentMoniker": "C:\\laragon\\www\\siupk\\routes\\web.php",
               "RelativeDocumentMoniker": "routes\\web.php",
@@ -83,20 +87,21 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 0,
               "Title": "AuthController.php",
               "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\AuthController.php",
               "RelativeDocumentMoniker": "app\\Http\\Controllers\\AuthController.php",
               "ToolTip": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\AuthController.php",
               "RelativeToolTip": "app\\Http\\Controllers\\AuthController.php",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABsAAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
               "WhenOpened": "2024-12-16T02:21:53.627Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "SimpananController.php",
               "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\SimpananController.php",
               "RelativeDocumentMoniker": "app\\Http\\Controllers\\SimpananController.php",
@@ -166,6 +171,18 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "ba_musyawarah.blade.php",
+              "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran\\dokumen\\ba_musyawarah.blade.php",
+              "RelativeDocumentMoniker": "resources\\views\\perguliran\\dokumen\\ba_musyawarah.blade.php",
+              "ToolTip": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran\\dokumen\\ba_musyawarah.blade.php",
+              "RelativeToolTip": "resources\\views\\perguliran\\dokumen\\ba_musyawarah.blade.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-08-28T05:52:18.143Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "index.blade.php",
               "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\transaksi\\jurnal_angsuran\\individu\\index.blade.php",
               "RelativeDocumentMoniker": "resources\\views\\transaksi\\jurnal_angsuran\\individu\\index.blade.php",
@@ -177,7 +194,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "struk_matrix.blade.php",
               "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\transaksi\\jurnal_angsuran\\dokumen\\struk_matrix.blade.php",
               "RelativeDocumentMoniker": "resources\\views\\transaksi\\jurnal_angsuran\\dokumen\\struk_matrix.blade.php",
@@ -189,7 +206,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "struk.blade.php",
               "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\transaksi\\jurnal_angsuran\\dokumen\\struk.blade.php",
               "RelativeDocumentMoniker": "resources\\views\\transaksi\\jurnal_angsuran\\dokumen\\struk.blade.php",
@@ -201,7 +218,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "kuitansi_thermal.blade.php",
               "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\transaksi\\dokumen\\kuitansi_thermal.blade.php",
               "RelativeDocumentMoniker": "resources\\views\\transaksi\\dokumen\\kuitansi_thermal.blade.php",
@@ -213,7 +230,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "kuitansi.blade.php",
               "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\transaksi\\dokumen\\kuitansi.blade.php",
               "RelativeDocumentMoniker": "resources\\views\\transaksi\\dokumen\\kuitansi.blade.php",
@@ -225,7 +242,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "kuitansi.blade.php",
               "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\perguliran\\dokumen\\kuitansi.blade.php",
               "RelativeDocumentMoniker": "resources\\views\\perguliran\\dokumen\\kuitansi.blade.php",
@@ -237,7 +254,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "base.blade.php",
               "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\layouts\\base.blade.php",
               "RelativeDocumentMoniker": "resources\\views\\layouts\\base.blade.php",
@@ -245,12 +262,11 @@
               "RelativeToolTip": "resources\\views\\layouts\\base.blade.php",
               "ViewState": "AgIAAI0BAAAAAAAAAAAwwKoBAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2025-08-20T04:46:45.543Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-20T04:46:45.543Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "out.blade.php",
               "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\layouts\\out.blade.php",
               "RelativeDocumentMoniker": "resources\\views\\layouts\\out.blade.php",
@@ -262,7 +278,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "navbar.blade.php",
               "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\layouts\\navbar.blade.php",
               "RelativeDocumentMoniker": "resources\\views\\layouts\\navbar.blade.php",
@@ -274,7 +290,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "TransaksiController.php",
               "DocumentMoniker": "C:\\laragon\\www\\siupk\\app\\Http\\Controllers\\TransaksiController.php",
               "RelativeDocumentMoniker": "app\\Http\\Controllers\\TransaksiController.php",
@@ -286,7 +302,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "index.blade.php",
               "DocumentMoniker": "C:\\laragon\\www\\siupk\\resources\\views\\transaksi\\jurnal_angsuran\\index.blade.php",
               "RelativeDocumentMoniker": "resources\\views\\transaksi\\jurnal_angsuran\\index.blade.php",
