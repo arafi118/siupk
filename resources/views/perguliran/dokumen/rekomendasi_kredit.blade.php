@@ -183,7 +183,7 @@
             </tr>
         </table>
 
-        <table border="1" width="100%" cellspacing="0" cellpadding="0" style="font-size: 12px;">
+        <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 12px;">
             <tr>
                 <td width="1%" height="30">&nbsp;</td>
                 <td width="50%">&nbsp;</td>
