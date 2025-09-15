@@ -49,7 +49,13 @@ class PelaporanController extends Controller
     public function subLaporan($file)
     {
         if ($file == 3) {
-            $rekening = Rekening::orderBy('kode_akun', 'ASC')->get();
+            $rekening = Rekening::where('kode_akun', '!=', '3.2.02.01')->orderBy('kode_akun', 'ASC')->get();
+            foreach ($rekening as $rek) {
+                $data[] = [
+                    'title' => $rek->kode_akun . '. ' . $rek->nama_akun,
+                    'value' => 'BB_' . $rek->kode_akun . '_' . $rek->nama_akun
+                ];
+            }
             return view('pelaporan.partials.sub_laporan')->with(compact('file', 'rekening'));
         }
 
@@ -533,7 +539,7 @@ class PelaporanController extends Controller
             $data['judul'] = 'Laporan Keuangan';
             $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         }
-        
+
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $data['jenis_pp'] = JenisProdukPinjaman::where(function ($query) use ($kec) {
             $query->where('lokasi', '0')
@@ -608,7 +614,7 @@ class PelaporanController extends Controller
             $data['judul'] = 'Laporan Keuangan';
             $data['sub_judul'] = date('t', strtotime($tgl)) . ' Bulan ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         }
-        
+
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $data['jenis_pp_i'] = JenisProdukPinjaman::where(function ($query) use ($kec) {
             $query->where('lokasi', '0')
@@ -697,10 +703,10 @@ class PelaporanController extends Controller
                         $query->whereRaw('tgl_buka = tgl_tutup')->orwhere('tgl_tutup', '>', $data['tgl_kondisi']);
                     });
             },
-            
+
             'simpanan.realSimpananTerbesar' => function ($query1) use ($tgl) {
                 $query1->where('tgl_transaksi', '<=', $tgl)
-                       ->orderBy('tgl_transaksi', 'desc');
+                    ->orderBy('tgl_transaksi', 'desc');
             },
         ])->where('kecuali', 'NOT LIKE', Session::get('lokasi') . '#%')->orwhere('kecuali', 'NOT LIKE', '%#' . Session::get('lokasi'))->get();
 
@@ -1049,7 +1055,7 @@ class PelaporanController extends Controller
             return $view;
         }
     }
-    
+
     private function KBP2(array $data)
     {
         $thn = $data['tahun'];
@@ -1392,7 +1398,7 @@ class PelaporanController extends Controller
             $data['sub_judul'] = 'Tahun ' . Tanggal::tahun($tgl);
             $data['tgl'] = Tanggal::tahun($tgl);
         }
-        
+
         $jabatan = '1';
         $level = '1';
         if (Session::get('lokasi') == '207') {
@@ -1980,7 +1986,7 @@ class PelaporanController extends Controller
             return $view;
         }
     }
-    
+
     private function individu_aktif(array $data)
     {
         $thn = $data['tahun'];
@@ -3272,9 +3278,8 @@ class PelaporanController extends Controller
 
         $view = view('pelaporan.view.perkembangan_piutang.tunggakan', $data)->render();
 
-            $pdf = PDF::loadHTML($view)->setPaper('A4', 'landscape');
-            return $pdf->stream();
-        
+        $pdf = PDF::loadHTML($view)->setPaper('A4', 'landscape');
+        return $pdf->stream();
     }
 
     private function ati(array $data)
@@ -3394,7 +3399,7 @@ class PelaporanController extends Controller
             return $view;
         }
     }
-    
+
     private function Sehat(array $data)
     {
         $thn = $data['tahun'];
@@ -3436,7 +3441,7 @@ class PelaporanController extends Controller
             return $view;
         }
     }
-    
+
     private function EB(array $data)
     {
         $keuangan = new Keuangan;
@@ -3553,7 +3558,7 @@ class PelaporanController extends Controller
         $pdf = PDF::loadHTML($view)->setPaper('A4', 'landscape');
         return $pdf->stream();
     }
-    
+
     private function alokasi_laba(array $data)
     {
         $keuangan = new Keuangan;
@@ -3579,12 +3584,12 @@ class PelaporanController extends Controller
         $data['tahun_tb'] = $thn;
         $data['surplus'] = $keuangan->laba_rugi(($data['tahun'] - 1) . '-13-00');
         $data['cr'] = Rekening::where('kode_akun', 'like', '1.1.04.%')
-            ->withSum(['trx_kredit' => function($query) use ($thn) {
+            ->withSum(['trx_kredit' => function ($query) use ($thn) {
                 $query->whereYear('tgl_transaksi', $thn);
             }], 'jumlah')
             ->get();
         $data['rekening'] = Rekening::where('kode_akun', 'like', '2.1.01%')
-            ->withSum(['trx_kredit' => function($query) use ($thn) {
+            ->withSum(['trx_kredit' => function ($query) use ($thn) {
                 $query->whereYear('tgl_transaksi', $thn);
             }], 'jumlah')
             ->get();
@@ -3861,7 +3866,8 @@ class PelaporanController extends Controller
 
         $data['tgl_lalu'] = $data['tahun'] . '-' . $data['bulan'] . '-01';
         //
-        $kec = Kecamatan::where('id', Session::get('lokasi'))->first();$tgl_kondisi = "{$data['tahun']}-{$data['bulan']}-{$data['hari']}";
+        $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
+        $tgl_kondisi = "{$data['tahun']}-{$data['bulan']}-{$data['hari']}";
         $tb_simp = 'simpanan_anggota_' . $data['kec']->id;
         $tb_angg = 'anggota_' . $data['kec']->id;
         $data['tb_simp'] = $tb_simp;
@@ -3869,20 +3875,20 @@ class PelaporanController extends Controller
         // Query dasar JenisSimpanan
         $data['jenis_ps'] = JenisSimpanan::where(function ($query) use ($kec) {
             $query->where('lokasi', '0')
-                  ->orWhere(function ($query) use ($kec) {
-                      $query->where('kecuali', 'NOT LIKE', "%-{$kec['id']}-%")
-                            ->where('lokasi', 'LIKE', "%-{$kec['id']}-%");
-                  });
+                ->orWhere(function ($query) use ($kec) {
+                    $query->where('kecuali', 'NOT LIKE', "%-{$kec['id']}-%")
+                        ->where('lokasi', 'LIKE', "%-{$kec['id']}-%");
+                });
         })->with([
             'simpanan' => function ($query) use ($tb_simp, $tb_angg, $tgl_kondisi) {
                 $query->select(
-                        "{$tb_simp}.*",
-                        "{$tb_angg}.namadepan",
-                        'desa.nama_desa',
-                        'desa.kd_desa',
-                        'desa.kode_desa',
-                        'sebutan_desa.sebutan_desa'
-                    )
+                    "{$tb_simp}.*",
+                    "{$tb_angg}.namadepan",
+                    'desa.nama_desa',
+                    'desa.kd_desa',
+                    'desa.kode_desa',
+                    'sebutan_desa.sebutan_desa'
+                )
                     ->join($tb_angg, "{$tb_angg}.id", '=', "{$tb_simp}.nia")
                     ->join('desa', "{$tb_angg}.desa", '=', 'desa.kd_desa')
                     ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
@@ -3894,9 +3900,9 @@ class PelaporanController extends Controller
                     }], 'real_k')
                     ->where(function ($query) use ($tb_simp, $tgl_kondisi) {
                         $query->where([
-                                ["{$tb_simp}.status", 'A'],
-                                ["{$tb_simp}.tgl_buka", '<=', $tgl_kondisi]
-                            ])
+                            ["{$tb_simp}.status", 'A'],
+                            ["{$tb_simp}.tgl_buka", '<=', $tgl_kondisi]
+                        ])
                             ->orWhere([
                                 ["{$tb_simp}.status", 'L'],
                                 ["{$tb_simp}.tgl_buka", '<=', $tgl_kondisi],
@@ -3906,9 +3912,9 @@ class PelaporanController extends Controller
                     ->orderBy("{$tb_angg}.desa", 'ASC')
                     ->orderBy("{$tb_simp}.tgl_buka", 'ASC');
             },
-            'simpanan.realSimpananTerbesar' => function ($query1) use ($tgl_kondisi) {
-                $query1->where('tgl_transaksi', '<=', $tgl_kondisi)
-                       ->orderBy('tgl_transaksi', 'desc');
+            'simpanan.realSimpananTerbesar' => function ($query) use ($tgl_kondisi) {
+                $query->where('tgl_transaaseksi', '<=', $tgl_kondisi)
+                    ->orderBy('id', 'desc');
             },
         ])->get();
 
