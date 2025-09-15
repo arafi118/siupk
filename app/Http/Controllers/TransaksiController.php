@@ -1838,6 +1838,19 @@ class TransaksiController extends Controller
         $trx->jumlah = $request->nominal;
         $trx->save();
 
+        $id_pinj = $trx->id_pinj;
+        $id_pinj_i = $trx->id_pinj_i;
+
+        if (!empty($id_pinj) && $id_pinj != 0) {
+            $pinkel = PinjamanKelompok::where('id', $id_pinj)->with(['trx'])->first();
+            $this->regenerateReal($pinkel);
+        }
+
+        if (!empty($id_pinj_i) && $id_pinj_i != 0) {
+            $pinj_i = PinjamanIndividu::where('id', $id_pinj_i)->with(['trx'])->first();
+            $this->regenerateReal($pinj_i);
+        }
+
         return response()->json(['success' => 'Data berhasil diperbarui']);
     }
 
