@@ -127,33 +127,63 @@
                         <td width="50%" align="center">{{ $kec->nama_kec }},
                             {{ Tanggal::tglLatin($pinkel->tgl_proposal) }}</td>
                     </tr>
-                    <tr>
-                        <td align="center">Mengetahui,</td>
-                        <td align="center">Dikuatkan Oleh,</td>
-                    </tr>
-                    <tr>
-                        <td align="center">
-                            {{ $pinkel->kelompok->d->sebutan_desa->sebutan_kades }} {{ $pinkel->kelompok->d->nama_desa }}
-                        </td>
-                        <td align="center">Ketua Kelompok {{ $pinkel->kelompok->nama_kelompok }}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" height="50">&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td align="center">
-                            <b>{{ $pinkel->kelompok->d->kades }}</b>
-                            @if ($pinkel->kelompok->d->nip)
-                                <div><small>NIP. {{ $pinkel->kelompok->d->nip }}</small></div>
-                            @endif
-                        </td>
-                        <td align="center">
-                            <b>{{ $pinkel->kelompok->ketua }}</b>
-                            @if ($pinkel->kelompok->d->nip)
-                                <div>&nbsp;</div>
-                            @endif
-                        </td>
-                    </tr>
+                    @if (session('lokasi') == 244)
+                        <tr>
+                            <td width="50%">&nbsp;</td>
+                            <td width="50%" align="center">{{ $kec->nama_kec }},
+                                {{ Tanggal::tglLatin($pinkel->tgl_proposal) }}</td>
+                        </tr>
+                        <tr>
+                            <td align="center">&nbsp;</td>
+                            <td align="center">Dikuatkan Oleh,</td>
+                        </tr>
+                        <tr>
+                            <td align="center">&nbsp;</td>
+                            <td align="center">Ketua Kelompok {{ $pinkel->kelompok->nama_kelompok }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" height="50">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td align="center">&nbsp;</td>
+                            <td align="center">
+                                <b>{{ $pinkel->kelompok->ketua }}</b>
+                                @if ($pinkel->kelompok->d->nip)
+                                    <div>&nbsp;</div>
+                                @endif
+                            </td>
+                        </tr>
+                    @else
+                        <tr>
+                            <td align="center">Mengetahui,</td>
+                            <td align="center">Dikuatkan Oleh,</td>
+                        </tr>
+                        <tr>
+                            <td align="center">
+                                {{ $pinkel->kelompok->d->sebutan_desa->sebutan_kades }} {{ $pinkel->kelompok->d->nama_desa }}
+                            </td>
+                            <td align="center">Ketua Kelompok {{ $pinkel->kelompok->nama_kelompok }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" height="50">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td align="center">
+                                <b>{{ $pinkel->kelompok->d->kades }}</b>
+                                @if ($pinkel->kelompok->d->nip)
+                                    <div><small>NIP. {{ $pinkel->kelompok->d->nip }}</small></div>
+                                @endif
+                            </td>
+                            <td align="center">
+                                <b>{{ $pinkel->kelompok->ketua }}</b>
+                                @if ($pinkel->kelompok->d->nip)
+                                    <div>&nbsp;</div>
+                                @endif
+                            </td>
+                        </tr>
+
+                    @endif
+
                 </table>
             </td>
         </tr>
