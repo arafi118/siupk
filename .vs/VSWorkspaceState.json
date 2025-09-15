@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\resources",
+    "\\resources\\views",
+    "\\resources\\views\\perguliran",
+    "\\resources\\views\\perguliran\\dokumen"
   ],
-  "SelectedNode": "\\C:\\laragon\\www\\siupk",
+  "SelectedNode": "\\resources\\views\\perguliran\\dokumen\\tanggung_renteng.blade.php",
   "PreviewInSolutionExplorer": false
 }

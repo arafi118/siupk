@@ -127,7 +127,7 @@
                         <td width="50%" align="center">{{ $kec->nama_kec }},
                             {{ Tanggal::tglLatin($pinkel->tgl_proposal) }}</td>
                     </tr>
-                    @if (session('lokasi') == 244)
+                    @if (session('lokasi') == 68)
                         <tr>
                             <td width="50%">&nbsp;</td>
                             <td width="50%" align="center">{{ $kec->nama_kec }},
