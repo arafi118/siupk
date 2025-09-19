@@ -2032,6 +2032,13 @@ class TransaksiController extends Controller
                     'kom_jasa' => 0
                 ]);
             }
+            if ($id_pinj_i != '0') {
+                $pinj_anggota = PinjamanAnggota::where('id', $id_pinj_i)->update([
+                    'status' => 'W',
+                    'kom_pokok' => 0,
+                    'kom_jasa' => 0
+                ]);
+            }
 
             $rek_inventaris = ['1.2.01.01', '1.2.01.02', '1.2.01.03', '1.2.01.04', '1.2.03.01', '1.2.03.02', '1.2.03.03', '1.2.03.04'];
 
