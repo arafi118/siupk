@@ -306,7 +306,13 @@
                             </tr>
                             <tr>
                                 <td class="t l b" align="center" colspan="2">
-                                    {{ number_format(($t_kolek1 * 1) / 100 + ($t_kolek2 * 10) / 100 + ($t_kolek3 * 25) / 100 + ($t_kolek4 * 50) / 100 + ($t_kolek3 * 100) / 100) }}
+                                    {{ number_format(
+                                        ($t_kolek1 * 1) / 100 + 
+                                        ($t_kolek2 * 10) / 100 + 
+                                        ($t_kolek3 * 25) / 100 + 
+                                        ($t_kolek4 * 50) / 100 + 
+                                        ($t_kolek5 * 100) / 100
+                                    ) }}
                                 </td>
                                 <td class="t l b" align="center">{{ number_format(($t_kolek1 * 1) / 100) }}</td>
                                 <td class="t l b" align="center">{{ number_format(($t_kolek2 * 10) / 100) }}</td>
