@@ -213,7 +213,7 @@ class PelaporanController extends Controller
         $data['kec'] = $kec;
         $data['kab'] = $kab;
         $data['dir'] = $dir;
-
+        
         if ($data['tahun'] == null) {
             abort(404);
         }
