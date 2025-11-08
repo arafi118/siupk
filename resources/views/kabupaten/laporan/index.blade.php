@@ -1,29 +1,37 @@
 @php
-    $thn_awal = explode('-', $kec->tgl_pakai)[0];
+    $thn_awal = 2023;
 @endphp
 
 @extends('kabupaten.layout.base')
 
 @section('content')
+    @foreach ($kab->kec as $kec)
+        @php
+            $nomor = $loop->iteration;
+        @endphp
+
+        <input type="hidden" data-input="lokasi" name="lokasi[]" id="lokasi_ke_{{ $nomor }}" value="{{ $kec->id }}">
+    @endforeach
+    <input type="hidden" name="count" id="count" value="{{ $nomor }}">
+
     <div class="card mb-3">
         <div class="card-header pt-3">
             <div>
-                {{ strtoupper($kec->nama_lembaga_long) }}
+                LAPORAN REKAP KABUPATEN
             </div>
             <div class="fw-bold">
-                <small>{{ strtoupper($nama_kec) }}</small>
+                <small>KABUPATEN {{ strtoupper($kab->nama_kab) }} PROVINSI {{ strtoupper($kab->wilayah->nama) }}</small>
             </div>
         </div>
         <div class="card-body pt-0 pb-0">
 
-            <form action="/pelaporan/preview/{{ $kec->id }}" method="post" id="FormPelaporan" target="_blank">
+            <form action="/kab/laporan/preview/{{ $kab->kd_kab }}" method="post" id="FormPelaporan" target="_blank">
                 @csrf
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="my-2">
                             <label class="form-label" for="tahun">Tahunan</label>
                             <select class="form-control" name="tahun" id="tahun">
-                                <option value="">---</option>
                                 @for ($i = $thn_awal; $i <= date('Y'); $i++)
                                     <option {{ $i == date('Y') ? 'selected' : '' }} value="{{ $i }}">
                                         {{ $i }}
@@ -33,11 +41,10 @@
                             <small class="text-danger" id="msg_tahun"></small>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="my-2">
                             <label class="form-label" for="bulan">Bulanan</label>
                             <select class="form-control" name="bulan" id="bulan">
-                                <option value="">---</option>
                                 <option {{ date('m') == '01' ? 'selected' : '' }} value="01">01. JANUARI</option>
                                 <option {{ date('m') == '02' ? 'selected' : '' }} value="02">02. FEBRUARI</option>
                                 <option {{ date('m') == '03' ? 'selected' : '' }} value="03">03. MARET</option>
@@ -52,22 +59,6 @@
                                 <option {{ date('m') == '12' ? 'selected' : '' }} value="12">12. DESEMBER</option>
                             </select>
                             <small class="text-danger" id="msg_bulan"></small>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="my-2">
-                            <label class="form-label" for="hari">Harian</label>
-                            <select class="form-control" name="hari" id="hari">
-                                <option value="">---</option>
-                                @for ($j = 1; $j <= 31; $j++)
-                                    @if ($j < 10)
-                                        <option value="0{{ $j }}">0{{ $j }}</option>
-                                    @else
-                                        <option value="{{ $j }}">{{ $j }}</option>
-                                    @endif
-                                @endfor
-                            </select>
-                            <small class="text-danger" id="msg_hari"></small>
                         </div>
                     </div>
                 </div>
@@ -103,8 +94,7 @@
             </form>
 
             <div class="d-flex justify-content-end">
-                <button type="button" id="SimpanSaldo" class="btn btn-sm btn-danger me-2">Simpan Saldo</button>
-                <button type="button" id="Excel" class="btn btn-sm btn-success me-2">Excel</button>
+                {{-- <button type="button" id="Excel" class="btn btn-sm btn-success me-2">Excel</button> --}}
                 <button type="button" id="Preview" class="btn btn-sm btn-github">Preview</button>
             </div>
         </div>
@@ -133,13 +123,6 @@
                 distance: 1000
             }
         })
-        new Choices($('select#hari')[0], {
-            shouldSort: false,
-            fuseOptions: {
-                threshold: 0.1,
-                distance: 1000
-            }
-        })
         new Choices($('select#laporan')[0], {
             shouldSort: false,
             fuseOptions: {
@@ -159,7 +142,7 @@
             e.preventDefault()
 
             var file = $(this).val()
-            $.get('/pelaporan/sub_laporan/' + file, function(result) {
+            $.get('/kab/laporan/sub_laporan/' + file, function(result) {
                 $('#subLaporan').html(result)
             })
         })
@@ -171,10 +154,7 @@
             var file = $('select#laporan').val()
             var sub = $('select#sub_laporan').val()
 
-            var form = $('#FormPelaporan')
-            if (file != '') {
-                form.submit()
-            }
+            setSession(1)
         })
 
         $(document).on('click', '#Excel', function(e) {
@@ -185,35 +165,56 @@
             var sub = $('select#sub_laporan').val()
 
             var form = $('#FormPelaporan')
-            console.log(form.serialize())
             if (file != '') {
                 form.submit()
             }
         })
 
-        let childWindow, loading;
-        $(document).on('click', '#SimpanSaldo', function(e) {
-            e.preventDefault()
+        // $(document).on('change', 'select#tahun,select#bulan', function() {
+        //     setSession()
+        // })
 
+        function setSession(number) {
+            $('#Preview').attr('disabled', true);
             var tahun = $('select#tahun').val()
-            loading = Swal.fire({
-                title: "Mohon Menunggu..",
-                html: "Menyimpan Saldo Januari sampai Desember Th. " + tahun,
-                timerProgressBar: true,
-                allowOutsideClick: false,
-                didOpen: () => {
-                    Swal.showLoading();
+            var bulan = $('select#bulan').val()
+            var laporan = $('select#laporan').val()
+
+            var lokasi = $('#lokasi_ke_' + number).val()
+            $.ajax({
+                type: 'GET',
+                url: '/kab/laporan/data/' + lokasi,
+                data: {
+                    tahun,
+                    bulan,
+                    laporan
+                },
+                success: function(result) {
+                    if (result.success) {
+                        Toastr('success', result.msg)
+
+                        checkCount(number)
+                    }
                 }
             })
+        }
 
-            childWindow = window.open('/kab/simpan_saldo?bulan=00&tahun=' + tahun, '_blank');
-        })
+        function checkCount(count) {
+            var lokasi_count = parseInt($('#count').val())
 
-        window.addEventListener('message', function(event) {
-            if (event.data === 'closed') {
-                loading.close()
-                window.location.reload()
+            if (count == lokasi_count) {
+                $('#Preview').removeAttr('disabled');
+                var form = $('#FormPelaporan')
+
+                var file = $('select#laporan').val()
+                var sub = $('select#sub_laporan').val()
+                if (file != '') {
+                    var submit = form.submit()
+                    console.log(submit)
+                }
+            } else {
+                setSession(count + 1)
             }
-        })
+        }
     </script>
 @endsection

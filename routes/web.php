@@ -3,25 +3,26 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\InvoiceController;
+use App\Http\Controllers\Admin\KabupatenController as AdminKabupatenController;
+use App\Http\Controllers\Admin\KecamatanController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\UpkController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Admin\KabupatenController as AdminKabupatenController;
-use App\Http\Controllers\Admin\KecamatanController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DesaController;
 use App\Http\Controllers\GenerateController;
-use App\Http\Controllers\PBController;
 use App\Http\Controllers\Kabupaten\AuthController as KabupatenAuthController;
 use App\Http\Controllers\Kabupaten\KabupatenController;
+use App\Http\Controllers\Kabupaten\LaporanController;
 use App\Http\Controllers\KelompokController;
+use App\Http\Controllers\PBController;
 use App\Http\Controllers\PelaporanController;
-use App\Http\Controllers\SimpananController;
 use App\Http\Controllers\PinjamanAnggotaController;
 use App\Http\Controllers\PinjamanIndividuController;
 use App\Http\Controllers\PinjamanKelompokController;
+use App\Http\Controllers\SimpananController;
 use App\Http\Controllers\SopController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
@@ -93,8 +94,16 @@ Route::post('/kab/login', [KabupatenAuthController::class, 'login'])->middleware
 
 Route::group(['prefix' => 'kab', 'as' => 'kab.', 'middleware' => 'kab'], function () {
     Route::get('/dashboard', [KabupatenController::class, 'index']);
+    Route::get('/tanda_tangan', [KabupatenController::class, 'tandaTangan']);
+    Route::post('/tanda_tangan/simpan', [KabupatenController::class, 'simpanTandaTangan']);
+
     Route::get('/simpan_saldo', [DashboardController::class, 'simpanSaldo']);
     Route::get('/kecamatan/{kd_kec}', [KabupatenController::class, 'kecamatan']);
+
+    Route::get('/laporan', [LaporanController::class, 'index']);
+    Route::get('/laporan/sub_laporan/{laporan}/', [LaporanController::class, 'subLaporan']);
+    Route::get('/laporan/data/{lokasi}/', [LaporanController::class, 'data']);
+    Route::post('/laporan/preview/{kd_kab}', [LaporanController::class, 'preview']);
 
     Route::post('/logout', [KabupatenAuthController::class, 'logout']);
 });

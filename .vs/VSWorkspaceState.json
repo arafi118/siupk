@@ -1,7 +1,19 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\app",
+    "\\app\\Http",
+    "\\app\\Http\\Controllers",
+    "\\app\\Http\\Controllers\\Kabupaten",
+    "\\resources",
+    "\\resources\\views",
+    "\\resources\\views\\kabupaten",
+    "\\resources\\views\\kabupaten\\auth",
+    "\\resources\\views\\kabupaten\\laporan",
+    "\\resources\\views\\kabupaten\\laporan\\layouts",
+    "\\resources\\views\\kabupaten\\laporan\\views",
+    "\\resources\\views\\kabupaten\\layout"
   ],
-  "SelectedNode": "\\C:\\laragon\\www\\siupk",
+  "SelectedNode": "\\resources\\views\\kabupaten\\laporan\\layouts\\base.blade.php",
   "PreviewInSolutionExplorer": false
 }

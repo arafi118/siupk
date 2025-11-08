@@ -7,7 +7,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/icon/favicon.png">
     <link rel="icon" type="image/png" href="/assets/img/icon/favicon.png">
     <title>
-        SI UPK Online
+        SIDBM &mdash; Jembatan Akuntabilitas Bumdesma
     </title>
     <meta name="keywords" content="">
     <meta name="description" content="">
@@ -25,10 +25,6 @@
     <link rel="stylesheet" href="/assets/css/style.css">
 
     <style>
-        .async-hide {
-            opacity: 0 !important
-        }
-
         .swal2-container {
             height: unset !important;
         }

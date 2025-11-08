@@ -48,9 +48,18 @@
             <li class="nav-item nav-item-link {{ active('dashboard') }}">
                 <a class="nav-link text-white {{ active('dashboard') }}" href="/kab/dashboard">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">dashboard</i>
+                        <i class="material-icons opacity-10">edit</i>
                     </div>
                     <span class="nav-link-text ms-1">Dashboard</span>
+                </a>
+            </li>
+
+            <li class="nav-item nav-item-link {{ active('tanda_tangan') }}">
+                <a class="nav-link text-white {{ active('tanda_tangan') }}" href="/kab/tanda_tangan">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">dashboard</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Tanda Tangan Laporan</span>
                 </a>
             </li>
 
@@ -61,7 +70,7 @@
 
 
             <li class="nav-item mt-3">
-                <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder text-white">Master Data</h6>
+                <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder text-white">Laporan Keuangan</h6>
             </li>
             <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#MenuKecamatan"
@@ -70,7 +79,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons-round opacity-10">assessment</i>
                     </div>
-                    <span class="nav-link-text ms-1">Kecamatan</span>
+                    <span class="nav-link-text ms-1">Per Kecamatan</span>
                 </a>
                 <div class="collapse" id="MenuKecamatan">
                     <ul class="nav nav-sm flex-column">
@@ -88,6 +97,15 @@
                         @endforeach
                     </ul>
                 </div>
+            </li>
+
+            <li class="nav-item nav-item-link {{ active('laporan') }}">
+                <a class="nav-link text-white {{ active('laporan') }}" href="/kab/laporan">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">insert_drive_file</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Rekap Kabupaten</span>
+                </a>
             </li>
         </ul>
     </div>
