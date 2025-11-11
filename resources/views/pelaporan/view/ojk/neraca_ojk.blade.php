@@ -148,7 +148,7 @@
             @endforeach
 
                 <tr style=" font-weight: bold; font-size: 12px;">
-                <td align='center' colspan='3'>Jumlah Liabisaelitas + Ekuitas</td>
+                <td align='center' colspan='3'>Jumlah Liabilitas + Ekuitas</td>
                 <td align='right'>{{number_format($jumlah_liabilitas_ekuitas,2);}}</td>
                 </tr>
 
