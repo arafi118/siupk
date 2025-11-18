@@ -209,7 +209,7 @@
                 <p><span> E. KESIMPULAN</span><br>
                     Anggota/peminjam ini LAYAK / TIDAK LAYAK untuk diberikan kredit sebesar:<br>
                     <br>
-                    <strong><u></u>Rp. {{ $pinkel->alokasi }} </u></strong>
+                    <strong><u></u>Rp. {{ number_format($pinkel->alokasi) }} </u></strong>
                 </p>
                 <p>Dengan Catatan :<br><br><br><br>
                     *) coret yang tidak perlu. </p>
