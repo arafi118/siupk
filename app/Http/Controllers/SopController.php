@@ -506,6 +506,43 @@ class SopController extends Controller
         ]);
     }
 
+    public function kolek(Request $request, Kecamatan $kec)
+    {
+        $rules = [];
+        $kolekData = [];
+
+        // looping untuk 5 tingkat
+        for ($i = 1; $i <= 5; $i++) {
+            $rules["nama_kolek{$i}"] = 'nullable|string';
+            $rules["pros_kolek{$i}"] = 'nullable|numeric';
+            $rules["durasi{$i}"]     = 'nullable|numeric';
+            $rules["satuan{$i}"]     = 'nullable|string';
+
+            $kolekData[] = [
+                'nama'       => $request->input("nama_kolek{$i}"),
+                'prosentase' => $request->input("pros_kolek{$i}"),
+                'durasi'     => $request->input("durasi{$i}"),
+                'satuan'     => $request->input("satuan{$i}"),
+            ];
+        }
+
+        // validasi
+        $validate = Validator::make($request->all(), $rules);
+        if ($validate->fails()) {
+            return response()->json($validate->errors(), Response::HTTP_BAD_REQUEST);
+        }
+        
+        
+        $kecamatan = Kecamatan::where('id', $kec->id)->update([
+            'kolek' => json_encode($kolekData)
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'msg'     => 'Kolek Berhasil Diperbarui.',
+        ]);
+    }
+
     public function pesanWhatsapp(Request $request, Kecamatan $kec)
     {
         if ($kec->id != Session::get('lokasi')) {

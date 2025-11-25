@@ -26,6 +26,12 @@
                             <span class="text-sm">Sistem Pinjaman</span>
                         </a>
                     </li>
+                    <li class="nav-item pt-2">
+                        <a class="nav-link text-dark d-flex" data-scroll="" href="#kolek">
+                            <i class="material-icons text-lg me-2">equalizer</i>
+                            <span class="text-sm">Kolektabilitas</span>
+                        </a>
+                    </li>
 
                     @if (session('lokasi') == 1 || session('lokasi') == 3)
                         <li class="nav-item pt-2">
@@ -93,6 +99,14 @@
                 </div>
                 <div class="card-body pt-0">
                     @include('sop.partials._pinjaman')
+                </div>
+            </div>
+            <div class="card mt-4" id="kolek">
+                <div class="card-header">
+                    <h5 class="mb-0">Kolektabilitas</h5>
+                </div>
+                <div class="card-body pt-0">
+                    @include('sop.partials._kolek')
                 </div>
             </div>
                     @if (session('lokasi') == 1 || session('lokasi') == 3)
