@@ -455,265 +455,372 @@ class Keuangan
         return $pendapatan - $biaya;
     }
 
-    public function tingkat_kesehatan($tgl_kondisi, $data = [])
-    {
-        $tgl = explode('-', $tgl_kondisi);
-        $data['tahun'] = $tgl[0];
-        $data['bulan'] = $tgl[1];
-        $data['tanggal'] = $tgl[2];
-        $data['lokasi'] = Session::get('lokasi');
-        $data['tgl_kondisi'] = $tgl_kondisi;
-
-        // Ambil data kolek dari database
-        $kec = Kecamatan::find(Session::get('lokasi'));
-        $kolekData = $kec->kolek ? json_decode($kec->kolek, true) : [];
-
-        $sum_nunggak_pokok = 0;
-        $sum_nunggak_jasa = 0;
-        $sum_saldo_pokok = 0;
-        $sum_saldo_jasa = 0;
+public function tingkat_kesehatan($tgl_kondisi, $data = [])
+{
+    $lokasi = Session::get('lokasi');
+    $kec = Kecamatan::where('id', $lokasi)->first();
     
-        // Inisialisasi sum_kolek untuk setiap tingkat kolek secara dinamis
-        $sum_kolek = [];
-        foreach ($kolekData as $index => $kolek) {
-            $sum_kolek[$index] = 0;
-        }
-
-        $pinjaman_kelompok = PinjamanKelompok::where('sistem_angsuran', '!=', '12')
-            ->where(function ($query) use ($data) {
-                $query->where([
-                    ['status', 'A'],
-                    ['tgl_cair', '<=', $data['tgl_kondisi']]
-                ])->orwhere([
-                    ['status', 'L'],
-                    ['tgl_cair', '<=', $data['tgl_kondisi']],
-                    ['tgl_lunas', '>=', "$data[tahun]-01-01"]
-                ])->orwhere([
-                    ['status', 'L'],
-                    ['tgl_lunas', '<=', $data['tgl_kondisi']],
-                    ['tgl_lunas', '>=', "$data[tahun]-01-01"]
-                ])->orwhere([
-                    ['status', 'R'],
-                    ['tgl_cair', '<=', $data['tgl_kondisi']],
-                    ['tgl_lunas', '>=', "$data[tahun]-01-01"]
-                ])->orwhere([
-                    ['status', 'R'],
-                    ['tgl_lunas', '<=', $data['tgl_kondisi']],
-                    ['tgl_lunas', '>=', "$data[tahun]-01-01"]
-                ])->orwhere([
-                    ['status', 'H'],
-                    ['tgl_cair', '<=', $data['tgl_kondisi']],
-                    ['tgl_lunas', '>=', "$data[tahun]-01-01"]
-                ])->orwhere([
-                    ['status', 'H'],
-                    ['tgl_lunas', '<=', $data['tgl_kondisi']],
-                    ['tgl_lunas', '>=', "$data[tahun]-01-01"]
-                ]);
-            })->with([
-                'saldo' => function ($query) use ($data) {
-                    $query->where('tgl_transaksi', '<=', $data['tgl_kondisi']);
-                },
-                'target' => function ($query) use ($data) {
-                    $query->where('jatuh_tempo', '<=', $data['tgl_kondisi']);
-                }
-            ])->get();
-
-        $pinjaman_individu = PinjamanIndividu::where('sistem_angsuran', '!=', '12')
-            ->where(function ($query) use ($data) {
-                $query->where([
-                    ['status', 'A'],
-                    ['jenis_pinjaman', 'I'],
-                    ['tgl_cair', '<=', $data['tgl_kondisi']]
-                ])->orwhere([
-                    ['status', 'L'],
-                    ['jenis_pinjaman', 'I'],
-                    ['tgl_cair', '<=', $data['tgl_kondisi']],
-                    ['tgl_lunas', '>=', "$data[tahun]-01-01"]
-                ])->orwhere([
-                    ['status', 'L'],
-                    ['jenis_pinjaman', 'I'],
-                    ['tgl_lunas', '<=', $data['tgl_kondisi']],
-                    ['tgl_lunas', '>=', "$data[tahun]-01-01"]
-                ])->orwhere([
-                    ['status', 'R'],
-                    ['jenis_pinjaman', 'I'],
-                    ['tgl_cair', '<=', $data['tgl_kondisi']],
-                    ['tgl_lunas', '>=', "$data[tahun]-01-01"]
-                ])->orwhere([
-                    ['status', 'R'],
-                    ['jenis_pinjaman', 'I'],
-                    ['tgl_lunas', '<=', $data['tgl_kondisi']],
-                    ['tgl_lunas', '>=', "$data[tahun]-01-01"]
-                ])->orwhere([
-                    ['status', 'H'],
-                    ['jenis_pinjaman', 'I'],
-                    ['tgl_cair', '<=', $data['tgl_kondisi']],
-                    ['tgl_lunas', '>=', "$data[tahun]-01-01"]
-                ])->orwhere([
-                    ['status', 'H'],
-                    ['jenis_pinjaman', 'I'],
-                    ['tgl_lunas', '<=', $data['tgl_kondisi']],
-                    ['tgl_lunas', '>=', "$data[tahun]-01-01"]
-                ]);
-            })->with([
-                'saldo' => function ($query) use ($data) {
-                    $query->where('tgl_transaksi', '<=', $data['tgl_kondisi']);
-                },
-                'target' => function ($query) use ($data) {
-                    $query->where('jatuh_tempo', '<=', $data['tgl_kondisi']);
-                }
-            ])->get();
-
-        // Gabungkan pinjaman kelompok dan individu
-        $all_pinjaman = $pinjaman_kelompok->concat($pinjaman_individu);
-
-        foreach ($all_pinjaman as $pinj) {
-            $real_pokok = 0;
-            $real_jasa = 0;
-            $sum_pokok = 0;
-            $sum_jasa = 0;
-            $saldo_pokok = $pinj->alokasi;
-            $saldo_jasa = 0;
+    // Ambil data kolek dari database
+    $kolekData = $kec->kolek ? json_decode($kec->kolek, true) : [];
+    
+    // Filter hanya kolek yang aktif (ada nama)
+    $activeKolek = array_filter($kolekData, function($k) {
+        return !empty($k['nama']);
+    });
+    
+    // Parse tanggal kondisi
+    $tgl_parts = explode('-', $tgl_kondisi);
+    $tahun = $tgl_parts[0];
+    $bulan = $tgl_parts[1];
+    $hari = $tgl_parts[2];
+    
+    // Inisialisasi variabel total
+    $sum_nunggak_pokok = 0;
+    $sum_nunggak_jasa = 0;
+    $sum_saldo_pokok = 0;
+    $sum_saldo_jasa = 0;
+    
+    // Inisialisasi array kolek secara dinamis
+    $sum_kolek = array_fill(0, count($kolekData), 0);
+    
+    // Query pinjaman kelompok - PERSIS SEPERTI DI CONTROLLER
+    $pinjaman_kelompok = PinjamanKelompok::where('sistem_angsuran', '!=', '12')
+        ->where(function ($query) use ($tgl_kondisi, $tahun) {
+            $query->where([
+                ['status', 'A'],
+                ['tgl_cair', '<=', $tgl_kondisi]
+            ])->orWhere([
+                ['status', 'L'],
+                ['tgl_cair', '<=', $tgl_kondisi],
+                ['tgl_lunas', '>=', "$tahun-01-01"]
+            ])->orWhere([
+                ['status', 'L'],
+                ['tgl_lunas', '<=', $tgl_kondisi],
+                ['tgl_lunas', '>=', "$tahun-01-01"]
+            ])->orWhere([
+                ['status', 'R'],
+                ['tgl_cair', '<=', $tgl_kondisi],
+                ['tgl_lunas', '>=', "$tahun-01-01"]
+            ])->orWhere([
+                ['status', 'R'],
+                ['tgl_lunas', '<=', $tgl_kondisi],
+                ['tgl_lunas', '>=', "$tahun-01-01"]
+            ])->orWhere([
+                ['status', 'H'],
+                ['tgl_cair', '<=', $tgl_kondisi],
+                ['tgl_lunas', '>=', "$tahun-01-01"]
+            ])->orWhere([
+                ['status', 'H'],
+                ['tgl_lunas', '<=', $tgl_kondisi],
+                ['tgl_lunas', '>=', "$tahun-01-01"]
+            ]);
+        })
+        ->with([
+            'saldo' => function ($query) use ($tgl_kondisi) {
+                $query->where('tgl_transaksi', '<=', $tgl_kondisi);
+            },
+            'target' => function ($query) use ($tgl_kondisi) {
+                $query->where('jatuh_tempo', '<=', $tgl_kondisi);
+            }
+        ])
+        ->get();
+    
+    // Query pinjaman individu - PERSIS SEPERTI DI CONTROLLER
+    $pinjaman_individu = PinjamanIndividu::where('sistem_angsuran', '!=', '12')
+        ->where(function ($query) use ($tgl_kondisi, $tahun) {
+            $query->where([
+                ['status', 'A'],
+                ['jenis_pinjaman', 'I'],
+                ['tgl_cair', '<=', $tgl_kondisi]
+            ])->orWhere([
+                ['status', 'L'],
+                ['jenis_pinjaman', 'I'],
+                ['tgl_cair', '<=', $tgl_kondisi],
+                ['tgl_lunas', '>=', "$tahun-01-01"]
+            ])->orWhere([
+                ['status', 'L'],
+                ['jenis_pinjaman', 'I'],
+                ['tgl_lunas', '<=', $tgl_kondisi],
+                ['tgl_lunas', '>=', "$tahun-01-01"]
+            ])->orWhere([
+                ['status', 'R'],
+                ['jenis_pinjaman', 'I'],
+                ['tgl_cair', '<=', $tgl_kondisi],
+                ['tgl_lunas', '>=', "$tahun-01-01"]
+            ])->orWhere([
+                ['status', 'R'],
+                ['jenis_pinjaman', 'I'],
+                ['tgl_lunas', '<=', $tgl_kondisi],
+                ['tgl_lunas', '>=', "$tahun-01-01"]
+            ])->orWhere([
+                ['status', 'H'],
+                ['jenis_pinjaman', 'I'],
+                ['tgl_cair', '<=', $tgl_kondisi],
+                ['tgl_lunas', '>=', "$tahun-01-01"]
+            ])->orWhere([
+                ['status', 'H'],
+                ['jenis_pinjaman', 'I'],
+                ['tgl_lunas', '<=', $tgl_kondisi],
+                ['tgl_lunas', '>=', "$tahun-01-01"]
+            ]);
+        })
+        ->with([
+            'saldo' => function ($query) use ($tgl_kondisi) {
+                $query->where('tgl_transaksi', '<=', $tgl_kondisi);
+            },
+            'target' => function ($query) use ($tgl_kondisi) {
+                $query->where('jatuh_tempo', '<=', $tgl_kondisi);
+            }
+        ])
+        ->get();
+    
+    // Proses pinjaman kelompok - PAKAI RUMUS YANG SAMA DENGAN VIEW
+    foreach ($pinjaman_kelompok as $pinkel) {
+        $hasil = $this->hitungKolektibilitasKelompok($pinkel, $tgl_kondisi, $tahun, $bulan, $kolekData);
         
-            if ($pinj->pros_jasa > 0) {
-                $saldo_jasa = $pinj->pros_jasa == 0 ? 0 : $pinj->alokasi * ($pinj->pros_jasa / 100);
-            }
+        $sum_nunggak_pokok += $hasil['tunggakan_pokok'];
+        $sum_nunggak_jasa += $hasil['tunggakan_jasa'];
+        $sum_saldo_pokok += $hasil['saldo_pokok'];
+        $sum_saldo_jasa += $hasil['saldo_jasa'];
         
-            if ($pinj->saldo) {
-                $real_pokok = $pinj->saldo->realisasi_pokok;
-                $real_jasa = $pinj->saldo->realisasi_jasa;
-                $sum_pokok = $pinj->saldo->sum_pokok;
-                $sum_jasa = $pinj->saldo->sum_jasa;
-                $saldo_pokok = $pinj->saldo->saldo_pokok;
-                $saldo_jasa = $pinj->saldo->saldo_jasa;
-            }
-
-            $target_pokok = 0;
-            $target_jasa = 0;
-            $wajib_pokok = 0;
-            $wajib_jasa = 0;
-            $angsuran_ke = 0;
+        // Tambahkan ke array kolek sesuai tingkat
+        $sum_kolek[$hasil['tingkat_kolek']] += $hasil['saldo_pokok'];
+    }
+    
+    // Proses pinjaman individu - PAKAI RUMUS YANG SAMA DENGAN VIEW
+    foreach ($pinjaman_individu as $pinkel) {
+        $hasil = $this->hitungKolektibilitasIndividu($pinkel, $tgl_kondisi, $tahun, $bulan, $kolekData);
         
-            if ($pinj->target) {
-                $target_pokok = $pinj->target->target_pokok;
-                $target_jasa = $pinj->target->target_jasa;
-                $wajib_pokok = $pinj->target->wajib_pokok;
-                $wajib_jasa = $pinj->target->wajib_jasa;
-                $angsuran_ke = $pinj->target->angsuran_ke;
-            }
-
-            $tunggakan_pokok = $target_pokok - $sum_pokok;
-            if ($tunggakan_pokok < 0) {
-                $tunggakan_pokok = 0;
-            }
+        $sum_nunggak_pokok += $hasil['tunggakan_pokok'];
+        $sum_nunggak_jasa += $hasil['tunggakan_jasa'];
+        $sum_saldo_pokok += $hasil['saldo_pokok'];
+        $sum_saldo_jasa += $hasil['saldo_jasa'];
         
-            $tunggakan_jasa = $target_jasa - $sum_jasa;
-            if ($tunggakan_jasa < 0) {
-                $tunggakan_jasa = 0;
-            }
+        // Tambahkan ke array kolek sesuai tingkat
+        $sum_kolek[$hasil['tingkat_kolek']] += $hasil['saldo_pokok'];
+    }
+    
+    // Hitung total kolek berdasarkan prosentase
+    $total_kolek = 0;
+    foreach ($activeKolek as $idx => $kolek) {
+        $prosentase = floatval($kolek['prosentase']);
+        $total_kolek += ($sum_kolek[$idx] * $prosentase) / 100;
+    }
+    
+    return [
+        'nunggak_pokok' => $sum_nunggak_pokok,
+        'nunggak_jasa' => $sum_nunggak_jasa,
+        'saldo_pokok' => $sum_saldo_pokok,
+        'saldo_jasa' => $sum_saldo_jasa,
+        'sum_kolek' => $total_kolek,
+        'detail_kolek' => $sum_kolek
+    ];
+}
 
-            // Reset tunggakan dan saldo jika sudah lunas/hapus buku
-            if ($pinj->tgl_lunas <= $data['tgl_kondisi'] && in_array($pinj->status, ['L', 'R', 'H'])) {
-                $tunggakan_pokok = 0;
-                $tunggakan_jasa = 0;
-                $saldo_pokok = 0;
-                $saldo_jasa = 0;
-            }
-
-            $tgl_cair = explode('-', $pinj->tgl_cair);
-            $th_cair = $tgl_cair[0];
-            $bl_cair = $tgl_cair[1];
-
-            $selisih_tahun = ($data['tahun'] - $th_cair) * 12;
-            $selisih_bulan = $data['bulan'] - $bl_cair;
-            $selisih = $selisih_bulan + $selisih_tahun;
-
-            $_kolek = 0;
-            if ($wajib_pokok != '0') {
-                $_kolek = ($tunggakan_pokok / $wajib_pokok);
-            }
-            $kolek_bulan = round($_kolek + ($selisih - $angsuran_ke));
-
-            // Tentukan tingkat kolek berdasarkan konfigurasi dari database
-            $tingkat_kolek_index = $this->getTingkatKolek($kolek_bulan, $kolekData);
-        
-            // Distribusikan saldo_pokok ke tingkat kolek yang sesuai
-            if ($tingkat_kolek_index !== null) {
-                $sum_kolek[$tingkat_kolek_index] += $saldo_pokok;
-            }
-
-            $sum_nunggak_pokok += $tunggakan_pokok;
-            $sum_nunggak_jasa += $tunggakan_jasa;
-            $sum_saldo_pokok += $saldo_pokok;
-            $sum_saldo_jasa += $saldo_jasa;
-        }
-
-        // Hitung total kolek berdasarkan prosentase dari konfigurasi
-        $total_kolek = 0;
-        foreach ($kolekData as $index => $kolek) {
-            if (!empty($kolek['prosentase']) && isset($sum_kolek[$index])) {
-                $prosentase = floatval($kolek['prosentase']);
-                $total_kolek += ($sum_kolek[$index] * $prosentase / 100);
-            }
-        }
-
-        return [
-            'nunggak_pokok' => $sum_nunggak_pokok,
-            'nunggak_jasa' => $sum_nunggak_jasa,
-            'saldo_pokok' => $sum_saldo_pokok,
-            'saldo_jasa' => $sum_saldo_jasa,
-            'sum_kolek' => $total_kolek,
-            'detail_kolek' => $sum_kolek // Detail per tingkat kolek
-        ];
+// UNTUK PINJAMAN KELOMPOK - PERSIS SEPERTI DI kolek_kelompok.blade.php
+private function hitungKolektibilitasKelompok($pinkel, $tgl_kondisi, $tahun, $bulan, $kolekData)
+{
+    $sum_pokok = 0;
+    $sum_jasa = 0;
+    $saldo_pokok = $pinkel->alokasi;
+    $saldo_jasa = $pinkel->pros_jasa == 0 ? 0 : $pinkel->alokasi * ($pinkel->pros_jasa / 100);
+    
+    if ($pinkel->saldo) {
+        $sum_pokok = $pinkel->saldo->sum_pokok;
+        $sum_jasa = $pinkel->saldo->sum_jasa;
+        $saldo_pokok = $pinkel->saldo->saldo_pokok;
+        $saldo_jasa = $pinkel->saldo->saldo_jasa;
     }
 
-    /**
-     * Menentukan tingkat kolek berdasarkan durasi tunggakan
-     * 
-     * @param int $kolek_bulan Jumlah bulan tunggakan
-     * @param array $kolekData Data konfigurasi kolek dari database
-     * @return int|null Index tingkat kolek (0-4) atau null jika tidak ada yang cocok
-     */
-    private function getTingkatKolek($kolek_bulan, $kolekData)
-    {
-        // Jika tidak ada konfigurasi kolek, return null
-        if (empty($kolekData)) {
-            return null;
-        }
-
-        // Loop dari tingkat kolek terendah ke tertinggi
-        for ($i = 0; $i < count($kolekData); $i++) {
-            $kolek = $kolekData[$i];
-        
-            // Skip jika tidak ada nama (kolek tidak digunakan)
-            if (empty($kolek['nama'])) {
-                continue;
-            }
-        
-            $durasi = floatval($kolek['durasi']);
-            $satuan = $kolek['satuan'];
-        
-            // Konversi durasi ke bulan jika satuan adalah hari
-            if ($satuan == 'hari') {
-                $durasi = $durasi / 30; // Asumsi 1 bulan = 30 hari
-            }
-        
-            // Cek apakah kolek_bulan kurang dari durasi
-            // Logika: durasi adalah "kurang dari (<)"
-            if ($kolek_bulan < $durasi) {
-                return $i;
-            }
-        }
-    
-        // Jika tidak ada yang cocok (melebihi semua durasi), masukkan ke tingkat kolek tertinggi
-        for ($i = count($kolekData) - 1; $i >= 0; $i--) {
-            if (!empty($kolekData[$i]['nama'])) {
-                return $i;
-            }
-        }
-    
-        return null;
+    if ($saldo_jasa < 0) {
+        $saldo_jasa = 0;
     }
+
+    if ($pinkel->tgl_lunas <= $tgl_kondisi && $pinkel->status == 'L') {
+        $saldo_jasa = 0;
+    }
+
+    $target_pokok = 0;
+    $target_jasa = 0;
+    $wajib_pokok = 0;
+    $wajib_jasa = 0;
+    $angsuran_ke = 0;
+    if ($pinkel->target) {
+        $target_pokok = $pinkel->target->target_pokok;
+        $target_jasa = $pinkel->target->target_jasa;
+        $wajib_pokok = $pinkel->target->wajib_pokok;
+        $wajib_jasa = $pinkel->target->wajib_jasa;
+        $angsuran_ke = $pinkel->target->angsuran_ke;
+    }
+
+    $tunggakan_pokok = $target_pokok - $sum_pokok;
+    if ($tunggakan_pokok < 0) {
+        $tunggakan_pokok = 0;
+    }
+    $tunggakan_jasa = $target_jasa - $sum_jasa;
+    if ($tunggakan_jasa < 0) {
+        $tunggakan_jasa = 0;
+    }
+
+    $pross = $saldo_pokok == 0 ? 0 : $saldo_pokok / $pinkel->alokasi;
+
+    if ($pinkel->tgl_lunas <= $tgl_kondisi && in_array($pinkel->status, ['L', 'R', 'H'])) {
+        $tunggakan_pokok = 0;
+        $tunggakan_jasa = 0;
+        $saldo_pokok = 0;
+        $saldo_jasa = 0;
+    }
+
+    // HITUNG KOLEK - PERSIS SEPERTI DI VIEW kolek_kelompok.blade.php
+    $tgl_cair = explode('-', $pinkel->tgl_cair);
+    $th_cair = $tgl_cair[0];
+    $bl_cair = $tgl_cair[1];
+    $tg_cair = $tgl_cair[2];
+
+    $selisih_tahun = ($tahun - $th_cair) * 12;
+    $selisih_bulan = $bulan - $bl_cair;
+    $selisih = $selisih_bulan + $selisih_tahun;
+
+    $_kolek = 0;
+    if ($wajib_pokok != '0') {
+        $_kolek = $tunggakan_pokok / $wajib_pokok;
+    }
+    // PAKAI round() SEPERTI DI VIEW kolek_kelompok.blade.php
+    $kolek_bulan = round($_kolek + ($selisih - $angsuran_ke));
+
+    // Tentukan tingkat kolek
+    $tingkat_kolek = $this->getTingkatKolek($kolek_bulan, $kolekData);
+    
+    return [
+        'tunggakan_pokok' => $tunggakan_pokok,
+        'tunggakan_jasa' => $tunggakan_jasa,
+        'saldo_pokok' => $saldo_pokok,
+        'saldo_jasa' => $saldo_jasa,
+        'tingkat_kolek' => $tingkat_kolek
+    ];
+}
+
+// UNTUK PINJAMAN INDIVIDU - PERSIS SEPERTI DI kolek_individu.blade.php
+private function hitungKolektibilitasIndividu($pinkel, $tgl_kondisi, $tahun, $bulan, $kolekData)
+{
+    $sum_pokok = 0;
+    $sum_jasa = 0;
+    $saldo_pokok = $pinkel->alokasi;
+    $saldo_jasa = $pinkel->pros_jasa == 0 ? 0 : $pinkel->alokasi * ($pinkel->pros_jasa / 100);
+    
+    if ($pinkel->saldo) {
+        $sum_pokok = $pinkel->saldo->sum_pokok;
+        $sum_jasa = $pinkel->saldo->sum_jasa;
+        $saldo_pokok = $pinkel->saldo->saldo_pokok;
+        $saldo_jasa = $pinkel->saldo->saldo_jasa;
+    }
+
+    if ($saldo_jasa < 0) {
+        $saldo_jasa = 0;
+    }
+
+    if ($pinkel->tgl_lunas <= $tgl_kondisi && $pinkel->status == 'L') {
+        $saldo_jasa = 0;
+    }
+
+    $target_pokok = 0;
+    $target_jasa = 0;
+    $wajib_pokok = 0;
+    $wajib_jasa = 0;
+    $angsuran_ke = 0;
+    if ($pinkel->target) {
+        $target_pokok = $pinkel->target->target_pokok;
+        $target_jasa = $pinkel->target->target_jasa;
+        $wajib_pokok = $pinkel->target->wajib_pokok;
+        $wajib_jasa = $pinkel->target->wajib_jasa;
+        $angsuran_ke = $pinkel->target->angsuran_ke;
+    }
+
+    $tunggakan_pokok = $target_pokok - $sum_pokok;
+    if ($tunggakan_pokok < 0) {
+        $tunggakan_pokok = 0;
+    }
+    $tunggakan_jasa = $target_jasa - $sum_jasa;
+    if ($tunggakan_jasa < 0) {
+        $tunggakan_jasa = 0;
+    }
+
+    $pross = $saldo_pokok == 0 ? 0 : $saldo_pokok / $pinkel->alokasi;
+
+    if ($pinkel->tgl_lunas <= $tgl_kondisi && in_array($pinkel->status, ['L', 'R', 'H'])) {
+        $tunggakan_pokok = 0;
+        $tunggakan_jasa = 0;
+        $saldo_pokok = 0;
+        $saldo_jasa = 0;
+    }
+
+    // HITUNG KOLEK - PERSIS SEPERTI DI VIEW kolek_individu.blade.php
+    $tgl_cair = explode('-', $pinkel->tgl_cair);
+    $th_cair = $tgl_cair[0];
+    $bl_cair = $tgl_cair[1];
+
+    $selisih_tahun = ($tahun - $th_cair) * 12;
+    $selisih_bulan = $bulan - $bl_cair;
+    $selisih = $selisih_bulan + $selisih_tahun;
+
+    $_kolek = 0;
+    if ($wajib_pokok != '0') {
+        $_kolek = $tunggakan_pokok / $wajib_pokok;
+    }
+    
+    // PAKAI ceil() SEPERTI DI VIEW kolek_individu.blade.php
+    $kolek_bulan = ceil($_kolek + ($selisih - $angsuran_ke));
+
+    // Tentukan tingkat kolek
+    $tingkat_kolek = $this->getTingkatKolek($kolek_bulan, $kolekData);
+    
+    return [
+        'tunggakan_pokok' => $tunggakan_pokok,
+        'tunggakan_jasa' => $tunggakan_jasa,
+        'saldo_pokok' => $saldo_pokok,
+        'saldo_jasa' => $saldo_jasa,
+        'tingkat_kolek' => $tingkat_kolek
+    ];
+}
+
+private function getTingkatKolek($kolek_bulan, $kolekData)
+{
+    if (empty($kolekData)) {
+        return 0;
+    }
+    
+    // Loop dari tingkat kolek terendah ke tertinggi
+    for ($i = 0; $i < count($kolekData); $i++) {
+        $kolek = $kolekData[$i];
+        
+        // Skip jika kolek tidak aktif
+        if (empty($kolek['nama'])) {
+            continue;
+        }
+        
+        $durasi = floatval($kolek['durasi']);
+        $satuan = $kolek['satuan'];
+        
+        // Konversi durasi ke bulan jika satuan hari
+        if ($satuan == 'hari') {
+            $durasi = $durasi / 30;
+        }
+        
+        // Jika kolek_bulan kurang dari durasi, maka masuk ke tingkat ini
+        if ($kolek_bulan < $durasi) {
+            return $i;
+        }
+    }
+    
+    // Jika melebihi semua durasi, masuk ke tingkat kolek tertinggi
+    for ($i = count($kolekData) - 1; $i >= 0; $i--) {
+        if (!empty($kolekData[$i]['nama'])) {
+            return $i;
+        }
+    }
+    
+    return 0;
+}
 
     public function aset($tgl_kondisi)
     {
