@@ -4048,7 +4048,9 @@ private function pinjaman_individu_mingguan(array $data)
         ['tgl_lunas', '<', $thn . '-01-01'],
         ['status', 'L']
     ])->with('saldo', 'target')->get();
-
+        foreach ($data['jenis_pp'] as $jpp) {
+        $jpp->nama_jpp = $jpp->nama_jpp . ' Mingguan';
+    }
     $view = view('pelaporan.view.perkembangan_piutang.lpp_individu', $data)->render();
 
     if ($data['type'] == 'pdf') {
@@ -4143,7 +4145,9 @@ private function pinjaman_per_kelompok_mingguan(array $data)
         ['tgl_lunas', '<', $thn . '-01-01'],
         ['status', 'L']
     ])->with('saldo', 'target')->get();
-
+        foreach ($data['jenis_pp'] as $jpp) {
+        $jpp->nama_jpp = $jpp->nama_jpp . ' Mingguan';
+    }
     $view = view('pelaporan.view.perkembangan_piutang.lpp_kelompok', $data)->render();
 
     if ($data['type'] == 'pdf') {
@@ -4239,7 +4243,9 @@ private function kolek_individu_mingguan(array $data)
             $query->where('jatuh_tempo', '<=', $data['tgl_kondisi']);
         }
     ])->get();
-
+        foreach ($data['jenis_pp'] as $jpp) {
+        $jpp->nama_jpp = $jpp->nama_jpp . ' Mingguan';
+    }
     $view = view('pelaporan.view.perkembangan_piutang.kolek_individu', $data)->render();
 
     if ($data['type'] == 'pdf') {
@@ -4327,6 +4333,9 @@ private function kolek_per_kelompok_mingguan(array $data)
         }
     ])->get();
 
+        foreach ($data['jenis_pp'] as $jpp) {
+        $jpp->nama_jpp = $jpp->nama_jpp . ' Mingguan';
+    }
     $view = view('pelaporan.view.perkembangan_piutang.kolek_kelompok', $data)->render();
 
     if ($data['type'] == 'pdf') {
