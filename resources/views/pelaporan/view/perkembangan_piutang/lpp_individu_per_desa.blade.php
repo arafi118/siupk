@@ -59,7 +59,7 @@
         </table>
 
         {{-- Tabel Data Utama --}}
-        <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 8px; table-layout: fixed;">
+        <table border="1" width="100%" cellspacing="0" cellpadding="0" style="font-size: 8px; table-layout: fixed;">
             {{-- Header Row 1 --}}
             <tr style="background: rgb(230, 230, 230); font-weight: bold;">
                 <th class="t l b" rowspan="2" width="2%">No</th>
@@ -123,17 +123,25 @@
                         $desa_data[$kd]['target_jasa'] += $pinj_i->target->target_jasa;
                     }
                     
-                    if ($pinj_i->real_bl) {
-                        $desa_data[$kd]['real_bl_pokok'] += $pinj_i->real_bl->realisasi_pokok;
-                        $desa_data[$kd]['real_bl_jasa'] += $pinj_i->real_bl->realisasi_jasa;
-                    }
+                    // Real bulan ini dari withSum yang sudah ada
+                    $real_pokok_bulan_ini = $pinj_i->real_i_sum_realisasi_pokok ?? 0;
+                    $real_jasa_bulan_ini = $pinj_i->real_i_sum_realisasi_jasa ?? 0;
                     
-                    if ($pinj_i->real) {
-                        $desa_data[$kd]['real_pokok'] += $pinj_i->real->realisasi_pokok;
-                        $desa_data[$kd]['real_jasa'] += $pinj_i->real->realisasi_jasa;
-                    }
+                    $desa_data[$kd]['real_pokok'] += $real_pokok_bulan_ini;
+                    $desa_data[$kd]['real_jasa'] += $real_jasa_bulan_ini;
                     
+                    // Hitung real s.d. bulan lalu dari saldo
                     if ($pinj_i->saldo) {
+                        $sum_pokok_sd_sekarang = $pinj_i->saldo->sum_pokok ?? 0;
+                        $sum_jasa_sd_sekarang = $pinj_i->saldo->sum_jasa ?? 0;
+                        
+                        // Real bulan lalu = sum s.d. sekarang - real bulan ini
+                        $real_bl_pokok = $sum_pokok_sd_sekarang - $real_pokok_bulan_ini;
+                        $real_bl_jasa = $sum_jasa_sd_sekarang - $real_jasa_bulan_ini;
+                        
+                        $desa_data[$kd]['real_bl_pokok'] += $real_bl_pokok;
+                        $desa_data[$kd]['real_bl_jasa'] += $real_bl_jasa;
+                        
                         $desa_data[$kd]['saldo_pokok'] += $pinj_i->saldo->saldo_pokok;
                         $desa_data[$kd]['saldo_jasa'] += $pinj_i->saldo->saldo_jasa;
                     }

@@ -2502,15 +2502,6 @@ class PelaporanController extends Controller
         $data['tgl_lalu'] = $data['tahun'] . '-' . $data['bulan'] . '-01';
 
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
-        $tb_pinj_i = 'pinjaman_anggota_' . $data['kec']->id;
-        $tb_angg = 'anggota_' . $data['kec']->id;
-        $data['tb_pinj_i'] = $tb_pinj_i;
-
-        // Ambil semua desa di kecamatan
-        $desa_list = Desa::where('kd_kec', $data['kec']->id)
-            ->orderBy('kd_desa', 'ASC')
-            ->get();
-
         $data['jenis_pp'] = JenisProdukPinjaman::where(function ($query) use ($kec) {
             $query->where('lokasi', '0')
                 ->orWhere(function ($query) use ($kec) {
@@ -2518,7 +2509,11 @@ class PelaporanController extends Controller
                         ->where('lokasi', 'LIKE', "%-{$kec['id']}-%");
                 });
         })->with([
-            'pinjaman_individu' => function ($query) use ($data, $tb_pinj_i, $tb_angg) {
+            'pinjaman_individu' => function ($query) use ($data) {
+                $tb_pinj_i = 'pinjaman_anggota_' . $data['kec']->id;
+                $tb_angg = 'anggota_' . $data['kec']->id;
+                $data['tb_pinj_i'] = $tb_pinj_i;
+
                 $query->select($tb_pinj_i . '.*', $tb_angg . '.namadepan', 'desa.nama_desa', 'desa.kd_desa', 'desa.kode_desa', 'sebutan_desa.sebutan_desa')
                     ->join($tb_angg, $tb_angg . '.id', '=', $tb_pinj_i . '.nia')
                     ->join('desa', $tb_angg . '.desa', '=', 'desa.kd_desa')
@@ -2529,8 +2524,7 @@ class PelaporanController extends Controller
                     ->withSum(['real_i' => function ($query) use ($data) {
                         $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
                     }], 'realisasi_jasa')
-                    ->where($tb_pinj_i . '.sistem_angsuran', '!=', '12')
-                    ->where(function ($query) use ($data) {
+                    ->where($tb_pinj_i . '.sistem_angsuran', '!=', '12')->where(function ($query) use ($data) {
                         $query->where([
                             [$data['tb_pinj_i'] . '.status', 'A'],
                             [$data['tb_pinj_i'] . '.jenis_pinjaman', 'I'],
@@ -2578,33 +2572,6 @@ class PelaporanController extends Controller
             },
             'pinjaman_individu.angsuran_pokok'
         ])->get();
-
-        // Kelompokkan data berdasarkan desa
-        $data['data_per_desa'] = [];
-        
-        foreach ($desa_list as $desa) {
-            $data_desa = [
-                'desa' => $desa,
-                'jenis_produk' => []
-            ];
-
-            foreach ($data['jenis_pp'] as $jenis) {
-                $pinjaman_desa = $jenis->pinjaman_individu->filter(function ($pinjaman) use ($desa) {
-                    return $pinjaman->kd_desa == $desa->kd_desa;
-                });
-
-                if ($pinjaman_desa->count() > 0) {
-                    $data_desa['jenis_produk'][] = [
-                        'jenis' => $jenis,
-                        'pinjaman' => $pinjaman_desa
-                    ];
-                }
-            }
-
-            if (count($data_desa['jenis_produk']) > 0) {
-                $data['data_per_desa'][] = $data_desa;
-            }
-        }
 
         $data['lunas'] = PinjamanKelompok::where([
             ['tgl_lunas', '<', $thn . '-01-01'],
