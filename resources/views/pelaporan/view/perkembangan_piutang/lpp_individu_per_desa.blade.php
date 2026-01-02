@@ -115,52 +115,89 @@
                         ];
                     }
                     
-                    // Akumulasi data
-                    $desa_data[$kd]['alokasi'] += $pinj_i->alokasi;
+                    // Hitung saldo per pinjaman (sama seperti lpp_individu asli)
+                    $saldo_pokok = $pinj_i->alokasi;
+                    $saldo_jasa = $pinj_i->pros_jasa == 0 ? 0 : $pinj_i->alokasi * ($pinj_i->pros_jasa / 100);
+                    $sum_pokok = 0;
+                    $sum_jasa = 0;
                     
+                    if ($pinj_i->saldo) {
+                        $sum_pokok = $pinj_i->saldo->sum_pokok;
+                        $sum_jasa = $pinj_i->saldo->sum_jasa;
+                        $saldo_pokok = $pinj_i->saldo->saldo_pokok;
+                        $saldo_jasa = $pinj_i->saldo->saldo_jasa;
+                    }
+                    
+                    if ($saldo_jasa < 0) {
+                        $saldo_jasa = 0;
+                    }
+                    
+                    if ($pinj_i->tgl_lunas <= $tgl_kondisi && $pinj_i->status == 'L') {
+                        $saldo_jasa = 0;
+                    }
+                    
+                    // Target
+                    $target_pokok = 0;
+                    $target_jasa = 0;
                     if ($pinj_i->target) {
-                        $desa_data[$kd]['target_pokok'] += $pinj_i->target->target_pokok;
-                        $desa_data[$kd]['target_jasa'] += $pinj_i->target->target_jasa;
+                        $target_pokok = $pinj_i->target->target_pokok;
+                        $target_jasa = $pinj_i->target->target_jasa;
+                    }
+                    
+                    // Tunggakan
+                    $tunggakan_pokok = $target_pokok - $sum_pokok;
+                    if ($tunggakan_pokok < 0) {
+                        $tunggakan_pokok = 0;
+                    }
+                    $tunggakan_jasa = $target_jasa - $sum_jasa;
+                    if ($tunggakan_jasa < 0) {
+                        $tunggakan_jasa = 0;
+                    }
+                    
+                    if ($pinj_i->tgl_lunas <= $tgl_kondisi && $pinj_i->status == 'L') {
+                        $tunggakan_pokok = 0;
+                        $tunggakan_jasa = 0;
+                        $saldo_pokok = 0;
+                        $saldo_jasa = 0;
+                    } elseif ($pinj_i->tgl_lunas <= $tgl_kondisi && $pinj_i->status == 'R') {
+                        $tunggakan_pokok = 0;
+                        $tunggakan_jasa = 0;
+                        $saldo_pokok = 0;
+                        $saldo_jasa = 0;
+                    } elseif ($pinj_i->tgl_lunas <= $tgl_kondisi && $pinj_i->status == 'H') {
+                        $tunggakan_pokok = 0;
+                        $tunggakan_jasa = 0;
+                        $saldo_pokok = 0;
+                        $saldo_jasa = 0;
                     }
                     
                     // Real bulan ini dari withSum yang sudah ada
                     $real_pokok_bulan_ini = $pinj_i->real_i_sum_realisasi_pokok ?? 0;
                     $real_jasa_bulan_ini = $pinj_i->real_i_sum_realisasi_jasa ?? 0;
                     
+                    // Real bulan lalu = sum s.d. sekarang - real bulan ini
+                    $real_bl_pokok = $sum_pokok - $real_pokok_bulan_ini;
+                    $real_bl_jasa = $sum_jasa - $real_jasa_bulan_ini;
+                    
+                    // Akumulasi ke desa
+                    $desa_data[$kd]['alokasi'] += $pinj_i->alokasi;
+                    $desa_data[$kd]['target_pokok'] += $target_pokok;
+                    $desa_data[$kd]['target_jasa'] += $target_jasa;
+                    $desa_data[$kd]['real_bl_pokok'] += $real_bl_pokok;
+                    $desa_data[$kd]['real_bl_jasa'] += $real_bl_jasa;
                     $desa_data[$kd]['real_pokok'] += $real_pokok_bulan_ini;
                     $desa_data[$kd]['real_jasa'] += $real_jasa_bulan_ini;
-                    
-                    // Hitung real s.d. bulan lalu dari saldo
-                    if ($pinj_i->saldo) {
-                        $sum_pokok_sd_sekarang = $pinj_i->saldo->sum_pokok ?? 0;
-                        $sum_jasa_sd_sekarang = $pinj_i->saldo->sum_jasa ?? 0;
-                        
-                        // Real bulan lalu = sum s.d. sekarang - real bulan ini
-                        $real_bl_pokok = $sum_pokok_sd_sekarang - $real_pokok_bulan_ini;
-                        $real_bl_jasa = $sum_jasa_sd_sekarang - $real_jasa_bulan_ini;
-                        
-                        $desa_data[$kd]['real_bl_pokok'] += $real_bl_pokok;
-                        $desa_data[$kd]['real_bl_jasa'] += $real_bl_jasa;
-                        
-                        $desa_data[$kd]['saldo_pokok'] += $pinj_i->saldo->saldo_pokok;
-                        $desa_data[$kd]['saldo_jasa'] += $pinj_i->saldo->saldo_jasa;
-                    }
+                    $desa_data[$kd]['saldo_pokok'] += $saldo_pokok;
+                    $desa_data[$kd]['saldo_jasa'] += $saldo_jasa;
+                    $desa_data[$kd]['tunggakan_pokok'] += $tunggakan_pokok;
+                    $desa_data[$kd]['tunggakan_jasa'] += $tunggakan_jasa;
                 }
                 
-                // Hitung real_bi dan tunggakan untuk setiap desa
+                // Akumulasi ke total
                 foreach ($desa_data as $kd => &$data) {
+                    // Hitung real_bi dari akumulasi
                     $data['real_bi_pokok'] = $data['real_bl_pokok'] + $data['real_pokok'];
                     $data['real_bi_jasa'] = $data['real_bl_jasa'] + $data['real_jasa'];
-                    
-                    $data['tunggakan_pokok'] = $data['target_pokok'] - $data['real_bi_pokok'];
-                    if ($data['tunggakan_pokok'] < 0) {
-                        $data['tunggakan_pokok'] = 0;
-                    }
-                    
-                    $data['tunggakan_jasa'] = $data['target_jasa'] - $data['real_bi_jasa'];
-                    if ($data['tunggakan_jasa'] < 0) {
-                        $data['tunggakan_jasa'] = 0;
-                    }
                     
                     // Akumulasi ke total
                     $t_alokasi += $data['alokasi'];
