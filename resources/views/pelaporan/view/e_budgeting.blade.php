@@ -126,6 +126,9 @@
                                 $total_realisasi = 0;
 
                                 $kom_realisasi = 0;
+                                
+                                // PERBAIKAN: Untuk rekap tahunan, gunakan logika akumulasi yang berbeda
+                                $is_rekap_tahunan = count($bulan_tampil) == 0;
                             @endphp
 
                             <tr style="background: {{ $bg }};">
@@ -133,33 +136,53 @@
 
                                 @foreach ($rek->kom_saldo as $saldo)
                                     @php
-                                        if ($bulan_ini != 0 && $sub!=12) {
-                                            $realisasi_bulan_lalu = $saldo_lalu;
-                                        }
-
-                                        $bulan_ini = $saldo->bulan;
-                                        $saldo_realisasi = floatval($saldo->kredit) - floatval($saldo->debit);
-                                        if ($rek->lev1 == 5) {
-                                            $saldo_realisasi = floatval($saldo->debit) - floatval($saldo->kredit);
-                                        }
-
-                                        $saldo_rencana = 0;
-                                        if ($saldo->eb) {
-                                            $saldo_rencana = $saldo->eb->jumlah;
-                                        }
-                                         
-                                        if ($saldo->bulan <= $akhir) {
+                                        // PERBAIKAN: Logika perhitungan untuk rekap tahunan dan triwulan
+                                        if ($is_rekap_tahunan) {
+                                            // Untuk rekap tahunan, ambil nilai kumulatif bulan terakhir (Desember)
+                                            $saldo_rencana = 0;
+                                            if ($saldo->eb) {
+                                                $saldo_rencana = $saldo->eb->jumlah;
+                                            }
+                                            
                                             $total_rencana += $saldo_rencana;
-                                            $kom_rencana_bulan_lalu += $saldo_rencana;
-                                        }
-                                        $saldo_lalu = $saldo_realisasi;
-                                        $saldo_realisasi -= $realisasi_bulan_lalu;
+                                            
+                                            // Jika ini bulan terakhir (Desember = 12), ambil nilai kumulatifnya
+                                            if ($saldo->bulan == 12) {
+                                                $total_realisasi = floatval($saldo->kredit) - floatval($saldo->debit);
+                                                if ($rek->lev1 == 5) {
+                                                    $total_realisasi = floatval($saldo->debit) - floatval($saldo->kredit);
+                                                }
+                                            }
+                                        } else {
+                                            // Untuk triwulan, hitung selisih dari bulan sebelumnya
+                                            if ($bulan_ini != 0) {
+                                                $realisasi_bulan_lalu = $saldo_lalu;
+                                            }
 
-                                        if (in_array($saldo->bulan, $bulan_hitung)) {
-                                            $rencana[$saldo->bulan] += $saldo_rencana;
-                                            $realisasi[$saldo->bulan] += $saldo_realisasi;
+                                            $bulan_ini = $saldo->bulan;
+                                            $saldo_realisasi = floatval($saldo->kredit) - floatval($saldo->debit);
+                                            if ($rek->lev1 == 5) {
+                                                $saldo_realisasi = floatval($saldo->debit) - floatval($saldo->kredit);
+                                            }
 
-                                            $total_realisasi += $saldo_realisasi;
+                                            $saldo_rencana = 0;
+                                            if ($saldo->eb) {
+                                                $saldo_rencana = $saldo->eb->jumlah;
+                                            }
+                                             
+                                            if ($saldo->bulan <= $akhir) {
+                                                $total_rencana += $saldo_rencana;
+                                                $kom_rencana_bulan_lalu += $saldo_rencana;
+                                            }
+                                            $saldo_lalu = $saldo_realisasi;
+                                            $saldo_realisasi -= $realisasi_bulan_lalu;
+
+                                            if (in_array($saldo->bulan, $bulan_hitung)) {
+                                                $rencana[$saldo->bulan] += $saldo_rencana;
+                                                $realisasi[$saldo->bulan] += $saldo_realisasi;
+
+                                                $total_realisasi += $saldo_realisasi;
+                                            }
                                         }
                                     @endphp
 
@@ -187,36 +210,67 @@
                                     @endif
                                 @endforeach
 
-                                {{-- @php
-                                dd($total_realisasi, $kom_realisasi, $bulan_hitung);
-                            @endphp --}}
                                 <td class="t l b" align="right">
                                     {{ number_format($total_rencana, 2) }}
                                 </td>
                                 <td class="t l b r" align="right">
-                                    {{ number_format($total_realisasi + $kom_realisasi, 2) }}
+                                    @if ($is_rekap_tahunan)
+                                        {{ number_format($total_realisasi, 2) }}
+                                    @else
+                                        {{ number_format($total_realisasi + $kom_realisasi, 2) }}
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
                     @endforeach
                 @endforeach
                 @php
-                    foreach ($rencana as $i => $val) {
-                        if ($lev1->lev1 == 4) {
-                            $rencana_pendapatan[$i] += $rencana[$i];
-                            $realisasi_pendapatan[$i] += $realisasi[$i];
-                        } else {
-                            $rencana_beban[$i] += $rencana[$i];
-                            $realisasi_beban[$i] += $realisasi[$i];
+                    // Hitung total untuk akumulasi pendapatan dan beban
+                    $total_realisasi_akun1 = 0;
+                    
+                    if ($is_rekap_tahunan) {
+                        // Untuk rekap tahunan, ambil total realisasi dari setiap rekening
+                        foreach ($lev1->akun2 as $lev2) {
+                            foreach ($lev2->akun3 as $lev3) {
+                                foreach ($lev3->rek as $rek) {
+                                    foreach ($rek->kom_saldo as $saldo) {
+                                        if ($saldo->bulan == 12) {
+                                            $saldo_realisasi = floatval($saldo->kredit) - floatval($saldo->debit);
+                                            if ($rek->lev1 == 5) {
+                                                $saldo_realisasi = floatval($saldo->debit) - floatval($saldo->kredit);
+                                            }
+                                            $total_realisasi_akun1 += $saldo_realisasi;
+                                        }
+                                    }
+                                }
+                            }
                         }
-                    }
-
-                    if ($lev1->lev1 == 4) {
-                        $kom_realisasi_pendapatan += $kom_realisasi_bulan_lalu;
-                        $kom_rencana_pendapatan += $kom_rencana_bulan_lalu;
+                        
+                        if ($lev1->lev1 == 4) {
+                            $kom_realisasi_pendapatan += $total_realisasi_akun1;
+                            $kom_rencana_pendapatan += $kom_rencana_bulan_lalu;
+                        } else {
+                            $kom_realisasi_beban += $total_realisasi_akun1;
+                            $kom_rencana_beban += $kom_rencana_bulan_lalu;
+                        }
                     } else {
-                        $kom_realisasi_beban += $kom_realisasi_bulan_lalu;
-                        $kom_rencana_beban += $kom_rencana_bulan_lalu;
+                        foreach ($rencana as $i => $val) {
+                            if ($lev1->lev1 == 4) {
+                                $rencana_pendapatan[$i] += $rencana[$i];
+                                $realisasi_pendapatan[$i] += $realisasi[$i];
+                            } else {
+                                $rencana_beban[$i] += $rencana[$i];
+                                $realisasi_beban[$i] += $realisasi[$i];
+                            }
+                        }
+
+                        if ($lev1->lev1 == 4) {
+                            $kom_realisasi_pendapatan += $kom_realisasi_bulan_lalu;
+                            $kom_rencana_pendapatan += $kom_rencana_bulan_lalu;
+                        } else {
+                            $kom_realisasi_beban += $kom_realisasi_bulan_lalu;
+                            $kom_rencana_beban += $kom_rencana_bulan_lalu;
+                        }
                     }
 
                     $kom_realisasi_akun1 = 0;
@@ -242,7 +296,11 @@
                         {{ number_format($kom_rencana_bulan_lalu, 2) }}
                     </td>
                     <td align="right" class="t l b r">
-                        {{ number_format($kom_realisasi_bulan_lalu + $kom_realisasi_akun1, 2) }}
+                        @if ($is_rekap_tahunan)
+                            {{ number_format($total_realisasi_akun1, 2) }}
+                        @else
+                            {{ number_format($kom_realisasi_bulan_lalu + $kom_realisasi_akun1, 2) }}
+                        @endif
                     </td>
                 </tr>
             @endforeach
@@ -289,7 +347,7 @@
                                 {{ number_format($kom_rencana_pendapatan - $kom_rencana_beban, 2) }}
                             </th>
                             <th width="8%" class="t l b r" align="right">
-                                {{ number_format($kom_realisasi_pendapatan - $kom_realisasi_beban + ($surplus_realisasi_pendapatan - $surplus_realisasi_beban), 2) }}
+                                {{ number_format($kom_realisasi_pendapatan - $kom_realisasi_beban, 2) }}
                             </th>
                         </tr>
                     </table>
