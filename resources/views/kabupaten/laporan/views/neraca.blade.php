@@ -10,7 +10,7 @@
         <tr>
             <td align="center">
                 <div style="font-size: 18px;">
-                    <b>NERACA BUMDESMA Lkd</b>
+                    <b>NERACA</b>
                 </div>
                 <div style="font-size: 18px;">
                     <b>REKAP KABUPATEN {{ strtoupper($kab->nama_kab) }}</b>

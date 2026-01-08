@@ -243,7 +243,7 @@
 
             Swal.fire({
                 title: 'Aktivasi Whatsapp',
-                text: 'Scan Whatsapp aplikasi SIDBM.',
+                text: 'Scan Whatsapp aplikasi SIUPK.',
                 showCancelButton: true,
                 confirmButtonText: 'Lanjutkan',
                 cancelButtonText: 'Batal',
@@ -275,7 +275,7 @@
 
             Swal.fire({
                 title: 'Hapus Whatsapp',
-                text: 'Hapus koneksi whatsapp SIDBM.',
+                text: 'Hapus koneksi whatsapp SIUPK.',
                 showCancelButton: true,
                 confirmButtonText: 'Hapus',
                 cancelButtonText: 'Batal',

@@ -40,7 +40,7 @@
 <td style="text-align: center; width: 33.3216%;">Kadis PMD</td>
 <td style="text-align: center; width: 21.0508%;">&nbsp;</td>
 <td style="text-align: center; width: 22.6388%;">Kabid .......................</td>
-<td style="text-align: center; width: 22.9536%;">Ketua Forkom Bumdesma</td>
+<td style="text-align: center; width: 22.9536%;">Ketua Forkom</td>
 </tr>
 <tr>
 <td style="text-align: center; width: 33.3216%;">&nbsp;</td>
