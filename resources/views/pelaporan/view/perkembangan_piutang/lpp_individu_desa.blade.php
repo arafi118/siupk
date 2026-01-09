@@ -33,6 +33,7 @@
             $t_saldo_jasa = 0;
             $t_tunggakan_pokok = 0;
             $t_tunggakan_jasa = 0;
+                        $nomor = 1;
         @endphp
         @if ($jpp->nama_jpp != 'SPP')
             <div class="break"></div>
@@ -110,9 +111,13 @@
                             }
                         @endphp
                         <tr style="font-weight: bold;">
-                            <td class="t l b" colspan="4" align="left" height="15">
-                                {{ $pinj_i->kode_desa }}.
-                            {{ $pinj_i->nama_desa }}
+                            <td class="t l b" align="right">{{ $nomor}}
+                            @php
+                            $nomor++
+                            @endphp
+                            </td>
+                            <td class="t l b" colspan="3" align="left" height="15">
+                                {{$nama_desa}}
                             </td>
                             <td class="t l b" align="right">{{ number_format($j_alokasi) }}</td>
                             <td class="t l b" align="right">&nbsp;</td>
@@ -134,7 +139,6 @@
 
 
                     @php
-                        $nomor = 1;
                         $j_alokasi = 0;
                         $j_target_pokok = 0;
                         $j_target_jasa = 0;
@@ -257,8 +261,8 @@
             @endphp
             @if (count($kd_desa) > 0)
                 <tr style="font-weight: bold;">
-                    <td class="t l b" colspan="4" align="left" height="15">
-                        {{ $pinj_i->kode_desa }}.
+                    <td class="t l b" align="right">{{ $nomor}}</td>
+                    <td class="t l b" colspan="3" align="left" height="15">
                             {{ $pinj_i->nama_desa }}
                     </td>
                     <td class="t l b" align="right">{{ number_format($j_alokasi) }}</td>
