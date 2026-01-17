@@ -59,33 +59,31 @@
             margin-right: 40px;
         }
     </style>
-
     @foreach ($jenis_pp as $jpp)
         @php
-            // Skip jika tidak ada pinjaman individu
             if ($jpp->pinjaman_individu->isEmpty()) {
                 continue;
             }
-
-            // Inisialisasi variabel total
+        @endphp
+        @php
+                        $nomor = 0;
+            $kd_desa = [];
             $t_alokasi = 0;
             $t_saldo = 0;
             $t_tunggakan_pokok = 0;
             $t_tunggakan_jasa = 0;
+            
+            // Inisialisasi total kolek secara dinamis
             $t_kolek = array_fill(0, count($kolekData), 0);
         @endphp
-
-        {{-- Page break untuk jenis pinjaman selain SPP --}}
         @if ($jpp->nama_jpp != 'SPP')
             <div class="break"></div>
         @endif
-
-        {{-- Header Tabel --}}
         <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
             <tr>
                 <td colspan="3" align="center">
                     <div style="font-size: 20px;">
-                        <b>DAFTAR KOLEKTIBILITAS INDIVIDU {{ strtoupper($jpp->nama_jpp) }} PER DESA</b>
+                        <b>DAFTAR KOLEKTIBILITAS INDIVIDU {{ strtoupper($jpp->nama_jpp) }}</b>
                     </div>
                     <div style="font-size: 16px;">
                         <b>{{ strtoupper($sub_judul) }}</b>
@@ -97,12 +95,10 @@
             </tr>
         </table>
 
-        {{-- Tabel Data Utama --}}
-        <table border="1" width="100%" cellspacing="0" cellpadding="0" style="font-size: 8px; table-layout: fixed;">
-            {{-- Header Tabel --}}
-            <tr style="background: rgb(230, 230, 230); font-weight: bold;">
+        <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px; table-layout: fixed;">
+            <tr>
                 <th class="t l b" width="2%">No</th>
-                <th class="t l b" width="23%">Nama Desa</th>
+                <th class="t l b" width="23%">Nama - Loan ID</th>
                 <th class="t l b" width="10%">Saldo</th>
                 <th class="t l b" width="10%">Tunggakan</th>
                 @foreach ($activeKolek as $index => $kolek)
@@ -110,31 +106,53 @@
                 @endforeach
             </tr>
 
-            @php
-                $desa_data = [];
-                $nomor_desa = 1;
-                
-                // Agregasi data per desa
-                foreach ($jpp->pinjaman_individu as $pinkel) {
-                    $kd = $pinkel->kd_desa;
-                    
-                    if (!isset($desa_data[$kd])) {
-                        $desa_data[$kd] = [
-                            'nama_desa' => $pinkel->sebutan_desa . ' ' . $pinkel->nama_desa,
-                            'alokasi' => 0,
-                            'saldo' => 0,
-                            'tunggakan_pokok' => 0,
-                            'tunggakan_jasa' => 0,
-                            'kolek' => array_fill(0, count($kolekData), 0),
-                        ];
-                    }
-                    
-                    // Hitung data per pinjaman
+            @foreach ($jpp->pinjaman_individu as $pinkel)
+                @php
+                    $kd_desa[] = $pinkel->kd_desa;
+                    $desa = $pinkel->kd_desa;
+                @endphp
+                @if (array_count_values($kd_desa)[$pinkel->kd_desa] <= '1')
+                    @if ($section != $desa && count($kd_desa) > 1)
+                        @php
+                            $j_pross = $j_saldo / $j_alokasi;
+                            $t_alokasi += $j_alokasi;
+                            $t_saldo += $j_saldo;
+                            $t_tunggakan_pokok += $j_tunggakan_pokok;
+                            $t_tunggakan_jasa += $j_tunggakan_jasa;
+                            
+                            foreach ($j_kolek as $idx => $val) {
+                                $t_kolek[$idx] += $val;
+                            }
+                        @endphp
+                        <tr style="font-weight: bold;">
+                            <td class="t l b" align="left" colspan="2">{{$nomor}} {{ $nama_desa }}</td>
+                            <td class="t l b" align="right">{{ number_format($j_saldo) }}</td>
+                            <td class="t l b" align="right">{{ number_format($j_tunggakan_pokok) }}</td>
+                            @foreach ($activeKolek as $idx => $kolek)
+                                <td class="t l b {{ $loop->last ? 'r' : '' }}" align="right">
+                                    {{ number_format($j_kolek[$idx] ?? 0) }}
+                                </td>
+                            @endforeach
+                        </tr>
+                    @endif
+
+                    @php
+                    $nomor ++;
+                        $j_alokasi = 0;
+                        $j_saldo = 0;
+                        $j_tunggakan_pokok = 0;
+                        $j_tunggakan_jasa = 0;
+                        $j_kolek = array_fill(0, count($kolekData), 0);
+                        $section = $pinkel->kd_desa;
+                        $nama_desa = $pinkel->sebutan_desa . ' ' . $pinkel->nama_desa;
+                    @endphp
+                @endif
+
+                @php
                     $sum_pokok = 0;
                     $sum_jasa = 0;
                     $saldo_pokok = $pinkel->alokasi;
                     $saldo_jasa = $pinkel->pros_jasa == 0 ? 0 : $pinkel->alokasi * ($pinkel->pros_jasa / 100);
-                    
                     if ($pinkel->saldo) {
                         $sum_pokok = $pinkel->saldo->sum_pokok;
                         $sum_jasa = $pinkel->saldo->sum_jasa;
@@ -155,7 +173,6 @@
                     $wajib_pokok = 0;
                     $wajib_jasa = 0;
                     $angsuran_ke = 0;
-                    
                     if ($pinkel->target) {
                         $target_pokok = $pinkel->target->target_pokok;
                         $target_jasa = $pinkel->target->target_jasa;
@@ -168,11 +185,12 @@
                     if ($tunggakan_pokok < 0) {
                         $tunggakan_pokok = 0;
                     }
-                    
                     $tunggakan_jasa = $target_jasa - $sum_jasa;
                     if ($tunggakan_jasa < 0) {
                         $tunggakan_jasa = 0;
                     }
+
+                    $pross = $saldo_pokok == 0 ? 0 : $saldo_pokok / $pinkel->alokasi;
 
                     if ($pinkel->tgl_lunas <= $tgl_kondisi && in_array($pinkel->status, ['L', 'R', 'H'])) {
                         $tunggakan_pokok = 0;
@@ -181,7 +199,6 @@
                         $saldo_jasa = 0;
                     }
 
-                    // Hitung kolek bulan
                     $tgl_cair = explode('-', $pinkel->tgl_cair);
                     $th_cair = $tgl_cair[0];
                     $bl_cair = $tgl_cair[1];
@@ -195,104 +212,119 @@
                         $_kolek = $tunggakan_pokok / $wajib_pokok;
                     }
                     
+                    // Gunakan ceil seperti kode asli
                     $kolek_bulan = ceil($_kolek + ($selisih - $angsuran_ke));
 
-                    // Tentukan tingkat kolek
+                    // Tentukan tingkat kolek berdasarkan konfigurasi database
                     $tingkat_kolek = getTingkatKolek($kolek_bulan, $kolekData);
                     
-                    // Akumulasi data ke desa
-                    $desa_data[$kd]['alokasi'] += $pinkel->alokasi;
-                    $desa_data[$kd]['saldo'] += $saldo_pokok;
-                    $desa_data[$kd]['tunggakan_pokok'] += $tunggakan_pokok;
-                    $desa_data[$kd]['tunggakan_jasa'] += $tunggakan_jasa;
-                    $desa_data[$kd]['kolek'][$tingkat_kolek] += $saldo_pokok;
-                }
-                
-                // Akumulasi ke total
-                foreach ($desa_data as $kd => &$data) {
-                    $t_alokasi += $data['alokasi'];
-                    $t_saldo += $data['saldo'];
-                    $t_tunggakan_pokok += $data['tunggakan_pokok'];
-                    $t_tunggakan_jasa += $data['tunggakan_jasa'];
+                    // Inisialisasi array kolek untuk baris ini
+                    $row_kolek = array_fill(0, count($kolekData), 0);
+                    $row_kolek[$tingkat_kolek] = $saldo_pokok;
+                @endphp
+
+
+                @php
+                    $j_alokasi += $pinkel->alokasi;
+                    $j_saldo += $saldo_pokok;
+                    $j_tunggakan_pokok += $tunggakan_pokok;
+                    $j_tunggakan_jasa += $tunggakan_jasa;
                     
-                    foreach ($data['kolek'] as $idx => $val) {
+                    foreach ($row_kolek as $idx => $val) {
+                        $j_kolek[$idx] += $val;
+                    }
+                @endphp
+            @endforeach
+
+            @if (count($kd_desa) > 0)
+                @php
+                    $j_pross = $j_saldo / $j_alokasi;
+                    $t_alokasi += $j_alokasi;
+                    $t_saldo += $j_saldo;
+                    $t_tunggakan_pokok += $j_tunggakan_pokok;
+                    $t_tunggakan_jasa += $j_tunggakan_jasa;
+                    
+                    foreach ($j_kolek as $idx => $val) {
                         $t_kolek[$idx] += $val;
                     }
-                }
-            @endphp
-
-            {{-- Tampilkan Data Per Desa --}}
-            @foreach ($desa_data as $kd => $data)
-                <tr>
-                    <td class="t l b" align="center" height="15">{{ $nomor_desa++ }}</td>
-                    <td class="t l b" align="left">{{ $data['nama_desa'] }}</td>
-                    <td class="t l b" align="right">{{ number_format($data['saldo']) }}</td>
-                    <td class="t l b" align="right">{{ number_format($data['tunggakan_pokok']) }}</td>
+                @endphp
+                <tr style="font-weight: bold;">
+                    <td class="t l b" align="left" colspan="2">{{$nomor}}. {{ $nama_desa }}</td>
+                    <td class="t l b" align="right">{{ number_format($j_saldo) }}</td>
+                    <td class="t l b" align="right">{{ number_format($j_tunggakan_pokok) }}</td>
                     @foreach ($activeKolek as $idx => $kolek)
                         <td class="t l b {{ $loop->last ? 'r' : '' }}" align="right">
-                            {{ number_format($data['kolek'][$idx] ?? 0) }}
+                            {{ number_format($j_kolek[$idx] ?? 0) }}
                         </td>
                     @endforeach
                 </tr>
-            @endforeach
 
-            @php
-                // Hitung total resiko pinjaman
-                $total_resiko = 0;
-                foreach ($activeKolek as $idx => $kolek) {
-                    $prosentase = floatval($kolek['prosentase']);
-                    $total_resiko += ($t_kolek[$idx] * $prosentase) / 100;
-                }
-            @endphp
-
-            {{-- Row Grand Total --}}
-            <tr style="background: rgb(230, 230, 230); font-weight: bold;">
-                <td class="t l b" colspan="2" align="center" height="15">J U M L A H</td>
-                <td class="t l b" align="right">{{ number_format($t_saldo) }}</td>
-                <td class="t l b" align="right">{{ number_format($t_tunggakan_pokok) }}</td>
-                @foreach ($activeKolek as $idx => $kolek)
-                    <td class="t l b {{ $loop->last ? 'r' : '' }}" align="right">
-                        {{ number_format($t_kolek[$idx] ?? 0) }}
-                    </td>
-                @endforeach
-            </tr>
-
-            {{-- Row Resiko Pinjaman Header --}}
-            <tr style="font-weight: bold;">
-                <td class="t l b" rowspan="2" colspan="2" align="center" height="15">Resiko Pinjaman</td>
-                <td class="t l b" colspan="2" align="center">
-                    ({{ implode(' + ', array_map(function($k) { return $k['nama']; }, $activeKolek)) }})
-                </td>
-                @foreach ($activeKolek as $idx => $kolek)
-                    <td class="t l b {{ $loop->last ? 'r' : '' }}" align="center">
-                        {{ $kolek['nama'] }} * {{ $kolek['prosentase'] }}%
-                    </td>
-                @endforeach
-            </tr>
-
-            {{-- Row Resiko Pinjaman Nilai --}}
-            <tr style="font-weight: bold;">
-                <td class="t l b" colspan="2" align="center">
-                    {{ number_format($total_resiko) }}
-                </td>
-                @foreach ($activeKolek as $idx => $kolek)
-                    @php
+                @php
+                    $t_pros = 0;
+                    if ($t_saldo) {
+                        $t_pross = $t_saldo / $t_alokasi;
+                    }
+                    
+                    // Hitung total resiko pinjaman
+                    $total_resiko = 0;
+                    foreach ($activeKolek as $idx => $kolek) {
                         $prosentase = floatval($kolek['prosentase']);
-                        $nilai_resiko = ($t_kolek[$idx] * $prosentase) / 100;
-                    @endphp
-                    <td class="t l b {{ $loop->last ? 'r' : '' }}" align="center">
-                        {{ number_format($nilai_resiko) }}
-                    </td>
-                @endforeach
-            </tr>
+                        $total_resiko += ($t_kolek[$idx] * $prosentase) / 100;
+                    }
+                @endphp
 
-            {{-- Row Tanda Tangan --}}
-            <tr>
-                <td colspan="{{ 4 + count($activeKolek) }}" style="padding: 0px !important;">
-                    <div style="margin-top: 16px;"></div>
-                    {!! json_decode(str_replace('{tanggal}', $tanggal_kondisi, $kec->ttd->tanda_tangan_pelaporan), true) !!}
-                </td>
-            </tr>
+                <tr>
+                    <td colspan="{{ 4 + count($activeKolek) }}" style="padding: 0px !important;">
+                        <table border="0" width="100%" cellspacing="0" cellpadding="0"
+                            style="font-size: 11px; table-layout: fixed;">
+                            <tr style="font-weight: bold;">
+                                <td width="25%" class="t l b" align="center" height="20">J U M L A H</td>
+                                <td width="10%" class="t l b" align="right">{{ number_format($t_saldo) }}</td>
+                                <td width="10%" class="t l b" align="right">
+                                    {{ number_format($t_tunggakan_pokok) }}
+                                </td>
+                                @foreach ($activeKolek as $idx => $kolek)
+                                    <td class="t l b {{ $loop->last ? 'r' : '' }}" align="right">
+                                        {{ number_format($t_kolek[$idx] ?? 0) }}
+                                    </td>
+                                @endforeach
+                            </tr>
+                            <tr style="font-weight: bold;">
+                                <td class="t l b" align="center" rowspan="2" height="20">Resiko Pinjaman</td>
+                                <td class="t l b" colspan="2" align="center">
+                                    ({{ implode(' + ', array_map(function($k) { return $k['nama']; }, $activeKolek)) }})
+                                </td>
+                                @foreach ($activeKolek as $idx => $kolek)
+                                    <td class="t l b {{ $loop->last ? 'r' : '' }}" align="center">
+                                        {{ $kolek['nama'] }} * {{ $kolek['prosentase'] }}%
+                                    </td>
+                                @endforeach
+                            </tr>
+                            <tr>
+                                <td class="t l b" align="center" colspan="2">
+                                    {{ number_format($total_resiko) }}
+                                </td>
+                                @foreach ($activeKolek as $idx => $kolek)
+                                    @php
+                                        $prosentase = floatval($kolek['prosentase']);
+                                        $nilai_resiko = ($t_kolek[$idx] * $prosentase) / 100;
+                                    @endphp
+                                    <td class="t l b {{ $loop->last ? 'r' : '' }}" align="center">
+                                        {{ number_format($nilai_resiko) }}
+                                    </td>
+                                @endforeach
+                            </tr>
+
+                            <tr>
+                                <td colspan="{{ 3 + count($activeKolek) }}">
+                                    <div style="margin-top: 16px;"></div>
+                                    {!! json_decode(str_replace('{tanggal}', $tanggal_kondisi, $kec->ttd->tanda_tangan_pelaporan), true) !!}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            @endif
         </table>
     @endforeach
 @endsection

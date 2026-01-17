@@ -2967,7 +2967,7 @@ class PelaporanController extends Controller
             return $view;
         }
     }
-
+    
     private function kolek_per_desa_individu(array $data)
     {
         $thn = $data['tahun'];
