@@ -1,8 +1,5 @@
 @php
     use App\Utils\Tanggal;
-    $section = 0;
-    $id_pinkel = 0;
-    $empty = false;
 @endphp
 
 @extends('pelaporan.layout.base')
@@ -10,21 +7,45 @@
 @section('content')
     @foreach ($jenis_pp as $jpp)
         @php
-            if ($jpp->pinjaman_kelompok->isEmpty()) {
-                $empty = true;
+            if ($jpp->pinjaman_anggota->isEmpty()) {
                 continue;
             }
 
-            $loan_id = [];
-            $kd_desa = [];
-            $t_pencairan = 0;
+            // Group data by desa -> kelompok -> anggota
+            $grouped_data = [];
+            foreach ($jpp->pinjaman_anggota as $pinj) {
+                $kd_desa = $pinj->kd_desa;
+                $id_pinkel = $pinj->id_pinkel;
+                
+                if (!isset($grouped_data[$kd_desa])) {
+                    $grouped_data[$kd_desa] = [
+                        'info' => [
+                            'kode_desa' => $pinj->kode_desa,
+                            'nama_desa' => $pinj->nama_desa,
+                            'sebutan_desa' => $pinj->sebutan_desa,
+                        ],
+                        'kelompok' => []
+                    ];
+                }
+                
+                if (!isset($grouped_data[$kd_desa]['kelompok'][$id_pinkel])) {
+                    $grouped_data[$kd_desa]['kelompok'][$id_pinkel] = [
+                        'info' => [
+                            'nama_kelompok' => $pinj->nama_kelompok,
+                            'id_pinkel' => $pinj->id_pinkel,
+                        ],
+                        'anggota' => []
+                    ];
+                }
+                
+                $grouped_data[$kd_desa]['kelompok'][$id_pinkel]['anggota'][] = $pinj;
+            }
+
+            $show_break = false;
         @endphp
 
-        @if ($jpp->nama_jpp != 'SPP' && !$empty)
+        @if ($show_break && $jpp->nama_jpp != 'SPP')
             <div class="break"></div>
-            @php
-                $empty = false;
-            @endphp
         @endif
 
         <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 11px;">
@@ -54,117 +75,95 @@
                 <th class="t l b r" width="15%">Alokasi</th>
             </tr>
 
-            @foreach ($jpp->pinjaman_anggota as $pinj)
+            @php
+                $total_keseluruhan = 0;
+                $nomor_desa = 1;
+            @endphp
+
+            @foreach ($grouped_data as $kd_desa => $desa_data)
                 @php
-                    $loan_id[] = $pinj->id_pinkel;
-                    $kd_desa[] = $pinj->kd_desa;
-                    $desa = $pinj->kd_desa;
-                    $id_pinj = $pinj->id_pinkel;
-                    $tampil_jumlah_pemanfaat = true;
+                    $total_desa = 0;
                 @endphp
 
-                @if (array_count_values($kd_desa)[$pinj->kd_desa] <= '1')
-                    @if ($section != $desa && count($kd_desa) > 1)
-                        @if ($id_pinkel != $id_pinj && count($loan_id) > 1)
-                            <tr style="font-weight: bold;">
-                                <td class="t l b" colspan="6">
-                                    Jumlah Alokasi Kelompok {{ $nama_kelompok }}
-                                </td>
-                                <td class="t l b r" align="right">
-                                    {{ number_format($j_alokasi_kelompok) }}
-                                </td>
-                            </tr>
-                            @php
-                                $tampil_jumlah_pemanfaat = false;
-                            @endphp
-                        @endif
-
-                        @php
-                            $t_pencairan += $j_pencairan;
-                        @endphp
-                        <tr style="font-weight: bold;">
-                            <td class="t l b" colspan="6">Jumlah {{ $nama_desa }}</td>
-                            <td class="t l b r" align="right">{{ number_format($j_pencairan) }}</td>
-                        </tr>
-                    @endif
-
-                    <tr style="font-weight: bold;">
-                        <td class="t l b r" colspan="7" align="left">
-                            {{ $pinj->kode_desa }}. {{ $pinj->nama_desa }}
-                        </td>
-                    </tr>
-
-                    @php
-                        $nomor = 1;
-                        $section = $pinj->kd_desa;
-                        $nama_desa = $pinj->sebutan_desa . ' ' . $pinj->nama_desa;
-                        $j_pengajuan = 0;
-                        $j_pencairan = 0;
-                    @endphp
-                @endif
-
-                @if (array_count_values($loan_id)[$pinj->id_pinkel] <= '1')
-                    @if ($id_pinkel != $id_pinj && count($loan_id) > 1 && $tampil_jumlah_pemanfaat)
-                        <tr style="font-weight: bold;">
-                            <td class="t l b" colspan="6">
-                                Jumlah Alokasi Kelompok {{ $nama_kelompok }}
-                            </td>
-                            <td class="t l b r" align="right">
-                                {{ number_format($j_alokasi_kelompok) }}
-                            </td>
-                        </tr>
-                    @endif
-
-                    <tr style="font-weight: bold;">
-                        <td class="t l b r" colspan="7" align="left">
-                            {{ $nomor++ }}. {{ $pinj->nama_kelompok }} - Loan ID. {{ $pinj->id_pinkel }}
-                        </td>
-                    </tr>
-
-                    @php
-                        $nom = 1;
-                        $id_pinkel = $pinj->id_pinkel;
-                        $nama_kelompok = $pinj->nama_kelompok;
-                        $j_alokasi_kelompok = 0;
-                    @endphp
-                @endif
-
-                <tr>
-                    <td class="t l b" align="center">{{ $nom++ }}</td>
-                    <td class="t l b" align="center">{{ $pinj->nik }}</td>
-                    <td class="t l b" align="center">{{ $pinj->kk }}</td>
-                    <td class="t l b">{{ $pinj->namadepan }}</td>
-                    <td class="t l b">
-                        {{ $pinj->alamat }} {{ $pinj->sebutan_desa }} {{ $pinj->nama_desa }}
+                {{-- Header Desa --}}
+                <tr style="font-weight: bold;">
+                    <td class="t l b r" colspan="7" align="left">
+                        {{ $desa_data['info']['kode_desa'] }}. {{ $desa_data['info']['nama_desa'] }}
                     </td>
-                    <td class="t l b" align="center">{{ Tanggal::tglIndo($pinj->tgl_cair) }}</td>
-                    <td class="t l b r" align="right">{{ number_format($pinj->alokasi) }}</td>
                 </tr>
 
                 @php
-                    $j_pencairan += $pinj->alokasi;
-                    $j_alokasi_kelompok += $pinj->alokasi;
+                    $nomor_kelompok = 1;
+                @endphp
+
+                @foreach ($desa_data['kelompok'] as $id_pinkel => $kelompok_data)
+                    @php
+                        $total_kelompok = 0;
+                    @endphp
+
+                    {{-- Header Kelompok --}}
+                    <tr style="font-weight: bold;">
+                        <td class="t l b r" colspan="7" align="left">
+                            {{ $nomor_kelompok }}. {{ $kelompok_data['info']['nama_kelompok'] }} - Loan ID. {{ $kelompok_data['info']['id_pinkel'] }}
+                        </td>
+                    </tr>
+
+                    @php
+                        $nomor_anggota = 1;
+                    @endphp
+
+                    {{-- Data Anggota --}}
+                    @foreach ($kelompok_data['anggota'] as $anggota)
+                        <tr>
+                            <td class="t l b" align="center">{{ $nomor_anggota }}</td>
+                            <td class="t l b" align="center">{{ $anggota->nik }}</td>
+                            <td class="t l b" align="center">{{ $anggota->kk }}</td>
+                            <td class="t l b">{{ $anggota->namadepan }}</td>
+                            <td class="t l b">
+                                {{ $anggota->alamat }} {{ $anggota->sebutan_desa }} {{ $anggota->nama_desa }}
+                            </td>
+                            <td class="t l b" align="center">{{ Tanggal::tglIndo($anggota->tgl_cair) }}</td>
+                            <td class="t l b r" align="right">{{ number_format($anggota->alokasi) }}</td>
+                        </tr>
+
+                        @php
+                            $total_kelompok += $anggota->alokasi;
+                            $nomor_anggota++;
+                        @endphp
+                    @endforeach
+
+                    {{-- Total Kelompok --}}
+                    <tr style="font-weight: bold;">
+                        <td class="t l b" colspan="6">
+                            Jumlah Alokasi Kelompok {{ $kelompok_data['info']['nama_kelompok'] }}
+                        </td>
+                        <td class="t l b r" align="right">
+                            {{ number_format($total_kelompok) }}
+                        </td>
+                    </tr>
+
+                    @php
+                        $total_desa += $total_kelompok;
+                        $nomor_kelompok++;
+                    @endphp
+                @endforeach
+
+                {{-- Total Desa --}}
+                <tr style="font-weight: bold;">
+                    <td class="t l b" colspan="6">
+                        Jumlah {{ $desa_data['info']['sebutan_desa'] }} {{ $desa_data['info']['nama_desa'] }}
+                    </td>
+                    <td class="t l b r" align="right">{{ number_format($total_desa) }}</td>
+                </tr>
+
+                @php
+                    $total_keseluruhan += $total_desa;
+                    $nomor_desa++;
                 @endphp
             @endforeach
 
-            @if (count($kd_desa) > 0)
-                <tr style="font-weight: bold;">
-                    <td class="t l b" colspan="6">
-                        Jumlah Alokasi Kelompok {{ $nama_kelompok }}
-                    </td>
-                    <td class="t l b r" align="right">
-                        {{ number_format($j_alokasi_kelompok) }}
-                    </td>
-                </tr>
-
-                @php
-                    $t_pencairan += $j_pencairan;
-                @endphp
-                <tr style="font-weight: bold;">
-                    <td class="t l b" colspan="6">Jumlah {{ $nama_desa }}</td>
-                    <td class="t l b r" align="right">{{ number_format($j_pencairan) }}
-                </tr>
-
+            {{-- Grand Total --}}
+            @if (count($grouped_data) > 0)
                 <tr>
                     <td colspan="7" style="padding: 0px !important;">
                         <table class="p" border="0" width="100%" cellspacing="0" cellpadding="0"
@@ -173,7 +172,7 @@
                                 <td height="15" width="85%">
                                     J U M L A H
                                 </td>
-                                <td align="right" width="15%">{{ number_format($t_pencairan) }}
+                                <td align="right" width="15%">{{ number_format($total_keseluruhan) }}</td>
                             </tr>
                         </table>
 
@@ -183,5 +182,9 @@
                 </tr>
             @endif
         </table>
+
+        @php
+            $show_break = true;
+        @endphp
     @endforeach
 @endsection
