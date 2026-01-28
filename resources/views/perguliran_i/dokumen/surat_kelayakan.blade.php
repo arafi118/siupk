@@ -21,13 +21,13 @@
             <td width="50">Nomor</td>
             <td width="10" align="center">:</td>
             <td colspan="2">
-                ______ /UPK/{{ Tanggal::tglRomawi($pinkel->tgl_dana) }} </td>
+                ______ /UPK/{{ Tanggal::tglRomawi($pinkel->tgl_tunggu) }} </td>
         </tr>
         <tr>
             <td>Tanggal</td>
             <td align="center">:</td>
             <td colspan="2">
-                {{ Tanggal::tglLatin($pinkel->tgl_dana) }} </td>
+                {{ Tanggal::tglLatin($pinkel->tgl_tunggu) }} </td>
         </tr>
         <tr>
             <td>Sifat</td>
@@ -70,7 +70,7 @@
                 <div>Dengan hormat,</div>
                 <div style="text-align: justify;">
                     Dengan ini memberitahukan bahwa keputusan rapat pendanaan Perguliran {{ $kec->nama_lembaga_sort }}
-                    Tanggal {{ Tanggal::tglLatin($pinkel->tgl_dana) }}. yang merupakan tindak lanjut hasil verifikasi atas
+                    Tanggal {{ Tanggal::tglLatin($pinkel->tgl_tunggu) }}. yang merupakan tindak lanjut hasil verifikasi atas
                     Proposal Permohonan Kredit dari ;
                 </div>
                 <table>
@@ -125,7 +125,7 @@
         <tr>
             <td width="50%">&nbsp;</td>
             <td width="50%" align="center">
-                {{ $kec->nama_kec }}, {{ Tanggal::tglLatin($pinkel->tgl_dana) }}
+                {{ $kec->nama_kec }}, {{ Tanggal::tglLatin($pinkel->tgl_tunggu) }}
             </td>
         </tr>
         <tr>
