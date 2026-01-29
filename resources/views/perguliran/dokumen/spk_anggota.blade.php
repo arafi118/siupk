@@ -33,7 +33,7 @@ $redaksi_spk = str_replace('<ul>', '', str_replace('</ul>', '', $redaksi_spk));
                 <b>SURAT PERJANJIAN KREDIT (SPK)</b>
             </div>
             <div style="font-size: 14px;">
-                Nomor: {{ $pinkel->spk_no }}
+                Nomor: {{ $pinkel->pinkel->spk_no }}
             </div>
             <div style="font-size: 14px;">
                 Tanggal: {{ Tanggal::tglLatin($pinkel->tgl_cair) }}
@@ -165,8 +165,8 @@ $redaksi_spk = str_replace('<ul>', '', str_replace('</ul>', '', $redaksi_spk));
             <li>
                 Kelompok menyepakati akan melakukan angsuran kredit dalam jangka waktu {{ $pinkel->jangka }}
                 ({{ $keuangan->terbilang($pinkel->jangka) }}) bulan dengan cara membayar angsuran Pokok
-                {{ $pinkel->sis_pokok->nama_sistem }} ({{ $pinkel->sis_pokok->deskripsi_sistem }}) dan angsuran jasa
-                {{ $pinkel->sis_jasa->nama_sistem }} ({{ $pinkel->sis_jasa->deskripsi_sistem }}) sebagaimana jadwal
+                {{ $pinkel->sis_pokok->nama_sistem ?? ''}} ({{ $pinkel->sis_pokok->deskripsi_sistem ?? '' }}) dan angsuran jasa
+                {{ $pinkel->sis_jasa->nama_sistem ?? ''}} ({{ $pinkel->sis_jasa->deskripsi_sistem ?? '' }}) sebagaimana jadwal
                 angsuran terlampir yang tidak terpisahkan dari Surat Perjanjian Kredit (SPK).
             </li>
             {!! json_decode($redaksi_spk, true) !!}

@@ -226,7 +226,7 @@
                     Kembalikan Ke Proposal
                 </button>
                 <button type="button" id="Simpan" class="btn btn-github ms-1 btn-sm"
-                    @if (!in_array('perguliran.cairkan', Session::get('tombol', [])))
+                    @if (!in_array('perguliran.cairkan', Session::get('tombol', [])) || $pinj_aktif)
                         disabled
                     @endif
                 >
