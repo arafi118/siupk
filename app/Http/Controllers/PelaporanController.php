@@ -1625,7 +1625,7 @@ class PelaporanController extends Controller
         $thn = $data['tahun'];
         $bln = $data['bulan'];
         $hari = $data['hari'];
-
+        
         if ($bln == '1' && $hari == '1') {
             return $this->CALK_tutup_buku($data);
         }
