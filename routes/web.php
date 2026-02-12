@@ -365,6 +365,10 @@ Route::get('/generate/individu', [GenerateController::class, 'individu']);
 Route::get('/generate/kelompok', [GenerateController::class, 'kelompok']);
 Route::post('/generate/save/{offset?}', [GenerateController::class, 'generate']);
 
+Route::post('/sinkronisasi/kelompok/{id}', [GenerateController::class, 'sinkronisasiKelompok'])->name('sinkronisasi.kelompok');
+Route::post('/sinkronisasi/individu/{id}', [GenerateController::class, 'sinkronisasiIndividu'])->name('sinkronisasi.individu');
+
+
 
 Route::get('/simpanan/register_penduduk', [SimpananController::class, 'register'])->middleware('auth');
 Route::get('/simpanan/cari_nik', [SimpananController::class, 'cariNik'])->middleware('auth');

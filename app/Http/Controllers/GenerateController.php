@@ -75,6 +75,61 @@ class GenerateController extends Controller
         ]);
     }
 
+    public function sinkronisasiKelompok($id)
+    {
+        $pinjamanKelompok = PinjamanKelompok::find($id);
+    
+        if (!$pinjamanKelompok) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data pinjaman tidak ditemukan'
+            ], 404);
+        }
+
+        $request = new Request([
+            'pinjaman' => 'kelompok',
+            'id' => [
+                'operator' => '=',
+                'value' => $id
+            ]
+        ]);
+
+        $this->generate($request, 0);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Sinkronisasi berhasil dilakukan'
+        ]);
+    }
+
+    public function sinkronisasiIndividu($id)
+    {
+        $pinjamanIndividu = PinjamanIndividu::find($id);
+    
+        if (!$pinjamanIndividu) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data pinjaman tidak ditemukan'
+            ], 404);
+        }
+
+        $request = new Request([
+            'pinjaman' => 'individu',
+            'jenis_pinjaman' => 'I',
+            'id' => [
+                'operator' => '=',
+                'value' => $id
+            ]
+        ]);
+
+        $this->generate($request, 0);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Sinkronisasi berhasil dilakukan'
+        ]);
+    }
+
     public function generate(Request $request, $offset = 0)
     {
         $real = [];

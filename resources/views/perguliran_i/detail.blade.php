@@ -176,7 +176,7 @@
     <div id="layout">
 
     </div>
-
+    
     <div class="card mt-3">
         <div class="card-body p-2">
             @if ($perguliran_i->status == 'L' || $perguliran_i->status == 'H')
@@ -191,6 +191,12 @@
             @else
                 <a href="/perguliran_i?status={{ $perguliran_i->status }}"
                     class="btn btn-info float-end btn-sm mb-0">Kembali</a>
+                @if ($perguliran_i->status == 'W' || $perguliran_i->status == 'A')
+                    <button class="btn btn-success btn-sm float-end me-2" 
+                        onclick="sinkronisasiIndividu({{ $perguliran_i->id }})" type="button">
+                        <i class="fa fa-sync"></i> Sinkronisasi
+                    </button>
+                @endif
             @endif
         </div>
     </div>
@@ -784,6 +790,50 @@
 
             open_window(action)
         })
+
+        function sinkronisasiIndividu(id) {
+            Swal.fire({
+                title: 'Konfirmasi Sinkronisasi',
+                text: 'Apakah Anda yakin ingin melakukan sinkronisasi data pinjaman individu ini?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Sinkronisasi!',
+                cancelButtonText: 'Batal',
+                showLoaderOnConfirm: true,
+                preConfirm: () => {
+                    return $.ajax({
+                        url: '/sinkronisasi/individu/' + id,
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            return response;
+                        },
+                        error: function(xhr) {
+                            Swal.showValidationMessage(
+                                'Gagal melakukan sinkronisasi: ' + (xhr.responseJSON?.message || 'Terjadi kesalahan')
+                            );
+                        }
+                    });
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if (result.isConfirmed && result.value.success) {
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: result.value.message,
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        // Reload halaman setelah sukses
+                        location.reload();
+                    });
+                }
+            });
+        }
 
         $(".money").maskMoney();
     </script>

@@ -254,6 +254,12 @@
             @else
                 <a href="/perguliran?status={{ $perguliran->status }}"
                     class="btn btn-info float-end btn-sm mb-0">Kembali</a>
+                @if ($perguliran->status == 'W' || $perguliran->status == 'A')
+                    <button class="btn btn-success btn-sm float-end me-2" 
+                        onclick="sinkronisasiKelompok({{ $perguliran->id }})" type="button">
+                        <i class="fa fa-sync"></i> Sinkronisasi
+                    </button>
+                @endif
             @endif
         </div>
     </div>
@@ -1186,7 +1192,49 @@
 
             open_window(action)
         })
-
+        function sinkronisasiKelompok(id) {
+            Swal.fire({
+                title: 'Konfirmasi Sinkronisasi',
+                text: 'Apakah Anda yakin ingin melakukan sinkronisasi data pinjaman kelompok ini?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Sinkronisasi!',
+                cancelButtonText: 'Batal',
+                showLoaderOnConfirm: true,
+                preConfirm: () => {
+                    return $.ajax({
+                        url: '/sinkronisasi/kelompok/' + id,
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            return response;
+                        },
+                        error: function(xhr) {
+                            Swal.showValidationMessage(
+                                'Gagal melakukan sinkronisasi: ' + (xhr.responseJSON?.message || 'Terjadi kesalahan')
+                            );
+                        }
+                    });
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if (result.isConfirmed && result.value.success) {
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: result.value.message,
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        // Reload halaman setelah sukses
+                        location.reload();
+                    });
+                }
+            });
+        }
         $(".money").maskMoney();
     </script>
 @endsection
