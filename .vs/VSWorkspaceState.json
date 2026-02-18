@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\app",
+    "\\resources",
+    "\\resources\\views",
+    "\\resources\\views\\layouts"
   ],
-  "SelectedNode": "\\C:\\laragon\\www\\siupk",
   "PreviewInSolutionExplorer": false
 }
