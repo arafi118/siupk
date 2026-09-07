@@ -3575,19 +3575,26 @@ private function pemanfaat_aktif(array $data)
         $data['sub_judul'] = $hari . ' ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         $data['tgl'] = Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
 
-        $data['pinjaman'] = PinjamanKelompok::where('status', 'A')->whereDay('tgl_cair', date('d', strtotime($tgl)))->with([
-            'target' => function ($query) use ($tgl) {
-                $query->where([
-                    ['jatuh_tempo', $tgl],
-                    ['angsuran_ke', '!=', '0']
-                ]);
-            },
-            'saldo' => function ($query) use ($tgl) {
-                $query->where('tgl_transaksi', '<=', $tgl);
-            },
-            'kelompok',
-            'kelompok.d'
-        ])->get();
+        $day = date('d', strtotime($tgl));
+        $monthStart = date('Y-m-01', strtotime($tgl));
+        $monthEnd = date('Y-m-t', strtotime($tgl));
+
+        $data['pinjaman'] = PinjamanKelompok::where('status', 'A')
+            ->whereBetween('tgl_cair', [$monthStart, $monthEnd])
+            ->whereRaw('DAY(tgl_cair) = ?', [$day])
+            ->with([
+                'target' => function ($query) use ($tgl) {
+                    $query->where([
+                        ['jatuh_tempo', $tgl],
+                        ['angsuran_ke', '!=', '0']
+                    ]);
+                },
+                'saldo' => function ($query) use ($tgl) {
+                    $query->where('tgl_transaksi', '<=', $tgl);
+                },
+                'kelompok',
+                'kelompok.d'
+            ])->get();
 
         $view = view('pelaporan.view.perkembangan_piutang.jatuh_tempo', $data)->render();
 
