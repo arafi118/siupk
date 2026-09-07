@@ -486,10 +486,12 @@ class PelaporanController extends Controller
                     ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
                     ->withCount('pinjaman_anggota')
                     ->withSum(['real' => function ($query) use ($data) {
-                        $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
+                        $bulan = $data['tahun'] . '-' . $data['bulan'];
+                        $query->whereBetween('tgl_transaksi', [$bulan . '-01', $bulan . '-' . date('t', strtotime($bulan . '-01'))]);
                     }], 'realisasi_pokok')
                     ->withSum(['real' => function ($query) use ($data) {
-                        $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
+                        $bulan = $data['tahun'] . '-' . $data['bulan'];
+                        $query->whereBetween('tgl_transaksi', [$bulan . '-01', $bulan . '-' . date('t', strtotime($bulan . '-01'))]);
                     }], 'realisasi_jasa')
                     ->where($tb_pinkel . '.sistem_angsuran', '!=', '12')->where(function ($query) use ($data) {
                         $query->where([
@@ -1950,10 +1952,12 @@ class PelaporanController extends Controller
                     ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
                     ->withCount('pinjaman_anggota')
                     ->withSum(['real' => function ($query) use ($data) {
-                        $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
+                        $bulan = $data['tahun'] . '-' . $data['bulan'];
+                        $query->whereBetween('tgl_transaksi', [$bulan . '-01', $bulan . '-' . date('t', strtotime($bulan . '-01'))]);
                     }], 'realisasi_pokok')
                     ->withSum(['real' => function ($query) use ($data) {
-                        $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
+                        $bulan = $data['tahun'] . '-' . $data['bulan'];
+                        $query->whereBetween('tgl_transaksi', [$bulan . '-01', $bulan . '-' . date('t', strtotime($bulan . '-01'))]);
                     }], 'realisasi_jasa')
                     ->where($tb_pinkel . '.sistem_angsuran', '!=', '12')->where(function ($query) use ($data) {
                         $query->where([
@@ -3635,10 +3639,12 @@ private function pemanfaat_aktif(array $data)
                     ->join('sebutan_desa', 'sebutan_desa.id', '=', 'desa.sebutan')
                     ->withCount('pinjaman_anggota')
                     ->withSum(['real' => function ($query) use ($data) {
-                        $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
+                        $bulan = $data['tahun'] . '-' . $data['bulan'];
+                        $query->whereBetween('tgl_transaksi', [$bulan . '-01', $bulan . '-' . date('t', strtotime($bulan . '-01'))]);
                     }], 'realisasi_pokok')
                     ->withSum(['real' => function ($query) use ($data) {
-                        $query->where('tgl_transaksi', 'LIKE', '%' . $data['tahun'] . '-' . $data['bulan'] . '-%');
+                        $bulan = $data['tahun'] . '-' . $data['bulan'];
+                        $query->whereBetween('tgl_transaksi', [$bulan . '-01', $bulan . '-' . date('t', strtotime($bulan . '-01'))]);
                     }], 'realisasi_jasa')
                     ->where($tb_pinkel . '.sistem_angsuran', '!=', '12')->where(function ($query) use ($data) {
                         $query->where([
