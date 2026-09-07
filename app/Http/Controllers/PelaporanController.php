@@ -3620,6 +3620,9 @@ private function pemanfaat_aktif(array $data)
         $data['sub_judul'] = $hari . ' ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         $data['tgl'] = Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
 
+        \DB::enableQueryLog();
+        $startWall = microtime(true);
+
         $kec = Kecamatan::where('id', Session::get('lokasi'))->first();
         $data['jenis_pp'] = JenisProdukPinjaman::where(function ($query) use ($kec) {
             $query->where('lokasi', '0')
@@ -3674,9 +3677,53 @@ private function pemanfaat_aktif(array $data)
             'pinjaman_kelompok.sis_pokok'
         ])->get();
 
+        $queriesPhase1 = \DB::getQueryLog();
+        $afterQuery = microtime(true);
+        @file_put_contents(public_path('menunggak_debug.log'), json_encode([
+            'phase' => 'after_query',
+            'time' => date('Y-m-d H:i:s'),
+            'lokasi' => Session::get('lokasi'),
+            'tgl' => $tgl,
+            'pinjaman_count' => collect($data['jenis_pp'])->sum(fn ($j) => $j->pinjaman_kelompok->count()),
+            'query_count' => count($queriesPhase1),
+            'query_total_ms' => array_sum(array_column($queriesPhase1, 'time')),
+            'slowest_query_ms' => count($queriesPhase1) ? max(array_column($queriesPhase1, 'time')) : 0,
+            'elapsed_ms' => round(($afterQuery - $startWall) * 1000),
+        ], JSON_PRETTY_PRINT));
+
         $view = view('pelaporan.view.perkembangan_piutang.tunggakan', $data)->render();
 
+        $queries = \DB::getQueryLog();
+        $afterView = microtime(true);
+
         $pdf = PDF::loadHTML($view)->setPaper('A4', 'landscape');
+        $afterPdf = microtime(true);
+
+        \Log::warning('menunggak_debug', [
+            'lokasi' => Session::get('lokasi'),
+            'tgl' => $tgl,
+            'pinjaman_count' => is_countable($data['jenis_pp']) ? collect($data['jenis_pp'])->sum(fn ($j) => $j->pinjaman_kelompok->count()) : null,
+            'query_count' => count($queries),
+            'query_total_ms' => array_sum(array_column($queries, 'time')),
+            'slowest_query_ms' => count($queries) ? max(array_column($queries, 'time')) : 0,
+            'view_render_ms' => round(($afterView - $startWall) * 1000),
+            'pdf_render_ms' => round(($afterPdf - $afterView) * 1000),
+            'total_ms' => round(($afterPdf - $startWall) * 1000),
+        ]);
+
+        @file_put_contents(public_path('menunggak_debug.log'), json_encode([
+            'time' => date('Y-m-d H:i:s'),
+            'lokasi' => Session::get('lokasi'),
+            'tgl' => $tgl,
+            'pinjaman_count' => is_countable($data['jenis_pp']) ? collect($data['jenis_pp'])->sum(fn ($j) => $j->pinjaman_kelompok->count()) : null,
+            'query_count' => count($queries),
+            'query_total_ms' => array_sum(array_column($queries, 'time')),
+            'slowest_query_ms' => count($queries) ? max(array_column($queries, 'time')) : 0,
+            'view_render_ms' => round(($afterView - $startWall) * 1000),
+            'pdf_render_ms' => round(($afterPdf - $afterView) * 1000),
+            'total_ms' => round(($afterPdf - $startWall) * 1000),
+        ], JSON_PRETTY_PRINT));
+
         return $pdf->stream();
     }
 
