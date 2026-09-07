@@ -3579,13 +3579,8 @@ private function pemanfaat_aktif(array $data)
         $data['sub_judul'] = $hari . ' ' . Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
         $data['tgl'] = Tanggal::namaBulan($tgl) . ' ' . Tanggal::tahun($tgl);
 
-        $day = date('d', strtotime($tgl));
-        $monthStart = date('Y-m-01', strtotime($tgl));
-        $monthEnd = date('Y-m-t', strtotime($tgl));
-
         $data['pinjaman'] = PinjamanKelompok::where('status', 'A')
-            ->whereBetween('tgl_cair', [$monthStart, $monthEnd])
-            ->whereRaw('DAY(tgl_cair) = ?', [$day])
+            ->whereDay('tgl_cair', date('d', strtotime($tgl)))
             ->with([
                 'target' => function ($query) use ($tgl) {
                     $query->where([
