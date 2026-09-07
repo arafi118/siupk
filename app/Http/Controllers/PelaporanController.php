@@ -3691,6 +3691,17 @@ private function pemanfaat_aktif(array $data)
             'elapsed_ms' => round(($afterQuery - $startWall) * 1000),
         ], JSON_PRETTY_PRINT));
 
+        $ttdHtml = '';
+        if ($data['kec']->ttd) {
+            $ttdHtml = json_decode(
+                str_replace('{tanggal}', $data['tanggal_kondisi'], $data['kec']->ttd->tanda_tangan_pelaporan),
+                true
+            );
+            $ttdHtml = is_string($ttdHtml) ? $ttdHtml : '';
+        }
+
+        $data['ttd_html'] = $ttdHtml;
+
         $view = view('pelaporan.view.perkembangan_piutang.tunggakan', $data)->render();
 
         $queries = \DB::getQueryLog();

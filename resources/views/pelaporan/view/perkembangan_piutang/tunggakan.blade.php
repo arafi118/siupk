@@ -14,6 +14,7 @@
         @endphp
         @php
             $kd_desa = [];
+            $desa_seen = [];
             $t_angg = 0;
             $t_alokasi = 0;
             $t_saldo = 0;
@@ -57,8 +58,10 @@
                 @php
                     $kd_desa[] = $pinkel->kd_desa;
                     $desa = $pinkel->kd_desa;
+                    $is_first_in_desa = !isset($desa_seen[$pinkel->kd_desa]);
+                    $desa_seen[$pinkel->kd_desa] = true;
                 @endphp
-                @if (array_count_values($kd_desa)[$pinkel->kd_desa] <= '1')
+                @if ($is_first_in_desa)
                     @if ($section != $desa && count($kd_desa) > 1)
                         @php
                             $t_angg += $j_angg;
@@ -179,7 +182,7 @@
                         </table>
 
                         <div style="margin-top: 16px;"></div>
-                        {!! json_decode(str_replace('{tanggal}', $tanggal_kondisi, $kec->ttd->tanda_tangan_pelaporan), true) !!}
+                        {!! $ttd_html !!}
                     </td>
                 </tr>
             @endif
