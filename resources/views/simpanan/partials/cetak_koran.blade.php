@@ -167,7 +167,7 @@ $sum = DB::table('real_simpanan_' . session('lokasi'))
                 <th colspan="3" class="text-left">
                     <strong>Saldo Sebelum {{ \Carbon\Carbon::create(null, $bulankop)->translatedFormat('F') }} {{ $tahunkop }}</strong>
                 </th>
-                <th class="style9 align-right">{{ number_format($sum, 0, ',', '.') }}</td>
+                <th class="style9 align-right">{{ number_format($sum, 2, '.', ',') }}</td>
                 <th colspan="2">&nbsp;</th>
             </tr>
         @elseif($bulankop != 0 && $tahunkop == 0 )
@@ -182,7 +182,7 @@ $sum = DB::table('real_simpanan_' . session('lokasi'))
                 <th colspan="3" class="text-left">
                     <strong>Saldo Sebelum {{ $tahunkop }})</strong>
                 </th>
-                <th class="style9 align-right">{{ number_format($sum, 0, ',', '.') }}</th>
+                <th class="style9 align-right">{{ number_format($sum, 2, '.', ',') }}</th>
                 <th colspan="2">&nbsp;</th>
                 </th>
             </tr>
@@ -214,9 +214,9 @@ $sum = DB::table('real_simpanan_' . session('lokasi'))
         <td width="15%" class="style9 align-center">{{ $trx->tgl_transaksi }}</td>
         <td width="6%" class="style9 align-center">{{ $trx->idt }}</td>
         <td width="35%" class="style9">{{ $trx->keterangan_transaksi }}</td>
-        <td width="10%" class="style9 align-right">{{ number_format($real_d) }}</td>
-        <td width="10%" class="style9 align-right">{{ number_format($real_k) }}</td>
-        <td width="10%" class="style9 align-right">{{ number_format($sum) }}</td>
+        <td width="10%" class="style9 align-right">{{ number_format($real_d, 2, '.', ',') }}</td>
+        <td width="10%" class="style9 align-right">{{ number_format($real_k, 2, '.', ',') }}</td>
+        <td width="10%" class="style9 align-right">{{ number_format($sum, 2, '.', ',') }}</td>
         <td width="2%" class="style9 align-center">{{ $trx->id_user }}</td>
     </tr>
             @empty
@@ -228,7 +228,7 @@ $sum = DB::table('real_simpanan_' . session('lokasi'))
                 <td colspan="6" class="text-center">
                     <b>TOTAL SALDO</b>
                 </td>
-                <td class="style9 align-right"><b>{{ number_format($sum, 0, ',', '.') }}</b></td>
+                <td class="style9 align-right"><b>{{ number_format($sum, 2, '.', ',') }}</b></td>
                 <td colspan="2">&nbsp;</td>
             </tr>
 </table>

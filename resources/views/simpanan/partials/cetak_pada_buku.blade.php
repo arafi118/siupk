@@ -48,9 +48,9 @@
         <tr>
             <td width="12%" class="style9 align-center">{{ $transaksi->tgl_transaksi }}</td>
             <td width="5%" class="style9 align-center">{{ $kode }}</td>
-            <td width="16%" class="style9 align-center">{{ number_format($transaksi->realSimpanan->real_d) }}</td>
-            <td width="16%" class="style9 align-center">{{ number_format($transaksi->realSimpanan->real_k) }}</td>
-            <td width="16%" class="style9 align-center">{{ number_format($transaksi->realSimpanan->sum) }}</td>
+            <td width="16%" class="style9 align-center">{{ number_format($transaksi->realSimpanan->real_d, 2, '.', ',') }}</td>
+            <td width="16%" class="style9 align-center">{{ number_format($transaksi->realSimpanan->real_k, 2, '.', ',') }}</td>
+            <td width="16%" class="style9 align-center">{{ number_format($transaksi->realSimpanan->sum, 2, '.', ',') }}</td>
             <td width="10%" class="style9 align-center">{{ strtoupper($user) }}-{{ $transaksi->idt }}</td>
             <td width="25%" class="style9 align-center">&nbsp;</td>
         </tr>

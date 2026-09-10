@@ -27,7 +27,7 @@
             <td width="80%" class="style9">
                 {{ $transaksi->idt }}.{{ $transaksi->nomor_rekening }} {{ $transaksi->tgl_transaksi }}-{{ strtoupper($user) }}<br>
                 CIF-{{ $transaksi->id_simp }}-{{ $kode }}<br>
-                Rp. {{ number_format($transaksi->jumlah) }}<br><br>
+                Rp. {{ number_format($transaksi->jumlah, 2, '.', ',') }}<br><br>
             </td>
         </tr>
     </table>

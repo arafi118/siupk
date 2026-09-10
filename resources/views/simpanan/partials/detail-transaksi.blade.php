@@ -34,7 +34,7 @@ $sum = DB::table('real_simpanan_' . session('lokasi'))
                 <td colspan="6" class="text-center"><b>
                     Saldo Sebelum {{ \Carbon\Carbon::create(null, $bulankop)->translatedFormat('F') }} {{ $tahunkop }}</b>
                 </td>
-                <td><b>{{ number_format($sum, 0, ',', '.') }}</b></td>
+                <td><b>{{ number_format($sum, 2, '.', ',') }}</b></td>
                 <td colspan="2">&nbsp;</td>
             </tr>
         @elseif($bulankop != 0 && $tahunkop == 0 )
@@ -48,7 +48,7 @@ $sum = DB::table('real_simpanan_' . session('lokasi'))
                 <th colspan="6" class="text-center">
                     <strong>Saldo Sebelum {{ $tahunkop }}</strong>
                 </th>
-                <th>{{ number_format($sum, 0, ',', '.') }}</th>
+                <th>{{ number_format($sum, 2, '.', ',') }}</th>
                 <th colspan="2">&nbsp;</th>
                 </th>
             </tr>
@@ -75,9 +75,9 @@ $sum = DB::table('real_simpanan_' . session('lokasi'))
                     <td>{{ \Carbon\Carbon::parse($trx->tgl_transaksi)->format('d/m/Y') }}</td>
                     <td style="word-wrap: break-word; word-break: break-word; white-space: normal;">{{$kd_trx}} | {{ $trx->keterangan_transaksi ?? '-' }}</td>
                     <td>{{ $idt ?? '-' }}</td>
-                    <td>{{ number_format($real_d, 0, ',', '.') }}</td>
-                    <td>{{ number_format($real_k, 0, ',', '.') }}</td>
-                    <td>{{ number_format($sum, 0, ',', '.') }}</td>
+                    <td>{{ number_format($real_d, 2, '.', ',') }}</td>
+                    <td>{{ number_format($real_k, 2, '.', ',') }}</td>
+                    <td>{{ number_format($sum, 2, '.', ',') }}</td>
                     <td>{{ $trx->ins ?? '-' }}</td>
                     <td>
 <a class="btn btn-sm float-end ms-2" data-toggle='tooltip' 
@@ -103,7 +103,7 @@ $sum = DB::table('real_simpanan_' . session('lokasi'))
         </tbody>
             <tr>
                 <td colspan="6" class="text-center"><b>TOTAL SALDO</b></td>
-                <td><b>{{ number_format($sum, 0, ',', '.') }}</b></td>
+                <td><b>{{ number_format($sum, 2, '.', ',') }}</b></td>
                 <td colspan="2">&nbsp;</td>
             </tr>
     </table><br>
